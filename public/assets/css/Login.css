@@ -1,0 +1,150 @@
+.bg_login {
+    font-size: 1.4rem;
+    padding: 62px 180px 50px 72px;
+    flex: 3 1 0%;
+    position: sticky;
+    top: 72px;
+    align-self: flex-start;
+    background: rgb(249, 249, 250);
+}
+.login_title{
+    font-size: 14px;
+    color: #33363E;
+}
+.login_SKU{
+    font-size: 14px !important;
+    color: #33363E;
+}
+.login_quantity{
+    font-size: 14px;
+    font-weight: bold;
+}
+.login_delivery{
+    font-size: 13px;
+    color: #8863fb;
+    font-weight: bold;
+}
+.login_price{
+    font-size: 14px;
+    font-weight: bold;
+}
+.login_product{
+    border-bottom: 1px solid rgb(222, 214, 251);
+    padding-bottom: 30px;
+    margin: 0px 0px;
+}
+.login_subtotal span{
+    float: right;
+}
+.login_discount span{
+    float: right;
+    color: #6ec840;
+}
+.login_shipping span{
+    float: right;
+    color: #8863fb;
+}
+.login_shipping{
+    font-size: 14px;
+}
+.login_discount{
+    font-size: 14px;
+}
+.login_subtotal{
+    font-size: 14px;
+}
+.login_cost span{
+    float: right;
+}
+.login_cost{
+    margin: 20px 0px;
+    font-size: 14px;
+}
+.delete__btn {
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.summary_border{
+    border-top: 1px solid rgb(222, 214, 251);
+    padding: 25px 0px;
+}
+.login_total{
+    margin: 20px 0px;
+    border-bottom: 1px solid rgb(222, 214, 251);
+    padding: 25px 0px;
+    color: #33363E;
+}
+.create_acc{
+    font-size: 11px;
+}
+.create_acc span{
+    color: #de57f5;
+    cursor: pointer;
+}
+.loginn_width{
+    width: 25% !important;
+    margin: auto;
+    display: block;
+}
+.login_width{
+    width: 50% !important;
+    margin: auto;
+    display: block;
+}
+.p_width_login{
+    width: 300px !important;
+}
+@media(max-width:1024px){
+    .loginn_width{
+        width: 50% !important;
+    }
+    .login_width{
+        width: 50% !important;
+    }
+    .p_width_login{
+        width: 200px !important;
+        text-align: center !important;
+        margin: 0% !important;
+    }
+}
+@media(max-width:768px){
+    .loginn_width{
+        width: 50% !important;
+    }
+    .p_width_loginn{
+        width: 298px !important;
+    }
+    .p_width_login{
+        width: 331px !important;
+    }
+}
+@media(max-width:426px){
+    .loginn_width{
+        width: 100% !important;
+    }
+    .login_width{
+        width: 100% !important;
+    }
+    .p_width_login{
+        width: 349px !important;
+    }
+}
+@media(max-width:376px){
+    .p_width_login{
+        width: 310px !important;
+    }
+}
+@media(max-width:350px){
+    .p_width_loginn{
+        width: 260px !important;
+    }
+    .p_width_login{
+        width: 271px !important;
+    }
+}
+@media(max-width:320px){
+    .p_width_login{
+        width: 245px !important;
+    }
+}

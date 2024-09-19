@@ -1,0 +1,61 @@
+* {
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.slick-slider {
+    padding: 0% !important;
+    margin: 0% !important;
+}
+
+input::placeholder {
+    font-size: 13px;
+}
+
+button,
+input {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+button:focus,
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    /* For Firefox */
+}
+
+div:where(.swal2-container) .swal2-html-container {
+    font-size: 13px !important;
+    letter-spacing: 0.3px;
+    word-spacing: 1px;
+    margin: 0% !important;
+}
+
+.btn-outline-dark:hover {
+    background-color: transparent !important;
+    color: #000 !important;
+}
+
+.heart-icon {
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+/* Optional: style for filled heart */
+.ri-heart-fill {
+    color: black;
+    /* or any color you prefer */
+}
