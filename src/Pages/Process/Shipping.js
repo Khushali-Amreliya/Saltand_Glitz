@@ -5,8 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
-import Aos from 'aos';
-import "aos/dist/aos.css"
+
 
 const Shipping = () => {
     const totalQuantity = useSelector(state => state.cart.totalQuantity)
@@ -44,7 +43,6 @@ const Shipping = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        Aos.init();
     }, []);
 
     const handleChange = (e) => {
@@ -170,7 +168,7 @@ const Shipping = () => {
                     </Link>
                 </div>
             </section>
-            <section className='container-fluid' style={{marginBottom:"100px"}} data-aos="fade-up" data-aos-duration="2000">
+            <section className='container-fluid' style={{marginBottom:"100px"}}>
                 <div className='row'>
                     <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-5 pb-3'>
                         {loading && <Loader />}
