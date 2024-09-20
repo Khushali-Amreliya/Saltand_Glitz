@@ -46,7 +46,7 @@ const Header = () => {
                     <div className='col-lg-3 col-md-3 col-sm-12 header_logo text-center'>
                         <i className="ri-calendar-line"></i>
                         <Link to="/signup" className='text-decoration-none text-dark'><i className="ri-user-line"></i></Link>
-                        <Link className='text-decoration-none text-dark pe-4' to="">
+                        <Link className='text-decoration-none text-dark pe-4' to="/wishlist">
                             <i className="ri-heart-fill pe-0 position-relative">
                                 {wishlistItem.length > 0 && (
                                     <span className="badge badge-icon">{wishlistItem.length}</span>
@@ -162,7 +162,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div className='col-sm-2 col-3 align-middle'>
-                        <Link className='text-decoration-none text-dark pe-3' to="">
+                        <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
                             <i className="ri-heart-fill pe-0 position-relative">
                                 {wishlistItem.length > 0 && (
                                     <span className="badge badge-icon">{wishlistItem.length}</span>
@@ -171,7 +171,11 @@ const Header = () => {
                         </Link>
                         <Link className='text-decoration-none text-dark' to="/cart">
                             <i className="ri-shopping-cart-fill pe-0 position-relative ">
-                                <span className=" bagde badge-icon">{totalQuantity}</span>
+                                {
+                                    totalQuantity > 0 && (
+                                        <span className=" bagde badge-icon">{totalQuantity}</span>
+                                    )
+                                }
                             </i>
                         </Link>
                     </div>
