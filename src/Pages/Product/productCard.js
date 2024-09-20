@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import { cartAction } from '../../Store/Slice/CartSlice';
 import Loader from '../Loader';
 import { formatCurrency } from '../../Utils/formateCurrency';
-
+import axios from 'axios';
 const ProductCard = (props) => {
     const [loading, setLoading] = useState(false);
     const { id, title, price, image01, image02, image03 } = props.Productsitem;
@@ -34,14 +34,29 @@ const ProductCard = (props) => {
         }, 2000);
     };
 
-    const handleHeartClick = () => {
-        if (isHeartFilled) {
-            dispatch(cartAction.removeFromWishlist(id)); // Remove from wishlist
-        } else {
-            dispatch(cartAction.addToWishlist({ id, title, price, image01 })); // Add to wishlist
+    const handleHeartClick = async () => {
+        try {
+            if (isHeartFilled) {
+                // Remove from wishlist
+                await axios.delete(`http://localhost:5000/api/wishlist/${id}`); // Update this URL based on your API route
+                dispatch(cartAction.removeFromWishlist(id)); 
+            } else {
+                // Add to wishlist
+                const response = await axios.post('http://localhost:5000/api/wishlist', {
+                    id,
+                    title,
+                    price,
+                    image01,
+                }); // Update this URL based on your API route
+                dispatch(cartAction.addToWishlist(response.data.item)); // Assuming response contains the added item
+            }
+            setIsHeartFilled(!isHeartFilled);
+        } catch (error) {
+            console.error('Error updating wishlist:', error);
+            // Optionally show an error notification to the user
         }
-        setIsHeartFilled(!isHeartFilled);
     };
+    
 
     const settings2 = {
         dots: false,

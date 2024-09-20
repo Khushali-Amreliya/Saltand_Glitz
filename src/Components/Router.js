@@ -14,6 +14,7 @@ import Payment from '../Pages/Process/Payment';
 import '../styles/Admin.css';
 import Admin from '../Admindashboard/Admin';
 import Dashboard from '../Admindashboard/Dashboard';
+import Wishlist from '../Pages/Process/Wishlist';
 
 const Router = () => {
   return (
@@ -29,6 +30,7 @@ const Router = () => {
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/summary' element={<OrderSummary />} />
         <Route path='/gift' element={<Gift />} />
+        <Route path='/wishlist' element={<Wishlist />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/112/admin' element={<Admin />} />
         <Route path='/112/admin/dashboard ' element={<Dashboard />} />
