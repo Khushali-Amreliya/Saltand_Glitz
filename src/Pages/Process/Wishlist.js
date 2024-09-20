@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import EmptyState from '../EmptyState';
 import { cartAction } from '../../Store/Slice/CartSlice';
+import { formatCurrency } from '../../Utils/formateCurrency';
 
 const Wishlist = () => {
   const wishlistItem = useSelector(state => state.cart.wishlistItem);
@@ -13,37 +14,33 @@ const Wishlist = () => {
 
   return (
     <>
-      <section className='container'>
-        <div className='row'>
-          {
-            wishlistItem.length > 0 ? (
-              <section className='wishlist-items'>
-                {wishlistItem.map((item) => (
-                  <div key={item.id} className='col-md-4'>
-                    <div className='wishlist-card p-3 mb-3'>
-                      <img 
-                        src={item.image01} 
-                        alt={item.title} 
-                        className='img-fluid' 
-                        style={{ height: '200px', objectFit: 'cover' }} 
-                      />
-                      <h5 className='mt-2'>{item.title}</h5>
-                      <p className='text-muted'>₹{item.price}</p>
-                      <button 
-                        className='btn btn-danger' 
-                        onClick={() => handleRemove(item.id)}
-                      >
-                        Remove from Wishlist
-                      </button>
+      <section className='container py-5'>
+        {
+          wishlistItem.length > 0 ? (
+            <section className='wishlist-items'>
+              <div className='row'>
+                {
+                  wishlistItem.map((item) => (
+                    <div key={item.id} className='col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12'>
+                      <div className='card border-0'>
+                        <img alt={item.title} src={item.image01} className='position-relative'></img>
+                        <div className='card-body'>
+                          <p className='m-0'>{formatCurrency(item.price)}</p>
+                          <h6>{item.title}</h6>
+                          <i className='ri-close-line wishlist_close_icon'
+                            onClick={() => handleRemove(item.id)}>
+                          </i>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </section>
-            ) : (
-              <EmptyState />
-            )
-          }
-        </div>
+                  ))
+                }
+              </div>
+            </section>
+          ) : (
+            <EmptyState />
+          )
+        }
       </section>
     </>
   );
