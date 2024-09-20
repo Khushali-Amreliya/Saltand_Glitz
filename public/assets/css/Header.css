@@ -72,11 +72,11 @@
     color: #000;
 }
 .badge-icon{
-    width: 17px;
-    height: 17px;
-    font-size: 10px;
+    width: 15px;
+    height: 15px;
+    font-size: 9px !important;
     color: #fff;
-    border-radius: 7px;
+    border-radius: 6px !important;
     display: inline-block;
     position: absolute;
     top: -7px;
@@ -84,6 +84,7 @@
     text-align: center;
     right: -10px;
     background: #8863fb;
+    vertical-align: middle !important;
 }
 @media(max-width:1024px){
     .dropdown-content{
