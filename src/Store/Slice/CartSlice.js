@@ -1,26 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Swal from 'sweetalert2';
 
-const items = localStorage.getItem("cartItem") !== null ? JSON.parse(localStorage.getItem("cartItem")) : [];
+const cartItems = localStorage.getItem("cartItem") !== null ? JSON.parse(localStorage.getItem("cartItem")) : [];
 const totalQuantity = localStorage.getItem("totalQuantity") !== null ? JSON.parse(localStorage.getItem("totalQuantity")) : 0;
 const subtotal = localStorage.getItem("subtotal") !== null ? JSON.parse(localStorage.getItem("subtotal")) : 0;
 const discount = localStorage.getItem("discount") !== null ? JSON.parse(localStorage.getItem("discount")) : 0;
+
+const wishlistItems = localStorage.getItem("wishlistItem") !== null ? JSON.parse(localStorage.getItem("wishlistItem")) : [];
 
 const setItem = (items, totalQuantity, subtotal, discount) => {
     localStorage.setItem("cartItem", JSON.stringify(items));
     localStorage.setItem("totalQuantity", JSON.stringify(totalQuantity));
     localStorage.setItem("subtotal", JSON.stringify(subtotal));
     localStorage.setItem("discount", JSON.stringify(discount));
-}
+};
+
+const setWishlist = (wishlist) => {
+    localStorage.setItem("wishlistItem", JSON.stringify(wishlist));
+};
 
 const initialState = {
-    cartItem: items,
+    cartItem: cartItems,
+    wishlistItem: wishlistItems,
     totalQuantity: totalQuantity,
     subtotal: subtotal, // Add subtotal
     totalAmount: subtotal - (subtotal * (discount / 100)), // Calculate total amount with discount
     discount: discount,
     error: null // Add error state
-}
+};
 
 const cartSlice = createSlice({
     name: "Cart",
@@ -145,6 +152,31 @@ const cartSlice = createSlice({
                     timerProgressBar: true
                 });
             }
+        },
+
+        // Wishlist actions
+        addToWishlist(state, action) {
+            const newItem = action.payload;
+            const existingItem = state.wishlistItem.find(item => item.id === newItem.id);
+
+            if (!existingItem) {
+                state.wishlistItem.push({
+                    id: newItem.id,
+                    title: newItem.title,
+                    image01: newItem.image01,
+                    price: newItem.price
+                });
+            }
+
+            // Update localStorage for wishlist
+            setWishlist(state.wishlistItem);
+        },
+        removeFromWishlist(state, action) {
+            const itemId = action.payload;
+            state.wishlistItem = state.wishlistItem.filter(item => item.id !== itemId);
+
+            // Update localStorage for wishlist
+            setWishlist(state.wishlistItem);
         }
     }
 });

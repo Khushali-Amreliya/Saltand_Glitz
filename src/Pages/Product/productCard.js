@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useRef, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import { cartAction } from '../../Store/Slice/CartSlice';
@@ -15,6 +15,16 @@ const ProductCard = (props) => {
 
     const [isHeartFilled, setIsHeartFilled] = useState(false);
 
+    // Fetch wishlist from the state
+    // Fetch wishlist from the state
+    const wishlist = useSelector((state) => state.cart.wishlistItem);
+
+    useEffect(() => {
+        // Check if the item is already in the wishlist
+        const itemInWishlist = wishlist.find(item => item.id === id);
+        setIsHeartFilled(!!itemInWishlist);
+    }, [wishlist, id]);
+
     const addToCart = () => {
         setLoading(true);
 
@@ -27,6 +37,11 @@ const ProductCard = (props) => {
     };
 
     const handleHeartClick = () => {
+        if (isHeartFilled) {
+            dispatch(cartAction.removeFromWishlist(id)); // Remove from wishlist
+        } else {
+            dispatch(cartAction.addToWishlist({ id, title, price, image01 })); // Add to wishlist
+        }
         setIsHeartFilled(!isHeartFilled);
     };
 
