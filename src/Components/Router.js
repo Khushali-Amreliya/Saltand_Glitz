@@ -31,7 +31,7 @@ const Router = () => {
         <Route path='/gift' element={<Gift />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/112/admin' element={<Admin />} />
-        <Route path='/112/admin/dashboard' element={<Dashboard />} />
+        <Route path='/112/admin/dashboard ' element={<Dashboard />} />
       </Routes>
     </div>
   );
