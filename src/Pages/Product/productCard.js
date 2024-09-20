@@ -15,8 +15,6 @@ const ProductCard = (props) => {
 
     const [isHeartFilled, setIsHeartFilled] = useState(false);
 
-    // Fetch wishlist from the state
-    // Fetch wishlist from the state
     const wishlist = useSelector((state) => state.cart.wishlistItem);
 
     useEffect(() => {
