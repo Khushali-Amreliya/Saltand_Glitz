@@ -81,7 +81,7 @@ const ProductCard = (props) => {
             {loading && <Loader />}
             <div className='card border-0'>
                 <Link to={`/productDetail/${id}`}>
-                    <Slider ref={slider} {...settings2} className='border border-1' style={{ borderRadius: "10px" }}>
+                    <Slider ref={slider} {...settings2} className='border border-1' style={{ borderRadius: "10px" }}  >
                         <img alt='' src={image01} className='img-fluid' />
                         <img alt='' src={image02} className='img-fluid' />
                         <img alt='' src={image03} className='img-fluid' />

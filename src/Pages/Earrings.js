@@ -680,7 +680,7 @@ const Earrings = () => {
                                 {
                                     (index + 1) % 4 === 0 && Math.floor(index / 4) < images.length && (
                                         <div className='col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12'>
-                                            <img alt={`Product ${Math.floor(index / 4) + 1}`} src={images[Math.floor(index / 4)]} className='img py-2' />
+                                            <img alt={`Product ${Math.floor(index / 4) + 1}`} src={images[Math.floor(index / 4)]} className='img py-2' style={{borderRadius:"40px"}} />
                                         </div>
                                     )
                                 }

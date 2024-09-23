@@ -464,7 +464,15 @@
     width: 40px;
     height: auto;
 }
+.cart_border{
+    border-left: 1px solid #aca6af;
+}
 
+@media(max-width:991px){
+    .cart_border{
+        border-left:none !important;
+    }
+}
 @media (max-width: 768px) {
     .cart_header {
         padding: 8px 16px;

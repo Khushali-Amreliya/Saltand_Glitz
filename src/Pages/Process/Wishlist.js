@@ -66,11 +66,13 @@
 
 // export default Wishlist;
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import EmptyState from '../EmptyState';
 import { cartAction } from '../../Store/Slice/CartSlice';
 import { formatCurrency } from '../../Utils/formateCurrency';
+import Aos from 'aos';
+import "aos/dist/aos.css"
 
 const Wishlist = () => {
   const wishlistItem = useSelector(state => state.cart.wishlistItem);
@@ -80,6 +82,10 @@ const Wishlist = () => {
     dispatch(cartAction.removeFromWishlist(id));
   };
 
+  useEffect(() => {
+    Aos.init();
+  }, []);
+
   return (
     <section className='container py-5'>
       {
@@ -88,7 +94,7 @@ const Wishlist = () => {
             <div className='row'>
               {
                 wishlistItem.map((item) => (
-                  <div key={item.id} className='col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6'>
+                  <div key={item.id} className='col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6' data-aos="zoom-in-up" data-aos-duration="2000">
                     <div className='card border-0'>
                       <img alt={item.title} src={item.image01} className='position-relative'></img>
                       <div className='card-body'>
