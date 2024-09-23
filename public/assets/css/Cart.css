@@ -357,7 +357,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: #fff;
+    background-color: rgb(246, 243, 249);
     border-bottom: 1px solid #eaeaea;
     position: sticky;
     top: 0;
@@ -371,7 +371,7 @@
     right: 0;
     z-index: 1000;
     box-shadow: rgb(187, 187, 187) 0px 2px 0.5rem;
-    background-color: #fff;
+    background-color: rgb(246, 243, 249);
     animation: slideDown 0.8s ease-in-out;
 }
 .cart_header_left {

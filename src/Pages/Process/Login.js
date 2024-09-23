@@ -4,10 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import OrderSummary from '../Process/OrderSummary';
 import Loader from '../Loader';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 const Login = () => {
-  const totalQuantity = useSelector(state => state.cart.totalQuantity)
+  // const totalQuantity = useSelector(state => state.cart.totalQuantity)
   const [formData, setFormData] = useState({ mobile: '' });
   const [error, setError] = useState('');
 
@@ -93,12 +92,12 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="cart_header_center">
+        {/* <div className="cart_header_center">
           <div className="toggle-buttons">
             <button className="toggle-button ">Shopping Cart ({totalQuantity})</button>
             <button className="toggle-button active d-lg-block d-none">Trial Cart (0)</button>
           </div>
-        </div>
+        </div> */}
 
         <div className="cart_header_right">
           <Link to="/assistance" className="assistance-link">

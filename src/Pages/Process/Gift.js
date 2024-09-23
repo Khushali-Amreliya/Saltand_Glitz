@@ -2,14 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react'
 import OrderSummary from '../Process/OrderSummary'
 import { Link, useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
-import { useSelector } from 'react-redux';
 
 const Gift = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const totalQuantity = useSelector(state => state.cart.totalQuantity)
+    // const totalQuantity = useSelector(state => state.cart.totalQuantity)
     const [selectedButton, setSelectedButton] = useState(null);
 
     const handleButtonClick = (name) => {
@@ -70,12 +69,12 @@ const Gift = () => {
                     </div>
                 </div>
 
-                <div className="cart_header_center">
+                {/* <div className="cart_header_center">
                     <div className="toggle-buttons">
                         <button className="toggle-button ">Shopping Cart ({totalQuantity})</button>
                         <button className="toggle-button active d-lg-block d-none">Trial Cart (0)</button>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="cart_header_right">
                     <Link to="/assistance" className="assistance-link">

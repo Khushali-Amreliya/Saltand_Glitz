@@ -18,7 +18,7 @@ const Header = () => {
     };
 
     return (
-        <div className=" m-0 p-0" style={{ borderBottom: "3px solid #81D8D0" }}>
+        <div className=" m-0 p-0" style={{ borderBottom: "2px solid #81D8D0" }}>
             <section className='container-fluid text-center header_color py-1'>
                 <Slider {...settings}>
                     <div>

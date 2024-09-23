@@ -4,11 +4,10 @@ import Loader from '../Loader';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useSelector } from 'react-redux';
 
 
 const Shipping = () => {
-    const totalQuantity = useSelector(state => state.cart.totalQuantity)
+    // const totalQuantity = useSelector(state => state.cart.totalQuantity)
     const [showBillingForm, setShowBillingForm] = useState(false);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -152,12 +151,12 @@ const Shipping = () => {
                     </div>
                 </div>
 
-                <div className="cart_header_center">
+                {/* <div className="cart_header_center">
                     <div className="toggle-buttons">
                         <button className="toggle-button ">Shopping Cart ({totalQuantity})</button>
                         <button className="toggle-button active d-lg-block d-none">Trial Cart (0)</button>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="cart_header_right">
                     <Link to="/assistance" className="assistance-link">

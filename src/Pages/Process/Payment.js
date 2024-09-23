@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import OrderSummary from './OrderSummary';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Payment = () => {
     const [selectedOption, setSelectedOption] = useState('');
-    const totalQuantity = useSelector(state => state.cart.totalQuantity)
+    // const totalQuantity = useSelector(state => state.cart.totalQuantity)
 
     const handleSelection = (option) => {
         setSelectedOption(option);
@@ -44,12 +43,12 @@ const Payment = () => {
                     </div>
                 </div>
 
-                <div className="cart_header_center">
+                {/* <div className="cart_header_center">
                     <div className="toggle-buttons">
                         <button className="toggle-button ">Shopping Cart ({totalQuantity})</button>
                         <button className="toggle-button active d-lg-block d-none">Trial Cart (0)</button>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="cart_header_right">
                     <Link to="/assistance" className="assistance-link">

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './Product/productCard';
-import productsData from '../fakedata/Product'; 
+import productsData from '../fakedata/Product';
 
 const Earrings = () => {
+    const images = [
+        'assets/img/product_img.jpg',
+        'assets/img/product_img1.jpg',
+    ];
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        // Set the fake data to the state
         setProducts(productsData);
     }, []);
 
@@ -668,24 +671,22 @@ const Earrings = () => {
                         </div>
                     </div> */}
                     <div className='row'>
-                        {
-                            products.map((item) => (
-                                <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow' key={item.id}>
-                                    <ProductCard
-                                        Productsitem={item}
-                                    />
+                        {products.map((item, index) => (
+                            <React.Fragment key={item.id}>
+                                <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow'>
+                                    <ProductCard Productsitem={item} />
                                 </div>
-                            ))
-                        }
+                                {/* Render the image after every two products */}
+                                {
+                                    (index + 1) % 4 === 0 && Math.floor(index / 4) < images.length && (
+                                        <div className='col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12'>
+                                            <img alt={`Product ${Math.floor(index / 4) + 1}`} src={images[Math.floor(index / 4)]} className='img py-2' />
+                                        </div>
+                                    )
+                                }
+                            </React.Fragment>
+                        ))}
                     </div>
-
-                    <div className='col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12'>
-                        <img alt='' src='assets/img/product_img.jpg' className='img'></img>
-                    </div>
-                    <div className='col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12'>
-                        <img alt='' src='assets/img/product_img1.jpg' className='img'></img>
-                    </div>
-
                 </div>
             </div>
         </section>

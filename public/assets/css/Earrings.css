@@ -1,24 +1,28 @@
-.card-body p{
+.card-body p {
     color: #4f3267;
     font-weight: bold;
     font-size: 16px;
 }
-.card-body p span{
+
+.card-body p span {
     color: #9d9fa4;
     font-size: 12px;
     font-weight: 100 !important;
 }
-.card-body h6{
+
+.card-body h6 {
     font-size: 12px;
     color: #9d9fa4;
     letter-spacing: 0.9px;
-    white-space: nowrap;        
-    overflow: hidden;             
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
-.card_shadow img{
+
+.card_shadow img {
     border-radius: 10px 10px 10px 10px;
 }
+
 .card_shadow {
     transition: box-shadow 0.3s ease, transform 0.8s ease;
     border-radius: 20px;
@@ -26,73 +30,101 @@
     margin-top: 10px !important;
     padding: 15px 0px;
 }
+
 .card_shadow:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
-.absolute_heart{
+
+.absolute_heart {
     position: absolute;
     left: 85%;
     top: 3%;
 }
-.absolute_latest{
+
+/* .heart-icon {
+    opacity: 0;
+}
+.card:hover .heart-icon {
+    opacity: 1;
+}
+.heart-icon1 {
+    opacity: 1;
+}
+.card:hover .heart-icon1 {
+    opacity: 1;
+} */
+.absolute_latest {
     position: absolute;
     left: 5%;
     top: 3%;
     font-size: 11px !important;
 }
-.absolute_next_btn{
+
+.absolute_next_btn {
     position: absolute;
     left: 25%;
     top: 19%;
     background: transparent;
 }
-.absolute_prev_btn{
+
+.absolute_prev_btn {
     position: absolute;
     left: -12%;
     top: 19%;
     background: transparent;
 }
-.fiter_main_title{
+
+.fiter_main_title {
     font-size: 13px;
 }
-.fiter_title{
+
+.fiter_title {
     font-size: 13px;
     font-weight: bold;
 }
-.form-check-input{
+
+.form-check-input {
     font-size: 20px;
 }
-.form-check-label{
+
+.form-check-label {
     font-size: 14px;
     padding-top: 5px;
     color: #4f3267;
 }
-.form-check-label span{
+
+.form-check-label span {
     color: #cfc1ff;
     padding-left: 2px;
 }
-.show_btn{
+
+.show_btn {
     text-decoration: none !important;
     color: #8863fb !important;
 }
-.show_btn i{
+
+.show_btn i {
     vertical-align: middle !important;
 }
+
 .sticky-header {
     position: sticky;
     top: 0;
-    max-height: calc(100vh - 20px); 
+    max-height: calc(100vh - 20px);
     overflow-y: auto;
     padding-right: 15px;
 }
+
 .sticky-header::-webkit-scrollbar {
     display: none;
 }
+
 .sticky-header {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-.filter_midium_divice{
+
+.filter_midium_divice {
     background: rgb(79, 50, 103);
     width: 40%;
     position: fixed;
@@ -100,106 +132,129 @@
     left: 0px;
     bottom: 0px;
 }
-.filter_midium_divice p{
+
+.filter_midium_divice p {
     font-size: 13px;
     font-weight: bold;
 }
-.offcanvas-bottom{
+
+.offcanvas-bottom {
     height: 100vh !important;
 }
-.offcanvas_sort{
+
+.offcanvas_sort {
     height: 90vh !important;
     border-radius: 30px 30px 0px 0px !important;
 }
-.filter_offcanvas{
+
+.filter_offcanvas {
     box-shadow: rgba(197, 197, 197, 0.5) 2px 3px 3px 5px;
     bottom: 0px;
     position: absolute;
     background: rgb(255, 255, 255);
     z-index: 10;
 }
-.filter_md_btn{
+
+.filter_md_btn {
     font-family: InterSemiBold, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 12px !important;
     font-weight: bold;
-    color: rgb(79, 50, 103) !important;    
+    color: rgb(79, 50, 103) !important;
     background: rgb(220, 210, 254) !important;
     border-radius: 12px !important;
 }
-.filter_md_btn1{
+
+.filter_md_btn1 {
     font-size: 12px !important;
     border-radius: 12px !important;
     background: linear-gradient(to right, rgb(222, 87, 229), rgb(136, 99, 251)) !important;
     border: 1px solid #fff;
 }
-.img{
+
+.img {
     max-width: 100%;
     animation: auto ease 0s 1 normal none running none;
     display: block;
     width: 100%;
     height: 100%;
 }
+
 .heart-icon1 {
     font-size: 16px;
     padding: 10px 20px;
     margin: 10px;
 }
-.heart-icon1 span{
+
+.heart-icon1 span {
     font-size: 13px;
 }
 
-@media(max-width:1024px){
-    .absolute_next_btn{
+@media(max-width:1024px) {
+    .absolute_next_btn {
         top: 14% !important;
         left: 33% !important;
     }
-    .absolute_prev_btn{
+
+    .absolute_prev_btn {
         top: 14% !important;
     }
-}   
+}
+
 @media only screen and (max-width: 768px) {
     .heart-icon1 {
-        font-size: 14px;
-        padding: 8px 16px;
-        margin: 8px;
+        font-size: 14px !important;
+        padding: 8px 16px !important;
+        margin: 8px !important;
     }
-    .absolute_latest{
+
+    .absolute_latest {
         font-size: 10px !important;
         padding: 3px 10px !important;
     }
 }
+
 @media only screen and (max-width: 480px) {
     .heart-icon1 {
-        font-size: 12px;
-        padding: 6px 12px;
-        margin: 6px;
+        font-size: 12px !important;
+        padding: 6px 12px !important;
+        margin: 6px !important;
+    }
+
+    .absolute_heart {
+        left: 81% !important;
+        top: 2% !important;
     }
 }
-@media(max-width:451px){
-    .heart-icon1{
+
+@media(max-width:451px) {
+    .heart-icon1 {
         margin: 0% !important;
         font-size: 12px !important;
-        margin-left: 1px;
+        margin-left: 1px !important;
     }
 }
-@media(max-width:419px){
-    .heart-icon1{
+
+@media(max-width:419px) {
+    .heart-icon1 {
         font-size: 15px !important;
-        display: flex;
-        width: 100%;
+        display: flex !important;
+        width: 100% !important;
         margin-top: 3px !important;
     }
 }
-@media(max-width:344px){
-    .heart-icon1{
+
+@media(max-width:344px) {
+    .heart-icon1 {
         padding: 2px 5px !important;
     }
-    .heart-icon1 span{
+
+    .heart-icon1 span {
         font-size: 11px !important;
     }
 }
-@media(max-width:321px){
-    .absolute_latest{
+
+@media(max-width:321px) {
+    .absolute_latest {
         font-size: 8px !important;
         padding: 3px 10px !important;
     }
