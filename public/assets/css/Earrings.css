@@ -34,18 +34,6 @@
     left: 85%;
     top: 3%;
 }
-.heart-icon {
-    opacity: 0;
-}
-.card:hover .heart-icon {
-    opacity: 1;
-}
-.heart-icon1 {
-    opacity: 1;
-}
-.card:hover .heart-icon1 {
-    opacity: 1;
-}
 .absolute_latest{
     position: absolute;
     left: 5%;
