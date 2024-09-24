@@ -7,6 +7,7 @@ import EmptyState from '../EmptyState';
 import { formatCurrency } from '../../Utils/formateCurrency';
 import Aos from 'aos';
 import "aos/dist/aos.css"
+import axios from 'axios';
 
 const Cart = (props) => {
     const dispatch = useDispatch();
@@ -45,21 +46,68 @@ const Cart = (props) => {
         dispatch(cartAction.deleteItem({ id: itemId }));
     };
 
-    const removeToCart = (item) => {
-        dispatch(cartAction.removeItem({
+    const removeToCart = async (item) => {
+        const cartItem = {
             id: item.id,
+            title: item.title,
             price: item.price,
-            totalprice: item.totalprice,
-        }));
+            image01: item.image01,
+            totalprice: item.totalprice
+        };
+    
+        try {
+            // Send a POST request to your backend API to remove the item from the cart
+            const response = await axios.post('http://localhost:5000/v1/carts/remove', cartItem);
+    
+            if (response.status === 201) {
+                // Assuming the backend returns the removed item or success response
+                
+                // Update Redux store to reflect the removed item
+                dispatch(cartAction.removeItem(item)); // Update store with the original item data, not response
+    
+                // Optional: If you need to navigate somewhere or handle a loading state
+                // setLoading(false);
+                // navigate('/cart');
+            }
+            console.log('Removed item response:', response.data);
+    
+        } catch (error) {
+            console.error('Error removing item from cart:', error);
+            // Handle error (e.g., show a notification)
+        }
+    };
+    
+
+    const addToCart = async (item) => {
+        setLoading(true);
+
+        const cartItem = {
+            id: item.id,
+            title: item.title,
+            price: item.price,
+            image01: item.image01,
+            totalprice: item.totalprice
+        };
+
+        try {
+            // Send a POST request to your backend API to add the item to the cart
+            const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
+
+            if (response.status === 201) {
+                // Update Redux store if the backend API call is successful
+                dispatch(cartAction.addItem(response.data)); // Assuming the API sends back the updated cart item
+                console.log(response.data);
+                setLoading(false);
+                navigate('/cart'); // Redirect to the cart page after adding the item
+            }
+        } catch (error) {
+            console.error('Error adding item to cart:', error);
+            setLoading(false);
+        }
+
+        
     };
 
-    const addToCart = (item) => {
-        dispatch(cartAction.addItem({
-            id: item.id,
-            price: item.price,
-            totalprice: item.totalprice,
-        }));
-    };
 
     useEffect(() => {
         window.scrollTo(0, 0);
