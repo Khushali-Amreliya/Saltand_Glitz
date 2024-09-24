@@ -127,7 +127,7 @@ const Cart = (props) => {
                                         <div className='headline_title pt-3 ps-3'>
                                             <strong>Get ₹1078 xCLusive points on this Order</strong>
                                             &nbsp;Redeem these points on your next order&nbsp;
-                                            <Link to="/" className='text-decoration-none' style={{ color: "#de57e5" }}>Know More</Link>
+                                            <Link to="/" className='text-decoration-none' style={{ color: "#3f91a1" }}>Know More</Link>
                                         </div>
                                     </div>
                                     {
@@ -247,7 +247,7 @@ const Cart = (props) => {
                                         <h6>
                                             <i className="ri-focus-3-line pe-2 fs-4"></i>
                                             <span style={{ fontSize: "13px" }}>Check Delivery & Details</span>
-                                            <span className='arrow'>
+                                            <span className='arrow_pin'>
                                                 <i className="ri-arrow-right-line  fs-5 text-center mx-auto d-block" data-bs-toggle="modal" data-bs-target="#pincode"></i>
                                             </span>
                                         </h6>
@@ -298,7 +298,7 @@ const Cart = (props) => {
                                     </div>
                                     <button
                                         onClick={handlePlaceOrder}
-                                        className='btn mx-auto d-block place_order_btn text-light w-100'>
+                                        className='btn mx-auto d-block place_order_btn w-100'>
                                         PLACE ORDER
                                     </button>
                                 </div>

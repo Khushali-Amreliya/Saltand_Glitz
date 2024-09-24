@@ -17,7 +17,7 @@
     background-color: white;
 } */
 .header_color {
-    background-color: #81D8D0;
+    background: var(--background);
 }
 
 .header_color h6 {
@@ -90,7 +90,7 @@
     width: 15px;
     height: 15px;
     font-size: 9px !important;
-    color: #fff;
+    color: #000 !important;
     border-radius: 6px !important;
     display: inline-block;
     position: absolute;
@@ -98,7 +98,7 @@
     line-height: 18px;
     text-align: center;
     right: -10px;
-    background: #8863fb;
+    background: var(--background);
     vertical-align: middle !important;
 }
 
@@ -107,7 +107,6 @@
     text-decoration: none;
     color: #353842;
     font-size: 15px;
-    /* padding-bottom: 29px !important; */
     transition: color 0.8s ease;
     cursor: pointer;
 }
@@ -120,7 +119,7 @@
     width: 0;
     height: 2px;
     border-radius: 20px;
-    background: #81d8d0;
+    background:var(--background);
     transition: width 0.8s ease;
 }
 

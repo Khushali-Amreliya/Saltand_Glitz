@@ -55,6 +55,8 @@
 } */
 .absolute_latest {
     position: absolute;
+    background-color: #afdbe2 !important;
+    color: #000 !important;
     left: 5%;
     top: 3%;
     font-size: 11px !important;

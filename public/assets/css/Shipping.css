@@ -44,25 +44,25 @@
     transition: background-color 0.3s ease;
 }
 .delivery_shipping.selected {
-    border: 1px solid rgb(136, 99, 251);
-    background: rgb(243, 235, 252);
+    border: 1px solid rgb(152, 216, 222);
+    background: #e2ebed;
 }
 .delivery_title{
     font-weight: bold;
 }
 .delivery_modal input{
-    background:#f6f3f9;
-    border: 1px solid #f6f3f9;
+    background:#f1f6f7;
+    border: 1px solid #f1f6f7;
     padding: 12px 0px 12px 10px;
     border-radius: 10px;
 }
 .delivery_modal input:hover{
-    border: 1px solid rgb(136, 99, 251);
+    border: 1px solid #bfdfe6;
     background: rgb(243, 235, 252) !;
 }
 .delivery_modal_select{
-    background:#f6f3f9 !important;
-    border: 1px solid #f6f3f9 !important;
+    background:#f1f6f7 !important;
+    border: 1px solid #f1f6f7 !important;
     padding: 12px 0px 12px 10px !important;
     border-radius: 10px !important;
     font-size: 13.5px !important;
@@ -83,7 +83,7 @@
     font-size: 10px;
 }
 .btn_Save{
-    background-color: #4f3267 !important;
+    background:var(--background);
     color: #fff !important;
     border-radius: 10px !important;
 }

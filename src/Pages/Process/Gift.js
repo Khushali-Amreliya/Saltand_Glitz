@@ -85,7 +85,7 @@ const Gift = () => {
                     </Link>
                 </div>
             </section>
-            <section className='container-fluid'>
+            <section className='container-fluid' style={{marginBottom:"100px"}}>
                 <div className='row'>
                     <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-5 pb-3 m-0 p-0'>
                         <div>
