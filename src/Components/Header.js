@@ -71,7 +71,7 @@ const Header = () => {
                         <i className="ri-menu-line fs-5 fw-bolder" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" ></i>
                         <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                             <div className="offcanvas-header">
-                                <h5 id="offcanvasExampleLabel"></h5>
+                                {/* <h5 id="offcanvasExampleLabel"></h5> */}
                                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div className="offcanvas-body">
