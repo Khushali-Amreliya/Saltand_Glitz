@@ -34,7 +34,6 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
-    /* For Firefox */
 }
 
 div:where(.swal2-container) .swal2-html-container {
