@@ -144,9 +144,9 @@ const Cart = (props) => {
                                                         <p className='m-0 p-0'>
                                                             <span className='cart_price'>{formatCurrency(item.totalprice)}</span>
                                                         </p>
-                                                        <p className='cart_quantity m-0 pt-1'>
+                                                        <p className='cart_quantity m-0 pt-1' style={{cursor:"pointer"}}>
                                                             Quantity:
-                                                            &nbsp;<span className=' ' onClick={() => addToCart(item)}>
+                                                            &nbsp;<span className='' onClick={() => addToCart(item)}>
                                                                 <i class="ri-add-line"></i>
                                                             </span>&nbsp;
                                                             <span style={{ fontSize: "14.5px" }}>

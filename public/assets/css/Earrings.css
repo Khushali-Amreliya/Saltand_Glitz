@@ -127,7 +127,7 @@
 }
 
 .filter_midium_divice {
-    background: rgb(79, 50, 103);
+    background:var(--background);
     width: 40%;
     position: fixed;
     z-index: 2;
