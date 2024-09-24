@@ -97,8 +97,8 @@ const ProductCard = (props) => {
                         className={`ri-heart-fill absolute_heart fs-4 heart-icon ${isHeartFilled ? '' : 'd-none'}`}
                         onClick={handleHeartClick}
                     ></i>
-                    <p className='absolute_latest btn bg-warning text-light'>LATEST</p>
-                    <button className='heart-icon1 btn border border-1 border-success rounded-pill' onClick={addToCart}>
+                    <p className='absolute_latest btn'>LATEST</p>
+                    <button className='heart-icon1 btn rounded-pill add_btn_border' onClick={addToCart}>
                         <span className='fw-bold'>ADD TO CART&nbsp;</span>
                     </button>
                     <button className='mx-auto d-block heart-icon1 btn bg-success border border-1 border-success rounded-pill float-end'>

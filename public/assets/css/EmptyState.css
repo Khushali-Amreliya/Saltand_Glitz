@@ -26,8 +26,8 @@
   }
   
   .start-button {
-    background: linear-gradient(90deg, rgb(229, 110, 235) 0%, rgb(136, 99, 251) 100%) !important;
-    color: #fff;
+    background: var(--background);
+    color: #000;
     border: none;
     border-radius: 5px;
     padding: 10px 50px;

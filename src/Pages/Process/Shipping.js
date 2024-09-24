@@ -227,7 +227,7 @@ const Shipping = () => {
                                         <h6 data-bs-toggle="modal" data-bs-target="#address">
                                             <i className=" pe-2 fs-4"></i>
                                             <span style={{ fontSize: "13px" }}>Add a New Address</span>
-                                            <span className='arrow'>
+                                            <span className='arrow_pin'>
                                                 <i className="ri-add-line fs-5 text-center mx-auto d-block"></i>
                                             </span>
                                         </h6>

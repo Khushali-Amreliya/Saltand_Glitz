@@ -11,9 +11,9 @@
     transition: border-color 0.3s ease;
 }
 .payment-option.selected {
-    background-color: #e0d7f7;
-    border-color: #9e6bdb;
-    border: 1px solid #9e6bdb;
+    background-color: #66bec8;
+    border-color: #297179;
+    border: 1px solid #297179;
 }
 .icon-wrapper {
     flex-shrink: 0;
@@ -31,13 +31,13 @@
 }
 .payment_title {
     font-size: 16px;
-    color: #5e3a8c;
+    color: var(--color);
     margin: 0;
     font-weight: bold;
 }
 .description {
     font-size: 12px;
-    color: #4f3267;
+    color: #08424a;
     margin: 2px 0 0 0;
     letter-spacing: 0.5px;
 }
@@ -45,12 +45,12 @@
     margin-left: auto;
 }
 .radio-wrapper input[type="radio"] {
-    accent-color: #9e6bdb;
+    accent-color: #0b7a9c;
     width: 18px;
     height: 18px;
 }
 .gift_add_wrapper{
-    color: #d557e5;
+    color: #0b617b;
     font-weight: bold;
     font-size: 15px;
     padding-right: 15px;
@@ -59,7 +59,7 @@
     background-color: #ebebff !important;
 }
 .pay_btn{
-    background: linear-gradient(to right, rgb(222, 87, 229), rgb(136, 99, 251));
+    background:var(--background);
     border-radius: 12px !important;
     padding: 10px 15px !important;
     font-size: 13px !important;

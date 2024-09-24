@@ -320,10 +320,10 @@ const Earrings = () => {
                 <div className='container-fluid filter_midium_divice d-lg-none d-xl-none d-block'>
                     <div className='row text-center pt-3'>
                         <div className='col-md-4 col-sm-4 col-4'>
-                            <p className='text-light'>CATEGORIES</p>
+                            <p className=''>CATEGORIES</p>
                         </div>
                         <div className='col-md-4 col-sm-4 col-4'>
-                            <p className='text-light' data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottomSort" aria-controls="offcanvasBottom">SORT</p>
+                            <p className='' data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottomSort" aria-controls="offcanvasBottom">SORT</p>
                             <div className="offcanvas offcanvas-bottom offcanvas_sort" tabIndex="-1" id="offcanvasBottomSort" aria-labelledby="offcanvasBottomLabel">
                                 <div className="offcanvas-header">
                                     <h5 className="offcanvas-title fw-bold" id="offcanvasBottomLabel">Sort Design By</h5>
@@ -352,7 +352,7 @@ const Earrings = () => {
                             </div>
                         </div>
                         <div className='col-md-4 col-sm-4 col-4'>
-                            <p className='text-light' data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">FILTER</p>
+                            <p className='' data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">FILTER</p>
                             <div className="offcanvas offcanvas-bottom" tabIndex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
                                 <div className="offcanvas-header">
                                     <h5 className="offcanvas-title fw-bold " id="offcanvasBottomLabel">Filters</h5>

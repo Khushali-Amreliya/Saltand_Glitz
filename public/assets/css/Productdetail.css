@@ -126,6 +126,10 @@
     top: 2% !important;
     left: 86% !important;
 }
+
+.add_btn_border{
+    border: 2px solid #b2ebf7 !important;
+}
 @media(max-width:992px){
     .add_btn_md{
         width: 100% !important;

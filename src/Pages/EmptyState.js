@@ -30,7 +30,7 @@ const EmptyState = () => {
                     </div>
                 </div>
                 <div className='d-lg-none d-block filter_midium_divice w-100 py-2'>
-                    <Link to="/"><button className="btn start_btn_md">START SHOPPING</button></Link>
+                    <Link to="/"><button className="btn start_btn_md text-dark fw-bold">START SHOPPING</button></Link>
                 </div>
             </div>
         </>
