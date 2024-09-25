@@ -45,24 +45,32 @@ const Cart = (props) => {
     // const deleteItem = (itemId) => {
     //     dispatch(cartAction.deleteItem({ id: itemId }));
     // };
-    const deleteItem = async (item) => { // Pass only the id
-        const cartItem = {
-            id: item.id,
-            title: item.title,
-            price: item.price,
-            image01: item.image01,
-            totalprice: item.totalprice
-        };
+    // const deleteItem = async (item) => { // Pass only the id
+    //     const cartItem = {
+    //         id: item.id,
+    //         title: item.title,
+    //         price: item.price,
+    //         image01: item.image01,
+    //         totalprice: item.totalprice
+    //     };
+    //     try {
+    //         const response = await axios.post('http://localhost:5000/v1/carts/delete', cartItem);
+    //         if (response.status === 200) {
+
+
+    //         }
+    //         dispatch(cartAction.deleteItem(response.data));
+    //         console.log('delete',response.data);
+    //     } catch (error) {
+    //         console.error('Error deleting item from cart:', error.message);
+    //     }
+    // };
+    const deleteItem = async (id) => {
         try {
-            const response = await axios.post('http://localhost:5000/v1/carts/delete', cartItem);
-            if (response.status === 200) {
-
-
-            }
-            dispatch(cartAction.deleteItem(response.data));
-            console.log('delete',response.data);
+            const response = await axios.post('http://localhost:5000/v1/carts/delete', { id });
+            dispatch(cartAction.deleteItem(response.data)); // Use response.data.id, not response.id
         } catch (error) {
-            console.error('Error deleting item from cart:', error.message);
+            console.error('Error deleting item:', error);
         }
     };
     
