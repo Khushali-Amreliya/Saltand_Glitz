@@ -9,8 +9,6 @@ import Aos from 'aos';
 import "aos/dist/aos.css"
 import axios from 'axios';
 
-
-
 const Cart = (props) => {
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.cartItem);
@@ -69,15 +67,8 @@ const Cart = (props) => {
     // };
     const deleteItem = async (id) => {
         try {
-            // Start loading animation
-            document.querySelector(`.delete[data-id="${id}"] .deleteBox`).classList.add('loading');
-            
             const response = await axios.post('http://localhost:5000/v1/carts/delete', { id });
-            dispatch(cartAction.deleteItem(response.data)); // Use response.data for the deleted item
-           
-            // Show the deleted message
-            document.querySelector(`.delete[data-id="${id}"] .deleteBox`).classList.remove('loading');
-            document.querySelector(`.delete[data-id="${id}"] .deleteBox`).classList.add('deleted');
+            dispatch(cartAction.deleteItem(response.data)); // Use response.data.id, not response.id
         } catch (error) {
             console.error('Error deleting item:', error);
         }
@@ -156,7 +147,7 @@ const Cart = (props) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [handleScroll]);
-  
+
     return (
         <>
             {loading && <Loader />}
