@@ -5,148 +5,175 @@
     scroll-snap-stop: always;
     transition: 1s;
 }
+
 .video-container {
     position: relative;
     width: 400px;
     height: 300px;
     overflow: hidden;
 }
+
 .video::-webkit-media-controls {
     display: none !important;
 }
-.title_taxes{
+
+.title_taxes {
     font-size: 15px;
     word-spacing: 1.5px;
 }
-.title_taxes span{
+
+.title_taxes span {
     color: #3d8dbe;
 }
-.title_offer{
+
+.title_offer {
     font-size: 12px;
     color: #3d8dbe;
 }
-.add_btn{
+
+.add_btn {
     background-color: #012f49 !important;
     color: #fff !important;
     font-size: 14px !important;
 }
-.delivery_cancellation{
+
+.delivery_cancellation {
     font-size: 12px;
 }
-.delivery_cancellation u{
+
+.delivery_cancellation u {
     letter-spacing: 1px;
     word-spacing: 1px;
     font-size: 14px;
 }
-.pincode_productdetail{
+
+.pincode_productdetail {
     font-size: 14px;
 }
-.pincode_input i{
+
+.pincode_input i {
     border-left: none !important;
     background-color: transparent !important;
     border: 2px solid #000;
 }
-.pincode_input input{
+
+.pincode_input input {
     border-right: none !important;
     border: 2px solid #000;
 }
-.category_tag{
+
+.category_tag {
     color: #7d7d7d;
     font-size: 14px;
     padding-right: 5px;
 }
-.category_tag1{
+
+.category_tag1 {
     font-size: 12px;
     word-spacing: 1px;
 }
-.video_call{
+
+.video_call {
     background-color: rgb(247, 251, 247);
     padding: 20px 0px;
 }
-.video_call h6{
+
+.video_call h6 {
     font-size: 15px !important;
     font-weight: bold;
 }
-.video_call p{
+
+.video_call p {
     font-size: 11px;
     letter-spacing: 0.5px;
 }
-.video_call button{
-    background-color: rgb(230, 246, 230);    
-    border-radius:30px;
+
+.video_call button {
+    background-color: rgb(230, 246, 230);
+    border-radius: 30px;
     font-size: 13px;
     font-weight: bold;
     padding: 10px 50px;
 }
+
 /* .video_call_img{
     border-radius: 8px 0px 0px 8px;
     border: 1px solid #eae4ed;
     border-right: none !important;
 } */
-.store h6{
+.store h6 {
     color: #4f3267;
 }
-.store p{
+
+.store p {
     color: #4e555e;
     font-size: 12px;
 }
-.store button{
-    background:linear-gradient(270deg, rgb(255, 91, 108) 0%, rgb(253, 139, 100) 100%);
+
+.store button {
+    background: linear-gradient(270deg, rgb(255, 91, 108) 0%, rgb(253, 139, 100) 100%);
     border-radius: 20px;
 }
-.services h6{
+
+.services h6 {
     font-size: 15px;
     margin: 0;
     padding: 0%;
 }
-.services p{
+
+.services p {
     font-size: 12px;
     color: #de57e5;
     font-weight: bold;
 }
-.certified_Sec p{
+
+.certified_Sec p {
     font-size: 12px;
     font-weight: 600;
 }
-.policy_sec{
+
+.policy_sec {
     background-image: linear-gradient(to right, rgb(255, 249, 220), rgb(255, 240, 216), rgb(255, 231, 217), rgb(255, 224, 222), rgb(255, 219, 229), rgb(255, 213, 232), rgb(252, 208, 238), rgb(245, 204, 246), rgb(235, 197, 248), rgb(223, 190, 250), rgb(208, 184, 252), rgb(190, 179, 255));
 }
-.policy_sec h6{
+
+.policy_sec h6 {
     font-size: 13px;
     font-weight: bold;
     margin: 0;
     padding: 0;
 }
-.policy_sec p{
+
+.policy_sec p {
     font-size: 10px;
     font-weight: bold;
 }
-.ri-heart-add-line{
+
+.ri-heart-add-line {
     position: absolute;
     top: 2% !important;
     left: 86% !important;
 }
 
-.add_btn_border{
-    border: 2px solid #b2ebf7 !important;
-}
-@media(max-width:992px){
-    .add_btn_md{
+@media(max-width:992px) {
+    .add_btn_md {
         width: 100% !important;
     }
 }
-@media(max-width:588px){
-    .video_call_img{
+
+@media(max-width:588px) {
+    .video_call_img {
         height: 200px !important;
     }
 }
-@media(max-width:426px){
-    .video_call_img{
+
+@media(max-width:426px) {
+    .video_call_img {
         height: 200px !important;
     }
 }
-@media(max-width:333px){
-    .video_call_img{
+
+@media(max-width:333px) {
+    .video_call_img {
         height: 212px !important;
     }
 }

@@ -36,7 +36,7 @@ const ProductCard = (props) => {
 
     const handleHeartClick = () => {
         if (isHeartFilled) {
-            dispatch(cartAction.removeFromWishlist(id)); 
+            dispatch(cartAction.removeFromWishlist(id));
         } else {
             dispatch(cartAction.addToWishlist({ id, title, price, image01 }));
         }
@@ -48,7 +48,7 @@ const ProductCard = (props) => {
         const cartItem = { id, title, price, image01 };
 
         try {
-            
+
             const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
 
             if (response.status === 201) {
@@ -98,10 +98,10 @@ const ProductCard = (props) => {
                         onClick={handleHeartClick}
                     ></i>
                     <p className='absolute_latest btn'>LATEST</p>
-                    <button className='heart-icon1 btn rounded-pill add_btn_border' onClick={addToCart}>
+                    <button className='heart-icon1 btn add_to_btn' onClick={addToCart}>
                         <span className='fw-bold'>ADD TO CART&nbsp;</span>
                     </button>
-                    <button className='mx-auto d-block heart-icon1 btn bg-success border border-1 border-success rounded-pill float-end'>
+                    <button className='mx-auto d-block video_call_btn btn rounded-pill float-end'>
                         <i className="ri-video-on-fill text-light text-center"></i>
                     </button>
                     <button onClick={() => slider?.current?.slickPrev()} className='prev_btn absolute_prev_btn d-lg-block d-none'><i className="ri-arrow-left-wide-line"></i></button>

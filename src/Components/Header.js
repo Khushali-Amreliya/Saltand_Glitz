@@ -67,18 +67,18 @@ const Header = () => {
             {/* Small device */}
             <section className='container-fluid pt-2 d-md-block d-sm-block d-lg-none'>
                 <div className='row'>
-                    <div className='col-sm-2 col-2 text-center'>
+                    <div className='col-sm-2 col-2'>
                         <i className="ri-menu-line fs-5 fw-bolder" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" ></i>
                         <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                             <div className="offcanvas-header">
-                                {/* <h5 id="offcanvasExampleLabel"></h5> */}
+                                <h5 id="offcanvasExampleLabel"></h5>
                                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div className="offcanvas-body">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            Jewellery
+                                            <i class="ri-subtract-line"></i> Jewellery
                                         </Link>
                                         <ul className="dropdown-menu dropdown-md-content" aria-labelledby="navbarDropdown">
                                             <div className='row'>
@@ -125,34 +125,34 @@ const Header = () => {
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            Office & Daily Wear
+                                            <i class="ri-subtract-line"></i> Office & Daily Wear
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            Love & Engagement
+                                            <i class="ri-subtract-line"></i> Love & Engagement
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            Gifts
+                                            <i class="ri-subtract-line"></i> Gifts
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            Know Your Diamond
+                                            <i class="ri-subtract-line"></i> Know Your Diamond
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            About Us
+                                            <i class="ri-subtract-line"></i> About Us
                                         </Link>
                                     </li>
                                 </ul>
-                                <div>
-                                    <Link to="/loginn" data-bs-dismiss="offcanvas"><button className='btn bg-primary text-light me-2'>Log In</button></Link>
-                                    <Link to="/signup" data-bs-dismiss="offcanvas"><button className='btn bg-primary text-light'>Sign Up</button></Link>
-                                </div>
+                            </div>
+                            <div className='btn_md'>
+                                <Link to="/loginn" data-bs-dismiss="offcanvas"><button className='btn'><span>Log In</span></button></Link>
+                                <Link to="/signup" data-bs-dismiss="offcanvas"><button className='btn mt-2'><span>Sign Up</span></button></Link>
                             </div>
                         </div>
                     </div>
