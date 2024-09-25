@@ -68,7 +68,7 @@ const Cart = (props) => {
     const deleteItem = async (id) => {
         try {
             const response = await axios.post('http://localhost:5000/v1/carts/delete', { id });
-            dispatch(cartAction.deleteItem(response.data.id)); // Use response.data.id, not response.id
+            dispatch(cartAction.deleteItem(response.data)); // Use response.data.id, not response.id
         } catch (error) {
             console.error('Error deleting item:', error);
         }
