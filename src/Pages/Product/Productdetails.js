@@ -6,6 +6,8 @@ import products from '../../fakedata/Product';
 import Loader from '../Loader';
 import ProductCard from './productCard';
 import { formatCurrency } from '../../Utils/formateCurrency';
+import axios from 'axios';
+
 
 const Productdetails = () => {
     const [loading, setLoading] = useState(false);
@@ -46,24 +48,72 @@ const Productdetails = () => {
     }, [category])
 
     const dispatch = useDispatch();
-    const addToCart = () => {
-        // setLoading(true);
+    // const addToCart = () => {
+    //     // setLoading(true);
 
-        dispatch(cartAction.addItem({ id, title, price, image01 }));
+    //     dispatch(cartAction.addItem({ id, title, price, image01 }));
 
-        // setTimeout(() => {
-        //     setLoading(false);
-        //     navigate('/cart');
-        // }, 2000);
-    };
-
-    const buyNow = () => {
+    //     // setTimeout(() => {
+    //     //     setLoading(false);
+    //     //     navigate('/cart');
+    //     // }, 2000);
+    // };
+    const addToCart = async () => {
         setLoading(true);
 
-        setTimeout(() => {
+        const cartItem = {
+            id,
+            title,
+            price,
+            image01,
+            totalprice: price // Assuming price is used for total price
+        };
+
+        try {
+            const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
+
+            if (response.status === 201) {
+                dispatch(cartAction.addItem(response.data));
+                setLoading(false);
+                // navigate('/cart');
+            }
+        } catch (error) {
+            console.error('Error adding item to cart:', error);
             setLoading(false);
-            navigate('/cart');
-        }, 2000);
+        }
+    };
+
+    // const buyNow = () => {
+    //     setLoading(true);
+
+    //     setTimeout(() => {
+    //         setLoading(false);
+    //         navigate('/cart');
+    //     }, 2000);
+    // };
+    const buyNow = async () => {
+        setLoading(true);
+
+        const cartItem = {
+            id,
+            title,
+            price,
+            image01,
+            totalprice: price // Assuming price is used for total price
+        };
+
+        try {
+            const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
+
+            if (response.status === 201) {
+                dispatch(cartAction.addItem(response.data));
+                setLoading(false);
+                navigate('/cart');
+            }
+        } catch (error) {
+            console.error('Error adding item to cart:', error);
+            setLoading(false);
+        }
     };
 
     // Colors data
@@ -371,7 +421,7 @@ const Productdetails = () => {
                             <div className='mt-3 ps-3'>
                                 <div className='row w-100 border rounded-3 store py-2 my-2'>
                                     <div className='col-md-1 col-sm-1 col-2 m-0 p-0'>
-                                        <i class="ri-store-2-line fs-1 ps-2"></i>
+                                        {/* <i class="ri-store-2-line fs-1 ps-2"></i> */}
                                         {/* <img alt='' src='assets/img/store.png' className='img-fluid'></img> */}
                                     </div>
                                     <div className='col-md-11 col-sm-11 col-10'>

@@ -116,7 +116,7 @@ const Cart = (props) => {
             if (response.status === 201) {
 
                 dispatch(cartAction.addItem(response.data));
-                console.log(response.data);
+                // console.log(response.data);
                 setLoading(false);
                 navigate('/cart');
             }
