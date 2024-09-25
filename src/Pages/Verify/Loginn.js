@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import Loader from '../Loader';
 
 const Loginn = () => {
     const [formData, setFormData] = useState({ mobile: '' });
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);  // Loader state
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,49 +20,62 @@ const Loginn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         if (!formData.mobile) {
             setError('Mobile number or email is required.');
             return;
         } else {
             setError('');
         }
-    
         setLoading(true);
-    
+
         try {
             const response = await axios.post('http://localhost:5000/v1/signup/create-signup', formData);
-    
+
             if (response.status === 200) {
-                Swal.fire({
-                    title: 'Thank You',
-                    text: 'Login successful',
-                    icon: 'success',
-                    willClose: () => {
-                        navigate('/');
-                    }
+                toast.success('Login successful', {
+                    position: 'top-center',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
                 });
+
+                setTimeout(() => {
+                    setLoading(false);
+                    navigate('/');
+                }, 2000);
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong',
+                toast.error('Something went wrong', {
+                    position: 'top-center',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
                 });
+                setLoading(false);
             }
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong',
+            toast.error('Something went wrong', {
+                position: 'top-center',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
             });
-        } finally {
             setLoading(false);
         }
     };
-    
 
     return (
         <>
+            {loading && <Loader />}
             <section className='container mt-5 loginn_width'>
                 <div className='text-center row'>
                     <div className='signup_logo'>

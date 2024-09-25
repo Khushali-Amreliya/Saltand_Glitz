@@ -6,13 +6,14 @@ import { cartAction } from '../../Store/Slice/CartSlice';
 import Loader from '../Loader';
 import { formatCurrency } from '../../Utils/formateCurrency';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 const ProductCard = (props) => {
     const [loading, setLoading] = useState(false);
     const { id, title, price, image01, image02, image03 } = props.Productsitem;
     const dispatch = useDispatch();
     const slider = useRef(null);
     const navigate = useNavigate();
-
     const [isHeartFilled, setIsHeartFilled] = useState(false);
 
     const wishlist = useSelector((state) => state.cart.wishlistItem);
@@ -42,30 +43,36 @@ const ProductCard = (props) => {
         }
         setIsHeartFilled(!isHeartFilled);
     };
+
     const addToCart = async () => {
         setLoading(true);
-
+        toast.success("Product added to cart successfully!", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    
         const cartItem = { id, title, price, image01 };
-
         try {
-
             const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
-
+    
             if (response.status === 201) {
-                dispatch(cartAction.addItem(response.data)); // Update Redux store if needed
-                setLoading(false);
-                navigate('/cart'); // Redirect to cart after adding
+                dispatch(cartAction.addItem(response.data));
             }
         } catch (error) {
             console.error('Error adding item to cart:', error);
-            setLoading(false);
         }
         setTimeout(() => {
             setLoading(false);
             navigate('/cart');
         }, 2000);
     };
-
+    
+    
     const settings2 = {
         dots: false,
         infinite: true,

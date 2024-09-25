@@ -7,6 +7,7 @@ import Loader from '../Loader';
 import ProductCard from './productCard';
 import { formatCurrency } from '../../Utils/formateCurrency';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const Productdetails = () => {
@@ -59,7 +60,16 @@ const Productdetails = () => {
     //     // }, 2000);
     // };
     const addToCart = async () => {
-        setLoading(true);
+        setLoading(true); 
+        toast.success("Product added to cart successfully!", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
 
         const cartItem = {
             id,
@@ -74,8 +84,11 @@ const Productdetails = () => {
 
             if (response.status === 201) {
                 dispatch(cartAction.addItem(response.data));
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000);
+            } else {
                 setLoading(false);
-                // navigate('/cart');
             }
         } catch (error) {
             console.error('Error adding item to cart:', error);
@@ -92,38 +105,43 @@ const Productdetails = () => {
     //     }, 2000);
     // };
     const buyNow = async () => {
-        setLoading(true);
+        setLoading(true); // Set loading to true
 
         const cartItem = {
             id,
             title,
             price,
             image01,
-            totalprice: price // Assuming price is used for total price
+            totalprice: price
         };
 
         try {
             const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
 
             if (response.status === 201) {
-                dispatch(cartAction.addItem(response.data));
-                setLoading(false);
-                navigate('/cart');
+                dispatch(cartAction.addItem(response.data)); // Dispatch action to add item
+
+                // Delay navigation to the cart after adding the item
+                setTimeout(() => {
+                    setLoading(false); // Set loading to false before navigating
+                    navigate('/cart'); // Navigate to the cart page
+                }, 2000); // 5 seconds delay
+            } else {
+                setLoading(false); // Handle unexpected response status
             }
         } catch (error) {
             console.error('Error adding item to cart:', error);
-            setLoading(false);
+            setLoading(false); // Set loading to false on error
         }
     };
 
-    // Colors data
+
     const colors = [
         { id: 1, color: "#ffcccc" },
         { id: 2, color: "#cccccc" },
         { id: 3, color: "#ffcc66" }
     ];
 
-    // Handler to toggle the selected color
     const handleColorClick = (colorId) => {
         setSelectedColor(selectedColor === colorId ? null : colorId);
     };
