@@ -9,6 +9,8 @@ import Aos from 'aos';
 import "aos/dist/aos.css"
 import axios from 'axios';
 
+
+
 const Cart = (props) => {
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.cartItem);
@@ -155,7 +157,7 @@ const Cart = (props) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [handleScroll]);
-
+  
     return (
         <>
             {loading && <Loader />}
