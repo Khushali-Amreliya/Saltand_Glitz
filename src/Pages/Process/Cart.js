@@ -45,7 +45,7 @@ const Cart = (props) => {
     // const deleteItem = (itemId) => {
     //     dispatch(cartAction.deleteItem({ id: itemId }));
     // };
-    const deleteItem = async (item) => {
+    const deleteItem = async (item) => { // Pass only the id
         const cartItem = {
             id: item.id,
             title: item.title,
@@ -53,20 +53,19 @@ const Cart = (props) => {
             image01: item.image01,
             totalprice: item.totalprice
         };
-    
         try {
             const response = await axios.post('http://localhost:5000/v1/carts/delete', cartItem);
-    
-            if (response.status === 201) {
-          
-                setLoading(false);
+            if (response.status === 200) {
+
+
             }
-            dispatch(cartAction.deleteItem(response.data)); 
-            console.log('Removed item response:', response.data);
+            dispatch(cartAction.deleteItem(response.data));
+            console.log('delete',response.data);
         } catch (error) {
-            console.error('Error removing item from cart:', error);
+            console.error('Error deleting item from cart:', error.message);
         }
     };
+    
     const removeToCart = async (item) => {
         const cartItem = {
             id: item.id,
@@ -75,23 +74,23 @@ const Cart = (props) => {
             image01: item.image01,
             totalprice: item.totalprice
         };
-    
+
         try {
             // Send a POST request to your backend API to remove the item from the cart
             const response = await axios.post('http://localhost:5000/v1/carts/remove', cartItem);
-    
+
             if (response.status === 201) {
-          
+
                 setLoading(false);
             }
-            dispatch(cartAction.removeItem(response.data)); 
-            console.log('Removed item response:', response.data);
+            dispatch(cartAction.removeItem(response.data));
+            // console.log('Removed item response:', response.data);
         } catch (error) {
             console.error('Error removing item from cart:', error);
             // Handle error (e.g., show a notification)
         }
     };
-    
+
     const addToCart = async (item) => {
         setLoading(true);
 
@@ -107,11 +106,11 @@ const Cart = (props) => {
             const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
 
             if (response.status === 201) {
-               
-                dispatch(cartAction.addItem(response.data)); 
+
+                dispatch(cartAction.addItem(response.data));
                 console.log(response.data);
                 setLoading(false);
-                navigate('/cart'); 
+                navigate('/cart');
             }
         } catch (error) {
             console.error('Error adding item to cart:', error);
@@ -203,7 +202,7 @@ const Cart = (props) => {
                                                         <p className='m-0 p-0'>
                                                             <span className='cart_price'>{formatCurrency(item.totalprice)}</span>
                                                         </p>
-                                                        <p className='cart_quantity m-0 pt-1' style={{cursor:"pointer"}}>
+                                                        <p className='cart_quantity m-0 pt-1' style={{ cursor: "pointer" }}>
                                                             Quantity:
                                                             &nbsp;<span className='' onClick={() => addToCart(item)}>
                                                                 <i class="ri-add-line"></i>
