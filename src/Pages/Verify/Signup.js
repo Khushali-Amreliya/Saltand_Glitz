@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import Loader from '../Loader';
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import auth from '../../Components/firebase';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [loading, setLoading] = useState(false);
@@ -21,14 +21,10 @@ const Signup = () => {
 
     const handleSignIn = async () => {
         if (user) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Already Signed In',
-                text: 'You are already signed in.',
-            });
+            toast.warn('You are already signed in.');
             return;
         }
-    
+
         try {
             setLoading(true);
             provider.setCustomParameters({
@@ -37,10 +33,10 @@ const Signup = () => {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
             setUser(user);
-    
+
             const { displayName, email, phoneNumber } = user;
             const [firstName, lastName] = displayName ? displayName.split(' ') : ['', ''];
-    
+
             setFormData({
                 firstName,
                 lastName,
@@ -48,33 +44,21 @@ const Signup = () => {
                 mobile: phoneNumber || '',
                 gender: ''
             });
-    
-            Swal.fire({
-                icon: 'success',
-                title: 'Signed In Successfully',
-                text: `Welcome, ${user.displayName || firstName}!`,
-            });
-            console.log('User Info:', user);
+
+            toast.success(`Welcome, ${user.displayName || firstName}!`);
         } catch (error) {
             console.error('Error signing in with Google:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Sign-In Failed',
-                text: 'Something went wrong during sign-in.',
-            });
+            toast.error('Something went wrong during sign-in.');
         } finally {
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
         }
     };
-    
 
     const handleSignOut = async () => {
         if (!user) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Not Signed In',
-                text: 'You are not signed in.',
-            });
+            toast.warn('You are not signed in.');
             return;
         }
 
@@ -88,19 +72,11 @@ const Signup = () => {
                 mobile: '',
                 gender: ''
             });
-            localStorage.removeItem('user'); 
-            Swal.fire({
-                icon: 'success',
-                title: 'Signed Out',
-                text: 'You have successfully signed out.',
-            });
+            localStorage.removeItem('user');
+            toast.success('You have successfully signed out.');
         } catch (error) {
             console.error('Error signing out:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Sign-Out Failed',
-                text: 'Something went wrong during sign-out.',
-            });
+            toast.error('Something went wrong during sign-out.');
         }
     };
 
@@ -127,47 +103,33 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { firstName, email, mobile, lastName, gender } = formData;
-    
+
         if (!firstName || !email || !mobile || !lastName || !gender) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Please fill up all details',
-            });
+            toast.error('Please fill up all details');
             return;
         }
-    
+
         setLoading(true);
-    
+
+
         try {
             const response = await axios.post('http://localhost:5000/v1/login/create-login', formData);
-    
+
             if (response.status === 200) {
                 localStorage.setItem('user', JSON.stringify(formData));
                 setUser(formData);
-                Swal.fire({
-                    title: 'Profile Updated Successfully',
-                    text: 'Your profile has been updated successfully.',
-                    icon: 'success',
-                });
+                toast.success('Your profile has been updated successfully.');
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong',
-                });
+                toast.error('Something went wrong');
             }
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong',
-            });
+            toast.error('Something went wrong');
         } finally {
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
         }
     };
-    
 
     return (
         <>
@@ -380,8 +342,8 @@ const Signup = () => {
                                     <button className='mt-4 btn w-100 place_order_btn text-light' type='submit'>Sign In</button>
                                 </form>
                             </div>
-                            <p className='create_acc pt-2'>Already have an account? 
-                            <Link to="/loginn" className='text-decoration-none'><span> LOG IN</span></Link></p>
+                            <p className='create_acc pt-2'>Already have an account?
+                                <Link to="/loginn" className='text-decoration-none'><span> LOG IN</span></Link></p>
                         </>
                     )}
                 </div>

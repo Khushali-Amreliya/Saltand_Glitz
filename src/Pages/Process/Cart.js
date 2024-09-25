@@ -69,8 +69,15 @@ const Cart = (props) => {
     // };
     const deleteItem = async (id) => {
         try {
+            // Start loading animation
+            document.querySelector(`.delete[data-id="${id}"] .deleteBox`).classList.add('loading');
+            
             const response = await axios.post('http://localhost:5000/v1/carts/delete', { id });
-            dispatch(cartAction.deleteItem(response.data)); // Use response.data.id, not response.id
+            dispatch(cartAction.deleteItem(response.data)); // Use response.data for the deleted item
+           
+            // Show the deleted message
+            document.querySelector(`.delete[data-id="${id}"] .deleteBox`).classList.remove('loading');
+            document.querySelector(`.delete[data-id="${id}"] .deleteBox`).classList.add('deleted');
         } catch (error) {
             console.error('Error deleting item:', error);
         }
@@ -86,24 +93,18 @@ const Cart = (props) => {
         };
 
         try {
-            // Send a POST request to your backend API to remove the item from the cart
             const response = await axios.post('http://localhost:5000/v1/carts/remove', cartItem);
 
             if (response.status === 201) {
-
-                setLoading(false);
             }
             dispatch(cartAction.removeItem(response.data));
             // console.log('Removed item response:', response.data);
         } catch (error) {
             console.error('Error removing item from cart:', error);
-            // Handle error (e.g., show a notification)
         }
     };
 
     const addToCart = async (item) => {
-        setLoading(true);
-
         const cartItem = {
             id: item.id,
             title: item.title,
@@ -118,8 +119,6 @@ const Cart = (props) => {
             if (response.status === 201) {
 
                 dispatch(cartAction.addItem(response.data));
-                // console.log(response.data);
-                setLoading(false);
                 navigate('/cart');
             }
         } catch (error) {
