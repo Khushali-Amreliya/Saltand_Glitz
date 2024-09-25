@@ -47,9 +47,18 @@ const Productdetails = () => {
 
     const dispatch = useDispatch();
     const addToCart = () => {
-        setLoading(true);
+        // setLoading(true);
 
         dispatch(cartAction.addItem({ id, title, price, image01 }));
+
+        // setTimeout(() => {
+        //     setLoading(false);
+        //     navigate('/cart');
+        // }, 2000);
+    };
+
+    const buyNow = () => {
+        setLoading(true);
 
         setTimeout(() => {
             setLoading(false);
@@ -146,7 +155,7 @@ const Productdetails = () => {
                                 <i className="ri-shopping-bag-4-line pe-2 fs-5"></i>
                                 ADD TO CART
                             </button>
-                            <button className='btn add_btn px-5 mt-3'>
+                            <button className='btn add_btn px-5 mt-3' onClick={buyNow}>
                                 <i className="ri-shopping-cart-2-line pe-2 fs-5"></i>
                                 BUY NOW
                             </button>

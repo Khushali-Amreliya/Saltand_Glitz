@@ -55,7 +55,6 @@ const Cart = (props) => {
         };
     
         try {
-            // Send a POST request to your backend API to remove the item from the cart
             const response = await axios.post('http://localhost:5000/v1/carts/delete', cartItem);
     
             if (response.status === 201) {
@@ -66,7 +65,6 @@ const Cart = (props) => {
             console.log('Removed item response:', response.data);
         } catch (error) {
             console.error('Error removing item from cart:', error);
-            // Handle error (e.g., show a notification)
         }
     };
     const removeToCart = async (item) => {
