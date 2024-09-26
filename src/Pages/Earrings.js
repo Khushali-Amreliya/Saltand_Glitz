@@ -16,7 +16,6 @@ const Earrings = () => {
         setProducts(productsData);
     }, []);
 
-
     const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
     const [showMorePrices, setShowMorePrices] = useState(false);
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);

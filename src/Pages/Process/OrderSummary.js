@@ -1,20 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { cartAction } from '../../Store/Slice/CartSlice';
 import { formatCurrency } from '../../Utils/formateCurrency';
 
 const OrderSummary = () => {
-    const dispatch = useDispatch()
     const cartItems = useSelector((state) => state.cart.cartItem);
     const [subtotal, setSubtotal] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
     const [couponDiscount, setCouponDiscount] = useState(0); // New state for coupon discount in rupees
     const discountPercentage = useSelector(state => state.cart.discount); // Renamed for clarity
-
-    const deleteItem = (itemId) => {
-        dispatch(cartAction.deleteItem({ id: itemId }));
-    };
 
     const calculateSubtotal = useCallback(() => {
         return cartItems.reduce((total, item) => total + Number(item.totalprice), 0);
@@ -56,9 +50,6 @@ const OrderSummary = () => {
                                 <p className='login_delivery m-0 p-0'>Expected Delivery by - 30th Aug</p>
                                 <p className='login_price'>{formatCurrency(item.totalprice)}</p>
                             </div>
-                            <span className='delete__btn float-end' onClick={() => deleteItem(item.id)}>
-                                <i className="ri-close-circle-fill"></i>
-                            </span>
                         </div>
                     </div>
                 ))

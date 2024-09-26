@@ -193,10 +193,7 @@
 }
 
 .add_to_btn {
-    margin: auto;
-    /* width: 50%; */
     display: block;
-    min-width: 160px;
     width: fit-content;
     width: -moz-fit-content;
     background: #fff !important;
@@ -226,7 +223,7 @@
     &:after {
         content: "";
         position: absolute;
-        width: 1px;
+        width: 0.5px;
         height: 100%;
         top: 0;
         transition: all 0.4s ease;
@@ -240,20 +237,7 @@
     &:after {
         right: 0;
     }
-
-    /* &:hover {
-        transition: all 0.4s ease;
-        box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.2);
-        letter-spacing: 2px;
-        color: rgb(23, 3, 3) !important;
-
-        &:before,
-        &:after {
-            width: 51%;
-        }
-    } */
 }
-
 
 .heart-icon1 span {
     font-size: 13px;
@@ -310,6 +294,12 @@
         display: flex !important;
         width: 100% !important;
         margin-top: 3px !important;
+    }
+
+    .video_call_btn {
+        margin: 10px;
+        background: var(--background);
+        width: 100%;
     }
 }
 
