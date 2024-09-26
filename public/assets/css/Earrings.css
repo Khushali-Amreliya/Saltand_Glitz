@@ -193,6 +193,8 @@
 }
 
 .add_to_btn {
+    margin: auto;
+    /* width: 50%; */
     display: block;
     min-width: 160px;
     width: fit-content;
@@ -212,25 +214,22 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-radius: 50%;
-    border: 1px solid #2498b3 !important;
 
     span {
         z-index: 1;
         text-align: center;
-        /* text-decoration: none !important; */
+        text-decoration: none !important;
     }
 
     &:before,
     &:after {
         content: "";
         position: absolute;
-        width: 1px;
+        width: 4px;
         height: 100%;
         top: 0;
         transition: all 0.4s ease;
         background: #2498b3;
-        color: #000 !important;
     }
 
     &:before {
@@ -241,17 +240,17 @@
         right: 0;
     }
 
-    /* &:hover {
+    &:hover {
         transition: all 0.4s ease;
         box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.2);
         letter-spacing: 2px;
-        color: #000 !important;
+        color: rgb(23, 3, 3) !important;
 
         &:before,
         &:after {
             width: 51%;
         }
-    } */
+    }
 }
 
 

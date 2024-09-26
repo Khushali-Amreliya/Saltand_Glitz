@@ -675,6 +675,20 @@ body {
 .delete .deleteBox.deleted:before {
     content: 'Deleted.';
 }
+.confirmation-popup{
+    background-color: brown;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 7px;
+}
+.confirmation-popup-ok{
+    background-color: green;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 7px;
+}
 
 
 @media(max-width:991px) {

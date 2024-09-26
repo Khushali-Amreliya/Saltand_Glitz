@@ -79,13 +79,13 @@ const Cart = (props) => {
         };
 
         const CancelButton = () => (
-            <button onClick={() => toast.dismiss()} style={{ marginLeft: '10px' }}>
+            <button onClick={() => toast.dismiss()} style={{ marginLeft: '10px' }} className='confirmation-popup'>
                 Cancel
             </button>
         );
 
         const ConfirmButton = () => (
-            <button onClick={deleteItem} style={{ marginLeft: '10px' }}>
+            <button onClick={deleteItem} style={{ marginLeft: '10px' }} className='confirmation-popup-ok'>
                 OK
             </button>
         );
