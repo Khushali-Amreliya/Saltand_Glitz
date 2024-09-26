@@ -78,7 +78,7 @@ const Header = () => {
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            <i class="ri-subtract-line"></i> Jewellery
+                                            <i className="ri-subtract-line"></i> Jewellery
                                         </Link>
                                         <ul className="dropdown-menu dropdown-md-content" aria-labelledby="navbarDropdown">
                                             <div className='row'>
@@ -125,27 +125,27 @@ const Header = () => {
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            <i class="ri-subtract-line"></i> Office & Daily Wear
+                                            <i className="ri-subtract-line"></i> Office & Daily Wear
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            <i class="ri-subtract-line"></i> Love & Engagement
+                                            <i className="ri-subtract-line"></i> Love & Engagement
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            <i class="ri-subtract-line"></i> Gifts
+                                            <i className="ri-subtract-line"></i> Gifts
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            <i class="ri-subtract-line"></i> Know Your Diamond
+                                            <i className="ri-subtract-line"></i> Know Your Diamond
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            <i class="ri-subtract-line"></i> About Us
+                                            <i className="ri-subtract-line"></i> About Us
                                         </Link>
                                     </li>
                                 </ul>

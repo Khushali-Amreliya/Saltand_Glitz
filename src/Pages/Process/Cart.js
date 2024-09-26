@@ -8,6 +8,7 @@ import { formatCurrency } from '../../Utils/formateCurrency';
 import Aos from 'aos';
 import "aos/dist/aos.css"
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Cart = (props) => {
     const dispatch = useDispatch();
@@ -65,15 +66,46 @@ const Cart = (props) => {
     //         console.error('Error deleting item from cart:', error.message);
     //     }
     // };
-    const deleteItem = async (id) => {
-        try {
-            const response = await axios.post('http://localhost:5000/v1/carts/delete', { id });
-            dispatch(cartAction.deleteItem(response.data)); // Use response.data.id, not response.id
-        } catch (error) {
-            console.error('Error deleting item:', error);
-        }
+    const handleDelete = (itemId) => {
+        const deleteItem = async () => {
+            try {
+                const response = await axios.post('http://localhost:5000/v1/carts/delete', { id: itemId });
+                dispatch(cartAction.deleteItem(response.data)); // Use response.data
+                toast.success('Item has been deleted');
+            } catch (error) {
+                console.error('Error deleting item:', error);
+                toast.error('Failed to delete the item');
+            }
+        };
+
+        const CancelButton = () => (
+            <button onClick={() => toast.dismiss()} style={{ marginLeft: '10px' }}>
+                Cancel
+            </button>
+        );
+
+        const ConfirmButton = () => (
+            <button onClick={deleteItem} style={{ marginLeft: '10px' }}>
+                OK
+            </button>
+        );
+
+        // Show confirmation toast
+        toast.info(
+            <div>
+                <p>Are you sure you want to delete this item?</p>
+                <div>
+                    <ConfirmButton />
+                    <CancelButton />
+                </div>
+            </div>,
+            {
+                autoClose: false,
+                closeOnClick: true,
+            }
+        );
     };
-    
+
     const removeToCart = async (item) => {
         const cartItem = {
             id: item.id,
@@ -217,7 +249,7 @@ const Cart = (props) => {
                                                         <p className='cart_delivery'>Delivery by - 30th Aug</p>
                                                     </div>
                                                     {/* Delete Button Floating to the End */}
-                                                    <span className='delete__btn float-end' onClick={() => deleteItem(item.id)}>
+                                                    <span className='delete__btn float-end' onClick={() => handleDelete(item.id)}>
                                                         <i className="ri-close-circle-fill"></i>
                                                     </span>
                                                 </div>
@@ -238,7 +270,7 @@ const Cart = (props) => {
                                             </span>
                                         </h6>
                                     </div>
-                                    <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="col-lg-12 modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                             <div className="modal-content">
                                                 <div className="modal-header border-0">
@@ -310,7 +342,7 @@ const Cart = (props) => {
                                             </span>
                                         </h6>
                                     </div>
-                                    <div className="modal fade" id="pincode" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal fade" id="pincode" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="col-lg-12 modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                             <div className="modal-content">
                                                 <div className="modal-header border-0">
@@ -321,7 +353,7 @@ const Cart = (props) => {
                                                     <h5 className='pt-3'>Enter your Pincode<br /> to browse better</h5>
                                                     <p className='pb-2'>Get fastest delivery dates possible, check<br /> appointment for trial at home. Find nearby <br />stores & design availability in stores</p>
                                                     <div className='pincode_search mb-2'>
-                                                        <label for="pinCode" className='pincode_label'>Enter Pincode</label>
+                                                        <label htmlFor="pinCode" className='pincode_label'>Enter Pincode</label>
                                                         <input type='text' placeholder='Enter Pincode' className='form-control input_location border-0 bg-transparent'></input>
                                                         <span className='arrow_pincode'>
                                                             <i className="ri-arrow-right-line"></i>

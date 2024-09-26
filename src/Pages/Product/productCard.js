@@ -48,7 +48,7 @@ const ProductCard = (props) => {
         setLoading(true);
         toast.success("Product added to cart successfully!", {
             position: "top-center",
-            autoClose: 2000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -69,7 +69,7 @@ const ProductCard = (props) => {
         setTimeout(() => {
             setLoading(false);
             navigate('/cart');
-        }, 2000);
+        }, 1000);
     };
     
     
