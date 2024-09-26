@@ -193,10 +193,9 @@
 }
 
 .add_to_btn {
-    margin: auto;
+    /* margin: auto; */
     /* width: 50%; */
     display: block;
-    min-width: 160px;
     width: fit-content;
     width: -moz-fit-content;
     background: #fff !important;

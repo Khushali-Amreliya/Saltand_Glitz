@@ -335,7 +335,7 @@ const Cart = (props) => {
                                     {/* pincode code */}
                                     <div className='cart_Pincode'>
                                         <h6>
-                                            <i className="ri-focus-3-line pe-2 fs-4"></i>   
+                                            <i className="ri-focus-3-line pe-2 fs-4"></i>
                                             <span style={{ fontSize: "13px" }}>Check Delivery & Details</span>
                                             <span className='arrow_pin'>
                                                 <i className="ri-arrow-right-line  fs-5 text-center mx-auto d-block" data-bs-toggle="modal" data-bs-target="#pincode"></i>
