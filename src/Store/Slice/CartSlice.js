@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';  // Import Toastify
 
 const cartItems = localStorage.getItem("cartItem") !== null ? JSON.parse(localStorage.getItem("cartItem")) : [];
 const totalQuantity = localStorage.getItem("totalQuantity") !== null ? JSON.parse(localStorage.getItem("totalQuantity")) : 0;
@@ -23,10 +23,10 @@ const initialState = {
     cartItem: cartItems,
     wishlistItem: wishlistItems,
     totalQuantity: totalQuantity,
-    subtotal: subtotal, // Add subtotal
-    totalAmount: subtotal - (subtotal * (discount / 100)), // Calculate total amount with discount
+    subtotal: subtotal, 
+    totalAmount: subtotal - (subtotal * (discount / 100)),
     discount: discount,
-    error: null // Add error state
+    error: null 
 };
 
 const cartSlice = createSlice({
@@ -52,14 +52,11 @@ const cartSlice = createSlice({
                 existingItem.totalprice = Number(existingItem.totalprice) + Number(newItem.price);
             }
 
-            // Calculate subtotal (without discount)
             state.subtotal = state.cartItem.reduce((total, item) =>
                 total + Number(item.price) * Number(item.quantity), 0);
 
-            // Calculate total amount with discount
             state.totalAmount = state.subtotal - (state.subtotal * (state.discount / 100));
 
-            // Update localStorage
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
         },
         removeItem(state, action) {
@@ -77,35 +74,34 @@ const cartSlice = createSlice({
                 existingItem.totalprice = Number(existingItem.totalprice) - Number(newItem.price);
             }
 
-            // Calculate subtotal (without discount)
             state.subtotal = state.cartItem.reduce((total, item) =>
                 total + Number(item.price) * Number(item.quantity), 0);
 
-            // Calculate total amount with discount
             state.totalAmount = state.subtotal - (state.subtotal * (state.discount / 100));
 
-            // Update localStorage
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
         },
         deleteItem(state, action) {
             const newItem = action.payload;
             const existingItem = state.cartItem.find(item => item.id === newItem.id);
-
+        
             if (!existingItem) return;
-
+        
             state.cartItem = state.cartItem.filter(item => item.id !== newItem.id);
             state.totalQuantity -= existingItem.quantity;
-
-            // Calculate subtotal (without discount)
+        
             state.subtotal = state.cartItem.reduce((total, item) =>
                 total + Number(item.price) * Number(item.quantity), 0);
-
-            // Calculate total amount with discount
+        
+            if (state.cartItem.length === 0) {
+                state.discount = 0;
+            }
+        
             state.totalAmount = state.subtotal - (state.subtotal * (state.discount / 100));
-
-            // Update localStorage
+        
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
         },
+        
         applyCoupon(state, action) {
             const discountCode = action.payload;
             let discountPercent = 0;
@@ -118,43 +114,26 @@ const cartSlice = createSlice({
             } else if (discountCode === "MOUNT5") {
                 discountPercent = 5;
             } else {
-                errorMessage = "Invalid coupon code"; // Set error message for invalid codes
-                discountPercent = 0; // No discount applied
+                errorMessage = "Invalid coupon code"; 
+                discountPercent = 0;
             }
 
             state.discount = discountPercent;
 
-            // Calculate subtotal (without discount)
             state.subtotal = state.cartItem.reduce((total, item) =>
                 total + Number(item.price) * Number(item.quantity), 0);
 
-            // Calculate total amount with discount
             state.totalAmount = state.subtotal - (state.subtotal * (discountPercent / 100));
 
-            // Update localStorage
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
 
-            // Handle error message
             if (errorMessage) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: errorMessage,
-                    icon: 'error',
-                    confirmButtonText: 'Okay'
-                });
+                toast.error(errorMessage);
             } else {
-                Swal.fire({
-                    title: 'Success!',
-                    text: `Discount of ${discountPercent}% applied.`,
-                    icon: 'success',
-                    confirmButtonText: 'Okay',
-                    timer: 3000,
-                    timerProgressBar: true
-                });
+                toast.success(`Discount of ${discountPercent}% applied!`);
             }
         },
 
-        // Wishlist actions
         addToWishlist(state, action) {
             const newItem = action.payload;
             const existingItem = state.wishlistItem.find(item => item.id === newItem.id);
@@ -168,14 +147,12 @@ const cartSlice = createSlice({
                 });
             }
 
-            // Update localStorage for wishlist
             setWishlist(state.wishlistItem);
         },
         removeFromWishlist(state, action) {
             const itemId = action.payload;
             state.wishlistItem = state.wishlistItem.filter(item => item.id !== itemId);
 
-            // Update localStorage for wishlist
             setWishlist(state.wishlistItem);
         }
     }
