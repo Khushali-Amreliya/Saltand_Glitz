@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { cartAction } from '../../Store/Slice/CartSlice';
 import products from '../../fakedata/Product';
 import Loader from '../Loader';
-import ProductCard from './productCard';
 import { formatCurrency } from '../../Utils/formateCurrency';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -22,31 +21,8 @@ const Productdetails = () => {
 
     const { id } = useParams()
     const Product = products.find(item => item.id === id)
-    const { title, price, image01, category } = Product;
-    const [allProduct, setAllProduct] = useState(products)
+    const { title, price, image01 } = Product;
 
-    useEffect(() => {
-        if (category === "Earring") {
-            const FilterProduct = products.filter(item => item.category === "Earring")
-            setAllProduct(FilterProduct.slice(0, 4))
-            console.log(FilterProduct);
-        }
-        if (category === "Ring") {
-            const FilterProduct = products.filter(item => item.category === "Ring")
-            setAllProduct(FilterProduct)
-            console.log(FilterProduct);
-        }
-        if (category === "Necklace") {
-            const FilterProduct = products.filter(item => item.category === "Necklace")
-            setAllProduct(FilterProduct)
-            console.log(FilterProduct);
-        }
-        if (category === "Bracelet") {
-            const FilterProduct = products.filter(item => item.category === "Bracelet")
-            setAllProduct(FilterProduct)
-            console.log(FilterProduct);
-        }
-    }, [category])
 
     const dispatch = useDispatch();
     // const addToCart = () => {
@@ -558,13 +534,6 @@ const Productdetails = () => {
                             </div>
                         </div>
                     </div> */}
-                    {
-                        allProduct.map((item) => {
-                            return <div className='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 mx-auto d-block' key={item.id}>
-                                <ProductCard Productsitem={item}></ProductCard>
-                            </div>
-                        })
-                    }
                 </div>
             </section>
         </>

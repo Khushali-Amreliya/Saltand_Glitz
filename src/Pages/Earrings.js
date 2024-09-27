@@ -4,8 +4,8 @@ import productsData from '../fakedata/Product';
 
 const Earrings = () => {
     const images = [
-        'assets/img/product_img.jpg',
         'assets/img/product_img1.jpg',
+        'assets/img/product_img.jpg',
     ];
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -15,7 +15,6 @@ const Earrings = () => {
     useEffect(() => {
         setProducts(productsData);
     }, []);
-
 
     const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
     const [showMorePrices, setShowMorePrices] = useState(false);

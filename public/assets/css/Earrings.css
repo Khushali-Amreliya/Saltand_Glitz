@@ -143,6 +143,9 @@
 .offcanvas-bottom {
     height: 100vh !important;
 }
+.bottom {
+    height: 45vh !important;
+}
 
 .offcanvas_sort {
     height: 90vh !important;
@@ -193,8 +196,11 @@
 }
 
 .add_to_btn {
+<<<<<<< HEAD
     /* margin: auto; */
     /* width: 50%; */
+=======
+>>>>>>> 405c56f6e190a9a99a4ea5ba85a42c2b2f27d136
     display: block;
     width: fit-content;
     width: -moz-fit-content;
@@ -225,7 +231,7 @@
     &:after {
         content: "";
         position: absolute;
-        width: 1px;
+        width: 0.5px;
         height: 100%;
         top: 0;
         transition: all 0.4s ease;
@@ -239,20 +245,7 @@
     &:after {
         right: 0;
     }
-
-    /* &:hover {
-        transition: all 0.4s ease;
-        box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.2);
-        letter-spacing: 2px;
-        color: rgb(23, 3, 3) !important;
-
-        &:before,
-        &:after {
-            width: 51%;
-        }
-    } */
 }
-
 
 .heart-icon1 span {
     font-size: 13px;
@@ -309,6 +302,12 @@
         display: flex !important;
         width: 100% !important;
         margin-top: 3px !important;
+    }
+
+    .video_call_btn {
+        margin: 10px;
+        background: var(--background);
+        width: 100%;
     }
 }
 
