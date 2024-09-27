@@ -58,7 +58,7 @@ const ProductCard = (props) => {
     
         const cartItem = { id, title, price, image01 };
         try {
-            const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
+            const response = await axios.post('http://localhost:5000/v1/cart/add', cartItem);
     
             if (response.status === 201) {
                 dispatch(cartAction.addItem(response.data));

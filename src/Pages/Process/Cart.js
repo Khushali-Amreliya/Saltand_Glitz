@@ -142,7 +142,7 @@ const Cart = (props) => {
             if (response.status === 201) {
 
                 dispatch(cartAction.addItem(response.data));
-                navigate('/cart');
+
             }
         } catch (error) {
             console.error('Error adding item to cart:', error);
@@ -163,11 +163,9 @@ const Cart = (props) => {
             navigate('/login');
         }, 1000);
     };
-
     const handleApplyCoupon = () => {
         dispatch(cartAction.applyCoupon(couponCode));
     };
-
     const [isScrolled, setIsScrolled] = useState(false);
     const handleScroll = useCallback(() => {
         setIsScrolled(window.scrollY > 50);
