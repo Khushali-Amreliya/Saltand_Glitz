@@ -675,14 +675,16 @@ body {
 .delete .deleteBox.deleted:before {
     content: 'Deleted.';
 }
-.confirmation-popup{
+
+.confirmation-popup {
     background-color: brown;
     color: #fff;
     border: none;
     padding: 5px 10px;
     border-radius: 7px;
 }
-.confirmation-popup-ok{
+
+.confirmation-popup-ok {
     background-color: green;
     color: #fff;
     border: none;
@@ -690,6 +692,36 @@ body {
     border-radius: 7px;
 }
 
+.modal_remove {
+    border: 1px solid #3f91a1 !important;
+    font-size: 13px !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+}
+
+.modal_wishlist {
+    border: 1px solid #a5ecfb !important;
+    font-size: 13px !important;
+    background: var(--background);
+    color: #000 !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+}
+
+.modal_content h6 {
+    color: var(--color) !important;
+    font-size: 18px !important;
+}
+
+.modal_content p {
+    color: #042932 !important;
+    font-size: 11px !important;
+}
+
+.modal-content {
+    border-radius: 20px !important;
+    border: none !important;
+}
 
 @media(max-width:991px) {
     .cart_border {

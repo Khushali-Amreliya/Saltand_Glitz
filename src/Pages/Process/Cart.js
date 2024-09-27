@@ -66,44 +66,15 @@ const Cart = (props) => {
     //         console.error('Error deleting item from cart:', error.message);
     //     }
     // };
-    const handleDelete = (itemId) => {
-        const deleteItem = async () => {
-            try {
-                const response = await axios.post('http://localhost:5000/v1/carts/delete', { id: itemId });
-                dispatch(cartAction.deleteItem(response.data)); // Use response.data
-                toast.success('Item has been deleted');
-            } catch (error) {
-                console.error('Error deleting item:', error);
-                toast.error('Failed to delete the item');
-            }
-        };
-
-        const CancelButton = () => (
-            <button onClick={() => toast.dismiss()} style={{ marginLeft: '10px' }} className='confirmation-popup'>
-                Cancel
-            </button>
-        );
-
-        const ConfirmButton = () => (
-            <button onClick={deleteItem} style={{ marginLeft: '10px' }} className='confirmation-popup-ok'>
-                OK
-            </button>
-        );
-
-        // Show confirmation toast
-        toast.info(
-            <div>
-                <p>Are you sure you want to delete this item?</p>
-                <div>
-                    <ConfirmButton />
-                    <CancelButton />
-                </div>
-            </div>,
-            {
-                autoClose: false,
-                closeOnClick: true,
-            }
-        );
+    const handleDelete = async (itemId) => {
+        try {
+            const response = await axios.post('http://localhost:5000/v1/carts/delete', { id: itemId });
+            dispatch(cartAction.deleteItem(response.data)); // Dispatch the deletion action
+            toast.success('Item removed from the cart');
+        } catch (error) {
+            console.error('Error removing item:', error);
+            toast.error('Failed to remove the item');
+        }
     };
 
     const removeToCart = async (item) => {
@@ -247,14 +218,35 @@ const Cart = (props) => {
                                                         <p className='cart_delivery'>Delivery by - 30th Aug</p>
                                                     </div>
                                                     {/* Delete Button Floating to the End */}
-                                                    <span className='delete__btn float-end' onClick={() => handleDelete(item.id)}>
-                                                        <i className="ri-close-circle-fill"></i>
-                                                    </span>
+                                                    <button type="button" className="border-0 btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                        <span className='delete__btn float-end' >
+                                                            <i className="ri-close-circle-fill"></i>
+                                                        </span>
+                                                    </button>
+                                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header border-0">
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body text-center modal_content">
+                                                                    <img alt={item.title} src={item.image01} className='w-25 mx-auto d-block' />
+                                                                    <h6 className='m-0 pt-3'>Move Design from Cart</h6>
+                                                                    <p>Are you sure you want to move this design from the cart?</p>
+                                                                </div>
+                                                                <div class="modal-footer border-0 mx-auto d-block">
+                                                                    <button type="button" class="btn modal_remove" data-bs-dismiss="modal" onClick={() => handleDelete(item.id)}>REMOVE</button>
+                                                                    <button type="button" class="btn btn-primary modal_wishlist">MOVE TO WISHLIST</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         ))
                                     }
                                 </div>
+
                             </div>
                             <div className='col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 cart_border mt-5'>
                                 <div>
