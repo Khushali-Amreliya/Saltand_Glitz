@@ -4,8 +4,8 @@ import productsData from '../fakedata/Product';
 
 const Earrings = () => {
     const images = [
-        'assets/img/product_img.jpg',
         'assets/img/product_img1.jpg',
+        'assets/img/product_img.jpg',
     ];
     useEffect(() => {
         window.scrollTo(0, 0)

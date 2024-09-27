@@ -143,6 +143,9 @@
 .offcanvas-bottom {
     height: 100vh !important;
 }
+.bottom {
+    height: 45vh !important;
+}
 
 .offcanvas_sort {
     height: 90vh !important;
