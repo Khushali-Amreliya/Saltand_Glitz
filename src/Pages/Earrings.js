@@ -3,24 +3,70 @@ import ProductCard from './Product/productCard';
 import productsData from '../fakedata/Product';
 
 const Earrings = () => {
+    // Initial product images
     const images = [
         'assets/img/product_img1.jpg',
         'assets/img/product_img.jpg',
     ];
+    
+    // Scroll to the top when the component mounts
     useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
+        window.scrollTo(0, 0);
+    }, []);
+    
+    // State to hold products and selected ring sizes
     const [products, setProducts] = useState([]);
+    const [selectedRingSizes, setSelectedRingSizes] = useState([]);
+    const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
+    const ringSizes = ['11', '12', '13', '5', '6', '7'];
 
+    // Fetch products data on component mount
     useEffect(() => {
         setProducts(productsData);
     }, []);
-
-    const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
+    
+    // const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
     const [showMorePrices, setShowMorePrices] = useState(false);
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);
 
-    const ringSizes = ['11', '12', '13', '5', '6', '7'];
+    const handleFilterChange = (type, value) => {
+                let updatedSelection;
+                switch (type) {
+                    case 'ringSize':
+                        updatedSelection = selectedRingSizes.includes(value)
+                            ? selectedRingSizes.filter(size => size !== value)
+                            : [...selectedRingSizes, value];
+                        setSelectedRingSizes(updatedSelection);
+                        break;
+                    // case 'price':
+                    //     updatedSelection = selectedPriceRanges.includes(value)
+                    //         ? selectedPriceRanges.filter(price => price !== value)
+                    //         : [...selectedPriceRanges, value];
+                    //     setSelectedPriceRanges(updatedSelection);
+                    //     break;
+                    // case 'discount':
+                    //     updatedSelection = selectedDiscounts.includes(value)
+                    //         ? selectedDiscounts.filter(discount => discount !== value)
+                    //         : [...selectedDiscounts, value];
+                    //     setSelectedDiscounts(updatedSelection);
+                    //     break;
+                    default:
+                        break;
+                }
+            };
+        
+            const filterProducts = () => {
+                return products.filter(product => {
+                    const matchesRingSize = selectedRingSizes.length === 0 || selectedRingSizes.includes(product.size);
+                    // const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
+                    //     const [min, max] = range.split(' - ').map(value => parseInt(value.replace(/[₹,]/g, '').trim(), 10));
+                    //     return product.price >= min && product.price <= (max || Infinity);
+                    // });
+                    // const matchesDiscount = selectedDiscounts.length === 0 || selectedDiscounts.includes(`${product.discount}%`);
+                    return matchesRingSize;
+                });
+            };
+    // const ringSizes = ['11', '12', '13', '5', '6', '7'];
     const priceRanges = ['₹10,001 - ₹15,000', '₹20,001 - ₹30,000', 'Under ₹5,000', '₹5,001 - ₹10,000', '₹15,001 - ₹20,000', '₹30,001 - ₹40,000', '₹40,000 - ₹50,000', '₹50,000 - ₹75,000', '₹1,50,001 - ₹2,00,000'];
     const discount = ['Up to 15% off on Diamond Prices', 'Flat 15% off on Diamond Prices', 'Flat 10% off on Diamond Prices', 'Flat 5% off on Diamond Prices', 'Flat 50% off on Making Charges']
 
@@ -37,12 +83,14 @@ const Earrings = () => {
                         <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
                             <h2 className='fw-bold fs-5 mt-3'>Ring Size</h2>
                             {
-                                ringSizes.slice(0, showMoreRingSizes ? ringSizes.length : 4).map((size, index) => (
-                                    <div className="form-check my-2" key={index}>
-                                        <input className="form-check-input" type="checkbox" id={`ringSize${index}`} />
-                                        <label className="form-check-label" htmlFor={`ringSize${index}`}>{size}</label>
-                                    </div>
-                                ))
+                                ringSizes.map((size, index) => (
+                                                                    <div className="form-check my-2" key={index}>
+                                                                        <input className="form-check-input" type="checkbox" id={`ringSize${index}`} 
+                                                                            checked={selectedRingSizes.includes(size)} 
+                                                                            onChange={() => handleFilterChange('ringSize', size)} />
+                                                                        <label className="form-check-label" htmlFor={`ringSize${index}`}>{size}</label>
+                                                                    </div>
+                                                                ))
                             }
                             <button onClick={() => setShowMoreRingSizes(!showMoreRingSizes)} className="btn btn-link p-0 show_btn">
                                 {showMoreRingSizes ? (
@@ -670,7 +718,7 @@ const Earrings = () => {
                         </div>
                     </div> */}
                     <div className='row'>
-                        {products.map((item, index) => (
+                        {filterProducts().map((item, index) => (
                             <React.Fragment key={item.id}>
                                 <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow'>
                                     <ProductCard Productsitem={item} />
@@ -693,3 +741,146 @@ const Earrings = () => {
 }
 
 export default Earrings;
+
+// import React, { useEffect, useState } from 'react';
+// import ProductCard from './Product/productCard';
+// import productsData from '../fakedata/Product';
+
+// const Earrings = () => {
+//     useEffect(() => {
+//         window.scrollTo(0, 0);
+//     }, []);
+
+//     const [products, setProducts] = useState([]);
+//     const [selectedRingSizes, setSelectedRingSizes] = useState([]);
+//     const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
+//     const [selectedDiscounts, setSelectedDiscounts] = useState([]);
+    
+//     useEffect(() => {
+//         setProducts(productsData);
+//     }, []);
+
+//     const ringSizes = ['11', '12', '13', '5', '6', '7'];
+//     const priceRanges = [
+//         '₹10,001 - ₹15,000',
+//         '₹20,001 - ₹30,000',
+//         'Under ₹5,000',
+//         '₹5,001 - ₹10,000',
+//         '₹15,001 - ₹20,000',
+//         '₹30,001 - ₹40,000',
+//         '₹40,000 - ₹50,000',
+//         '₹50,000 - ₹75,000',
+//         '₹1,50,001 - ₹2,00,000'
+//     ];
+//     const discount = [
+//         'Up to 15% off on Diamond Prices',
+//         'Flat 15% off on Diamond Prices',
+//         'Flat 10% off on Diamond Prices',
+//         'Flat 5% off on Diamond Prices',
+//         'Flat 50% off on Making Charges'
+//     ];
+
+//     const handleFilterChange = (type, value) => {
+//         let updatedSelection;
+//         switch (type) {
+//             case 'ringSize':
+//                 updatedSelection = selectedRingSizes.includes(value)
+//                     ? selectedRingSizes.filter(size => size !== value)
+//                     : [...selectedRingSizes, value];
+//                 setSelectedRingSizes(updatedSelection);
+//                 break;
+//             case 'price':
+//                 updatedSelection = selectedPriceRanges.includes(value)
+//                     ? selectedPriceRanges.filter(price => price !== value)
+//                     : [...selectedPriceRanges, value];
+//                 setSelectedPriceRanges(updatedSelection);
+//                 break;
+//             case 'discount':
+//                 updatedSelection = selectedDiscounts.includes(value)
+//                     ? selectedDiscounts.filter(discount => discount !== value)
+//                     : [...selectedDiscounts, value];
+//                 setSelectedDiscounts(updatedSelection);
+//                 break;
+//             default:
+//                 break;
+//         }
+//     };
+
+//     const filterProducts = () => {
+//         return products.filter(product => {
+//             const matchesRingSize = selectedRingSizes.length === 0 || selectedRingSizes.includes(product.size);
+//             const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
+//                 const [min, max] = range.split(' - ').map(value => parseInt(value.replace(/[₹,]/g, '').trim(), 10));
+//                 return product.price >= min && product.price <= (max || Infinity);
+//             });
+//             const matchesDiscount = selectedDiscounts.length === 0 || selectedDiscounts.includes(`${product.discount}%`);
+//             return matchesRingSize && matchesPrice && matchesDiscount;
+//         });
+//     };
+
+//     return (
+//         <section className='container-fluid mt-5'>
+//             <div className='row'>
+//                 <div className='col-xl-3 col-lg-3 d-lg-block d-none'>
+//                     <div className='sticky-header px-5'>
+//                         <div className='border border-bottom-3 pb-2'>
+//                             <h6 className='filter_main_title'>FILTERS</h6>
+//                         </div>
+
+//                         {/* Ring Size Filter */}
+//                         <div className='border border-bottom-3 pb-2'>
+//                             <h2 className='fw-bold fs-5 mt-3'>Ring Size</h2>
+//                             {ringSizes.map((size, index) => (
+//                                 <div className="form-check my-2" key={index}>
+//                                     <input className="form-check-input" type="checkbox" id={`ringSize${index}`} 
+//                                         checked={selectedRingSizes.includes(size)} 
+//                                         onChange={() => handleFilterChange('ringSize', size)} />
+//                                     <label className="form-check-label" htmlFor={`ringSize${index}`}>{size}</label>
+//                                 </div>
+//                             ))}
+//                         </div>
+
+//                         {/* Price Filter */}
+//                         <div className='border border-bottom-3 pb-2'>
+//                             <h2 className='fw-bold fs-5 mt-3'>Price</h2>
+//                             {priceRanges.map((price, index) => (
+//                                 <div className="form-check my-2" key={index}>
+//                                     <input className="form-check-input" type="checkbox" id={`price${index}`} 
+//                                         checked={selectedPriceRanges.includes(price)} 
+//                                         onChange={() => handleFilterChange('price', price)} />
+//                                     <label className="form-check-label" htmlFor={`price${index}`}>{price}</label>
+//                                 </div>
+//                             ))}
+//                         </div>
+
+//                         {/* Discount Filter */}
+//                         <div className='border border-bottom-3 pb-2'>
+//                             <h2 className='fw-bold fs-5 mt-3'>Discount</h2>
+//                             {discount.map((item, index) => (
+//                                 <div className="form-check my-2" key={index}>
+//                                     <input className="form-check-input" type="checkbox" id={`discount${index}`} 
+//                                         checked={selectedDiscounts.includes(`${item.split(' ')[0]}%`)} 
+//                                         onChange={() => handleFilterChange('discount', `${item.split(' ')[0]}%`)} />
+//                                     <label className="form-check-label" htmlFor={`discount${index}`}>{item}</label>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     </div>
+//                 </div>
+
+//                 {/* Product Listing Section */}
+//                 <div className='col-xl-9 col-lg-9'>
+//                     <div className='row'>
+//                         {filterProducts().map((product, index) => (
+//                             <div className="col-md-3 col-sm-6 mb-4" key={index}>
+//                                 <ProductCard Productsitem={product} />
+//                             </div>
+//                         ))}
+//                     </div>
+//                 </div>
+//             </div>
+//         </section>
+//     );
+// };
+
+// export default Earrings;

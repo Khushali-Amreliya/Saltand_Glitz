@@ -8,9 +8,9 @@ import { formatCurrency } from '../../Utils/formateCurrency';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const ProductCard = (props) => {
+const ProductCard = ({Productsitem}) => {
     const [loading, setLoading] = useState(false);
-    const { id, title, price, image01, image02, image03 } = props.Productsitem;
+    const { id, title, price, image01, image02, image03 } = Productsitem;
     const dispatch = useDispatch();
     const slider = useRef(null);
     const navigate = useNavigate();
