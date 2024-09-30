@@ -18,7 +18,20 @@ const Earrings = () => {
     const [products, setProducts] = useState([]);
     const [selectedRingSizes, setSelectedRingSizes] = useState([]);
     const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
+    const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
+    
     const ringSizes = ['11', '12', '13', '5', '6', '7'];
+        const priceRanges = [
+        '₹10,001 - ₹15,000',
+        '₹20,001 - ₹30,000',
+        'Under ₹5,000',
+        '₹5,001 - ₹10,000',
+        '₹15,001 - ₹20,000',
+        '₹30,001 - ₹40,000',
+        '₹40,000 - ₹50,000',
+        '₹50,000 - ₹75,000',
+        '₹1,50,001 - ₹2,00,000'
+    ];
 
     // Fetch products data on component mount
     useEffect(() => {
@@ -38,12 +51,12 @@ const Earrings = () => {
                             : [...selectedRingSizes, value];
                         setSelectedRingSizes(updatedSelection);
                         break;
-                    // case 'price':
-                    //     updatedSelection = selectedPriceRanges.includes(value)
-                    //         ? selectedPriceRanges.filter(price => price !== value)
-                    //         : [...selectedPriceRanges, value];
-                    //     setSelectedPriceRanges(updatedSelection);
-                    //     break;
+                    case 'price':
+                        updatedSelection = selectedPriceRanges.includes(value)
+                            ? selectedPriceRanges.filter(price => price !== value)
+                            : [...selectedPriceRanges, value];
+                        setSelectedPriceRanges(updatedSelection);
+                        break;
                     // case 'discount':
                     //     updatedSelection = selectedDiscounts.includes(value)
                     //         ? selectedDiscounts.filter(discount => discount !== value)
@@ -58,16 +71,16 @@ const Earrings = () => {
             const filterProducts = () => {
                 return products.filter(product => {
                     const matchesRingSize = selectedRingSizes.length === 0 || selectedRingSizes.includes(product.size);
-                    // const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
-                    //     const [min, max] = range.split(' - ').map(value => parseInt(value.replace(/[₹,]/g, '').trim(), 10));
-                    //     return product.price >= min && product.price <= (max || Infinity);
-                    // });
+                    const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
+                        const [min, max] = range.split(' - ').map(value => parseInt(value.replace(/[₹,]/g, '').trim(), 10));
+                        return product.price >= min && product.price <= (max || Infinity);
+                    });
                     // const matchesDiscount = selectedDiscounts.length === 0 || selectedDiscounts.includes(`${product.discount}%`);
-                    return matchesRingSize;
+                    return matchesRingSize && matchesPrice;
                 });
             };
     // const ringSizes = ['11', '12', '13', '5', '6', '7'];
-    const priceRanges = ['₹10,001 - ₹15,000', '₹20,001 - ₹30,000', 'Under ₹5,000', '₹5,001 - ₹10,000', '₹15,001 - ₹20,000', '₹30,001 - ₹40,000', '₹40,000 - ₹50,000', '₹50,000 - ₹75,000', '₹1,50,001 - ₹2,00,000'];
+    // const priceRanges = ['₹10,001 - ₹15,000', '₹20,001 - ₹30,000', 'Under ₹5,000', '₹5,001 - ₹10,000', '₹15,001 - ₹20,000', '₹30,001 - ₹40,000', '₹40,000 - ₹50,000', '₹50,000 - ₹75,000', '₹1,50,001 - ₹2,00,000'];
     const discount = ['Up to 15% off on Diamond Prices', 'Flat 15% off on Diamond Prices', 'Flat 10% off on Diamond Prices', 'Flat 5% off on Diamond Prices', 'Flat 50% off on Making Charges']
 
     return (
@@ -84,13 +97,13 @@ const Earrings = () => {
                             <h2 className='fw-bold fs-5 mt-3'>Ring Size</h2>
                             {
                                 ringSizes.map((size, index) => (
-                                                                    <div className="form-check my-2" key={index}>
-                                                                        <input className="form-check-input" type="checkbox" id={`ringSize${index}`} 
-                                                                            checked={selectedRingSizes.includes(size)} 
-                                                                            onChange={() => handleFilterChange('ringSize', size)} />
-                                                                        <label className="form-check-label" htmlFor={`ringSize${index}`}>{size}</label>
-                                                                    </div>
-                                                                ))
+                                    <div className="form-check my-2" key={index}>
+                                        <input className="form-check-input" type="checkbox" id={`ringSize${index}`} 
+                                            checked={selectedRingSizes.includes(size)} 
+                                            onChange={() => handleFilterChange('ringSize', size)} />
+                                        <label className="form-check-label" htmlFor={`ringSize${index}`}>{size}</label>
+                                    </div>
+                                ))
                             }
                             <button onClick={() => setShowMoreRingSizes(!showMoreRingSizes)} className="btn btn-link p-0 show_btn">
                                 {showMoreRingSizes ? (
@@ -109,14 +122,14 @@ const Earrings = () => {
                         {/* Price */}
                         <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
                             <h2 className='fw-bold fs-5 mt-3'>Price</h2>
-                            {
-                                priceRanges.slice(0, showMorePrices ? priceRanges.length : 4).map((price, index) => (
-                                    <div className="form-check my-2" key={index}>
-                                        <input className="form-check-input" type="checkbox" id={`price${index}`} />
-                                        <label className="form-check-label" htmlFor={`price${index}`}>{price}</label>
-                                    </div>
-                                ))
-                            }
+                            {priceRanges.map((price, index) => (
+                                <div className="form-check my-2" key={index}>
+                                    <input className="form-check-input" type="checkbox" id={`price${index}`} 
+                                        checked={selectedPriceRanges.includes(price)} 
+                                        onChange={() => handleFilterChange('price', price)} />
+                                    <label className="form-check-label" htmlFor={`price${index}`}>{price}</label>
+                                </div>
+                            ))}
                             <button onClick={() => setShowMorePrices(!showMorePrices)} className="btn btn-link p-0 show_btn">
                                 {showMorePrices ? (
                                     <>
