@@ -149,12 +149,6 @@ const Cart = (props) => {
         };
     }, [handleScroll]);
 
-    const handleMoveToWishlist = (item) => {
-        dispatch(cartAction.addToWishlist(item));  // Add item to wishlist
-        handleDelete(item.id);              // Remove item from cart
-        toast.success('Item moved to wishlist');
-    };
-    
     return (
         <>
             {loading && <Loader />}
@@ -242,15 +236,7 @@ const Cart = (props) => {
                                                                 </div>
                                                                 <div class="modal-footer border-0 mx-auto d-block">
                                                                     <button type="button" class="btn modal_remove" data-bs-dismiss="modal" onClick={() => handleDelete(item.id)}>REMOVE</button>
-                                                                    <button
-                                                                        type="button"
-                                                                        className="btn btn-primary modal_wishlist"
-                                                                        data-bs-dismiss="modal"
-                                                                        onClick={() => handleMoveToWishlist(item)}
-                                                                    >
-                                                                        MOVE TO WISHLIST
-                                                                    </button>
-
+                                                                    <button type="button" class="btn btn-primary modal_wishlist">MOVE TO WISHLIST</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -260,6 +246,7 @@ const Cart = (props) => {
                                         ))
                                     }
                                 </div>
+
                             </div>
                             <div className='col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 cart_border mt-5'>
                                 <div>
