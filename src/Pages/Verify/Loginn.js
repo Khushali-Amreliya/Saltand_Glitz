@@ -5,44 +5,61 @@ import { toast } from 'react-toastify';
 import Loader from '../Loader';
 
 const Loginn = () => {
-    const [formData, setFormData] = useState({ mobile: '' });
+    const [formData, setFormData] = useState({ identifier: '' });
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);  // Loader state
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!formData.mobile) {
+    
+        const signupMobile = localStorage.getItem('signupMobile');
+        const signupEmail = localStorage.getItem('signupEmail');
+    
+        if (!formData.identifier) {
             setError('Mobile number or email is required.');
             return;
-        } else {
-            setError('');
         }
+
+        // Check if the entered identifier is a mobile number or email
+        const isMobile = /^\d{10}$/.test(formData.identifier); // Simple 10-digit mobile number regex
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.identifier); // Basic email regex
+    
+        if (!isMobile && !isEmail) {
+            setError('Please enter a valid mobile number or email.');
+            toast.error('Invalid mobile number or email');
+            return;
+        }
+
+        // Validate the identifier (either mobile number or email)
+        if (
+            (isMobile && formData.identifier !== signupMobile) ||
+            (isEmail && formData.identifier !== signupEmail)
+        ) {
+            setError('Invalid mobile number or email. Please enter the correct credentials.');
+            toast.error('Invalid credentials');
+            return;
+        }
+
+        setError('');
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:5000/v1/signup/create-signup', formData);
+            const response = await axios.post('http://localhost:5000/v1/signup/login', formData);
 
             if (response.status === 200) {
                 toast.success('Login successful', {
                     position: 'top-center',
                     autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
                 });
-
                 setTimeout(() => {
                     setLoading(false);
                     navigate('/');
@@ -51,11 +68,6 @@ const Loginn = () => {
                 toast.error('Something went wrong', {
                     position: 'top-center',
                     autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
                 });
                 setLoading(false);
             }
@@ -63,11 +75,6 @@ const Loginn = () => {
             toast.error('Something went wrong', {
                 position: 'top-center',
                 autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
             });
             setLoading(false);
         }
@@ -90,10 +97,10 @@ const Loginn = () => {
                             <div className='mt-4'>
                                 <input
                                     type='text'
-                                    placeholder='Enter Mobile Number'
+                                    placeholder='Enter Mobile Number or Email'
                                     className='form-control'
-                                    name='mobile'
-                                    value={formData.mobile}
+                                    name='identifier'
+                                    value={formData.identifier}
                                     onChange={handleChange}
                                     required
                                 />
