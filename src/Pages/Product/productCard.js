@@ -43,9 +43,18 @@ const ProductCard = ({Productsitem}) => {
         }
         setIsHeartFilled(!isHeartFilled);
     };
-
     const addToCart = async () => {
-        setLoading(true);
+        const token = localStorage.getItem('authToken'); // Check if user is logged in
+        const cartItem = { id, title, price, image01 };
+        
+        // If no token found, redirect user to the login page
+        if (!token) {
+            toast.error("Please log in to add items to the cart.");
+            navigate('/sign'); // Redirect to login page
+            return;
+        }
+    
+        setLoading(true); // Set loading state to true
         toast.success("Product added to cart successfully!", {
             position: "top-center",
             autoClose: 1000,
@@ -56,21 +65,31 @@ const ProductCard = ({Productsitem}) => {
             progress: undefined,
         });
     
-        const cartItem = { id, title, price, image01 };
         try {
-            const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
+            // Send the cart item with authorization header containing the token
+            const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem, {
+                headers: {
+                    Authorization: `Bearer ${token}` // Include token in the request header
+                }
+            });
     
+            // If the item is successfully added to the cart
             if (response.status === 201) {
-                dispatch(cartAction.addItem(response.data));
+                dispatch(cartAction.addItem(response.data)); // Dispatch action to update Redux store
             }
         } catch (error) {
             console.error('Error adding item to cart:', error);
+            toast.error('Failed to add item to cart.');
+        } finally {
+            setLoading(false); // Set loading state to false after request
         }
+    
+        // Redirect to the cart page after 1 second
         setTimeout(() => {
-            setLoading(false);
-            navigate('/cart');
+            navigate('/cart'); // Navigate to cart page
         }, 1000);
     };
+    
     
     
     const settings2 = {

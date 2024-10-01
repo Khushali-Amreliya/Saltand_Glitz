@@ -5,6 +5,7 @@ import { cartAction } from '../../Store/Slice/CartSlice';
 import { formatCurrency } from '../../Utils/formateCurrency';
 import Aos from 'aos';
 import "aos/dist/aos.css";
+import axios from 'axios';
 
 const Wishlist = () => {
   const wishlistItem = useSelector(state => state.cart.wishlistItem);
@@ -16,8 +17,27 @@ const Wishlist = () => {
   };
 
   // Add to cart and remove from wishlist
-  const handleMoveToCart = (item) => {
-    dispatch(cartAction.addItem(item));
+  const handleMoveToCart = async(item) => {
+    const cartItem = {
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      image01: item.image01,
+      totalprice: item.totalprice
+    };
+
+    try {
+      const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
+
+      if (response.status === 201) {
+
+        dispatch(cartAction.addItem(response.data));
+
+      }
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+      // setLoading(false);
+    }
     dispatch(cartAction.removeFromWishlist(item.id));
   };
 

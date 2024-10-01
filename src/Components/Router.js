@@ -15,6 +15,8 @@ import '../styles/Admin.css';
 import Admin from '../Admindashboard/Admin';
 import Dashboard from '../Admindashboard/Dashboard';
 import Wishlist from '../Pages/Process/Wishlist';
+import Adashbord from '../Admindashboard/Adashbord';
+// import ProductGet from '../Admindashboard/ProductGet';
 
 const Router = () => {
   return (
@@ -34,6 +36,8 @@ const Router = () => {
         <Route path='/payment' element={<Payment />} />
         <Route path='/112/admin' element={<Admin />} />
         <Route path='/112/admin/dashboard ' element={<Dashboard />} />
+        <Route path='/adashbord' element={<Adashbord></Adashbord>}></Route>
+        {/* <Route path='/a-product' element={<ProductGet></ProductGet>}></Route> */}
       </Routes>
     </div>
   );

@@ -45,7 +45,7 @@ const Admin = () => {
                 text: 'You have successfully logged in.',
             });
 
-            navigate('/112/admin/dashboard');
+            navigate('/a-product');
         } catch (error) {
             console.error('Failed to log in:', error);
             Swal.fire({
