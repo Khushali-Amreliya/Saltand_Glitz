@@ -37,6 +37,13 @@ const Header = () => {
                         <i className="ri-search-line"></i>
                         <i className="ri-map-pin-line"></i>
                         <i className="ri-contacts-line"></i>
+                        {/* <form className='serach-box'>
+                            <input type="text" className='serach' />
+                            <div className="after"></div>
+                            <input type="submit" className='serach'  />
+                        </form>
+                        <h4 className='serach-set'>&nbsp;</h4> */}
+
                     </div>
                     <div className='col-lg-6 col-md-6 col-sm-12'>
                         <div>

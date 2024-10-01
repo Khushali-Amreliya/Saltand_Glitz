@@ -114,3 +114,17 @@ div:where(.swal2-container) .swal2-html-container {
         bottom: 164px !important;
     }
 }
+/* .border-gradient {
+    border: 2px solid;
+    border-image-slice: 1;
+    border-width: 3px;
+    
+  } */
+   /* .icon-set{
+    background:linear-gradient(90deg, rgba(178, 235, 247, 1) 0%, rgba(143, 195, 205, 1) 0%, rgba(90, 188, 209, 1) 100%) ;
+   }
+  .border-gradient-purple {
+    background: linear-gradient(90deg, rgba(178, 235, 247, 1) 0%, rgba(143, 195, 205, 1) 0%, rgba(90, 188, 209, 1) 100%) border-box;
+  /* border-radius: 10em !; */
+  /* border: 3px solid transparent;
+  } */ 
