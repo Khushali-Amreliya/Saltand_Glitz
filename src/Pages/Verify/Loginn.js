@@ -1,84 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import Loader from '../Loader';
 
 const Loginn = () => {
-    const [formData, setFormData] = useState({ identifier: '' });
-    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const [emailOrMobile, setEmailOrMobile] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    // const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
+    // const handleChange = (e) => {
+    //     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        const signupMobile = localStorage.getItem('signupMobile');
-        const signupEmail = localStorage.getItem('signupEmail');
-    
-        if (!formData.identifier) {
-            setError('Mobile number or email is required.');
-            return;
-        }
-
-        // Check if the entered identifier is a mobile number or email
-        const isMobile = /^\d{10}$/.test(formData.identifier); // Simple 10-digit mobile number regex
-        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.identifier); // Basic email regex
-    
-        if (!isMobile && !isEmail) {
-            setError('Please enter a valid mobile number or email.');
-            toast.error('Invalid mobile number or email');
-            return;
-        }
-
-        // Validate the identifier (either mobile number or email)
-        if (
-            (isMobile && formData.identifier !== signupMobile) ||
-            (isEmail && formData.identifier !== signupEmail)
-        ) {
-            setError('Invalid mobile number or email. Please enter the correct credentials.');
-            toast.error('Invalid credentials');
-            return;
-        }
-
         setError('');
-        setLoading(true);
+        setSuccess('');
 
         try {
-            const response = await axios.post('http://localhost:5000/v1/signup/login', formData);
-
-            if (response.status === 200) {
-                toast.success('Login successful', {
-                    position: 'top-center',
-                    autoClose: 2000,
-                });
-                setTimeout(() => {
-                    setLoading(false);
-                    navigate('/');
-                }, 2000);
-            } else {
-                toast.error('Something went wrong', {
-                    position: 'top-center',
-                    autoClose: 2000,
-                });
-                setLoading(false);
-            }
+            const response = await axios.post('http://localhost:5000/v1/login/verify', { emailOrMobile });
+            setSuccess(response.data.message);
+            // Store user information in localStorage or handle it as needed
+            localStorage.setItem('user', JSON.stringify(response.data.user));
         } catch (error) {
-            toast.error('Something went wrong', {
-                position: 'top-center',
-                autoClose: 2000,
-            });
-            setLoading(false);
+            setError(error.response ? error.response.data.message : 'Login failed');
         }
     };
+
 
     return (
         <>
@@ -97,15 +51,16 @@ const Loginn = () => {
                             <div className='mt-4'>
                                 <input
                                     type='text'
-                                    placeholder='Enter Mobile Number or Email'
+                                    placeholder="Email or Mobile Number"
                                     className='form-control'
-                                    name='identifier'
-                                    value={formData.identifier}
-                                    onChange={handleChange}
+                                    name='mobile'
+                                    value={emailOrMobile}
+                                    onChange={(e) => setEmailOrMobile(e.target.value)}
                                     required
                                 />
                             </div>
-                            {error && <p className='text-danger mt-2'>{error}</p>}
+                            {error && <p style={{ color: 'red' }}>{error}</p>}
+                            {success && <p style={{ color: 'green' }}>{success}</p>}
                             <button className='mt-4 btn w-100 place_order_btn text-light' type='submit' disabled={loading}>
                                 {loading ? 'Logging in...' : 'CONTINUE TO LOGIN'}
                             </button>
@@ -124,3 +79,46 @@ const Loginn = () => {
 };
 
 export default Loginn;
+
+// import React, { useState } from 'react';
+// import axios from 'axios';
+
+// const Login = () => {
+//     const [emailOrMobile, setEmailOrMobile] = useState('');
+//     const [error, setError] = useState('');
+//     const [success, setSuccess] = useState('');
+
+//     const handleLogin = async (e) => {
+//         e.preventDefault();
+//         setError('');
+//         setSuccess('');
+
+//         try {
+//             const response = await axios.post('http://localhost:5000/v1/login/verify', { emailOrMobile });
+//             setSuccess(response.data.message);
+//             // Store user information in localStorage or handle it as needed
+//             localStorage.setItem('user', JSON.stringify(response.data.user));
+//         } catch (error) {
+//             setError(error.response ? error.response.data.message : 'Login failed');
+//         }
+//     };
+
+//     return (
+//         <div>
+//             <h2>Login</h2>
+//             <form onSubmit={handleLogin}>
+//                 <input
+//                     type="text"
+//                     placeholder="Email or Mobile Number"
+//                     value={emailOrMobile}
+//                     onChange={(e) => setEmailOrMobile(e.target.value)}
+//                     required
+//                 />
+//                 <button type="submit">Login</button>
+//             </form>
+//
+//         </div>
+//     );
+// };
+
+// export default Login;

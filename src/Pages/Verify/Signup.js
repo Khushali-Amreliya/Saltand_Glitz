@@ -103,20 +103,20 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { firstName, email, mobile, lastName, gender } = formData;
-    
+
         if (!firstName || !email || !mobile || !lastName || !gender) {
             toast.error('Please fill up all details');
             return;
         }
-    
+
         setLoading(true);
-    
+
+
         try {
-            const response = await axios.post('http://localhost:5000/v1/login/create-login', formData);
-    
+            const response = await axios.post('http://localhost:5000/v1/login/create-User', formData);
+
             if (response.status === 200) {
-                localStorage.setItem('user', JSON.stringify(formData)); // Save user details
-                localStorage.setItem('signupMobile', mobile); // Save the mobile number
+                localStorage.setItem('user', JSON.stringify(formData));
                 setUser(formData);
                 toast.success('Your profile has been updated successfully.');
             } else {
@@ -125,11 +125,11 @@ const Signup = () => {
         } catch (error) {
             toast.error('Something went wrong');
         } finally {
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+            }, 2000);
         }
     };
-    
-    
 
     return (
         <>
