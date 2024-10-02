@@ -103,6 +103,189 @@ div:where(.swal2-container) .swal2-html-container {
     cursor: pointer;
 }
 
+/* ```````````userProfile`````````` */
+.sidebar-wrapper {
+    /* position: fixed; */
+    /* left: 0; */
+    top: 0;
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+  
+}
+
+.sidebar {
+    width: 60px;
+    /* Initial collapsed width */
+    height: 100%;
+    background: linear-gradient(90deg, rgba(178, 235, 247, 1) 0%, rgba(143, 195, 205, 1) 0%, rgba(90, 188, 209, 1) 100%);
+    transition: width 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    /* Position relative for button positioning */
+}
+
+.sidebar {
+    width: 200px;
+
+}
+
+.sidebar.open {
+    width: 200px;
+    /* Expanded width when open */
+}
+
+.sidebar .profile {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    color: #000;
+    transition: padding 0.3s ease;
+    width: 100%;
+}
+
+.sidebar img {
+    position: relative;
+    left: 18px;
+    opacity: 1;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.sidebar .profile span {
+    margin-left: 30px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+/* .sidebar.open img,
+.sidebar:hover img {
+    width: 55px;
+    height: 55px;
+} */
+
+/* .sidebar.open .profile span,
+.sidebar:hover .profile span {
+    opacity: 1;
+} */
+
+.sidebar ul {
+    /* position: relative; */
+    left: -13px;
+    list-style-type: none;
+    padding: 20px 0;
+    position: relative;
+}
+
+.sidebar ul li {
+    display: flex;
+    align-items: center;
+    padding: 20px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.sidebar ul li:hover {
+    background-color: #34495e;
+}
+
+.sidebar ul li i {
+    position: relative;
+    left: 4px;
+    font-size: 24px;
+    margin-right: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar ul li a {
+    margin-left: 1px;
+    text-decoration: none;
+    /* display: flex; */
+    justify-content: flex-start;
+    text-align: left;
+    opacity: 1;
+    white-space: nowrap;
+    transition: opacity 0.3s ease; ;
+    color: #000;
+}
+
+/* .sidebar.open ul li span,
+.sidebar:hover ul li span {
+    opacity: 1;
+} */
+
+.sidebar .indicator {
+    position: absolute;
+    left: 15px;
+    width: 4px;
+    height: 60px;
+    background-color: #0d6efd;
+    transition: top 0.3s ease;
+    pointer-events: none;
+    /* Prevent the indicator from interfering with mouse events */
+}
+
+.toggle-btn {
+    position: absolute;
+    /* top: 10px; */
+    left: 15%;
+    /* Position the button half outside the sidebar */
+    width: 22px;
+    height: 22px;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 50%;
+    /* Make the button circular */
+    z-index: 1000;
+    /* Ensure the button stays on top */
+}
+
+.toggle-btn i {
+    position: relative;
+    top: 1px;
+}
+
+.toggle-btn:hover {
+    background-color: #0950ba;
+}
+
+.content {
+    position: relative;
+    left: 48%;
+    top: 5%;
+    width: 200px;
+    transition: color 0.5s ease;
+}
+
+.content-line {
+    width: 120px;
+    margin-top: 3px;
+    height: 1.5px;
+    background-color: black;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    transition: background-color 0.5s ease;
+}
+
+.content:hover {
+    color: #0d6efd;
+}
+
+.content:hover .content-line {
+    background-color: #0d6efd;
+}
+
+
+/* ```````````userProfile`````````` */
+
 @media(max-width:429px) {
     .view-similar-btn {
         bottom: 176px !important;
@@ -114,17 +297,3 @@ div:where(.swal2-container) .swal2-html-container {
         bottom: 164px !important;
     }
 }
-/* .border-gradient {
-    border: 2px solid;
-    border-image-slice: 1;
-    border-width: 3px;
-    
-  } */
-   /* .icon-set{
-    background:linear-gradient(90deg, rgba(178, 235, 247, 1) 0%, rgba(143, 195, 205, 1) 0%, rgba(90, 188, 209, 1) 100%) ;
-   }
-  .border-gradient-purple {
-    background: linear-gradient(90deg, rgba(178, 235, 247, 1) 0%, rgba(143, 195, 205, 1) 0%, rgba(90, 188, 209, 1) 100%) border-box;
-  /* border-radius: 10em !; */
-  /* border: 3px solid transparent;
-  } */ 

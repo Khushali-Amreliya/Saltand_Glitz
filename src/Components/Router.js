@@ -16,7 +16,10 @@ import Admin from '../Admindashboard/Admin';
 import Dashboard from '../Admindashboard/Dashboard';
 import Wishlist from '../Pages/Process/Wishlist';
 import Adashbord from '../Admindashboard/Adashbord';
-// import ProductGet from '../Admindashboard/ProductGet';
+import UserHome from '../UserProfile/UserHome';
+import Uwishlist from '../UserProfile/Uwishlist';
+import Uorder from '../UserProfile/Uorder';
+
 
 const Router = () => {
   return (
@@ -37,7 +40,9 @@ const Router = () => {
         <Route path='/112/admin' element={<Admin />} />
         <Route path='/112/admin/dashboard ' element={<Dashboard />} />
         <Route path='/adashbord' element={<Adashbord></Adashbord>}></Route>
-        {/* <Route path='/a-product' element={<ProductGet></ProductGet>}></Route> */}
+       <Route path='/profile' element={<UserHome></UserHome>}></Route>
+       <Route path='/u-wishlist' element={<Uwishlist></Uwishlist>}></Route>
+       <Route path='/u-order' element={<Uorder></Uorder>}></Route>
       </Routes>
     </div>
   );
