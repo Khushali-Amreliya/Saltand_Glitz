@@ -52,7 +52,7 @@ const Header = () => {
                     </div>
                     <div className='col-lg-3 col-md-3 col-sm-12 header_logo text-center'>
                         <i className="ri-calendar-line"></i>
-                        <Link to="/profile" className='text-decoration-none text-dark'><i className="ri-user-line"></i></Link>
+                        <Link to="/Uprofile" className='text-decoration-none text-dark'><i className="ri-user-line"></i></Link>
                         <Link className='text-decoration-none text-dark pe-4' to="/wishlist">
                             <i className="ri-heart-fill pe-0 position-relative">
                                 {wishlistItem.length > 0 && (

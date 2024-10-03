@@ -1,0 +1,72 @@
+.bg_uprofile {
+    background: rgb(249, 249, 250);
+    padding: 100px 20px;
+}
+
+.sidebar {
+    padding: 20px;
+    background-color: #f8f9fa;
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Enable scrolling if content exceeds viewport height */
+}
+
+
+.sidebar p {
+    font-size: 12px;
+    font-weight: bold;
+    color: #9d9fa4;
+}
+
+.edit-profile-link {
+    color: #ff33cc;
+    font-size: 12px;
+    margin-bottom: 20px;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.edit-profile-link:hover {
+    color: #ff33cc;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+
+.sidebar-menu a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    font-size: 14px;
+    color: #231535;
+    font-weight: bold;
+}
+
+.sidebar-menu a {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.line_profile {
+    background-color: #e6dce6;
+    height: 2px;
+    width: 35px;
+}
+
+.option_menu li {
+    padding-bottom: 5px !important;
+}
+
+.option_menu {
+    padding: 10px 0 !important;
+}
