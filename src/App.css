@@ -183,14 +183,14 @@ div:where(.swal2-container) .swal2-html-container {
 .sidebar ul li {
     display: flex;
     align-items: center;
-    padding: 20px 20px;
+    padding: 8px 20px;
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 .sidebar ul li:hover {
-    background-color: #34495e;
+    background-color: #fff;
 }
 
 .sidebar ul li i {
@@ -199,6 +199,7 @@ div:where(.swal2-container) .swal2-html-container {
     font-size: 24px;
     margin-right: 20px;
     transition: opacity 0.3s ease;
+    margin-bottom: 0;
 }
 
 .sidebar ul li a {
@@ -220,12 +221,13 @@ div:where(.swal2-container) .swal2-html-container {
 
 .sidebar .indicator {
     position: absolute;
-    left: 15px;
-    width: 4px;
-    height: 60px;
+    left: 26px;
+    width: 3px;
+    height: 33px;
     background-color: #0d6efd;
     transition: top 0.3s ease;
     pointer-events: none;
+    margin-top: 11px;
     /* Prevent the indicator from interfering with mouse events */
 }
 

@@ -1,4 +1,4 @@
-import React, {  } from 'react'
+import React, { } from 'react'
 import { Link } from 'react-router-dom'
 import Signup from '../Pages/Verify/Signup'
 // import { toast } from 'react-toastify';
@@ -84,11 +84,11 @@ function UserHome() {
                                     </div>
 
                                     <div className="indicator" id="indicator"></div>
-                                    <li><Link to="/profile"><i className="icon"><i className="fa-solid fa-house"></i></i><span>Home</span></Link></li>
-                                    <li><Link to="/u-order"><i className="icon"><i className="fa-solid fa-database"></i></i><span>Order</span></Link></li>
-                                    <li><Link><i className="icon"><i className="fa-solid fa-pen-to-square"></i></i><span>Edit Profile</span></Link></li>
-                                    <li><Link to="/u-wishlist"><i className="icon"><i className="fa-solid fa-heart"></i></i><span>Wishlist</span></Link></li>
-                                    <li><Link ><i className="icon"><i className="fa-solid fa-right-from-bracket"></i></i><span >Logout</span></Link></li>
+                                    <li><Link to="/profile"><i className="icon"></i><span>Home</span></Link></li>
+                                    <li><Link to="/u-order"><i className="icon"></i><span>Order</span></Link></li>
+                                    <li><Link><i className="icon"></i><span>Edit Profile</span></Link></li>
+                                    <li><Link to="/u-wishlist"><i className="icon"></i><span>Wishlist</span></Link></li>
+                                    <li><Link ><i className="icon"></i><span >Logout</span></Link></li>
                                 </ul>
                             </div>
                             {/* <button className="toggle-btn" id="toggleBtn">
