@@ -35,11 +35,44 @@ const ProductCard = ({Productsitem}) => {
     //     }, 2000);
     // };
 
-    const handleHeartClick = () => {
+    const handleHeartClick = async () => {
         if (isHeartFilled) {
-            dispatch(cartAction.removeFromWishlist(id));
+            try {
+                // Call the API to remove the item from the wishlist
+                await axios.post(`http://localhost:5000/v1/wishlist/remove-wishlist/${id}`);
+                dispatch(cartAction.removeFromWishlist(id));
+                toast.success("Item removed from wishlist", {
+                    position: "top-center",
+                    autoClose: 1000,
+                });
+            } catch (error) {
+                console.error('Error removing item from wishlist:', error);
+                toast.error("Error removing item from wishlist", {
+                    position: "top-center",
+                    autoClose: 1000,
+                });
+            }
         } else {
-            dispatch(cartAction.addToWishlist({ id, title, price, image01 }));
+            try {
+                // Call the API to add the item to the wishlist
+                await axios.post('http://localhost:5000/v1/wishlist/create-wishlist', {
+                    id,
+                    title,
+                    price,
+                    image01
+                });
+                dispatch(cartAction.addToWishlist({ id, title, price, image01 }));
+                toast.success("Item added to wishlist", {
+                    position: "top-center",
+                    autoClose: 1000,
+                });
+            } catch (error) {
+                console.error('Error adding item to wishlist:', error);
+                toast.error("Error adding item to wishlist", {
+                    position: "top-center",
+                    autoClose: 1000,
+                });
+            }
         }
         setIsHeartFilled(!isHeartFilled);
     };
