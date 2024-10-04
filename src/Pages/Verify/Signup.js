@@ -176,8 +176,8 @@ const Signup = () => {
                                     </div>
                                 ))}
                             </div>
-                            <button className='mt-4 btn w-100 place_order_btn text-light' type='submit'>Sign Up</button>
-                            <button className='mt-4 btn w-100 place_order_btn text-light' type='submit' onClick={handleSignOut}>Sign Up</button>
+                            <button className='mt-4 btn w-50 place_order_btn text-light' type='submit'>Sign Up</button><br></br>
+                            <button className='mt-1 btn w-50 place_order_btn text-light' type='submit' onClick={handleSignOut}>Log Out</button>
                         </form>
                     </div>
                     <p className='create_acc pt-2'>Already have an account?

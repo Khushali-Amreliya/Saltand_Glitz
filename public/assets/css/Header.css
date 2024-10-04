@@ -9,7 +9,13 @@
 .slick-next {
     right: 0px !important;
 }
-
+.search_btn_header i{
+    font-size: 14px !important;
+    padding-right: 10px !important;
+}
+.search_btn_header{
+    color: var(--color) !important;
+}
 /* .sticky-header {
     position: sticky;
     top: 0;
@@ -218,7 +224,7 @@
 
 @media(max-width:992px) {
     .main_logo {
-        width: 27% !important;
+        width: 42% !important;
     }
 }
 

@@ -31,12 +31,22 @@ const Header = () => {
             </section>
 
             {/* Large device */}
-            <section className='container-fluid pt-3 d-lg-block d-md-none d-none'>
+            <section className='container-fluid pt-2 d-lg-block d-md-none d-none'>
                 <div className='row'>
                     <div className='col-lg-3 col-md-3 col-sm-12 header_logo text-center'>
-                        <i className="ri-search-line"></i>
-                        <i className="ri-map-pin-line"></i>
-                        <i className="ri-contacts-line"></i>
+                        {/* <i className="ri-search-line"></i> */}
+                        <form action="" className='ps-4'>
+                            <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                                <div className="input-group">
+                                    <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
+                                    <div className="input-group-append">
+                                        <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><i className="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        {/* <i className="ri-map-pin-line"></i>
+                        <i className="ri-contacts-line"></i> */}
                         {/* <form className='serach-box'>
                             <input type="text" className='serach' />
                             <div className="after"></div>
@@ -45,14 +55,22 @@ const Header = () => {
                         <h4 className='serach-set'>&nbsp;</h4> */}
 
                     </div>
-                    <div className='col-lg-6 col-md-6 col-sm-12'>
+                    <div className='col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center'>
                         <div>
-                            <Link to="/"><img alt='' src='assets/img/tiffco-logo-2.svg' className='img-fluid w-25 mx-auto d-block align-items-center d-flex' /></Link>
+                            <Link to="/">
+                                <img
+                                    alt=''
+                                    src='assets/img/tiffco-logo-2.svg'
+                                    className='img-fluid w-50 mx-auto d-block'
+                                />
+                            </Link>
                         </div>
                     </div>
-                    <div className='col-lg-3 col-md-3 col-sm-12 header_logo text-center'>
-                        <i className="ri-calendar-line"></i>
-                        <Link to="/Uprofile" className='text-decoration-none text-dark'><i className="ri-user-line"></i></Link>
+
+                    <div className='col-lg-3 col-md-3 col-sm-12 header_logo d-flex justify-content-center align-items-center text-center'>
+                        <Link to="/Uprofile" className='text-decoration-none text-dark'>
+                            <i className="ri-user-line"></i>
+                        </Link>
                         <Link className='text-decoration-none text-dark pe-4' to="/wishlist">
                             <i className="ri-heart-fill pe-0 position-relative">
                                 {wishlistItem.length > 0 && (
@@ -68,6 +86,7 @@ const Header = () => {
                             </i>
                         </Link>
                     </div>
+
                 </div>
             </section>
 
@@ -163,12 +182,19 @@ const Header = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-sm-8 col-7'>
+                    <div className='col-sm-8 col-7 d-flex justify-content-center align-items-center'>
                         <div>
-                            <Link to="/"><img alt='' src='assets/img/tiffco-logo-2.svg' className=' mx-auto d-block mt-2 align-items-center d-flex main_logo'></img></Link>
+                            <Link to="/">
+                                <img
+                                    alt=''
+                                    src='assets/img/tiffco-logo-2.svg'
+                                    className='mx-auto d-block main_logo'
+                                />
+                            </Link>
                         </div>
                     </div>
-                    <div className='col-sm-2 col-3 align-middle'>
+
+                    <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center'>
                         <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
                             <i className="ri-heart-fill pe-0 position-relative">
                                 {wishlistItem.length > 0 && (
@@ -177,15 +203,14 @@ const Header = () => {
                             </i>
                         </Link>
                         <Link className='text-decoration-none text-dark' to="/cart">
-                            <i className="ri-shopping-cart-fill pe-0 position-relative ">
-                                {
-                                    totalQuantity > 0 && (
-                                        <span className=" bagde badge-icon">{totalQuantity}</span>
-                                    )
-                                }
+                            <i className="ri-shopping-cart-fill pe-0 position-relative">
+                                {totalQuantity > 0 && (
+                                    <span className="badge badge-icon">{totalQuantity}</span>
+                                )}
                             </i>
                         </Link>
                     </div>
+
                 </div>
             </section>
 

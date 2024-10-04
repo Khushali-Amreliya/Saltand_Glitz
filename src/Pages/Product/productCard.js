@@ -8,7 +8,7 @@ import { formatCurrency } from '../../Utils/formateCurrency';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const ProductCard = ({Productsitem}) => {
+const ProductCard = ({ Productsitem }) => {
     const [loading, setLoading] = useState(false);
     const { id, title, price, image01, image02, image03 } = Productsitem;
     const dispatch = useDispatch();
@@ -88,11 +88,11 @@ const ProductCard = ({Productsitem}) => {
             draggable: true,
             progress: undefined,
         });
-    
+
         const cartItem = { id, title, price, image01 };
         try {
             const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
-    
+
             if (response.status === 201) {
                 dispatch(cartAction.addItem(response.data));
             }
@@ -104,8 +104,8 @@ const ProductCard = ({Productsitem}) => {
             navigate('/cart');
         }, 1000);
     };
-    
-    
+
+
     const settings2 = {
         dots: false,
         infinite: true,
@@ -126,26 +126,44 @@ const ProductCard = ({Productsitem}) => {
                         <img alt='' src={image03} className='img-fluid' />
                     </Slider>
                 </Link>
-                <div className='card-body relative'>
-                    <p className='m-0'>{formatCurrency(price)}</p>
+                <div className="card-body relative">
+                    <p className="m-0">{formatCurrency(price)}</p>
                     <h6>{title}</h6>
-                    <i
-                        className={`ri-heart-line absolute_heart fs-4 heart-icon ${isHeartFilled ? 'd-none' : ''}`}
-                        onClick={handleHeartClick}
-                    ></i>
-                    <i
-                        className={`ri-heart-fill absolute_heart fs-4 heart-icon ${isHeartFilled ? '' : 'd-none'}`}
-                        onClick={handleHeartClick}
-                    ></i>
-                    <p className='absolute_latest btn'>LATEST</p>
-                    <button className='heart-icon1 btn add_to_btn' onClick={addToCart}>
-                        <span className='fw-bold'>ADD TO CART&nbsp;</span>
+
+                    <div className="d-flex align-items-center">
+                        <i
+                            className={`ri-heart-line absolute_heart fs-4 heart-icon ${isHeartFilled ? 'd-none' : ''}`}
+                            onClick={handleHeartClick}
+                        ></i>
+                        <i
+                            className={`ri-heart-fill absolute_heart fs-4 heart-icon ${isHeartFilled ? '' : 'd-none'}`}
+                            onClick={handleHeartClick}
+                        ></i>
+
+                        {/* "View Similar" Button */}
+                        <img
+                            alt="view_similar"
+                            src="assets/img/view_similar.png"
+                            className="img-fluid view-similar-btn"
+                        />
+                    </div>
+
+                    <p className="absolute_latest btn">LATEST</p>
+
+                    <button className="heart-icon1 btn add_to_btn" onClick={addToCart}>
+                        <span className="fw-bold">ADD TO CART&nbsp;</span>
                     </button>
-                    <button className='mx-auto d-block video_call_btn btn rounded-pill float-end'>
+
+                    <button className="mx-auto d-block video_call_btn btn rounded-pill float-end">
                         <i className="ri-video-on-fill text-light text-center"></i>
                     </button>
-                    <button onClick={() => slider?.current?.slickPrev()} className='prev_btn absolute_prev_btn d-lg-block d-none'><i className="ri-arrow-left-wide-line"></i></button>
-                    <button onClick={() => slider?.current?.slickNext()} className="next_btn absolute_next_btn d-lg-block d-none"><i className="ri-arrow-right-wide-line"></i></button>
+
+                    <button onClick={() => slider?.current?.slickPrev()} className="prev_btn absolute_prev_btn d-lg-block d-none">
+                        <i className="ri-arrow-left-wide-line"></i>
+                    </button>
+                    <button onClick={() => slider?.current?.slickNext()} className="next_btn absolute_next_btn d-lg-block d-none">
+                        <i className="ri-arrow-right-wide-line"></i>
+                    </button>
                 </div>
             </div>
         </>
