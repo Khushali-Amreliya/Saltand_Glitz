@@ -101,10 +101,11 @@ const Signup = () => {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Show loader when form is submitted
         try {
             const response = await axios.post('http://localhost:5000/v1/login/create-User', formData);
             toast.success(response.data.message); // Show success toast
-
+    
             // Clear form data after successful signup
             setFormData({
                 mobile: '',
@@ -113,14 +114,18 @@ const Signup = () => {
                 lastName: '',
                 gender: ''
             });
+    
         } catch (error) {
             if (error.response) {
                 toast.error(error.response.data.message); // Show error toast
             } else {
                 toast.error('Server error');
             }
+        } finally {
+            setLoading(false); // Hide loader once the API call is done (whether successful or failed)
         }
     };
+    
 
 
     return (

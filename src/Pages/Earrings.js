@@ -52,48 +52,48 @@ const Earrings = () => {
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);
 
     const handleFilterChange = (type, value) => {
-                let updatedSelection;
-                switch (type) {
-                    // case 'ringSize':
-                    //     updatedSelection = selectedRingSizes.includes(value)
-                    //         ? selectedRingSizes.filter(size => size !== value)
-                    //         : [...selectedRingSizes, value];
-                    //     setSelectedRingSizes(updatedSelection);
-                    //     break;
-                    case 'price':
-                        updatedSelection = selectedPriceRanges.includes(value)
-                            ? selectedPriceRanges.filter(price => price !== value)
-                            : [...selectedPriceRanges, value];
-                        setSelectedPriceRanges(updatedSelection);
-                        break;
-                    case 'discount':
-                        updatedSelection = selectedDiscounts.includes(value)
-                            ? selectedDiscounts.filter(discount => discount !== value)
-                            : [...selectedDiscounts, value];
-                        setSelectedDiscounts(updatedSelection);
-                        break;
-                    default:
-                        break;
-                }
-            };
+        let updatedSelection;
+        switch (type) {
+            // case 'ringSize':
+            //     updatedSelection = selectedRingSizes.includes(value)
+            //         ? selectedRingSizes.filter(size => size !== value)
+            //         : [...selectedRingSizes, value];
+            //     setSelectedRingSizes(updatedSelection);
+            //     break;
+            case 'price':
+                updatedSelection = selectedPriceRanges.includes(value)
+                    ? selectedPriceRanges.filter(price => price !== value)
+                    : [...selectedPriceRanges, value];
+                setSelectedPriceRanges(updatedSelection);
+                break;
+            case 'discount':
+                updatedSelection = selectedDiscounts.includes(value)
+                    ? selectedDiscounts.filter(discount => discount !== value)
+                    : [...selectedDiscounts, value];
+                setSelectedDiscounts(updatedSelection);
+                break;
+            default:
+                break;
+        }
+    };
         
-            const filterProducts = () => {
-                return products.filter(product => {
-                    // const matchesRingSize = selectedRingSizes.length === 0 || selectedRingSizes.includes(product.size);
-                    const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
-                        const [min, max] = range.split(' - ').map(value => parseInt(value.replace(/[₹,]/g, '').trim(), 10));
-                        return product.price >= min && product.price <= (max || Infinity);
-                    });
-                    const matchesDiscount = selectedDiscounts.length === 0 || selectedDiscounts.includes(`${product.discount}%`);
-                    return matchesPrice && matchesDiscount;
-                });
-            };
+    const filterProducts = () => {
+        return products.filter(product => {
+            // const matchesRingSize = selectedRingSizes.length === 0 || selectedRingSizes.includes(product.size);
+            const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
+                const [min, max] = range.split(' - ').map(value => parseInt(value.replace(/[₹,]/g, '').trim(), 10));
+                return product.price >= min && product.price <= (max || Infinity);
+            });
+            const matchesDiscount = selectedDiscounts.length === 0 || selectedDiscounts.includes(`${product.discount}%`);
+            return matchesPrice && matchesDiscount;
+        });
+    };
     // const ringSizes = ['11', '12', '13', '5', '6', '7'];
     // const priceRanges = ['₹10,001 - ₹15,000', '₹20,001 - ₹30,000', 'Under ₹5,000', '₹5,001 - ₹10,000', '₹15,001 - ₹20,000', '₹30,001 - ₹40,000', '₹40,000 - ₹50,000', '₹50,000 - ₹75,000', '₹1,50,001 - ₹2,00,000'];
     // const discount = ['Up to 15% off on Diamond Prices', 'Flat 15% off on Diamond Prices', 'Flat 10% off on Diamond Prices', 'Flat 5% off on Diamond Prices', 'Flat 50% off on Making Charges']
 
     return (
-        <section className='container-fluid mt-5'>
+        <section className='container-fluid mt-5 mb-4'>
             <div className='row'>
                 <div className='col-xl-3 col-lg-3 d-lg-block d-none'>
                     <div className='sticky-header px-5'>
