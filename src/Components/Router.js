@@ -18,7 +18,10 @@ import Wishlist from '../Pages/Process/Wishlist';
 import Adashbord from '../Admindashboard/Adashbord';
 import Uprofile from '../UserProfile/Uprofile';
 import Uwishlist from '../UserProfile/Uwishlist';
-
+import Uorder from '../UserProfile/Uorder';
+import Register from '../test/Register';
+import LoginUser from '../test/LoginUser';
+// import Login1 from '../test/Login';
 
 const Router = () => {
   return (
@@ -41,6 +44,10 @@ const Router = () => {
         <Route path='/adashbord' element={<Adashbord></Adashbord>}></Route>
         <Route path='/Uprofile' element={<Uprofile />} />
         <Route path='/Uwishlist' element={<Uwishlist />} />
+        <Route path='/U-order' element={<Uorder></Uorder>}></Route>
+        <Route path='/rgister' element={<Register></Register>}></Route>
+        {/* <Route path='/login-t' element={<Login></Login>}></Route> */}
+        <Route path='/loginu' element={<LoginUser></LoginUser>}></Route>
         </Routes>
     </div>
   );

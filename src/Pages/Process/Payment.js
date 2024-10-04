@@ -117,6 +117,20 @@ const Payment = () => {
                                     <input type="radio" id="banking-card" name="payment-method" checked={selectedOption === 'banking-card'} onChange={() => handleSelection('banking-card')} />
                                 </div>
                             </div>
+                            <div
+                                className={`payment-option my-2 ${selectedOption === 'COD-card' ? 'selected' : ''}`}
+                                onClick={() => handleSelection('COD-card')}>
+                                <div className="icon-wrapper">
+                                    {/* <img src="assets/img/net_banking.png" alt="Net Banking Icon" className="icon" /> */}
+                                    <i className="fa-solid fa-indian-rupee-sign icon fs-4 text-center pt-2 "></i>
+                                </div>
+                                <div className="text-wrapper">
+                                    <h4 className="payment_title">COD: Cash On Delivery</h4>
+                                </div>
+                                <div className="radio-wrapper">
+                                    <input type="radio" id="COD-card" name="payment-method" checked={selectedOption === 'COD-card'} onChange={() => handleSelection('COD-card')} />
+                                </div>
+                            </div>
                             <h6 className='fw-bold py-3'>Gift Card</h6>
                             <div className='payment-option gift_card'>
                                 <div className="icon-wrapper">

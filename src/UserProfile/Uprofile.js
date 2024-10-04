@@ -13,8 +13,8 @@ const Uprofile = () => {
                     <li>ORDERS</li>
                     <p className='line_profile m-0 p-0'></p>
                     <div className='option_menu'>
-                        <li><Link to="">ORDERS AND RETURNS</Link></li>
-                        <li><Link to="">PAYMENT</Link></li>
+                        <li><Link to="/U-order">ORDERS AND RETURNS</Link></li>
+                        <li><Link to="">PAYMENT</Link></li> 
                         <li><Link to="">MANAGE REFUNDS</Link></li>
                     </div>
                     <li>OFFERS</li>
