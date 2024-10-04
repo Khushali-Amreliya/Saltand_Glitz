@@ -106,6 +106,16 @@ const ProductCard = ({ Productsitem }) => {
             navigate('/cart');
         }, 1000);
     };
+
+    const handleVideoCallClick = () => {
+        const phoneNumber = '7624046215'; // Replace with your actual phone number
+        const message = `Hi, I'm interested in trying on the jewelry via video call: ${title} with ID: ${id}. Can we schedule a call?`;
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+        // Redirecting to WhatsApp Web with the predefined message
+        window.open(whatsappUrl, '_blank');
+    };
+
     const settings2 = {
         dots: false,
         infinite: true,
@@ -123,26 +133,26 @@ const ProductCard = ({ Productsitem }) => {
         arrows: true,
         responsive: [
             {
-                breakpoint: 768, // tablet
+                breakpoint: 480, // tablet
                 settings: {
                     slidesToShow: 2, // Show 2 items on tablet
-                    slidesToScroll: 2,
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 768, // tablet
+                settings: {
+                    slidesToShow: 3, // Show 2 items on tablet
+                    slidesToScroll: 1,
                 },
             },
             {
                 breakpoint: 1024, // small desktop
                 settings: {
-                    slidesToShow: 3, // Show 3 items on small desktop
-                    slidesToScroll: 3,
+                    slidesToShow: 4, // Show 3 items on small desktop
+                    slidesToScroll: 2,
                 },
-            },
-            {
-                breakpoint: 1200, // large desktop
-                settings: {
-                    slidesToShow: 5, // Show 5 items on large desktop
-                    slidesToScroll: 5,
-                },
-            },
+            }
         ],
     };
     return (
@@ -186,9 +196,12 @@ const ProductCard = ({ Productsitem }) => {
                         <span className="fw-bold">ADD TO CART&nbsp;</span>
                     </button>
 
-                    <button className="mx-auto d-block video_call_btn btn rounded-pill float-end">
+                    <button
+                        className="mx-auto d-block video_call_btn btn rounded-pill float-end"
+                        onClick={handleVideoCallClick}>
                         <i className="ri-video-on-fill text-light text-center"></i>
                     </button>
+
 
                     <button onClick={() => slider?.current?.slickPrev()} className="prev_btn absolute_prev_btn d-lg-block d-none">
                         <i className="ri-arrow-left-wide-line"></i>
@@ -198,14 +211,14 @@ const ProductCard = ({ Productsitem }) => {
                     </button>
 
                     {/* offcanvas */}
-                    <div className="offcanvas offcanvas-bottom off_bottom"  data-bs-backdrop="true" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div className="offcanvas offcanvas-bottom off_bottom" data-bs-backdrop="true" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         <div className="offcanvas-header">
                             <h5 className="offcanvas-title off_title" id="offcanvasExampleLabel">Similar Designs</h5>
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div className="offcanvas-body m-0 p-0">
                             <div className='row position-relative'>
-                                <div className='d-lg-block d-md-block d-sm-block d-none'>
+                                <div className=''>
                                     <button onClick={() => similar?.current?.slickPrev()} className='pre-btn-set'><i className="ri-arrow-left-wide-line"></i></button>
                                 </div>
                                 <div className='mx-3'>
@@ -225,13 +238,13 @@ const ProductCard = ({ Productsitem }) => {
                                         ))}
                                     </Slider>
                                 </div>
-                                <div className='d-lg-block d-md-block d-sm-block d-none'>
+                                <div className=''>
                                     <button onClick={() => similar?.current?.slickNext()} className="next-btn-set float-end "><i className="ri-arrow-right-wide-line"></i></button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </>
     );

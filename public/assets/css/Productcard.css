@@ -53,10 +53,23 @@
 .offcanvas-header {
     margin-bottom: 15px !important;
 }
-
+@media(max-width:576px){
+    .pre-btn-set{
+        left: 4% !important;
+    }
+    .next-btn-set{
+        right: 3% !important;
+    }
+}
 @media(max-width:429px) {
     .view-similar-btn {
         bottom: 176px !important;
+    }
+    .pre-btn-set{
+        left: 6% !important;
+    }
+    .next-btn-set{
+        right: 6% !important;
     }
 }
 

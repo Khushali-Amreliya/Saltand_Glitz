@@ -16,14 +16,14 @@ const Earrings = () => {
     
     // State to hold products and selected ring sizes
     const [products, setProducts] = useState([]);
-    const [selectedRingSizes, setSelectedRingSizes] = useState([]);
-    const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
+    // const [selectedRingSizes, setSelectedRingSizes] = useState([]);
+    // const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
     const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
     const [selectedDiscounts, setSelectedDiscounts] = useState([]);
 
     
-    const ringSizes = ['11', '12', '13', '5', '6', '7'];
-        const priceRanges = [
+    // const ringSizes = ['11', '12', '13', '5', '6', '7'];
+    const priceRanges = [
         '₹10,001 - ₹15,000',
         '₹20,001 - ₹30,000',
         'Under ₹5,000',
@@ -54,12 +54,12 @@ const Earrings = () => {
     const handleFilterChange = (type, value) => {
                 let updatedSelection;
                 switch (type) {
-                    case 'ringSize':
-                        updatedSelection = selectedRingSizes.includes(value)
-                            ? selectedRingSizes.filter(size => size !== value)
-                            : [...selectedRingSizes, value];
-                        setSelectedRingSizes(updatedSelection);
-                        break;
+                    // case 'ringSize':
+                    //     updatedSelection = selectedRingSizes.includes(value)
+                    //         ? selectedRingSizes.filter(size => size !== value)
+                    //         : [...selectedRingSizes, value];
+                    //     setSelectedRingSizes(updatedSelection);
+                    //     break;
                     case 'price':
                         updatedSelection = selectedPriceRanges.includes(value)
                             ? selectedPriceRanges.filter(price => price !== value)
@@ -79,13 +79,13 @@ const Earrings = () => {
         
             const filterProducts = () => {
                 return products.filter(product => {
-                    const matchesRingSize = selectedRingSizes.length === 0 || selectedRingSizes.includes(product.size);
+                    // const matchesRingSize = selectedRingSizes.length === 0 || selectedRingSizes.includes(product.size);
                     const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
                         const [min, max] = range.split(' - ').map(value => parseInt(value.replace(/[₹,]/g, '').trim(), 10));
                         return product.price >= min && product.price <= (max || Infinity);
                     });
                     const matchesDiscount = selectedDiscounts.length === 0 || selectedDiscounts.includes(`${product.discount}%`);
-                    return matchesRingSize && matchesPrice && matchesDiscount;
+                    return matchesPrice && matchesDiscount;
                 });
             };
     // const ringSizes = ['11', '12', '13', '5', '6', '7'];
@@ -102,7 +102,7 @@ const Earrings = () => {
                         </div>
 
                         {/* Ring Size */}
-                        <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
+                        {/* <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
                             <h2 className='fw-bold fs-5 mt-3'>Ring Size</h2>
                             {
                                 ringSizes.map((size, index) => (
@@ -126,7 +126,7 @@ const Earrings = () => {
                                 )
                                 }
                             </button>
-                        </div>
+                        </div> */}
 
                         {/* Price */}
                         <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
@@ -430,7 +430,7 @@ const Earrings = () => {
                                 <div className="offcanvas-body small m-0 p-0">
                                     <div className='sticky-header px-5'>
                                         {/* Ring Size */}
-                                        <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
+                                        {/* <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
                                             <h2 className='fw-bold fs-5 mt-3'>Ring Size</h2>
                                             {
                                                 ringSizes.slice(0, showMoreRingSizes ? ringSizes.length : 4).map((size, index) => (
@@ -452,7 +452,7 @@ const Earrings = () => {
                                                 )
                                                 }
                                             </button>
-                                        </div>
+                                        </div> */}
 
                                         {/* Price */}
                                         <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
