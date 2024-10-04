@@ -92,25 +92,3 @@ div:where(.swal2-container) .swal2-html-container {
     padding: 5px 10px;
     border-radius: 10px;
 }
-
-/* productcard */
-.view-similar-btn {
-    position: absolute;
-    bottom: 150px;
-    right: 5px;
-    width: 35px;
-    height: auto;
-    cursor: pointer;
-}
-
-@media(max-width:429px) {
-    .view-similar-btn {
-        bottom: 176px !important;
-    }
-}
-
-@media(max-width:320px) {
-    .view-similar-btn {
-        bottom: 164px !important;
-    }
-}

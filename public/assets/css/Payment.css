@@ -14,6 +14,7 @@
     background-color: #66bec8;
     border-color: #297179;
     border: 1px solid #297179;
+    color: #000;
 }
 .icon-wrapper {
     flex-shrink: 0;

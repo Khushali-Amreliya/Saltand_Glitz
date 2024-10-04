@@ -7,6 +7,7 @@ import Loader from '../Loader';
 import { formatCurrency } from '../../Utils/formateCurrency';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import products from '../../fakedata/Product';
 
 const ProductCard = ({ Productsitem }) => {
     const [loading, setLoading] = useState(false);
@@ -15,6 +16,7 @@ const ProductCard = ({ Productsitem }) => {
     const slider = useRef(null);
     const navigate = useNavigate();
     const [isHeartFilled, setIsHeartFilled] = useState(false);
+    const similar = React.useRef(null);
 
     const wishlist = useSelector((state) => state.cart.wishlistItem);
 
@@ -104,8 +106,6 @@ const ProductCard = ({ Productsitem }) => {
             navigate('/cart');
         }, 1000);
     };
-
-
     const settings2 = {
         dots: false,
         infinite: true,
@@ -114,7 +114,37 @@ const ProductCard = ({ Productsitem }) => {
         slidesToScroll: 1,
         arrows: true,
     };
-
+    const view_similar = {
+        dots: false,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        arrows: true,
+        responsive: [
+            {
+                breakpoint: 768, // tablet
+                settings: {
+                    slidesToShow: 2, // Show 2 items on tablet
+                    slidesToScroll: 2,
+                },
+            },
+            {
+                breakpoint: 1024, // small desktop
+                settings: {
+                    slidesToShow: 3, // Show 3 items on small desktop
+                    slidesToScroll: 3,
+                },
+            },
+            {
+                breakpoint: 1200, // large desktop
+                settings: {
+                    slidesToShow: 5, // Show 5 items on large desktop
+                    slidesToScroll: 5,
+                },
+            },
+        ],
+    };
     return (
         <>
             {loading && <Loader />}
@@ -145,6 +175,8 @@ const ProductCard = ({ Productsitem }) => {
                             alt="view_similar"
                             src="assets/img/view_similar.png"
                             className="img-fluid view-similar-btn"
+                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+                            style={{ cursor: 'pointer' }} // Adds pointer cursor to image
                         />
                     </div>
 
@@ -164,7 +196,42 @@ const ProductCard = ({ Productsitem }) => {
                     <button onClick={() => slider?.current?.slickNext()} className="next_btn absolute_next_btn d-lg-block d-none">
                         <i className="ri-arrow-right-wide-line"></i>
                     </button>
-                </div>
+
+                    {/* offcanvas */}
+                    <div className="offcanvas offcanvas-bottom off_bottom"  data-bs-backdrop="true" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                        <div className="offcanvas-header">
+                            <h5 className="offcanvas-title off_title" id="offcanvasExampleLabel">Similar Designs</h5>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div className="offcanvas-body m-0 p-0">
+                            <div className='row position-relative'>
+                                <div className='d-lg-block d-md-block d-sm-block d-none'>
+                                    <button onClick={() => similar?.current?.slickPrev()} className='pre-btn-set'><i className="ri-arrow-left-wide-line"></i></button>
+                                </div>
+                                <div className='mx-3'>
+                                    <Slider ref={similar} {...view_similar}>
+                                        {products.map((item) => (
+                                            <div className='card border-0 w-100 mx-auto d-block' key={item.id}>
+                                                <Link to={`/productDetail/${item.id}`}>
+                                                    <img alt={item.title} src={item.image01} className='img-fluid px-2 position-relative' />
+                                                </Link>
+                                                <div className='card-body cartlane'>
+                                                    <h6>
+                                                        {formatCurrency(item.price)} <span><del>{formatCurrency(item.delprice)}</del></span>
+                                                    </h6>
+                                                    <p>{item.title}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </Slider>
+                                </div>
+                                <div className='d-lg-block d-md-block d-sm-block d-none'>
+                                    <button onClick={() => similar?.current?.slickNext()} className="next-btn-set float-end "><i className="ri-arrow-right-wide-line"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
             </div>
         </>
     );

@@ -210,7 +210,16 @@ const Header = () => {
                             </i>
                         </Link>
                     </div>
-
+                    <form action="" className='pt-3'>
+                        <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                            <div className="input-group">
+                                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
+                                <div className="input-group-append">
+                                    <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><i className="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </section>
 

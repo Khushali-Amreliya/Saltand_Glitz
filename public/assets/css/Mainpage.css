@@ -42,15 +42,16 @@
   transform: translate(-50%, -50%);
 }
 .cartlane h6 del{
-  font-size: 12px;
+  font-size: 12px !important;
   color: #aca6af;
 }
 .cartlane h6{
-  font-size: 18px;
+  font-size: 17px !important;
   color: #719c98;
 }
 .cartlane p{
-  font-size: 13px;
+  font-size: 13px !important;
+  color: var(--color) !important;
 }
 @media(max-width:992px){
     .festival_img1{
