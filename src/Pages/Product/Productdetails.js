@@ -7,6 +7,7 @@ import Loader from '../Loader';
 import { formatCurrency } from '../../Utils/formateCurrency';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Slider from 'react-slick/lib/slider';
 
 
 const Productdetails = () => {
@@ -36,7 +37,7 @@ const Productdetails = () => {
     //     // }, 2000);
     // };
     const addToCart = async () => {
-        setLoading(true); 
+        setLoading(true);
         toast.success("Product added to cart successfully!", {
             position: "top-center",
             autoClose: 2000,
@@ -124,25 +125,57 @@ const Productdetails = () => {
     const handleButtonClick = (purity) => {
         setSelectedPurity(purity);
     };
-
+    var md_carousel = {
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    };
     return (
         <>
             {loading && <Loader />}
             <section className='container-fluid pb-4 pt-2'>
                 <div>
                     <div className='row '>
-                        <div className='col-lg-4 col-md-6 col-sm-12 col-12 m-0 p-0'>
+                        <div className='col-lg-4 col-md-6 col-sm-12 col-12 m-0 p-0 d-lg-block d-none'>
                             <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_1_lar.jpg' className='img-fluid p-1'></img>
                             <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_3_lar.jpg' className='img-fluid p-1'></img>
                             <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_5_lar.jpg' className='img-fluid p-1'></img>
                         </div>
-                        <div className='col-lg-4 col-md-6 col-sm-12 col-12 m-0 p-0'>
+                        <div className='col-lg-4 col-md-6 col-sm-12 col-12 m-0 p-0 d-lg-block d-none'>
                             <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_4_lar.jpg' className='img-fluid p-1'></img>
                             <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_7_lar.jpg' className='img-fluid p-1'></img>
                             <video autoPlay loop controls muted style={{ width: "485px" }} className='item1 video p-1'>
                                 <source src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_16_video.mp4" type="video/mp4" />
                             </video>
                         </div>
+                        <section className='container-fluid m-0 p-0 mb-5 d-lg-none d-block'>
+                            <Slider {...md_carousel}>
+                                <div>
+                                    <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_1_lar.jpg' className='img-fluid p-1'></img>
+                                </div>
+                                <div>
+                                    <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_3_lar.jpg' className='img-fluid p-1'></img>
+                                </div>
+                                <div>
+                                    <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_5_lar.jpg' className='img-fluid p-1'></img>
+                                </div>
+                                <div>
+                                    <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_4_lar.jpg' className='img-fluid p-1'></img>
+                                </div>
+                                <div>
+                                    <img alt='' src='https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_7_lar.jpg' className='img-fluid p-1'></img>
+                                </div>
+                                <div>
+                                    <video autoPlay loop controls muted style={{ width: "485px" }} className='item1 video p-1'>
+                                        <source src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_16_video.mp4" type="video/mp4" />
+                                    </video>
+                                </div>
+                            </Slider>
+                        </section>
                         {/* =========Larger device========= */}
                         <div className='col-lg-4 col-md-6 col-sm-12 col-12 ps-3 mt-4 mx-auto d-block d-lg-block d-none sticky-header'>
                             <h3>{title}</h3>

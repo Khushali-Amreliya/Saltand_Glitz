@@ -143,6 +143,7 @@
 .offcanvas-bottom {
     height: 100vh !important;
 }
+
 .bottom {
     height: 45vh !important;
 }
@@ -246,6 +247,29 @@
 
 .heart-icon1 span {
     font-size: 13px;
+}
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.pagination-controls button {
+    margin: 0 20px;
+    padding: 3px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #8863fb;
+    color: white;   
+    cursor: pointer;
+    /* box-shadow: 5px 5px 5px #8d8d8d !important; */
+}
+
+.pagination-controls button:disabled {
+    background-color: #c4c1c1;
+    cursor: not-allowed;
 }
 
 @media(max-width:1024px) {
