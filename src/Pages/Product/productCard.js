@@ -185,7 +185,7 @@ const ProductCard = ({ Productsitem }) => {
                             alt="view_similar"
                             src="assets/img/view_similar.png"
                             className="img-fluid view-similar-btn"
-                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+                            data-bs-toggle="offcanvas" data-bs-target="#viewSimilar" aria-controls="viewSimilar"
                             style={{ cursor: 'pointer' }} // Adds pointer cursor to image
                         />
                     </div>
@@ -211,9 +211,9 @@ const ProductCard = ({ Productsitem }) => {
                     </button>
 
                     {/* offcanvas */}
-                    <div className="offcanvas offcanvas-bottom off_bottom" data-bs-backdrop="true" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div className="offcanvas offcanvas-bottom off_bottom" data-bs-backdrop="true" tabIndex="-1" id="viewSimilar" aria-labelledby="offcanvasViewSimilar">
                         <div className="offcanvas-header">
-                            <h5 className="offcanvas-title off_title" id="offcanvasExampleLabel">Similar Designs</h5>
+                            <h5 className="offcanvas-title off_title" id="offcanvasViewSimilar">Similar Designs</h5>
                             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div className="offcanvas-body m-0 p-0">
@@ -221,7 +221,7 @@ const ProductCard = ({ Productsitem }) => {
                                 <div className=''>
                                     <button onClick={() => similar?.current?.slickPrev()} className='pre-btn-set'><i className="ri-arrow-left-wide-line"></i></button>
                                 </div>
-                                <div className='mx-3'>
+                                <div className=''>
                                     <Slider ref={similar} {...view_similar}>
                                         {products.map((item) => (
                                             <div className='card border-0 w-100 mx-auto d-block' key={item.id}>

@@ -18,6 +18,9 @@
 input::placeholder {
     font-size: 13px;
 }
+.btn-close {
+    font-size: 10px !important;
+}
 
 button,
 input {

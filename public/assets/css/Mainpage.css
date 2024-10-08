@@ -1,26 +1,32 @@
 .slick-next:before {
-    visibility: hidden !important;
+  visibility: hidden !important;
 }
+
 .slick-prev:before {
-    visibility: hidden !important;
+  visibility: hidden !important;
 }
+
 .slick-next {
-    right: 0px !important;
+  right: 0px !important;
 }
-.home-img{
-    padding-right: 0px!important;
+
+.home-img {
+  padding-right: 0px !important;
 }
-.service_p p{
-    font-size: 13px;
+
+.service_p p {
+  font-size: 13px;
 }
-.next_btn{
+
+.next_btn {
   background-color: #fff;
   border: none;
   font-size: 20px;
   margin-top: 140px !important;
 
 }
-.prev_btn{
+
+.prev_btn {
   border: none;
   margin-top: 140px !important;
   font-size: 20px;
@@ -29,61 +35,74 @@
 
   margin-top: 140px !important;
 }
-.absoluteSlider{
+
+.absoluteSlider {
   position: absolute;
   top: 0%;
   left: -2%;
   transform: translate(-50%, -50%);
 }
-.absolute1{
+
+.absolute1 {
   position: absolute;
   top: 0%;
   left: 100%;
   transform: translate(-50%, -50%);
 }
-.cartlane h6 del{
-  font-size: 12px !important;
+
+.cartlane h6 del {
+  font-size: 11px !important;
   color: #aca6af;
 }
-.cartlane h6{
-  font-size: 17px !important;
+
+.cartlane h6 {
+  font-size: 13px !important;
   color: #719c98;
 }
-.cartlane p{
+
+.cartlane p {
   font-size: 13px !important;
   color: var(--color) !important;
 }
-@media(max-width:992px){
-    .festival_img1{
-        padding-right: 10px !important;
-    }
-    .festival_img3{
-        padding-top: 0 !important;
-    }
-    .festival_img2{
-        padding-bottom: 0 !important;
-    }
+
+@media(max-width:992px) {
+  .festival_img1 {
+    padding-right: 10px !important;
+  }
+
+  .festival_img3 {
+    padding-top: 0 !important;
+  }
+
+  .festival_img2 {
+    padding-bottom: 0 !important;
+  }
 }
-@media(max-width:575px){
-    .festival_img2{
-        padding-top: 18px !important;
-        padding-left: 10px !important;
-    }
-    .festival_img3{
-        padding-left: 10px !important;
-    }
-    .banner_class{
-      /* height: 40vh !important; */
-    }
+
+@media(max-width:575px) {
+  .festival_img2 {
+    padding-top: 18px !important;
+    padding-left: 10px !important;
+  }
+
+  .festival_img3 {
+    padding-left: 10px !important;
+  }
+
+  .banner_class {
+    /* height: 40vh !important; */
+  }
 }
-@media(max-width:1024px){
-    .festival_img3{
-       padding-left: 10px;
-       width: 100% !important;
-       height: 53% !important;
-       padding-top: 0% !important;
-    }
-    .festival_img2{
-        padding-left: 10px;
-     }
+
+@media(max-width:1024px) {
+  .festival_img3 {
+    padding-left: 10px;
+    width: 100% !important;
+    height: 53% !important;
+    padding-top: 0% !important;
+  }
+
+  .festival_img2 {
+    padding-left: 10px;
+  }
 }
