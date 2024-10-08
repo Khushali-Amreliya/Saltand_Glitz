@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom'
 // import Uwishlist from './Uwishlist'
 
 const Uprofile = () => {
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        // Perform other actions like redirecting the user to a login page
+        alert('Logged out successfully');
+    };
+    
   return (
     <>
         <div className='bg_uprofile'>
@@ -27,6 +33,7 @@ const Uprofile = () => {
                     <div className='option_menu'>
                         <li><Link to="/">PROFILE</Link></li>
                         <li><Link to="/Uwishlist">WISHLIST</Link></li>
+                        <li><Link onClick={handleLogout}>Log Out</Link></li>
                     </div>
                 </ul>
             </div>

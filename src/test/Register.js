@@ -1,46 +1,77 @@
-// src/components/Register.js
-import axios from 'axios';
 import React, { useState } from 'react';
+import axios from 'axios';
 
+const Register = () => {
+    const [name , setname] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [gender, setGender] = useState('');
 
-function Register() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    email: '',
-    gender: '',
-  });
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post('http://localhost:5000/api/auth/register', {
+                name,
+                email,
+                password,
+                gender,
+            });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+            const data = res.data;
+            if (data.token) {
+                localStorage.setItem('token', data.token);
+                alert('Registration successful');
+            } else {
+                alert('Error: ' + data.msg);
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Registration failed. Please try again.');
+        }
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5000/v1/login/create-User', formData);
-      alert(response.data.message);
-    } catch (error) {
-      console.error(error.response?.data?.error || error.message);
-    }
-  };
+    return (
+        <form onSubmit={handleRegister}>
+            <div>
+                <label>First Name:</label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setname(e.target.value)}
+                    required
+                />
+            </div>
 
-  return (
-    <form onSubmit={handleSubmit}>
-      {/* Input fields */}
-      <input type="text" name="firstName" onChange={handleChange} placeholder="First Name" />
-      <input type="text" name="lastName" onChange={handleChange} placeholder="Last Name" />
-      <input type="text" name="phoneNumber" onChange={handleChange} placeholder="Phone Number" />
-      <input type="email" name="email" onChange={handleChange} placeholder="Email" />
-      <select name="gender" onChange={handleChange}>
-        <option value="">Select Gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-      <button type="submit">Register</button>
-    </form>
-  );
-}
+            <div>
+                <label>Email:</label>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+            </div>
+            <div>
+                <label>Password:</label>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+            </div>
+            <div>
+                <label>Gender:</label>
+                <select value={gender} onChange={(e) => setGender(e.target.value)} required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    );
+};
 
 export default Register;

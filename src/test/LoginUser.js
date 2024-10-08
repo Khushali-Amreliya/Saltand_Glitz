@@ -1,24 +1,32 @@
 import React, { useContext, useState } from 'react';
-import { AuthContext } from '../context/AuthContext';  // Import the context
+// import { AuthContext } from '../context/AuthContext';  // Import the context
 import axios from 'axios';
 
 function LoginUser() {
-  const [emailOrPhone, setEmailOrPhone] = useState('');
-  const { login } = useContext(AuthContext);  // Destructure the login function from context
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  }); // Destructure the login function from context
+
+  const [message, setMessage] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Make the request to the backend for login
-      const response = await axios.post('http://localhost:5000/v1/login/login', { emailOrPhone });
-
-      // If login is successful, update the context with the user data
-      login(response.data);
-
-      alert('Login successful');
+      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      // Set JWT token in localStorage
+      localStorage.setItem('token', response.data.token);
+      setMessage('Login successful!');
+      // You can redirect the user to another page or perform other actions
     } catch (error) {
-      // Display error if login fails
-      console.error(error.response?.data?.message || error.message);
+      setMessage(error.response?.data?.message || 'Login failed');
     }
   };
 
@@ -26,15 +34,11 @@ function LoginUser() {
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="emailOrPhone"
-          value={emailOrPhone}
-          onChange={(e) => setEmailOrPhone(e.target.value)}
-          placeholder="Email or Phone Number"
-        />
+        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
         <button type="submit">Login</button>
       </form>
+      {message && <p>{message}</p>}
     </div>
   );
 }

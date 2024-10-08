@@ -6,18 +6,33 @@ import { formatCurrency } from '../../Utils/formateCurrency';
 import Aos from 'aos';
 import "aos/dist/aos.css";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Wishlist = () => {
   const wishlistItem = useSelector(state => state.cart.wishlistItem);
   const dispatch = useDispatch();
 
   // Remove from wishlist
-  const handleRemove = (id) => {
-    dispatch(cartAction.removeFromWishlist(id));
+  const handleRemove = async (id) => {
+    try {
+      // Call the API to remove the item from the wishlist
+      await axios.post(`http://localhost:5000/v1/wishlist/remove-wishlist/${id}`);
+      dispatch(cartAction.removeFromWishlist(id));
+      toast.success("Item removed from wishlist", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    } catch (error) {
+      console.error('Error removing item from wishlist:', error);
+      toast.error("Error removing item from wishlist", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    }
   };
 
   // Add to cart and remove from wishlist
-  const handleMoveToCart = async(item) => {
+  const handleMoveToCart = async (item) => {
     const cartItem = {
       id: item.id,
       title: item.title,
