@@ -246,7 +246,7 @@ const Header = () => {
                     </div>
                     <form action="" className='pt-3'>
                         <div className="p-1 bg-light rounded rounded-pill shadow-sm">
-                            <div className="input-group">
+                            <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#mdsearchOffcanvas" aria-controls="mdsearchOffcanvas">
                                 <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                 <div className="input-group-append">
                                     <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><i className="fa fa-search"></i></button>
@@ -343,7 +343,7 @@ const Header = () => {
                 </div>
             </section>
 
-            {/* OFFCANVAS */}
+            {/*LARGE OFFCANVAS */}
             <div className="offcanvas offcanvas-start offcanvas_start_search" tabindex="-1" id="searchOffcanvas" aria-labelledby="offcanvasSearchLabel">
                 <div className="offcanvas-header">
                     <h5 className="offcanvas-title text-light" id="offcanvasSearchLabel">.</h5>
@@ -413,6 +413,129 @@ const Header = () => {
                                 </div>
                             </div>
                             <div className='col-lg-6 px-4'>
+                                <div>
+                                    <div className="search-item">
+                                        <div className="left">
+                                            <img alt='' src='assets/img/search_page.png' className='search_offcanvas_arrow'></img>
+                                            <span>Gemstone Designs</span>
+                                        </div>
+                                        <img src="https://cdn.caratlane.com/media/static/images/V4/2024/CL/09_Sep/others/SearchBar/Studs.jpg" alt="Diamond Mangalsutras" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 className='trending_title pt-4'>Recently Viewed</h5>
+                        <div className='row position-relative'>
+                            <div className=''>
+                                <button onClick={() => search?.current?.slickPrev()} className='pre-btn-set'><i className="ri-arrow-left-wide-line"></i></button>
+                            </div>
+                            <div className='pt-3'>
+                                <Slider ref={search} {...slider_search}>
+                                    {products.map((item) => (
+                                        <div className='card border-0 w-100 mx-auto d-block' key={item.id}>
+                                            <Link to={`/productDetail/${item.id}`}>
+                                                <img alt={item.title} src={item.image01} className='img-fluid px-2 position-relative' />
+                                            </Link>
+                                            <div className='card-body cartlane'>
+                                                <h6>
+                                                    {formatCurrency(item.price)} <span><del>{formatCurrency(item.delprice)}</del></span>
+                                                </h6>
+                                                <p>{item.title}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </Slider>
+                            </div>
+                            <div className=''>
+                                <button onClick={() => search?.current?.slickNext()} className="next-btn-set float-end "><i className="ri-arrow-right-wide-line"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/*MD OFFCANVAS */}
+            <div className="offcanvas offcanvas-bottom rounded-0" tabindex="-1" id="mdsearchOffcanvas" aria-labelledby="mdoffcanvasSearchLabel">
+                <div className="offcanvas-header">
+                    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <h5 className="offcanvas-title w-100" id="mdoffcanvasSearchLabel">
+                    <form action="" className='pt-3'>
+                        <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                            <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#mdsearchOffcanvas" aria-controls="mdsearchOffcanvas">
+                                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
+                                <div className="input-group-append">
+                                    <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><i className="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </h5>
+                    
+                </div>
+                <div className="offcanvas-body">
+                    <div>
+                        <h5 className='trending_title'>Trending Searches</h5>
+                        <div className='row '>
+                            <div className='col-lg-6 px-4 offcanvas_search'>
+                                <div>
+                                    <div className="search-item">
+                                        <div className="left">
+                                            <img alt='' src='assets/img/search_page.png' className='search_offcanvas_arrow'></img>
+                                            <span>Message Bands</span>
+                                        </div>
+                                        <img src="https://cdn.caratlane.com/media/static/images/V4/2024/CL/09_Sep/others/SearchBar/MessageBands.jpg" alt="Diamond Mangalsutras" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='col-lg-6 px-4 offcanvas_search'>
+                                <div>
+                                    <div className="search-item">
+                                        <div className="left">
+                                            <img alt='' src='assets/img/search_page.png' className='search_offcanvas_arrow'></img>
+                                            <span>Gemstone Designs</span>
+                                        </div>
+                                        <img src="https://cdn.caratlane.com/media/static/images/V4/2024/CL/09_Sep/others/SearchBar/Gemstone.jpg" alt="Diamond Mangalsutras" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='row '>
+                            <div className='col-lg-6 px-4 offcanvas_search'>
+                                <div>
+                                    <div className="search-item">
+                                        <div className="left">
+                                            <img alt='' src='assets/img/search_page.png' className='search_offcanvas_arrow'></img>
+                                            <span>Message Bands</span>
+                                        </div>
+                                        <img src="https://cdn.caratlane.com/media/static/images/V4/2024/CL/09_Sep/others/SearchBar/DiamondMangalsutra.jpg" alt="Diamond Mangalsutras" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='col-lg-6 px-4 offcanvas_search'>
+                                <div>
+                                    <div className="search-item">
+                                        <div className="left">
+                                            <img alt='' src='assets/img/search_page.png' className='search_offcanvas_arrow'></img>
+                                            <span>Gemstone Designs</span>
+                                        </div>
+                                        <img src="https://cdn.caratlane.com/media/static/images/V4/2024/CL/09_Sep/others/SearchBar/Nosepin.jpg" alt="Diamond Mangalsutras" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='row '>
+                            <div className='col-lg-6 px-4 offcanvas_search'>
+                                <div>
+                                    <div className="search-item">
+                                        <div className="left">
+                                            <img alt='' src='assets/img/search_page.png' className='search_offcanvas_arrow'></img>
+                                            <span>Message Bands</span>
+                                        </div>
+                                        <img src="https://cdn.caratlane.com/media/static/images/V4/2024/CL/09_Sep/others/SearchBar/Necklace.jpg" alt="Diamond Mangalsutras" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='col-lg-6 px-4 offcanvas_search'>
                                 <div>
                                     <div className="search-item">
                                         <div className="left">
