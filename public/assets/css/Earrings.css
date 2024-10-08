@@ -249,28 +249,81 @@
     font-size: 13px;
 }
 
-.pagination-controls {
+.pagination {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-}
-
-.pagination-controls button {
-    margin: 0 20px;
-    padding: 3px 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #8863fb;
-    color: white;   
+    margin: 20px 0;
+  }
+  
+  .pagination ul {
+    display: flex;
+    padding: 0;
+  }
+  
+  .pagination ul li {
+    color: #3f91a1;
+    list-style: none;
+    line-height: 45px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    /* box-shadow: 5px 5px 5px #8d8d8d !important; */
-}
-
-.pagination-controls button:disabled {
-    background-color: #c4c1c1;
-    cursor: not-allowed;
-}
+    user-select: none;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination ul li.numb {
+    height: 44px;
+    width: 44px;
+    margin: 0 3px;
+    line-height: 45px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+  }
+  
+  .pagination ul li.numb.first {
+    margin: 0px 3px 0 -5px;
+  }
+  
+  .pagination ul li.numb.last {
+    margin: 0px -5px 0 3px;
+  }
+  
+  .pagination ul li.dots {
+    font-size: 22px;
+    cursor: default;
+  }
+  
+  .pagination ul li.btn {
+    padding: 0 20px;
+    border-radius: 50px;
+  }
+  
+  .pagination ul li.active {
+    background-color: #3f91a1;
+    color: white;
+  }
+  
+  .pagination ul li:hover,
+  .pagination ul li.numb:hover,
+  .pagination ul li:first-child:hover,
+  .pagination ul li:last-child:hover {
+    background-color: #3f91a1;
+    color: white;
+  }
+  
+  .pagination ul li.btn.prev,
+  .pagination ul li.btn.next {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  .pagination ul li.btn.prev:hover,
+  .pagination ul li.btn.next:hover {
+    background-color: #3f91a1;
+    color: white;
+  }
+  
 
 @media(max-width:1024px) {
     .absolute_next_btn {

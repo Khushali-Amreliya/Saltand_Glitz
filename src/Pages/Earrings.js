@@ -50,8 +50,10 @@ const Earrings = () => {
     // const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
     const [showMorePrices, setShowMorePrices] = useState(false);
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);
-    const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 6; // Number of products to display per page
+    const [currentPage, setCurrentPage] = useState(1); // page starts from 1
+    const itemsPerPage = 3; // Number of products per page
+
+    const totalPages = Math.ceil(products.length / itemsPerPage); // Calculate total pages
 
     const handleFilterChange = (type, value) => {
         let updatedSelection;
@@ -94,20 +96,78 @@ const Earrings = () => {
     // const discount = ['Up to 15% off on Diamond Prices', 'Flat 15% off on Diamond Prices', 'Flat 10% off on Diamond Prices', 'Flat 5% off on Diamond Prices', 'Flat 50% off on Making Charges']
 
     const filteredProducts = filterProducts();
-    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-    const currentItems = filteredProducts.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+    const currentItems = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     // Handle pagination
     const handleNextPage = () => {
-        if (currentPage < totalPages - 1) {
+        if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     };
-
     const handlePrevPage = () => {
-        if (currentPage > 0) {
+        if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
         }
+    };
+
+    const handlePageClick = (pageNum) => {
+        setCurrentPage(pageNum);
+    };
+
+    const renderPagination = () => {
+        let paginationItems = [];
+        let beforePage = currentPage - 1;
+        let afterPage = currentPage + 1;
+
+        if (currentPage > 1) {
+            paginationItems.push(
+                <li className="btn prev" key="prev" onClick={handlePrevPage}>
+                    <span>Prev</span>
+                </li>
+            );
+        }
+
+        if (currentPage > 2) {
+            paginationItems.push(
+                <li className="numb" key={1} onClick={() => handlePageClick(1)}>
+                    <span>1</span>
+                </li>
+            );
+            if (currentPage > 3) {
+                paginationItems.push(<li className="dots" key="dots-before"><span>...</span></li>);
+            }
+        }
+
+        for (let pageNum = beforePage; pageNum <= afterPage; pageNum++) {
+            if (pageNum > 0 && pageNum <= totalPages) {
+                paginationItems.push(
+                    <li className={`numb ${currentPage === pageNum ? 'active' : ''}`} key={pageNum} onClick={() => handlePageClick(pageNum)}>
+                        <span>{pageNum}</span>
+                    </li>
+                );
+            }
+        }
+
+        if (currentPage < totalPages - 1) {
+            if (currentPage < totalPages - 2) {
+                paginationItems.push(<li className="dots" key="dots-after"><span>...</span></li>);
+            }
+            paginationItems.push(
+                <li className="numb" key={totalPages} onClick={() => handlePageClick(totalPages)}>
+                    <span>{totalPages}</span>
+                </li>
+            );
+        }
+
+        if (currentPage < totalPages) {
+            paginationItems.push(
+                <li className="btn next" key="next" onClick={handleNextPage}>
+                    <span>Next</span>
+                </li>
+            );
+        }
+
+        return paginationItems;
     };
     return (
         <section className='container-fluid mt-5 mb-4'>
@@ -762,21 +822,19 @@ const Earrings = () => {
                                 <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow'>
                                     <ProductCard Productsitem={item} />
                                 </div>
-                                {/* Render the image after every two products */}
-                                {
-                                    (index + 1) % 4 === 0 && Math.floor(index / 4) < images.length && (
-                                        <div className='col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12'>
-                                            <img alt={`Product ${Math.floor(index / 4) + 1}`} src={images[Math.floor(index / 4)]} className='img py-2' style={{ borderRadius: "40px" }} />
-                                        </div>
-                                    )
-                                }
+                                {(index + 1) % 4 === 0 && Math.floor(index / 4) < images.length && (
+                                    <div className='col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12'>
+                                        <img alt={`Product ${Math.floor(index / 4) + 1}`} src={images[Math.floor(index / 4)]} className='img py-2' style={{ borderRadius: "40px" }} />
+                                    </div>
+                                )}
                             </React.Fragment>
                         ))}
                     </div>
-                    <div className='pagination-controls'>
-                        <button onClick={handlePrevPage} disabled={currentPage === 0}><i class="ri-arrow-drop-left-line fs-4"></i></button>
-                        <span>{currentPage + 1} of {totalPages}</span>
-                        <button onClick={handleNextPage} disabled={currentPage === totalPages - 1}><i class="ri-arrow-drop-right-line fs-4"></i></button>
+
+                    <div className='pagination'>
+                        <ul>
+                            {renderPagination()}
+                        </ul>
                     </div>
                 </div>
             </div>
