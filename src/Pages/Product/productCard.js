@@ -214,7 +214,7 @@ const ProductCard = ({ Productsitem }) => {
                     <div className="offcanvas offcanvas-bottom off_bottom" data-bs-backdrop="true" tabIndex="-1" id="viewSimilar" aria-labelledby="offcanvasViewSimilar">
                         <div className="offcanvas-header">
                             <h5 className="offcanvas-title off_title" id="offcanvasViewSimilar">Similar Designs</h5>
-                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div className="offcanvas-body m-0 p-0">
                             <div className='row position-relative'>

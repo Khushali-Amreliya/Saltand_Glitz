@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { cartAction } from '../../Store/Slice/CartSlice';
 import products from '../../fakedata/Product';
@@ -22,7 +22,7 @@ const Productdetails = () => {
 
     const { id } = useParams()
     const Product = products.find(item => item.id === id)
-    const { title, price, image01 } = Product;
+    const { title, price, image01, delprice } = Product;
 
 
     const dispatch = useDispatch();
@@ -226,8 +226,10 @@ const Productdetails = () => {
                             </p>
                             <p>
                                 <span style={{ fontSize: "12px" }} className='fw-bold me-4'>SIZE</span>
-                                <span className='ps-3' style={{ fontSize: "13px", color: "#212529" }}>6.5 inches (customisable)</span>
+                                <span className='ps-3' style={{ fontSize: "13px", color: "#212529" }}>6.5 inches</span>
+                                <button className='btn add_btn ms-2' data-bs-toggle="offcanvas" data-bs-target="#offcanvassize" aria-controls="offcanvassize">CUSTOMISE</button>
                             </p>
+
                             <button className='btn add_btn me-2 px-5 mt-3' onClick={addToCart}>
                                 <i className="ri-shopping-bag-4-line pe-2 fs-5"></i>
                                 ADD TO CART
@@ -275,7 +277,7 @@ const Productdetails = () => {
                             <div className='mt-3'>
                                 <div className='row w-100 border rounded-3 store py-2 my-2'>
                                     <div className='col-lg-1 col-md-2 col-sm-2 col-2 m-0 p-0'>
-                                        <i class="ri-store-2-line fs-2 ps-2"></i>
+                                        <i className="ri-store-2-line fs-2 ps-2"></i>
                                         {/* <img alt='' src='assets/img/store.png' className='img-fluid'></img> */}
                                     </div>
                                     <div className='col-lg-11 col-md-10 col-sm-10 col-10'>
@@ -297,22 +299,22 @@ const Productdetails = () => {
                                 <div className='row'>
                                     <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                         {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i class="ri-verified-badge-line fs-1"></i>
+                                        <i className="ri-verified-badge-line fs-1"></i>
                                         <p>100% <br />Certified</p>
                                     </div>
                                     <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                         {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i class="ri-replay-15-line fs-1"></i>
+                                        <i className="ri-replay-15-line fs-1"></i>
                                         <p>15 Day <br />Money Back</p>
                                     </div>
                                     <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                         {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i class="ri-exchange-funds-line fs-1"></i>
+                                        <i className="ri-exchange-funds-line fs-1"></i>
                                         <p>Lifetime Exchange</p>
                                     </div>
                                     <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                         {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i class="ri-calendar-line fs-1"></i>
+                                        <i className="ri-calendar-line fs-1"></i>
                                         <p>One Year Warranty</p>
                                     </div>
                                 </div>
@@ -328,18 +330,18 @@ const Productdetails = () => {
                                 <div className='row text-center'>
                                     <div className='col-lg-4 col-md-4 col-sm-6 col-12  mt-2'>
                                         {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
-                                        <i class="ri-discount-percent-line fs-1"></i>
+                                        <i className="ri-discount-percent-line fs-1"></i>
                                         <p style={{ fontSize: "14px" }} className='m-0 pt-2'>100% BIS</p>
                                         <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
                                     </div>
                                     <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
                                         {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
-                                        <i class="ri-bubble-chart-line fs-1"></i>
+                                        <i className="ri-bubble-chart-line fs-1"></i>
                                         <p style={{ fontSize: "14px" }} className='m-0 pt-2'>Trust of Tanishq</p>
                                         <p style={{ fontSize: "11px" }}>Titan Privileges</p>
                                     </div>
                                     <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
-                                        <i class="ri-verified-badge-line fs-1 text-success"></i>
+                                        <i className="ri-verified-badge-line fs-1 text-success"></i>
                                         {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
                                         <p style={{ fontSize: "14px" }} className='m-0 pt-2'>100% Certified</p>
                                         <p style={{ fontSize: "11px" }}>by CaratLane</p>
@@ -399,7 +401,8 @@ const Productdetails = () => {
                             </p>
                             <p>
                                 <span style={{ fontSize: "12px" }} className='fw-bold me-4'>SIZE</span>
-                                <span className='ps-3' style={{ fontSize: "13px", color: "#212529" }}>6.5 inches (customisable)</span>
+                                <span className='ps-3' style={{ fontSize: "13px", color: "#212529" }}>6.5 inches</span>
+                                <button className='btn add_btn ms-2' data-bs-toggle="offcanvas" data-bs-target="#mdoffcanvassize" aria-controls="mdoffcanvassize">CUSTOMISE</button>
                             </p>
                             <button className='btn add_btn add_btn_md me-2 px-5 mt-3' onClick={addToCart}>
                                 <i className="ri-shopping-bag-4-line pe-2 fs-5"></i>
@@ -448,7 +451,7 @@ const Productdetails = () => {
                             <div className='mt-3 ps-3'>
                                 <div className='row w-100 border rounded-3 store py-2 my-2'>
                                     <div className='col-md-1 col-sm-1 col-2 m-0 p-0'>
-                                        {/* <i class="ri-store-2-line fs-1 ps-2"></i> */}
+                                        {/* <i className="ri-store-2-line fs-1 ps-2"></i> */}
                                         {/* <img alt='' src='assets/img/store.png' className='img-fluid'></img> */}
                                     </div>
                                     <div className='col-md-11 col-sm-11 col-10'>
@@ -470,22 +473,22 @@ const Productdetails = () => {
                                 <div className='row'>
                                     <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                         {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i class="ri-verified-badge-line fs-1"></i>
+                                        <i className="ri-verified-badge-line fs-1"></i>
                                         <p>100% <br />Certified</p>
                                     </div>
                                     <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                         {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i class="ri-replay-15-line fs-1"></i>
+                                        <i className="ri-replay-15-line fs-1"></i>
                                         <p>15 Day <br />Money Back</p>
                                     </div>
                                     <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                         {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i class="ri-exchange-funds-line fs-1"></i>
+                                        <i className="ri-exchange-funds-line fs-1"></i>
                                         <p>Lifetime Exchange</p>
                                     </div>
                                     <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                         {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i class="ri-calendar-line fs-1"></i>
+                                        <i className="ri-calendar-line fs-1"></i>
                                         <p>One Year Warranty</p>
                                     </div>
                                 </div>
@@ -501,18 +504,18 @@ const Productdetails = () => {
                                 <div className='row text-center'>
                                     <div className='col-lg-4 col-md-4 col-sm-6 col-12  mt-2'>
                                         {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
-                                        <i class="ri-discount-percent-line fs-1"></i>
+                                        <i className="ri-discount-percent-line fs-1"></i>
                                         <p style={{ fontSize: "14px" }} className='m-0 pt-2'>100% BIS</p>
                                         <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
                                     </div>
                                     <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
                                         {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
-                                        <i class="ri-bubble-chart-line fs-1"></i>
+                                        <i className="ri-bubble-chart-line fs-1"></i>
                                         <p style={{ fontSize: "14px" }} className='m-0 pt-2'>Trust of Tanishq</p>
                                         <p style={{ fontSize: "11px" }}>Titan Privileges</p>
                                     </div>
                                     <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
-                                        <i class="ri-verified-badge-line fs-1 text-success"></i>
+                                        <i className="ri-verified-badge-line fs-1 text-success"></i>
                                         {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
                                         <p style={{ fontSize: "14px" }} className='m-0 pt-2'>100% Certified</p>
                                         <p style={{ fontSize: "11px" }}>by CaratLane</p>
@@ -569,6 +572,211 @@ const Productdetails = () => {
                     </div> */}
                 </div>
             </section>
+
+            {/* Large Offcanvas */}
+            <div className="offcanvas offcanvas-end offcanvas_end_size" tabIndex="-1" id="offcanvassize" aria-labelledby="offcanvassizeLabel">
+                <div className="offcanvas-header offcanvas_size_header d-flex justify-content-between align-items-center">
+                    <div className="text-start pt-5">
+                        <p className='m-0 p-0'>Estimated price</p>
+                        <span className="fw-bold" style={{ fontSize: "18px" }}>{formatCurrency(price)}&nbsp;</span>
+                        <span className="text-decoration-line-through text-muted">{formatCurrency(delprice)}</span>
+                    </div>
+                    <div className="text-end">
+                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <div className='pt-3 delivery_size'>
+                            <p className='m-0 p-0'>Delivery By</p>
+                            <span className="fw-bold">14th Oct</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className="offcanvas-body">
+                    {/* Choice of Metal */}
+                    <div className="mb-2 metal_offcanvas">
+                        <h6 className="text-dark mb-3">Choice of Metal</h6>
+                        <div className="row g-3">
+                            {/* Metal Options */}
+                            {['18KT Yellow Gold', '14KT White Gold', '16KT Rose Gold'].map((metal, index) => (
+                                <div key={index} className="col-3">
+                                    <button className="btn size-btn w-100 p-3">
+                                        <p>{metal}</p>
+                                        <small className="text-muted d-block">in Stock!</small>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+
+                    {/* Diamond Quality */}
+                    <div className="mb-4">
+                        <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h6 className="text-dark">Diamond Quality</h6>
+                            <Link to="">Diamond Guide</Link>
+                        </div>
+                        <div className="row g-3 diamond_offcanvas">
+                            {[
+                                { quality: "IJ-SI", status: "Only 4 left!" },
+                                { quality: "GH-VS", status: "Made to Order" },
+                                { quality: "GH-VVS", status: "Made to Order" },
+                                { quality: "EF-VVS", status: "Made to Order" },
+                                { quality: "GH-SI", status: "in Stock!" },
+                            ].map((item, index) => (
+                                <div key={index} className="col-3">
+                                    <button
+                                        className={`btn size-btn w-100 p-3 ${item.selected ? 'selected' : ''}`}
+                                    >
+                                        <p className="fw-bold m-0 p-0">{item.quality}</p>
+                                        <small>{item.status}</small>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Select Size */}
+                    <div className="mb-4">
+                        <div className="d-flex justify-content-between align-items-center mb-4">
+                            <h6 className="text-dark">Select Size</h6>
+                            <Link to="">Size Guide</Link>
+                        </div>
+                        <div className="row g-3 size_offcanvas">
+                            {/* Size buttons */}
+                            {[
+                                { size: 5, mm: "44.8 mm", stock: "Made to Order" },
+                                { size: 6, mm: "45.9 mm", stock: "Made to Order" },
+                                { size: 7, mm: "47.1 mm", stock: "Only 4 left!" },
+                                { size: 8, mm: "48.1 mm", stock: "In Stock!" },
+                                { size: 9, mm: "49.0 mm", stock: "In Stock!" },
+                                { size: 10, mm: "50.0 mm", stock: "In Stock!" },
+                                { size: 11, mm: "50.9 mm", stock: "In Stock!" },
+                                { size: 12, mm: "51.8 mm", stock: "In Stock!", selected: true },
+                                { size: 13, mm: "52.8 mm", stock: "In Stock!" },
+                                { size: 14, mm: "54.0 mm", stock: "In Stock!" },
+                                { size: 15, mm: "55.0 mm", stock: "In Stock!" },
+                                { size: 16, mm: "55.9 mm", stock: "In Stock!" },
+                            ].map((item, index) => (
+                                <div key={index} className="col-3">
+                                    <button
+                                        className="btn size-btn w-100 p-2 text-center"
+                                    >
+                                        <p className="fs-6 fw-bold m-0 p-0">{item.size}</p>
+                                        <p className="text-muted m-0 p-0">{item.mm}</p>
+                                        <small >{item.stock}</small>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="offcanvas-footer text-center offcanvas_size_btn">
+                    <button className="btn w-100 py-3 fw-bold text-uppercase">Confirm Customisation</button>
+                </div>
+            </div>
+            {/* Md Offcanvas */}
+            <div className="offcanvas offcanvas-bottom offcanvas_bottom_size" tabIndex="-1" id="mdoffcanvassize" aria-labelledby="mdoffcanvassizeLabel">
+                <div className="offcanvas-header offcanvas_size_header d-flex justify-content-between align-items-center">
+                    <div className="text-start pt-5">
+                        <p className='m-0 p-0'>Estimated price</p>
+                        <span className="fw-bold" style={{ fontSize: "18px" }}>{formatCurrency(price)}&nbsp;</span>
+                        <span className="text-decoration-line-through text-muted">{formatCurrency(delprice)}</span>
+                    </div>
+                    <div className="text-end">
+                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <div className='pt-3 delivery_size'>
+                            <p className='m-0 p-0'>Delivery By</p>
+                            <span className="fw-bold">14th Oct</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className="offcanvas-body">
+                    {/* Choice of Metal */}
+                    <div className="mb-2 metal_offcanvas">
+                        <h6 className="text-dark mb-3">Choice of Metal</h6>
+                        <div className="row g-3">
+                            {/* Metal Options */}
+                            {['18KT Yellow Gold', '14KT White Gold', '16KT Rose Gold'].map((metal, index) => (
+                                <div key={index} className="col-3">
+                                    <button className="btn size-btn w-100">
+                                        <p>{metal}</p>
+                                        <small className="text-muted d-block">in Stock!</small>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+
+                    {/* Diamond Quality */}
+                    <div className="mb-4">
+                        <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h6 className="text-dark">Diamond Quality</h6>
+                            <Link to="">Diamond Guide</Link>
+                        </div>
+                        <div className="row g-3 diamond_offcanvas">
+                            {[
+                                { quality: "IJ-SI", status: "Only 4 left!" },
+                                { quality: "GH-VS", status: "Made to Order" },
+                                { quality: "GH-VVS", status: "Made to Order" },
+                                { quality: "EF-VVS", status: "Made to Order" },
+                                { quality: "GH-SI", status: "in Stock!" },
+                            ].map((item, index) => (
+                                <div key={index} className="col-3">
+                                    <button
+                                        className={`btn size-btn w-100 ${item.selected ? 'selected' : ''}`}
+                                    >
+                                        <p className="fw-bold m-0 p-0">{item.quality}</p>
+                                        <small>{item.status}</small>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Select Size */}
+                    <div className="mb-4">
+                        <div className="d-flex justify-content-between align-items-center mb-4">
+                            <h6 className="text-dark">Select Size</h6>
+                            <Link to="">Size Guide</Link>
+                        </div>
+                        <div className="row g-3 size_offcanvas">
+                            {/* Size buttons */}
+                            {[
+                                { size: 5, mm: "44.8 mm", stock: "Made to Order" },
+                                { size: 6, mm: "45.9 mm", stock: "Made to Order" },
+                                { size: 7, mm: "47.1 mm", stock: "Only 4 left!" },
+                                { size: 8, mm: "48.1 mm", stock: "In Stock!" },
+                                { size: 9, mm: "49.0 mm", stock: "In Stock!" },
+                                { size: 10, mm: "50.0 mm", stock: "In Stock!" },
+                                { size: 11, mm: "50.9 mm", stock: "In Stock!" },
+                                { size: 12, mm: "51.8 mm", stock: "In Stock!", selected: true },
+                                { size: 13, mm: "52.8 mm", stock: "In Stock!" },
+                                { size: 14, mm: "54.0 mm", stock: "In Stock!" },
+                                { size: 15, mm: "55.0 mm", stock: "In Stock!" },
+                                { size: 16, mm: "55.9 mm", stock: "In Stock!" },
+                            ].map((item, index) => (
+                                <div key={index} className="col-3">
+                                    <button
+                                        className="btn size-btn w-100 text-center"
+                                    >
+                                        <p className="fs-6 fw-bold m-0 p-0">{item.size}</p>
+                                        <p className="text-muted m-0 p-0">{item.mm}</p>
+                                        <small >{item.stock}</small>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="offcanvas-footer text-center offcanvas_size_btn">
+                    <button className="btn w-100 py-3 fw-bold text-uppercase">Confirm Customisation</button>
+                </div>
+            </div>
         </>
     )
 }

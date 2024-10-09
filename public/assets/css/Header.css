@@ -288,12 +288,12 @@
     padding-top: 8px;
 }
 
-.offcanvas-header {
+.offcanvas_header_search {
     padding-top: 0% !important;
     box-shadow: -3px 0px 10px #f1f1f1;
 }
 
-.offcanvas-header .btn-close {
+.offcanvas-header .btn_close {
     margin-top: 0.5rem !important;
     margin-right: 0.5rem !important;
 }

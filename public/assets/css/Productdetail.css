@@ -32,9 +32,9 @@
 }
 
 .add_btn {
-    background-color: #012f49 !important;
-    color: #fff !important;
-    font-size: 14px !important;
+    background: var(--background) !important;
+    color: #000 !important;
+    font-size: 13px !important;
 }
 
 .delivery_cancellation {
@@ -154,15 +154,142 @@
     left: 86% !important;
 }
 
+.offcanvas_end_size {
+    width: 40% !important;
+    border-radius: 20px 0px 0px 20px !important;
+}
+
+.offcanvas_size_header span {
+    font-size: 13px;
+    color: var(--color);
+}
+
+.offcanvas_size_header p {
+    font-size: 10px !important;
+}
+
+.delivery_size span {
+    font-size: 10px;
+}
+
+.offcanvas_size_header {
+    padding: 20px 0px;
+    background-color: rgba(163, 212, 217, 0.467);
+    border-radius: 20px 0px 0px 0px !important;
+
+}
+
+.offcanvas_size_btn button {
+    background: var(--background);
+}
+
+.size-btn {
+    background-color: #f3f3f4 !important;
+    color: #000 !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease !important;
+    border-radius: 13px !important;
+}
+
+.size-btn:hover {
+    background-color: #c7d7da !important;
+    border-color: #42a1c1 !important;
+}
+
+.size-btn.selected {
+    background-color: #d7c2f1;
+    color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+.offcanvas-footer {
+    border-top: 1px solid #ddd;
+    background-color: #f8f9fa;
+}
+
+.offcanvas-body h6 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.offcanvas-body a {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 13px;
+    color: #2c8ee4;
+}
+
+.offcanvas-body {
+    padding: 20px;
+}
+
+.metal_offcanvas {
+    border-bottom: 1px solid rgb(235, 235, 255) !important;
+    padding: 10px 0;
+}
+
+.size_offcanvas small,
+.diamond_offcanvas small,
+.metal_offcanvas small {
+    background-color: #fff;
+    border-radius: 10px;
+    font-size: 9px;
+    padding: 5px 10px;
+}
+
+.size_offcanvas p,
+.metal_offcanvas p,
+.diamond_offcanvas p {
+    font-size: 12px;
+    color: #3f91a1;
+    font-weight: bold;
+}
+
+.offcanvas_bottom_size {
+    width: 100% !important;
+}
+
+@media(max-width:1250px) {
+    .offcanvas_end_size {
+        width: 60% !important;
+    }
+}
+
+@media(max-width:1024px) {
+    .offcanvas_end_size {
+        width: 60% !important;
+    }
+}
+
 @media(max-width:992px) {
     .add_btn_md {
         width: 100% !important;
+    }
+
+    .offcanvas_end_size {
+        width: 80% !important;
     }
 }
 
 @media(max-width:588px) {
     .video_call_img {
         height: 200px !important;
+    }
+}
+
+@media (max-width: 769px) {
+    .size-btn{
+        padding: 20px 2px !important;
+    }
+}
+@media (max-width: 576px) {
+    .size_offcanvas small,
+    .diamond_offcanvas small,
+    .metal_offcanvas small {
+        padding:5px 5px !important;
+        font-size: 7px !important;
+    }
+    .size-btn{
+        padding: 10px !important;
     }
 }
 

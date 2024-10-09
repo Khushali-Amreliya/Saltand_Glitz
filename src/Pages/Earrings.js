@@ -51,7 +51,7 @@ const Earrings = () => {
     const [showMorePrices, setShowMorePrices] = useState(false);
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);
     const [currentPage, setCurrentPage] = useState(1); // page starts from 1
-    const itemsPerPage = 3; // Number of products per page
+    const itemsPerPage = 6; // Number of products per page
 
     const totalPages = Math.ceil(products.length / itemsPerPage); // Calculate total pages
 

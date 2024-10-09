@@ -7,6 +7,8 @@ import products from '../fakedata/Product';
 
 const Header = () => {
     const search = React.useRef(null);
+    const searchmd = React.useRef(null);
+
     const totalQuantity = useSelector(state => state.cart.totalQuantity);
     const wishlistItem = useSelector(state => state.cart.wishlistItem);
 
@@ -21,6 +23,38 @@ const Header = () => {
     };
 
     const slider_search = {
+        dots: false,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        arrows: true,
+        responsive: [
+            {
+                breakpoint: 480, // tablet
+                settings: {
+                    slidesToShow: 2, // Show 2 items on tablet
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 768, // tablet
+                settings: {
+                    slidesToShow: 3, // Show 2 items on tablet
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 1024, // small desktop
+                settings: {
+                    slidesToShow: 4, // Show 3 items on small desktop
+                    slidesToScroll: 2,
+                },
+            }
+        ],
+    };
+
+    const slider_search_md = {
         dots: false,
         infinite: true,
         speed: 1000,
@@ -344,10 +378,21 @@ const Header = () => {
             </section>
 
             {/*LARGE OFFCANVAS */}
-            <div className="offcanvas offcanvas-start offcanvas_start_search" tabindex="-1" id="searchOffcanvas" aria-labelledby="offcanvasSearchLabel">
-                <div className="offcanvas-header">
-                    <h5 className="offcanvas-title text-light" id="offcanvasSearchLabel">.</h5>
-                    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div className="offcanvas offcanvas-start offcanvas_start_search" tabIndex="-1" id="searchOffcanvas" aria-labelledby="offcanvasSearchLabel">
+                <div className="offcanvas-header offcanvas_header_search">
+                    <h5 className="offcanvas-title w-100 pe-3" id="offcanvasSearchLabel">
+                        <form action="" className='pt-3'>
+                            <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                                <div className="input-group">
+                                    <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
+                                    <div className="input-group-append">
+                                        <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><i className="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </h5>
+                    <button type="button" className="btn-close btn_close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
                     <div>
@@ -455,22 +500,21 @@ const Header = () => {
             </div>
 
             {/*MD OFFCANVAS */}
-            <div className="offcanvas offcanvas-bottom rounded-0" tabindex="-1" id="mdsearchOffcanvas" aria-labelledby="mdoffcanvasSearchLabel">
-                <div className="offcanvas-header">
-                    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    <h5 className="offcanvas-title w-100" id="mdoffcanvasSearchLabel">
-                    <form action="" className='pt-3'>
-                        <div className="p-1 bg-light rounded rounded-pill shadow-sm">
-                            <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#mdsearchOffcanvas" aria-controls="mdsearchOffcanvas">
-                                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
-                                <div className="input-group-append">
-                                    <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><i className="fa fa-search"></i></button>
+            <div className="offcanvas offcanvas-bottom rounded-0" tabIndex="-1" id="mdsearchOffcanvas" aria-labelledby="mdoffcanvasSearchLabel">
+                <div className="offcanvas-header offcanvas_header_search">
+                    <button type="button" className="btn-close btn_close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <h5 className="offcanvas-title w-100" id="offcanvasSearchLabel">
+                        <form action="" className='pt-3'>
+                            <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                                <div className="input-group">
+                                    <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
+                                    <div className="input-group-append">
+                                        <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><i className="fa fa-search"></i></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
                     </h5>
-                    
                 </div>
                 <div className="offcanvas-body">
                     <div>
@@ -550,10 +594,10 @@ const Header = () => {
                         <h5 className='trending_title pt-4'>Recently Viewed</h5>
                         <div className='row position-relative'>
                             <div className=''>
-                                <button onClick={() => search?.current?.slickPrev()} className='pre-btn-set'><i className="ri-arrow-left-wide-line"></i></button>
+                                <button onClick={() => searchmd?.current?.slickPrev()} className='pre-btn-set'><i className="ri-arrow-left-wide-line"></i></button>
                             </div>
                             <div className='pt-3'>
-                                <Slider ref={search} {...slider_search}>
+                                <Slider ref={searchmd} {...slider_search_md}>
                                     {products.map((item) => (
                                         <div className='card border-0 w-100 mx-auto d-block' key={item.id}>
                                             <Link to={`/productDetail/${item.id}`}>
@@ -570,7 +614,7 @@ const Header = () => {
                                 </Slider>
                             </div>
                             <div className=''>
-                                <button onClick={() => search?.current?.slickNext()} className="next-btn-set float-end "><i className="ri-arrow-right-wide-line"></i></button>
+                                <button onClick={() => searchmd?.current?.slickNext()} className="next-btn-set float-end "><i className="ri-arrow-right-wide-line"></i></button>
                             </div>
                         </div>
                     </div>
