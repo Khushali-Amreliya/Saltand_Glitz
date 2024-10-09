@@ -610,7 +610,7 @@ const Productdetails = () => {
 
 
                     {/* Diamond Quality */}
-                    <div className="mb-4">
+                    <div className="mb-2">
                         <div className="d-flex justify-content-between align-items-center mb-3">
                             <h6 className="text-dark">Diamond Quality</h6>
                             <Link to="">Diamond Guide</Link>
@@ -636,7 +636,7 @@ const Productdetails = () => {
                     </div>
 
                     {/* Select Size */}
-                    <div className="mb-4">
+                    <div className="mb-2">
                         <div className="d-flex justify-content-between align-items-center mb-4">
                             <h6 className="text-dark">Select Size</h6>
                             <Link to="">Size Guide</Link>
@@ -712,7 +712,7 @@ const Productdetails = () => {
 
 
                     {/* Diamond Quality */}
-                    <div className="mb-4">
+                    <div className="mb-2">
                         <div className="d-flex justify-content-between align-items-center mb-3">
                             <h6 className="text-dark">Diamond Quality</h6>
                             <Link to="">Diamond Guide</Link>
@@ -738,7 +738,7 @@ const Productdetails = () => {
                     </div>
 
                     {/* Select Size */}
-                    <div className="mb-4">
+                    <div className="mb-2">
                         <div className="d-flex justify-content-between align-items-center mb-4">
                             <h6 className="text-dark">Select Size</h6>
                             <Link to="">Size Guide</Link>
