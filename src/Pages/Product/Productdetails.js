@@ -591,7 +591,7 @@ const Productdetails = () => {
                     </div>
                 </div>
 
-                <div className="offcanvas-body">
+                <div className="offcanvas-body offcanvas_body_size">
                     {/* Choice of Metal */}
                     <div className="mb-2 metal_offcanvas">
                         <h6 className="text-dark mb-3">Choice of Metal</h6>
@@ -693,7 +693,7 @@ const Productdetails = () => {
                     </div>
                 </div>
 
-                <div className="offcanvas-body">
+                <div className="offcanvas-body offcanvas_body_size">
                     {/* Choice of Metal */}
                     <div className="mb-2 metal_offcanvas">
                         <h6 className="text-dark mb-3">Choice of Metal</h6>

@@ -30,7 +30,8 @@
     transform: translateY(100%);
     border-radius: 13px;
 }
-.pre-btn-set{
+
+.pre-btn-set {
     background-color: #000;
     color: #fff;
     padding: 1px 5px;
@@ -40,7 +41,8 @@
     top: 38%;
     left: 3%;
 }
-.next-btn-set{
+
+.next-btn-set {
     background-color: #000;
     color: #fff;
     padding: 1px 5px;
@@ -50,25 +52,34 @@
     top: 38%;
     right: 2%;
 }
+
 .offcanvas-header {
     margin-bottom: 15px !important;
 }
-@media(max-width:576px){
-    .pre-btn-set{
+
+@media(max-width:576px) {
+    .pre-btn-set {
         left: 4% !important;
     }
-    .next-btn-set{
+
+    .next-btn-set {
         right: 3% !important;
     }
+    .off_bottom {
+        height: 50% !important;
+    }
 }
+
 @media(max-width:429px) {
     .view-similar-btn {
         bottom: 176px !important;
     }
-    .pre-btn-set{
+
+    .pre-btn-set {
         left: 6% !important;
     }
-    .next-btn-set{
+
+    .next-btn-set {
         right: 6% !important;
     }
 }

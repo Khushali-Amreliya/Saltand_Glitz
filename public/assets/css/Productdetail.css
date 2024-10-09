@@ -211,7 +211,7 @@
     font-weight: bold;
 }
 
-.offcanvas-body a {
+.offcanvas_body_size a {
     font-weight: bold;
     text-decoration: none;
     font-size: 13px;
@@ -278,18 +278,21 @@
 }
 
 @media (max-width: 769px) {
-    .size-btn{
+    .size-btn {
         padding: 20px 2px !important;
     }
 }
+
 @media (max-width: 576px) {
+
     .size_offcanvas small,
     .diamond_offcanvas small,
     .metal_offcanvas small {
-        padding:5px 5px !important;
+        padding: 5px 5px !important;
         font-size: 7px !important;
     }
-    .size-btn{
+
+    .size-btn {
         padding: 10px !important;
     }
 }
