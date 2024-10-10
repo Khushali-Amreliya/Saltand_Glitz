@@ -302,7 +302,19 @@
         height: 200px !important;
     }
 }
-
+@media (max-width: 376px) {
+    .size-btn {
+        padding: 5px !important;
+    }
+    .size_offcanvas p, .metal_offcanvas p, .diamond_offcanvas p {
+        font-size: 10px !important;
+    }
+}
+@media (max-width: 373px) {
+    .size-btn {
+        padding: 3px 0px !important;
+    }
+}
 @media(max-width:333px) {
     .video_call_img {
         height: 212px !important;

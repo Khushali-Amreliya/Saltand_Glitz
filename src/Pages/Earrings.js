@@ -170,7 +170,7 @@ const Earrings = () => {
         return paginationItems;
     };
     return (
-        <section className='container-fluid mt-5 mb-4'>
+        <section className='container-fluid mt-2 mb-4'>
             <div className='row'>
                 <div className='col-xl-3 col-lg-3 d-lg-block d-none'>
                     <div className='sticky-header px-5'>
