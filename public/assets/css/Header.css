@@ -216,6 +216,7 @@
     cursor: pointer;
 }
 
+/* line hover */
 .nav-link::after {
     content: "";
     position: absolute;
