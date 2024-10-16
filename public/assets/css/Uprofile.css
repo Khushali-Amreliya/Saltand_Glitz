@@ -6,8 +6,9 @@
 .sidebar {
     padding: 20px;
     background-color: #f8f9fa;
-    height: 100vh; /* Full viewport height */
-    overflow-y: auto; /* Enable scrolling if content exceeds viewport height */
+    height: 100%;
+    overflow-y: auto;
+    /* Enable scrolling if content exceeds viewport height */
 }
 
 
@@ -69,4 +70,77 @@
 
 .option_menu {
     padding: 10px 0 !important;
+}
+
+.table>:not(caption)>*>* {
+    border-bottom-width: 0px !important;
+}
+
+.table_up tbody tr th {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.table_up tbody tr td {
+    font-size: 12px;
+}
+
+/* Profile container */
+.profile-container {
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+
+/* Profile details card */
+.profile-details-card {
+    padding:0px 20px;
+}
+
+.bg_up {
+    background-color: #fff !important;
+    border: 1px solid #dddddd;
+}
+
+.profile-details-card .profile_title {
+    font-size: 15px;
+    border-bottom: 1px solid #dddddd;
+    /* background-color: #000; */
+    padding: 10px 0px;
+    margin-bottom: 10px;
+}
+
+.profile_title h2 {
+    font-size: 15px;
+}
+
+.profile-details-card .profile_title button {
+    font-size: 14px;
+    color: #000;
+    background: var(--background) !important;
+    padding: 6px 28px !important;
+}
+
+.profile-info p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.profile-info p strong {
+    font-weight: 600;
+    color: #000;
+}
+
+/* Buttons styling */
+.profile-buttons {
+    margin-top: 20px;
+}
+
+.profile-buttons .btn {
+    margin-right: 10px;
+    padding: 10px 20px;
+}
+
+.profile-buttons .btn-link {
+    font-size: 14px;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
@@ -85,6 +85,12 @@ const Header = () => {
             }
         ],
     };
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        setIsLoggedIn(!!storedUser);  // If there is user data, set to true, else false
+    }, []);
     return (
         <div className=" m-0 p-0">
             <section className='container-fluid text-center header_color py-1'>
@@ -136,7 +142,7 @@ const Header = () => {
                     </div>
 
                     <div className='col-lg-3 col-md-3 col-sm-12 header_logo d-flex justify-content-center align-items-center text-center'>
-                        <Link to="/Uprofile" className='text-decoration-none text-dark'>
+                        <Link to={isLoggedIn ? "/Userprofile" : "/signup"} className='text-decoration-none text-dark'>
                             <i className="ri-user-line"></i>
                         </Link>
                         <Link className='text-decoration-none text-dark pe-4' to="/wishlist">
@@ -194,8 +200,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" 
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings2.jpg'
@@ -206,7 +212,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings3.jpg'
@@ -217,7 +223,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings4.jpg'
@@ -228,7 +234,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings5.jpg'
@@ -243,7 +249,7 @@ const Header = () => {
                                                             <ul className='ps-0'>
                                                                 <li>
                                                                     <Link to="/earrings" className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings6.jpg'
@@ -254,7 +260,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings7.jpg'
@@ -265,7 +271,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings8.jpg'
@@ -276,7 +282,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings9.jpg'
@@ -287,7 +293,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings10.jpg'
@@ -305,7 +311,7 @@ const Header = () => {
                                                     <div className="underline mb-3"></div>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal1.png'
@@ -316,7 +322,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal2.png'
@@ -327,7 +333,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal3.png'
@@ -338,7 +344,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal4.png'
@@ -349,7 +355,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal5.png'
@@ -360,7 +366,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal6.png'
@@ -371,7 +377,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal7.png'
@@ -382,7 +388,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal8.png'
@@ -424,7 +430,7 @@ const Header = () => {
                                                             <ul className='ps-0'>
                                                                 <li>
                                                                     <Link to="/earrings" className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings1.jpg'
@@ -435,7 +441,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings2.jpg'
@@ -446,7 +452,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings3.jpg'
@@ -457,7 +463,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings4.jpg'
@@ -468,7 +474,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings5.jpg'
@@ -483,7 +489,7 @@ const Header = () => {
                                                             <ul className='ps-0'>
                                                                 <li>
                                                                     <Link to="/earrings" className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings6.jpg'
@@ -494,7 +500,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings7.jpg'
@@ -505,7 +511,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings8.jpg'
@@ -516,7 +522,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings9.jpg'
@@ -527,7 +533,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings10.jpg'
@@ -545,7 +551,7 @@ const Header = () => {
                                                     <div className="underline mb-3"></div>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal1.png'
@@ -556,7 +562,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal2.png'
@@ -567,7 +573,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal3.png'
@@ -578,7 +584,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal4.png'
@@ -589,7 +595,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal5.png'
@@ -600,7 +606,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal6.png'
@@ -611,7 +617,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal7.png'
@@ -622,7 +628,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal8.png'
@@ -664,7 +670,7 @@ const Header = () => {
                                                             <ul className='ps-0'>
                                                                 <li>
                                                                     <Link to="/earrings" className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings1.jpg'
@@ -675,7 +681,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings2.jpg'
@@ -686,7 +692,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings3.jpg'
@@ -697,7 +703,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings4.jpg'
@@ -708,7 +714,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings5.jpg'
@@ -723,7 +729,7 @@ const Header = () => {
                                                             <ul className='ps-0'>
                                                                 <li>
                                                                     <Link to="/earrings" className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings6.jpg'
@@ -734,7 +740,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings7.jpg'
@@ -745,7 +751,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings8.jpg'
@@ -756,7 +762,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings9.jpg'
@@ -767,7 +773,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='assets/img/rings10.jpg'
@@ -785,7 +791,7 @@ const Header = () => {
                                                     <div className="underline mb-3"></div>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal1.png'
@@ -796,7 +802,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal2.png'
@@ -807,7 +813,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal3.png'
@@ -818,7 +824,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal4.png'
@@ -829,7 +835,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal5.png'
@@ -840,7 +846,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal6.png'
@@ -851,7 +857,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal7.png'
@@ -862,7 +868,7 @@ const Header = () => {
                                                     </li>
                                                     <li>
                                                         <Link to="/earrings" className="d-flex align-items-center"
-                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                            data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
                                                                 src='assets/img/metal8.png'

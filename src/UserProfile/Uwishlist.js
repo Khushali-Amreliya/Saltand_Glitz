@@ -13,8 +13,8 @@ const Uwishlist = () => {
                     </div>
                 </div>
                 <div className='col-lg-10 col-md-10'>
-                    <div >
-                        <Wishlist></Wishlist>
+                    <div>
+                        <Wishlist />
                     </div>
                 </div>
             </div>

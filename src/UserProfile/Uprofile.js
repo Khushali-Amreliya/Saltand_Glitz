@@ -1,90 +1,76 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-// import Uwishlist from './Uwishlist'
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { signOut } from 'firebase/auth';
+import auth from '../Components/firebase';
 
 const Uprofile = () => {
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        // Perform other actions like redirecting the user to a login page
-        alert('Logged out successfully');
+    const navigate = useNavigate(); // To redirect after logout
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            try {
+                setUser(JSON.parse(storedUser)); // Safely parse user data
+            } catch (error) {
+                console.error('Error parsing user data:', error);
+                toast.error('Error loading user data. Please log in again.');
+                localStorage.removeItem('user'); // Clear invalid data
+                navigate('/signup'); // Redirect to signup or login page
+            }
+        }
+    }, [navigate]); // Include navigate as a dependency
+
+    const handleLogout = async () => {
+        if (!user) {
+            toast.warn('You are not signed in.');
+            return;
+        }
+
+        try {
+            await signOut(auth);
+            localStorage.removeItem('token');
+            localStorage.removeItem('user'); // Clear user data on logout
+            setUser(null); // Update local state
+            toast.success('You have successfully signed out.');
+            navigate('/signup'); // Redirect to the signup page (or login page if applicable)
+        } catch (error) {
+            console.error('Error signing out:', error);
+            toast.error('Something went wrong during sign-out.');
+        }
     };
-    
-  return (
-    <>
+
+    return (
         <div className='bg_uprofile'>
-            <div className="sidebar ">
-                <p className='m-0 p-0'>abc@gmail.com</p>
-                <Link to="" className="edit-profile-link">Edit Profile</Link>
+            <div className="sidebar">
+                {/* Check if user is defined before accessing its properties */}
+                <p className='m-0 p-0'>{user ? user.email : 'Guest'}</p>
+                <Link to="/edit-profile" className="edit-profile-link">Edit Profile</Link> {/* Link to Edit Profile */}
                 <ul className="sidebar-menu">
                     <li>ORDERS</li>
                     <p className='line_profile m-0 p-0'></p>
                     <div className='option_menu'>
                         <li><Link to="/U-order">ORDERS AND RETURNS</Link></li>
-                        <li><Link to="">PAYMENT</Link></li> 
+                        <li><Link to="">PAYMENT</Link></li>
                         <li><Link to="">MANAGE REFUNDS</Link></li>
                     </div>
                     <li>OFFERS</li>
                     <p className='line_profile m-0 p-0'></p>
-                        <div className='option_menu'>
+                    <div className='option_menu'>
                         <li><Link to="">COUPONS</Link></li>
                     </div>
                     <li>ACCOUNTS</li>
                     <p className='line_profile m-0 p-0'></p>
                     <div className='option_menu'>
-                        <li><Link to="/">PROFILE</Link></li>
+                        <li><Link to="/Userprofile">PROFILE</Link></li>
                         <li><Link to="/Uwishlist">WISHLIST</Link></li>
                         <li><Link onClick={handleLogout}>Log Out</Link></li>
                     </div>
                 </ul>
             </div>
         </div>
-    </>
-  )
-}
+    );
+};
 
-export default Uprofile
-
-
-// import React from 'react'; // Assume you have some CSS for styling
-
-// const Uprofile = () => {
-//   return (
-//     <div className="orders-container">
-//       <div className="sidebar">
-//         <p>Email</p>
-//         <Link to="/profile" className="edit-profile-link">Edit Profile</Link>
-//         <ul className="sidebar-menu">
-//           <li>ORDERS</li>
-//           <li><Link to="/orders" className="active">ORDERS AND RETURNS</Link></li>
-//           <li><Link to="/payment">PAYMENT</Link></li>
-//           <li><Link to="/refunds">MANAGE REFUNDS</Link></li>
-//           <li>APPOINTMENTS</li>
-//           <li><Link to="/try-at-home">TRY AT HOME</Link></li>
-//           <li>OFFERS</li>
-//           <li><Link to="/coupons">COUPONS</Link></li>
-//           <li>ACCOUNTS</li>
-//           <li><Link to="/profile">PROFILE</Link></li>
-//           <li>CREDITS</li>
-//           <li><Link to="/egold">CARATLANE eGold</Link></li>
-//           <li><Link to="/pop">CARATLANE POP!</Link></li>
-//         </ul>
-//       </div>
-      
-//       <div className="main-content">
-//         <div className="order-status">
-//           <div className="tabs">
-//             <button className="tab active">MY ORDERS</button>
-//             <button className="tab">CANCELLED ORDERS</button>
-//           </div>
-//           <div className="empty-orders">
-//             <img src="no-orders.svg" alt="No Active Orders" className="no-orders-icon"/>
-//             <p>No Active Orders</p>
-//             <button className="continue-shopping-button">Continue Shopping</button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Uprofile;
+export default Uprofile;

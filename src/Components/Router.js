@@ -17,10 +17,12 @@ import Dashboard from '../Admindashboard/Dashboard';
 import Wishlist from '../Pages/Process/Wishlist';
 import Adashbord from '../Admindashboard/Adashbord';
 import Uprofile from '../UserProfile/Uprofile';
+import Userprofile from '../UserProfile/Userprofile';
 import Uwishlist from '../UserProfile/Uwishlist';
 import Uorder from '../UserProfile/Uorder';
 import Register from '../test/Register';
 import LoginUser from '../test/LoginUser';
+import EditProfile from '../UserProfile/EditProfile';
 // import Login1 from '../test/Login';
 
 const Router = () => {
@@ -43,9 +45,11 @@ const Router = () => {
         <Route path='/112/admin/dashboard ' element={<Dashboard />} />
         <Route path='/adashbord' element={<Adashbord></Adashbord>}></Route>
         <Route path='/Uprofile' element={<Uprofile />} />
+        <Route path='/Userprofile' element={<Userprofile />} />
         <Route path='/Uwishlist' element={<Uwishlist />} />
         <Route path='/U-order' element={<Uorder></Uorder>}></Route>
         <Route path='/rgister' element={<Register></Register>}></Route>
+        <Route path="/edit-profile" element={<EditProfile />} /> 
         {/* <Route path='/login-t' element={<Login></Login>}></Route> */}
         <Route path='/loginu' element={<LoginUser></LoginUser>}></Route>
         </Routes>

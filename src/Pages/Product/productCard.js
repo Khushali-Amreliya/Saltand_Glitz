@@ -26,17 +26,6 @@ const ProductCard = ({ Productsitem }) => {
         setIsHeartFilled(!!itemInWishlist);
     }, [wishlist, id]);
 
-    // const addToCart = () => {
-    //     setLoading(true);
-
-    //     dispatch(cartAction.addItem({ id, title, price, image01 }));
-
-    //     setTimeout(() => {
-    //         setLoading(false);
-    //         navigate('/cart');
-    //     }, 2000);
-    // };
-
     const handleHeartClick = async () => {
         if (isHeartFilled) {
             try {
@@ -124,6 +113,7 @@ const ProductCard = ({ Productsitem }) => {
         slidesToScroll: 1,
         arrows: true,
     };
+
     const view_similar = {
         dots: false,
         infinite: true,
@@ -133,28 +123,29 @@ const ProductCard = ({ Productsitem }) => {
         arrows: true,
         responsive: [
             {
-                breakpoint: 480, // tablet
+                breakpoint: 480, // mobile
                 settings: {
-                    slidesToShow: 2, // Show 2 items on tablet
+                    slidesToShow: 2,
                     slidesToScroll: 1,
                 },
             },
             {
                 breakpoint: 768, // tablet
                 settings: {
-                    slidesToShow: 3, // Show 2 items on tablet
+                    slidesToShow: 3,
                     slidesToScroll: 1,
                 },
             },
             {
                 breakpoint: 1024, // small desktop
                 settings: {
-                    slidesToShow: 4, // Show 3 items on small desktop
+                    slidesToShow: 4,
                     slidesToScroll: 2,
                 },
             }
         ],
     };
+
     return (
         <>
             {loading && <Loader />}
@@ -202,7 +193,6 @@ const ProductCard = ({ Productsitem }) => {
                         <i className="ri-video-on-fill text-light text-center"></i>
                     </button>
 
-
                     <button onClick={() => slider?.current?.slickPrev()} className="prev_btn absolute_prev_btn d-lg-block d-none">
                         <i className="ri-arrow-left-wide-line"></i>
                     </button>
@@ -247,7 +237,7 @@ const ProductCard = ({ Productsitem }) => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
 export default ProductCard;

@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
-import { GoogleAuthProvider, signInWithPopup ,signOut} from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import auth from '../../Components/firebase';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Signup = () => {
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({
-        mobile: '',
+        name: '',
         email: '',
-        firstName: '',
-        lastName: '',
+        password: '',
         gender: ''
     });
-
+    const navigate = useNavigate(); // Initialize the useNavigate hook
     const provider = new GoogleAuthProvider();
 
     // Handle sign-in with Google
@@ -30,18 +29,24 @@ const Signup = () => {
             setLoading(true);
             provider.setCustomParameters({ prompt: 'select_account' });
             const result = await signInWithPopup(auth, provider);
-            const { displayName, email, phoneNumber } = result.user;
-            const [firstName, lastName] = displayName ? displayName.split(' ') : ['', ''];
+            const { displayName, email } = result.user;
 
-            setFormData({
-                firstName,
-                lastName,
+            const userData = {
+                name: displayName || '',
                 email: email || '',
-                mobile: phoneNumber || '',
+                password: '', // Password will need to be set by user manually
                 gender: ''
-            });
+            };
+
+            setFormData(userData);
             setUser(result.user);
-            toast.success(`Welcome, ${displayName || firstName}!`);
+            toast.success(`Welcome, ${displayName || 'User'}!`);
+
+            // Store user data locally only if name and email are available
+            if (displayName && email) {
+                localStorage.setItem('user', JSON.stringify(userData));
+            }
+
         } catch (error) {
             console.error('Error signing in with Google:', error);
             toast.error('Something went wrong during sign-in.');
@@ -51,43 +56,28 @@ const Signup = () => {
     };
 
     // Handle sign-out
-    const handleSignOut = async () => {
-        if (!user) {
-            toast.warn('You are not signed in.');
-            return;
-        }
-
-        try {
-            await signOut(auth);
-            setUser(null);
-            setFormData({
-                firstName: '',
-                lastName: '',
-                email: '',
-                mobile: '',
-                gender: ''
-            });
-            localStorage.removeItem('user');
-            toast.success('You have successfully signed out.');
-        } catch (error) {
-            console.error('Error signing out:', error);
-            toast.error('Something went wrong during sign-out.');
-        }
-    };
+   
 
     // Load user from local storage on mount
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
-            const parsedUser = JSON.parse(storedUser);
-            setUser(parsedUser);
-            setFormData({
-                firstName: parsedUser.firstName,
-                lastName: parsedUser.lastName,
-                email: parsedUser.email,
-                mobile: parsedUser.mobile,
-                gender: parsedUser.gender
-            });
+            try {
+                const parsedUser = JSON.parse(storedUser);
+                if (parsedUser) {
+                    setUser(parsedUser);
+                    setFormData({
+                        name: parsedUser.name || '',
+                        email: parsedUser.email || '',
+                        password: parsedUser.password || '',
+                        gender: parsedUser.gender || ''
+                    });
+                }
+            } catch (error) {
+                console.error('Error parsing stored user data:', error);
+                // If error occurs, clear invalid data from localStorage
+                localStorage.removeItem('user');
+            }
         }
     }, []);
 
@@ -98,35 +88,36 @@ const Signup = () => {
     };
 
     // Handle form submission
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true); // Show loader when form is submitted
+        setLoading(true); // Show loader during submission
+
         try {
-            const response = await axios.post('http://localhost:5000/v1/login/create-User', formData);
-            toast.success(response.data.message); // Show success toast
-    
+            // Send form data to the backend
+            await axios.post('http://localhost:5000/api/users/register', formData);
+            toast.success('Sign-up successful!');
+
+            // Save the user data from the response (if needed)
+            localStorage.setItem('user', JSON.stringify(formData));
+
             // Clear form data after successful signup
             setFormData({
-                mobile: '',
+                name: '',
                 email: '',
-                firstName: '',
-                lastName: '',
+                password: '',
                 gender: ''
             });
-    
+
+            // Redirect to the user profile page
+            navigate('/Userprofile'); // Use navigate to redirect
+
         } catch (error) {
-            if (error.response) {
-                toast.error(error.response.data.message); // Show error toast
-            } else {
-                toast.error('Server error');
-            }
+            console.error('Error during signup:', error);
+            toast.error(error.response?.data?.message || 'Signup failed. Please try again.');
         } finally {
-            setLoading(false); // Hide loader once the API call is done (whether successful or failed)
+            setLoading(false);
         }
     };
-    
-
 
     return (
         <>
@@ -150,23 +141,45 @@ const Signup = () => {
                     <div className='col-xl-6 mx-auto d-block'>
                         <form onSubmit={handleSubmit}>
                             <div className='row'>
-                                {/* Input Fields for Signup */}
-                                {['mobile', 'email', 'firstName', 'lastName'].map((field, index) => (
-                                    <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 my-2' key={index}>
-                                        <input
-                                            type={field === 'email' ? 'email' : 'text'}
-                                            placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                                            className='form-control'
-                                            name={field}
-                                            value={formData[field]}
-                                            onChange={handleChange}
-                                            required
-                                        />
-                                    </div>
-                                ))}
+                                {/* Name Field */}
+                                <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
+                                    <input
+                                        type='text'
+                                        placeholder='Name'
+                                        className='form-control'
+                                        name='name'
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                {/* Email Field */}
+                                <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
+                                    <input
+                                        type='email'
+                                        placeholder='Email'
+                                        className='form-control'
+                                        name='email'
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                {/* Password Field */}
+                                <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
+                                    <input
+                                        type='password'
+                                        placeholder='Password'
+                                        className='form-control'
+                                        name='password'
+                                        value={formData.password}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
                                 {/* Gender Radio Buttons */}
                                 {['Male', 'Female', 'Other'].map((genderOption, index) => (
-                                    <div className="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 form-check m-0 me-5 text-center" key={index}>
+                                    <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 form-check m-0 me-5 text-center" key={index}>
                                         <input
                                             className="form-check-input"
                                             type="radio"
@@ -181,68 +194,16 @@ const Signup = () => {
                                     </div>
                                 ))}
                             </div>
-                            <button className='mt-4 btn w-50 place_order_btn text-light' type='submit'>Sign Up</button><br></br>
-                            <button className='mt-1 btn w-50 place_order_btn text-light' type='submit' onClick={handleSignOut}>Log Out</button>
+                            <button className='mt-4 btn w-50 place_order_btn text-light' type='submit'>Sign Up</button>
                         </form>
                     </div>
                     <p className='create_acc pt-2'>Already have an account?
                         <Link to="/loginn" className='text-decoration-none'><span> LOG IN</span></Link>
                     </p>
                 </div>
-            </section >
+            </section>
         </>
     );
 };
 
 export default Signup;
-// import axios from 'axios';
-// import { toast } from 'react-toastify'; // Make sure to install and import react-toastify
-
-// const Signup = () => {
-//     const [formData, setFormData] = useState({
-//         firstName: '',
-//         lastName: '',
-//         email: '',
-//         mobile: '',
-//         gender: ''
-//     });
-
-//     const handleChange = (e) => {
-//         const { name, value } = e.target;
-//         setFormData({ ...formData, [name]: value });
-//     };
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         try {
-//             const response = await axios.post('http://localhost:5000/v1/login/create-User', formData);
-//             toast.success(response.data.message); // Show success toast
-//             // Redirect to welcome page or clear form, etc.
-//         } catch (error) {
-//             if (error.response) {
-//                 toast.error(error.response.data.message); // Show error toast
-//             } else {
-//                 toast.error('Server error');
-//             }
-//         }
-//     };
-
-//     return (
-//         <form onSubmit={handleSubmit}>
-//             {/* Input fields for first name, last name, email, mobile, gender */}
-//             <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" required />
-//             <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" required />
-//             <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
-//             <input type="text" name="mobile" value={formData.mobile} onChange={handleChange} placeholder="Mobile" required />
-//             <select name="gender" value={formData.gender} onChange={handleChange} required>
-//                 <option value="">Select Gender</option>
-//                 <option value="Male">Male</option>
-//                 <option value="Female">Female</option>
-//                 <option value="Other">Other</option>
-//             </select>
-//             <button type="submit">Sign Up</button>
-//         </form>
-//     );
-// };
-
-// export default Signup;
