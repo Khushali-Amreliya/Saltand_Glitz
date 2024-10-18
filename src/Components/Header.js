@@ -170,9 +170,12 @@ const Header = () => {
                     <div className='col-sm-2 col-2'>
                         <i className="ri-menu-line fs-5 fw-bolder" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" ></i>
                         <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-                            <div className="offcanvas-header">
-                                <h5 id="offcanvasExampleLabel" className='text-light'>.</h5>
+                            <div className="offcanvas-header mb-0">
                                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                {/* <h5 id="offcanvasExampleLabel" className='text-light'>.</h5> */}
+                                <Link to={isLoggedIn ? "/Userprofile" : "/signup"} className='text-decoration-none text-dark'>
+                                    <i className="ri-user-line"></i>
+                                </Link>
                             </div>
                             <div className="offcanvas-body">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">

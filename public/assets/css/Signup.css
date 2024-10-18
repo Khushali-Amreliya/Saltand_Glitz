@@ -45,6 +45,44 @@
 .form-check {
     padding-left: 2.5em !important;
 }
+.input-container {
+    position: relative;
+    /* margin-bottom: 1.5rem; */
+}
+
+.input-field {
+    width: 100%;
+    padding: 1rem;
+    font-size: 13px;
+    border: 1px solid #ccc; /* Change border color */
+    border-radius: 0.5rem; /* Rounded corners */
+    transition: border-color 0.3s;
+    outline: none;
+}
+
+.input-field:focus {
+    border-color: var(--color); /* Change border color on focus */
+}
+
+.input-label {
+    position: absolute;
+    top: 20%; /* Adjust positioning */
+    left: 1rem;
+    padding: 6px 9px;
+    background-color: #fff; /* White background for label */
+    color: #aaa; /* Light gray for label */
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown) + .input-label {
+    top: -21%; /* Move label above input */
+    left: 1rem;
+    font-size: 0.75rem; /* Smaller font size */
+    color: var(--color); /* Change label color on focus */
+}
+
 
 @media(max-width:380px){
     .signup_logo div p {

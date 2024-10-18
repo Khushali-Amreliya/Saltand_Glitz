@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import auth from '../../Components/firebase';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -15,7 +15,7 @@ const Signup = () => {
         password: '',
         gender: ''
     });
-    const navigate = useNavigate(); // Initialize the useNavigate hook
+    const navigate = useNavigate();
     const provider = new GoogleAuthProvider();
 
     // Handle sign-in with Google
@@ -34,19 +34,18 @@ const Signup = () => {
             const userData = {
                 name: displayName || '',
                 email: email || '',
-                password: '', // Password will need to be set by user manually
-                gender: ''
+                gender: '' // Ensure gender is being selected or passed
             };
-
-            setFormData(userData);
-            setUser(result.user);
-            toast.success(`Welcome, ${displayName || 'User'}!`);
 
             // Store user data locally only if name and email are available
             if (displayName && email) {
                 localStorage.setItem('user', JSON.stringify(userData));
+                setUser(result.user);
+                toast.success('Sign-up successful!');
+                navigate('/Userprofile');
+            } else {
+                toast.error('Failed to sign in. Name or email is missing.');
             }
-
         } catch (error) {
             console.error('Error signing in with Google:', error);
             toast.error('Something went wrong during sign-in.');
@@ -55,8 +54,41 @@ const Signup = () => {
         }
     };
 
-    // Handle sign-out
-   
+    // const handleSignIn = async () => {
+    //     if (user) {
+    //         toast.warn('You are already signed in.');
+    //         return;
+    //     }
+
+    //     try {
+    //         setLoading(true);
+    //         provider.setCustomParameters({ prompt: 'select_account' });
+    //         const result = await signInWithPopup(auth, provider);
+    //         const { displayName, email, accessToken } = result.user;
+
+    //         const userData = {
+    //             name: displayName || '',
+    //             email: email || '',
+    //             gender: '' // Ensure gender is being selected or passed
+    //         };
+
+    //         // Send the Google token to the backend
+    //         const response = await axios.post('http://localhost:5000/api/users/google-login', {
+    //             token: accessToken, // Send the Firebase token
+    //         });
+
+    //         // Handle response from the backend
+    //         localStorage.setItem('user', JSON.stringify(response.data.user));
+    //         setUser(result.user);
+    //         toast.success('Sign-up successful!');
+    //         navigate('/Userprofile');
+    //     } catch (error) {
+    //         console.error('Error signing in with Google:', error);
+    //         toast.error('Something went wrong during sign-in.');
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     // Load user from local storage on mount
     useEffect(() => {
@@ -64,22 +96,28 @@ const Signup = () => {
         if (storedUser) {
             try {
                 const parsedUser = JSON.parse(storedUser);
-                if (parsedUser) {
+                if (parsedUser && user) {
                     setUser(parsedUser);
                     setFormData({
-                        name: parsedUser.name || '',
-                        email: parsedUser.email || '',
-                        password: parsedUser.password || '',
-                        gender: parsedUser.gender || ''
+                        name: '',
+                        email: '',
+                        password: '',
+                        gender: ''
                     });
                 }
             } catch (error) {
                 console.error('Error parsing stored user data:', error);
-                // If error occurs, clear invalid data from localStorage
                 localStorage.removeItem('user');
             }
         }
-    }, []);
+
+        // Clear form data if user is logged out
+        return () => {
+            if (!user) {
+                setFormData({ name: '', email: '', password: '', gender: '' }); // Clear form data on unmount
+            }
+        };
+    }, [user]);
 
     // Handle input changes
     const handleChange = (e) => {
@@ -90,10 +128,9 @@ const Signup = () => {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true); // Show loader during submission
+        setLoading(true);
 
         try {
-            // Send form data to the backend
             await axios.post('http://localhost:5000/api/users/register', formData);
             toast.success('Sign-up successful!');
 
@@ -109,7 +146,7 @@ const Signup = () => {
             });
 
             // Redirect to the user profile page
-            navigate('/Userprofile'); // Use navigate to redirect
+            navigate('/Userprofile');
 
         } catch (error) {
             console.error('Error during signup:', error);
@@ -133,7 +170,7 @@ const Signup = () => {
                     </div>
                     <div className='pt-4 mx-auto d-block'>
                         <img onClick={handleSignIn} alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />
-                        <img alt='' src='assets/img/facebook.png' className='img-fluid google_facebook_logo' />
+                        {/* <img alt='' src='assets/img/facebook.png' className='img-fluid google_facebook_logo' /> */}
                     </div>
                     <div className='title_Shadow'>
                         <p>Or Continue With</p>
@@ -143,39 +180,48 @@ const Signup = () => {
                             <div className='row'>
                                 {/* Name Field */}
                                 <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
-                                    <input
-                                        type='text'
-                                        placeholder='Name'
-                                        className='form-control'
-                                        name='name'
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        required
-                                    />
+                                    <div className='input-container'>
+                                        <input
+                                            type='text'
+                                            placeholder=' '
+                                            className='input-field'
+                                            name='name'
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                        <label className='input-label'>Name</label>
+                                    </div>
                                 </div>
                                 {/* Email Field */}
                                 <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
-                                    <input
-                                        type='email'
-                                        placeholder='Email'
-                                        className='form-control'
-                                        name='email'
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        required
-                                    />
+                                    <div className='input-container'>
+                                        <input
+                                            type='email'
+                                            placeholder=' '
+                                            className='input-field'
+                                            name='email'
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                        <label className='input-label'>Email</label>
+                                    </div>
                                 </div>
                                 {/* Password Field */}
                                 <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
-                                    <input
-                                        type='password'
-                                        placeholder='Password'
-                                        className='form-control'
-                                        name='password'
-                                        value={formData.password}
-                                        onChange={handleChange}
-                                        required
-                                    />
+                                    <div className='input-container'>
+                                        <input
+                                            type='password'
+                                            placeholder=' '
+                                            className='input-field'
+                                            name='password'
+                                            value={formData.password}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                        <label className='input-label'>Password</label>
+                                    </div>
                                 </div>
                                 {/* Gender Radio Buttons */}
                                 {['Male', 'Female', 'Other'].map((genderOption, index) => (

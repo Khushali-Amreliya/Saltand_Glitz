@@ -1,10 +1,11 @@
 .bg_uprofile {
     background: rgb(249, 249, 250);
-    padding: 100px 20px;
+    padding: 146px 20px;
 }
 
 .sidebar {
     padding: 20px;
+    padding-left: 70px;
     background-color: #f8f9fa;
     height: 100%;
     overflow-y: auto;
@@ -93,7 +94,7 @@
 
 /* Profile details card */
 .profile-details-card {
-    padding:0px 20px;
+    padding: 0px 20px;
 }
 
 .bg_up {
@@ -111,6 +112,10 @@
 
 .profile_title h2 {
     font-size: 15px;
+}
+.profile_title h2 span{
+    color: var(--color);
+    font-weight: bold;
 }
 
 .profile-details-card .profile_title button {
@@ -143,4 +148,146 @@
 
 .profile-buttons .btn-link {
     font-size: 14px;
+}
+
+/* editprofile */
+/* Container setup */
+.l-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form {
+    width: 360px;
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+}
+
+/* Floating label container */
+.form__div {
+    position: relative;
+    height: 48px;
+    margin-bottom: 1.5rem;
+}
+
+/* Input field styling */
+.form__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: .5rem;
+    outline: none;
+    padding: 5px 1rem 0.25rem;
+    /* Adjust padding for better vertical alignment */
+    background: none;
+    z-index: 1;
+    transition: border 0.3s ease;
+    /* Smoother border transitions */
+}
+
+/* Input field focus state */
+.form__input:focus {
+    border: 1.5px solid #3f91a1;
+    /* Focused border color */
+}
+
+/* Add pseudo-element to hide part of the border */
+.form__input:focus::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 10px;
+    /* Adjust based on your label position */
+    width: 75px;
+    /* Width should match the length of your label */
+    height: 5px;
+    /* Height can be small to cover just the border */
+    background-color: #fff;
+    /* Same color as the form background */
+    z-index: 3;
+    /* Ensure this is above the input */
+}
+
+/* Label styling */
+.form__label {
+    position: absolute;
+    left: 1rem;
+    top: 27%;
+    /* Adjusted for better alignment with input */
+    padding: 0 .25rem;
+    background-color: #fff;
+    /* Background color for label to hide border */
+    color: #777;
+    font-size: 14px;
+    transition: all .3s ease;
+    /* Smooth transition for label movement */
+    z-index: 2;
+    /* Ensure label is above input */
+}
+
+/* When the input is focused or not empty */
+.form__input:focus+.form__label,
+.form__input:not(:placeholder-shown)+.form__label {
+    top: -0.6rem;
+    /* Moves the label above the input */
+    left: 0.8rem;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color);
+    /* Blue color when focused */
+    padding: 0 .3rem;
+    /* Ensure the label background covers the input border */
+}
+
+/* Submit button styling */
+.form__button {
+    margin-left: auto;
+    float: inline-end;
+    padding: 10px 28px;
+    outline: none;
+    border: none;
+    background: var(--background);
+    color: #000;
+    font-size: 16px;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.form__button_cancel{
+    padding: 10px 28px;
+    outline: none;
+    border: none;
+    background: #723232 !important;
+    color: #fff !important;
+    font-size: 16px;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.edit-profile {
+    width: 50% !important;
+}
+
+@media(max-width:1024px) {
+    .sidebar {
+        padding-left: 0% !important;
+    }
+}
+@media(max-width:768px) {
+
+    .bg_uprofile {
+        padding: 20px 20px !important;
+    }
+
+    .edit-profile {
+        width: 100% !important;
+    }
 }

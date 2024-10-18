@@ -199,7 +199,7 @@ const Productdetails = () => {
                                     ))}
                                 </span>
                             </p>
-                            <p>
+                            {/* <p>
                                 <span className='fw-bold me-3' style={{ fontSize: "12px" }}>PURITY</span>
                                 <button
                                     className='btn mx-1 pt-2'
@@ -223,7 +223,7 @@ const Productdetails = () => {
                                 >
                                     18 KT
                                 </button>
-                            </p>
+                            </p> */}
                             <p>
                                 <span style={{ fontSize: "12px" }} className='fw-bold me-4'>SIZE</span>
                                 <span className='ps-3' style={{ fontSize: "13px", color: "#212529" }}>6.5 inches</span>
@@ -374,7 +374,7 @@ const Productdetails = () => {
                                     ))}
                                 </span>
                             </p>
-                            <p>
+                            {/* <p>
                                 <span className='fw-bold me-3' style={{ fontSize: "12px" }}>PURITY</span>
                                 <button
                                     className='btn mx-1 pt-2'
@@ -398,7 +398,7 @@ const Productdetails = () => {
                                 >
                                     18 KT
                                 </button>
-                            </p>
+                            </p> */}
                             <p>
                                 <span style={{ fontSize: "12px" }} className='fw-bold me-4'>SIZE</span>
                                 <span className='ps-3' style={{ fontSize: "13px", color: "#212529" }}>6.5 inches</span>

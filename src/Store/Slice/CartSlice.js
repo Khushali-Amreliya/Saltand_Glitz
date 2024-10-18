@@ -23,10 +23,10 @@ const initialState = {
     cartItem: cartItems,
     wishlistItem: wishlistItems,
     totalQuantity: totalQuantity,
-    subtotal: subtotal, 
+    subtotal: subtotal,
     totalAmount: subtotal - (subtotal * (discount / 100)),
     discount: discount,
-    error: null 
+    error: null
 };
 
 const cartSlice = createSlice({
@@ -84,24 +84,24 @@ const cartSlice = createSlice({
         deleteItem(state, action) {
             const newItem = action.payload;
             const existingItem = state.cartItem.find(item => item.id === newItem.id);
-        
+
             if (!existingItem) return;
-        
+
             state.cartItem = state.cartItem.filter(item => item.id !== newItem.id);
             state.totalQuantity -= existingItem.quantity;
-        
+
             state.subtotal = state.cartItem.reduce((total, item) =>
                 total + Number(item.price) * Number(item.quantity), 0);
-        
+
             if (state.cartItem.length === 0) {
                 state.discount = 0;
             }
-        
+
             state.totalAmount = state.subtotal - (state.subtotal * (state.discount / 100));
-        
+
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
         },
-        
+
         applyCoupon(state, action) {
             const discountCode = action.payload;
             let discountPercent = 0;
@@ -114,7 +114,7 @@ const cartSlice = createSlice({
             } else if (discountCode === "MOUNT5") {
                 discountPercent = 5;
             } else {
-                errorMessage = "Invalid coupon code"; 
+                errorMessage = "Invalid coupon code";
                 discountPercent = 0;
             }
 
@@ -154,6 +154,21 @@ const cartSlice = createSlice({
             state.wishlistItem = state.wishlistItem.filter(item => item.id !== itemId);
 
             setWishlist(state.wishlistItem);
+        },
+        clearCartAndWishlist(state) {
+            state.cartItem = [];
+            state.wishlistItem = [];
+            state.totalQuantity = 0;
+            state.subtotal = 0;
+            state.totalAmount = 0;
+            state.discount = 0;
+
+            // Clear from localStorage as well
+            localStorage.removeItem('cartItem');
+            localStorage.removeItem('totalQuantity');
+            localStorage.removeItem('subtotal');
+            localStorage.removeItem('discount');
+            localStorage.removeItem('wishlistItem');
         }
     }
 });

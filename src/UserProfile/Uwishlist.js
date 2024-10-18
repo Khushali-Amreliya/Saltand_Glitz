@@ -7,12 +7,12 @@ const Uwishlist = () => {
     <div>
         <div className='container-fluid'>
             <div className='row'>
-                <div className='col-lg-2 col-md-2 m-0 p-0'>
+                <div className='col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 m-0 p-0'>
                     <div>
                         <Uprofile />
                     </div>
                 </div>
-                <div className='col-lg-10 col-md-10'>
+                <div className='col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12'>
                     <div>
                         <Wishlist />
                     </div>

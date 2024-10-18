@@ -3,11 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { signOut } from 'firebase/auth';
 import auth from '../Components/firebase';
+import { useDispatch } from 'react-redux';
+import { cartAction } from '../Store/Slice/CartSlice';
 
 const Uprofile = () => {
     const navigate = useNavigate(); // To redirect after logout
     const [user, setUser] = useState(null);
 
+    const dispatch = useDispatch();
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -30,16 +33,22 @@ const Uprofile = () => {
 
         try {
             await signOut(auth);
-            localStorage.removeItem('token');
-            localStorage.removeItem('user'); // Clear user data on logout
-            setUser(null); // Update local state
-            toast.success('You have successfully signed out.');
-            navigate('/signup'); // Redirect to the signup page (or login page if applicable)
+
+            // Clear Redux cart and wishlist
+            dispatch(cartAction.clearCartAndWishlist());
+
+            // Clear user data
+            localStorage.removeItem('user');
+
+            setUser(null);
+            toast.success('You have successfully logged out and your data has been cleared.');
+            navigate('/signup');
         } catch (error) {
             console.error('Error signing out:', error);
-            toast.error('Something went wrong during sign-out.');
+            toast.error('Something went wrong during log-out.');
         }
     };
+    
 
     return (
         <div className='bg_uprofile'>

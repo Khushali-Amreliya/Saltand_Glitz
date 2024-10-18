@@ -10,6 +10,11 @@
     font-weight: 100 !important;
 }
 
+.card-body>div {
+    flex: 1;
+    min-width: 0;
+}
+
 .card-body h6 {
     font-size: 12px;
     color: #9d9fa4;
@@ -17,6 +22,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
 }
 
 .card_shadow img {
@@ -41,18 +48,6 @@
     top: 3%;
 }
 
-/* .heart-icon {
-    opacity: 0;
-}
-.card:hover .heart-icon {
-    opacity: 1;
-}
-.heart-icon1 {
-    opacity: 1;
-}
-.card:hover .heart-icon1 {
-    opacity: 1;
-} */
 .absolute_latest {
     position: absolute;
     background-color: #afdbe2 !important;
@@ -65,14 +60,14 @@
 .absolute_next_btn {
     position: absolute;
     left: 25%;
-    top: 19%;
+    top: 24%;
     background: transparent;
 }
 
 .absolute_prev_btn {
     position: absolute;
     left: -12%;
-    top: 19%;
+    top: 24%;
     background: transparent;
 }
 
@@ -253,14 +248,14 @@
     display: flex;
     justify-content: center;
     margin: 20px 0;
-  }
-  
-  .pagination ul {
+}
+
+.pagination ul {
     display: flex;
     padding: 0;
-  }
-  
-  .pagination ul li {
+}
+
+.pagination ul li {
     color: #3f91a1;
     list-style: none;
     line-height: 45px;
@@ -270,60 +265,60 @@
     cursor: pointer;
     user-select: none;
     transition: all 0.3s ease;
-  }
-  
-  .pagination ul li.numb {
+}
+
+.pagination ul li.numb {
     height: 44px;
     width: 44px;
     margin: 0 3px;
     line-height: 45px;
     border-radius: 50%;
     background-color: #f0f0f0;
-  }
-  
-  .pagination ul li.numb.first {
+}
+
+.pagination ul li.numb.first {
     margin: 0px 3px 0 -5px;
-  }
-  
-  .pagination ul li.numb.last {
+}
+
+.pagination ul li.numb.last {
     margin: 0px -5px 0 3px;
-  }
-  
-  .pagination ul li.dots {
+}
+
+.pagination ul li.dots {
     font-size: 22px;
     cursor: default;
-  }
-  
-  .pagination ul li.btn {
+}
+
+.pagination ul li.btn {
     padding: 0 20px;
     border-radius: 50px;
-  }
-  
-  .pagination ul li.active {
+}
+
+.pagination ul li.active {
     background-color: #3f91a1;
     color: white;
-  }
-  
-  .pagination ul li:hover,
-  .pagination ul li.numb:hover,
-  .pagination ul li:first-child:hover,
-  .pagination ul li:last-child:hover {
+}
+
+.pagination ul li:hover,
+.pagination ul li.numb:hover,
+.pagination ul li:first-child:hover,
+.pagination ul li:last-child:hover {
     background-color: #3f91a1;
     color: white;
-  }
-  
-  .pagination ul li.btn.prev,
-  .pagination ul li.btn.next {
+}
+
+.pagination ul li.btn.prev,
+.pagination ul li.btn.next {
     background-color: #e0e0e0;
     color: #333;
-  }
-  
-  .pagination ul li.btn.prev:hover,
-  .pagination ul li.btn.next:hover {
+}
+
+.pagination ul li.btn.prev:hover,
+.pagination ul li.btn.next:hover {
     background-color: #3f91a1;
     color: white;
-  }
-  
+}
+
 
 @media(max-width:1024px) {
     .absolute_next_btn {
