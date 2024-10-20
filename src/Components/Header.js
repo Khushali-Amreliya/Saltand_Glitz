@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import { formatCurrency } from '../Utils/formateCurrency';
 import products from '../fakedata/Product';
+import { toast } from 'react-toastify';
+import { cartAction } from '../Store/Slice/CartSlice';
+import { signOut } from 'firebase/auth';
+import auth from './firebase';
 
 const Header = () => {
     const search = React.useRef(null);
@@ -85,12 +89,41 @@ const Header = () => {
             }
         ],
     };
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        setIsLoggedIn(!!storedUser);  // If there is user data, set to true, else false
-    }, []);
+    // useEffect(() => {
+    //     const storedUser = localStorage.getItem('user');
+    //     setIsLoggedIn(!!storedUser);  // If there is user data, set to true, else false
+    // }, []);
+
+
+    const navigate = useNavigate(); // To redirect after logout
+    const [user, setUser] = useState(null);
+
+    const dispatch = useDispatch();
+    const handleLogout = async () => {
+        if (!user) {
+            toast.warn('You are not signed in.');
+            return;
+        }
+
+        try {
+            await signOut(auth);
+
+            // Clear Redux cart and wishlist
+            dispatch(cartAction.clearCartAndWishlist());
+
+            // Clear user data
+            localStorage.removeItem('user');
+
+            setUser(null);
+            toast.success('You have successfully logged out');
+            navigate('/signup');
+        } catch (error) {
+            console.error('Error signing out:', error);
+            toast.error('Something went wrong during log-out.');
+        }
+    };
     return (
         <div className=" m-0 p-0">
             <section className='container-fluid text-center header_color py-1'>
@@ -142,9 +175,17 @@ const Header = () => {
                     </div>
 
                     <div className='col-lg-3 col-md-3 col-sm-12 header_logo d-flex justify-content-center align-items-center text-center'>
-                        <Link to={isLoggedIn ? "/Userprofile" : "/signup"} className='text-decoration-none text-dark'>
-                            <i className="ri-user-line"></i>
-                        </Link>
+                        <div className="dropdown">
+                            <Link  className="text-decoration-none text-dark dropdown-toggle" id="dropdownUserLink" role="button">
+                                <i className="ri-user-line"></i>
+                            </Link>
+                            <ul className="dropdown-menu" aria-labelledby="dropdownUserLink">
+                                <li><Link to="/Userprofile" className="dropdown-item">My Account</Link></li>
+                                <li><Link to="" className="dropdown-item">Our Story</Link></li>
+                                <li><Link to="" className="dropdown-item" onClick={handleLogout}>Logout</Link></li>
+                            </ul>
+                        </div>
+
                         <Link className='text-decoration-none text-dark pe-4' to="/wishlist">
                             <i className="ri-heart-fill pe-0 position-relative">
                                 {wishlistItem.length > 0 && (
@@ -173,7 +214,10 @@ const Header = () => {
                             <div className="offcanvas-header mb-0">
                                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                 {/* <h5 id="offcanvasExampleLabel" className='text-light'>.</h5> */}
-                                <Link to={isLoggedIn ? "/Userprofile" : "/signup"} className='text-decoration-none text-dark'>
+                                {/* <Link to={isLoggedIn ? "/Userprofile" : "/signup"} className='text-decoration-none text-dark'>
+                                    <i className="ri-user-line"></i>
+                                </Link> */}
+                                <Link className='text-decoration-none text-dark'>
                                     <i className="ri-user-line"></i>
                                 </Link>
                             </div>

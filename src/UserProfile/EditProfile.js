@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Uprofile from './Uprofile';
+import Uprofile from './Uprofile'; // Assuming Uprofile is your user profile component
+import axios from 'axios'; // For making backend requests if needed
 
 const EditProfile = () => {
     const [formData, setFormData] = useState({
@@ -29,33 +30,39 @@ const EditProfile = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         // Simple validation
         if (!formData.name || !formData.email || !formData.mobile) {
             toast.error('Please fill in all required fields');
             return;
         }
-
-        // Assuming mobile number should be numeric and 10 digits
+    
         if (!/^\d{10}$/.test(formData.mobile)) {
             toast.error('Mobile number must be 10 digits');
             return;
         }
-
-        localStorage.setItem('user', JSON.stringify(formData)); // Update localStorage
-        toast.success('Profile updated successfully');
-        navigate('/Userprofile'); // Redirect to profile page after update
+    
+        try {
+            const response = await axios.put('http://localhost:5000/api/users/update', formData);
+    
+            if (response.status === 200) {
+                localStorage.setItem('user', JSON.stringify(formData)); // Update localStorage
+                toast.success('Profile updated successfully');
+                navigate('/Userprofile'); // Navigate back to user profile
+            }
+        } catch (error) {
+            console.error('Error updating profile:', error.response ? error.response.data : error.message);
+            toast.error('Failed to update profile');
+        }
     };
+    
 
     // Function to handle cancel action
     const handleCancel = () => {
         navigate('/Userprofile'); // Redirect to profile page or previous page
     };
-
-    // Calculate profile completion percentage
-  
 
     return (
         <>
@@ -67,6 +74,7 @@ const EditProfile = () => {
                     <div className='col-xl-9 col-lg-9 col-md-9 col-sm-12 col-12 edit-profile mx-auto d-block'>
                         <div className='edit-profile-container py-5'>
                             <form onSubmit={handleSubmit}>
+                                {/* Name Input */}
                                 <div className="form__div">
                                     <input
                                         type='text'
@@ -75,10 +83,11 @@ const EditProfile = () => {
                                         onChange={handleInputChange}
                                         className='form__input'
                                         placeholder=' '
-                                        required // Make field required
+                                        required
                                     />
                                     <label className='form__label'>Name</label>
                                 </div>
+                                {/* Email Input */}
                                 <div className="form__div">
                                     <input
                                         type='email'
@@ -87,10 +96,11 @@ const EditProfile = () => {
                                         onChange={handleInputChange}
                                         className='form__input'
                                         placeholder=' '
-                                        required // Make field required
+                                        required
                                     />
                                     <label className='form__label'>Email</label>
                                 </div>
+                                {/* Mobile Input */}
                                 <div className="form__div">
                                     <input
                                         type='text'
@@ -99,9 +109,11 @@ const EditProfile = () => {
                                         onChange={handleInputChange}
                                         className='form__input'
                                         placeholder=' '
+                                        required
                                     />
                                     <label className='form__label'>Mobile</label>
                                 </div>
+                                {/* Additional Fields */}
                                 <div className="form__div">
                                     <input
                                         type='text'

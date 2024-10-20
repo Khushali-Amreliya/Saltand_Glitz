@@ -13,7 +13,6 @@ import Slider from 'react-slick/lib/slider';
 const Productdetails = () => {
     const [loading, setLoading] = useState(false);
     const [selectedColor, setSelectedColor] = useState(null);
-    const [selectedPurity, setSelectedPurity] = useState('14KT'); // State to track the selected button (14KT or 18KT)
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -121,9 +120,6 @@ const Productdetails = () => {
 
     const handleColorClick = (colorId) => {
         setSelectedColor(selectedColor === colorId ? null : colorId);
-    };
-    const handleButtonClick = (purity) => {
-        setSelectedPurity(purity);
     };
     var md_carousel = {
         dots: true,

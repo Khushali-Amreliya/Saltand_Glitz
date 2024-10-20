@@ -23,6 +23,7 @@ import Uorder from '../UserProfile/Uorder';
 import Register from '../test/Register';
 import LoginUser from '../test/LoginUser';
 import EditProfile from '../UserProfile/EditProfile';
+import Ucoupon from '../UserProfile/Ucoupon';
 // import Login1 from '../test/Login';
 
 const Router = () => {
@@ -47,6 +48,7 @@ const Router = () => {
         <Route path='/Uprofile' element={<Uprofile />} />
         <Route path='/Userprofile' element={<Userprofile />} />
         <Route path='/Uwishlist' element={<Uwishlist />} />
+        <Route path='/Ucoupon' element={<Ucoupon />} />
         <Route path='/U-order' element={<Uorder></Uorder>}></Route>
         <Route path='/rgister' element={<Register></Register>}></Route>
         <Route path="/edit-profile" element={<EditProfile />} /> 

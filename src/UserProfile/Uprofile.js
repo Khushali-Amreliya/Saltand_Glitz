@@ -41,7 +41,7 @@ const Uprofile = () => {
             localStorage.removeItem('user');
 
             setUser(null);
-            toast.success('You have successfully logged out and your data has been cleared.');
+            toast.success('You have successfully logged out');
             navigate('/signup');
         } catch (error) {
             console.error('Error signing out:', error);
@@ -67,7 +67,7 @@ const Uprofile = () => {
                     <li>OFFERS</li>
                     <p className='line_profile m-0 p-0'></p>
                     <div className='option_menu'>
-                        <li><Link to="">COUPONS</Link></li>
+                        <li><Link to="/Ucoupon">COUPONS</Link></li>
                     </div>
                     <li>ACCOUNTS</li>
                     <p className='line_profile m-0 p-0'></p>
