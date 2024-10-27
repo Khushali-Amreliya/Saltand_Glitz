@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loader from '../Loader';
 import { toast } from 'react-toastify';
+import Helmet from '../../Components/Helmet';
 
 const Loginn = () => {
     const navigate = useNavigate();
@@ -50,62 +51,64 @@ const Loginn = () => {
     };
 
     return (
-        <>
-            {loading && <Loader />}
-            <section className='container mt-5 loginn_width'>
-                <div className='text-center row'>
-                    <div className='signup_logo'>
-                        <i className="ri-fingerprint-line fs-2"></i>
-                        <h6>Signup with Tiffany & Co.</h6>
-                        <div>
-                            <p className='p_width_loginn'>
-                                Unlock Best prices and become an insider for our exclusive launches & offers. Complete your profile and get ₹250 worth of xCLusive Points.
-                            </p>
-                        </div>
-                        <div className='pt-4 mx-auto d-block'>
-                            <img alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />
-                        </div>
-                    </div>
-                    <div className='mx-auto d-block pb-4'>
-                        <form onSubmit={handleSubmit}>
-
-                            <div className="form__div">
-                                <input
-                                    type="email"
-                                    className="form__input"
-                                    placeholder=" "
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                />
-                                <label className="form__label">Email</label>
+        <Helmet title="Login">
+            <>
+                {loading && <Loader />}
+                <section className='container mt-5 loginn_width'>
+                    <div className='text-center row'>
+                        <div className='signup_logo'>
+                            <i className="ri-fingerprint-line fs-2"></i>
+                            <h6>Signup with Tiffany & Co.</h6>
+                            <div>
+                                <p className='p_width_loginn'>
+                                    Unlock Best prices and become an insider for our exclusive launches & offers. Complete your profile and get ₹250 worth of xCLusive Points.
+                                </p>
                             </div>
-
-                            <div className="form__div">
-                                <input
-                                    type="password"
-                                    className="form__input"
-                                    placeholder=" "
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
-                                <label className="form__label">Password</label>
+                            <div className='pt-4 mx-auto d-block'>
+                                <img alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />
                             </div>
+                        </div>
+                        <div className='mx-auto d-block pb-4'>
+                            <form onSubmit={handleSubmit}>
 
-                            <button className='mt-4 btn w-100 place_order_btn text-light' type='submit' disabled={loading}>
-                                {loading ? 'Logging in...' : 'CONTINUE TO LOGIN'}
-                            </button>
-                        </form>
+                                <div className="form__div">
+                                    <input
+                                        type="email"
+                                        className="form__input"
+                                        placeholder=" "
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                    <label className="form__label">Email</label>
+                                </div>
 
+                                <div className="form__div">
+                                    <input
+                                        type="password"
+                                        className="form__input"
+                                        placeholder=" "
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                    <label className="form__label">Password</label>
+                                </div>
+
+                                <button className='mt-4 btn w-100 place_order_btn text-light' type='submit' disabled={loading}>
+                                    {loading ? 'Logging in...' : 'CONTINUE TO LOGIN'}
+                                </button>
+                            </form>
+
+                        </div>
+                        <p className='m-0 p-0 create_acc'>
+                            New to Tiffany & Co.? <Link to="/signup" className='text-decoration-none'><span>Create an Account</span></Link>
+                        </p>
+                        <p className='create_acc'>Complete your profile and get Rs.250 worth of xCLusive Points.</p>
                     </div>
-                    <p className='m-0 p-0 create_acc'>
-                        New to Tiffany & Co.? <Link to="/signup" className='text-decoration-none'><span>Create an Account</span></Link>
-                    </p>
-                    <p className='create_acc'>Complete your profile and get Rs.250 worth of xCLusive Points.</p>
-                </div>
-            </section>
-        </>
+                </section>
+            </>
+        </Helmet>
     );
 };
 

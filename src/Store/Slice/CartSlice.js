@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { toast } from 'react-toastify';  // Import Toastify
+import { toast } from 'react-toastify';
 
-const cartItems = localStorage.getItem("cartItem") !== null ? JSON.parse(localStorage.getItem("cartItem")) : [];
-const totalQuantity = localStorage.getItem("totalQuantity") !== null ? JSON.parse(localStorage.getItem("totalQuantity")) : 0;
-const subtotal = localStorage.getItem("subtotal") !== null ? JSON.parse(localStorage.getItem("subtotal")) : 0;
-const discount = localStorage.getItem("discount") !== null ? JSON.parse(localStorage.getItem("discount")) : 0;
-
-const wishlistItems = localStorage.getItem("wishlistItem") !== null ? JSON.parse(localStorage.getItem("wishlistItem")) : [];
+const cartItems = localStorage.getItem("cartItem") ? JSON.parse(localStorage.getItem("cartItem")) : [];
+const wishlistItems = localStorage.getItem("wishlistItem") ? JSON.parse(localStorage.getItem("wishlistItem")) : [];
+const totalQuantity = localStorage.getItem("totalQuantity") ? JSON.parse(localStorage.getItem("totalQuantity")) : 0;
+const subtotal = localStorage.getItem("subtotal") ? JSON.parse(localStorage.getItem("subtotal")) : 0;
+const discount = localStorage.getItem("discount") ? JSON.parse(localStorage.getItem("discount")) : 0;
 
 const setItem = (items, totalQuantity, subtotal, discount) => {
     localStorage.setItem("cartItem", JSON.stringify(items));
@@ -59,6 +58,7 @@ const cartSlice = createSlice({
 
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
         },
+
         removeItem(state, action) {
             const newItem = action.payload;
             const existingItem = state.cartItem.find(item => item.id === newItem.id);
@@ -81,6 +81,7 @@ const cartSlice = createSlice({
 
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
         },
+
         deleteItem(state, action) {
             const newItem = action.payload;
             const existingItem = state.cartItem.find(item => item.id === newItem.id);
@@ -145,16 +146,36 @@ const cartSlice = createSlice({
                     image01: newItem.image01,
                     price: newItem.price
                 });
+                // toast.success("Item added to wishlist!");
             }
 
             setWishlist(state.wishlistItem);
         },
+
         removeFromWishlist(state, action) {
             const itemId = action.payload;
             state.wishlistItem = state.wishlistItem.filter(item => item.id !== itemId);
 
             setWishlist(state.wishlistItem);
         },
+
+        moveToWishlist(state, action) {
+            const newItem = action.payload; // Ensure this has all necessary properties
+
+            const existingItem = state.wishlistItem.find(item => item.id === newItem.id);
+
+            if (!existingItem) {
+                state.wishlistItem.push({
+                    id: newItem.id,
+                    title: newItem.title,
+                    image01: newItem.image01,
+                    price: newItem.price
+                });
+            }
+
+            setWishlist(state.wishlistItem);
+        },
+
         clearCartAndWishlist(state) {
             state.cartItem = [];
             state.wishlistItem = [];
@@ -163,7 +184,6 @@ const cartSlice = createSlice({
             state.totalAmount = 0;
             state.discount = 0;
 
-            // Clear from localStorage as well
             localStorage.removeItem('cartItem');
             localStorage.removeItem('totalQuantity');
             localStorage.removeItem('subtotal');

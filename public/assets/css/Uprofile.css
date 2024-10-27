@@ -259,26 +259,35 @@
     width: 50% !important;
 }
 
-.wishlist_uprofile{
-    max-height: 650px; /* Adjust height as per your requirement */
+.wishlist_uprofile {
+    max-height: 650px;
+    /* Adjust height as per your requirement */
     overflow-y: scroll;
-    padding-right: 10px; /* Adds padding for scrollbar */
+    padding-right: 10px;
+    /* Adds padding for scrollbar */
 }
+
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+
 .dropdown-toggle::after {
-    display: none !important; /* Hides the dropdown arrow */
+    display: none !important;
+    /* Hides the dropdown arrow */
 }
+
 /* coupon code */
-.main_title_copoun_profile{
+.main_title_copoun_profile {
     font-size: 14px;
 }
+
 .coupon-cards-container {
     padding: 20px;
-    max-height: 650px; /* Adjust height as per your requirement */
+    max-height: 650px;
+    /* Adjust height as per your requirement */
     overflow-y: scroll;
-    padding-right: 10px; /* Adds padding for scrollbar */
+    padding-right: 10px;
+    /* Adds padding for scrollbar */
 }
 
 .coupon-card {
@@ -304,9 +313,8 @@
     margin-right: 20px;
 }
 
-
 .discount-circle h2 {
-    color: #9f7aea;
+    color: var(--color) !important;
     font-size: 20px;
     margin: 0;
 }
@@ -332,6 +340,14 @@
     color: #888888;
     margin-top: 8px;
 }
+.popover {
+    background-color: #f0f0f0;
+    border: none !important;
+    font-size: 12px !important;
+    padding: 10px !important;
+    transition: opacity 0.3s ease !important;
+    z-index: 1000 !important; /* Make sure it appears above other elements */
+}
 
 @media(max-width:1024px) {
     .sidebar {
@@ -348,15 +364,18 @@
     .edit-profile {
         width: 100% !important;
     }
+
     .discount-circle {
         width: 115px;
     }
 }
+
 @media(max-width:520px) {
     .discount-circle {
         width: 190px;
     }
 }
+
 @media(max-width:376px) {
     .discount-circle {
         width: 273px;

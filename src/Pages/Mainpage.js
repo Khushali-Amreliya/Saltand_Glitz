@@ -28,6 +28,11 @@ const Mainpage = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const slidermenu = React.useRef(null);
   const slider1 = React.useRef(null);
 
@@ -201,7 +206,7 @@ const Mainpage = () => {
               <Slider ref={slider1} {...settings2}>
                 {products.map((item) => (
                   <div className='card border-0' key={item.id}>
-                    <Link to={`/productDetail/${item.id}`}> 
+                    <Link to={`/productDetail/${item.id}`}>
                       <img alt={item.title} src={item.image01} className='img-fluid px-2' />
                     </Link>
                     <div className='card-body cartlane'>

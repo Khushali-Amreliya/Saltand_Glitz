@@ -60,14 +60,14 @@
 .absolute_next_btn {
     position: absolute;
     left: 25%;
-    top: 24%;
+    top: 20%;
     background: transparent;
 }
 
 .absolute_prev_btn {
     position: absolute;
     left: -12%;
-    top: 24%;
+    top: 20%;
     background: transparent;
 }
 

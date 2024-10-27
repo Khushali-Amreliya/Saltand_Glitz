@@ -1,81 +1,68 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom'
 import OrderSummary from '../Process/OrderSummary';
 import Loader from '../Loader';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login = () => {
-  // const totalQuantity = useSelector(state => state.cart.totalQuantity)
-  const [formData, setFormData] = useState({ mobile: '' });
-  const [error, setError] = useState('');
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!formData.mobile) {
-      setError('Mobile number or email is required.');
-      return;
-    } else {
-      setError('');
-    }
-
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/v1/signup/create-signup', formData);
+      // Perform the login request
+      const res = await axios.post('http://localhost:5000/api/users/login', { email, password });
 
-      if (response.status === 200) {
-        Swal.fire({
-          title: 'Thank You',
-          text: 'Login successful',
-          icon: 'success',
-          willClose: () => {
-            navigate('/shipping');
-          }
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong',
-        });
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong',
+      // Store the token in local storage
+      localStorage.setItem('token', res.data.token);
+
+      // Fetch the user's profile data using the token
+      const userRes = await axios.get('http://localhost:5000/api/users/profile', {
+        headers: {
+          'Authorization': `Bearer ${res.data.token}`,  // Send the token for authentication
+        }
       });
+
+      // Store user data in local storage under 'user'
+      localStorage.setItem('user', JSON.stringify(userRes.data));
+
+      // Show success toast
+      toast.success("Login Successfully!");
+
+      // Redirect to user profile page
+      navigate('/Userprofile');
+    } catch (err) {
+      console.error('Error during login:', err.response?.data);  // Log the full error response
+      // Show error toast
+      toast.error(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
   };
   // header scroll
   const [isScrolled, setIsScrolled] = useState(false);
-    
+
   const handleScroll = useCallback(() => {
-      console.log(window.scrollY);
-      setIsScrolled(window.scrollY > 50);
-      console.log(isScrolled);
+    console.log(window.scrollY);
+    setIsScrolled(window.scrollY > 50);
+    console.log(isScrolled);
   }, [isScrolled]);
-  
+
   useEffect(() => {
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-          window.removeEventListener('scroll', handleScroll);
-      };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [handleScroll]);
 
   return (
@@ -108,7 +95,7 @@ const Login = () => {
           </Link>
         </div>
       </section>
-      <section className='container-fluid'  style={{marginBottom:"100px"}}>
+      <section className='container-fluid' style={{ marginBottom: "100px" }}>
         <div className='row'>
           <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-5 '>
             <section className='container mt-5 login_width'>
@@ -117,32 +104,50 @@ const Login = () => {
                   <i className="ri-fingerprint-line fs-2"></i>
                   <h6>Signup with Tiffany & Co.</h6>
                   <div>
-                    <p className='p_width_login'>Unlock Best prices and become an insider for our exclusive launches & offers. Complete your profile and get ₹250 worth of xCLusive Points.</p>
+                    <p className='p_width_loginn'>
+                      Unlock Best prices and become an insider for our exclusive launches & offers. Complete your profile and get ₹250 worth of xCLusive Points.
+                    </p>
+                  </div>
+                  <div className='pt-4 mx-auto d-block'>
+                    <img alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />
                   </div>
                 </div>
-                <div className='mx-auto d-block'>
+                <div className='mx-auto d-block pb-4'>
                   <form onSubmit={handleSubmit}>
-                    <div className='mt-4'>
+
+                    <div className="form__div">
                       <input
-                        type='text'
-                        placeholder='Enter Mobile Number'
-                        className='form-control'
-                        name='mobile'
-                        onChange={handleChange}
+                        type="email"
+                        className="form__input"
+                        placeholder=" "
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                       />
+                      <label className="form__label">Email</label>
                     </div>
-                    {error && <p className='text-danger mt-2'>{error}</p>}
+
+                    <div className="form__div">
+                      <input
+                        type="password"
+                        className="form__input"
+                        placeholder=" "
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                      <label className="form__label">Password</label>
+                    </div>
+
                     <button className='mt-4 btn w-100 place_order_btn text-light' type='submit' disabled={loading}>
                       {loading ? 'Logging in...' : 'CONTINUE TO LOGIN'}
                     </button>
                   </form>
+
                 </div>
-                <div className='pt-4 mx-auto d-block'>
-                  <img alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo'></img>
-                  <img alt='' src='assets/img/facebook.png' className='img-fluid google_facebook_logo'></img>
-                </div>
-                <p className='m-0 p-0 create_acc'>New to CaratLane? <Link to="/signup" className='text-decoration-none'><span>Create an Account</span></Link></p>
+                <p className='m-0 p-0 create_acc'>
+                  New to Tiffany & Co.? <Link to="/signup" className='text-decoration-none'><span>Create an Account</span></Link>
+                </p>
                 <p className='create_acc'>Complete your profile and get Rs.250 worth of xCLusive Points.</p>
               </div>
             </section>

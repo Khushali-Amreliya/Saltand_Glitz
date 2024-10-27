@@ -385,6 +385,7 @@
 .place_order_btn {
     background: var(--background);
     color: #000;
+    width: 50%;
 }
 
 .cart_headline {
@@ -752,6 +753,9 @@ body {
 @media(max-width:426px) {
     .cart_headline {
         height: 72px !important;
+    }
+    .place_order_btn {
+        width: 100% !important;
     }
 }
 

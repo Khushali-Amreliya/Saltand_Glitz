@@ -145,7 +145,6 @@ const ProductCard = ({ Productsitem }) => {
             }
         ],
     };
-
     return (
         <>
             {loading && <Loader />}

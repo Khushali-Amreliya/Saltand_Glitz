@@ -8,6 +8,56 @@
     font-size: 13px;
 }
 .footer_main{
-    border-top: 2px solid #b2ebf7;
+    border-top: 0.5px solid var(--color);
     padding-top: 60px;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.faq-question {
+    background: #fff;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question:hover {
+    background: #fafafb;
+}
+
+.faq-answer {
+    display: none;
+    background: #f2f6f9;
+    padding: 15px;
+    border-left: 2px solid var(--color);
+    font-size: 14px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    color: #333;
+}
+.faq-answer p a{
+    color: #333 !important;
+    text-decoration: none !important;
+}
+.faq-answer p{
+    margin-bottom: 10px !important;
+}
+.faq-question.active+.faq-answer {
+    display: block;
+}
+
+.faq-question .toggle-icon {
+    font-size: 25px;
+    color: var(--color);
+}
+
+.faq-question.active .toggle-icon {
+    transform: rotate(45deg);
 }

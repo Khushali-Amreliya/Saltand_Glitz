@@ -3,7 +3,7 @@ import OrderSummary from '../Process/OrderSummary';
 import Loader from '../Loader';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 
 const Shipping = () => {
@@ -78,11 +78,7 @@ const Shipping = () => {
                 pincode: isPincodeValid ? '' : 'Pincode must be 6 digits.',
                 mobile: isMobileValid ? '' : 'Mobile number must be 10 digits.',
             });
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Please correct the errors in the form.',
-            });
+            toast.error("Please correct the errors in the form.")
             return;
         }
 
@@ -90,29 +86,17 @@ const Shipping = () => {
         try {
             await axios.post('http://localhost:5000/v1/shipping/create-shipping', formData);
             setLoading(false);
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Your address has been successfully added!',
-            });
+            toast.success("Your address has been successfully added!")
         } catch (error) {
             console.error('Failed to add address:', error);
             setLoading(false);
-            Swal.fire({
-                icon: 'error',
-                title: 'Failed',
-                text: 'There was an error submitting your address. Please try again.',
-            });
+            toast.error("There was an error submitting your address. Please try again.")
         }
     };
 
     const handleSubmitButton = () => {
         if (!validateForm()) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Please Fill Out Your Shipping Address!',
-            });
+            toast.error("Please Fill Out Your Shipping Address!")
             return;
         }
         setLoading(true);
@@ -142,7 +126,7 @@ const Shipping = () => {
         <>
             <section className={`cart_header ${isScrolled ? 'scrolled' : ''}`}>
                 <div className="cart_header_left">
-                    <Link to="/login" className="back-button">
+                    <Link to="/login-success" className="back-button">
                         <i className="ri-arrow-left-line"></i>
                     </Link>
                     <div className="cart_logo">
