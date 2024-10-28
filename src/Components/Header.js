@@ -16,6 +16,9 @@ const Header = () => {
     const totalQuantity = useSelector(state => state.cart.totalQuantity);
     const wishlistItem = useSelector(state => state.cart.wishlistItem);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     var settings = {
         dots: false,
         infinite: true,
@@ -105,9 +108,7 @@ const Header = () => {
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
