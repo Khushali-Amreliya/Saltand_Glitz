@@ -8,10 +8,12 @@ import "aos/dist/aos.css";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Helmet from '../../Components/Helmet';
+import { useNavigate } from 'react-router-dom';
 
 const Wishlist = () => {
   const wishlistItem = useSelector(state => state.cart.wishlistItem);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Remove from wishlist
   const handleRemove = async (id) => {
@@ -50,6 +52,7 @@ const Wishlist = () => {
         dispatch(cartAction.addItem(response.data));
 
       }
+      navigate('/cart')
     } catch (error) {
       console.error('Error adding item to cart:', error);
       // setLoading(false);

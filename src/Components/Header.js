@@ -19,6 +19,7 @@ const Header = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+    
     var settings = {
         dots: false,
         infinite: true,
@@ -190,12 +191,13 @@ const Header = () => {
                     </div>
                     <div className='col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center'>
                         <div>
-                            <Link to="/">
-                                <img
+                            <Link to="/" className="text-decoration-none fs-5 text-dark">
+                                {/* <img
                                     alt=''
                                     src='assets/img/tiffco-logo-2.svg'
                                     className='img-fluid w-50 mx-auto d-block'
-                                />
+                                /> */}
+                                SALTAND GLITZ
                             </Link>
                         </div>
                     </div>
@@ -1041,12 +1043,20 @@ const Header = () => {
                     </div>
                     <div className='col-sm-8 col-7 d-flex justify-content-center align-items-center'>
                         <div>
-                            <Link to="/">
+                            {/* <Link to="/">
                                 <img
                                     alt=''
                                     src='assets/img/tiffco-logo-2.svg'
                                     className='mx-auto d-block main_logo'
                                 />
+                            </Link> */}
+                            <Link to="/" className="text-decoration-none fs-5 text-dark">
+                                {/* <img
+                                    alt=''
+                                    src='assets/img/tiffco-logo-2.svg'
+                                    className='img-fluid w-50 mx-auto d-block'
+                                /> */}
+                                SALTAND GLITZ
                             </Link>
                         </div>
                     </div>

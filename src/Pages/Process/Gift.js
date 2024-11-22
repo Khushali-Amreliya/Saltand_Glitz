@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import OrderSummary from '../Process/OrderSummary'
+import React, { useCallback, useEffect, useState } from 'react';
+import OrderSummary from '../Process/OrderSummary';
 import { Link, useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
 
@@ -8,8 +8,28 @@ const Gift = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    // const totalQuantity = useSelector(state => state.cart.totalQuantity)
+    const [selectedGiftWrap, setSelectedGiftWrap] = useState(null);
     const [selectedButton, setSelectedButton] = useState(null);
+
+    // Load persisted selection from localStorage on component mount
+    useEffect(() => {
+        const savedGiftWrap = localStorage.getItem('selectedGiftWrap');
+        if (savedGiftWrap) {
+            setSelectedGiftWrap(savedGiftWrap);
+        }
+    }, []);
+
+    const handleGiftWrapClick = (name) => {
+        const newSelection = selectedGiftWrap === name ? null : name;
+        setSelectedGiftWrap(newSelection);
+
+        // Persist the selection in localStorage
+        if (newSelection) {
+            localStorage.setItem('selectedGiftWrap', newSelection);
+        } else {
+            localStorage.removeItem('selectedGiftWrap'); // Clear selection from localStorage
+        }
+    };
 
     const handleButtonClick = (name) => {
         setSelectedButton(name);
@@ -38,23 +58,23 @@ const Gift = () => {
             setLoading(false);
             navigate('/payment');
         }, 1000);
-    }
+    };
 
     // header scroll
     const [isScrolled, setIsScrolled] = useState(false);
-    
+
     const handleScroll = useCallback(() => {
-        console.log(window.scrollY);
         setIsScrolled(window.scrollY > 50);
-        console.log(isScrolled);
-    }, [isScrolled]);
-    
+    }, []);
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [handleScroll]);
+
+
     return (
         <>
             {loading && <Loader />}
@@ -85,7 +105,7 @@ const Gift = () => {
                     </Link>
                 </div>
             </section>
-            <section className='container-fluid' style={{marginBottom:"100px"}}>
+            <section className='container-fluid' style={{ marginBottom: "100px" }}>
                 <div className='row'>
                     <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-5 pb-3 m-0 p-0'>
                         <div>
@@ -110,28 +130,36 @@ const Gift = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='my-5 py-5 bg_gift'>
-                                <h6 className='text-center pb-2 fw-bold'>Choose a gift wrap</h6>
-                                <div className='d-flex justify-content-center m-0 p-0 ps-2'>
-                                    <div className='position-relative d-block pe-2'>
-                                        <img alt='' src='assets/img/Giftwrap1.png' className='relative_image'></img>
-                                        <p className=' absoulate_image'>Warm hugs</p>
-                                    </div>
-                                    <div className='position-relative d-block pe-2'>
-                                        <img alt='' src='assets/img/Giftwrap2.png' className='relative_image'></img>
-                                        <p className=' absoulate_image'>Purple aun</p>
-                                    </div>
-                                    <div className='position-relative d-block pe-2'>
-                                        <img alt='' src='assets/img/Giftwrap3.png' className='relative_image'></img>
-                                        <p className=' absoulate_image'>Fairy Tales</p>
-                                    </div>
+                            <div className="my-5 py-5 bg_gift">
+                                <h6 className="text-center pb-2 fw-bold">Choose a gift wrap <span>(Free)</span></h6>
+                                <div className="d-flex justify-content-center m-0 p-0 ps-2">
+                                    {[
+                                        { name: 'Warm hugs', img: 'assets/img/Giftwrap1.png' },
+                                        { name: 'Purple aun', img: 'assets/img/Giftwrap2.png' },
+                                        { name: 'Fairy Tales', img: 'assets/img/Giftwrap3.png' }
+                                    ].map((wrap) => (
+                                        <div
+                                            key={wrap.name}
+                                            className="position-relative d-block pe-2"
+                                            onClick={() => handleGiftWrapClick(wrap.name)}
+                                        >
+                                            <img alt="" src={wrap.img} className="relative_image"></img>
+                                            <p
+                                                className={`absoulate_image ${selectedGiftWrap === wrap.name ? 'highlighted' : ''
+                                                    }`}
+                                            >
+                                                {wrap.name}
+                                            </p>
+                                        </div>
+                                    ))}
                                 </div>
-                                <h6 className='text-center pt-5 fw-bold'>Add a gift message (Optional)</h6>
+                                <h6 className='text-center pt-5 fw-bold'>Add a gift message <span>(Optional)</span></h6>
                                 <div className='textarea_wrapper mx-auto d-block'>
                                     <textarea placeholder="You can write a personal note with this gift. We promise we'll send it to your loved one."></textarea>
                                     <span className='max_char'>250</span>
                                 </div>
                             </div>
+                            {/* Gift Recipient Section */}
                             <div className='px-3 mx-auto d-block gif_video_sec'>
                                 <h6 className='text-center pb-2 fw-bold'>Who is the gift for?</h6>
                                 <div className='row'>
@@ -163,20 +191,10 @@ const Gift = () => {
                 </div>
             </section>
             <section className="cart_footer">
-                <div className="cart_footer_left pt-3">
-                    <p>
-                        <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) | contactus@caratlane.com
-                    </p>
-                </div>
-                <div className="cart_footer_right">
-                    <img src="assets/img/cart_footer_logo.png" alt="payment-icon" className="payment-icon" />
-                    <img src="assets/img/cart_footer_logo1.png" alt="MasterCard" className="payment-icon" />
-                    <img src="assets/img/cart_footer_logo2.png" alt="PayPal" className="payment-icon" />
-                    <img src="assets/img/cart_footer_logo3.png" alt="American Express" className="payment-icon" />
-                </div>
+                {/* Footer content */}
             </section>
         </>
-    )
-}
+    );
+};
 
-export default Gift
+export default Gift;

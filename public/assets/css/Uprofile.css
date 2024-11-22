@@ -340,18 +340,24 @@
     color: #888888;
     margin-top: 8px;
 }
+
 .popover {
     background-color: #f0f0f0;
     border: none !important;
     font-size: 12px !important;
     padding: 10px !important;
     transition: opacity 0.3s ease !important;
-    z-index: 1000 !important; /* Make sure it appears above other elements */
+    z-index: 1000 !important;
+    /* Make sure it appears above other elements */
 }
 
 @media(max-width:1024px) {
     .sidebar {
         padding-left: 0% !important;
+    }
+
+    .edit-profile {
+        width: 75% !important;
     }
 }
 
@@ -359,10 +365,6 @@
 
     .bg_uprofile {
         padding: 20px 20px !important;
-    }
-
-    .edit-profile {
-        width: 100% !important;
     }
 
     .discount-circle {
@@ -373,6 +375,10 @@
 @media(max-width:520px) {
     .discount-circle {
         width: 190px;
+    }
+
+    .edit-profile {
+        width: 100% !important;
     }
 }
 

@@ -22,6 +22,13 @@ const Cart = (props) => {
     const [totalAmount, setTotalAmount] = useState(0);
     const [couponDiscount, setCouponDiscount] = useState(0); // New state for coupon discount in rupees
     const navigate = useNavigate();
+    const [copiedCode, setCopiedCode] = useState("");
+
+    const handleCopyCode = (code) => {
+        navigator.clipboard.writeText(code);
+        setCopiedCode(code); // Track the copied code
+        setTimeout(() => setCopiedCode(""), 1000); // Hide the popover after 2 seconds
+    };
 
     const calculateSubtotal = useCallback(() => {
         return cartItems.reduce((total, item) => total + Number(item.totalprice), 0);
@@ -129,6 +136,7 @@ const Cart = (props) => {
             // console.log('Moving to wishlist:', item);
             dispatch(cartAction.deleteItem(item));
             toast.success("Item added to wishlist!");
+            navigate('/wishlist')
         } catch (error) {
             console.error('Error moving item to wishlist:', error);
             toast.error('Failed to move item to wishlist');
@@ -142,10 +150,10 @@ const Cart = (props) => {
 
     const handlePlaceOrder = () => {
         setLoading(true);
-        
+
         // Simulating a login check; replace with your actual login check
         const isLoggedIn = localStorage.getItem('user')
-    
+
         setTimeout(() => {
             setLoading(false);
             if (isLoggedIn) {
@@ -155,7 +163,7 @@ const Cart = (props) => {
             }
         }, 1000);
     };
-    
+
 
     const handleApplyCoupon = () => {
         dispatch(cartAction.applyCoupon(couponCode));
@@ -293,53 +301,59 @@ const Cart = (props) => {
                                                     <div className="modal-body border-0">
                                                         <div className="input-group mb-3 coupon_input">
                                                             <input
-                                                                type='text'
+                                                                type="text"
                                                                 className="form-control border-0"
-                                                                placeholder='Enter Coupon Code'
+                                                                placeholder="Enter Coupon Code"
                                                                 aria-describedby="basic-addon2"
                                                                 value={couponCode}
                                                                 onChange={(e) => setCouponCode(e.target.value)}
                                                             />
-                                                            <span className="input-group-text border-0" id="basic-addon2" style={{ cursor: "pointer" }} onClick={handleApplyCoupon}>APPLY</span>
+                                                            <span
+                                                                className="input-group-text border-0"
+                                                                id="basic-addon2"
+                                                                style={{ cursor: "pointer" }}
+                                                                onClick={handleApplyCoupon}
+                                                            >
+                                                                APPLY
+                                                            </span>
                                                         </div>
-                                                        <div className='coupon_modal'>
-                                                            <h6 className='text-center py-2 fw-bold'>Other Offers at CartLane</h6>
-                                                            <div className='coupan_box mx-3'>
-                                                                <div className=' offer-label border border-start-0 border-top-0 border-bottom-0 px-3 align-items-center d-flex'>
-                                                                    <h5 className='pt-3 fw-bold text-light'>10% OFF</h5>
-                                                                </div>
-                                                                <div className='coupon_box1 align-items-center d-flex'>
-                                                                    <div>
-                                                                        <h6 className='m-0'>SHAYAUPSELL10</h6>
-                                                                        <p>Valid till August 21 2024</p>
-                                                                        <p className='coupon_box1_p'>Get Extra 10% OFF on purchase of 3 or more items</p>
+                                                        <div className="coupon_modal">
+                                                            <h6 className="text-center py-2 fw-bold">Other Offers at CartLane</h6>
+
+                                                            {[
+                                                                { code: "SHAYAUPSELL10", discount: "10% OFF", validity: "August 21 2024", description: "Get Extra 10% OFF on purchase of 3 or more items" },
+                                                                { code: "PERFECT3", discount: "3% OFF", validity: "August 19 2024", description: "Flat 3% Off on Loose Solitaires Only" },
+                                                                { code: "MOUNT5", discount: "5% OFF", validity: "August 19 2024", description: "Flat 5% Off on Solitaire Mount SKU" },
+                                                            ].map((offer, index) => (
+                                                                <div className="coupan_box mx-3" key={index}>
+                                                                    <div className="offer-label border border-start-0 border-top-0 border-bottom-0 px-3 align-items-center d-flex">
+                                                                        <h5 className="pt-3 fw-bold text-light">{offer.discount}</h5>
+                                                                    </div>
+                                                                    <div className="coupon_box1 align-items-center d-flex position-relative">
+                                                                        <div className="w-100 d-flex justify-content-between align-items-center">
+                                                                            <div>
+                                                                                <h6 className="m-0">
+                                                                                    {offer.code}
+                                                                                    <span
+                                                                                        onClick={() => handleCopyCode(offer.code)}
+                                                                                        className="text-danger ms-2"
+                                                                                        style={{ cursor: "pointer" }}
+                                                                                    >
+                                                                                        Copy Code
+                                                                                    </span>
+                                                                                </h6>
+                                                                                <p>{offer.validity}</p>
+                                                                                <p className="coupon_box1_p">{offer.description}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        {copiedCode === offer.code && (
+                                                                            <div className="popover bg-secondary text-white w-25 text-center rounded position-absolute" style={{ top: "11px", left: "185px", zIndex: "1050" }}>
+                                                                                Copied!
+                                                                            </div>
+                                                                        )}
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div className='coupan_box mx-3'>
-                                                                <div className=' offer-label border border-start-0 border-top-0 border-bottom-0 px-3 align-items-center d-flex'>
-                                                                    <h5 className='pt-4 fw-bold text-light'>3% OFF</h5>
-                                                                </div>
-                                                                <div className='coupon_box1 align-items-center d-flex'>
-                                                                    <div>
-                                                                        <h6 className='m-0'>PERFECT3</h6>
-                                                                        <p>Valid till August 19 2024</p>
-                                                                        <p className='coupon_box1_p'>Flat 3% Off on Loose Solitaires Only</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className='coupan_box mx-3'>
-                                                                <div className=' offer-label border border-start-0 border-top-0 border-bottom-0 px-3 align-items-center d-flex'>
-                                                                    <h5 className='pt-4 fw-bold text-light'>5% OFF</h5>
-                                                                </div>
-                                                                <div className='coupon_box1 align-items-center d-flex'>
-                                                                    <div>
-                                                                        <h6 className='m-0'>MOUNT5</h6>
-                                                                        <p>Valid till August 19 2024</p>
-                                                                        <p className='coupon_box1_p'>Flat 5% Off on Solitaire Mount SKU</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            ))}
                                                         </div>
                                                     </div>
                                                 </div>

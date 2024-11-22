@@ -340,7 +340,7 @@ const AboutUs = () => {
                   <p>Our designs always come with a unique CaratLane touch through innovative designs or techniques, or both. Uncover our jewellery-making process, from the inspiration to the final outcome.</p>
                 </div>
               </div>
-              <button>Continue Shopping</button>
+              <Link to="/" className="text-decoration-none"><button>Continue Shopping</button></Link>
             </div>
           </div>
         </section>
@@ -358,42 +358,42 @@ const AboutUs = () => {
             </div>
             <div className="col-lg-7 col-md-12 col-sm-12 col-12 m-0 p-0">
               <div className="row m-0 p-0">
-                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0">
+                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0 overflow">
                   <img
                     src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/05-MAY/Others/Insta/12/2.jpg"
                     alt="Diamond ring with a circular shape"
                     className="instagram-secondary-img"
                   />
                 </div>
-                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0">
+                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0 overflow">
                   <img
                     src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/05-MAY/Others/Insta/12/4.jpg"
                     alt="Elegant gold bracelet"
                     className="instagram-secondary-img"
                   />
                 </div>
-                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0">
+                <div className="col-lg-4  col-md-6 col-sm-6 col-6 p-0 overflow">
                   <img
                     src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/05-MAY/Others/Insta/12/5.jpg"
                     alt="Diamond ring with a circular shape"
                     className="instagram-secondary-img"
                   />
                 </div>
-                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0">
+                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0 overflow">
                   <img
                     src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/05-MAY/Others/Insta/12/6.jpg"
                     alt="Elegant gold bracelet"
                     className="instagram-secondary-img"
                   />
                 </div>
-                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0">
+                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0 overflow">
                   <img
                     src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/05-MAY/Others/Insta/12/3.jpg"
                     alt="Gold necklace with intricate design"
                     className="instagram-secondary-img"
                   />
                 </div>
-                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0">
+                <div className="col-lg-4 col-md-6 col-sm-6 col-6 p-0 overflow">
                   <img
                     src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/05-MAY/Others/Insta/12/7.jpg"
                     alt="Diamond ring with a circular shape"

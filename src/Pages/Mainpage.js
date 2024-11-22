@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick'
 import products from '../fakedata/Product';
 import { formatCurrency } from '../Utils/formateCurrency';
+// import ScheduledTask from '../ScheduledTask';
 
 const Mainpage = () => {
   const getSlidesToShow = () => {
@@ -69,6 +70,8 @@ const Mainpage = () => {
   };
   return (
     <>
+      {/* <h1>Scheduled Task at 3:00 AM IST</h1>
+      <ScheduledTask /> */}
       <section className='container-fluid m-0 p-0 mb-5'>
         <Slider {...settings}>
           <div>

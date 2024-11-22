@@ -37,6 +37,32 @@
     font-size: 13px !important;
 }
 
+.customize_sec {
+    background-color: white;
+    color: #5a5a5a;
+    border: 1px solid #ffc107 !important;
+    border-radius: 10px;
+
+}
+
+.customize_sec div {
+    /* border-right: 1px solid #ffc107 !important; */
+}
+
+.customize_sec p {
+    margin-bottom: 0;
+    font-size: 11.5px;
+}
+
+.customize_sec small {
+    font-size: 9px;
+}
+
+.customize_sec button {
+    font-size: 12px;
+    border-radius: 0px;
+}
+
 .delivery_cancellation {
     font-size: 12px;
 }
@@ -281,6 +307,14 @@
     .size-btn {
         padding: 20px 2px !important;
     }
+
+    .customize_sec {
+        border: 1px solid #ffc107 !important;
+        /* border-bottom: none !important; */
+        border-radius: 0px;
+        padding: 10px 0;
+        margin-bottom: 5px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -302,19 +336,25 @@
         height: 200px !important;
     }
 }
+
 @media (max-width: 376px) {
     .size-btn {
         padding: 5px !important;
     }
-    .size_offcanvas p, .metal_offcanvas p, .diamond_offcanvas p {
+
+    .size_offcanvas p,
+    .metal_offcanvas p,
+    .diamond_offcanvas p {
         font-size: 10px !important;
     }
 }
+
 @media (max-width: 373px) {
     .size-btn {
         padding: 3px 0px !important;
     }
 }
+
 @media(max-width:333px) {
     .video_call_img {
         height: 212px !important;
