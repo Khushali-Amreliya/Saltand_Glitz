@@ -204,7 +204,7 @@ const Header = () => {
                     <div className='col-lg-3 col-md-3 col-sm-12 header_logo d-flex justify-content-center align-items-center text-center'>
                         <div className="dropdown drp_main">
                             <Link className="text-decoration-none text-dark dropdown-toggle" id="dropdownUserLink" role="button">
-                                <i className="ri-user-line nav_icon text-center"></i>
+                                <i className="ri-user-fill nav_icon text-center"></i>
                             </Link>
                             <ul className="dropdown-menu drp_icon" aria-labelledby="dropdownUserLink">
                                 {isLoggedIn ? (
@@ -215,7 +215,7 @@ const Header = () => {
                                             <ul className="profile-menu">
                                                 <li className="mb-2">
                                                     <Link to="/Userprofile" className="profile-menu-item">
-                                                        <i className="ri-user-line"></i> My Account
+                                                        <i class="ri-user-3-fill"></i> My Account
                                                     </Link>
                                                 </li>
                                                 <li>
@@ -225,8 +225,6 @@ const Header = () => {
                                                 </li>
                                             </ul>
                                         </div>
-
-
                                     </>
                                 ) : (
                                     <>

@@ -91,7 +91,7 @@ const ImportExcel = () => {
                         {
                             excelData.map((getdata,index)=>(
                                 <tr key={index}>
-                                    <td>{getdata.Name}</td>
+                                    <td>{getdata.Title}</td>
                                     <td>{getdata.Email}</td>
                                     <td>{getdata.Image}</td>
                                 </tr>

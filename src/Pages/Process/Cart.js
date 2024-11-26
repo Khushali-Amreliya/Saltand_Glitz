@@ -313,9 +313,12 @@ const Cart = (props) => {
                                                                 id="basic-addon2"
                                                                 style={{ cursor: "pointer" }}
                                                                 onClick={handleApplyCoupon}
+                                                                data-bs-dismiss="modal" aria-label="Close"
                                                             >
                                                                 APPLY
                                                             </span>
+
+                                                            
                                                         </div>
                                                         <div className="coupon_modal">
                                                             <h6 className="text-center py-2 fw-bold">Other Offers at CartLane</h6>
@@ -347,8 +350,8 @@ const Cart = (props) => {
                                                                             </div>
                                                                         </div>
                                                                         {copiedCode === offer.code && (
-                                                                            <div className="popover bg-secondary text-white w-25 text-center rounded position-absolute" style={{ top: "11px", left: "185px", zIndex: "1050" }}>
-                                                                                Copied!
+                                                                            <div className="popover text-success text-center rounded position-absolute" style={{ top: "11px", left: "185px", zIndex: "1050" }}>
+                                                                                <i class="ri-check-double-line"></i>
                                                                             </div>
                                                                         )}
                                                                     </div>
