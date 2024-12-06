@@ -238,13 +238,13 @@ const Cart = (props) => {
                                                             <p className='cart_quantity m-0 pt-1' style={{ cursor: "pointer" }}>
                                                                 Quantity:
                                                                 &nbsp;<span className='' onClick={() => addToCart(item)}>
-                                                                    <i class="ri-add-line"></i>
+                                                                    <i className="ri-add-line"></i>
                                                                 </span>&nbsp;
                                                                 <span style={{ fontSize: "14.5px" }}>
                                                                     {item.quantity}
                                                                 </span>
                                                                 &nbsp;<span className=' ' onClick={() => removeToCart(item)}>
-                                                                    <i class="ri-subtract-line"></i>
+                                                                    <i className="ri-subtract-line"></i>
                                                                 </span>
                                                             </p>
                                                             <p className='cart_delivery'>Delivery by - 30th Aug</p>
@@ -255,20 +255,20 @@ const Cart = (props) => {
                                                                 <i className="ri-close-circle-fill"></i>
                                                             </span>
                                                         </button>
-                                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header border-0">
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                            <div className="modal-dialog modal-dialog-centered">
+                                                                <div className="modal-content">
+                                                                    <div className="modal-header border-0">
+                                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-                                                                    <div class="modal-body text-center modal_content">
+                                                                    <div className="modal-body text-center modal_content">
                                                                         <img alt={item.title} src={item.image01} className='w-25 mx-auto d-block' />
                                                                         <h6 className='m-0 pt-3'>Move Design from Cart</h6>
                                                                         <p>Are you sure you want to move this design from the cart?</p>
                                                                     </div>
-                                                                    <div class="modal-footer border-0 mx-auto d-block">
-                                                                        <button type="button" class="btn modal_remove" data-bs-dismiss="modal" onClick={() => handleDelete(item.id)}>REMOVE</button>
-                                                                        <button type="button" class="btn btn-primary modal_wishlist" onClick={() => moveToWishlist(item)}>MOVE TO WISHLIST</button>
+                                                                    <div className="modal-footer border-0 mx-auto d-block">
+                                                                        <button type="button" className="btn modal_remove" data-bs-dismiss="modal" onClick={() => handleDelete(item.id)}>REMOVE</button>
+                                                                        <button type="button" className="btn btn-primary modal_wishlist" onClick={() => moveToWishlist(item)}>MOVE TO WISHLIST</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -351,7 +351,7 @@ const Cart = (props) => {
                                                                         </div>
                                                                         {copiedCode === offer.code && (
                                                                             <div className="popover text-success text-center rounded position-absolute" style={{ top: "11px", left: "185px", zIndex: "1050" }}>
-                                                                                <i class="ri-check-double-line"></i>
+                                                                                <i className="ri-check-double-line"></i>
                                                                             </div>
                                                                         )}
                                                                     </div>

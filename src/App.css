@@ -1,5 +1,6 @@
 * {
-    font-family: "Poppins", sans-serif;
+    /* font-family: "Poppins", sans-serif; */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -9,8 +10,20 @@
     --background: linear-gradient(90deg, rgba(178, 235, 247, 1) 0%, rgba(143, 195, 205, 1) 0%, rgba(90, 188, 209, 1) 100%);
     --color: #3f91a1;
     --underline: linear-gradient(90deg, rgba(156,216,228,1) 0%, rgba(98,176,193,1) 50%, rgba(52,124,139,1) 100%);
-}
+    --font: Santral W01;
 
+}
+.font_main{
+    /* font-family: var(--font) !important; */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 25px;
+}
+.p_main{
+    letter-spacing: 0.3px;
+    word-spacing: 1px;
+    font-size: 16px;
+}
 .slick-slider {
     padding: 0% !important;
     margin: 0% !important;

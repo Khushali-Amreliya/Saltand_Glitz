@@ -30,7 +30,9 @@
 }
 
 .header_color h6 {
-    font-size: 11px !important;
+    font-size: 12px !important;
+    letter-spacing: 0.5px;
+    word-spacing: 0.5px;
 }
 
 .header_logo i {
@@ -152,26 +154,33 @@
 } */
 .underline {
     width: 0;
-    height: 1.8px;
-    background: var(--underline); /* Gradient effect for more color pop */
+    height: 1.5px;
+    background: var(--underline);
+    /* Gradient effect for more color pop */
     margin: 10px 0 0 0;
     animation: expandUnderline 2s ease forwards;
-    border-radius: 2px; /* Smooth edges */
-    box-shadow: 0 0 8px var(--underline); /* Soft glow effect */
+    border-radius: 2px;
+    /* Smooth edges */
+    box-shadow: 0 0 8px var(--underline);
+    /* Soft glow effect */
 }
 
 /* Animation for expanding the underline */
 @keyframes expandUnderline {
     0% {
         width: 0;
-        opacity: 0; /* Fade in effect */
+        opacity: 0;
+        /* Fade in effect */
     }
+
     50% {
         opacity: 1;
     }
+
     100% {
         width: 80px;
-        opacity: 1; /* Fully visible */
+        opacity: 1;
+        /* Fully visible */
     }
 }
 
@@ -206,15 +215,16 @@
 
 .dropdown a {
     color: #000;
-    transition: 0.3s;
+    /* transition: 0.3s; */
 }
 
 .dropdown a:hover {
     color: #000;
-    padding-left: 20px;
-    transition: 0.3s;
-    font-weight: bold;
+    /* padding-left: 20px; */
+    /* transition: all 0.4s ease-in-out; Increased transition duration */
+    font-weight: 500;
 }
+
 
 .badge-icon {
     width: 15px;
@@ -231,9 +241,11 @@
     background: var(--background);
     vertical-align: middle !important;
 }
-.badge_icon_w{
+
+.badge_icon_w {
     right: 0px !important;
 }
+
 .nav-link {
     position: relative;
     text-decoration: none;
@@ -241,6 +253,13 @@
     font-size: 15px;
     transition: color 0.8s ease;
     cursor: pointer;
+    letter-spacing: 0.6px;
+    letter-spacing: 0.5px;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
 }
 
 /* line hover */
@@ -250,10 +269,10 @@
     left: 0;
     bottom: 0;
     width: 0;
-    height: 2px;
+    height: 0.9px;
     border-radius: 20px;
     background: var(--background);
-    transition: width 0.8s ease;
+    /* transition: width 0.8s ease; */
 }
 
 .nav-link:hover::after {
@@ -319,7 +338,7 @@
     margin: 0px -80px !important;
     border-radius: 8px !important;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px !important;
+    padding: 5px !important;
     min-width: 14rem !important;
 }
 
@@ -548,7 +567,13 @@
     margin-right: 0.5rem !important;
 }
 
-
+/* Media Query */
+@media(max-width:1316px) {
+    .header_logo i {
+        padding: 0px 5px !important;
+        margin: 0px 0px !important;
+    }
+}
 
 @media(max-width:1024px) {
     .border-dropdown {

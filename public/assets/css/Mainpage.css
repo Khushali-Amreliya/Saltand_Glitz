@@ -65,6 +65,159 @@
   color: var(--color) !important;
 }
 
+.banner_class {
+  object-fit: cover;
+  /* width: 100% !important;
+  height: 100% !important; */
+  overflow: hidden;
+}
+
+.div_img {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  padding: 10px;
+  gap: 25px;
+  scroll-padding: 10px;
+}
+
+.img_carousel {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  text-align: center;
+}
+
+.item3 {
+  width: 90px;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.img_carousel:hover .item1 {
+  transform: scale(1.1);
+}
+
+.div_img h5 {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+::-webkit-scrollbar {
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+
+.shop_category h5 {
+  font-size: 14.5px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.viewall_btn {
+  background-color: #fff;
+  color: #000;
+  height: 40px;
+  padding: 12px 24px;
+  border: 1px solid #000 !important;
+  width: 10% !important;
+}
+
+.viewall_btn span {
+  position: relative;
+  background: transparent; /* Keeps the button styling clean */
+  border: none;
+  cursor: pointer;
+  padding: 0; /* Optional: Removes extra padding if necessary */
+  font-size: 16px; /* Adjust as needed */
+  color: inherit; /* Keeps inherited text color */
+}
+
+.viewall_btn span::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -4px; /* Adjust the distance below the text */
+  transform: translateX(-50%);
+  width: 0;
+  height: 0.5px; /* Height of the line */
+  background-color: black; /* Color of the underline */
+  transition: width 0.3s ease-in-out;
+}
+
+.viewall_btn span:hover::after {
+  width: 100%; /* Full width of the text */
+}
+
+
+.gift_sec_main h5 {
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+}
+
+.gift_sec_main p,
+.service_main span {
+  letter-spacing: 0.5px;
+  font-style: normal;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #000 !important;
+}
+
+.line_hover {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.line_hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background:var(--color);
+  transition: width 0.3s ease-in-out;
+}
+
+.line_hover:hover::after {
+  width: 100%;
+}
+
+.service_main h6 {
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 15px;
+}
+
+.service_main p {
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 13px;
+  padding-bottom: 10px !important;
+}
+
+@media(max-width:992px) {
+  .viewall_btn {
+    width: 50% !important;
+  }
+}
+
 @media(max-width:992px) {
   .festival_img1 {
     padding-right: 10px !important;
@@ -76,6 +229,10 @@
 
   .festival_img2 {
     padding-bottom: 0 !important;
+  }
+
+  .viewall_btn {
+    width: 50% !important;
   }
 }
 

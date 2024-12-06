@@ -18,8 +18,15 @@ const setWishlist = (wishlist) => {
     localStorage.setItem("wishlistItem", JSON.stringify(wishlist));
 };
 
+const setRecentlyViewed = (recentlyViewed) => {
+    localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
+};
+
 const initialState = {
     cartItem: cartItems,
+    recentlyViewed: localStorage.getItem("recentlyViewed") 
+        ? JSON.parse(localStorage.getItem("recentlyViewed")) 
+        : [],
     wishlistItem: wishlistItems,
     totalQuantity: totalQuantity,
     subtotal: subtotal,
@@ -103,6 +110,19 @@ const cartSlice = createSlice({
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
         },
 
+        addRecentlyViewed(state, action) {
+            const newItem = action.payload;
+            const existingItem = state.recentlyViewed.find(item => item.id === newItem.id);
+
+            if (!existingItem) {
+                state.recentlyViewed.unshift(newItem);
+                if (state.recentlyViewed.length > 8) {
+                    state.recentlyViewed.pop();
+                }
+            }
+
+            setRecentlyViewed(state.recentlyViewed); // Save to localStorage
+        },
         applyCoupon(state, action) {
             const discountCode = action.payload;
             let discountPercent = 0;

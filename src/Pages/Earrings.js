@@ -15,15 +15,12 @@ const Earrings = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    // State to hold products and selected ring sizes
     const [products, setProducts] = useState([]);
-    // const [selectedRingSizes, setSelectedRingSizes] = useState([]);
-    // const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
     const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
     const [selectedDiscounts, setSelectedDiscounts] = useState([]);
+    const [selectedDiscountRanges, setSelectedDiscountRanges] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
 
-
-    // const ringSizes = ['11', '12', '13', '5', '6', '7'];
     const priceRanges = [
         '₹10,001 - ₹15,000',
         '₹20,001 - ₹30,000',
@@ -35,13 +32,8 @@ const Earrings = () => {
         '₹50,000 - ₹75,000',
         '₹1,50,001 - ₹2,00,000'
     ];
-    const discount = [
-        'Up to 15% off on Diamond Prices',
-        'Flat 15% off on Diamond Prices',
-        'Flat 10% off on Diamond Prices',
-        'Flat 5% off on Diamond Prices',
-        'Flat 50% off on Making Charges'
-    ];
+
+    const discountOptions = [...new Set(products.map(product => `${product.discount}%`))];
 
     // Fetch products data on component mount
     useEffect(() => {
@@ -49,23 +41,14 @@ const Earrings = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    // const [showMoreRingSizes, setShowMoreRingSizes] = useState(false);
     const [showMorePrices, setShowMorePrices] = useState(false);
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);
     const [currentPage, setCurrentPage] = useState(1); // page starts from 1
     const itemsPerPage = 6; // Number of products per page
 
-    const totalPages = Math.ceil(products.length / itemsPerPage); // Calculate total pages
-
     const handleFilterChange = (type, value) => {
         let updatedSelection;
         switch (type) {
-            // case 'ringSize':
-            //     updatedSelection = selectedRingSizes.includes(value)
-            //         ? selectedRingSizes.filter(size => size !== value)
-            //         : [...selectedRingSizes, value];
-            //     setSelectedRingSizes(updatedSelection);
-            //     break;
             case 'price':
                 updatedSelection = selectedPriceRanges.includes(value)
                     ? selectedPriceRanges.filter(price => price !== value)
@@ -78,27 +61,71 @@ const Earrings = () => {
                     : [...selectedDiscounts, value];
                 setSelectedDiscounts(updatedSelection);
                 break;
+            case 'discountRange':
+                updatedSelection = selectedDiscountRanges.includes(value)
+                    ? selectedDiscountRanges.filter(range => range !== value)
+                    : [...selectedDiscountRanges, value];
+                setSelectedDiscountRanges(updatedSelection);
+                break;
+            case 'category':
+                updatedSelection = selectedCategories.includes(value)
+                    ? selectedCategories.filter(category => category !== value)
+                    : [...selectedCategories, value];
+                setSelectedCategories(updatedSelection);
+                break;
             default:
                 break;
         }
     };
 
     const filterProducts = () => {
-        return products.filter(product => {
-            const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
-                const [min, max] = range.split(' - ').map(value => parseInt(value.replace(/[₹,]/g, '').trim(), 10));
-                return product.price >= min && product.price <= (max || Infinity);
-            });
-            const matchesDiscount = selectedDiscounts.length === 0 || selectedDiscounts.includes(`${product.discount}%`);
-            return matchesPrice && matchesDiscount;
+        return products.filter((product) => {
+            // Price filter
+            const matchesPrice =
+                selectedPriceRanges.length === 0 ||
+                selectedPriceRanges.some((range) => {
+                    const [min, max] = range.split(' - ').map((value) =>
+                        parseInt(value.replace(/[₹,]/g, '').trim(), 10)
+                    );
+                    return product.price >= min && product.price <= (max || Infinity);
+                });
+
+            // Discount filter
+            const matchesDiscount =
+                selectedDiscounts.length === 0 ||
+                selectedDiscounts.includes(`${product.discount}%`);
+
+            // Discount Range filter
+            const matchesDiscountRange =
+                selectedDiscountRanges.length === 0 ||
+                selectedDiscountRanges.some((range) => {
+                    if (range === 'Below 10') {
+                        return product.discount < 10;
+                    } else if (range === '10 - 15') {
+                        return product.discount >= 10 && product.discount <= 15;
+                    } else if (range === '15 - 20') {
+                        return product.discount >= 15 && product.discount <= 20;
+                    }
+                    return false;
+                });
+
+            // Category filter
+            const matchesCategory =
+                selectedCategories.length === 0 ||
+                selectedCategories.includes(product.category);
+
+            return matchesPrice && matchesDiscount && matchesDiscountRange && matchesCategory;
         });
     };
-    // const ringSizes = ['11', '12', '13', '5', '6', '7'];
-    // const priceRanges = ['₹10,001 - ₹15,000', '₹20,001 - ₹30,000', 'Under ₹5,000', '₹5,001 - ₹10,000', '₹15,001 - ₹20,000', '₹30,001 - ₹40,000', '₹40,000 - ₹50,000', '₹50,000 - ₹75,000', '₹1,50,001 - ₹2,00,000'];
-    // const discount = ['Up to 15% off on Diamond Prices', 'Flat 15% off on Diamond Prices', 'Flat 10% off on Diamond Prices', 'Flat 5% off on Diamond Prices', 'Flat 50% off on Making Charges']
 
     const filteredProducts = filterProducts();
-    const currentItems = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+    // Paginate the filtered products
+    const currentItems = filteredProducts.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
     // Handle pagination
     const handleNextPage = () => {
@@ -106,6 +133,7 @@ const Earrings = () => {
             setCurrentPage(currentPage + 1);
         }
     };
+
     const handlePrevPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
@@ -136,14 +164,22 @@ const Earrings = () => {
                 </li>
             );
             if (currentPage > 3) {
-                paginationItems.push(<li className="dots" key="dots-before"><span>...</span></li>);
+                paginationItems.push(
+                    <li className="dots" key="dots-before">
+                        <span>...</span>
+                    </li>
+                );
             }
         }
 
         for (let pageNum = beforePage; pageNum <= afterPage; pageNum++) {
             if (pageNum > 0 && pageNum <= totalPages) {
                 paginationItems.push(
-                    <li className={`numb ${currentPage === pageNum ? 'active' : ''}`} key={pageNum} onClick={() => handlePageClick(pageNum)}>
+                    <li
+                        className={`numb ${currentPage === pageNum ? 'active' : ''}`}
+                        key={pageNum}
+                        onClick={() => handlePageClick(pageNum)}
+                    >
                         <span>{pageNum}</span>
                     </li>
                 );
@@ -152,7 +188,11 @@ const Earrings = () => {
 
         if (currentPage < totalPages - 1) {
             if (currentPage < totalPages - 2) {
-                paginationItems.push(<li className="dots" key="dots-after"><span>...</span></li>);
+                paginationItems.push(
+                    <li className="dots" key="dots-after">
+                        <span>...</span>
+                    </li>
+                );
             }
             paginationItems.push(
                 <li className="numb" key={totalPages} onClick={() => handlePageClick(totalPages)}>
@@ -171,6 +211,7 @@ const Earrings = () => {
 
         return paginationItems;
     };
+
     return (
         <Helmet title="Engagement">
             <>
@@ -181,77 +222,96 @@ const Earrings = () => {
                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
                                     <h6 className='fiter_main_title'>FILTERS</h6>
                                 </div>
-
                                 {/* Ring Size */}
                                 {/* <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                            <h2 className='fw-bold fs-5 mt-3'>Ring Size</h2>
-                            {
-                                ringSizes.map((size, index) => (
-                                    <div className="form-check my-2" key={index}>
-                                        <input className="form-check-input" type="checkbox" id={`ringSize${index}`} 
-                                            checked={selectedRingSizes.includes(size)} 
-                                            onChange={() => handleFilterChange('ringSize', size)} />
-                                        <label className="form-check-label" htmlFor={`ringSize${index}`}>{size}</label>
-                                    </div>
-                                ))
-                            }
-                            <button onClick={() => setShowMoreRingSizes(!showMoreRingSizes)} className="btn btn-link p-0 show_btn">
-                                {showMoreRingSizes ? (
-                                    <>
-                                        <i className="ri-arrow-up-s-line fs-4 pe-1"></i>Show Less
-                                    </>
-                                ) : (
-                                    <>
-                                        <i className="ri-arrow-down-s-line fs-4 pe-1"></i>2 More
-                                    </>
-                                )
-                                }
-                            </button>
-                        </div> */}
+                                    <h2 className='fw-bold fs-5 mt-3'>Ring Size</h2>
+                                    {
+                                        ringSizes.map((size, index) => (
+                                            <div className="form-check my-2" key={index}>
+                                                <input className="form-check-input" type="checkbox" id={`ringSize${index}`}
+                                                    checked={selectedRingSizes.includes(size)}
+                                                    onChange={() => handleFilterChange('ringSize', size)} />
+                                                <label className="form-check-label" htmlFor={`ringSize${index}`}>{size}</label>
+                                            </div>
+                                        ))
+                                    }
+                                    <button onClick={() => setShowMoreRingSizes(!showMoreRingSizes)} className="btn btn-link p-0 show_btn">
+                                        {showMoreRingSizes ? (
+                                            <>
+                                                <i className="ri-arrow-up-s-line fs-4 pe-1"></i>Show Less
+                                            </>
+                                        ) : (
+                                            <>
+                                                <i className="ri-arrow-down-s-line fs-4 pe-1"></i>2 More
+                                            </>
+                                        )
+                                        }
+                                    </button>
+                                </div> */}
 
                                 {/* Price */}
                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                    <h2 className='fw-bold fs-5 mt-3'>Price</h2>
-                                    {priceRanges.map((price, index) => (
+                                    <h2 className='mt-3 filter_title'>Price</h2>
+                                    {priceRanges.slice(0, showMorePrices ? priceRanges.length : 4).map((price, index) => (
                                         <div className="form-check my-2" key={index}>
-                                            <input className="form-check-input" type="checkbox" id={`price${index}`}
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                id={`price${index}`}
                                                 checked={selectedPriceRanges.includes(price)}
-                                                onChange={() => handleFilterChange('price', price)} />
-                                            <label className="form-check-label" htmlFor={`price${index}`}>{price}</label>
+                                                onChange={() => handleFilterChange('price', price)}
+                                            />
+                                            <label className="form-check-label" htmlFor={`price${index}`}>
+                                                {price}
+                                            </label>
                                         </div>
                                     ))}
-                                    <button onClick={() => setShowMorePrices(!showMorePrices)} className="btn btn-link p-0 show_btn">
+                                    <button
+                                        onClick={() => setShowMorePrices(!showMorePrices)}
+                                        className="btn btn-link p-0 show_btn"
+                                    >
                                         {showMorePrices ? (
                                             <>
                                                 <i className="ri-arrow-up-s-line fs-4 pe-1"></i>Show Less
                                             </>
                                         ) : (
                                             <>
-                                                <i className="ri-arrow-down-s-line fs-4 pe-1"></i>5 More
+                                                <i className='ri-arrow-down-s-line fs-4 pe-1'></i>
+                                                {priceRanges.length - 4} More
                                             </>
                                         )}
                                     </button>
                                 </div>
 
                                 {/* Discount */}
-                                <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                    <h2 className='fw-bold fs-5 mt-3'>Discount</h2>
-                                    {discount.map((item, index) => (
+                                <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
+                                    <h2 className="filter_title mt-3">Discount</h2>
+                                    {discountOptions.slice(0, showMoreDiscount ? discountOptions.length : 4).map((item, index) => (
                                         <div className="form-check my-2" key={index}>
-                                            <input className="form-check-input" type="checkbox" id={`discount${index}`}
-                                                checked={selectedDiscounts.includes(`${item.split(' ')[0]}%`)}
-                                                onChange={() => handleFilterChange('discount', `${item.split(' ')[0]}%`)} />
-                                            <label className="form-check-label" htmlFor={`discount${index}`}>{item}</label>
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                id={`discount${index}`}
+                                                checked={selectedDiscounts.includes(item)}
+                                                onChange={() => handleFilterChange('discount', item)}
+                                            />
+                                            <label className="form-check-label" htmlFor={`discount${index}`}>
+                                                {item}
+                                            </label>
                                         </div>
                                     ))}
-                                    <button onClick={() => setShowMoreDiscount(!showMoreDiscount)} className="btn btn-link p-0 show_btn">
+                                    <button
+                                        onClick={() => setShowMoreDiscount(!showMoreDiscount)}
+                                        className="btn btn-link p-0 show_btn"
+                                    >
                                         {showMoreDiscount ? (
                                             <>
                                                 <i className="ri-arrow-up-s-line fs-4 pe-1"></i>Show Less
                                             </>
                                         ) : (
                                             <>
-                                                <i className="ri-arrow-down-s-line fs-4 pe-1"></i>1 More
+                                                <i className="ri-arrow-down-s-line fs-4 pe-1"></i>
+                                                {discountOptions.length - 4} More
                                             </>
                                         )}
                                     </button>
@@ -259,66 +319,68 @@ const Earrings = () => {
 
                                 {/* Discount Range */}
                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                    <h2 className='fw-bold fs-5 mt-3'>Discount_Ranges</h2>
+                                    <h2 className='filter_title mt-3'>Discount Ranges</h2>
                                     <div className="form-check my-2">
-                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                            15 - 20
-                                            <span>(271)</span>
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="discountRange1"
+                                            checked={selectedDiscountRanges.includes('15 - 20')}
+                                            onChange={() => handleFilterChange('discountRange', '15 - 20')}
+                                        />
+                                        <label className="form-check-label" htmlFor="discountRange1">
+                                            15 - 20 <span>(271)</span>
                                         </label>
                                     </div>
                                     <div className="form-check my-2">
-                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                            Below 10
-                                            <span>(47)</span>
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="discountRange2"
+                                            checked={selectedDiscountRanges.includes('Below 10')}
+                                            onChange={() => handleFilterChange('discountRange', 'Below 10')}
+                                        />
+                                        <label className="form-check-label" htmlFor="discountRange2">
+                                            Below 10 <span>(47)</span>
                                         </label>
                                     </div>
                                     <div className="form-check my-2">
-                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                            10 - 15
-                                            <span>(26)</span>
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="discountRange3"
+                                            checked={selectedDiscountRanges.includes('10 - 15')}
+                                            onChange={() => handleFilterChange('discountRange', '10 - 15')}
+                                        />
+                                        <label className="form-check-label" htmlFor="discountRange3">
+                                            10 - 15 <span>(26)</span>
                                         </label>
                                     </div>
                                 </div>
 
                                 {/* Product Type */}
                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                    <h2 className='fw-bold fs-5 mt-3'>Product Type</h2>
-                                    <div className="form-check my-2">
-                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                            Earrings
-                                            <span>(2369)</span>
-                                        </label>
-                                    </div>
-                                    <div className="form-check my-2">
-                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                            Rings
-                                            <span>(2015)</span>
-                                        </label>
-                                    </div>
-                                    <div className="form-check my-2">
-                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                            Necklaces
-                                            <span>(716)</span>
-                                        </label>
-                                    </div>
-                                    <div className="form-check my-2">
-                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                            Pendants
-                                            <span>(728)</span>
-                                        </label>
-                                    </div>
+                                    <h2 className='filter_title mt-3'>Product Type</h2>
+                                    {['Earring', 'Ring', 'Necklace', 'Bracelet'].map((category, index) => (
+                                        <div className="form-check my-2" key={index}>
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                value={category}
+                                                id={`category${index}`}
+                                                checked={selectedCategories.includes(category)}
+                                                onChange={() => handleFilterChange('category', category)}
+                                            />
+                                            <label className="form-check-label" htmlFor={`category${index}`}>
+                                                {category}
+                                            </label>
+                                        </div>
+                                    ))}
                                 </div>
 
                                 {/* Weight Ranges */}
                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                    <h2 className='fw-bold fs-5 mt-3'>Weight Ranges</h2>
+                                    <h2 className='filter_title mt-3'>Weight Ranges</h2>
                                     <div className="form-check my-2">
                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -344,7 +406,7 @@ const Earrings = () => {
 
                                 {/* Material */}
                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                    <h2 className='fw-bold fs-5 mt-3'>Material</h2>
+                                    <h2 className='filter_title mt-3'>Material</h2>
                                     <div className="form-check my-2">
                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -381,7 +443,7 @@ const Earrings = () => {
 
                                 {/* Metal */}
                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                    <h2 className='fw-bold fs-5 mt-3'>Metal</h2>
+                                    <h2 className='filter_title mt-3'>Metal</h2>
                                     <div className="form-check my-2">
                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -414,7 +476,7 @@ const Earrings = () => {
 
                                 {/* Shop For */}
                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                    <h2 className='fw-bold fs-5 mt-3'>Shop For</h2>
+                                    <h2 className='filter_title mt-3'>Shop For</h2>
                                     <div className="form-check my-2">
                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -433,7 +495,7 @@ const Earrings = () => {
 
                                 {/* Occasion */}
                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                    <h2 className='fw-bold fs-5 mt-3'>Occasion</h2>
+                                    <h2 className='filter_title mt-3'>Occasion</h2>
                                     <div className="form-check my-2">
                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -510,50 +572,35 @@ const Earrings = () => {
                                         </div>
                                         <div className="offcanvas-body small m-0 p-0">
                                             <div className='sticky-header px-5'>
-                                                {/* Ring Size */}
-                                                {/* <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                            <h2 className='fw-bold fs-5 mt-3'>Ring Size</h2>
-                                            {
-                                                ringSizes.slice(0, showMoreRingSizes ? ringSizes.length : 4).map((size, index) => (
-                                                    <div className="form-check my-2" key={index}>
-                                                        <input className="form-check-input" type="checkbox" id={`ringSize${index}`} />
-                                                        <label className="form-check-label" htmlFor={`ringSize${index}`}>{size}</label>
-                                                    </div>
-                                                ))
-                                            }
-                                            <button onClick={() => setShowMoreRingSizes(!showMoreRingSizes)} className="btn btn-link p-0 show_btn">
-                                                {showMoreRingSizes ? (
-                                                    <>
-                                                        <i className="ri-arrow-up-s-line fs-4 pe-1"></i>Show Less
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <i className="ri-arrow-down-s-line fs-4 pe-1"></i>2 More
-                                                    </>
-                                                )
-                                                }
-                                            </button>
-                                        </div> */}
-
                                                 {/* Price */}
                                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                                    <h2 className='fw-bold fs-5 mt-3'>Price</h2>
-                                                    {
-                                                        priceRanges.slice(0, showMorePrices ? priceRanges.length : 4).map((price, index) => (
-                                                            <div className="form-check my-2" key={index}>
-                                                                <input className="form-check-input" type="checkbox" id={`price${index}`} />
-                                                                <label className="form-check-label" htmlFor={`price${index}`}>{price}</label>
-                                                            </div>
-                                                        ))
-                                                    }
-                                                    <button onClick={() => setShowMorePrices(!showMorePrices)} className="btn btn-link p-0 show_btn">
+                                                    <h2 className='filter_title mt-3'>Price</h2>
+                                                    {priceRanges.slice(0, showMorePrices ? priceRanges.length : 4).map((price, index) => (
+                                                        <div className="form-check my-2" key={index}>
+                                                            <input
+                                                                className="form-check-input"
+                                                                type="checkbox"
+                                                                id={`price${index}`}
+                                                                checked={selectedPriceRanges.includes(price)}
+                                                                onChange={() => handleFilterChange('price', price)}
+                                                            />
+                                                            <label className="form-check-label" htmlFor={`price${index}`}>
+                                                                {price}
+                                                            </label>
+                                                        </div>
+                                                    ))}
+                                                    <button
+                                                        onClick={() => setShowMorePrices(!showMorePrices)}
+                                                        className="btn btn-link p-0 show_btn"
+                                                    >
                                                         {showMorePrices ? (
                                                             <>
                                                                 <i className="ri-arrow-up-s-line fs-4 pe-1"></i>Show Less
                                                             </>
                                                         ) : (
                                                             <>
-                                                                <i className="ri-arrow-down-s-line fs-4 pe-1"></i>5 More
+                                                                <i className='ri-arrow-down-s-line fs-4 pe-1'></i>
+                                                                {priceRanges.length - 4} More
                                                             </>
                                                         )}
                                                     </button>
@@ -561,23 +608,33 @@ const Earrings = () => {
 
                                                 {/* Discount */}
                                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                                    <h2 className='fw-bold fs-5 mt-3'>Discount</h2>
-                                                    {
-                                                        discount.slice(0, showMoreDiscount ? discount.length : 4).map((price, index) => (
-                                                            <div className="form-check my-2" key={index}>
-                                                                <input className="form-check-input" type="checkbox" id={`price${index}`} />
-                                                                <label className="form-check-label" htmlFor={`price${index}`}>{price}</label>
-                                                            </div>
-                                                        ))
-                                                    }
-                                                    <button onClick={() => setShowMoreDiscount(!showMoreDiscount)} className="btn btn-link p-0 show_btn">
+                                                    <h2 className='filter_title mt-3'>Discount</h2>
+                                                    {discountOptions.slice(0, showMoreDiscount ? discountOptions.length : 4).map((item, index) => (
+                                                        <div className="form-check my-2" key={index}>
+                                                            <input
+                                                                className="form-check-input"
+                                                                type="checkbox"
+                                                                id={`discount${index}`}
+                                                                checked={selectedDiscounts.includes(item)}
+                                                                onChange={() => handleFilterChange('discount', item)}
+                                                            />
+                                                            <label className="form-check-label" htmlFor={`discount${index}`}>
+                                                                {item}
+                                                            </label>
+                                                        </div>
+                                                    ))}
+                                                    <button
+                                                        onClick={() => setShowMoreDiscount(!showMoreDiscount)}
+                                                        className="btn btn-link p-0 show_btn"
+                                                    >
                                                         {showMoreDiscount ? (
                                                             <>
                                                                 <i className="ri-arrow-up-s-line fs-4 pe-1"></i>Show Less
                                                             </>
                                                         ) : (
                                                             <>
-                                                                <i className="ri-arrow-down-s-line fs-4 pe-1"></i>1 More
+                                                                <i className="ri-arrow-down-s-line fs-4 pe-1"></i>
+                                                                {discountOptions.length - 4} More
                                                             </>
                                                         )}
                                                     </button>
@@ -585,66 +642,68 @@ const Earrings = () => {
 
                                                 {/* Discount Range */}
                                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                                    <h2 className='fw-bold fs-5 mt-3'>Discount_Ranges</h2>
+                                                    <h2 className='filter_title mt-3'>Discount_Ranges</h2>
                                                     <div className="form-check my-2">
-                                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                            15 - 20
-                                                            <span>(271)</span>
+                                                        <input
+                                                            className="form-check-input"
+                                                            type="checkbox"
+                                                            id="discountRange1"
+                                                            checked={selectedDiscountRanges.includes('15 - 20')}
+                                                            onChange={() => handleFilterChange('discountRange', '15 - 20')}
+                                                        />
+                                                        <label className="form-check-label" htmlFor="discountRange1">
+                                                            15 - 20 <span>(271)</span>
                                                         </label>
                                                     </div>
                                                     <div className="form-check my-2">
-                                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                            Below 10
-                                                            <span>(47)</span>
+                                                        <input
+                                                            className="form-check-input"
+                                                            type="checkbox"
+                                                            id="discountRange2"
+                                                            checked={selectedDiscountRanges.includes('Below 10')}
+                                                            onChange={() => handleFilterChange('discountRange', 'Below 10')}
+                                                        />
+                                                        <label className="form-check-label" htmlFor="discountRange2">
+                                                            Below 10 <span>(47)</span>
                                                         </label>
                                                     </div>
                                                     <div className="form-check my-2">
-                                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                            10 - 15
-                                                            <span>(26)</span>
+                                                        <input
+                                                            className="form-check-input"
+                                                            type="checkbox"
+                                                            id="discountRange3"
+                                                            checked={selectedDiscountRanges.includes('10 - 15')}
+                                                            onChange={() => handleFilterChange('discountRange', '10 - 15')}
+                                                        />
+                                                        <label className="form-check-label" htmlFor="discountRange3">
+                                                            10 - 15 <span>(26)</span>
                                                         </label>
                                                     </div>
                                                 </div>
 
                                                 {/* Product Type */}
                                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                                    <h2 className='fw-bold fs-5 mt-3'>Product Type</h2>
-                                                    <div className="form-check my-2">
-                                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                            Earrings
-                                                            <span>(2369)</span>
-                                                        </label>
-                                                    </div>
-                                                    <div className="form-check my-2">
-                                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                            Rings
-                                                            <span>(2015)</span>
-                                                        </label>
-                                                    </div>
-                                                    <div className="form-check my-2">
-                                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                            Necklaces
-                                                            <span>(716)</span>
-                                                        </label>
-                                                    </div>
-                                                    <div className="form-check my-2">
-                                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                                                            Pendants
-                                                            <span>(728)</span>
-                                                        </label>
-                                                    </div>
+                                                    <h2 className='filter_title mt-3'>Product Type</h2>
+                                                    {['Earring', 'Ring', 'Necklace', 'Bracelet'].map((category, index) => (
+                                                        <div className="form-check my-2" key={index}>
+                                                            <input
+                                                                className="form-check-input"
+                                                                type="checkbox"
+                                                                value={category}
+                                                                id={`category${index}`}
+                                                                checked={selectedCategories.includes(category)}
+                                                                onChange={() => handleFilterChange('category', category)}
+                                                            />
+                                                            <label className="form-check-label" htmlFor={`category${index}`}>
+                                                                {category}
+                                                            </label>
+                                                        </div>
+                                                    ))}
                                                 </div>
 
                                                 {/* Weight Ranges */}
                                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                                    <h2 className='fw-bold fs-5 mt-3'>Weight Ranges</h2>
+                                                    <h2 className='filter_title mt-3'>Weight Ranges</h2>
                                                     <div className="form-check my-2">
                                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -670,7 +729,7 @@ const Earrings = () => {
 
                                                 {/* Material */}
                                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                                    <h2 className='fw-bold fs-5 mt-3'>Material</h2>
+                                                    <h2 className='filter_title mt-3'>Material</h2>
                                                     <div className="form-check my-2">
                                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -707,7 +766,7 @@ const Earrings = () => {
 
                                                 {/* Metal */}
                                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                                    <h2 className='fw-bold fs-5 mt-3'>Metal</h2>
+                                                    <h2 className='filter_title mt-3'>Metal</h2>
                                                     <div className="form-check my-2">
                                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -740,7 +799,7 @@ const Earrings = () => {
 
                                                 {/* Shop For */}
                                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                                    <h2 className='fw-bold fs-5 mt-3'>Shop For</h2>
+                                                    <h2 className='filter_title mt-3'>Shop For</h2>
                                                     <div className="form-check my-2">
                                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -759,7 +818,7 @@ const Earrings = () => {
 
                                                 {/* Occasion */}
                                                 <div className='border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2'>
-                                                    <h2 className='fw-bold fs-5 mt-3'>Occasion</h2>
+                                                    <h2 className='filter_title mt-3'>Occasion</h2>
                                                     <div className="form-check my-2">
                                                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                                         <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -796,7 +855,7 @@ const Earrings = () => {
                                                         <button className='btn w-100 filter_md_btn'>Clear All</button>
                                                     </div>
                                                     <div className='col-md-6 col-sm-6 col-6'>
-                                                        <button className='btn w-100 text-light filter_md_btn1'>APPLY FILTERS</button>
+                                                        <button className='btn w-100 text-light filter_md_btn1' data-bs-dismiss="offcanvas" aria-label="Close">APPLY FILTERS</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -808,33 +867,47 @@ const Earrings = () => {
 
                         <div className='col-lg-9'>
                             {/* <div className='row'>
-                        <div className='d-xl-block d-lg-block d-none d-flex justify-content-end'>
-                            <div>
-                                <select className="form-select">
-                                    <option value="default">Default</option>
-                                    <option value="1">Alphabetically, A-Z</option>
-                                    <option value="2">Alphabetically, Z-A</option>
-                                    <option value="3">High Price</option>
-                                    <option value="4">Low Price</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div> */}
+                                <div className='d-xl-block d-lg-block d-none d-flex justify-content-end'>
+                                    <div>
+                                        <select className="form-select">
+                                            <option value="default">Default</option>
+                                            <option value="1">Alphabetically, A-Z</option>
+                                            <option value="2">Alphabetically, Z-A</option>
+                                            <option value="3">High Price</option>
+                                            <option value="4">Low Price</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> */}
                             <div className='row'>
-                                {currentItems.map((item, index) => (
-                                    <React.Fragment key={item.id}>
-                                        <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow'>
-                                            <ProductCard Productsitem={item} />
-                                        </div>
-                                        {(index + 1) % 4 === 0 && Math.floor(index / 4) < images.length && (
-                                            <div className='col-xl-6 col-lg-4 col-md-6 col-sm-12 col-12'>
-                                                <img alt={`Product ${Math.floor(index / 4) + 1}`} src={images[Math.floor(index / 4)]} className='img py-2' style={{ borderRadius: "40px" }} />
+                                {currentItems.length > 0 ? (
+                                    currentItems.map((item, index) => (
+                                        <React.Fragment key={item.id}>
+                                            {/* Product Card */}
+                                            <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow p-0 px-1'>
+                                                <ProductCard Productsitem={item} />
                                             </div>
-                                        )}
-                                    </React.Fragment>
-                                ))}
-                            </div>
 
+                                            {/* Insert Image After Every 4 Products */}
+                                            {(index + 1) % 4 === 0 && Math.floor(index / 4) < images.length && (
+                                                <div className='col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12'>
+                                                    <img
+                                                        alt={`Product ${Math.floor(index / 4) + 1}`}
+                                                        src={images[Math.floor(index / 4)]}
+                                                        className='img py-2'
+                                                        style={{ borderRadius: "40px" }}
+                                                    />
+                                                </div>
+                                            )}
+                                        </React.Fragment>
+                                    ))
+                                ) : (
+                                    <div className="text-center w-100 py-5">
+                                        <h4>No products found</h4>
+                                        <p>Oops! There are no products available under your current selection.</p>
+                                    </div>
+                                )}
+                            </div>
                             <div className='pagination'>
                                 <ul>
                                     {renderPagination()}

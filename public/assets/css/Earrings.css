@@ -1,13 +1,15 @@
 .card-body p {
-    color: #4f3267;
-    font-weight: bold;
-    font-size: 16px;
+    color: #000;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.8px;
 }
 
 .card-body p span {
-    color: #9d9fa4;
+    color: #000;
+    font-weight: 400;
     font-size: 12px;
-    font-weight: 100 !important;
+    letter-spacing: 0.8px;
 }
 
 .card-body>div {
@@ -16,14 +18,15 @@
 }
 
 .card-body h6 {
-    font-size: 12px;
-    color: #9d9fa4;
+    font-size: 13px;
+    color: #000;
     letter-spacing: 0.9px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
     display: block;
+    font-weight: 400;
 }
 
 .card_shadow img {
@@ -35,16 +38,16 @@
     border-radius: 20px;
     margin-bottom: 10px;
     margin-top: 10px !important;
-    padding: 15px 0px;
+    /* padding: 15px 0px; */
 }
 
-.card_shadow:hover {
+/* .card_shadow:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .absolute_heart {
     position: absolute;
-    left: 85%;
+    left: 90%;
     top: 3%;
 }
 
@@ -57,20 +60,11 @@
     font-size: 11px !important;
 }
 
-.absolute_next_btn {
-    position: absolute;
-    left: 25%;
-    top: 20%;
-    background: transparent;
+.filter_title{
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 19px;
 }
-
-.absolute_prev_btn {
-    position: absolute;
-    left: -12%;
-    top: 20%;
-    background: transparent;
-}
-
 .fiter_main_title {
     font-size: 13px;
 }
@@ -85,9 +79,11 @@
 }
 
 .form-check-label {
-    font-size: 14px;
+    font-size: 13.8px;
     padding-top: 5px;
     color: #4f3267;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
 .form-check-label span {
@@ -352,7 +348,7 @@
     }
 
     .absolute_heart {
-        left: 81% !important;
+        left: 85% !important;
         top: 2% !important;
     }
 }

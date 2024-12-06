@@ -15,15 +15,16 @@ const Header = () => {
 
     const totalQuantity = useSelector(state => state.cart.totalQuantity);
     const wishlistItem = useSelector(state => state.cart.wishlistItem);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-    
+
     var settings = {
         dots: false,
         infinite: true,
-        speed: 500,
+        speed: 1000,
         autoplay: true,
         autoplaySpeed: 3000,
         slidesToShow: 1,
@@ -31,66 +32,56 @@ const Header = () => {
     };
 
     const slider_search = {
-        dots: false,
-        infinite: true,
-        speed: 1000,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        arrows: true,
+        slidesToShow: 5, // Default: Show 5 slides
+        slidesToScroll: 1, // Scroll one at a time
+        infinite: false, // Disable infinite scrolling
+        afterChange: (index) => setCurrentIndex(index), // Track index after change
         responsive: [
             {
-                breakpoint: 480, // tablet
+                breakpoint: 1200, // For devices with width <= 1200px
                 settings: {
-                    slidesToShow: 2, // Show 2 items on tablet
-                    slidesToScroll: 1,
+                    slidesToShow: 4,
                 },
             },
             {
-                breakpoint: 768, // tablet
+                breakpoint: 992, // For devices with width <= 992px
                 settings: {
-                    slidesToShow: 3, // Show 2 items on tablet
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 1024, // small desktop
-                settings: {
-                    slidesToShow: 4, // Show 3 items on small desktop
-                    slidesToScroll: 2,
+                    slidesToShow: 3,
                 },
             }
         ],
     };
 
     const slider_search_md = {
-        dots: false,
-        infinite: true,
-        speed: 1000,
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        arrows: true,
+        slidesToShow: 3, // Default: Show 5 slides
+        slidesToScroll: 1, // Scroll one at a time
+        infinite: false, // Disable infinite scrolling
+        afterChange: (index) => setCurrentIndex(index), // Track index after change
         responsive: [
             {
-                breakpoint: 480, // tablet
+                breakpoint: 1200, // For devices with width <= 1200px
                 settings: {
-                    slidesToShow: 2, // Show 2 items on tablet
-                    slidesToScroll: 1,
+                    slidesToShow: 4,
                 },
             },
             {
-                breakpoint: 768, // tablet
+                breakpoint: 992, // For devices with width <= 992px
                 settings: {
-                    slidesToShow: 3, // Show 2 items on tablet
-                    slidesToScroll: 1,
+                    slidesToShow: 3,
                 },
             },
             {
-                breakpoint: 1024, // small desktop
+                breakpoint: 768, // For devices with width <= 768px
                 settings: {
-                    slidesToShow: 4, // Show 3 items on small desktop
-                    slidesToScroll: 2,
+                    slidesToShow: 3,
                 },
-            }
+            },
+            {
+                breakpoint: 576, // For devices with width <= 576px
+                settings: {
+                    slidesToShow: 2,
+                },
+            },
         ],
     };
     const [searchTerm, setSearchTerm] = useState('');
@@ -150,15 +141,22 @@ const Header = () => {
             toast.error('Something went wrong during log-out.');
         }
     };
+
+    // recently viewd
+    const recentlyViewed = useSelector(state => state.cart.recentlyViewed);
+
     return (
         <div className=" m-0 p-0">
             <section className='container-fluid text-center header_color py-1'>
                 <Slider {...settings}>
                     <div>
-                        <h6>BEST D2C GAMECHANGER BRAND 2023</h6>
+                        <h6>This Holiday, enjoy complimentary shipping & extended returns with our Tiffany Blue® packaging.</h6>
                     </div>
                     <div>
-                        <h6>FEMINA POWER BRANDS 2023</h6>
+                        <h6>Our gift to you: A Bird on a Rock charm to adorn your Tiffany Blue® bag, complimentary with every online delivery order.</h6>
+                    </div>
+                    <div>
+                        <h6>New for the holidays: limited-edition Return to Tiffany® designs. </h6>
                     </div>
                 </Slider>
             </section>
@@ -197,25 +195,33 @@ const Header = () => {
                                     src='assets/img/tiffco-logo-2.svg'
                                     className='img-fluid w-50 mx-auto d-block'
                                 /> */}
-                                SALTAND GLITZ
+                                SALT & GLITZ
                             </Link>
                         </div>
                     </div>
-                    <div className='col-lg-3 col-md-3 col-sm-12 header_logo d-flex justify-content-center align-items-center text-center'>
+                    <div className='col-lg-3 col-md-3 col-sm-12 header_logo d-flex justify-content-end align-items-center'>
+                        <Link className='text-decoration-none text-dark' to="">
+                            <i class="ri-contacts-line">
+                                <span className='align-middle' style={{fontSize:"14px",fontWeight:"500"}}>&nbsp; Contact us</span>
+                                {totalQuantity > 0 && (
+                                    <span className="badge badge-icon">{totalQuantity}</span>
+                                )}
+                            </i>
+                        </Link>
                         <div className="dropdown drp_main">
                             <Link className="text-decoration-none text-dark dropdown-toggle" id="dropdownUserLink" role="button">
-                                <i className="ri-user-fill nav_icon text-center"></i>
+                                <i className="ri-user-line nav_icon text-center"></i>
                             </Link>
                             <ul className="dropdown-menu drp_icon" aria-labelledby="dropdownUserLink">
                                 {isLoggedIn ? (
                                     <>
                                         <div className="">
-                                            <p className="user-email">{user ? user.email : 'Guest'}</p>
-                                            <div className="underline mb-3"></div>
+                                            <p className="user-email px-3">{user ? user.email : 'Guest'}</p>
+                                            <div className="underline mb-3 ms-3"></div>
                                             <ul className="profile-menu">
                                                 <li className="mb-2">
                                                     <Link to="/Userprofile" className="profile-menu-item">
-                                                        <i class="ri-user-3-fill"></i> My Account
+                                                        <i className="ri-user-3-fill"></i> My Account
                                                     </Link>
                                                 </li>
                                                 <li>
@@ -246,14 +252,14 @@ const Header = () => {
                         </div>
 
                         <Link className='text-decoration-none text-dark' to="/wishlist">
-                            <i className="ri-heart-fill text-center position-relative">
+                            <i className="ri-heart-line text-center position-relative">
                                 {wishlistItem.length > 0 && (
                                     <span className="badge badge-icon badge_icon_w text-center">{wishlistItem.length}</span>
                                 )}
                             </i>
                         </Link>
                         <Link className='text-decoration-none text-dark' to="/cart">
-                            <i className="ri-shopping-cart-fill pe-0 position-relative">
+                            <i className="ri-shopping-cart-2-line pe-0 position-relative">
                                 {totalQuantity > 0 && (
                                     <span className="badge badge-icon">{totalQuantity}</span>
                                 )}
@@ -275,8 +281,8 @@ const Header = () => {
                                 {/* <Link to={isLoggedIn ? "/Userprofile" : "/signup"} className='text-decoration-none text-dark'>
                                     <i className="ri-user-line"></i>
                                 </Link> */}
-                                <Link className='text-decoration-none text-dark'>
-                                    <i className="ri-user-line"></i>
+                                <Link className="text-decoration-none text-dark dropdown-toggle" id="dropdownUserLink" role="button">
+                                    <i className="ri-user-fill nav_icon text-center"></i>
                                 </Link>
                             </div>
                             <div className="offcanvas-body">
@@ -1061,14 +1067,14 @@ const Header = () => {
 
                     <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center'>
                         <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
-                            <i className="ri-heart-fill pe-0 position-relative">
+                            <i className="ri-heart-line pe-0 position-relative">
                                 {wishlistItem.length > 0 && (
                                     <span className="badge badge-icon">{wishlistItem.length}</span>
                                 )}
                             </i>
                         </Link>
                         <Link className='text-decoration-none text-dark' to="/cart">
-                            <i className="ri-shopping-cart-fill pe-0 position-relative">
+                            <i className="ri-shopping-cart-line pe-0 position-relative">
                                 {totalQuantity > 0 && (
                                     <span className="badge badge-icon">{totalQuantity}</span>
                                 )}
@@ -1092,7 +1098,7 @@ const Header = () => {
             <section className='container-fluid'>
                 <div className='row'>
                     <div>
-                        <nav className="navbar navbar-expand-lg navbar-light">
+                        <nav className="navbar navbar-expand-lg navbar-light pt-0 pb-1">
                             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
@@ -1831,7 +1837,7 @@ const Header = () => {
                             filteredProducts.map((item) => (
                                 <div className='col-lg-6 px-4' key={item.id}>
                                     <div className="search-item">
-                                        <Link to={`/productDetail/${item.id}`} className="text-decoration-none text-dark">
+                                        <Link to={`/productDetail/${item.id}`} className="text-decoration-none text-dark" >
                                             <div className="left">
                                                 <img src={item.image01} alt={item.title} className='img-fluid search_offcanvas_arrow' />
                                                 <span>{item.title}</span>
@@ -1845,35 +1851,68 @@ const Header = () => {
                         )}
                     </div>
 
-                    <h5 className='trending_title pt-4'>Recently Viewed</h5>
-                    <div className='row position-relative'>
-                        <div className=''>
-                            <button onClick={() => search?.current?.slickPrev()} className='pre-btn-set'><i className="ri-arrow-left-wide-line"></i></button>
-                        </div>
-                        <div className='pt-3'>
-                            <Slider ref={search} {...slider_search}>
-                                {products.map((item) => (
-                                    <div className='card border-0 w-100 mx-auto d-block' key={item.id}>
-                                        <Link to={`/productDetail/${item.id}`}>
-                                            <img alt={item.title} src={item.image01} className='img-fluid px-2 position-relative' />
-                                        </Link>
-                                        <div className='card-body cartlane'>
-                                            <h6>
-                                                {formatCurrency(item.price)} <span><del>{formatCurrency(item.delprice)}</del></span>
-                                            </h6>
-                                            <p>{item.title}</p>
-                                        </div>
+                    <h5 className="trending_title pt-4">Recently Viewed</h5>
+                    <div className="row position-relative">
+                        {recentlyViewed.length > 0 ? (
+                            <>
+                                {/* Prev Button */}
+                                {currentIndex > 0 && (
+                                    <div>
+                                        <button
+                                            onClick={() => search?.current?.slickPrev()}
+                                            className="pre-btn-set"
+                                        >
+                                            <i className="ri-arrow-left-wide-line"></i>
+                                        </button>
                                     </div>
-                                ))}
-                            </Slider>
-                        </div>
-                        <div className=''>
-                            <button onClick={() => search?.current?.slickNext()} className="next-btn-set float-end "><i className="ri-arrow-right-wide-line"></i></button>
-                        </div>
+                                )}
+
+                                <Slider ref={search} {...slider_search}>
+                                    {recentlyViewed.map((item) => (
+                                        <div
+                                            className="card border-0 w-100 mx-auto d-block"
+                                            key={item.id}
+                                        >
+                                            <Link to={`/productDetail/${item.id}`}>
+                                                <img
+                                                    alt={item.title}
+                                                    src={item.image01}
+                                                    className="img-fluid px-2 position-relative"
+                                                />
+                                            </Link>
+                                            <div className="card-body cartlane">
+                                                <h6>
+                                                    {formatCurrency(item.price)}{" "}
+                                                    <span>
+                                                        <del>{formatCurrency(item.delprice)}</del>
+                                                    </span>
+                                                </h6>
+                                                <p>{item.title}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </Slider>
+
+                                {/* Next Button */}
+                                {currentIndex < recentlyViewed.length - slider_search.slidesToShow && (
+                                    <div>
+                                        <button
+                                            onClick={() => search?.current?.slickNext()}
+                                            className="next-btn-set float-end"
+                                        >
+                                            <i className="ri-arrow-right-wide-line"></i>
+                                        </button>
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <div className="text-center w-100 pt-5">
+                                <p>You haven't viewed any products yet. Start exploring now!</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
-
             {/*MD OFFCANVAS */}
             <div className="offcanvas offcanvas-bottom rounded-0" tabIndex="-1" id="mdsearchOffcanvas" aria-labelledby="mdoffcanvasSearchLabel">
                 <div className="offcanvas-header offcanvas_header_search">
@@ -1920,31 +1959,65 @@ const Header = () => {
                         )}
                     </div>
 
-                    <h5 className='trending_title pt-4'>Recently Viewed</h5>
-                    <div className='row position-relative'>
-                        <div className=''>
-                            <button onClick={() => searchmd?.current?.slickPrev()} className='pre-btn-set'><i className="ri-arrow-left-wide-line"></i></button>
-                        </div>
-                        <div className='pt-3'>
-                            <Slider ref={search} {...slider_search_md}>
-                                {products.map((item) => (
-                                    <div className='card border-0 w-100 mx-auto d-block' key={item.id}>
-                                        <Link to={`/productDetail/${item.id}`}>
-                                            <img alt={item.title} src={item.image01} className='img-fluid px-2 position-relative' />
-                                        </Link>
-                                        <div className='card-body cartlane'>
-                                            <h6>
-                                                {formatCurrency(item.price)} <span><del>{formatCurrency(item.delprice)}</del></span>
-                                            </h6>
-                                            <p>{item.title}</p>
-                                        </div>
+                    <h5 className="trending_title pt-4">Recently Viewed</h5>
+                    <div className="row position-relative">
+                        {recentlyViewed.length > 0 ? (
+                            <>
+                                {/* Prev Button */}
+                                {currentIndex > 0 && (
+                                    <div>
+                                        <button
+                                            onClick={() => searchmd?.current?.slickPrev()}
+                                            className="pre-btn-set"
+                                        >
+                                            <i className="ri-arrow-left-wide-line"></i>
+                                        </button>
                                     </div>
-                                ))}
-                            </Slider>
-                        </div>
-                        <div className=''>
-                            <button onClick={() => searchmd?.current?.slickNext()} className="next-btn-set float-end "><i className="ri-arrow-right-wide-line"></i></button>
-                        </div>
+                                )}
+
+                                <Slider ref={searchmd} {...slider_search_md}>
+                                    {recentlyViewed.map((item) => (
+                                        <div
+                                            className="card border-0 w-100 mx-auto d-block"
+                                            key={item.id}
+                                        >
+                                            <Link to={`/productDetail/${item.id}`}>
+                                                <img
+                                                    alt={item.title}
+                                                    src={item.image01}
+                                                    className="img-fluid px-2 position-relative"
+                                                />
+                                            </Link>
+                                            <div className="card-body cartlane">
+                                                <h6>
+                                                    {formatCurrency(item.price)}{" "}
+                                                    <span>
+                                                        <del>{formatCurrency(item.delprice)}</del>
+                                                    </span>
+                                                </h6>
+                                                <p>{item.title}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </Slider>
+
+                                {/* Next Button */}
+                                {currentIndex < recentlyViewed.length - slider_search_md.slidesToShow && (
+                                    <div>
+                                        <button
+                                            onClick={() => searchmd?.current?.slickNext()}
+                                            className="next-btn-set float-end"
+                                        >
+                                            <i className="ri-arrow-right-wide-line"></i>
+                                        </button>
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <div className="text-center w-100 pt-5">
+                                <p>You haven't viewed any products yet. Start exploring now!</p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

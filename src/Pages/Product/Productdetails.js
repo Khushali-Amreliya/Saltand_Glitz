@@ -111,7 +111,7 @@
 //     //         setLoading(false);
 //     //     }
 //     // };
-    
+
 //     // const buyNow = () => {
 //     //     setLoading(true);
 
@@ -160,7 +160,7 @@
 //     const handleColorClick = (colorId) => {
 //         setSelectedColor(selectedColor === colorId ? null : colorId);
 //     };
-    
+
 //     var md_carousel = {
 //         dots: true,
 //         infinite: true,
@@ -189,7 +189,7 @@
 //         { metal: '14KT White Gold', price: price }, // No change for 14KT White Gold
 //         { metal: '16KT Rose Gold', price: Math.round(price * 1.07) } // 7% more
 //     ], [price]);
-    
+
 //     const diamondOptions = [
 //         { quality: "IJ-SI", status: "Only 4 left!", price: Math.round(price * 1.02) }, // 2% more
 //         { quality: "GH-VS", status: "Made to Order", price: Math.round(price * 1.04) }, // 4% more
@@ -197,7 +197,7 @@
 //         { quality: "EF-VVS", status: "Made to Order", price: Math.round(price * 1.08) }, // 8% more
 //         { quality: "GH-SI", status: "In Stock!", price: price } // No change for GH-SI
 //     ];
-    
+
 //     const [selectedMetal, setSelectedMetal] = useState(metalOptions[1].metal); // Track selected metal
 //     const [confirmedMetal, setConfirmedMetal] = useState(metalOptions[1].metal); // Confirmed metal
 
@@ -217,39 +217,39 @@
 //     const calculateTempPrice = (sizePrice, metalPrice, diamondPrice) => {
 //         return sizePrice + metalPrice + diamondPrice - price;
 //     };
-    
+
 //     const handleSizeClick = (size) => {
 //         setSelectedSize(size);
 //         const selectedSizeData = sizeOptions.find((s) => s.size === size);
 //         const selectedMetalData = metalOptions.find((m) => m.metal === selectedMetal);
 //         const selectedDiamondData = diamondOptions.find((d) => d.quality === selectedDiamondQuality);
-    
+
 //         setTempPrice(calculateTempPrice(
 //             selectedSizeData ? selectedSizeData.price : price,
 //             selectedMetalData ? selectedMetalData.price : 0,
 //             selectedDiamondData ? selectedDiamondData.price : 0
 //         ));
 //     };
-    
+
 //     const handleMetalClick = (metal) => {
 //         setSelectedMetal(metal);
 //         const selectedSizeData = sizeOptions.find((s) => s.size === selectedSize);
 //         const selectedMetalData = metalOptions.find((m) => m.metal === metal);
 //         const selectedDiamondData = diamondOptions.find((d) => d.quality === selectedDiamondQuality);
-    
+
 //         setTempPrice(calculateTempPrice(
 //             selectedSizeData ? selectedSizeData.price : price,
 //             selectedMetalData ? selectedMetalData.price : 0,
 //             selectedDiamondData ? selectedDiamondData.price : 0
 //         ));
 //     };                  
-    
+
 //     const handleDiamondQualityClick = (quality) => {
 //         setSelectedDiamondQuality(quality);
 //         const selectedSizeData = sizeOptions.find((s) => s.size === selectedSize);
 //         const selectedMetalData = metalOptions.find((m) => m.metal === selectedMetal);
 //         const selectedDiamondData = diamondOptions.find((d) => d.quality === quality);
-    
+
 //         setTempPrice(calculateTempPrice(
 //             selectedSizeData ? selectedSizeData.price : price,
 //             selectedMetalData ? selectedMetalData.price : 0,
@@ -262,7 +262,7 @@
 //         setAdjustedPrice(tempPrice);
 //         setConfirmedMetal(selectedMetal);
 //         setConfirmedDiamondQuality(selectedDiamondQuality);
-    
+
 //         const offcanvas = document.getElementById('offcanvassize', 'offcanvasmetal', 'offcanvasDiamond');
 //         const offcanvasInstance = new window.bootstrap.Offcanvas(offcanvas);
 //         offcanvasInstance.hide();
@@ -936,7 +936,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartAction } from '../../Store/Slice/CartSlice';
 import products from '../../fakedata/Product';
 import Loader from '../Loader';
@@ -945,20 +945,64 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Slider from 'react-slick/lib/slider';
 import Helmet from '../../Components/Helmet';
+import ProductCard from './productCard';
 
 const Productdetails = () => {
-    const [loading , setLoading] = useState(false);
-    const [selectedColor , setSelectedColor] = useState(2);
-
+    const search = React.useRef(null);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [selectedColor, setSelectedColor] = useState(2);
+    const [allProduct, setAllProduct] = useState(products)
     const navigate = useNavigate()
     useEffect(() => {
-        window.scrollTo(0,0);
-    },[])
+        window.scrollTo(0, 0);
+    }, [])
 
     const { id } = useParams()
     const Product = products.find(item => item.id === id)
-    const { title, price, image01, delprice , category } = Product;
+    const { title, price, image01, delprice, category } = Product;
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(cartAction.addRecentlyViewed(Product));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch]);
+
+    // recently viewd
+    const recentlyViewed = useSelector(state => state.cart.recentlyViewed);
+
+    const slider_search = {
+        slidesToShow: 5, // Default: Show 5 slides
+        slidesToScroll: 1, // Scroll one at a time
+        infinite: false, // Disable infinite scrolling
+        afterChange: (index) => setCurrentIndex(index), // Track index after change
+        responsive: [
+            {
+                breakpoint: 1200, // For devices with width <= 1200px
+                settings: {
+                    slidesToShow: 4,
+                },
+            },
+            {
+                breakpoint: 992, // For devices with width <= 992px
+                settings: {
+                    slidesToShow: 3,
+                },
+            },
+            {
+                breakpoint: 768, // For devices with width <= 768px
+                settings: {
+                    slidesToShow: 3,
+                },
+            },
+            {
+                breakpoint: 576, // For devices with width <= 576px
+                settings: {
+                    slidesToShow: 2,
+                },
+            },
+        ],
+    };
 
     // const addToCart = () => {
     //     // setLoading(true);
@@ -971,45 +1015,45 @@ const Productdetails = () => {
     //     // }, 2000);
     // };
     const addToCart = async () => {
-    setLoading(true);
-    toast.success("Product added to cart successfully!", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    });
+        setLoading(true);
+        toast.success("Product added to cart successfully!", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
 
-    // Use adjustedPrice to ensure the final price is added to the cart
-    const cartItem = {  
-        id,
-        title,
-        price: adjustedPrice,
-        image01,
-        totalprice: adjustedPrice,
-        selectedSize,
-        confirmedMetal,
-        confirmedDiamondQuality
-    };
+        // Use adjustedPrice to ensure the final price is added to the cart
+        const cartItem = {
+            id,
+            title,
+            price: adjustedPrice,
+            image01,
+            totalprice: adjustedPrice,
+            selectedSize,
+            confirmedMetal,
+            confirmedDiamondQuality
+        };
 
-    try {
-        const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
+        try {
+            const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
 
-        if (response.status === 201) {
-            dispatch(cartAction.addItem(response.data));
-            setTimeout(() => {
+            if (response.status === 201) {
+                dispatch(cartAction.addItem(response.data));
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000);
+            } else {
                 setLoading(false);
-            }, 2000);
-        } else {
+            }
+        } catch (error) {
+            console.error('Error adding item to cart:', error);
             setLoading(false);
         }
-    } catch (error) {
-        console.error('Error adding item to cart:', error);
-        setLoading(false);
-    }
-};
+    };
 
     // const addToCart = async () => {
     //     setLoading(true);
@@ -1047,7 +1091,7 @@ const Productdetails = () => {
     //         setLoading(false);
     //     }
     // };
-    
+
     // const buyNow = () => {
     //     setLoading(true);
 
@@ -1088,19 +1132,15 @@ const Productdetails = () => {
     };
 
     const colors = [
-        { id: 1, color: "#ffcccc"},
-        { id: 2, color: "#cccccc"},
-        { id: 3, color: "#ffcc66"}
+        { id: 1, color: "#ffcccc" },
+        { id: 2, color: "#cccccc" },
+        { id: 3, color: "#ffcc66" }
     ]
 
     const handleColorClick = (colorId) => {
         setSelectedColor(selectedColor === colorId ? null : colorId);
     };
 
-    // const handlecolorCLick = (colorId) => {
-    //     setSelectedColor(selecte)
-    // }
-    
     var md_carousel = {
         dots: true,
         infinite: true,
@@ -1129,7 +1169,7 @@ const Productdetails = () => {
         { metal: '14KT White Gold', price: price }, // No change for 14KT White Gold
         { metal: '16KT Rose Gold', price: Math.round(price * 1.07) } // 7% more
     ], [price]);
-    
+
     const diamondOptions = [
         { quality: "IJ-SI", status: "Only 4 left!", price: Math.round(price * 1.02) }, // 2% more
         { quality: "GH-VS", status: "Made to Order", price: Math.round(price * 1.04) }, // 4% more
@@ -1137,7 +1177,7 @@ const Productdetails = () => {
         { quality: "EF-VVS", status: "Made to Order", price: Math.round(price * 1.08) }, // 8% more
         { quality: "GH-SI", status: "In Stock!", price: price } // No change for GH-SI
     ];
-    
+
     const [selectedMetal, setSelectedMetal] = useState(metalOptions[1].metal); // Track selected metal
     const [confirmedMetal, setConfirmedMetal] = useState(metalOptions[1].metal); // Confirmed metal
 
@@ -1157,39 +1197,39 @@ const Productdetails = () => {
     const calculateTempPrice = (sizePrice, metalPrice, diamondPrice) => {
         return sizePrice + metalPrice + diamondPrice - price;
     };
-    
+
     const handleSizeClick = (size) => {
         setSelectedSize(size);
         const selectedSizeData = sizeOptions.find((s) => s.size === size);
         const selectedMetalData = metalOptions.find((m) => m.metal === selectedMetal);
         const selectedDiamondData = diamondOptions.find((d) => d.quality === selectedDiamondQuality);
-    
+
         setTempPrice(calculateTempPrice(
             selectedSizeData ? selectedSizeData.price : price,
             selectedMetalData ? selectedMetalData.price : 0,
             selectedDiamondData ? selectedDiamondData.price : 0
         ));
     };
-    
+
     const handleMetalClick = (metal) => {
         setSelectedMetal(metal);
         const selectedSizeData = sizeOptions.find((s) => s.size === selectedSize);
         const selectedMetalData = metalOptions.find((m) => m.metal === metal);
         const selectedDiamondData = diamondOptions.find((d) => d.quality === selectedDiamondQuality);
-    
+
         setTempPrice(calculateTempPrice(
             selectedSizeData ? selectedSizeData.price : price,
             selectedMetalData ? selectedMetalData.price : 0,
             selectedDiamondData ? selectedDiamondData.price : 0
         ));
-    };                  
-    
+    };
+
     const handleDiamondQualityClick = (quality) => {
         setSelectedDiamondQuality(quality);
         const selectedSizeData = sizeOptions.find((s) => s.size === selectedSize);
         const selectedMetalData = metalOptions.find((m) => m.metal === selectedMetal);
         const selectedDiamondData = diamondOptions.find((d) => d.quality === quality);
-    
+
         setTempPrice(calculateTempPrice(
             selectedSizeData ? selectedSizeData.price : price,
             selectedMetalData ? selectedMetalData.price : 0,
@@ -1202,12 +1242,34 @@ const Productdetails = () => {
         setAdjustedPrice(tempPrice);
         setConfirmedMetal(selectedMetal);
         setConfirmedDiamondQuality(selectedDiamondQuality);
-    
+
         const offcanvas = document.getElementById('offcanvassize', 'offcanvasmetal', 'offcanvasDiamond');
         const offcanvasInstance = new window.bootstrap.Offcanvas(offcanvas);
         offcanvasInstance.hide();
     };
 
+    useEffect(() => {
+        if (category === "Bracelet") {
+            const FilterProduct = products.filter(item => item.category === "Bracelet")
+            setAllProduct(FilterProduct.slice(0, 4))
+            // console.log(FilterProduct);
+        }
+        if (category === "Earring") {
+            const FilterProduct = products.filter(item => item.category === "Earring")
+            setAllProduct(FilterProduct)
+            // console.log(FilterProduct);
+        }
+        if (category === "Necklace") {
+            const FilterProduct = products.filter(item => item.category === "Necklace")
+            setAllProduct(FilterProduct)
+            // console.log(FilterProduct);
+        }
+        if (category === "Ring") {
+            const FilterProduct = products.filter(item => item.category === "Ring")
+            setAllProduct(FilterProduct)
+            // console.log(FilterProduct);
+        }
+    }, [category])
 
     const imagesByColor = {
         1: [
@@ -1266,7 +1328,7 @@ const Productdetails = () => {
                             </div>
                             <section className='container-fluid m-0 p-0 mb-5 d-lg-none d-block'>
                                 <Slider {...md_carousel}>
-                                {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
+                                    {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
                                         <div key={index} >
                                             {src.includes(".mp4") ? (
                                                 <video
@@ -1702,46 +1764,74 @@ const Productdetails = () => {
                 <section className='container my-3'>
                     <h3 className='text-center pb-4 fw-bold'>You may also Like</h3>
                     <div className='row '>
-                        {/* <div className='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mx-auto d-block'>
-                        <div className='card border-0 '>
-                            <Link to="/productDetail"><img alt='' src='assets/img/cartlane8.png' className='img-fluid'></img></Link>
-                            <div className='card-body relative'>
-                                <h5>₹6,254</h5>
-                                <p>Heart with crown stud Earring</p>
-                                <i className="ri-heart-add-line fs-4"></i>
-                            </div>
-                        </div>
+                        {
+                            allProduct.map((item) => {
+                                return <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow' key={item.id}>
+                                    <ProductCard Productsitem={item} />
+                                </div>
+                            })
+                        }
                     </div>
-                    <div className='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mx-auto d-block'>
-                        <div className='card border-0 relative'>
-                            <img alt='' src='assets/img/cartlane8.png' className='img-fluid'></img>
-                            <div className='card-body'>
-                                <h5>₹6,254</h5>
-                                <p>Heart with crown stud Earring</p>
-                                <i className="ri-heart-add-line fs-4"></i>
+
+                    <h3 className='text-center pb-4 fw-bold'>Recently Viewed</h3>
+                    <div className="row position-relative">
+                        {recentlyViewed.length > 0 ? (
+                            <>
+                                {/* Prev Button */}
+                                {currentIndex > 0 && (
+                                    <div>
+                                        <button
+                                            onClick={() => search?.current?.slickPrev()}
+                                            className="pre-btn-set"
+                                        >
+                                            <i className="ri-arrow-left-wide-line"></i>
+                                        </button>
+                                    </div>
+                                )}
+
+                                <Slider ref={search} {...slider_search}>
+                                    {recentlyViewed.map((item) => (
+                                        <div
+                                            className="card border-0 w-100 mx-auto d-block"
+                                            key={item.id}
+                                        >
+                                            <Link to={`/productDetail/${item.id}`}>
+                                                <img
+                                                    alt={item.title}
+                                                    src={item.image01}
+                                                    className="img-fluid px-2 position-relative"
+                                                />
+                                            </Link>
+                                            <div className="card-body cartlane">
+                                                <h6>
+                                                    {formatCurrency(item.price)}{" "}
+                                                    <span>
+                                                        <del>{formatCurrency(item.delprice)}</del>
+                                                    </span>
+                                                </h6>
+                                                <p>{item.title}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </Slider>
+
+                                {/* Next Button */}
+                                {currentIndex < recentlyViewed.length - slider_search.slidesToShow && (
+                                    <div>
+                                        <button
+                                            onClick={() => search?.current?.slickNext()}
+                                            className="next-btn-set float-end"
+                                        >
+                                            <i className="ri-arrow-right-wide-line"></i>
+                                        </button>
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <div className="text-center w-100 pt-5">
+                                <p>You haven't viewed any products yet. Start exploring now!</p>
                             </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mx-auto d-block'>
-                        <div className='card border-0 relative'>
-                            <img alt='' src='assets/img/cartlane8.png' className='img-fluid'></img>
-                            <div className='card-body'>
-                                <h5>₹6,254</h5>
-                                <p>Heart with crown stud Earring</p>
-                                <i className="ri-heart-add-line fs-4"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mx-auto d-block'>
-                        <div className='card border-0 relative'>
-                            <img alt='' src='assets/img/cartlane8.png' className='img-fluid'></img>
-                            <div className='card-body'>
-                                <h5>₹6,254</h5>
-                                <p>Heart with crown stud Earring</p>
-                                <i className="ri-heart-add-line fs-4 "></i>
-                            </div>
-                        </div>
-                    </div> */}
+                        )}
                     </div>
                 </section>
 
@@ -1869,8 +1959,6 @@ const Productdetails = () => {
                                 ))}
                             </div>
                         </div>
-
-
                         {/* Diamond Quality */}
                         <div className="mb-2">
                             <div className="d-flex justify-content-between align-items-center mb-3">

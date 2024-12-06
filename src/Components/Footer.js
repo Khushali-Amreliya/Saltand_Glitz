@@ -52,7 +52,7 @@ const Footer = () => {
 
           <div className='col-lg-5 col-md-6 col-sm-12 footer_sec pb-5'>
             <h6 className='fw-bolder pb-3'>Latest from Tiffany</h6>
-            <p style={{ fontSize: "13px" }}>
+            <p style={{ fontSize: "13px" }} className='footer_email_p'>
               Be the first to know about exciting new designs, special events, store openings, and much more.
             </p>
             <input

@@ -278,7 +278,7 @@ const products = [
         category: "Necklace",
         size: "6",
         material: "Pearl",
-        discount: 10,
+        discount: 9,
         image01: product_08_01,
         image02: product_08_02,
         image03: product_08_03,
