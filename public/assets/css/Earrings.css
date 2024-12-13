@@ -317,14 +317,14 @@
 
 
 @media(max-width:1024px) {
-    .absolute_next_btn {
+    /* .absolute_next_btn {
         top: 14% !important;
         left: 33% !important;
     }
 
     .absolute_prev_btn {
         top: 14% !important;
-    }
+    } */
 }
 
 @media only screen and (max-width: 768px) {
@@ -334,10 +334,10 @@
         margin: 8px !important;
     }
 
-    .absolute_latest {
+    /* .absolute_latest {
         font-size: 10px !important;
         padding: 3px 10px !important;
-    }
+    } */
 }
 
 @media only screen and (max-width: 480px) {

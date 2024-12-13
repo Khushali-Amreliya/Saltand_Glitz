@@ -7,7 +7,7 @@ import Router from './Router';
 const Layout = () => {
   const location = useLocation();
 
-  const hideHeaderFooter = location.pathname === '/cart' || location.pathname === '/login-success' ||location.pathname === '/login'||location.pathname === '/gift'||location.pathname === '/payment'|| location.pathname === '/shipping' || location.pathname.startsWith('/112/admin');
+  const hideHeaderFooter = location.pathname === '/cart' || location.pathname === '/login-success' ||location.pathname === '/login'||location.pathname === '/gift'||location.pathname === '/payment'|| location.pathname === '/shipping' || location.pathname === '/adashbord' || location.pathname.startsWith('/112/admin');
 
   return (
     <div>

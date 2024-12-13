@@ -1,62 +1,206 @@
-// import React from 'react'
-// import { DataGrid } from '@mui/x-data-grid';
-// import Paper from '@mui/material/Paper';
-
-// function Adashbord() {
-//     const columns = [
-//         { field: 'id', headerName: 'ID', width: 70 },
-//         { field: 'firstName', headerName: 'First name', width: 130 },
-//         { field: 'lastName', headerName: 'Last name', width: 130 },
-//         {
-//             field: 'age',
-//             headerName: 'Age',
-//             type: 'number',
-//             width: 90,
-//         },
-//         {
-//             field: 'fullName',
-//             headerName: 'Full name',
-//             description: 'This column has a value getter and is not sortable.',
-//             sortable: false,
-//             width: 160,
-//             valueGetter: (value, row) => `${row.firstName || ''} ${row.lastName || ''}`,
-//         },
-//     ];
-
-//     const rows = [
-//         { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-//         { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-//         { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-//         { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-//         { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-//         { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-//         { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-//         { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-//         { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-//     ];
-
-//     const paginationModel = { page: 0, pageSize: 5 };
-//     return (
-//         <div className='container'><Paper sx={{ height: 400, width: '100%' }}>
-//             <DataGrid
-//                 rows={rows}
-//                 columns={columns}
-//                 initialState={{ pagination: { paginationModel } }}
-//                 pageSizeOptions={[5, 10]}
-//                 checkboxSelection
-//                 sx={{ border: 0 }}
-//             />
-//         </Paper></div>
-//     )
-// }
-
-// export default Adashbord
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios"; // Ensure axios is installed
+import * as XLSX from "xlsx";
+import { formatCurrency } from "../Utils/formateCurrency";
 
 const Adashbord = () => {
-  return (
-    <div>Adashbord</div>
-  )
-}
+  const [products, setProducts] = useState(() => {
+    const savedProducts = localStorage.getItem("products");
+    return savedProducts ? JSON.parse(savedProducts) : [];
+  });
 
-export default Adashbord
+  const [productName, setProductName] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [productImage, setProductImage] = useState("");
+  const [productCategory, setProductCategory] = useState("");
+
+  // Save products to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("products", JSON.stringify(products));
+  }, [products]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newProduct = {
+      title: productName,
+      price: productPrice,
+      img: productImage,
+      category: productCategory,
+    };
+
+    setProducts([...products, newProduct]);
+    setProductName("");
+    setProductPrice("");
+    setProductImage("");
+    setProductCategory("");
+  };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+      const newProducts = jsonData.map((row) => ({
+        title: row.title || "Unnamed Product",
+        price: row.Price || 0,
+        img: row.img || "",
+        category: row.category || "Miscellaneous",
+      }));
+
+      // Filter out duplicate products
+      const filteredProducts = newProducts.filter((newProduct) => {
+        return !products.some(
+          (existingProduct) =>
+            existingProduct.title === newProduct.title &&
+            existingProduct.category === newProduct.category
+        );
+      });
+
+      // Add only the new products (non-duplicates)
+      setProducts([...products, ...filteredProducts]);
+    };
+    reader.readAsArrayBuffer(file);
+  };
+
+  const handleDelete = (index) => {
+    const updatedProducts = products.filter((_, i) => i !== index);
+    setProducts(updatedProducts);
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
+  };
+
+  const handleUploadToBackend = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/v1/upload/get_upload", {
+        products,
+      });
+      alert("Data uploaded successfully!");
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error uploading data:", error);
+      alert("Failed to upload data. Please try again.");
+    }
+  };
+
+  return (
+    <div>
+      <div className="container my-4">
+        <h2 className="mb-4">Add New Product</h2>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="productName" className="form-label">
+              Product Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="productName"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="productPrice" className="form-label">
+              Price (₹)
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="productPrice"
+              value={productPrice}
+              onChange={(e) => setProductPrice(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="productImage" className="form-label">
+              Product Image URL
+            </label>
+            <input
+              type="url"
+              className="form-control"
+              id="productImage"
+              value={productImage}
+              onChange={(e) => setProductImage(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="productCategory" className="form-label">
+              Category
+            </label>
+            <select
+              className="form-select"
+              id="productCategory"
+              value={productCategory}
+              onChange={(e) => setProductCategory(e.target.value)}
+              required
+            >
+              <option value="">Select Category</option>
+              <option value="Ring">Ring</option>
+              <option value="Earring">Earring</option>
+              <option value="Bracelet">Bracelet</option>
+              <option value="Pendents">Pendents</option>
+            </select>
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Add Product
+          </button>
+        </form>
+
+        <div className="mt-4">
+          <label htmlFor="fileUpload" className="form-label">
+            Upload Excel File
+          </label>
+          <input
+            type="file"
+            id="fileUpload"
+            accept=".xlsx, .xls"
+            className="form-control"
+            onChange={handleFileUpload}
+          />
+        </div>
+
+        <h2 className="mt-5 mb-4">Product List</h2>
+        <button className="btn btn-success" onClick={handleUploadToBackend}>
+          Upload to Backend
+        </button>
+        <div className="row g-4" id="productList">
+          {products.map((product, index) => (
+            <div key={index} className="col-md-3">
+              <div className="product-card">
+                <img
+                  src={product.img || "https://via.placeholder.com/150"}
+                  alt={product.title}
+                  className="img-fluid"
+                />
+                <div className="product-info">
+                  <h5>{product.title}</h5>
+                  <p>Category: {product.category}</p>
+                  <p className="price">{formatCurrency(product.price)}</p>
+                  <button
+                    className="btn btn-danger mt-2"
+                    onClick={() => handleDelete(index)}
+                  >
+                    Delete Product
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Adashbord;

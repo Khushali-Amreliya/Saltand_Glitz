@@ -1349,16 +1349,16 @@ const Productdetails = () => {
                                 </Slider>
                             </section>
                             {/* =========Larger device========= */}
-                            <div className='col-lg-4 col-md-6 col-sm-12 col-12 ps-3 mt-4 mx-auto d-block d-lg-block d-none sticky-header'>
-                                <h3>{title}</h3>
-                                <h4 className='fw-bold'>{formatCurrency(adjustedPrice)}</h4>
+                            <div className='col-lg-4 col-md-6 col-sm-12 col-12 px-4 mt-4 mx-auto d-block d-lg-block d-none sticky-header'>
+                                <h3 className='font_h'>{title}</h3>
+                                <h4 className='font_h'>{formatCurrency(adjustedPrice)}</h4>
                                 <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
                                 <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
                                 <p>
-                                    <span style={{ fontSize: "12px" }} className="fw-bold">
+                                    <span style={{ fontSize: "12px" }} className="fw-bold align-middle">
                                         COLOR
                                     </span>
-                                    <span className="ps-3" style={{ fontSize: "20px" }}>
+                                    <span className="ps-3 align-middle" style={{ fontSize: "20px" }}>
                                         {colors.map((color) => (
                                             <i
                                                 key={color.id}
@@ -1443,38 +1443,41 @@ const Productdetails = () => {
                                         </button>
                                     </div>
                                 </p>
-                                <button className='btn add_btn me-2 px-5 mt-3' onClick={addToCart}>
-                                    <i className="ri-shopping-bag-4-line pe-2 fs-5"></i>
+                                <button className='btn add_btn me-2 my-3' onClick={addToCart}>
+                                    {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
                                     ADD TO CART
                                 </button>
-                                <button className='btn add_btn px-5 mt-3' onClick={buyNow}>
-                                    <i className="ri-shopping-cart-2-line pe-2 fs-5"></i>
+                                <button className='btn add_btn my-3 me-2' onClick={buyNow}>
+                                    {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
                                     BUY NOW
                                 </button>
-                                <p className='delivery_cancellation pt-4'>
+                                <button className='btn wish_btn my-3' onClick={buyNow}>
+                                    <i class="fa-regular fa-heart fs-5"></i>
+                                </button>
+                                {/* <p className='delivery_cancellation pt-4'>
                                     <i className="ri-truck-line fs-5 pe-2"></i>
                                     <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 3RD SEP 2024</u>
-                                </p>
-                                <p className='pincode_productdetail pt-2 p-0 m-0'>Your Pincode</p>
+                                </p> */}
+                                {/* <p className='pincode_productdetail pt-2 p-0 m-0'>Your Pincode</p>
                                 <div className="input-group mb-3 w-100 pincode_input">
                                     <input type="text" className="form-control" aria-describedby="basic-addon2" />
                                     <i className="ri-map-pin-line input-group-text" id="basic-addon2"></i>
-                                </div>
-                                <p className='m-0'>
+                                </div> */}
+                                {/* <p className='m-0'>
                                     <span className='category_tag'>CATEGORIES:</span>
                                     <span className='category_tag1'>{category}</span>
                                 </p>
                                 <p>
                                     <span className='category_tag'>TAGS:</span>
                                     <span className='category_tag1'>Bestsellers, Solitaire, Workwear</span>
-                                </p>
-                                <p>
+                                </p> */}
+                                {/* <p>
                                     <span className='fw-bold' style={{ fontSize: "14px" }}>Share On:</span>
                                     <i className="ri-facebook-circle-fill fs-2 pe-1 ps-2" style={{ color: "#0c5581" }}></i>
                                     <i className="ri-whatsapp-fill fs-2 pe-1" style={{ color: "#46b63b" }}></i>
                                     <i className="ri-telegram-fill fs-2 pe-1" style={{ color: "#1c90ca" }}></i>
                                     <i className="ri-clipboard-fill fs-2 pe-1"></i>
-                                </p>
+                                </p> */}
                                 <div>
                                     <div className='row p-0 m-0 w-100 border rounded-3'>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4 m-0 p-0'>
@@ -1483,15 +1486,27 @@ const Productdetails = () => {
                                         <div className='col-lg-8 col-md-8 col-sm-8 col-8 video_call'>
                                             <h6>Live Video Call</h6>
                                             <p>Join a live video call with our consultants to see your favourite designs up close!</p>
-                                            <button className='btn'>Schedule a Video Call</button>
+                                            <button
+                                                className='btn'
+                                                onClick={() => {
+                                                    const message = encodeURIComponent(
+                                                        "Hello, I would like to schedule a video call to see the designs."
+                                                    );
+                                                    const phoneNumber = ""; // Replace with your WhatsApp number including country code
+                                                    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+                                                    window.open(whatsappURL, "_blank"); // Opens WhatsApp in a new tab
+                                                }}
+                                            >
+                                                Schedule a Video Call
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div className='mt-3'>
+                                {/* <div className='mt-3'>
                                     <div className='row m-0 p-0 w-100 border rounded-3 store py-2 my-2'>
                                         <div className='col-lg-1 col-md-2 col-sm-2 col-2 m-0 p-0'>
                                             <i className="ri-store-2-line fs-2 ps-2"></i>
-                                            {/* <img alt='' src='assets/img/store.png' className='img-fluid'></img> */}
+                                            <img alt='' src='assets/img/store.png' className='img-fluid'></img>
                                         </div>
                                         <div className='col-lg-11 col-md-10 col-sm-10 col-10'>
                                             <h6>Nearest Store - <span className='fw-bold'>Adajan</span> (2km)</h6>
@@ -1501,13 +1516,13 @@ const Productdetails = () => {
                                         </div>
                                         <button className='btn w-75 mx-auto d-block'>FIND IN STORE</button>
                                     </div>
-                                </div>
-                                <div className='border rounded-3 services  px-3 pt-3 mt-3'>
+                                </div> */}
+                                {/* <div className='border rounded-3 services  px-3 pt-3 mt-3'>
                                     <div className=''>
                                         <h6>Try at Home service is not available</h6>
                                         <p>Browse other Designs</p>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className='certified_Sec mt-4'>
                                     <div className='row'>
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
@@ -1532,31 +1547,31 @@ const Productdetails = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='rounded-3 policy_sec pt-3 px-3 pb-2 pt-4 mt-3'>
+                                {/* <div className='rounded-3 policy_sec pt-3 px-3 pb-2 pt-4 mt-3'>
                                     <h6>Earn 894 xCLusive points with this order</h6>
                                     <p>(1 xClusive point = ₹1)</p>
-                                </div>
+                                </div> */}
                                 <div className='mt-2'>
                                     <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></p>
                                 </div>
-                                <div className='mt-5'>
+                                <div className='mt-2'>
                                     <div className='row text-center'>
                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12  mt-2'>
                                             {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
                                             <i className="ri-discount-percent-line fs-1"></i>
-                                            <p style={{ fontSize: "14px" }} className='m-0 pt-2'>100% BIS</p>
+                                            <p className='p_main m-0 pt-2'>100% BIS</p>
                                             <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
                                         </div>
                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
                                             {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
                                             <i className="ri-bubble-chart-line fs-1"></i>
-                                            <p style={{ fontSize: "14px" }} className='m-0 pt-2'>Trust of Tanishq</p>
+                                            <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
                                             <p style={{ fontSize: "11px" }}>Titan Privileges</p>
                                         </div>
                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
                                             <i className="ri-verified-badge-line fs-1 text-success"></i>
                                             {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
-                                            <p style={{ fontSize: "14px" }} className='m-0 pt-2'>100% Certified</p>
+                                            <p className='m-0 pt-2 p_main'>100% Certified</p>
                                             <p style={{ fontSize: "11px" }}>by CaratLane</p>
                                         </div>
                                     </div>
@@ -1639,23 +1654,23 @@ const Productdetails = () => {
                                     CUSTOMISE
                                 </button>
                                 <button className='btn add_btn add_btn_md me-2 px-5 mt-3' onClick={addToCart}>
-                                    <i className="ri-shopping-bag-4-line pe-2 fs-5"></i>
+                                    {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
                                     ADD TO CART
                                 </button>
                                 <button className='btn add_btn add_btn_md px-5 mt-3' onClick={buyNow}>
-                                    <i className="ri-shopping-cart-2-line pe-2 fs-5"></i>
+                                    {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
                                     BUY NOW
                                 </button>
-                                <p className='delivery_cancellation pt-4'>
+                                {/* <p className='delivery_cancellation pt-4'>
                                     <i className="ri-truck-line fs-5 pe-2"></i>
                                     <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 3RD SEP 2024</u>
-                                </p>
-                                <p className='pincode_productdetail pt-2 p-0 m-0'>Your Pincode</p>
+                                </p> */}
+                                {/* <p className='pincode_productdetail pt-2 p-0 m-0'>Your Pincode</p>
                                 <div className="input-group mb-3 w-100 pincode_input">
                                     <input type="text" className="form-control" aria-describedby="basic-addon2" />
                                     <i className="ri-map-pin-line input-group-text" id="basic-addon2"></i>
-                                </div>
-                                <p className='m-0'>
+                                </div> */}
+                                {/* <p className='m-0'>
                                     <span className='category_tag'>CATEGORIES:</span>
                                     <span className='category_tag1'>Bracelet</span>
                                 </p>
@@ -1669,7 +1684,7 @@ const Productdetails = () => {
                                     <i className="ri-whatsapp-fill fs-2 pe-1" style={{ color: "#46b63b" }}></i>
                                     <i className="ri-telegram-fill fs-2 pe-1" style={{ color: "#1c90ca" }}></i>
                                     <i className="ri-clipboard-fill fs-2 pe-1"></i>
-                                </p>
+                                </p> */}
                                 <div className='ps-3'>
                                     <div className='row w-100 border rounded-3'>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4 m-0 p-0'>
@@ -1678,15 +1693,28 @@ const Productdetails = () => {
                                         <div className='col-lg-8 col-md-8 col-sm-8 col-8 video_call'>
                                             <h6>Live Video Call</h6>
                                             <p>Join a live video call with our consultants to see your favourite designs up close!</p>
-                                            <button className='btn'>Schedule a Video Call</button>
+                                            <button
+                                                className='btn'
+                                                onClick={() => {
+                                                    const message = encodeURIComponent(
+                                                        "Hello, I would like to schedule a video call to see the designs."
+                                                    );
+                                                    const phoneNumber = ""; // Replace with your WhatsApp number including country code
+                                                    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+                                                    window.open(whatsappURL, "_blank"); // Opens WhatsApp in a new tab
+                                                }}
+                                            >
+                                                Schedule a Video Call
+                                            </button>
                                         </div>
+
                                     </div>
                                 </div>
-                                <div className='mt-3 ps-3'>
+                                {/* <div className='mt-3 ps-3'>
                                     <div className='row w-100 border rounded-3 store py-2 my-2'>
                                         <div className='col-md-1 col-sm-1 col-2 m-0 p-0'>
-                                            {/* <i className="ri-store-2-line fs-1 ps-2"></i> */}
-                                            {/* <img alt='' src='assets/img/store.png' className='img-fluid'></img> */}
+                                            <i className="ri-store-2-line fs-1 ps-2"></i>
+                                            <img alt='' src='assets/img/store.png' className='img-fluid'></img>
                                         </div>
                                         <div className='col-md-11 col-sm-11 col-10'>
                                             <h6>Nearest Store - <span className='fw-bold'>Adajan</span> (2km)</h6>
@@ -1702,7 +1730,7 @@ const Productdetails = () => {
                                         <h6>Try at Home service is not available</h6>
                                         <p>Browse other Designs</p>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className='certified_Sec mt-4'>
                                     <div className='row'>
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
@@ -1727,31 +1755,31 @@ const Productdetails = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='rounded-3 policy_sec pt-3 px-3 pb-2 pt-4 mt-3'>
+                                {/* <div className='rounded-3 policy_sec pt-3 px-3 pb-2 pt-4 mt-3'>
                                     <h6>Earn 894 xCLusive points with this order</h6>
                                     <p>(1 xClusive point = ₹1)</p>
-                                </div>
+                                </div> */}
                                 <div className='mt-2'>
                                     <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></p>
                                 </div>
-                                <div className='mt-5'>
+                                <div className='mt-2'>
                                     <div className='row text-center'>
-                                        <div className='col-lg-4 col-md-4 col-sm-6 col-12  mt-2'>
+                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4  mt-2'>
                                             {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
                                             <i className="ri-discount-percent-line fs-1"></i>
-                                            <p style={{ fontSize: "14px" }} className='m-0 pt-2'>100% BIS</p>
+                                            <p className='p_main m-0 pt-2'>100% BIS</p>
                                             <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
                                         </div>
-                                        <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
+                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
                                             {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
                                             <i className="ri-bubble-chart-line fs-1"></i>
-                                            <p style={{ fontSize: "14px" }} className='m-0 pt-2'>Trust of Tanishq</p>
+                                            <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
                                             <p style={{ fontSize: "11px" }}>Titan Privileges</p>
                                         </div>
-                                        <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
+                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
                                             <i className="ri-verified-badge-line fs-1 text-success"></i>
                                             {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
-                                            <p style={{ fontSize: "14px" }} className='m-0 pt-2'>100% Certified</p>
+                                            <p className='m-0 pt-2 p_main'>100% Certified</p>
                                             <p style={{ fontSize: "11px" }}>by CaratLane</p>
                                         </div>
                                     </div>
@@ -1760,10 +1788,98 @@ const Productdetails = () => {
                         </div>
                     </div>
                 </section>
+                <section className='container-fluid py-3'>
+                    <div>
+                        <div className='row'>
+                            <div className='col-xl-8'>
+                                {/* <h5>PRODUCT DETAILS</h5> */}
+                                <div class="section product-details">
+                                    <h3>Product Details</h3>
+                                    <div class="grid">
+                                        <div class="detail-box">
+                                            <h4>Weight</h4>
+                                            <p className='m-0 p-0 mb-2'>Gross (Product): 3.316 gram</p>
+                                            <p>Net (Gold): 2.940 gram</p>
+                                        </div>
+                                        <div class="detail-box">
+                                            <h4>Purity</h4>
+                                            <p>14Kt Yellow Gold</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="diamonds-gemstones">
+                                    <h3>Diamond & Gemstones</h3>
+                                    <p>Weight: 1.880 Ct</p>
+                                    <div className="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <th>Color</th>
+                                                    <th>Clarity</th>
+                                                    <th>Shape</th>
+                                                    <th>No. of Diamonds</th>
+                                                    <th>Total Weight</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>0.01 to 0.07</td>
+                                                    <td>GH</td>
+                                                    <td>VS</td>
+                                                    <td>Round</td>
+                                                    <td>38</td>
+                                                    <td>0.380</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1.50 to 1.99</td>
+                                                    <td>G</td>
+                                                    <td>VS1</td>
+                                                    <td>Emerald</td>
+                                                    <td>1</td>
+                                                    <td>1.500</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="section price-breakup pt-3">
+                                    <h3>Price Breakup</h3>
+                                    <ul className='ps-0'>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>Gold:</span>
+                                            <span className='price_break_price text_end_break'>₹13,856/-</span>
+                                        </p>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>Diamond:</span>
+                                            <span className='price_break_price text_end_break'>₹99,500/-</span>
+                                        </p>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>Making Charge:</span>
+                                            <span className='price_break_price text_end_break'>₹4,410/-</span>
+                                        </p>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>GST:</span>
+                                            <span className='price_break_price text_end_break'>₹3,532/-</span>
+                                        </p>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>Total:</span>
+                                            <span className='price_break_price text_end_break'>₹1,21,299/-</span>
+                                        </p>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div className='col-xl-4'>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 {/* ============you may also like============= */}
                 <section className='container my-3'>
-                    <h3 className='text-center pb-4 fw-bold'>You may also Like</h3>
-                    <div className='row '>
+                    <h3 className='text-center pb-4 font_main'>You may also Like</h3>
+                    <div className='row mb-4'>
                         {
                             allProduct.map((item) => {
                                 return <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow' key={item.id}>
@@ -1773,8 +1889,8 @@ const Productdetails = () => {
                         }
                     </div>
 
-                    <h3 className='text-center pb-4 fw-bold'>Recently Viewed</h3>
-                    <div className="row position-relative">
+                    <h3 className='text-center py-4 font_main'>Recently Viewed</h3>
+                    <div className="row position-relative mb-4">
                         {recentlyViewed.length > 0 ? (
                             <>
                                 {/* Prev Button */}
@@ -1845,10 +1961,10 @@ const Productdetails = () => {
                         </div>
                         <div className="text-end">
                             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            <div className='pt-3 delivery_size'>
+                            {/* <div className='pt-3 delivery_size'>
                                 <p className='m-0 p-0'>Delivery By</p>
                                 <span className="fw-bold">14th Oct</span>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>
@@ -1856,7 +1972,7 @@ const Productdetails = () => {
                     <div className="offcanvas-body offcanvas_body_size">
                         {/* Choice of Metal */}
                         <div className="mb-2 metal_offcanvas">
-                            <h6 className="text-dark mb-3">Choice of Metal</h6>
+                            <h6 className="font_h mb-3">Choice of Metal</h6>
                             <div className="row g-3">
                                 {/* Metal Options */}
                                 {metalOptions.map((item, index) => (
@@ -1876,7 +1992,7 @@ const Productdetails = () => {
                         {/* Diamond Quality */}
                         <div className="mb-2">
                             <div className="d-flex justify-content-between align-items-center mb-3">
-                                <h6 className="text-dark">Diamond Quality</h6>
+                                <h6 className="font_h">Diamond Quality</h6>
                                 <Link to="">Diamond Guide</Link>
                             </div>
                             <div className="row g-3 diamond_offcanvas">
@@ -1897,7 +2013,7 @@ const Productdetails = () => {
                         {/* Select Size */}
                         <div className="mb-2">
                             <div className="d-flex justify-content-between align-items-center mb-4">
-                                <h6 className="text-dark">Select Size</h6>
+                                <h6 className="font_h">Select Size</h6>
                                 <Link to="">Size Guide</Link>
                             </div>
                             <div className="row g-3 size_offcanvas">
@@ -1932,10 +2048,10 @@ const Productdetails = () => {
                         </div>
                         <div className="text-end">
                             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            <div className='pt-3 delivery_size'>
+                            {/* <div className='pt-3 delivery_size'>
                                 <p className='m-0 p-0'>Delivery By</p>
                                 <span className="fw-bold">14th Oct</span>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>
@@ -1943,7 +2059,7 @@ const Productdetails = () => {
                     <div className="offcanvas-body offcanvas_body_size">
                         {/* Choice of Metal */}
                         <div className="mb-2 metal_offcanvas">
-                            <h6 className="text-dark mb-3">Choice of Metal</h6>
+                            <h6 className="font_h mb-3">Choice of Metal</h6>
                             <div className="row g-3">
                                 {/* Metal Options */}
                                 {metalOptions.map((item, index) => (
@@ -1962,7 +2078,7 @@ const Productdetails = () => {
                         {/* Diamond Quality */}
                         <div className="mb-2">
                             <div className="d-flex justify-content-between align-items-center mb-3">
-                                <h6 className="text-dark">Diamond Quality</h6>
+                                <h6 className="font_h">Diamond Quality</h6>
                                 <Link to="">Diamond Guide</Link>
                             </div>
                             <div className="row g-3 diamond_offcanvas">
@@ -1983,7 +2099,7 @@ const Productdetails = () => {
                         {/* Select Size */}
                         <div className="mb-2">
                             <div className="d-flex justify-content-between align-items-center mb-4">
-                                <h6 className="text-dark">Select Size</h6>
+                                <h6 className="font_h">Select Size</h6>
                                 <Link to="">Size Guide</Link>
                             </div>
                             <div className="row g-3 size_offcanvas">

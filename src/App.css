@@ -13,6 +13,12 @@
     --font: Santral W01;
 
 }
+.font_h{
+    /* font-family: var(--font) !important; */
+    font-weight: 300 !important;
+    letter-spacing: 0.5px;
+    font-size: 25px;
+}
 .font_main{
     /* font-family: var(--font) !important; */
     font-weight: 600;

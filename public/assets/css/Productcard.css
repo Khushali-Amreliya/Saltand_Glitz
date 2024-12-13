@@ -142,6 +142,15 @@
     margin-bottom: 15px !important;
 }
 
+@media(max-width:768px) {
+
+    .absolute_next_btn,
+    .absolute_prev_btn {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+
 @media(max-width:576px) {
     .pre-btn-set {
         left: 4% !important;
@@ -167,6 +176,11 @@
 
     .next-btn-set {
         right: 6% !important;
+    }
+
+    .absolute_next_btn,
+    .absolute_prev_btn {
+        top: 35% !important;
     }
 }
 

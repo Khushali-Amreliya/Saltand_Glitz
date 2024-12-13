@@ -360,10 +360,10 @@ const ProductCard = ({ Productsitem }) => {
                     </div>
 
                     <div className=''>
-                        <button onClick={() => slider?.current?.slickPrev()} className="prev_btn absolute_prev_btn d-lg-block d-none">
+                        <button onClick={() => slider?.current?.slickPrev()} className=" absolute_prev_btn d-lg-none d-block">
                             <i className="ri-arrow-left-wide-line"></i>
                         </button>
-                        <button onClick={() => slider?.current?.slickNext()} className="next_btn absolute_next_btn d-lg-block d-none">
+                        <button onClick={() => slider?.current?.slickNext()} className=" absolute_next_btn d-lg-none d-block">
                             <i className="ri-arrow-right-wide-line"></i>
                         </button>
                     </div>

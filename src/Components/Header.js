@@ -203,9 +203,7 @@ const Header = () => {
                         <Link className='text-decoration-none text-dark' to="">
                             <i class="ri-contacts-line">
                                 <span className='align-middle' style={{fontSize:"14px",fontWeight:"500"}}>&nbsp; Contact us</span>
-                                {totalQuantity > 0 && (
-                                    <span className="badge badge-icon">{totalQuantity}</span>
-                                )}
+                                
                             </i>
                         </Link>
                         <div className="dropdown drp_main">
@@ -1060,7 +1058,7 @@ const Header = () => {
                                     src='assets/img/tiffco-logo-2.svg'
                                     className='img-fluid w-50 mx-auto d-block'
                                 /> */}
-                                SALTAND GLITZ
+                                SALT & GLITZ
                             </Link>
                         </div>
                     </div>
