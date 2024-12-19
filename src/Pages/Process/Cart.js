@@ -63,7 +63,7 @@ const Cart = (props) => {
     //         totalprice: item.totalprice
     //     };
     //     try {
-    //         const response = await axios.post('http://localhost:5000/v1/carts/delete', cartItem);
+    //         const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/delete', cartItem);
     //         if (response.status === 200) {
 
 
@@ -76,7 +76,7 @@ const Cart = (props) => {
     // };
     const handleDelete = async (itemId) => {
         try {
-            const response = await axios.post('http://localhost:5000/v1/carts/delete', { id: itemId });
+            const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/delete', { id: itemId });
             dispatch(cartAction.deleteItem(response.data)); // Dispatch the deletion action
             toast.success('Item removed from the cart');
         } catch (error) {
@@ -95,7 +95,7 @@ const Cart = (props) => {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/v1/carts/remove', cartItem);
+            const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/remove', cartItem);
 
             if (response.status === 201) {
             }
@@ -116,7 +116,7 @@ const Cart = (props) => {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
+            const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/add', cartItem);
 
             if (response.status === 201) {
 

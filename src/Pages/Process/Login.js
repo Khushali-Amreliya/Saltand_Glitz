@@ -21,13 +21,13 @@ const Login = () => {
 
     try {
       // Perform the login request
-      const res = await axios.post('http://localhost:5000/api/users/login', { email, password });
+      const res = await axios.post('https://saltandglitz-api.vercel.app/api/users/login', { email, password });
 
       // Store the token in local storage
       localStorage.setItem('token', res.data.token);
 
       // Fetch the user's profile data using the token
-      const userRes = await axios.get('http://localhost:5000/api/users/profile', {
+      const userRes = await axios.get('https://saltandglitz-api.vercel.app/api/users/profile', {
         headers: {
           'Authorization': `Bearer ${res.data.token}`,  // Send the token for authentication
         }

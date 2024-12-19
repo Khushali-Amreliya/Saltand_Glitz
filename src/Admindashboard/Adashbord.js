@@ -25,7 +25,7 @@ const Adashbord = () => {
     const newProduct = {
       title: productName,
       price: productPrice,
-      img: productImage,
+      image01: productImage,
       category: productCategory,
     };
 
@@ -49,9 +49,10 @@ const Adashbord = () => {
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
       const newProducts = jsonData.map((row) => ({
+        // id: row.id,
         title: row.title || "Unnamed Product",
-        price: row.Price || 0,
-        img: row.img || "",
+        price: row.price || 0,
+        image01: row.image01 || "",
         category: row.category || "Miscellaneous",
       }));
 
@@ -78,7 +79,7 @@ const Adashbord = () => {
 
   const handleUploadToBackend = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/v1/upload/get_upload", {
+      const response = await axios.post("http://localhost:5000/v1/upload/post_upload", {
         products,
       });
       alert("Data uploaded successfully!");
@@ -92,9 +93,8 @@ const Adashbord = () => {
   return (
     <div>
       <div className="container my-4">
-        <h2 className="mb-4">Add New Product</h2>
-
-        <form onSubmit={handleSubmit}>
+        {/* <h2 className="mb-4">Add New Product</h2> */}
+        {/* <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="productName" className="form-label">
               Product Name
@@ -155,8 +155,7 @@ const Adashbord = () => {
           <button type="submit" className="btn btn-primary">
             Add Product
           </button>
-        </form>
-
+        </form> */}
         <div className="mt-4">
           <label htmlFor="fileUpload" className="form-label">
             Upload Excel File
@@ -169,21 +168,21 @@ const Adashbord = () => {
             onChange={handleFileUpload}
           />
         </div>
-
-        <h2 className="mt-5 mb-4">Product List</h2>
         <button className="btn btn-success" onClick={handleUploadToBackend}>
           Upload to Backend
         </button>
+        <h2 className="mt-5 mb-4">Product List</h2>
         <div className="row g-4" id="productList">
           {products.map((product, index) => (
             <div key={index} className="col-md-3">
               <div className="product-card">
                 <img
-                  src={product.img || "https://via.placeholder.com/150"}
+                  src={product.image01 || "https://via.placeholder.com/150"}
                   alt={product.title}
                   className="img-fluid"
                 />
                 <div className="product-info">
+                  {/* <p>{product.id}</p> */}
                   <h5>{product.title}</h5>
                   <p>Category: {product.category}</p>
                   <p className="price">{formatCurrency(product.price)}</p>

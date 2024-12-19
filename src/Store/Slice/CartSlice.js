@@ -24,8 +24,8 @@ const setRecentlyViewed = (recentlyViewed) => {
 
 const initialState = {
     cartItem: cartItems,
-    recentlyViewed: localStorage.getItem("recentlyViewed") 
-        ? JSON.parse(localStorage.getItem("recentlyViewed")) 
+    recentlyViewed: localStorage.getItem("recentlyViewed")
+        ? JSON.parse(localStorage.getItem("recentlyViewed"))
         : [],
     wishlistItem: wishlistItems,
     totalQuantity: totalQuantity,
@@ -109,6 +109,41 @@ const cartSlice = createSlice({
 
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
         },
+
+        // addRecentlyViewed(state, action) {
+        //     const newItem = action.payload;
+        
+        //     // Check if newItem is valid and has the 'id' property
+        //     if (!newItem || !newItem.id) {
+        //         console.error("Invalid item:", newItem);
+        //         return;
+        //     }
+        
+        //     console.log("Adding to Recently Viewed:", newItem); // Log newItem for debugging
+        
+        //     // Ensure state.recentlyViewed is an array
+        //     if (!Array.isArray(state.recentlyViewed)) {
+        //         state.recentlyViewed = [];
+        //     }
+        
+        //     // Check if the new item is already in the recently viewed list
+        //     const existingItem = state.recentlyViewed.find(item => item._id === newItem.id);
+        
+        //     if (!existingItem) {
+        //         state.recentlyViewed.unshift(newItem); // Add new item to the start of the array
+        
+        //         // Ensure the array length doesn't exceed 8
+        //         if (state.recentlyViewed.length > 8) {
+        //             state.recentlyViewed.pop(); // Remove the last item if more than 8
+        //         }
+        
+        //         console.log("Updated Recently Viewed:", state.recentlyViewed); // Log updated list
+        //     }
+        
+        //     // Save to localStorage (if needed)
+        //     setRecentlyViewed(state.recentlyViewed);
+        // },
+
 
         addRecentlyViewed(state, action) {
             const newItem = action.payload;

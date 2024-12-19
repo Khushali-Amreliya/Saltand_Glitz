@@ -30,7 +30,7 @@
 //         if (isHeartFilled) {
 //             try {
 //                 // Call the API to remove the item from the wishlist
-//                 await axios.post(`http://localhost:5000/v1/wishlist/remove-wishlist/${id}`);
+//                 await axios.post(`https://saltandglitz-api.vercel.app/v1/wishlist/remove-wishlist/${id}`);
 //                 dispatch(cartAction.removeFromWishlist(id));
 //                 toast.success("Item removed from wishlist", {
 //                     position: "top-center",
@@ -46,7 +46,7 @@
 //         } else {
 //             try {
 //                 // Call the API to add the item to the wishlist
-//                 await axios.post('http://localhost:5000/v1/wishlist/create-wishlist', {
+//                 await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create-wishlist', {
 //                     id,
 //                     title,
 //                     price,
@@ -82,7 +82,7 @@
 
 //         const cartItem = { id, title, price, image01 };
 //         try {
-//             const response = await axios.post('http://localhost:5000/v1/carts/add', cartItem);
+//             const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/add', cartItem);
 
 //             if (response.status === 201) {
 //                 dispatch(cartAction.addItem(response.data));
@@ -311,7 +311,6 @@ const ProductCard = ({ Productsitem }) => {
         slidesToScroll: 1,
         arrows: true,
     };
-
     return (
         <div className="card-container position-relative">
             <div className=''>
@@ -390,7 +389,7 @@ const ProductCard = ({ Productsitem }) => {
                     </div>
                 </div>
                 {/* Md device end */}
-                
+
             </div>
         </div>
     );

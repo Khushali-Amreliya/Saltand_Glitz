@@ -24,6 +24,10 @@ import EditProfile from '../UserProfile/EditProfile';
 import Ucoupon from '../UserProfile/Ucoupon';
 import AboutUs from '../Pages/AboutUs';
 import LoginSuccess from '../Pages/Verify/LoginSuccess';
+import Return from '../Policies/Return';
+import Exchange from '../Policies/Exchange';
+import Warranty from '../Policies/Warranty';
+import Contact from '../Pages/Contact';
 
 const Router = () => {
   return (
@@ -33,6 +37,7 @@ const Router = () => {
         <Route path='/' element={<Mainpage />} />
         <Route path='/earrings' element={<Earrings />} />
         <Route path='/aboutUs' element={<AboutUs />} />
+        <Route path='/contact' element={<Contact />} />
         
         {/* Process */}
         <Route path='/cart' element={<Cart />} />
@@ -45,6 +50,7 @@ const Router = () => {
         
         {/* product */}
         <Route path='/productDetail/:id' element={<Productdetails />} />
+        
         {/* verify */}
         <Route path='/signup' element={<Signup />} />
         <Route path='/loginn' element={<Loginn />} />
@@ -62,6 +68,12 @@ const Router = () => {
         <Route path='/Ucoupon' element={<Ucoupon />} />
         <Route path='/U-order' element={<Uorder />} />
         <Route path="/edit-profile" element={<EditProfile />} />
+
+
+        {/* Policies */}
+        <Route path='/return' element={<Return />} />
+        <Route path='/exchange' element={<Exchange />} />
+        <Route path='/warranty' element={<Warranty />} />
       </Routes>
     </div>
   );

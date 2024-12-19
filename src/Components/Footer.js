@@ -34,9 +34,9 @@ const Footer = () => {
             <p><Link to="">California Supply Chains Act</Link></p>
             <p><Link to="">California Privacy</Link></p>
             <p><Link to="">Tiffany Careers</Link></p>
-            <p><Link to="">Website Policies</Link></p>
-            <p><Link to="">Transparency in Coverage</Link></p>
-            <p><Link to="">Do Not Sell or Share My Personal Information</Link></p>
+            <p><Link to="/return">Return Policies</Link></p>
+            <p><Link to="/exchange">Exchange & Buy Back Policies</Link></p>
+            <p><Link to="/warranty">Warranty Policies</Link></p>
             <p><Link to="">Opt-Out of Targeted Advertising</Link></p>
           </div>
 
@@ -139,9 +139,9 @@ const faqData = [
         <p><Link to="">California Supply Chains Act</Link></p>
         <p><Link to="">California Privacy</Link></p>
         <p><Link to="">Tiffany Careers</Link></p>
-        <p><Link to="">Website Policies</Link></p>
-        <p><Link to="">Transparency in Coverage</Link></p>
-        <p><Link to="">Do Not Sell or Share My Personal Information</Link></p>
+        <p><Link to="/return">Return Policy</Link></p>
+        <p><Link to="/exchange">Transparency in Coverage</Link></p>
+        <p><Link to="/warranty">Warranty Policies</Link></p>
         <p><Link to="">Opt-Out of Targeted Advertising</Link></p>
       </div>
     ),

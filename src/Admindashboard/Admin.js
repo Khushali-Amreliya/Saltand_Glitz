@@ -38,7 +38,7 @@ const Admin = () => {
         }
 
         try {
-            await axios.post('http://localhost:5000/v1/admin/create-admin', formData);
+            await axios.post('https://saltandglitz-api.vercel.app/v1/admin/create-admin', formData);
             Swal.fire({
                 icon: 'success',
                 title: 'Login Successful',

@@ -200,8 +200,8 @@ const Header = () => {
                         </div>
                     </div>
                     <div className='col-lg-3 col-md-3 col-sm-12 header_logo d-flex justify-content-end align-items-center'>
-                        <Link className='text-decoration-none text-dark' to="">
-                            <i class="ri-contacts-line">
+                        <Link className='text-decoration-none text-dark' to="/contact">
+                            <i className="ri-contacts-line">
                                 <span className='align-middle' style={{fontSize:"14px",fontWeight:"500"}}>&nbsp; Contact us</span>
                                 
                             </i>
