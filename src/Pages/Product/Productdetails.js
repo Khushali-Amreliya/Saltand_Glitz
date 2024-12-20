@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import Slider from 'react-slick/lib/slider';
 import Helmet from '../../Components/Helmet';
 import ProductCard from './productCard';
+// import "../../css/Productdetail.css"
 
 const Productdetails = () => {
     const search = React.useRef(null);

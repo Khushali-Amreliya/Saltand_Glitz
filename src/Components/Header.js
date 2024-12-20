@@ -99,9 +99,7 @@ const Header = () => {
     const navigate = useNavigate(); // To redirect after logout
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
-
-
-
+    
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {

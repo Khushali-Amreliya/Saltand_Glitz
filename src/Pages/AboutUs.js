@@ -117,7 +117,7 @@ const AboutUs = () => {
         {/* who are we */}
         <section className='container py-5'>
           <div className='text-center aboutus_who_are_we'>
-            <h3>Who Are We</h3>
+            <h3 className='font_main'>Who Are We</h3>
             <div className="underline mb-3 mx-auto d-block"></div>
             <p>Conversations with hundreds of women across the country revealed a common problem: buying expensive jewellery for momentous events & settling for mediocre designs that failed to keep up with their dynamic lifestyles.</p>
             <p>CaratLane was founded in 2008 to bridge the gap between exquisite jewellery meant for special occasions and everyday wear, making diamond jewellery accessible, affordable, and a timeless part of your life that you could wear effortlessly every day.</p>
@@ -129,7 +129,7 @@ const AboutUs = () => {
 
         {/* Featured In */}
         <section className='text-center py-5'>
-          <h3 className='pb-3'>Featured In</h3>
+          <h3 className='pb-3 font_main'>Featured In</h3>
           <div className='container-fluid aboutus_featured py-5'>
             <div className='text-center'>
               <Slider {...customSliderSettings}>
@@ -254,7 +254,7 @@ const AboutUs = () => {
         <section className='container'>
           <div className="py-5 mt-3">
             <div className="text-center pb-5">
-              <h3>Our Team</h3>
+              <h3 className='font_main'>Our Team</h3>
               <div className="underline mb-3 mx-auto d-block"></div>
               <p className="team_p">Our roots are digital, our passion is contagious and most importantly, our people are creative, inspiring, and dedicated!</p>
             </div>
@@ -296,7 +296,7 @@ const AboutUs = () => {
         {/* Advantage-Two */}
         <section className="container-fluid advantage_two_bg">
           <div className="">
-            <h3>CaratLane Advantage</h3>
+            <h3 className='font_main'>CaratLane Advantage</h3>
             <div className="underline mb-3 mx-auto d-block"></div>
             <p>When you shop at CaratLane, you can always be assured of the highest quality standards. Every piece of jewellery is meticulously crafted with the utmost care. It goes through a thorough quality check and is then taken through certification.</p>
           </div>
@@ -347,7 +347,7 @@ const AboutUs = () => {
 
         {/* layout */}
         <section className="container-fluid overflow-hidden pt-5 px-lg-2 px-0">
-          <h4 className="ps-lg-3 ps-0 pb-2 text-center text-lg-start">Shop Our Instagram</h4>
+          <h4 className="ps-lg-3 ps-0 pb-2 text-center text-lg-start font_main">Shop Our Instagram</h4>
           <div className="row m-0 p-0">
             <div className="col-lg-5 col-md-12 col-sm-12 col-12 m-0 p-0">
               <img
