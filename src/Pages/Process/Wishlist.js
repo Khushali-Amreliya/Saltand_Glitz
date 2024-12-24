@@ -35,7 +35,7 @@ const Wishlist = () => {
   };
 
   // Add to cart and remove from wishlist
-  const handleMoveToCart = async (item) => {
+  const handleMoveToCart = async (item, id) => {
     const cartItem = {
       id: item.id,
       title: item.title,
@@ -43,22 +43,46 @@ const Wishlist = () => {
       image01: item.image01,
       totalprice: item.totalprice
     };
-
+  
     try {
-      const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/add', cartItem);
-
-      if (response.status === 201) {
-
-        dispatch(cartAction.addItem(response.data));
-
+      // Add the item to the cart first
+      const cartResponse = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/add', cartItem);
+      
+      // If the item was added to the cart successfully, proceed to remove it from the wishlist
+      if (cartResponse.status === 201) {
+        const removeWishlistResponse = await axios.post(`https://saltandglitz-api.vercel.app/v1/wishlist/remove-wishlist/${id}`);
+        
+        // After removing from the wishlist, update the Redux store
+        if (removeWishlistResponse.status === 200) {
+          // Add item to the cart in the Redux store
+          dispatch(cartAction.addItem(cartResponse.data));
+          
+          // Remove item from the wishlist in the Redux store
+          dispatch(cartAction.removeFromWishlist(item.id));
+  
+          // Navigate to the cart page
+          navigate('/cart');
+        } else {
+          toast.error("Error removing item from wishlist", {
+            position: "top-center",
+            autoClose: 1000,
+          });
+        }
+      } else {
+        toast.error("Error adding item to cart", {
+          position: "top-center",
+          autoClose: 1000,
+        });
       }
-      navigate('/cart')
     } catch (error) {
-      console.error('Error adding item to cart:', error);
-      // setLoading(false);
+      console.error('Error handling item move to cart:', error);
+      toast.error("Error processing your request", {
+        position: "top-center",
+        autoClose: 1000,
+      });
     }
-    dispatch(cartAction.removeFromWishlist(item.id));
   };
+  
 
   useEffect(() => {
     Aos.init();

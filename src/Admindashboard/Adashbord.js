@@ -9,10 +9,15 @@ const Adashbord = () => {
     return savedProducts ? JSON.parse(savedProducts) : [];
   });
 
+  console.log(products);
+
+
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productImage, setProductImage] = useState("");
   const [productCategory, setProductCategory] = useState("");
+  const [sku, setSku] = useState("");
+  const [name, setName] = useState("");
 
   // Save products to localStorage whenever they change
   useEffect(() => {
@@ -23,7 +28,8 @@ const Adashbord = () => {
     e.preventDefault();
 
     const newProduct = {
-      title: productName,
+      id: sku,
+      title: name,
       price: productPrice,
       image01: productImage,
       category: productCategory,
@@ -34,6 +40,8 @@ const Adashbord = () => {
     setProductPrice("");
     setProductImage("");
     setProductCategory("");
+    setSku("")
+    setName("")
   };
 
   const handleFileUpload = (event) => {
@@ -49,8 +57,9 @@ const Adashbord = () => {
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
       const newProducts = jsonData.map((row) => ({
-        // id: row.id,
-        title: row.title || "Unnamed Product",
+        id: row.SKU,
+        // ttl: row.Title,
+        title: row.title,
         price: row.price || 0,
         image01: row.image01 || "",
         category: row.category || "Miscellaneous",
@@ -184,7 +193,8 @@ const Adashbord = () => {
                 <div className="product-info">
                   {/* <p>{product.id}</p> */}
                   <h5>{product.title}</h5>
-                  <p>Category: {product.category}</p>
+                  {/* <p>Category: {product.ttl}</p> */}
+                  <p>SKU: {product.id}</p>
                   <p className="price">{formatCurrency(product.price)}</p>
                   <button
                     className="btn btn-danger mt-2"

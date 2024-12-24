@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Mainpage from '../Pages/Mainpage';
-import Productdetails from '../Pages/Product/Productdetails';
 import Earrings from '../Pages/Earrings';
 import Cart from '../Pages/Process/Cart';
 import Signup from '../Pages/Verify/Signup';
@@ -28,6 +27,7 @@ import Return from '../Policies/Return';
 import Exchange from '../Policies/Exchange';
 import Warranty from '../Policies/Warranty';
 import Contact from '../Pages/Contact';
+import Productdetails from '../Pages/Product/Productdetails';
 
 const Router = () => {
   return (
@@ -49,7 +49,7 @@ const Router = () => {
         <Route path='/payment' element={<Payment />} />
         
         {/* product */}
-        <Route path='/productDetail/:id' element={<Productdetails />} />
+        <Route path='/Productdetails/:id' element={<Productdetails />} />
         
         {/* verify */}
         <Route path='/signup' element={<Signup />} />
