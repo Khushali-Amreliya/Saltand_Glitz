@@ -10,7 +10,7 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('https://saltandglitz-api.vercel.app/api/auth/register', {
+            const res = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/api/auth/register', {
                 name,
                 email,
                 password,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './Product/productCard';
-import productsData from '../fakedata/Product';
 import Helmet from '../Components/Helmet';
+import axios from 'axios';
 
 const Earrings = () => {
     // Initial product images
@@ -33,13 +33,27 @@ const Earrings = () => {
         '₹1,50,001 - ₹2,00,000'
     ];
 
+    const getUploadData = async () => {
+        let getData = await axios.get("https://saltandglitzapi-rkm5g.kinsta.app/v1/upload/get_upload")
+        console.log(getData.data);
+        setProducts(getData.data)
+    }
+
+
+    useEffect(() => {
+        getUploadData()
+    },[])
+
     const discountOptions = [...new Set(products.map(product => `${product.discount}%`))];
 
-    // Fetch products data on component mount
-    useEffect(() => {
-        setProducts(productsData);
-        window.scrollTo(0, 0);
-    }, []);
+    console.log(products);
+
+
+    // // Fetch products data on component mount
+    // useEffect(() => {
+    //     setProducts(productsData);
+    //     window.scrollTo(0, 0);
+    // }, []);
 
     const [showMorePrices, setShowMorePrices] = useState(false);
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);

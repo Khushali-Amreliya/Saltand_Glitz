@@ -378,7 +378,8 @@ const Mainpage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/v1/upload/get_upload");
+        const response = await axios.get("https://saltandglitzapi-rkm5g.kinsta.app/v1/upload/get_upload");
+        console.log(response);
         setProducts(response.data); // Set products in state
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -440,6 +441,8 @@ const Mainpage = () => {
 
   const handleProductClick = (id) => {
     navigate(`/product/${id}`); // Navigate to ProductDetails page with the product ID
+    navigate(`/Productdetails/${id}`); // Navigate to ProductDetails page with the product ID
+    console.log(id);
   };
   return (
     <>
@@ -507,12 +510,14 @@ const Mainpage = () => {
               {products.map((item) => (
                   <div className='card border-0' key={item._id} onClick={() => handleProductClick(item._id)}>
                     {/* <Link to={`/productDetail/${item._id}`}> */}
+                    <Link to={`/Productdetails/${item._id}`}>
                       <img
                         alt={item.title}
                         src={item.image01}
                         className="img-fluid px-2"
                       />
                     {/* </Link> */}
+                    </Link>
                     <div className="card-body">
                       <h6>{item.title}</h6>
                       <p>
@@ -610,12 +615,14 @@ const Mainpage = () => {
                 {products.map((item) => (
                   <div className='card border-0' key={item.id} onClick={() => handleProductClick(item._id)}>
                     {/* <Link to={`/productDetail/${item._id}`}> */}
+                    <Link to={`/Productdetails/${item._id}`}>
                       <img
                         alt={item.title}
                         src={item.image01}
                         className="img-fluid px-2"
                       />
                     {/* </Link> */}
+                    </Link>
                     <div className="card-body">
                       <h6>{item.title}</h6>
                       <p>

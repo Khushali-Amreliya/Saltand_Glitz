@@ -18,6 +18,7 @@
     "axios": "^1.7.3",
     "firebase": "^10.13.0",
     "jquery": "^3.7.1",
+    "project": "file:",
     "puppeteer": "^23.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
