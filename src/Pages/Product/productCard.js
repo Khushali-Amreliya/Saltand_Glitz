@@ -253,7 +253,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const ProductCard = ({ Productsitem }) => {
-    const { id, title, price, image01, image02, image03 } = Productsitem;
+    const { id, title, total14KT, image01, image02, image03 } = Productsitem;
     const slider = useRef(null);
     const dispatch = useDispatch();
     const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -285,10 +285,10 @@ const ProductCard = ({ Productsitem }) => {
                 await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/wishlist/create-wishlist', {
                     id,
                     title,
-                    price,
+                    total14KT,
                     image01,
                 });
-                dispatch(cartAction.addToWishlist({ id, title, price, image01 }));
+                dispatch(cartAction.addToWishlist({ id, title, total14KT, image01 }));
                 toast.success('Item added to wishlist', {
                     position: 'top-center',
                     autoClose: 1000,
@@ -325,7 +325,7 @@ const ProductCard = ({ Productsitem }) => {
                 {/* Hover Content */}
                 <div className='card-body p-0 d-lg-block d-none'>
                     <div className="hover-details position-absolute w-100">
-                        <p className="m-0">{formatCurrency(price)}</p>
+                        <p className="m-0">{formatCurrency(total14KT)}</p>
                         <h6>{title}</h6>
                     </div>
 
@@ -354,7 +354,7 @@ const ProductCard = ({ Productsitem }) => {
                 {/* Md device start */}
                 <div className='card-body p-0 d-lg-none d-md-block'>
                     <div className="">
-                        <p className="m-0">{formatCurrency(price)}</p>
+                        <p className="m-0">{formatCurrency(total14KT)}</p>
                         <h6>{title}</h6>
                     </div>
 

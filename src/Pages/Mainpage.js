@@ -440,7 +440,7 @@ const Mainpage = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleProductClick = (id) => {
-    navigate(`/product/${id}`); // Navigate to ProductDetails page with the product ID
+    // navigate(`/product/${id}`); // Navigate to ProductDetails page with the product ID
     navigate(`/Productdetails/${id}`); // Navigate to ProductDetails page with the product ID
     console.log(id);
   };
@@ -521,7 +521,7 @@ const Mainpage = () => {
                     <div className="card-body">
                       <h6>{item.title}</h6>
                       <p>
-                        {formatCurrency(item.price)}{" "}
+                        {formatCurrency(item.total14KT)}{" "}
                         <span>
                           <del>{item.delprice ? formatCurrency(item.delprice) : ""}</del>
                         </span>
@@ -626,7 +626,7 @@ const Mainpage = () => {
                     <div className="card-body">
                       <h6>{item.title}</h6>
                       <p>
-                        {formatCurrency(item.price)}{" "}
+                        {formatCurrency(item.total14KT)}{" "}
                         <span>
                           <del>{item.delprice ? formatCurrency(item.delprice) : ""}</del>
                         </span>

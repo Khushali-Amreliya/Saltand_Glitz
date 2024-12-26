@@ -1172,9 +1172,11 @@ const Productdetails = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [price, setPrice] = useState(null);
-    const [selectedSize, setSelectedSize] = useState(null); // To track selected size
+    const [selectedSize, setSelectedSize] = useState(''); // To track selected size
     const [tempPrice, setTempPrice] = useState(price); // Temporary price for selected size
     const [adjustedPrice, setAdjustedPrice] = useState(price); // Final price
+    const [selectedKT, setSelectedKT] = useState("14KT"); // Default selection is 14KT
+    const [isValidSize, setIsValidSize] = useState(false);
 
     useEffect(() => {
         dispatch(cartAction.addRecentlyViewed(product));
@@ -1184,6 +1186,33 @@ const Productdetails = () => {
     // recently viewd
     const recentlyViewed = useSelector(state => state.cart.recentlyViewed);
 
+
+    useEffect(() => {
+        // Set initial price based on the selectedKT
+        setPrice(selectedKT === "14KT" ? product.total14KT : product.total18KT);
+    }, [selectedKT, product]);
+
+    const handleSizeChange = (e) => {
+        const size = e.target.value;
+        setSelectedSize(size);
+
+        // Calculate the price based on size
+        let basePrice = selectedKT === "14KT" ? product.total14KT : product.total18KT;
+
+        if (size !== 'choose') {
+            // Increase or decrease the price by 2% based on the selected size
+            const sizeDiff = size - 6; // Assuming size 6 is the base size
+            const priceAdjustment = 0.02 * basePrice * sizeDiff;
+            setPrice(basePrice + priceAdjustment);
+        } else {
+            setPrice(basePrice); // Reset to the base price if no size is selected
+        }
+    };
+
+    const handleClear = () => {
+        setSelectedSize('choose');
+        setIsValidSize(false); // Disable buttons when cleared
+    };
     const slider_search = {
         slidesToShow: 5, // Default: Show 5 slides
         slidesToScroll: 1, // Scroll one at a time
@@ -1272,15 +1301,45 @@ const Productdetails = () => {
     };
 
     // useEffect(() => {
+    // const fetchProductDetails = async () => {
+    //     try {
+    //         const response = await axios.get(`https://saltandglitzapi-rkm5g.kinsta.app/v1/upload/get_id/${id}`);
+    //         console.log(id);
+
+
+
+    //         setProduct(response.data); // Set product details in state
+    //         console.log(response.data);
+    //     } catch (err) {
+    //         console.error("Error fetching product details:", err.response || err);
+    //         setError("Failed to load product details.");
+    //     } finally {
+    //         setLoading(false); // Stop loader
+    //     }
+    // };
     const fetchProductDetails = async () => {
         try {
             const response = await axios.get(`https://saltandglitzapi-rkm5g.kinsta.app/v1/upload/get_id/${id}`);
-            console.log(id);
+            console.log(response);
+            
+            const data = response.data;
 
-
-
-            setProduct(response.data); // Set product details in state
-            console.log(response.data);
+            // Map data from Excel file
+            setProduct({
+                title: data.title,
+                grossWt: data.grossWt,
+                netWeight14KT: data.netWeight14KT,
+                netWeight18KT: data.netWeight18KT,
+                makingCharge14KT: data.makingCharge14KT,
+                makingCharge18KT: data.makingCharge18KT,
+                gst14KT: data.gst14KT,
+                gst18KT: data.gst18KT,
+                total14KT: data.total14KT,
+                total18KT: data.total18KT,
+                price14KT: data.price14KT,
+                price18KT: data.price18KT,
+                diamondprice: data.diamondprice
+            });
         } catch (err) {
             console.error("Error fetching product details:", err.response || err);
             setError("Failed to load product details.");
@@ -1289,6 +1348,9 @@ const Productdetails = () => {
         }
     };
 
+    // useEffect(() => {
+    //     fetchProductDetails(); // Fetch product details on component mount
+    // }, [id]);
 
     useEffect(() => {
         fetchProductDetails()
@@ -1299,7 +1361,10 @@ const Productdetails = () => {
 
     // console.log(product);
 
-
+    // Handle KT button click
+    const handleKTClick = (ktType) => {
+        setSelectedKT(ktType);
+    };
     if (loading) return <p>Loading...</p>;
     if (!product) return <p>Product not found</p>;
     var md_carousel = {
@@ -1504,12 +1569,13 @@ const Productdetails = () => {
                         {/* Large */}
                         <div className='col-lg-4 col-md-6 col-sm-12 col-12 px-4 mt-4 mx-auto d-block d-lg-block d-none sticky-header'>
                             <h3 className='font_h'>{product.title}</h3>
-                            <h4 className='font_h'>{formatCurrency(product.price)}</h4>
+                            <h4 className='font_h'>{formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}</h4>
                             <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
                             <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
-                            <p>
-                                <span style={{ fontSize: "12px" }} className="fw-bold align-middle">
-                                    COLOR
+
+                            <p className="KT_button">
+                                <span className=" align-middle">
+                                    color
                                 </span>
                                 <span className="ps-3 align-middle" style={{ fontSize: "20px" }}>
                                     {colors.map((color) => (
@@ -1541,7 +1607,52 @@ const Productdetails = () => {
                                     ))}
                                 </span>
                             </p>
-                            <p className="d-flex align-items-center customize_sec">
+
+                            {/* KT Selection Buttons */}
+                            <div className="my-3 KT_button">
+                                <span className="align-middle pe-3">
+                                    Purity
+                                </span>
+                                <button
+                                    className={`btn ${selectedKT === "14KT" ? "bg-dark text-light" : "btn-light text-dark"
+                                        } me-2`}
+                                    onClick={() => handleKTClick("14KT")}
+                                >
+                                    14KT
+                                </button>
+                                <button
+                                    className={`btn ${selectedKT === "18KT" ? "bg-dark text-light" : "btn-light text-dark"
+                                        } me-2`}
+                                    onClick={() => handleKTClick("18KT")}
+                                >
+                                    18KT
+                                </button>
+                            </div>
+                            <div className="my-3 KT_button d-flex align-items-center">
+                                <span className="pe-3">
+                                    Ring Size
+                                </span>
+                                <select
+                                    className="form-select d-inline w-auto"
+                                    value={selectedSize}
+                                    onChange={handleSizeChange}
+                                >
+                                    <option value="choose">Choose</option>
+                                    {[...Array(21)].map((_, i) => (
+                                        <option key={i} value={i + 6}>
+                                            {i + 6}
+                                        </option>
+                                    ))}
+                                </select>
+                                <button
+                                    className="btn btn-link ms-3"
+                                    type="button"
+                                    onClick={handleClear}
+                                >
+                                    Clear
+                                </button>
+                            </div>
+                            {/* <p className="d-flex align-items-center customize_sec">
                                 <div className="w-25 border-end px-2 py-1 bg-white" style={{ borderRadius: "10px 0px 0px 10px" }}>
                                     <small className="text-muted">Size</small>
                                     <p className="fw-bold mb-0">{selectedSize ? `${selectedSize} inches` : "Select Size"}</p>
@@ -1564,12 +1675,12 @@ const Productdetails = () => {
                                         CUSTOMISE
                                     </button>
                                 </div>
-                            </p>
-                            <button className='btn add_btn me-2 my-3' onClick={addToCart}>
+                            </p> */}
+                            <button className='btn add_btn me-2 my-3' onClick={addToCart} disabled={!isValidSize}>
                                 {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
                                 ADD TO CART
                             </button>
-                            <button className='btn add_btn my-3 me-2' onClick={buyNow}>
+                            <button className='btn add_btn my-3 me-2' onClick={buyNow} disabled={!isValidSize}>
                                 {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
                                 BUY NOW
                             </button>
@@ -1655,53 +1766,79 @@ const Productdetails = () => {
                     {/* =========Medium device========= */}
                     <div className='row d-lg-none d-block'>
                         <div className='col-md-12 col-sm-12 col-12 mx-auto d-block'>
-                            <h3>{product.title}</h3>
-                            <h4 className='fw-bold'>{formatCurrency(product.price)}</h4>
+                            <h3 className='font_h'>{product.title}</h3>
+                            <h4 className='font_h'>{formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}</h4>
                             <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
                             <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
-                            <p>
-                                <span style={{ fontSize: "12px" }} className='fw-bold'>COLOR</span>
-                                <span className='ps-3' style={{ fontSize: "20px" }}>
-                                    {colors.map(color => (
+
+                            <p className="KT_button">
+                                <span className="align-middle">
+                                    color
+                                </span>
+                                <span className="ps-3 align-middle" style={{ fontSize: "20px" }}>
+                                    {colors.map((color) => (
                                         <i
                                             key={color.id}
                                             className="ri-circle-fill"
-                                            style={{ color: color.color, fontSize: "20px", position: 'relative', cursor: 'pointer' }}
+                                            style={{
+                                                color: color.color,
+                                                fontSize: "20px",
+                                                position: "relative",
+                                                cursor: "pointer",
+                                            }}
                                             onClick={() => handleColorClick(color.id)}
                                         >
                                             {selectedColor === color.id && (
-                                                <i className="ri-check-line" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: '#fff', fontSize: '12px' }}></i>
+                                                <i
+                                                    className="ri-check-line"
+                                                    style={{
+                                                        position: "absolute",
+                                                        top: "50%",
+                                                        left: "50%",
+                                                        transform: "translate(-50%, -50%)",
+                                                        color: "#fff",
+                                                        fontSize: "12px",
+                                                    }}
+                                                ></i>
                                             )}
                                         </i>
                                     ))}
                                 </span>
                             </p>
-                            {/* <p>
-                                <span className='fw-bold me-3' style={{ fontSize: "12px" }}>PURITY</span>
+
+                            {/* KT Selection Buttons */}
+                            <div className="my-3 KT_button">
+                                <span className="align-middle pe-3">
+                                    Purity
+                                </span>
                                 <button
-                                    className='btn mx-1 pt-2'
-                                    style={{
-                                        fontSize: "11px",
-                                        backgroundColor: selectedPurity === '14KT' ? '#ffcc00' : '#000',
-                                        color: selectedPurity === '14KT' ? '#000' : '#fff'
-                                    }}
-                                    onClick={() => handleButtonClick('14KT')}
+                                    className={`btn ${selectedKT === "14KT" ? "bg-dark text-light" : "btn-light text-dark"
+                                        } me-2`}
+                                    onClick={() => handleKTClick("14KT")}
                                 >
-                                    14 KT
+                                    14KT
                                 </button>
                                 <button
-                                    className='btn mx-1 pt-2'
-                                    style={{
-                                        fontSize: "11px",
-                                        backgroundColor: selectedPurity === '18KT' ? '#ffcc00' : '#000', // Change bg color when selected
-                                        color: selectedPurity === '18KT' ? '#000' : '#fff' // Change text color to black when selected
-                                    }}
-                                    onClick={() => handleButtonClick('18KT')}
+                                    className={`btn ${selectedKT === "18KT" ? "bg-dark text-light" : "btn-light text-dark"
+                                        } me-2`}
+                                    onClick={() => handleKTClick("18KT")}
                                 >
-                                    18 KT
+                                    18KT
                                 </button>
-                            </p> */}
-                            <div className=" align-items-center customize_sec container-fluid">
+                            </div>
+                            <div className="my-3 KT_button d-flex align-items-center">
+                                <span className="pe-3">
+                                    Ring Size
+                                </span>
+                                <select className="form-select d-inline w-auto">
+                                    {[...Array(21)].map((_, i) => (
+                                        <option key={i} value={i + 6}>
+                                            {i + 6}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            {/* <div className=" align-items-center customize_sec container-fluid">
                                 <div className="row">
                                     <div className="col-12 border my-1 bg-white">
                                         <small className="text-muted">Size</small>
@@ -1726,12 +1863,12 @@ const Productdetails = () => {
                                 aria-controls="offcanvassize"
                             >
                                 CUSTOMISE
-                            </button>
+                            </button> */}
                             <button className='btn add_btn add_btn_md me-2 px-5 mt-3' onClick={addToCart}>
                                 {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
                                 ADD TO CART
                             </button>
-                            <button className='btn add_btn add_btn_md px-5 mt-3' onClick={buyNow}>
+                            <button className='btn add_btn add_btn_md px-5 my-3' onClick={buyNow}>
                                 {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
                                 BUY NOW
                             </button>
@@ -1872,12 +2009,12 @@ const Productdetails = () => {
                                 <div className="grid">
                                     <div className="detail-box">
                                         <h4>Weight</h4>
-                                        <p className='m-0 p-0 mb-2'>Gross (Product): 3.316 gram</p>
-                                        <p>Net (Gold): 2.940 gram</p>
+                                        <p className='m-0 p-0 mb-2'>Gross (Product): {product.grossWt} gram</p>
+                                        <p>Net (Gold): {selectedKT === "14KT" ? product.netWeight14KT : product.netWeight18KT} gram</p>
                                     </div>
                                     <div className="detail-box">
                                         <h4>Purity</h4>
-                                        <p>14Kt Yellow Gold</p>
+                                        <p>{selectedKT} Yellow Gold</p>
                                     </div>
                                 </div>
                             </div>
@@ -1922,23 +2059,23 @@ const Productdetails = () => {
                                 <ul className='ps-0'>
                                     <p className='m-0 p-0'>
                                         <span className='price_break'>Gold:</span>
-                                        <span className='price_break_price text_end_break'>₹13,856/-</span>
+                                        <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.price14KT : product.price18KT)}/-</span>
                                     </p>
                                     <p className='m-0 p-0'>
                                         <span className='price_break'>Diamond:</span>
-                                        <span className='price_break_price text_end_break'>₹99,500/-</span>
+                                        <span className='price_break_price text_end_break'>{formatCurrency(product.diamondprice)}/-</span>
                                     </p>
                                     <p className='m-0 p-0'>
                                         <span className='price_break'>Making Charge:</span>
-                                        <span className='price_break_price text_end_break'>₹4,410/-</span>
+                                        <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.makingCharge14KT : product.makingCharge18KT)}/-</span>
                                     </p>
                                     <p className='m-0 p-0'>
                                         <span className='price_break'>GST:</span>
-                                        <span className='price_break_price text_end_break'>₹3,532/-</span>
+                                        <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.gst14KT : product.gst18KT)}/-</span>
                                     </p>
                                     <p className='m-0 p-0'>
                                         <span className='price_break'>Total:</span>
-                                        <span className='price_break_price text_end_break'>₹1,21,299/-</span>
+                                        <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}/-</span>
                                     </p>
                                 </ul>
                             </div>
