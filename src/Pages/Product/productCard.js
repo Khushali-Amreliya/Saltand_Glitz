@@ -316,13 +316,13 @@ const ProductCard = ({ Productsitem }) => {
         <div className="card-container position-relative">
             <div className=''>
                 <Slider ref={slider} {...settings2} className="border border-1" style={{ boxShasow: "0px 0px 10px #000" }}>
-                    <Link to={`/Productdetails/${product_id}`}>
+                    <Link to={`/Productdetails/${id}`}>
                         <img alt="" src={image01} className="img-fluid" />
                     </Link>
-                    <Link to={`/Productdetails/${product_id}`}>
+                    <Link to={`/Productdetails/${id}`}>
                         <img alt="" src={image02} className="img-fluid" />
                     </Link>
-                    <Link to={`/Productdetails/${product_id}`}>
+                    <Link to={`/Productdetails/${id}`}>
                         <img alt="" src={image03} className="img-fluid" />
                     </Link>
                 </Slider>
