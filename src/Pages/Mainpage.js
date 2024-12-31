@@ -378,7 +378,7 @@ const Mainpage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://saltandglitzapi-rkm5g.kinsta.app/v1/upload/get_upload");
+        const response = await axios.get("http://localhost:5000/v1/upload/get_upload");
         console.log(response);
         setProducts(response.data); // Set products in state
       } catch (err) {
@@ -429,7 +429,7 @@ const Mainpage = () => {
 
   const settings2 = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     autoplay: true,
     autoplaySpeed: 6000,
