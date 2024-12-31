@@ -8,7 +8,7 @@ import "aos/dist/aos.css";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Helmet from '../../Components/Helmet';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Wishlist = () => {
   const wishlistItem = useSelector(state => state.cart.wishlistItem);
@@ -43,23 +43,23 @@ const Wishlist = () => {
       image01: item.image01,
       totalprice: item.totalprice
     };
-  
+
     try {
       // Add the item to the cart first
       const cartResponse = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/add', cartItem);
-      
+
       // If the item was added to the cart successfully, proceed to remove it from the wishlist
       if (cartResponse.status === 201) {
         const removeWishlistResponse = await axios.post(`https://saltandglitzapi-rkm5g.kinsta.app/v1/wishlist/remove-wishlist/${id}`);
-        
+
         // After removing from the wishlist, update the Redux store
         if (removeWishlistResponse.status === 200) {
           // Add item to the cart in the Redux store
           dispatch(cartAction.addItem(cartResponse.data));
-          
+
           // Remove item from the wishlist in the Redux store
           dispatch(cartAction.removeFromWishlist(item.id));
-  
+
           // Navigate to the cart page
           navigate('/cart');
         } else {
@@ -82,7 +82,7 @@ const Wishlist = () => {
       });
     }
   };
-  
+
 
   useEffect(() => {
     Aos.init();
@@ -99,7 +99,9 @@ const Wishlist = () => {
                   wishlistItem.map((item) => (
                     <div key={item.id} className='col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6' data-aos="zoom-in-up" data-aos-duration="2000">
                       <div className='card border-0'>
-                        <img alt={item.title} src={item.image01} className='position-relative'></img>
+                        <Link to={`/Productdetails/${item.id}`}>
+                          <img alt={item.title} src={item.image01} className='position-relative'></img>
+                        </Link>
                         <div className='card-body d-flex justify-content-between align-items-center'>
                           <div>
                             <p className='m-0'>{formatCurrency(item.price)}</p>

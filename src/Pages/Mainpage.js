@@ -373,6 +373,7 @@ const Mainpage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [banner, setBanner] = useState([])
 
   // Fetch products from the backend
   useEffect(() => {
@@ -391,6 +392,22 @@ const Mainpage = () => {
 
     fetchProducts();
   }, []);
+
+
+  // let getBanner = async () => {
+  //   let res = await axios.get("http://localhost:5000/v1/banner/bannerGet")
+  //   // console.log(res, "fdxgfchgvhmbj,n");
+  //   console.log(res.data.banners);
+  //   setBanner(res?.data?.banners || [])
+  // }
+
+  // console.log(banner, "tfchgvjhbkjnlkm");
+
+
+  // useEffect(() => {
+  //   getBanner()
+  // }, [])
+
   useEffect(() => {
     const handleResize = () => {
       setSlidesToShow(getSlidesToShow());
@@ -456,6 +473,15 @@ const Mainpage = () => {
               <h5>Latest</h5>
             </div>
             <div className='img_carousel'>
+              {/* {banner.map((banner, index) => (
+                <div key={index} className="banner-item">
+                  <img
+                    src={banner.bannerImage}  // Set the banner image
+                    alt={`Banner ${index + 1}`}  // Provide an alt text
+                    className="banner-image"   // Optionally, apply some styles
+                  />
+                </div>
+              ))} */}
               <img alt='Best Sellers' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/11_NOV/Topmenu/mobile/mobile_bestseller.png' className='img-fluid item3' />
               <h5>Best Sellers</h5>
             </div>
@@ -476,6 +502,15 @@ const Mainpage = () => {
               <h5>Necklaces</h5>
             </div> <div className='img_carousel'>
               <img alt='Earrings' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/11_NOV/Topmenu/mobile/mobile_gifts.png' className='img-fluid item3' />
+              {/* {banner.map((banner, index) => (
+                <div key={index} className="banner-item">
+                  <img
+                    src={banner.bannerImage}  // Set the banner image
+                    alt={`Banner ${index + 1}`}  // Provide an alt text
+                    className="banner-image"   // Optionally, apply some styles
+                  />
+                </div>
+              ))} */}
               <h5>Wedding Gifs</h5>
             </div>
           </div>
@@ -507,7 +542,7 @@ const Mainpage = () => {
             </div>
             <div className=''>
               <Slider ref={slidermenu} {...settings1}>
-              {products.map((item) => (
+                {products.map((item) => (
                   <div className='card border-0' key={item._id} onClick={() => handleProductClick(item._id)}>
                     {/* <Link to={`/productDetail/${item._id}`}> */}
                     <Link to={`/Productdetails/${item._id}`}>
@@ -516,7 +551,7 @@ const Mainpage = () => {
                         src={item.image01}
                         className="img-fluid px-2"
                       />
-                    {/* </Link> */}
+                      {/* </Link> */}
                     </Link>
                     <div className="card-body">
                       <h6>{item.title}</h6>
@@ -621,7 +656,7 @@ const Mainpage = () => {
                         src={item.image01}
                         className="img-fluid px-2"
                       />
-                    {/* </Link> */}
+                      {/* </Link> */}
                     </Link>
                     <div className="card-body">
                       <h6>{item.title}</h6>

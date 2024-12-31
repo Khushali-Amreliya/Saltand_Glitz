@@ -2126,7 +2126,7 @@ const Productdetails = () => {
                                         className="card border-0 w-100 mx-auto d-block"
                                         key={item.id}
                                     >
-                                        <Link to={`/productDetail/${item.id}`}>
+                                        <Link to={`/Productdetails/${item.id}`}>
                                             <img
                                                 alt={item.title}
                                                 src={item.image01}

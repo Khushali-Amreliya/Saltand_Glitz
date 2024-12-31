@@ -253,12 +253,13 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const ProductCard = ({ Productsitem }) => {
-    const { id, title, total14KT, image01, image02, image03 } = Productsitem;
+    const { product_id, id, title, total14KT, image01, image02, image03 } = Productsitem;
     const slider = useRef(null);
     const dispatch = useDispatch();
     const [isHeartFilled, setIsHeartFilled] = useState(false);
 
     const wishlist = useSelector((state) => state.cart.wishlistItem);
+
 
     useEffect(() => {
         const itemInWishlist = wishlist.find((item) => item.id === id);
@@ -314,13 +315,17 @@ const ProductCard = ({ Productsitem }) => {
     return (
         <div className="card-container position-relative">
             <div className=''>
-                <Link to={`/productDetail/${id}`}>
-                    <Slider ref={slider} {...settings2} className="border border-1" style={{ boxShasow: "0px 0px 10px #000" }}>
+                <Slider ref={slider} {...settings2} className="border border-1" style={{ boxShasow: "0px 0px 10px #000" }}>
+                    <Link to={`/Productdetails/${product_id}`}>
                         <img alt="" src={image01} className="img-fluid" />
+                    </Link>
+                    <Link to={`/Productdetails/${product_id}`}>
                         <img alt="" src={image02} className="img-fluid" />
+                    </Link>
+                    <Link to={`/Productdetails/${product_id}`}>
                         <img alt="" src={image03} className="img-fluid" />
-                    </Slider>
-                </Link>
+                    </Link>
+                </Slider>
 
                 {/* Hover Content */}
                 <div className='card-body p-0 d-lg-block d-none'>
