@@ -1179,28 +1179,28 @@ const Productdetails = () => {
     const [isValidSize, setIsValidSize] = useState(true);
     const [ringSize, setRingSize] = useState(6);
     const [showClear, setShowClear] = useState(true);
-    const [recentlyViewed, setRecentlyViewed] = useState([]);
+    // const [recentlyViewed, setRecentlyViewed] = useState([]);
 
-    // useEffect(() => {
-    //     dispatch(cartAction.addRecentlyViewed(product));
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps 
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(cartAction.addRecentlyViewed(product));
+        // eslint-disable-next-line react-hooks/exhaustive-deps 
+    }, [dispatch]);
 
     // recently viewd
-    // const recentlyViewed = useSelector(state => state.cart.recentlyViewed);
-    useEffect(() => {
-        const fetchRecentlyViewed = async () => {
-          try {
-            const response = await fetch('http://localhost:5000/api/recently-viewed');
-            const data = await response.json();
-            setRecentlyViewed(data);
-          } catch (error) {
-            console.error('Error fetching recently viewed products:', error);
-          }
-        };
+    const recentlyViewed = useSelector(state => state.cart.recentlyViewed);
+    // useEffect(() => {
+    //     const fetchRecentlyViewed = async () => {
+    //       try {
+    //         const response = await fetch('http://localhost:5000/api/recently-viewed');
+    //         const data = await response.json();
+    //         setRecentlyViewed(data);
+    //       } catch (error) {
+    //         console.error('Error fetching recently viewed products:', error);
+    //       }
+    //     };
     
-        fetchRecentlyViewed();
-      }, []);    
+    //     fetchRecentlyViewed();
+    //   }, []);    
 
     useEffect(() => {
         // Set initial price based on the selectedKT

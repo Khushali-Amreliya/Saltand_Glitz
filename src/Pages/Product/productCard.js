@@ -315,18 +315,13 @@ const ProductCard = ({ Productsitem }) => {
     return (
         <div className="card-container position-relative">
             <div className=''>
-                <Slider ref={slider} {...settings2} className="border border-1" style={{ boxShasow: "0px 0px 10px #000" }}>
-                    <Link to={`/Productdetails/${id}`}>
+                <Link to={`/Productdetails/${product_id}`}>
+                    <Slider ref={slider} {...settings2} className="border border-1" style={{ boxShasow: "0px 0px 10px #000" }}>
                         <img alt="" src={image01} className="img-fluid" />
-                    </Link>
-                    <Link to={`/Productdetails/${id}`}>
                         <img alt="" src={image02} className="img-fluid" />
-                    </Link>
-                    <Link to={`/Productdetails/${id}`}>
                         <img alt="" src={image03} className="img-fluid" />
-                    </Link>
-                </Slider>
-
+                    </Slider>
+                </Link>
                 {/* Hover Content */}
                 <div className='card-body p-0 d-lg-block d-none'>
                     <div className="hover-details position-absolute w-100">

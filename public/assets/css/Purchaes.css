@@ -194,10 +194,12 @@
 /* work sec */
 .bg_works {
     background: radial-gradient(111.87% 129.26% at -5.52% -1.73%, #e3d9ff 0%, rgba(255, 215, 245, 0.7) 21.81%, rgba(243, 241, 255, 0.8) 50%, #f8ebfb 100%);
-    margin-bottom: 65px;
+    /* margin-bottom: 65px; */
     padding-top: 62px;
     padding-bottom: 70px;
     width: 100%;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
 }
 
 .purchase_box {
@@ -207,11 +209,15 @@
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 4px 20px 0px rgba(185, 137, 255, 0.2);
     position: relative;
+    /* Ensure the parent box is positioned for absolute children */
     margin: 10px 0;
+    transition: transform 0.3s ease;
+    padding-top: 40px;
+    /* Add padding to create space for the overlapping icon */
 }
 
 .purchase_box p {
-    padding: 50px 28px 50px;
+    padding: 35px 28px 50px;
     width: 20vw;
     text-align: center;
     margin: 0 auto;
@@ -222,12 +228,211 @@
     letter-spacing: 0.5px;
 }
 
+.icon_image {
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+}
+
+/* General Reset */
+.cta-section {
+    /* background: linear-gradient(to bottom, #f5f0ff, #ffffff); */
+    padding: 40px 20px;
+    padding-right: 5rem !important;
+    padding-left: 5rem !important;
+}
+
+.cta-container {
+    flex-wrap: wrap;
+
+    border-radius: 15px;
+    /* padding: 20px; */
+    box-shadow: 0 4px 20px rgba(100, 100, 255, 0.2);
+}
+
+.cta-left {
+    flex: 1;
+    text-align: center;
+    background: #eae6ff;
+    padding: 67px 20px;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.cta-left h2 {
+    font-size: 3rem;
+    color: #3b2078;
+    margin: 0;
+}
+
+.cta-left p {
+    font-size: 1rem;
+    color: #6c5b7b;
+    margin: 10px 0 0;
+}
+
+.cta-right {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    border-radius: 0px 15px 15px 0px;
+}
+
+.cta-right p {
+    font-size: 1rem;
+    color: #3b2078;
+    margin-bottom: 15px;
+}
+
+.cta-input {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #d0c7ff;
+    background: #f9f7ff;
+    font-size: 1rem;
+    color: #3b2078;
+}
+
+.cta-input::placeholder {
+    color: #d0c7ff;
+}
+
+.cta-button {
+    background: linear-gradient(90deg, #a044ff, #6a1b9a);
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: linear-gradient(90deg, #6a1b9a, #a044ff);
+}
+
+.bg-faq {
+    background-color: #f6f3f9;
+    padding: 57px 20px;
+}
+
+.faq-container {
+    max-width: 1039px;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.tab {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    color: #6c63ff;
+    transition: background-color 0.3s ease;
+}
+
+.tab.active {
+    background-color: #e8e6ff;
+}
+
+.accordion {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #4f3267;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #ddd;
+    padding: 12px 0;
+    cursor: pointer;
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: #000;
+}
+
+.accordion-answer {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #4e555e;
+}
+
+.accordion-icon {
+    font-size: 16px;
+    color: #4f3267;
+}
+
+.accordion-item {
+    background-color: #fff;
+    border: 0px solid #000 !important;
+    border-bottom: 1px solid #ddd !important;
+    border-radius: 0px !important;
+}
+
+.terms {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    color: #555;
+}
+
+.terms-title {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.list-group-item{
+    border: 0px solid #000 !important;
+    padding: 0px !important;
+}
 
 @media(max-width:1440px) {
     .purchase_box p {
         width: auto !important;
     }
+
+    .cta-section {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
 }
+
 @media(max-width:992px) {
     .purchase_final_instalment {
         width: 100% !important;

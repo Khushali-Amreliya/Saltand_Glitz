@@ -57,8 +57,8 @@ const Earrings = () => {
     const [showMorePrices, setShowMorePrices] = useState(false);
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);
     const [currentPage, setCurrentPage] = useState(1); // page starts from 1
-    const itemsPerPage = 6; // Number of products per page
-
+    const itemsPerPage = 8; // Number of products per page
+    
     const handleFilterChange = (type, value) => {
         let updatedSelection;
         switch (type) {
@@ -1378,7 +1378,7 @@ const Earrings = () => {
                                         <React.Fragment key={item.id} onClick={() => handleProductClick(item.id)}>
                                             {/* Product Card */}
                                             <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow p-0 px-1">
-                                                <Link to={`/Productdetails/${item.id}`}>
+                                                <Link>
                                                     <ProductCard Productsitem={item} />
                                                 </Link>
                                             </div>

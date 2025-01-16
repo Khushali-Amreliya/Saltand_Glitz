@@ -380,7 +380,7 @@ const Mainpage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("http://localhost:5000/v1/upload/get_upload");
-        console.log(response);
+        // console.log(response);
         setProducts(response.data); // Set products in state
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -543,9 +543,9 @@ const Mainpage = () => {
             <div className=''>
               <Slider ref={slidermenu} {...settings1}>
                 {products.map((item) => (
-                  <div className='card border-0' key={item._id} onClick={() => handleProductClick(item._id)}>
+                  <div className='card border-0' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
                     {/* <Link to={`/productDetail/${item._id}`}> */}
-                    <Link to={`/Productdetails/${item._id}`}>
+                    <Link to={`/Productdetails/${item.product_id}`}>
                       <img
                         alt={item.title}
                         src={item.image01}
@@ -648,9 +648,9 @@ const Mainpage = () => {
             <div className=''>
               <Slider ref={slider1} {...settings2}>
                 {products.map((item) => (
-                  <div className='card border-0' key={item.id} onClick={() => handleProductClick(item._id)}>
+                  <div className='card border-0' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
                     {/* <Link to={`/productDetail/${item._id}`}> */}
-                    <Link to={`/Productdetails/${item._id}`}>
+                    <Link to={`/Productdetails/${item.product_id}`}>
                       <img
                         alt={item.title}
                         src={item.image01}
