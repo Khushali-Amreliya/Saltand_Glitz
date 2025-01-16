@@ -10,6 +10,7 @@ import "aos/dist/aos.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Helmet from "../../Components/Helmet";
+import { data } from "jquery";
 
 const Cart = (props) => {
   const dispatch = useDispatch();
@@ -76,6 +77,35 @@ const Cart = (props) => {
   //         console.error('Error deleting item from cart:', error.message);
   //     }
   // };
+  const [product, setProduct] = useState([]); // Initialize as an array
+  // const [loading, setLoading] = useState(true); // Add loading state if needed
+
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const fetch = async () => {
+    try {
+      const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
+      const data = response.data;
+
+      const getcart = data?.cart?.quantity || []; // Default to an empty array if no cart data is available
+      console.log(getcart);
+
+      // Update product state with cart data
+      setProduct(getcart);
+
+    } catch (err) {
+      console.error("Error fetching product details:", err.response || err);
+      // Handle error (e.g., show a message or set error state)
+    } finally {
+      setLoading(false); // Stop loader
+    }
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
+
   const handleDelete = async (itemId) => {
     try {
       const response = await axios.post(
@@ -114,26 +144,36 @@ const Cart = (props) => {
     }
   };
 
-  const addToCart = async (item) => {
+  const addToCart = async (id) => {
+    setLoading(true);
+
     const cartItem = {
-      id: item.id,
-      title: item.title,
-      price: item.price,
-      image01: item.image01,
-      totalprice: item.totalprice,
+      product: id,
+      user: user._id,
     };
 
     try {
       const response = await axios.post(
-        "https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/add",
+        "https://saltandglitz-api.vercel.app/v1/cart/addCart",
         cartItem
       );
 
-      if (response.status === 201) {
-        dispatch(cartAction.addItem(response.data));
+
+      if (response.status === 201 || response.status === 200) {
+        toast.success("Product added to cart successfully!", {
+          position: "top-center",
+          autoClose: 2000,
+        });
+
+        const updatedCart = response.data.updatedCart || response.data.newCart;
+        dispatch(cartAction.addItem(updatedCart));
+      } else {
+        toast.error("Failed to add product to cart!");
       }
     } catch (error) {
-      console.error("Error adding item to cart:", error);
+      console.error("Error adding item to cart:", error.message);
+      toast.error("An error occurred while adding to cart!");
+    } finally {
       setLoading(false);
     }
   };
@@ -224,7 +264,7 @@ const Cart = (props) => {
         </section>
         <section className="container cart_Sec">
           <div className="row">
-            {cartItems.length > 0 ? (
+            {product.length > 0 ? (
               <>
                 <div className="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-4 mt-5">
                   <div>
@@ -241,26 +281,26 @@ const Cart = (props) => {
                         </Link>
                       </div>
                     </div>
-                    {cartItems.map((item) => (
+                    {product.map((item) => (
                       <div
                         className="row cart_product align-items-center d-flex my-1"
                         key={item.id}
                       >
                         <div className="col-lg-3 col-md-4 col-sm-4 col-4">
-                          <Link to={`/productDetail/${item.id}`}>
+                          <Link to={`/Productdetails/${item.productId.product_id}`}>
                             <img
-                              alt={item.title}
-                              src={item.image01}
+                              alt={item.productId.title}
+                              src={item.productId.image01}
                               className="img-fluid cart_img"
                             />
                           </Link>
                         </div>
                         <div className="col-lg-9 col-md-8 col-sm-8 col-8 d-flex justify-content-between">
                           <div>
-                            <h6 className="cart_Title m-0 p-0">{item.title}</h6>
+                            <h6 className="cart_Title m-0 p-0">{item.productId.title}</h6>
                             <p className="m-0 p-0">
                               <span className="cart_price">
-                                {formatCurrency(item.totalprice)}
+                                {formatCurrency(item.productId.gst14KT)}
                               </span>
                             </p>
                             <p

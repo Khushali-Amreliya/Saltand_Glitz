@@ -1159,6 +1159,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from '../../Store/Slice/CartSlice';
+import Loader from "../Loader";
 
 
 const Productdetails = () => {
@@ -1179,6 +1180,8 @@ const Productdetails = () => {
     const [isValidSize, setIsValidSize] = useState(true);
     const [ringSize, setRingSize] = useState(6);
     const [showClear, setShowClear] = useState(true);
+    const user = JSON.parse(localStorage.getItem('user'))
+    console.log(user);
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
 
     useEffect(() => {
@@ -1346,10 +1349,13 @@ const Productdetails = () => {
         try {
             const response = await axios.get(`http://localhost:5000/v1/upload/get_id/${id}`);
             const data = response.data;
+            console.log("Data",data);
+            
 
             // Map data from Excel file
             setProduct({
                 title: data.title,
+                id:data._id,
                 grossWt: data.grossWt,
                 netWeight14KT: data.netWeight14KT,
                 netWeight18KT: data.netWeight18KT,
@@ -1363,6 +1369,8 @@ const Productdetails = () => {
                 price18KT: data.price18KT,
                 diamondprice: data.diamondprice
             });
+            console.log(product);
+            
         } catch (err) {
             console.error("Error fetching product details:", err.response || err);
             setError("Failed to load product details.");
@@ -1379,7 +1387,7 @@ const Productdetails = () => {
     const handleKTClick = (ktType) => {
         setSelectedKT(ktType);
     };
-    if (loading) return <p>Loading...</p>;
+    // if (loading) return <p>Loading...</p>;
     if (!product) return <p>Product not found</p>;
     var md_carousel = {
         dots: true,
@@ -1426,44 +1434,80 @@ const Productdetails = () => {
         ],
     };
 
-    const addToCart = async () => {
+    
+    
+    const addToCart = async (id) => {
         setLoading(true);
-
+    
         const cartItem = {
-            id: product.id, // Ensure `product` has these properties
-            title: product.title,
-            price: product.price, // Use the original price or calculated price
-            image01: product.img, // Assuming product.img is the main image
-            totalprice: product.price,
-            selectedSize: "defaultSize", // Replace with actual size if available
-            confirmedMetal: "defaultMetal", // Replace with selected metal if applicable
-            confirmedDiamondQuality: "defaultDiamondQuality" // Replace with diamond quality if applicable
+            product:id,
+            user: user._id,
         };
-
+    
         try {
-            const response = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/cart/addCart', cartItem);
+            const response = await axios.post(
+                "https://saltandglitz-api.vercel.app/v1/cart/addCart",
+                cartItem
+            );
 
-            if (response.status === 201) {
+    
+            if (response.status === 201 || response.status === 200) {
                 toast.success("Product added to cart successfully!", {
                     position: "top-center",
                     autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
                 });
-                dispatch(cartAction.addItem(response.data)); // Assuming cartAction is correctly imported
+    
+                const updatedCart = response.data.updatedCart || response.data.newCart;
+                dispatch(cartAction.addItem(updatedCart));
             } else {
                 toast.error("Failed to add product to cart!");
             }
         } catch (error) {
-            console.error('Error adding item to cart:', error);
+            console.error("Error adding item to cart:", error.message);
             toast.error("An error occurred while adding to cart!");
         } finally {
             setLoading(false);
         }
     };
+
+    // const addToCart = async () => {
+    //     setLoading(true);
+
+    //     const cartItem = {
+    //         id: product.id, // Ensure `product` has these properties
+    //         title: product.title,
+    //         price: product.price, // Use the original price or calculated price
+    //         image01: product.img, // Assuming product.img is the main image
+    //         totalprice: product.price,
+    //         selectedSize: "defaultSize", // Replace with actual size if available
+    //         confirmedMetal: "defaultMetal", // Replace with selected metal if applicable
+    //         confirmedDiamondQuality: "defaultDiamondQuality" // Replace with diamond quality if applicable
+    //     };
+
+    //     try {
+    //         const response = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/cart/addCart', cartItem);
+
+    //         if (response.status === 201) {
+    //             toast.success("Product added to cart successfully!", {
+    //                 position: "top-center",
+    //                 autoClose: 2000,
+    //                 hideProgressBar: false,
+    //                 closeOnClick: true,
+    //                 pauseOnHover: true,
+    //                 draggable: true,
+    //                 progress: undefined,
+    //             });
+    //             dispatch(cartAction.addItem(response.data)); // Assuming cartAction is correctly imported
+    //         } else {
+    //             toast.error("Failed to add product to cart!");
+    //         }
+    //     } catch (error) {
+    //         console.error('Error adding item to cart:', error);
+    //         toast.error("An error occurred while adding to cart!");
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     const buyNow = async () => {
         setLoading(true);
@@ -1532,7 +1576,8 @@ const Productdetails = () => {
         offcanvasInstance.hide();
     };
     return (
-        <div>
+        <>
+        {loading && <Loader />}
             <section className='container-fluid pb-4 pt-2'>
                 <div>
                     <div className='row '>
@@ -1690,7 +1735,7 @@ const Productdetails = () => {
                                     </button>
                                 </div>
                             </p> */}
-                            <button className='btn add_btn me-2 my-3' onClick={addToCart} disabled={!isValidSize}>
+                            <button className='btn add_btn me-2 my-3' onClick={() => addToCart(product.id)} disabled={!isValidSize}>
                                 {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
                                 ADD TO CART
                             </button>
@@ -2351,7 +2396,7 @@ const Productdetails = () => {
                     <button className="btn w-100 py-3 fw-bold text-uppercase" onClick={handleConfirm}>Confirm Customisation</button>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
