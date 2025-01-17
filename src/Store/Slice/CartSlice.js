@@ -1,11 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 
-const cartItems = localStorage.getItem("cartItem") ? JSON.parse(localStorage.getItem("cartItem")) : [];
-const wishlistItems = localStorage.getItem("wishlistItem") ? JSON.parse(localStorage.getItem("wishlistItem")) : [];
-const totalQuantity = localStorage.getItem("totalQuantity") ? JSON.parse(localStorage.getItem("totalQuantity")) : 0;
-const subtotal = localStorage.getItem("subtotal") ? JSON.parse(localStorage.getItem("subtotal")) : 0;
-const discount = localStorage.getItem("discount") ? JSON.parse(localStorage.getItem("discount")) : 0;
+const parseJSON = (value) => {
+    try {
+        return value ? JSON.parse(value) : null;
+    } catch (error) {
+        console.error("Error parsing JSON from localStorage:", error);
+        return null;
+    }
+};
+
+const cartItems = parseJSON(localStorage.getItem("cartItem")) || [];
+const wishlistItems = parseJSON(localStorage.getItem("wishlistItem")) || [];
+const totalQuantity = parseJSON(localStorage.getItem("totalQuantity")) || 0;
+const subtotal = parseJSON(localStorage.getItem("subtotal")) || 0;
+const discount = parseJSON(localStorage.getItem("discount")) || 0;
+
 
 const setItem = (items, totalQuantity, subtotal, discount) => {
     localStorage.setItem("cartItem", JSON.stringify(items));
@@ -110,41 +120,6 @@ const cartSlice = createSlice({
             setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
         },
 
-        // addRecentlyViewed(state, action) {
-        //     const newItem = action.payload;
-        
-        //     // Check if newItem is valid and has the 'id' property
-        //     if (!newItem || !newItem.id) {
-        //         console.error("Invalid item:", newItem);
-        //         return;
-        //     }
-        
-        //     console.log("Adding to Recently Viewed:", newItem); // Log newItem for debugging
-        
-        //     // Ensure state.recentlyViewed is an array
-        //     if (!Array.isArray(state.recentlyViewed)) {
-        //         state.recentlyViewed = [];
-        //     }
-        
-        //     // Check if the new item is already in the recently viewed list
-        //     const existingItem = state.recentlyViewed.find(item => item._id === newItem.id);
-        
-        //     if (!existingItem) {
-        //         state.recentlyViewed.unshift(newItem); // Add new item to the start of the array
-        
-        //         // Ensure the array length doesn't exceed 8
-        //         if (state.recentlyViewed.length > 8) {
-        //             state.recentlyViewed.pop(); // Remove the last item if more than 8
-        //         }
-        
-        //         console.log("Updated Recently Viewed:", state.recentlyViewed); // Log updated list
-        //     }
-        
-        //     // Save to localStorage (if needed)
-        //     setRecentlyViewed(state.recentlyViewed);
-        // },
-
-
         addRecentlyViewed(state, action) {
             const newItem = action.payload;
             const existingItem = state.recentlyViewed.find(item => item.id === newItem.id);
@@ -158,6 +133,7 @@ const cartSlice = createSlice({
 
             setRecentlyViewed(state.recentlyViewed); // Save to localStorage
         },
+        
         applyCoupon(state, action) {
             const discountCode = action.payload;
             let discountPercent = 0;

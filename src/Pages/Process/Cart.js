@@ -82,7 +82,7 @@ const Cart = (props) => {
 
   const user = JSON.parse(localStorage.getItem('user'));
 
-  const fetch = async () => {
+  const getCart = async () => {
     try {
       const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
       const data = response.data;
@@ -102,7 +102,7 @@ const Cart = (props) => {
   };
 
   useEffect(() => {
-    fetch();
+    getCart();
   }, []);
 
 
@@ -300,7 +300,7 @@ const Cart = (props) => {
                             <h6 className="cart_Title m-0 p-0">{item.productId.title}</h6>
                             <p className="m-0 p-0">
                               <span className="cart_price">
-                                {formatCurrency(item.productId.gst14KT)}
+                                {formatCurrency(item.productId.total14KT)}
                               </span>
                             </p>
                             <p
@@ -346,7 +346,7 @@ const Cart = (props) => {
                             id="staticBackdrop"
                             data-bs-backdrop="static"
                             data-bs-keyboard="false"
-                            tabindex="-1"
+                            tabIndex="-1"
                             aria-labelledby="staticBackdropLabel"
                             aria-hidden="true"
                           >
@@ -362,8 +362,8 @@ const Cart = (props) => {
                                 </div>
                                 <div className="modal-body text-center modal_content">
                                   <img
-                                    alt={item.title}
-                                    src={item.image01}
+                                    alt={item.productId.title}
+                                    src={item.productId.image01}
                                     className="w-25 mx-auto d-block"
                                   />
                                   <h6 className="m-0 pt-3">

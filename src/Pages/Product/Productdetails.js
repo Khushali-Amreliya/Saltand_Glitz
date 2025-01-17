@@ -1160,6 +1160,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from '../../Store/Slice/CartSlice';
 import Loader from "../Loader";
+import { productCard } from "../Product/productCard"
 
 
 const Productdetails = () => {
@@ -1181,48 +1182,41 @@ const Productdetails = () => {
     const [ringSize, setRingSize] = useState(6);
     const [showClear, setShowClear] = useState(true);
     const user = JSON.parse(localStorage.getItem('user'))
-    console.log(user);
+    // console.log(user);
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
 
     useEffect(() => {
-        dispatch(cartAction.addRecentlyViewed(product));
-        // eslint-disable-next-line react-hooks/exhaustive-deps 
-    }, [dispatch]);
+        if (product && product.id) {
+            dispatch(cartAction.addRecentlyViewed(product));
+        } else {
+            console.warn("Product data not available yet");
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [product, dispatch]);
+
 
     // recently viewd
-    const recentlyViewed = useSelector(state => state.cart.recentlyViewed);
-    // useEffect(() => {
-    //     const fetchRecentlyViewed = async () => {
-    //       try {
-    //         const response = await fetch('http://localhost:5000/api/recently-viewed');
-    //         const data = await response.json();
-    //         setRecentlyViewed(data);
-    //       } catch (error) {
-    //         console.error('Error fetching recently viewed products:', error);
-    //       }
-    //     };
-    
-    //     fetchRecentlyViewed();
-    //   }, []);    
+    const recentlyViewed = useSelector((state) => state.cart.recentlyViewed);
+    console.log("Recently Viewed Products in Redux:", recentlyViewed);
 
     useEffect(() => {
         // Set initial price based on the selectedKT
         let basePrice = selectedKT === "14KT" ? product.total14KT : product.total18KT;
-    
+
         // Calculate price for the default or selected size
         const sizeDiff = ringSize !== "choose" ? parseInt(ringSize, 10) - 6 : 0;
         const priceAdjustment = 0.02 * basePrice * sizeDiff;
         setPrice(basePrice + priceAdjustment);
     }, [selectedKT, product, ringSize]);
-    
+
     const handleSizeChange = (e) => {
         const size = e.target.value; // Get selected size
         setRingSize(size); // Update ringSize state
         setIsValidSize(size !== 'choose');
-    
+
         // Calculate the price based on size
         let basePrice = selectedKT === "14KT" ? product.total14KT : product.total18KT;
-    
+
         if (size !== "choose") {
             const sizeDiff = parseInt(size, 10) - 6;
             const priceAdjustment = 0.02 * basePrice * sizeDiff;
@@ -1233,7 +1227,7 @@ const Productdetails = () => {
             setShowClear(false); // Hide the Clear button
         }
     };
-    
+
     const handleClear = () => {
         setRingSize("choose"); // Reset the selected size to "choose"
         setIsValidSize(false);
@@ -1349,13 +1343,13 @@ const Productdetails = () => {
         try {
             const response = await axios.get(`http://localhost:5000/v1/upload/get_id/${id}`);
             const data = response.data;
-            console.log("Data",data);
-            
+            // console.log("Data",data);
 
             // Map data from Excel file
             setProduct({
+                image01: data.image01,
                 title: data.title,
-                id:data._id,
+                id: data._id,
                 grossWt: data.grossWt,
                 netWeight14KT: data.netWeight14KT,
                 netWeight18KT: data.netWeight18KT,
@@ -1367,10 +1361,9 @@ const Productdetails = () => {
                 total18KT: data.total18KT,
                 price14KT: data.price14KT,
                 price18KT: data.price18KT,
-                diamondprice: data.diamondprice
+                diamondprice: data.diamondprice,
             });
-            console.log(product);
-            
+
         } catch (err) {
             console.error("Error fetching product details:", err.response || err);
             setError("Failed to load product details.");
@@ -1434,29 +1427,29 @@ const Productdetails = () => {
         ],
     };
 
-    
-    
+
+
     const addToCart = async (id) => {
         setLoading(true);
-    
+
         const cartItem = {
-            product:id,
+            product: id,
             user: user._id,
         };
-    
+
         try {
             const response = await axios.post(
                 "https://saltandglitz-api.vercel.app/v1/cart/addCart",
                 cartItem
             );
 
-    
+
             if (response.status === 201 || response.status === 200) {
                 toast.success("Product added to cart successfully!", {
                     position: "top-center",
                     autoClose: 2000,
                 });
-    
+
                 const updatedCart = response.data.updatedCart || response.data.newCart;
                 dispatch(cartAction.addItem(updatedCart));
             } else {
@@ -1577,7 +1570,7 @@ const Productdetails = () => {
     };
     return (
         <>
-        {loading && <Loader />}
+            {loading && <Loader />}
             <section className='container-fluid pb-4 pt-2'>
                 <div>
                     <div className='row '>
@@ -2058,6 +2051,8 @@ const Productdetails = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Weight and Range section */}
             <section className='container-fluid py-3'>
                 <div>
                     <div className='row'>
@@ -2152,12 +2147,12 @@ const Productdetails = () => {
             <p>{product.description}</p>
             <p>Price: {product.price}</p> */}
             <section className='container my-3'>
-                <h3 className='text-center pb-4 font_main'>You may also Like</h3>
-                {/* <div className='row mb-4'>
+                {/* <h3 className='text-center pb-4 font_main'>You may also Like</h3>
+                <div className='row mb-4'>
                     {
                         allProduct.map((item) => {
                             return <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow' key={item.id}>
-                                <ProductCard Productsitem={item} />
+                                <productCard Productsitem={item} />
                             </div>
                         })
                     }
@@ -2183,10 +2178,9 @@ const Productdetails = () => {
                                 {recentlyViewed.map((item) => (
                                     <div
                                         className="card border-0 w-100 mx-auto d-block"
-                                        key={item.product_id}
+                                        key={item.id}
                                     >
-                                        <Link to={`/Productdetails/${item.product_id}`}>
-
+                                        <Link to={`/Productdetails/${item.id}`}>
                                             <img
                                                 alt={item.title}
                                                 src={item.image01}
@@ -2194,16 +2188,13 @@ const Productdetails = () => {
                                             />
                                         </Link>
                                         <div className="card-body cartlane">
-                                            <h6>
-                                                {formatCurrency(item.price)}{" "}
-                                                <span>
-                                                    <del>{formatCurrency(item.delprice)}</del>
-                                                </span>
-                                            </h6>
+                                            <h6>{formatCurrency(item.total14KT)}</h6>
                                             <p>{item.title}</p>
                                         </div>
                                     </div>
                                 ))}
+
+
                             </Slider>
 
                             {/* Next Button */}

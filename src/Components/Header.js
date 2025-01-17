@@ -1878,10 +1878,10 @@ const Header = () => {
                                             </Link>
                                             <div className="card-body cartlane">
                                                 <h6>
-                                                    {formatCurrency(item.price)}{" "}
-                                                    <span>
+                                                    {formatCurrency(item.total14KT)}{" "}
+                                                    {/* <span>
                                                         <del>{formatCurrency(item.delprice)}</del>
-                                                    </span>
+                                                    </span> */}
                                                 </h6>
                                                 <p>{item.title}</p>
                                             </div>
