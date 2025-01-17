@@ -1160,7 +1160,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from '../../Store/Slice/CartSlice';
 import Loader from "../Loader";
-import { productCard } from "../Product/productCard"
+// import { productCard } from "../Product/productCard"
 
 
 const Productdetails = () => {
@@ -1168,7 +1168,7 @@ const Productdetails = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [ setError] = useState(null);
     const { id } = useParams(); // Get the product ID from the URL
     const [selectedColor, setSelectedColor] = useState(2);
     const dispatch = useDispatch();
@@ -1195,7 +1195,7 @@ const Productdetails = () => {
     }, [product, dispatch]);
 
 
-    // recently viewd
+    // recently viewed
     const recentlyViewed = useSelector((state) => state.cart.recentlyViewed);
     console.log("Recently Viewed Products in Redux:", recentlyViewed);
 
@@ -1290,10 +1290,10 @@ const Productdetails = () => {
     ];
 
     const [selectedMetal, setSelectedMetal] = useState(metalOptions[1].metal); // Track selected metal
-    const [confirmedMetal, setConfirmedMetal] = useState(metalOptions[1].metal); // Confirmed metal
+    const [ setConfirmedMetal] = useState(metalOptions[1].metal); // Confirmed metal
 
     const [selectedDiamondQuality, setSelectedDiamondQuality] = useState(diamondOptions[4].quality); // Default selection
-    const [confirmedDiamondQuality, setConfirmedDiamondQuality] = useState(diamondOptions[4].quality); // Confirmed quality with default
+    const [ setConfirmedDiamondQuality] = useState(diamondOptions[4].quality); // Confirmed quality with default
 
 
     useEffect(() => {
@@ -1426,8 +1426,6 @@ const Productdetails = () => {
             "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_16_video.mp4",
         ],
     };
-
-
 
     const addToCart = async (id) => {
         setLoading(true);

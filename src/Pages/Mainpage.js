@@ -371,9 +371,29 @@ const Mainpage = () => {
   const slider1 = React.useRef(null);
   const [slidesToShow, setSlidesToShow] = useState(getSlidesToShow());
   const [products, setProducts] = useState([]);
+  const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [banner, setBanner] = useState([])
+
+
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const response = await axios.get("https://saltandglitz-api.vercel.app/v1/banner/bannerGet");
+        const data = response.data.banners;
+        console.log(data);
+        
+        setBanners(data); // Store fetched banners in state
+      } catch (err) {
+        console.error("Error fetching banners:", err.message);
+        setError("Failed to load banners.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBanners();
+  }, []);
 
   // Fetch products from the backend
   useEffect(() => {
@@ -517,21 +537,25 @@ const Mainpage = () => {
         </div>
       </section>
 
-      <section className='container-fluid m-0 p-0 mb-5'>
-        <Slider {...settings}>
-          <div>
-            <img alt='' src='assets/img/banner1.jpg' className='img-fluid  banner_class'></img>
-          </div>
-          <div>
-            <img alt='' src='assets/img/banner2.jpg' className='img-fluid  banner_class'></img>
-          </div>
-          <div>
-            <img alt='' src='https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Library-Sites-TanishqSharedLibrary/default/dw00ae15cf/homepage/HeroBanner/fod-plp-desktop.jpg' className='img-fluid banner_class'></img>
-          </div>
-          <div>
-            <img alt='' src='assets/img/banner2.jpg' className='img-fluid  banner_class'></img>
-          </div>
-        </Slider>
+      {/* Banner section */}
+      <section className="container-fluid m-0 p-0 mb-5">
+        {loading ? (
+          <p>Loading banners...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          <Slider {...settings}>
+            {banners.map((banner, index) => (
+              <div key={banner.banner_id}>
+                <img
+                  alt={`Banner ${index + 1}`}
+                  src={banner.bannerImage}
+                  className="img-fluid banner_class"
+                />
+              </div>
+            ))}
+          </Slider>
+        )}
       </section>
       <section className='container pb-5 pt-3'>
         <div>

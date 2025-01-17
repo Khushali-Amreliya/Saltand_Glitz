@@ -245,6 +245,7 @@ const Adashbord = () => {
       const newProducts = jsonData.map((row) => ({
         id: row.SKU,
         title: row.Title,
+        gender: row.Gender,
         price14KT: row["Gprice(14)"] || 0,
         price18KT: row["Gprice(18)"] || 0,
         diamondprice: row["Dprice"] || 0,
@@ -253,7 +254,7 @@ const Adashbord = () => {
         gst14KT: row["GST(14)"] || 0,
         gst18KT: row["GST(18)"] || 0,
         total14KT: row["Total(14)"] || 0,
-        total18KT: row["Total(18)"] || 0,
+        total14KT: row["Total(14)"] || 0,
         netWeight14KT: row["NetWeight(14)"] || 0, // Added Net Weight for 14KT
         netWeight18KT: row["NetWeight(18)"] || 0, // Added Net Weight for 18KT
         grossWt: row["GrossWt"] || 0, 
@@ -266,7 +267,8 @@ const Adashbord = () => {
         return !products.some(
           (existingProduct) =>
             existingProduct.title === newProduct.title &&
-            existingProduct.category === newProduct.category
+            existingProduct.category === newProduct.category &&
+            existingProduct.gender === newProduct.gender
         );
       });
 
@@ -294,6 +296,7 @@ const Adashbord = () => {
 
       const formattedProducts = products.map((product) => ({
         title: product.title,
+        gender: product.gender,
         category: product.category,
         price14KT: product.price14KT,
         price18KT: product.price18KT,
@@ -375,6 +378,7 @@ const Adashbord = () => {
                     </button>
                   </div>
                   <p><strong>Purity:</strong> {product.priceType}</p>
+                  <p><strong>Gender:</strong> {product.gender}</p>
                   <p><strong>Gross Weight:</strong> {product.grossWt}</p>
                   <p>
                     <strong>Net Weight: </strong>
