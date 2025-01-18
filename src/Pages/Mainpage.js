@@ -381,7 +381,7 @@ const Mainpage = () => {
       try {
         const response = await axios.get("https://saltandglitz-api.vercel.app/v1/banner/bannerGet");
         const data = response.data.banners;
-        console.log(data);
+        // console.log(data);
         
         setBanners(data); // Store fetched banners in state
       } catch (err) {

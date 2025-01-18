@@ -254,7 +254,7 @@ const Adashbord = () => {
         gst14KT: row["GST(14)"] || 0,
         gst18KT: row["GST(18)"] || 0,
         total14KT: row["Total(14)"] || 0,
-        total14KT: row["Total(14)"] || 0,
+        total18KT: row["Total(18)"] || 0,
         netWeight14KT: row["NetWeight(14)"] || 0, // Added Net Weight for 14KT
         netWeight18KT: row["NetWeight(18)"] || 0, // Added Net Weight for 18KT
         grossWt: row["GrossWt"] || 0, 

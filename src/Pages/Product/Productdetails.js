@@ -1168,7 +1168,6 @@ const Productdetails = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
-    const [ setError] = useState(null);
     const { id } = useParams(); // Get the product ID from the URL
     const [selectedColor, setSelectedColor] = useState(2);
     const dispatch = useDispatch();
@@ -1181,6 +1180,7 @@ const Productdetails = () => {
     const [isValidSize, setIsValidSize] = useState(true);
     const [ringSize, setRingSize] = useState(6);
     const [showClear, setShowClear] = useState(true);
+    const [similarProducts, setSimilarProducts] = useState([]);
     const user = JSON.parse(localStorage.getItem('user'))
     // console.log(user);
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
@@ -1189,15 +1189,14 @@ const Productdetails = () => {
         if (product && product.id) {
             dispatch(cartAction.addRecentlyViewed(product));
         } else {
-            console.warn("Product data not available yet");
+            // console.warn("Product data not available yet");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [product, dispatch]);
 
-
     // recently viewed
     const recentlyViewed = useSelector((state) => state.cart.recentlyViewed);
-    console.log("Recently Viewed Products in Redux:", recentlyViewed);
+    // console.log("Recently Viewed Products in Redux:", recentlyViewed);
 
     useEffect(() => {
         // Set initial price based on the selectedKT
@@ -1290,10 +1289,10 @@ const Productdetails = () => {
     ];
 
     const [selectedMetal, setSelectedMetal] = useState(metalOptions[1].metal); // Track selected metal
-    const [ setConfirmedMetal] = useState(metalOptions[1].metal); // Confirmed metal
+    const [setConfirmedMetal] = useState(metalOptions[1].metal); // Confirmed metal
 
     const [selectedDiamondQuality, setSelectedDiamondQuality] = useState(diamondOptions[4].quality); // Default selection
-    const [ setConfirmedDiamondQuality] = useState(diamondOptions[4].quality); // Confirmed quality with default
+    const [setConfirmedDiamondQuality] = useState(diamondOptions[4].quality); // Confirmed quality with default
 
 
     useEffect(() => {
@@ -1322,23 +1321,16 @@ const Productdetails = () => {
         ));
     };
 
-    // useEffect(() => {
-    // const fetchProductDetails = async () => {
-    //     try {
-    //         const response = await axios.get(`https://saltandglitzapi-rkm5g.kinsta.app/v1/upload/get_id/${id}`);
-    //         console.log(id);
+    const fetchProducts = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/v1/upload/get_similar/${id}`);
+            // console.log(response);
+            setSimilarProducts(response.data);
+        } catch (err) {
+            console.error("Error fetching similar products:", err);
+        }
+    };
 
-
-
-    //         setProduct(response.data); // Set product details in state
-    //         console.log(response.data);
-    //     } catch (err) {
-    //         console.error("Error fetching product details:", err.response || err);
-    //         setError("Failed to load product details.");
-    //     } finally {
-    //         setLoading(false); // Stop loader
-    //     }
-    // };
     const fetchProductDetails = async () => {
         try {
             const response = await axios.get(`http://localhost:5000/v1/upload/get_id/${id}`);
@@ -1366,14 +1358,15 @@ const Productdetails = () => {
 
         } catch (err) {
             console.error("Error fetching product details:", err.response || err);
-            setError("Failed to load product details.");
+            // setError("Failed to load product details.");
         } finally {
             setLoading(false); // Stop loader
         }
     };
 
     useEffect(() => {
-        fetchProductDetails()
+        fetchProductDetails();
+        fetchProducts();
     }, [id])
 
     // Handle KT button click
@@ -1504,23 +1497,28 @@ const Productdetails = () => {
         setLoading(true);
 
         const cartItem = {
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            image01: product.img,
-            totalprice: product.price
+            product: id,
+            user: user._id,
         };
 
         try {
-            const response = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/add', cartItem);
+            const response = await axios.post(
+                "https://saltandglitz-api.vercel.app/v1/cart/addCart",
+                cartItem
+            );
 
-            if (response.status === 201) {
-                dispatch(cartAction.addItem(response.data));
-                toast.success("Redirecting to cart...");
+            if (response.status === 201 || response.status === 200) {
+                toast.success("Redirecting to cart...", {
+                    position: "top-center",
+                    autoClose: 2000,
+                });
                 setTimeout(() => {
                     setLoading(false);
                     navigate('/cart'); // Ensure `navigate` is imported from `react-router-dom`
                 }, 2000);
+
+                const updatedCart = response.data.updatedCart || response.data.newCart;
+                dispatch(cartAction.addItem(updatedCart));
             } else {
                 toast.error("Failed to add product to cart!");
             }
@@ -2139,23 +2137,40 @@ const Productdetails = () => {
                     </div>
                 </div>
             </section>
-
-            {/* <h1>{product.title}</h1>
-            <img src={product.img} alt={product.title} />
-            <p>{product.description}</p>
-            <p>Price: {product.price}</p> */}
             <section className='container my-3'>
-                {/* <h3 className='text-center pb-4 font_main'>You may also Like</h3>
-                <div className='row mb-4'>
+                <h3 className='text-center pb-4 font_main'>You may also Like</h3>
+                <div className='row'>
                     {
-                        allProduct.map((item) => {
-                            return <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow' key={item.id}>
-                                <productCard Productsitem={item} />
-                            </div>
-                        })
-                    }
-                </div> */}
+                        similarProducts.length > 0 ? (
 
+                            <>
+                                {
+                                    similarProducts.map((item) => (
+                                        <div
+                                            className="col-lg-3 col-md-4 col-sm-6 mb-4 card border-0"
+                                            key={item._id}
+                                        >
+                                            <Link to={`/Productdetails/${item._id}`}>
+                                                <img
+                                                    alt={item.title}
+                                                    src={item.image01}
+                                                    className="img-fluid px-2 position-relative"
+                                                />
+                                            </Link>
+                                            <div className="card-body cartlane">
+                                                <h6>{formatCurrency(item.total14KT)}</h6>
+                                                <p>{item.title}</p>
+                                            </div>
+                                        </div>
+                                    ))
+                                }
+                            </>
+                        ) : (
+                            <div className="text-center w-100 py-3">
+                                <p>No related products available. Please check back later!</p>
+                            </div>
+                        )}
+                </div>
                 <h3 className='text-center py-4 font_main'>Recently Viewed</h3>
                 <div className="row position-relative mb-4">
                     {recentlyViewed.length > 0 ? (
@@ -2191,8 +2206,6 @@ const Productdetails = () => {
                                         </div>
                                     </div>
                                 ))}
-
-
                             </Slider>
 
                             {/* Next Button */}
