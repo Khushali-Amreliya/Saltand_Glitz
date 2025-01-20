@@ -14,8 +14,8 @@ const Header = () => {
     const search = React.useRef(null);
     const searchmd = React.useRef(null);
 
-    const totalQuantity = useSelector(state => state.cart.totalQuantity);
-    const wishlistItem = useSelector(state => state.cart.wishlistItem);
+    // const totalQuantity = useSelector(state => state.cart.totalQuantity);
+    // const wishlistItem = useSelector(state => state.cart.wishlistItem);
     const userFetch = JSON.parse(localStorage.getItem('user'));
     const [tQuantity, setTQuantity] = useState([])
     const [wishlistItems, setWishlistItems] = useState([])
