@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { cartAction } from '../Store/Slice/CartSlice';
 import { signOut } from 'firebase/auth';
 import auth from './firebase';
+import axios from 'axios';
 
 const Header = () => {
     const search = React.useRef(null);
@@ -15,10 +16,57 @@ const Header = () => {
 
     const totalQuantity = useSelector(state => state.cart.totalQuantity);
     const wishlistItem = useSelector(state => state.cart.wishlistItem);
+    const userFetch = JSON.parse(localStorage.getItem('user'));
+    const [tQuantity, setTQuantity] = useState([])
+    const [wishlistItems, setWishlistItems] = useState([])
+    const [wishlistLength, setWishlistLength] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+    }, []);
+
+    const fetchWishlist = async () => {
+        try {
+            const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${userFetch._id}`);
+            // console.log(response);
+
+            const length = response.data.wishlist.products
+            // console.log(wishlistLength);
+
+            setWishlistLength(length)
+
+            if (response.status === 200) {
+                setWishlistItems(response.data.wishlist.products); // Update the local state with fetched data
+            }
+        } catch (error) {
+            console.error('Error fetching wishlist items:', error);
+            toast.error("Failed to load wishlist", {
+                position: "top-center",
+                autoClose: 1000,
+            });
+        }
+    };
+
+    const getCart = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${userFetch._id}`);
+            // console.log(response.data.totalQuantity);
+
+            const quantity = response.data;
+            // console.log(tQuantity);
+
+            setTQuantity(quantity)
+
+        } catch (err) {
+            console.error("Error fetching product details:", err.response || err);
+            // Handle error (e.g., show a message or set error state)
+        }
+    };
+
+    useEffect(() => {
+        getCart();
+        fetchWishlist();
     }, []);
 
     var settings = {
@@ -99,7 +147,7 @@ const Header = () => {
     const navigate = useNavigate(); // To redirect after logout
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
@@ -200,8 +248,8 @@ const Header = () => {
                     <div className='col-lg-3 col-md-3 col-sm-12 header_logo d-flex justify-content-end align-items-center'>
                         <Link className='text-decoration-none text-dark' to="/contact">
                             <i className="ri-contacts-line">
-                                <span className='align-middle' style={{fontSize:"14px",fontWeight:"500"}}>&nbsp; Contact us</span>
-                                
+                                <span className='align-middle' style={{ fontSize: "14px", fontWeight: "500" }}>&nbsp; Contact us</span>
+
                             </i>
                         </Link>
                         <div className="dropdown drp_main">
@@ -249,15 +297,15 @@ const Header = () => {
 
                         <Link className='text-decoration-none text-dark' to="/wishlist">
                             <i className="ri-heart-line text-center position-relative">
-                                {wishlistItem.length > 0 && (
-                                    <span className="badge badge-icon badge_icon_w text-center">{wishlistItem.length}</span>
+                                {wishlistLength.length > 0 && (
+                                    <span className="badge badge-icon badge_icon_w text-center">{wishlistLength.length}</span>
                                 )}
                             </i>
                         </Link>
                         <Link className='text-decoration-none text-dark' to="/cart">
                             <i className="ri-shopping-cart-2-line pe-0 position-relative">
-                                {totalQuantity > 0 && (
-                                    <span className="badge badge-icon">{totalQuantity}</span>
+                                {tQuantity.totalQuantity > 0 && (
+                                    <span className="badge badge-icon">{tQuantity.totalQuantity}</span>
                                 )}
                             </i>
                         </Link>
@@ -1064,15 +1112,15 @@ const Header = () => {
                     <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center'>
                         <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
                             <i className="ri-heart-line pe-0 position-relative">
-                                {wishlistItem.length > 0 && (
-                                    <span className="badge badge-icon">{wishlistItem.length}</span>
+                                {wishlistLength.length > 0 && (
+                                    <span className="badge badge-icon">{wishlistLength.length}</span>
                                 )}
                             </i>
                         </Link>
                         <Link className='text-decoration-none text-dark' to="/cart">
                             <i className="ri-shopping-cart-line pe-0 position-relative">
-                                {totalQuantity > 0 && (
-                                    <span className="badge badge-icon">{totalQuantity}</span>
+                                {tQuantity.totalQuantity > 0 && (
+                                    <span className="badge badge-icon">{tQuantity.totalQuantity}</span>
                                 )}
                             </i>
                         </Link>

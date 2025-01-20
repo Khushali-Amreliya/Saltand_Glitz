@@ -175,7 +175,7 @@ const cartSlice = createSlice({
                     id: newItem.id,
                     title: newItem.title,
                     image01: newItem.image01,
-                    price: newItem.price
+                    total14KT:newItem.total14KT
                 });
                 // toast.success("Item added to wishlist!");
             }

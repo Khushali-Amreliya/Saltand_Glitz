@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import EmptyState from '../EmptyState';
-import { cartAction } from '../../Store/Slice/CartSlice';
 import { formatCurrency } from '../../Utils/formateCurrency';
 import Aos from 'aos';
 import "aos/dist/aos.css";
@@ -9,18 +7,38 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Helmet from '../../Components/Helmet';
 import { Link, useNavigate } from 'react-router-dom';
+import Loader from '../Loader';
 
 const Wishlist = () => {
-  const wishlistItem = useSelector(state => state.cart.wishlistItem);
-  const dispatch = useDispatch();
+  const [wishlistItems, setWishlistItems] = useState([]); // Local state for wishlist items
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('user'));
+  const [loading, setLoading] = useState(true); // Loader state
+
+
+  // Fetch wishlist items from backend
+  const fetchWishlist = async () => {
+    try {
+      const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
+      if (response.status === 200) {
+        setWishlistItems(response.data.wishlist.products); // Update the local state with fetched data
+      }
+    } catch (error) {
+      console.error('Error fetching wishlist items:', error);
+      toast.error("Failed to load wishlist", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    } finally {
+      setLoading(false); // Stop loader after fetching data
+    }
+  };
 
   // Remove from wishlist
   const handleRemove = async (id) => {
     try {
-      // Call the API to remove the item from the wishlist
       await axios.post(`https://saltandglitzapi-rkm5g.kinsta.app/v1/wishlist/remove-wishlist/${id}`);
-      dispatch(cartAction.removeFromWishlist(id));
+      setWishlistItems((prevItems) => prevItems.filter((item) => item.id !== id)); // Remove item locally
       toast.success("Item removed from wishlist", {
         position: "top-center",
         autoClose: 1000,
@@ -39,35 +57,20 @@ const Wishlist = () => {
     const cartItem = {
       id: item.id,
       title: item.title,
-      price: item.price,
       image01: item.image01,
-      totalprice: item.totalprice
+      total14KT: item.total14KT,
     };
 
     try {
-      // Add the item to the cart first
       const cartResponse = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/add', cartItem);
-
-      // If the item was added to the cart successfully, proceed to remove it from the wishlist
       if (cartResponse.status === 201) {
-        const removeWishlistResponse = await axios.post(`https://saltandglitzapi-rkm5g.kinsta.app/v1/wishlist/remove-wishlist/${id}`);
-
-        // After removing from the wishlist, update the Redux store
-        if (removeWishlistResponse.status === 200) {
-          // Add item to the cart in the Redux store
-          dispatch(cartAction.addItem(cartResponse.data));
-
-          // Remove item from the wishlist in the Redux store
-          dispatch(cartAction.removeFromWishlist(item.id));
-
-          // Navigate to the cart page
-          navigate('/cart');
-        } else {
-          toast.error("Error removing item from wishlist", {
-            position: "top-center",
-            autoClose: 1000,
-          });
-        }
+        await axios.post(`https://saltandglitzapi-rkm5g.kinsta.app/v1/wishlist/remove-wishlist/${id}`);
+        setWishlistItems((prevItems) => prevItems.filter((item) => item.id !== id)); // Remove item locally
+        toast.success("Item moved to cart", {
+          position: "top-center",
+          autoClose: 1000,
+        });
+        navigate('/cart');
       } else {
         toast.error("Error adding item to cart", {
           position: "top-center",
@@ -75,7 +78,7 @@ const Wishlist = () => {
         });
       }
     } catch (error) {
-      console.error('Error handling item move to cart:', error);
+      console.error('Error moving item to cart:', error);
       toast.error("Error processing your request", {
         position: "top-center",
         autoClose: 1000,
@@ -83,35 +86,36 @@ const Wishlist = () => {
     }
   };
 
-
   useEffect(() => {
     Aos.init();
+    fetchWishlist(); // Fetch wishlist when the component loads
   }, []);
 
   return (
     <Helmet title="Wishlist">
+      {loading && <Loader />}
       <section className='container py-5'>
         {
-          wishlistItem.length > 0 ? (
+          wishlistItems.length > 0 ? (
             <section className='wishlist-items'>
               <div className='row'>
                 {
-                  wishlistItem.map((item) => (
-                    <div key={item.id} className='col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6' data-aos="zoom-in-up" data-aos-duration="2000">
+                  wishlistItems.map((item) => (
+                    <div key={item.productId.product_id} className='col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6' data-aos="zoom-in-up" data-aos-duration="2000">
                       <div className='card border-0'>
-                        <Link to={`/Productdetails/${item.id}`}>
-                          <img alt={item.title} src={item.image01} className='position-relative'></img>
+                        <Link to={`/Productdetails/${item.productId.product_id}`}>
+                          <img alt={item.productId.title} src={item.productId.image01} className='position-relative img-fluid'></img>
                         </Link>
                         <div className='card-body d-flex justify-content-between align-items-center'>
                           <div>
-                            <p className='m-0'>{formatCurrency(item.price)}</p>
-                            <h6 className='d-inline-block'>{item.title}</h6>
+                            <p className='m-0'>{formatCurrency(item.productId.total14KT)}</p>
+                            <h6 className='d-inline-block'>{item.productId.title}</h6>
                           </div>
                           <i className='ri-shopping-cart-2-fill align-middle wishlist_cart'
-                            onClick={() => handleMoveToCart(item)}>
+                            onClick={() => handleMoveToCart(item, item.productId.product_id)}>
                           </i>
                           <i className='ri-close-line wishlist_close_icon'
-                            onClick={() => handleRemove(item.id)}>
+                            onClick={() => handleRemove(item.productId.product_id)}>
                           </i>
                         </div>
                       </div>

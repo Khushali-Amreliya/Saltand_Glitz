@@ -10,7 +10,7 @@ import "aos/dist/aos.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Helmet from "../../Components/Helmet";
-import { data } from "jquery";
+// import { data } from "jquery";
 
 const Cart = (props) => {
   const dispatch = useDispatch();
@@ -84,11 +84,14 @@ const Cart = (props) => {
 
   const getCart = async () => {
     try {
-      const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
+      setLoading(true); // start loader
+      const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${user._id}`);
+      // console.log(response);
+      
       const data = response.data;
 
       const getcart = data?.cart?.quantity || []; // Default to an empty array if no cart data is available
-      console.log(getcart);
+      // console.log(getcart);
 
       // Update product state with cart data
       setProduct(getcart);

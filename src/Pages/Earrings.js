@@ -34,7 +34,7 @@ const Earrings = () => {
     const getUploadData = async () => {
 
         let getData = await axios.get("http://localhost:5000/v1/upload/get_upload")
-        console.log(getData.data);
+        // console.log(getData.data);
         setProducts(getData.data);
     };
 
@@ -46,7 +46,7 @@ const Earrings = () => {
         ...new Set(products.map((product) => `${product.discount}%`)),
     ];
 
-    console.log(products);
+    // console.log(products);
 
     // // Fetch products data on component mount
     // useEffect(() => {

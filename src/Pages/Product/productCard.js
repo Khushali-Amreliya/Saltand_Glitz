@@ -253,29 +253,34 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const ProductCard = ({ Productsitem }) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    // console.log('User ID:', user._id);
+
     const { product_id, id, title, total14KT, image01, image02, image03 } = Productsitem;
     const slider = useRef(null);
     const dispatch = useDispatch();
     const [isHeartFilled, setIsHeartFilled] = useState(false);
-
     const wishlist = useSelector((state) => state.cart.wishlistItem);
 
-
     useEffect(() => {
-        const itemInWishlist = wishlist.find((item) => item.id === id);
-        setIsHeartFilled(!!itemInWishlist);
-    }, [wishlist, id]);
+        const itemInWishlist = wishlist.find((item) => item.product_id === product_id);
+        setIsHeartFilled(!!itemInWishlist); // Updates heart state based on persisted wishlist
+    }, [wishlist, product_id]);
+
 
     const handleHeartClick = async () => {
+
         if (isHeartFilled) {
             try {
-                await axios.post(`https://saltandglitzapi-rkm5g.kinsta.app/v1/wishlist/remove-wishlist/${id}`);
-                dispatch(cartAction.removeFromWishlist(id));
+                console.log('Removing from wishlist...');
+                await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
+                dispatch(cartAction.removeFromWishlist(product_id));
                 toast.success('Item removed from wishlist', {
                     position: 'top-center',
                     autoClose: 1000,
                 });
             } catch (error) {
+                console.error('Error removing from wishlist:', error);
                 toast.error('Error removing item from wishlist', {
                     position: 'top-center',
                     autoClose: 1000,
@@ -283,18 +288,20 @@ const ProductCard = ({ Productsitem }) => {
             }
         } else {
             try {
-                await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/wishlist/create-wishlist', {
-                    id,
-                    title,
-                    total14KT,
-                    image01,
+                console.log('Adding to wishlist...');
+                const res = await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
+                    userId: user._id,  // Send userId here
+                    productId: product_id, // Send productId here
                 });
-                dispatch(cartAction.addToWishlist({ id, title, total14KT, image01 }));
+                console.log(res);
+
+                dispatch(cartAction.addToWishlist({ id, title, image01, total14KT }));
                 toast.success('Item added to wishlist', {
                     position: 'top-center',
                     autoClose: 1000,
                 });
             } catch (error) {
+                console.error('Error adding to wishlist:', error);
                 toast.error('Error adding item to wishlist', {
                     position: 'top-center',
                     autoClose: 1000,
@@ -303,6 +310,8 @@ const ProductCard = ({ Productsitem }) => {
         }
         setIsHeartFilled(!isHeartFilled);
     };
+
+
 
     const settings2 = {
         dots: false,
@@ -350,6 +359,7 @@ const ProductCard = ({ Productsitem }) => {
                                 onClick={handleHeartClick}
                             ></i>
                         </div>
+
                     </div>
 
                     {/* Md device start */}

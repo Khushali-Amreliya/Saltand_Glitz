@@ -1160,6 +1160,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from '../../Store/Slice/CartSlice';
 import Loader from "../Loader";
+import Helmet from "../../Components/Helmet";
 // import { productCard } from "../Product/productCard"
 
 
@@ -1565,142 +1566,143 @@ const Productdetails = () => {
         offcanvasInstance.hide();
     };
     return (
-        <>
-            {loading && <Loader />}
-            <section className='container-fluid pb-4 pt-2'>
-                <div>
-                    <div className='row '>
-                        <div className="col-lg-8 col-md-6 col-sm-12 col-12 m-0 p-0  d-lg-block d-none">
-                            <div className="row">
-                                {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
-                                    <div key={index} className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                        {src.includes(".mp4") ? (
-                                            <video
-                                                autoPlay
-                                                loop
-                                                controls
-                                                muted
-                                                style={{ width: "100%" }}
-                                                className='item1 video p-1'
-                                            >
-                                                <source src={src} type="video/mp4" />
-                                            </video>
-                                        ) : (
-                                            <img alt="" src={src} className="img-fluid p-1" />
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <section className='container-fluid m-0 p-0 mb-5 d-lg-none d-block'>
-                            <Slider {...md_carousel}>
-                                {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
-                                    <div key={index} >
-                                        {src.includes(".mp4") ? (
-                                            <video
-                                                autoPlay
-                                                loop
-                                                controls
-                                                muted
-                                                style={{ width: "100%" }}
-                                                className='item1 video p-1'
-                                            >
-                                                <source src={src} type="video/mp4" />
-                                            </video>
-                                        ) : (
-                                            <img alt="" src={src} className="img-fluid p-1" />
-                                        )}
-                                    </div>
-                                ))}
-                            </Slider>
-                        </section>
-                        {/* Large */}
-                        <div className='col-lg-4 col-md-6 col-sm-12 col-12 px-4 mt-4 mx-auto d-block d-lg-block d-none sticky-header'>
-                            <h3 className='font_h'>{product.title}</h3>
-                            <h4 className='font_h'>{formatCurrency(price)}</h4>
-                            <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
-                            <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
-
-                            <p className="KT_button">
-                                <span className=" align-middle">
-                                    color
-                                </span>
-                                <span className="ps-3 align-middle" style={{ fontSize: "20px" }}>
-                                    {colors.map((color) => (
-                                        <i
-                                            key={color.id}
-                                            className="ri-circle-fill"
-                                            style={{
-                                                color: color.color,
-                                                fontSize: "20px",
-                                                position: "relative",
-                                                cursor: "pointer",
-                                            }}
-                                            onClick={() => handleColorClick(color.id)}
-                                        >
-                                            {selectedColor === color.id && (
-                                                <i
-                                                    className="ri-check-line"
-                                                    style={{
-                                                        position: "absolute",
-                                                        top: "50%",
-                                                        left: "50%",
-                                                        transform: "translate(-50%, -50%)",
-                                                        color: "#fff",
-                                                        fontSize: "12px",
-                                                    }}
-                                                ></i>
+        <Helmet title={product.title}>
+            <>
+                {loading && <Loader />}
+                <section className='container-fluid pb-4 pt-2'>
+                    <div>
+                        <div className='row '>
+                            <div className="col-lg-8 col-md-6 col-sm-12 col-12 m-0 p-0  d-lg-block d-none">
+                                <div className="row">
+                                    {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
+                                        <div key={index} className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                            {src.includes(".mp4") ? (
+                                                <video
+                                                    autoPlay
+                                                    loop
+                                                    controls
+                                                    muted
+                                                    style={{ width: "100%" }}
+                                                    className='item1 video p-1'
+                                                >
+                                                    <source src={src} type="video/mp4" />
+                                                </video>
+                                            ) : (
+                                                <img alt="" src={src} className="img-fluid p-1" />
                                             )}
-                                        </i>
+                                        </div>
                                     ))}
-                                </span>
-                            </p>
+                                </div>
+                            </div>
+                            <section className='container-fluid m-0 p-0 mb-5 d-lg-none d-block'>
+                                <Slider {...md_carousel}>
+                                    {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
+                                        <div key={index} >
+                                            {src.includes(".mp4") ? (
+                                                <video
+                                                    autoPlay
+                                                    loop
+                                                    controls
+                                                    muted
+                                                    style={{ width: "100%" }}
+                                                    className='item1 video p-1'
+                                                >
+                                                    <source src={src} type="video/mp4" />
+                                                </video>
+                                            ) : (
+                                                <img alt="" src={src} className="img-fluid p-1" />
+                                            )}
+                                        </div>
+                                    ))}
+                                </Slider>
+                            </section>
+                            {/* Large */}
+                            <div className='col-lg-4 col-md-6 col-sm-12 col-12 px-4 mt-4 mx-auto d-block d-lg-block d-none sticky-header'>
+                                <h3 className='font_h'>{product.title}</h3>
+                                <h4 className='font_h'>{formatCurrency(price)}</h4>
+                                <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
+                                <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
 
-                            {/* KT Selection Buttons */}
-                            <div className="my-3 KT_button">
-                                <span className="align-middle pe-3">
-                                    Purity
-                                </span>
-                                <button
-                                    className={`btn ${selectedKT === "14KT" ? "bg-dark text-light" : "btn-light text-dark"
-                                        } me-2`}
-                                    onClick={() => handleKTClick("14KT")}
-                                >
-                                    14KT
-                                </button>
-                                <button
-                                    className={`btn ${selectedKT === "18KT" ? "bg-dark text-light" : "btn-light text-dark"
-                                        } me-2`}
-                                    onClick={() => handleKTClick("18KT")}
-                                >
-                                    18KT
-                                </button>
-                            </div>
-                            <div className="my-3 KT_button d-flex align-items-center">
-                                <span className="pe-3">Ring Size</span>
-                                <select
-                                    className="form-select d-inline w-auto"
-                                    value={ringSize} // Bind the ringSize state
-                                    onChange={handleSizeChange}
-                                >
-                                    <option value="choose">Choose</option>
-                                    {[...Array(21)].map((_, i) => (
-                                        <option key={i} value={i + 6}>
-                                            {i + 6}
-                                        </option>
-                                    ))}
-                                </select>
-                                {showClear && ( // Show Clear button only if showClear is true
+                                <p className="KT_button">
+                                    <span className=" align-middle">
+                                        color
+                                    </span>
+                                    <span className="ps-3 align-middle" style={{ fontSize: "20px" }}>
+                                        {colors.map((color) => (
+                                            <i
+                                                key={color.id}
+                                                className="ri-circle-fill"
+                                                style={{
+                                                    color: color.color,
+                                                    fontSize: "20px",
+                                                    position: "relative",
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() => handleColorClick(color.id)}
+                                            >
+                                                {selectedColor === color.id && (
+                                                    <i
+                                                        className="ri-check-line"
+                                                        style={{
+                                                            position: "absolute",
+                                                            top: "50%",
+                                                            left: "50%",
+                                                            transform: "translate(-50%, -50%)",
+                                                            color: "#fff",
+                                                            fontSize: "12px",
+                                                        }}
+                                                    ></i>
+                                                )}
+                                            </i>
+                                        ))}
+                                    </span>
+                                </p>
+
+                                {/* KT Selection Buttons */}
+                                <div className="my-3 KT_button">
+                                    <span className="align-middle pe-3">
+                                        Purity
+                                    </span>
                                     <button
-                                        className="btn btn-link ms-3 bg-white text-decoration-none text-dark"
-                                        type="button"
-                                        onClick={handleClear}
+                                        className={`btn ${selectedKT === "14KT" ? "bg-dark text-light" : "btn-light text-dark"
+                                            } me-2`}
+                                        onClick={() => handleKTClick("14KT")}
                                     >
-                                        Clear
+                                        14KT
                                     </button>
-                                )}
-                            </div>
-                            {/* <p className="d-flex align-items-center customize_sec">
+                                    <button
+                                        className={`btn ${selectedKT === "18KT" ? "bg-dark text-light" : "btn-light text-dark"
+                                            } me-2`}
+                                        onClick={() => handleKTClick("18KT")}
+                                    >
+                                        18KT
+                                    </button>
+                                </div>
+                                <div className="my-3 KT_button d-flex align-items-center">
+                                    <span className="pe-3">Ring Size</span>
+                                    <select
+                                        className="form-select d-inline w-auto"
+                                        value={ringSize} // Bind the ringSize state
+                                        onChange={handleSizeChange}
+                                    >
+                                        <option value="choose">Choose</option>
+                                        {[...Array(21)].map((_, i) => (
+                                            <option key={i} value={i + 6}>
+                                                {i + 6}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {showClear && ( // Show Clear button only if showClear is true
+                                        <button
+                                            className="btn btn-link ms-3 bg-white text-decoration-none text-dark"
+                                            type="button"
+                                            onClick={handleClear}
+                                        >
+                                            Clear
+                                        </button>
+                                    )}
+                                </div>
+                                {/* <p className="d-flex align-items-center customize_sec">
                                 <div className="w-25 border-end px-2 py-1 bg-white" style={{ borderRadius: "10px 0px 0px 10px" }}>
                                     <small className="text-muted">Size</small>
                                     <p className="fw-bold mb-0">{selectedSize ? `${selectedSize} inches` : "Select Size"}</p>
@@ -1724,169 +1726,169 @@ const Productdetails = () => {
                                     </button>
                                 </div>
                             </p> */}
-                            <button className='btn add_btn me-2 my-3' onClick={() => addToCart(product.id)} disabled={!isValidSize}>
-                                {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
-                                ADD TO CART
-                            </button>
-                            <button className='btn add_btn my-3 me-2' onClick={buyNow} disabled={!isValidSize}>
-                                {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
-                                BUY NOW
-                            </button>
-                            <button className='btn wish_btn my-3'>
-                                <i className="fa-regular fa-heart fs-5"></i>
-                            </button>
+                                <button className='btn add_btn me-2 my-3' onClick={() => addToCart(product.id)} disabled={!isValidSize}>
+                                    {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
+                                    ADD TO CART
+                                </button>
+                                <button className='btn add_btn my-3 me-2' onClick={buyNow} disabled={!isValidSize}>
+                                    {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
+                                    BUY NOW
+                                </button>
+                                <button className='btn wish_btn my-3'>
+                                    <i className="fa-regular fa-heart fs-5"></i>
+                                </button>
 
-                            <div>
-                                <div className='row p-0 m-0 w-100 border rounded-3'>
-                                    <div className='col-lg-4 col-md-4 col-sm-4 col-4 m-0 p-0'>
-                                        <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/03-MAR/Others/CLlive/TOPBanner.png' className='img-fluid w-100 h-100'></img>
-                                    </div>
-                                    <div className='col-lg-8 col-md-8 col-sm-8 col-8 video_call'>
-                                        <h6>Live Video Call</h6>
-                                        <p>Join a live video call with our consultants to see your favourite designs up close!</p>
-                                        <button
-                                            className='btn'
-                                            onClick={() => {
-                                                const message = encodeURIComponent(
-                                                    "Hello, I would like to schedule a video call to see the designs."
-                                                );
-                                                const phoneNumber = ""; // Replace with your WhatsApp number including country code
-                                                const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
-                                                window.open(whatsappURL, "_blank"); // Opens WhatsApp in a new tab
-                                            }}
-                                        >
-                                            Schedule a Video Call
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='certified_Sec mt-4'>
-                                <div className='row'>
-                                    <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                        {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i className="ri-verified-badge-line fs-1"></i>
-                                        <p>100% <br />Certified</p>
-                                    </div>
-                                    <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                        {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i className="ri-replay-15-line fs-1"></i>
-                                        <p>15 Day <br />Money Back</p>
-                                    </div>
-                                    <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                        {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i className="ri-exchange-funds-line fs-1"></i>
-                                        <p>Lifetime Exchange</p>
-                                    </div>
-                                    <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                        {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i className="ri-calendar-line fs-1"></i>
-                                        <p>One Year Warranty</p>
+                                <div>
+                                    <div className='row p-0 m-0 w-100 border rounded-3'>
+                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4 m-0 p-0'>
+                                            <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/03-MAR/Others/CLlive/TOPBanner.png' className='img-fluid w-100 h-100'></img>
+                                        </div>
+                                        <div className='col-lg-8 col-md-8 col-sm-8 col-8 video_call'>
+                                            <h6>Live Video Call</h6>
+                                            <p>Join a live video call with our consultants to see your favourite designs up close!</p>
+                                            <button
+                                                className='btn'
+                                                onClick={() => {
+                                                    const message = encodeURIComponent(
+                                                        "Hello, I would like to schedule a video call to see the designs."
+                                                    );
+                                                    const phoneNumber = ""; // Replace with your WhatsApp number including country code
+                                                    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+                                                    window.open(whatsappURL, "_blank"); // Opens WhatsApp in a new tab
+                                                }}
+                                            >
+                                                Schedule a Video Call
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className='mt-2'>
-                                <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></p>
-                            </div>
-                            <div className='mt-2'>
-                                <div className='row text-center'>
-                                    <div className='col-lg-4 col-md-4 col-sm-6 col-12  mt-2'>
-                                        {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
-                                        <i className="ri-discount-percent-line fs-1"></i>
-                                        <p className='p_main m-0 pt-2'>100% BIS</p>
-                                        <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
+                                <div className='certified_Sec mt-4'>
+                                    <div className='row'>
+                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
+                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
+                                            <i className="ri-verified-badge-line fs-1"></i>
+                                            <p>100% <br />Certified</p>
+                                        </div>
+                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
+                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
+                                            <i className="ri-replay-15-line fs-1"></i>
+                                            <p>15 Day <br />Money Back</p>
+                                        </div>
+                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
+                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
+                                            <i className="ri-exchange-funds-line fs-1"></i>
+                                            <p>Lifetime Exchange</p>
+                                        </div>
+                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
+                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
+                                            <i className="ri-calendar-line fs-1"></i>
+                                            <p>One Year Warranty</p>
+                                        </div>
                                     </div>
-                                    <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
-                                        {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
-                                        <i className="ri-bubble-chart-line fs-1"></i>
-                                        <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
-                                        <p style={{ fontSize: "11px" }}>Titan Privileges</p>
-                                    </div>
-                                    <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
-                                        <i className="ri-verified-badge-line fs-1 text-success"></i>
-                                        {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
-                                        <p className='m-0 pt-2 p_main'>100% Certified</p>
-                                        <p style={{ fontSize: "11px" }}>by CaratLane</p>
+                                </div>
+                                <div className='mt-2'>
+                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></p>
+                                </div>
+                                <div className='mt-2'>
+                                    <div className='row text-center'>
+                                        <div className='col-lg-4 col-md-4 col-sm-6 col-12  mt-2'>
+                                            {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
+                                            <i className="ri-discount-percent-line fs-1"></i>
+                                            <p className='p_main m-0 pt-2'>100% BIS</p>
+                                            <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
+                                        </div>
+                                        <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
+                                            {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
+                                            <i className="ri-bubble-chart-line fs-1"></i>
+                                            <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
+                                            <p style={{ fontSize: "11px" }}>Titan Privileges</p>
+                                        </div>
+                                        <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
+                                            <i className="ri-verified-badge-line fs-1 text-success"></i>
+                                            {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
+                                            <p className='m-0 pt-2 p_main'>100% Certified</p>
+                                            <p style={{ fontSize: "11px" }}>by CaratLane</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {/* =========Medium device========= */}
-                    <div className='row d-lg-none d-block'>
-                        <div className='col-md-12 col-sm-12 col-12 mx-auto d-block'>
-                            <h3 className='font_h'>{product.title}</h3>
-                            <h4 className='font_h'>{formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}</h4>
-                            <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
-                            <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
+                        {/* =========Medium device========= */}
+                        <div className='row d-lg-none d-block'>
+                            <div className='col-md-12 col-sm-12 col-12 mx-auto d-block'>
+                                <h3 className='font_h'>{product.title}</h3>
+                                <h4 className='font_h'>{formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}</h4>
+                                <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
+                                <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
 
-                            <p className="KT_button">
-                                <span className="align-middle">
-                                    color
-                                </span>
-                                <span className="ps-3 align-middle" style={{ fontSize: "20px" }}>
-                                    {colors.map((color) => (
-                                        <i
-                                            key={color.id}
-                                            className="ri-circle-fill"
-                                            style={{
-                                                color: color.color,
-                                                fontSize: "20px",
-                                                position: "relative",
-                                                cursor: "pointer",
-                                            }}
-                                            onClick={() => handleColorClick(color.id)}
-                                        >
-                                            {selectedColor === color.id && (
-                                                <i
-                                                    className="ri-check-line"
-                                                    style={{
-                                                        position: "absolute",
-                                                        top: "50%",
-                                                        left: "50%",
-                                                        transform: "translate(-50%, -50%)",
-                                                        color: "#fff",
-                                                        fontSize: "12px",
-                                                    }}
-                                                ></i>
-                                            )}
-                                        </i>
-                                    ))}
-                                </span>
-                            </p>
+                                <p className="KT_button">
+                                    <span className="align-middle">
+                                        color
+                                    </span>
+                                    <span className="ps-3 align-middle" style={{ fontSize: "20px" }}>
+                                        {colors.map((color) => (
+                                            <i
+                                                key={color.id}
+                                                className="ri-circle-fill"
+                                                style={{
+                                                    color: color.color,
+                                                    fontSize: "20px",
+                                                    position: "relative",
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() => handleColorClick(color.id)}
+                                            >
+                                                {selectedColor === color.id && (
+                                                    <i
+                                                        className="ri-check-line"
+                                                        style={{
+                                                            position: "absolute",
+                                                            top: "50%",
+                                                            left: "50%",
+                                                            transform: "translate(-50%, -50%)",
+                                                            color: "#fff",
+                                                            fontSize: "12px",
+                                                        }}
+                                                    ></i>
+                                                )}
+                                            </i>
+                                        ))}
+                                    </span>
+                                </p>
 
-                            {/* KT Selection Buttons */}
-                            <div className="my-3 KT_button">
-                                <span className="align-middle pe-3">
-                                    Purity
-                                </span>
-                                <button
-                                    className={`btn ${selectedKT === "14KT" ? "bg-dark text-light" : "btn-light text-dark"
-                                        } me-2`}
-                                    onClick={() => handleKTClick("14KT")}
-                                >
-                                    14KT
-                                </button>
-                                <button
-                                    className={`btn ${selectedKT === "18KT" ? "bg-dark text-light" : "btn-light text-dark"
-                                        } me-2`}
-                                    onClick={() => handleKTClick("18KT")}
-                                >
-                                    18KT
-                                </button>
-                            </div>
-                            <div className="my-3 KT_button d-flex align-items-center">
-                                <span className="pe-3">
-                                    Ring Size
-                                </span>
-                                <select className="form-select d-inline w-auto">
-                                    {[...Array(21)].map((_, i) => (
-                                        <option key={i} value={i + 6}>
-                                            {i + 6}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            {/* <div className=" align-items-center customize_sec container-fluid">
+                                {/* KT Selection Buttons */}
+                                <div className="my-3 KT_button">
+                                    <span className="align-middle pe-3">
+                                        Purity
+                                    </span>
+                                    <button
+                                        className={`btn ${selectedKT === "14KT" ? "bg-dark text-light" : "btn-light text-dark"
+                                            } me-2`}
+                                        onClick={() => handleKTClick("14KT")}
+                                    >
+                                        14KT
+                                    </button>
+                                    <button
+                                        className={`btn ${selectedKT === "18KT" ? "bg-dark text-light" : "btn-light text-dark"
+                                            } me-2`}
+                                        onClick={() => handleKTClick("18KT")}
+                                    >
+                                        18KT
+                                    </button>
+                                </div>
+                                <div className="my-3 KT_button d-flex align-items-center">
+                                    <span className="pe-3">
+                                        Ring Size
+                                    </span>
+                                    <select className="form-select d-inline w-auto">
+                                        {[...Array(21)].map((_, i) => (
+                                            <option key={i} value={i + 6}>
+                                                {i + 6}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                {/* <div className=" align-items-center customize_sec container-fluid">
                                 <div className="row">
                                     <div className="col-12 border my-1 bg-white">
                                         <small className="text-muted">Size</small>
@@ -1912,24 +1914,24 @@ const Productdetails = () => {
                             >
                                 CUSTOMISE
                             </button> */}
-                            <button className='btn add_btn add_btn_md me-2 px-5 mt-3' onClick={addToCart}>
-                                {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
-                                ADD TO CART
-                            </button>
-                            <button className='btn add_btn add_btn_md px-5 my-3' onClick={buyNow}>
-                                {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
-                                BUY NOW
-                            </button>
-                            {/* <p className='delivery_cancellation pt-4'>
+                                <button className='btn add_btn add_btn_md me-2 px-5 mt-3' onClick={addToCart}>
+                                    {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
+                                    ADD TO CART
+                                </button>
+                                <button className='btn add_btn add_btn_md px-5 my-3' onClick={buyNow}>
+                                    {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
+                                    BUY NOW
+                                </button>
+                                {/* <p className='delivery_cancellation pt-4'>
                                     <i className="ri-truck-line fs-5 pe-2"></i>
                                     <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 3RD SEP 2024</u>
                                 </p> */}
-                            {/* <p className='pincode_productdetail pt-2 p-0 m-0'>Your Pincode</p>
+                                {/* <p className='pincode_productdetail pt-2 p-0 m-0'>Your Pincode</p>
                                 <div className="input-group mb-3 w-100 pincode_input">
                                     <input type="text" className="form-control" aria-describedby="basic-addon2" />
                                     <i className="ri-map-pin-line input-group-text" id="basic-addon2"></i>
                                 </div> */}
-                            {/* <p className='m-0'>
+                                {/* <p className='m-0'>
                                     <span className='category_tag'>CATEGORIES:</span>
                                     <span className='category_tag1'>Bracelet</span>
                                 </p>
@@ -1944,32 +1946,32 @@ const Productdetails = () => {
                                     <i className="ri-telegram-fill fs-2 pe-1" style={{ color: "#1c90ca" }}></i>
                                     <i className="ri-clipboard-fill fs-2 pe-1"></i>
                                 </p> */}
-                            <div className='ps-3'>
-                                <div className='row w-100 border rounded-3'>
-                                    <div className='col-lg-4 col-md-4 col-sm-4 col-4 m-0 p-0'>
-                                        <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/03-MAR/Others/CLlive/TOPBanner.png' className='img-fluid w-100 h-100'></img>
-                                    </div>
-                                    <div className='col-lg-8 col-md-8 col-sm-8 col-8 video_call'>
-                                        <h6>Live Video Call</h6>
-                                        <p>Join a live video call with our consultants to see your favourite designs up close!</p>
-                                        <button
-                                            className='btn'
-                                            onClick={() => {
-                                                const message = encodeURIComponent(
-                                                    "Hello, I would like to schedule a video call to see the designs."
-                                                );
-                                                const phoneNumber = ""; // Replace with your WhatsApp number including country code
-                                                const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
-                                                window.open(whatsappURL, "_blank"); // Opens WhatsApp in a new tab
-                                            }}
-                                        >
-                                            Schedule a Video Call
-                                        </button>
-                                    </div>
+                                <div className='ps-3'>
+                                    <div className='row w-100 border rounded-3'>
+                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4 m-0 p-0'>
+                                            <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/03-MAR/Others/CLlive/TOPBanner.png' className='img-fluid w-100 h-100'></img>
+                                        </div>
+                                        <div className='col-lg-8 col-md-8 col-sm-8 col-8 video_call'>
+                                            <h6>Live Video Call</h6>
+                                            <p>Join a live video call with our consultants to see your favourite designs up close!</p>
+                                            <button
+                                                className='btn'
+                                                onClick={() => {
+                                                    const message = encodeURIComponent(
+                                                        "Hello, I would like to schedule a video call to see the designs."
+                                                    );
+                                                    const phoneNumber = ""; // Replace with your WhatsApp number including country code
+                                                    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+                                                    window.open(whatsappURL, "_blank"); // Opens WhatsApp in a new tab
+                                                }}
+                                            >
+                                                Schedule a Video Call
+                                            </button>
+                                        </div>
 
+                                    </div>
                                 </div>
-                            </div>
-                            {/* <div className='mt-3 ps-3'>
+                                {/* <div className='mt-3 ps-3'>
                                     <div className='row w-100 border rounded-3 store py-2 my-2'>
                                         <div className='col-md-1 col-sm-1 col-2 m-0 p-0'>
                                             <i className="ri-store-2-line fs-1 ps-2"></i>
@@ -1990,167 +1992,210 @@ const Productdetails = () => {
                                         <p>Browse other Designs</p>
                                     </div>
                                 </div> */}
-                            <div className='certified_Sec mt-4'>
-                                <div className='row'>
-                                    <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                        {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i className="ri-verified-badge-line fs-1"></i>
-                                        <p>100% <br />Certified</p>
-                                    </div>
-                                    <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                        {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i className="ri-replay-15-line fs-1"></i>
-                                        <p>15 Day <br />Money Back</p>
-                                    </div>
-                                    <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                        {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i className="ri-exchange-funds-line fs-1"></i>
-                                        <p>Lifetime Exchange</p>
-                                    </div>
-                                    <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                        {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                        <i className="ri-calendar-line fs-1"></i>
-                                        <p>One Year Warranty</p>
+                                <div className='certified_Sec mt-4'>
+                                    <div className='row'>
+                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
+                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
+                                            <i className="ri-verified-badge-line fs-1"></i>
+                                            <p>100% <br />Certified</p>
+                                        </div>
+                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
+                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
+                                            <i className="ri-replay-15-line fs-1"></i>
+                                            <p>15 Day <br />Money Back</p>
+                                        </div>
+                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
+                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
+                                            <i className="ri-exchange-funds-line fs-1"></i>
+                                            <p>Lifetime Exchange</p>
+                                        </div>
+                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
+                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
+                                            <i className="ri-calendar-line fs-1"></i>
+                                            <p>One Year Warranty</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {/* <div className='rounded-3 policy_sec pt-3 px-3 pb-2 pt-4 mt-3'>
+                                {/* <div className='rounded-3 policy_sec pt-3 px-3 pb-2 pt-4 mt-3'>
                                     <h6>Earn 894 xCLusive points with this order</h6>
                                     <p>(1 xClusive point = ₹1)</p>
                                 </div> */}
-                            <div className='mt-2'>
-                                <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></p>
-                            </div>
-                            <div className='mt-2'>
-                                <div className='row text-center'>
-                                    <div className='col-lg-4 col-md-4 col-sm-4 col-4  mt-2'>
-                                        {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
-                                        <i className="ri-discount-percent-line fs-1"></i>
-                                        <p className='p_main m-0 pt-2'>100% BIS</p>
-                                        <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
-                                    </div>
-                                    <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
-                                        {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
-                                        <i className="ri-bubble-chart-line fs-1"></i>
-                                        <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
-                                        <p style={{ fontSize: "11px" }}>Titan Privileges</p>
-                                    </div>
-                                    <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
-                                        <i className="ri-verified-badge-line fs-1 text-success"></i>
-                                        {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
-                                        <p className='m-0 pt-2 p_main'>100% Certified</p>
-                                        <p style={{ fontSize: "11px" }}>by CaratLane</p>
+                                <div className='mt-2'>
+                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></p>
+                                </div>
+                                <div className='mt-2'>
+                                    <div className='row text-center'>
+                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4  mt-2'>
+                                            {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
+                                            <i className="ri-discount-percent-line fs-1"></i>
+                                            <p className='p_main m-0 pt-2'>100% BIS</p>
+                                            <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
+                                        </div>
+                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
+                                            {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
+                                            <i className="ri-bubble-chart-line fs-1"></i>
+                                            <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
+                                            <p style={{ fontSize: "11px" }}>Titan Privileges</p>
+                                        </div>
+                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
+                                            <i className="ri-verified-badge-line fs-1 text-success"></i>
+                                            {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
+                                            <p className='m-0 pt-2 p_main'>100% Certified</p>
+                                            <p style={{ fontSize: "11px" }}>by CaratLane</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Weight and Range section */}
-            <section className='container-fluid py-3'>
-                <div>
+                {/* Weight and Range section */}
+                <section className='container-fluid py-3'>
+                    <div>
+                        <div className='row'>
+                            <div className='col-xl-8'>
+                                {/* <h5>PRODUCT DETAILS</h5> */}
+                                <div className="section product-details">
+                                    <h3>Product Details</h3>
+                                    <div className="grid">
+                                        <div className="detail-box">
+                                            <h4>Weight</h4>
+                                            <p className='m-0 p-0 mb-2'>Gross (Product): {product.grossWt} gram</p>
+                                            <p>Net (Gold): {selectedKT === "14KT" ? product.netWeight14KT : product.netWeight18KT} gram</p>
+                                        </div>
+                                        <div className="detail-box">
+                                            <h4>Purity</h4>
+                                            <p>{selectedKT} Yellow Gold</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="diamonds-gemstones">
+                                    <h3>Diamond & Gemstones</h3>
+                                    <p>Weight: 1.880 Ct</p>
+                                    <div className="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <th>Color</th>
+                                                    <th>Clarity</th>
+                                                    <th>Shape</th>
+                                                    <th>No. of Diamonds</th>
+                                                    <th>Total Weight</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>0.01 to 0.07</td>
+                                                    <td>GH</td>
+                                                    <td>VS</td>
+                                                    <td>Round</td>
+                                                    <td>38</td>
+                                                    <td>0.380</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1.50 to 1.99</td>
+                                                    <td>G</td>
+                                                    <td>VS1</td>
+                                                    <td>Emerald</td>
+                                                    <td>1</td>
+                                                    <td>1.500</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div className="section price-breakup pt-3">
+                                    <h3>Price Breakup</h3>
+                                    <ul className='ps-0'>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>Gold:</span>
+                                            <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.price14KT : product.price18KT)}/-</span>
+                                        </p>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>Diamond:</span>
+                                            <span className='price_break_price text_end_break'>{formatCurrency(product.diamondprice)}/-</span>
+                                        </p>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>Making Charge:</span>
+                                            <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.makingCharge14KT : product.makingCharge18KT)}/-</span>
+                                        </p>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>GST:</span>
+                                            <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.gst14KT : product.gst18KT)}/-</span>
+                                        </p>
+                                        <p className='m-0 p-0'>
+                                            <span className='price_break'>Total:</span>
+                                            <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}/-</span>
+                                        </p>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div className='col-xl-4'>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section className='container my-3'>
+                    <h3 className='text-center pb-4 font_main'>You may also Like</h3>
                     <div className='row'>
-                        <div className='col-xl-8'>
-                            {/* <h5>PRODUCT DETAILS</h5> */}
-                            <div className="section product-details">
-                                <h3>Product Details</h3>
-                                <div className="grid">
-                                    <div className="detail-box">
-                                        <h4>Weight</h4>
-                                        <p className='m-0 p-0 mb-2'>Gross (Product): {product.grossWt} gram</p>
-                                        <p>Net (Gold): {selectedKT === "14KT" ? product.netWeight14KT : product.netWeight18KT} gram</p>
-                                    </div>
-                                    <div className="detail-box">
-                                        <h4>Purity</h4>
-                                        <p>{selectedKT} Yellow Gold</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="diamonds-gemstones">
-                                <h3>Diamond & Gemstones</h3>
-                                <p>Weight: 1.880 Ct</p>
-                                <div className="table-responsive">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Size</th>
-                                                <th>Color</th>
-                                                <th>Clarity</th>
-                                                <th>Shape</th>
-                                                <th>No. of Diamonds</th>
-                                                <th>Total Weight</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>0.01 to 0.07</td>
-                                                <td>GH</td>
-                                                <td>VS</td>
-                                                <td>Round</td>
-                                                <td>38</td>
-                                                <td>0.380</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1.50 to 1.99</td>
-                                                <td>G</td>
-                                                <td>VS1</td>
-                                                <td>Emerald</td>
-                                                <td>1</td>
-                                                <td>1.500</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div className="section price-breakup pt-3">
-                                <h3>Price Breakup</h3>
-                                <ul className='ps-0'>
-                                    <p className='m-0 p-0'>
-                                        <span className='price_break'>Gold:</span>
-                                        <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.price14KT : product.price18KT)}/-</span>
-                                    </p>
-                                    <p className='m-0 p-0'>
-                                        <span className='price_break'>Diamond:</span>
-                                        <span className='price_break_price text_end_break'>{formatCurrency(product.diamondprice)}/-</span>
-                                    </p>
-                                    <p className='m-0 p-0'>
-                                        <span className='price_break'>Making Charge:</span>
-                                        <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.makingCharge14KT : product.makingCharge18KT)}/-</span>
-                                    </p>
-                                    <p className='m-0 p-0'>
-                                        <span className='price_break'>GST:</span>
-                                        <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.gst14KT : product.gst18KT)}/-</span>
-                                    </p>
-                                    <p className='m-0 p-0'>
-                                        <span className='price_break'>Total:</span>
-                                        <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}/-</span>
-                                    </p>
-                                </ul>
-                            </div>
+                        {
+                            similarProducts.length > 0 ? (
 
-                        </div>
-                        <div className='col-xl-4'>
-
-                        </div>
+                                <>
+                                    {
+                                        similarProducts.map((item) => (
+                                            <div
+                                                className="col-lg-3 col-md-4 col-sm-6 mb-4 card border-0"
+                                                key={item._id}
+                                            >
+                                                <Link to={`/Productdetails/${item._id}`}>
+                                                    <img
+                                                        alt={item.title}
+                                                        src={item.image01}
+                                                        className="img-fluid px-2 position-relative"
+                                                    />
+                                                </Link>
+                                                <div className="card-body cartlane">
+                                                    <h6>{formatCurrency(item.total14KT)}</h6>
+                                                    <p>{item.title}</p>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </>
+                            ) : (
+                                <div className="text-center w-100 py-3">
+                                    <p>No related products available. Please check back later!</p>
+                                </div>
+                            )}
                     </div>
-                </div>
-            </section>
-            <section className='container my-3'>
-                <h3 className='text-center pb-4 font_main'>You may also Like</h3>
-                <div className='row'>
-                    {
-                        similarProducts.length > 0 ? (
-
+                    <h3 className='text-center py-4 font_main'>Recently Viewed</h3>
+                    <div className="row position-relative mb-4">
+                        {recentlyViewed.length > 0 ? (
                             <>
-                                {
-                                    similarProducts.map((item) => (
-                                        <div
-                                            className="col-lg-3 col-md-4 col-sm-6 mb-4 card border-0"
-                                            key={item._id}
+                                {/* Prev Button */}
+                                {currentIndex > 0 && (
+                                    <div>
+                                        <button
+                                            onClick={() => search?.current?.slickPrev()}
+                                            className="pre-btn-set"
                                         >
-                                            <Link to={`/Productdetails/${item._id}`}>
+                                            <i className="ri-arrow-left-wide-line"></i>
+                                        </button>
+                                    </div>
+                                )}
+
+                                <Slider ref={search} {...slider_search}>
+                                    {recentlyViewed.map((item) => (
+                                        <div
+                                            className="card border-0 w-100 mx-auto d-block"
+                                            key={item.id}
+                                        >
+                                            <Link to={`/Productdetails/${item.id}`}>
                                                 <img
                                                     alt={item.title}
                                                     src={item.image01}
@@ -2162,243 +2207,201 @@ const Productdetails = () => {
                                                 <p>{item.title}</p>
                                             </div>
                                         </div>
-                                    ))
-                                }
+                                    ))}
+                                </Slider>
+
+                                {/* Next Button */}
+                                {currentIndex < recentlyViewed.length - slider_search.slidesToShow && (
+                                    <div>
+                                        <button
+                                            onClick={() => search?.current?.slickNext()}
+                                            className="next-btn-set float-end"
+                                        >
+                                            <i className="ri-arrow-right-wide-line"></i>
+                                        </button>
+                                    </div>
+                                )}
                             </>
                         ) : (
-                            <div className="text-center w-100 py-3">
-                                <p>No related products available. Please check back later!</p>
+                            <div className="text-center w-100 pt-5">
+                                <p>You haven't viewed any products yet. Start exploring now!</p>
                             </div>
                         )}
-                </div>
-                <h3 className='text-center py-4 font_main'>Recently Viewed</h3>
-                <div className="row position-relative mb-4">
-                    {recentlyViewed.length > 0 ? (
-                        <>
-                            {/* Prev Button */}
-                            {currentIndex > 0 && (
-                                <div>
-                                    <button
-                                        onClick={() => search?.current?.slickPrev()}
-                                        className="pre-btn-set"
-                                    >
-                                        <i className="ri-arrow-left-wide-line"></i>
-                                    </button>
-                                </div>
-                            )}
-
-                            <Slider ref={search} {...slider_search}>
-                                {recentlyViewed.map((item) => (
-                                    <div
-                                        className="card border-0 w-100 mx-auto d-block"
-                                        key={item.id}
-                                    >
-                                        <Link to={`/Productdetails/${item.id}`}>
-                                            <img
-                                                alt={item.title}
-                                                src={item.image01}
-                                                className="img-fluid px-2 position-relative"
-                                            />
-                                        </Link>
-                                        <div className="card-body cartlane">
-                                            <h6>{formatCurrency(item.total14KT)}</h6>
-                                            <p>{item.title}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </Slider>
-
-                            {/* Next Button */}
-                            {currentIndex < recentlyViewed.length - slider_search.slidesToShow && (
-                                <div>
-                                    <button
-                                        onClick={() => search?.current?.slickNext()}
-                                        className="next-btn-set float-end"
-                                    >
-                                        <i className="ri-arrow-right-wide-line"></i>
-                                    </button>
-                                </div>
-                            )}
-                        </>
-                    ) : (
-                        <div className="text-center w-100 pt-5">
-                            <p>You haven't viewed any products yet. Start exploring now!</p>
-                        </div>
-                    )}
-                </div>
-            </section>
-            {/* Large Offcanvas */}
-            <div className="offcanvas offcanvas-end offcanvas_end_size" tabIndex="-1" id="offcanvassize" aria-labelledby="offcanvassizeLabel">
-                <div className="offcanvas-header offcanvas_size_header d-flex justify-content-between align-items-center">
-                    <div className="text-start pt-5">
-                        <p className='m-0 p-0'>Estimated price</p>
-                        <span className="fw-bold" style={{ fontSize: "18px" }}>{formatCurrency(adjustedPrice)}&nbsp;</span>
-                        {/* <span className="text-decoration-line-through text-muted">{formatCurrency(delprice)}</span> */}
                     </div>
-                    <div className="text-end">
-                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        {/* <div className='pt-3 delivery_size'>
+                </section>
+                {/* Large Offcanvas */}
+                <div className="offcanvas offcanvas-end offcanvas_end_size" tabIndex="-1" id="offcanvassize" aria-labelledby="offcanvassizeLabel">
+                    <div className="offcanvas-header offcanvas_size_header d-flex justify-content-between align-items-center">
+                        <div className="text-start pt-5">
+                            <p className='m-0 p-0'>Estimated price</p>
+                            <span className="fw-bold" style={{ fontSize: "18px" }}>{formatCurrency(adjustedPrice)}&nbsp;</span>
+                            {/* <span className="text-decoration-line-through text-muted">{formatCurrency(delprice)}</span> */}
+                        </div>
+                        <div className="text-end">
+                            <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            {/* <div className='pt-3 delivery_size'>
                             <p className='m-0 p-0'>Delivery By</p>
                             <span className="fw-bold">14th Oct</span>
                         </div> */}
+                        </div>
+                    </div>
+
+                    <div className="offcanvas-body offcanvas_body_size">
+                        {/* Choice of Metal */}
+                        <div className="mb-2 metal_offcanvas">
+                            <h6 className="font_h mb-3">Choice of Metal</h6>
+                            <div className="row g-3">
+                                {/* Metal Options */}
+                                {metalOptions.map((item, index) => (
+                                    <div key={index} className="col-3">
+                                        <button
+                                            className={`btn size-btn w-100 p-3 ${selectedMetal === item.metal ? 'selected' : ''}`}
+                                            onClick={() => handleMetalClick(item.metal)}
+                                        >
+                                            <p>{item.metal}</p>
+                                            <small className="text-muted d-block">in Stock!</small>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Diamond Quality */}
+                        <div className="mb-2">
+                            <div className="d-flex justify-content-between align-items-center mb-3">
+                                <h6 className="font_h">Diamond Quality</h6>
+                                <Link to="">Diamond Guide</Link>
+                            </div>
+                            <div className="row g-3 diamond_offcanvas">
+                                {diamondOptions.map((item, index) => (
+                                    <div key={index} className="col-3">
+                                        <button
+                                            className={`btn size-btn w-100 p-3 ${selectedDiamondQuality === item.quality ? 'selected' : ''}`}
+                                            onClick={() => handleDiamondQualityClick(item.quality)}
+                                        >
+                                            <p className="fw-bold m-0 p-0">{item.quality}</p>
+                                            <small>{item.status}</small>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Select Size */}
+                        <div className="mb-2">
+                            <div className="d-flex justify-content-between align-items-center mb-4">
+                                <h6 className="font_h">Select Size</h6>
+                                <Link to="">Size Guide</Link>
+                            </div>
+                            <div className="row g-3 size_offcanvas">
+                                {/* Size buttons */}
+                                {sizeOptions.map((item) => (
+                                    <div key={item.size} className="col-3">
+                                        <button
+                                            className={`btn size-btn w-100 p-2 ${selectedSize === item.size ? 'selected' : ''}`}
+                                            onClick={() => handleSizeClick(item.size)}
+                                        >
+                                            <p className="fw-bold m-0 p-0">{item.size} inches</p>
+                                            <p className="text-muted m-0 p-0" style={{ fontSize: "10px" }}>{item.mm}</p>
+                                            <small>{item.stock}</small>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="offcanvas-footer text-center offcanvas_size_btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                        <button className="btn w-100 py-3 fw-bold text-uppercase" onClick={handleConfirm}>Confirm Customisation</button>
                     </div>
                 </div>
-
-                <div className="offcanvas-body offcanvas_body_size">
-                    {/* Choice of Metal */}
-                    <div className="mb-2 metal_offcanvas">
-                        <h6 className="font_h mb-3">Choice of Metal</h6>
-                        <div className="row g-3">
-                            {/* Metal Options */}
-                            {metalOptions.map((item, index) => (
-                                <div key={index} className="col-3">
-                                    <button
-                                        className={`btn size-btn w-100 p-3 ${selectedMetal === item.metal ? 'selected' : ''}`}
-                                        onClick={() => handleMetalClick(item.metal)}
-                                    >
-                                        <p>{item.metal}</p>
-                                        <small className="text-muted d-block">in Stock!</small>
-                                    </button>
-                                </div>
-                            ))}
+                {/* Md Offcanvas */}
+                <div className="offcanvas offcanvas-bottom offcanvas_bottom_size" tabIndex="-1" id="mdoffcanvassize" aria-labelledby="mdoffcanvassizeLabel">
+                    <div className="offcanvas-header offcanvas_size_header d-flex justify-content-between align-items-center">
+                        <div className="text-start pt-5">
+                            <p className='m-0 p-0'>Estimated price</p>
+                            <span className="fw-bold" style={{ fontSize: "18px" }}>{formatCurrency(adjustedPrice)}&nbsp;</span>
+                            {/* <span className="text-decoration-line-through text-muted">{formatCurrency(delprice)}</span> */}
                         </div>
-                    </div>
-
-                    {/* Diamond Quality */}
-                    <div className="mb-2">
-                        <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h6 className="font_h">Diamond Quality</h6>
-                            <Link to="">Diamond Guide</Link>
-                        </div>
-                        <div className="row g-3 diamond_offcanvas">
-                            {diamondOptions.map((item, index) => (
-                                <div key={index} className="col-3">
-                                    <button
-                                        className={`btn size-btn w-100 p-3 ${selectedDiamondQuality === item.quality ? 'selected' : ''}`}
-                                        onClick={() => handleDiamondQualityClick(item.quality)}
-                                    >
-                                        <p className="fw-bold m-0 p-0">{item.quality}</p>
-                                        <small>{item.status}</small>
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Select Size */}
-                    <div className="mb-2">
-                        <div className="d-flex justify-content-between align-items-center mb-4">
-                            <h6 className="font_h">Select Size</h6>
-                            <Link to="">Size Guide</Link>
-                        </div>
-                        <div className="row g-3 size_offcanvas">
-                            {/* Size buttons */}
-                            {sizeOptions.map((item) => (
-                                <div key={item.size} className="col-3">
-                                    <button
-                                        className={`btn size-btn w-100 p-2 ${selectedSize === item.size ? 'selected' : ''}`}
-                                        onClick={() => handleSizeClick(item.size)}
-                                    >
-                                        <p className="fw-bold m-0 p-0">{item.size} inches</p>
-                                        <p className="text-muted m-0 p-0" style={{ fontSize: "10px" }}>{item.mm}</p>
-                                        <small>{item.stock}</small>
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="offcanvas-footer text-center offcanvas_size_btn" data-bs-dismiss="offcanvas" aria-label="Close">
-                    <button className="btn w-100 py-3 fw-bold text-uppercase" onClick={handleConfirm}>Confirm Customisation</button>
-                </div>
-            </div>
-            {/* Md Offcanvas */}
-            <div className="offcanvas offcanvas-bottom offcanvas_bottom_size" tabIndex="-1" id="mdoffcanvassize" aria-labelledby="mdoffcanvassizeLabel">
-                <div className="offcanvas-header offcanvas_size_header d-flex justify-content-between align-items-center">
-                    <div className="text-start pt-5">
-                        <p className='m-0 p-0'>Estimated price</p>
-                        <span className="fw-bold" style={{ fontSize: "18px" }}>{formatCurrency(adjustedPrice)}&nbsp;</span>
-                        {/* <span className="text-decoration-line-through text-muted">{formatCurrency(delprice)}</span> */}
-                    </div>
-                    <div className="text-end">
-                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        {/* <div className='pt-3 delivery_size'>
+                        <div className="text-end">
+                            <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            {/* <div className='pt-3 delivery_size'>
                                 <p className='m-0 p-0'>Delivery By</p>
                                 <span className="fw-bold">14th Oct</span>
                             </div> */}
 
-                    </div>
-                </div>
-
-                <div className="offcanvas-body offcanvas_body_size">
-                    {/* Choice of Metal */}
-                    <div className="mb-2 metal_offcanvas">
-                        <h6 className="font_h mb-3">Choice of Metal</h6>
-                        <div className="row g-3">
-                            {/* Metal Options */}
-                            {metalOptions.map((item, index) => (
-                                <div key={index} className="col-3">
-                                    <button
-                                        className={`btn size-btn w-100 p-3 ${selectedMetal === item.metal ? 'selected' : ''}`}
-                                        onClick={() => handleMetalClick(item.metal)}
-                                    >
-                                        <p>{item.metal}</p>
-                                        <small className="text-muted d-block">in Stock!</small>
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    {/* Diamond Quality */}
-                    <div className="mb-2">
-                        <div className="d-flex justify-content-between align-items-center mb-3">
-                            <h6 className="font_h">Diamond Quality</h6>
-                            <Link to="">Diamond Guide</Link>
-                        </div>
-                        <div className="row g-3 diamond_offcanvas">
-                            {diamondOptions.map((item, index) => (
-                                <div key={index} className="col-3">
-                                    <button
-                                        className={`btn size-btn w-100 p-3 ${selectedDiamondQuality === item.quality ? 'selected' : ''}`}
-                                        onClick={() => handleDiamondQualityClick(item.quality)}
-                                    >
-                                        <p className="fw-bold m-0 p-0">{item.quality}</p>
-                                        <small>{item.status}</small>
-                                    </button>
-                                </div>
-                            ))}
                         </div>
                     </div>
 
-                    {/* Select Size */}
-                    <div className="mb-2">
-                        <div className="d-flex justify-content-between align-items-center mb-4">
-                            <h6 className="font_h">Select Size</h6>
-                            <Link to="">Size Guide</Link>
+                    <div className="offcanvas-body offcanvas_body_size">
+                        {/* Choice of Metal */}
+                        <div className="mb-2 metal_offcanvas">
+                            <h6 className="font_h mb-3">Choice of Metal</h6>
+                            <div className="row g-3">
+                                {/* Metal Options */}
+                                {metalOptions.map((item, index) => (
+                                    <div key={index} className="col-3">
+                                        <button
+                                            className={`btn size-btn w-100 p-3 ${selectedMetal === item.metal ? 'selected' : ''}`}
+                                            onClick={() => handleMetalClick(item.metal)}
+                                        >
+                                            <p>{item.metal}</p>
+                                            <small className="text-muted d-block">in Stock!</small>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="row g-3 size_offcanvas">
-                            {/* Size buttons */}
-                            {sizeOptions.map((item) => (
-                                <div key={item.size} className="col-3">
-                                    <button
-                                        className={`btn size-btn w-100 p-2 ${selectedSize === item.size ? 'selected' : ''}`}
-                                        onClick={() => handleSizeClick(item.size)}
-                                    >
-                                        <p className="fw-bold m-0 p-0">{item.size} inches</p>
-                                        <p className="text-muted m-0 p-0" style={{ fontSize: "10px" }}>{item.mm}</p>
-                                        <small>{item.stock}</small>
-                                    </button>
-                                </div>
-                            ))}
+                        {/* Diamond Quality */}
+                        <div className="mb-2">
+                            <div className="d-flex justify-content-between align-items-center mb-3">
+                                <h6 className="font_h">Diamond Quality</h6>
+                                <Link to="">Diamond Guide</Link>
+                            </div>
+                            <div className="row g-3 diamond_offcanvas">
+                                {diamondOptions.map((item, index) => (
+                                    <div key={index} className="col-3">
+                                        <button
+                                            className={`btn size-btn w-100 p-3 ${selectedDiamondQuality === item.quality ? 'selected' : ''}`}
+                                            onClick={() => handleDiamondQualityClick(item.quality)}
+                                        >
+                                            <p className="fw-bold m-0 p-0">{item.quality}</p>
+                                            <small>{item.status}</small>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Select Size */}
+                        <div className="mb-2">
+                            <div className="d-flex justify-content-between align-items-center mb-4">
+                                <h6 className="font_h">Select Size</h6>
+                                <Link to="">Size Guide</Link>
+                            </div>
+                            <div className="row g-3 size_offcanvas">
+                                {/* Size buttons */}
+                                {sizeOptions.map((item) => (
+                                    <div key={item.size} className="col-3">
+                                        <button
+                                            className={`btn size-btn w-100 p-2 ${selectedSize === item.size ? 'selected' : ''}`}
+                                            onClick={() => handleSizeClick(item.size)}
+                                        >
+                                            <p className="fw-bold m-0 p-0">{item.size} inches</p>
+                                            <p className="text-muted m-0 p-0" style={{ fontSize: "10px" }}>{item.mm}</p>
+                                            <small>{item.stock}</small>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
+                    <div className="offcanvas-footer text-center offcanvas_size_btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                        <button className="btn w-100 py-3 fw-bold text-uppercase" onClick={handleConfirm}>Confirm Customisation</button>
+                    </div>
                 </div>
-                <div className="offcanvas-footer text-center offcanvas_size_btn" data-bs-dismiss="offcanvas" aria-label="Close">
-                    <button className="btn w-100 py-3 fw-bold text-uppercase" onClick={handleConfirm}>Confirm Customisation</button>
-                </div>
-            </div>
-        </>
+            </>
+        </Helmet>
     );
 };
 
