@@ -399,7 +399,7 @@ const Mainpage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/v1/upload/get_upload");
+        const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
         // console.log(response);
         setProducts(response.data); // Set products in state
       } catch (err) {
@@ -415,7 +415,7 @@ const Mainpage = () => {
 
 
   // let getBanner = async () => {
-  //   let res = await axios.get("http://localhost:5000/v1/banner/bannerGet")
+  //   let res = await axios.get("https://saltandglitz-api.vercel.app/v1/banner/bannerGet")
   //   // console.log(res, "fdxgfchgvhmbj,n");
   //   console.log(res.data.banners);
   //   setBanner(res?.data?.banners || [])

@@ -84,7 +84,7 @@ const Shipping = () => {
 
         setLoading(true);
         try {
-            await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/shipping/create-shipping', formData);
+            await axios.post('https://saltandglitz-api.vercel.app/v1/shipping/create-shipping', formData);
             setLoading(false);
             toast.success("Your address has been successfully added!")
         } catch (error) {

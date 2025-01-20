@@ -41,16 +41,16 @@ const Header = () => {
             }
         } catch (error) {
             console.error('Error fetching wishlist items:', error);
-            toast.error("Failed to load wishlist", {
-                position: "top-center",
-                autoClose: 1000,
-            });
+            // toast.error("Failed to load wishlist", {
+            //     position: "top-center",
+            //     autoClose: 1000,
+            // });
         }
     };
 
     const getCart = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${userFetch._id}`);
+            const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${userFetch._id}`);
             // console.log(response.data.totalQuantity);
 
             const quantity = response.data;

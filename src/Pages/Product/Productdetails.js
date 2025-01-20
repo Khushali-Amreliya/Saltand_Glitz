@@ -102,7 +102,7 @@
 //         };
 
 //         try {
-//             const response = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/add', cartItem);
+//             const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/add', cartItem);
 
 //             if (response.status === 201) {
 //                 dispatch(cartAction.addItem(response.data));
@@ -130,7 +130,7 @@
 //         };
 
 //         try {
-//             const response = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/add', cartItem);
+//             const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/add', cartItem);
 
 //             if (response.status === 201) {
 //                 dispatch(cartAction.addItem(response.data)); // Dispatch action to add item
@@ -1334,7 +1334,7 @@ const Productdetails = () => {
 
     const fetchProductDetails = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/v1/upload/get_id/${id}`);
+            const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/upload/get_id/${id}`);
             const data = response.data;
             // console.log("Data",data);
 
@@ -1470,7 +1470,7 @@ const Productdetails = () => {
     //     };
 
     //     try {
-    //         const response = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/cart/addCart', cartItem);
+    //         const response = await axios.post('https://saltandglitz-api.vercel.app/v1/cart/addCart', cartItem);
 
     //         if (response.status === 201) {
     //             toast.success("Product added to cart successfully!", {
@@ -2421,7 +2421,7 @@ export default Productdetails;
 //   useEffect(() => {
 //     const fetchProductDetails = async () => {
 //       try {
-//         const response = await axios.get(`https://saltandglitzapi-rkm5g.kinsta.app/v1/upload/get_id/${id}`);
+//         const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/upload/get_id/${id}`);
 //         setProduct(response.data); // Set product details in state
 //       } catch (err) {
 //         console.error("Error fetching product details:", err.response || err);

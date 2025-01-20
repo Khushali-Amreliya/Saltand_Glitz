@@ -8,7 +8,7 @@ const Uorder = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get(`https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/`);
+        const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/carts/`);
         setCartItems(response.data);
         console.log(response.data);
         

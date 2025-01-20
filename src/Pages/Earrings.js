@@ -33,7 +33,7 @@ const Earrings = () => {
 
     const getUploadData = async () => {
 
-        let getData = await axios.get("http://localhost:5000/v1/upload/get_upload")
+        let getData = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload")
         // console.log(getData.data);
         setProducts(getData.data);
     };

@@ -20,7 +20,7 @@ function LoginUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/api/auth/login', formData);
+      const response = await axios.post('https://saltandglitz-api.vercel.app/api/auth/login', formData);
       // Set JWT token in localStorage
       localStorage.setItem('token', response.data.token);
       setMessage('Login successful!');

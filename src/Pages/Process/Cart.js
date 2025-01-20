@@ -67,7 +67,7 @@ const Cart = (props) => {
   //         totalprice: item.totalprice
   //     };
   //     try {
-  //         const response = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/delete', cartItem);
+  //         const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/delete', cartItem);
   //         if (response.status === 200) {
 
   //         }
@@ -85,7 +85,7 @@ const Cart = (props) => {
   const getCart = async () => {
     try {
       setLoading(true); // start loader
-      const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${user._id}`);
+      const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
       // console.log(response);
       
       const data = response.data;
@@ -112,7 +112,7 @@ const Cart = (props) => {
   const handleDelete = async (itemId) => {
     try {
       const response = await axios.post(
-        "https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/delete",
+        "https://saltandglitz-api.vercel.app/v1/carts/delete",
         { id: itemId }
       );
       dispatch(cartAction.deleteItem(response.data)); // Dispatch the deletion action
@@ -134,7 +134,7 @@ const Cart = (props) => {
 
     try {
       const response = await axios.post(
-        "https://saltandglitzapi-rkm5g.kinsta.app/v1/carts/remove",
+        "https://saltandglitz-api.vercel.app/v1/carts/remove",
         cartItem
       );
 

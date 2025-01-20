@@ -88,7 +88,7 @@
 
 //   const handleUploadToBackend = async () => {
 //     try {
-//       const response = await axios.post("https://saltandglitzapi-rkm5g.kinsta.app/v1/upload/post_upload", {
+//       const response = await axios.post("https://saltandglitz-api.vercel.app/v1/upload/post_upload", {
 //         products,
 //       });
 //       alert("Data uploaded successfully!");
@@ -317,7 +317,7 @@ const Adashbord = () => {
       console.log("Formatted products:", formattedProducts);
 
       const response = await axios.post(
-        "http://localhost:5000/v1/upload/post_upload",
+        "https://saltandglitz-api.vercel.app/v1/upload/post_upload",
         { products: formattedProducts }
       );
 

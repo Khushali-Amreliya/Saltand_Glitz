@@ -45,7 +45,7 @@
 //         }
 
 //         try {
-//             const response = await axios.put('https://saltandglitzapi-rkm5g.kinsta.app/api/users/update', formData);
+//             const response = await axios.put('https://saltandglitz-api.vercel.app/api/users/update', formData);
 
 //             if (response.status === 200) {
 //                 localStorage.setItem('user', JSON.stringify(formData)); // Update localStorage

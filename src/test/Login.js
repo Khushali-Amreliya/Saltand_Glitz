@@ -11,7 +11,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://saltandglitzapi-rkm5g.kinsta.app/v1/login/login', { emailOrPhone });
+      const response = await axios.post('https://saltandglitz-api.vercel.app/v1/login/login', { emailOrPhone });
       login(response.data); // Update auth state
       alert('Login successful');
     } catch (error) {
