@@ -311,8 +311,6 @@ const ProductCard = ({ Productsitem }) => {
         setIsHeartFilled(!isHeartFilled);
     };
 
-
-
     const settings2 = {
         dots: false,
         infinite: true,

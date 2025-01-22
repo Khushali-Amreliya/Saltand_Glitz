@@ -12,52 +12,49 @@ import { useDispatch } from 'react-redux';
 import { cartAction } from '../../Store/Slice/CartSlice';
 
 const Wishlist = () => {
-  const [wishlistItems, setWishlistItems] = useState([]); // Local state for wishlist items
+  const [wishlistItems, setWishlistItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('user'));
-  const [loading, setLoading] = useState(true); // Loader state
 
-  // console.log(wishlistItems);
-
-  // Fetch wishlist items from backend
+  // Fetch wishlist items from the backend
   const fetchWishlist = async () => {
     try {
       const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
+      // console.log("Fetched Wishlist Response:", response.data);
       if (response.status === 200) {
-        setWishlistItems(response.data.wishlist.products); // Update the local state with fetched data
+        setWishlistItems(response.data.wishlist.products);
       }
     } catch (error) {
-      console.error('Error fetching wishlist items:', error);
+      // console.error('Error fetching wishlist items:', error.response?.data || error.message);
       // toast.error("Failed to load wishlist", {
       //   position: "top-center",
       //   autoClose: 1000,
       // });
     } finally {
-      setLoading(false); // Stop loader after fetching data
+      setLoading(false);
     }
   };
-  // console.log(wishlistItems);
 
-  // Remove from wishlist
+  // Remove item from wishlist
   const handleRemove = async (id) => {
-    // console.log('User ID:', user._id);
-    // console.log('Item ID:', id);
-
     try {
-      await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`);
-      // console.log('API Response:', res);
-
-      setWishlistItems(wishlistItems.filter((item) => item.productId.product_id !== id) // Adjust key if needed
-      );
-
-      toast.success("Item removed from wishlist", {
-        position: "top-center",
-        autoClose: 1000,
-      });
+      const res = await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`);
+      // console.log("Remove Wishlist Response:", res);
+      if (res.status === 200) {
+        setWishlistItems((prev) =>
+          prev.filter((item) => item.productId.product_id !== id)
+        );
+        toast.success("Item removed from wishlist", {
+          position: "top-center",
+          autoClose: 1000,
+        });
+      } else {
+        throw new Error("Failed to remove item from wishlist");
+      }
     } catch (error) {
-      console.error('Error removing item from wishlist:', error.response?.data || error.message);
-
+      console.error("Error removing item from wishlist:", error.response?.data || error.message);
       toast.error("Error removing item from wishlist", {
         position: "top-center",
         autoClose: 1000,
@@ -65,94 +62,63 @@ const Wishlist = () => {
     }
   };
 
-  // Add to cart and remove from wishlist
-  // const handleMoveToCart = async (item, id) => {
-  //   const cartItem = {
-  //     product_id: item.productId.product_id,
-  //     userId: user._id,
-  //   };
-  //   // console.log(id);
-  //   console.log(cartItem);
-
-  //   try {
-  //     const res = await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', cartItem);
-  //     console.log(res);
-
-  //     if (res.status === 201) {
-  //       await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`);
-  //       setWishlistItems(wishlistItems.filter((item) => item.productId.product_id !== id) // Adjust key if needed
-  //       );
-  //       dispatch(cartAction.addToWishlist({ id }));
-  //       toast.success("Item moved to cart", {
-  //         position: "top-center",
-  //         autoClose: 1000,
-  //       });
-  //       navigate('/cart');
-  //     } else {
-  //       toast.error("Error adding item to cart", {
-  //         position: "top-center",
-  //         autoClose: 1000,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error('Error moving item to cart:', error);
-  //     toast.error("Error processing your request", {
-  //       position: "top-center",
-  //       autoClose: 1000,
-  //     });
-  //   }
-  // };
-
+  // Move item from wishlist to cart
   const handleMoveToCart = async (item, id) => {
-    if (!item || !item.productId || !item.productId.product_id) {
-      console.error('Invalid product ID:', id);
-      toast.error("Product not found or invalid", {
-        position: "top-center",
-        autoClose: 1000,
-      });
-      return;
-    }
-  
+    setLoading(true)
     const cartItem = {
-      product_id: item.productId.product_id,
-      userId: user._id,
+      product: item.productId.product_id,
+      user: user._id,
     };
-  
-    // console.log('Cart Item:', cartItem);
-  
+
     try {
-      const res = await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', cartItem);
-      console.log('Response:', res);
-  
-      if (res.status === 201) {
-        await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`);
-        setWishlistItems((prevItems) => prevItems.filter((item) => item.productId.product_id !== id));
-        dispatch(cartAction.addToWishlist({ id }));
-        toast.success("Item moved to cart", {
-          position: "top-center",
-          autoClose: 1000,
-        });
-        navigate('/cart');
+      // Add item to cart
+      const addCartResponse = await axios.post(
+        'https://saltandglitz-api.vercel.app/v1/cart/addCart',
+        cartItem
+      );
+      console.log("Cart API Response:", addCartResponse);
+
+      if (addCartResponse.status === 201 || addCartResponse.status === 200) {
+        // Remove item from wishlist
+        const removeWishlistResponse = await axios.delete(
+          `https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`
+        );
+        console.log("Remove Wishlist Response:", removeWishlistResponse);
+
+        if (removeWishlistResponse.status === 200) {
+          // Update state and Redux store
+          setWishlistItems((prev) =>
+            prev.filter((wishlistItem) => wishlistItem.productId.product_id !== id)
+          );
+          const updatedCart = addCartResponse.data.updatedCart || addCartResponse.data.newCart;
+          dispatch(cartAction.addItem(updatedCart));
+
+          toast.success("Item moved to cart successfully!", {
+            position: "top-center",
+            autoClose: 1000,
+          });
+          navigate('/cart');
+        } else {
+          throw new Error("Failed to remove item from wishlist");
+        }
       } else {
-        toast.error("Error adding item to cart", {
-          position: "top-center",
-          autoClose: 1000,
-        });
+        throw new Error("Failed to add item to cart");
       }
     } catch (error) {
-      console.error('Error moving item to cart:', error);
+      console.error("Error Details:", error.response?.data || error.message);
       toast.error("Error processing your request", {
         position: "top-center",
         autoClose: 1000,
       });
+    } finally{
+      setLoading(false)
     }
   };
-  
 
 
   useEffect(() => {
     Aos.init();
-    fetchWishlist(); // Fetch wishlist when the component loads
+    fetchWishlist();
   }, []);
 
   return (
@@ -175,7 +141,8 @@ const Wishlist = () => {
                             <p className='m-0'>{formatCurrency(item.productId.total14KT)}</p>
                             <h6 className='d-inline-block'>{item.productId.title}</h6>
                           </div>
-                          <i className='ri-shopping-cart-2-fill align-middle wishlist_cart'
+                          <i
+                            className='ri-shopping-cart-2-fill align-middle wishlist_cart'
                             onClick={() => {
                               if (item && item.productId && item.productId.product_id) {
                                 handleMoveToCart(item, item.productId.product_id);

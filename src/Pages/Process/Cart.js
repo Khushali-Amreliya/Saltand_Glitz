@@ -15,7 +15,7 @@ import Helmet from "../../Components/Helmet";
 const Cart = (props) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItem);
-  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  // const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const discountPercentage = useSelector((state) => state.cart.discount); // Renamed for clarity
   const [loading, setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState("");
@@ -55,58 +55,33 @@ const Cart = (props) => {
     updateAmounts();
   }, [cartItems, discountPercentage, updateAmounts]);
 
-  // const deleteItem = (itemId) => {
-  //     dispatch(cartAction.deleteItem({ id: itemId }));
-  // };
-  // const deleteItem = async (item) => { // Pass only the id
-  //     const cartItem = {
-  //         id: item.id,
-  //         title: item.title,
-  //         price: item.price,
-  //         image01: item.image01,
-  //         totalprice: item.totalprice
-  //     };
-  //     try {
-  //         const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/delete', cartItem);
-  //         if (response.status === 200) {
-
-  //         }
-  //         dispatch(cartAction.deleteItem(response.data));
-  //         console.log('delete',response.data);
-  //     } catch (error) {
-  //         console.error('Error deleting item from cart:', error.message);
-  //     }
-  // };
   const [product, setProduct] = useState([]); // Initialize as an array
-  // const [loading, setLoading] = useState(true); // Add loading state if needed
+  const [tQuantity, setTQuantity] = useState([])
 
   const user = JSON.parse(localStorage.getItem('user'));
 
-  const getCart = async () => {
-    try {
-      setLoading(true); // start loader
-      const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
-      // console.log(response);
-      
-      const data = response.data;
-
-      const getcart = data?.cart?.quantity || []; // Default to an empty array if no cart data is available
-      // console.log(getcart);
-
-      // Update product state with cart data
-      setProduct(getcart);
-
-    } catch (err) {
-      console.error("Error fetching product details:", err.response || err);
-      // Handle error (e.g., show a message or set error state)
-    } finally {
-      setLoading(false); // Stop loader
-    }
-  };
-
   useEffect(() => {
-    getCart();
-  }, []);
+    const fetchCart = async () => {
+      try {
+        setLoading(true); // Start loader
+        const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
+
+        const data = response.data;
+        const quantity = response.data;
+        setTQuantity(quantity)
+
+        const getcart = data?.cart?.quantity || []; // Default to an empty array if no cart data is available
+        setProduct(getcart);
+      } catch (err) {
+        // Handle error (e.g., show a message or set error state)
+      } finally {
+        setLoading(false); // Stop loader
+      }
+    };
+
+    fetchCart();
+  }, [user._id]);
+
 
 
   const handleDelete = async (itemId) => {
@@ -123,27 +98,42 @@ const Cart = (props) => {
     }
   };
 
-  const removeToCart = async (item) => {
+  const removeToCart = async (item, id) => {
+    // console.log("item.productId:", item.productId);  // Log the productId to check its structure
+
+    setLoading(true)
     const cartItem = {
-      id: item.id,
-      title: item.title,
-      price: item.price,
-      image01: item.image01,
-      totalprice: item.totalprice,
+      user: user._id,  // Make sure user._id is valid
+      productId: item.productId.product_id,   // Passing the correct id here
     };
+    // console.log(cartItem);
+
 
     try {
-      const response = await axios.post(
-        "https://saltandglitz-api.vercel.app/v1/carts/remove",
+      const response = await axios.delete(
+        `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${id}`,  // Endpoint
         cartItem
       );
 
-      if (response.status === 201) {
+      // Check if the response status is 200 (successful request)
+      if (response.status === 200) {
+        // Handle success: Update the local cart state or UI
+        dispatch(cartAction.removeItem(response.data));
+        // console.log("Removed item from cart:", response.data);
+        toast.success('Item removed from the cart', {
+          position: 'top-center',
+          autoClose: 1000,
+        });
+        navigate("/")
+      } else {
+        // Handle errors or unexpected responses
+        toast.error("Failed to remove item from cart!");
       }
-      dispatch(cartAction.removeItem(response.data));
-      // console.log('Removed item response:', response.data);
     } catch (error) {
       console.error("Error removing item from cart:", error);
+      toast.error("An error occurred while removing item from cart.");
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -181,17 +171,58 @@ const Cart = (props) => {
     }
   };
 
-  const moveToWishlist = (item) => {
+  const moveToWishlist = async (item, id) => {
+    setLoading(true);
+
+    // Prepare the cart item to be removed
+    const cartItem = {
+      user: user._id,
+      productId: item.productId.product_id, // Use the correct productId
+    };
+    // console.log(cartItem);
+
     try {
-      // Use cartAction for moving item to wishlist
-      dispatch(cartAction.moveToWishlist(item));
-      // console.log('Moving to wishlist:', item);
-      dispatch(cartAction.deleteItem(item));
-      toast.success("Item added to wishlist!");
-      navigate("/wishlist");
+      // First, remove the item from the cart
+      const removeResponse = await axios.delete(
+        `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${id}`,  // Endpoint to remove from cart
+        { data: cartItem }  // The correct way to send the body in a DELETE request
+      );
+
+      // console.log("removeResponse:", removeResponse); // Log the remove response for debugging
+
+      if (removeResponse.status === 200) {
+        // Item removed successfully from cart, now add it to the wishlist
+        const wishlistResponse = await axios.post(
+          'https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist',
+          {
+            userId: user._id,  // Send userId here
+            productId: item.productId.product_id,  // Send productId here
+          }
+        );
+
+        // console.log("wishlistResponse:", wishlistResponse); // Log the wishlist response for debugging
+
+        if (wishlistResponse.status === 200 || wishlistResponse.status === 201) {
+          // Add to the wishlist successfully, update the state
+          dispatch(cartAction.removeItem(removeResponse.data));  // Remove from cart in the store
+          dispatch(cartAction.addToWishlist(wishlistResponse.data));  // Add to wishlist in the store
+
+          toast.success('Item moved to wishlist', {
+            position: 'top-center',
+            autoClose: 1000,
+          });
+          navigate('/wishlist');
+        } else {
+          toast.error('Failed to add item to wishlist. Response status: ' + wishlistResponse.status);
+        }
+      } else {
+        toast.error('Failed to remove item from cart');
+      }
     } catch (error) {
-      console.error("Error moving item to wishlist:", error);
-      toast.error("Failed to move item to wishlist");
+      console.error('Error moving item to wishlist:', error);
+      toast.error('An error occurred while moving item to wishlist');
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -248,7 +279,7 @@ const Cart = (props) => {
           <div className="cart_header_center">
             <div className="toggle-buttons">
               <button className="toggle-button ">
-                Shopping Cart ({totalQuantity})
+                Shopping Cart ({tQuantity.totalQuantity})
               </button>
               <button className="toggle-button active d-lg-block d-none">
                 Trial Cart (0)
@@ -313,7 +344,7 @@ const Cart = (props) => {
                               Quantity: &nbsp;
                               <span
                                 className=""
-                                onClick={() => addToCart(item)}
+                                onClick={() => addToCart(item.productId.product_id)}
                               >
                                 <i className="ri-add-line"></i>
                               </span>
@@ -322,12 +353,10 @@ const Cart = (props) => {
                                 {item.quantity}
                               </span>
                               &nbsp;
-                              <span
-                                className=" "
-                                onClick={() => removeToCart(item)}
-                              >
+                              <span onClick={() => handleDelete(item.id)}>
                                 <i className="ri-subtract-line"></i>
                               </span>
+
                             </p>
                             <p className="cart_delivery">
                               Delivery by - 30th Aug
@@ -382,14 +411,15 @@ const Cart = (props) => {
                                     type="button"
                                     className="btn modal_remove"
                                     data-bs-dismiss="modal"
-                                    onClick={() => handleDelete(item.id)}
+                                    onClick={() => removeToCart(item, item.productId.product_id)}
                                   >
                                     REMOVE
                                   </button>
                                   <button
                                     type="button"
                                     className="btn btn-primary modal_wishlist"
-                                    onClick={() => moveToWishlist(item)}
+                                    data-bs-dismiss="modal"
+                                    onClick={() => moveToWishlist(item, item.productId.product_id)}
                                   >
                                     MOVE TO WISHLIST
                                   </button>

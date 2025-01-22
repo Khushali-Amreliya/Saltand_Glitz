@@ -259,7 +259,7 @@ const Adashbord = () => {
         netWeight18KT: row["NetWeight(18)"] || 0, // Added Net Weight for 18KT
         grossWt: row["GrossWt"] || 0, 
         image01: row.Image || "",
-        category: row.Category || "Miscellaneous",
+        category: row.Category || "category",
         priceType: "14KT", // Default price type
       }));
 
@@ -317,7 +317,7 @@ const Adashbord = () => {
       console.log("Formatted products:", formattedProducts);
 
       const response = await axios.post(
-        "https://saltandglitz-api.vercel.app/v1/upload/post_upload",
+        "http://localhost:5000/v1/upload/post_upload",
         { products: formattedProducts }
       );
 

@@ -479,7 +479,7 @@ const Mainpage = () => {
   const handleProductClick = (id) => {
     // navigate(`/product/${id}`); // Navigate to ProductDetails page with the product ID
     navigate(`/Productdetails/${id}`); // Navigate to ProductDetails page with the product ID
-    console.log(id);
+    // console.log(id);
   };
   return (
     <>
