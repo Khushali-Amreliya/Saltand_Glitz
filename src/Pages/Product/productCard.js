@@ -256,7 +256,7 @@ const ProductCard = ({ Productsitem }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     // console.log('User ID:', user._id);
 
-    const { product_id, id, title, total14KT, image01, image02, image03 } = Productsitem;
+    const { product_id, id, title, total14KT, image01, image02, image03, video } = Productsitem;
     const slider = useRef(null);
     const dispatch = useDispatch();
     const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -328,6 +328,10 @@ const ProductCard = ({ Productsitem }) => {
                             <img alt="" src={image01} className="img-fluid" />
                             <img alt="" src={image02} className="img-fluid" />
                             <img alt="" src={image03} className="img-fluid" />
+                            <video controls autoPlay className="img-fluid" style={{ width: "100%" }}>
+                                <source src={video} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
                         </Slider>
                     </Link>
                     {/* Hover Content */}
@@ -361,14 +365,14 @@ const ProductCard = ({ Productsitem }) => {
                     </div>
 
                     {/* Md device start */}
-                    <div className='card-body p-0 d-lg-none d-md-block'>
+                    <div className='card-body p-0 d-lg-none d-md-block color_md'>
                         <div className="">
                             <p className="m-0">{formatCurrency(total14KT)}</p>
                             <h6>{title}</h6>
                         </div>
 
                         <div className=''>
-                            <button onClick={() => slider?.current?.slickPrev()} className=" absolute_prev_btn d-lg-none d-block">
+                            <button onClick={() => slider?.current?.slickPrev()} className=" absolute   _prev_btn d-lg-none d-block">
                                 <i className="ri-arrow-left-wide-line"></i>
                             </button>
                             <button onClick={() => slider?.current?.slickNext()} className=" absolute_next_btn d-lg-none d-block">
@@ -377,7 +381,7 @@ const ProductCard = ({ Productsitem }) => {
                         </div>
 
                         {/* Wishlist Icons */}
-                        <div className="d-flex align-items-center">
+                        <div className="d-flex align-items-center color_md">
                             <i
                                 className={`ri-heart-line absolute_heart fs-4 heart-icon ${isHeartFilled ? 'd-none' : ''}`}
                                 onClick={handleHeartClick}

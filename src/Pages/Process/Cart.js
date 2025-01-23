@@ -288,7 +288,7 @@ const Cart = (props) => {
           </div>
 
           <div className="cart_header_right">
-            <Link to="/assistance" className="assistance-link">
+            <Link to="" className="assistance-link">
               <span className="d-lg-block d-md-block d-sm-block d-none">
                 Need Assistance?
               </span>

@@ -132,7 +132,7 @@ const Signup = () => {
         setLoading(true);
 
         try {
-            await axios.post('https://saltandglitz-api.vercel.app/api/users/register', formData);
+            await axios.post('http://localhost:5000/api/users/register', formData);
             toast.success('Sign-up successful!');
 
             // Save the user data from the response (if needed)

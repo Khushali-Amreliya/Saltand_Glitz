@@ -143,6 +143,10 @@
     margin-bottom: 15px !important;
 }
 
+.color_md{
+    color: #000 !important;
+    text-decoration:none !important;
+}
 @media(max-width:768px) {
 
     .absolute_next_btn,

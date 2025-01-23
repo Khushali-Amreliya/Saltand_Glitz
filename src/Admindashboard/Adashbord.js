@@ -255,13 +255,17 @@ const Adashbord = () => {
         gst18KT: row["GST(18)"] || 0,
         total14KT: row["Total(14)"] || 0,
         total18KT: row["Total(18)"] || 0,
-        netWeight14KT: row["NetWeight(14)"] || 0, // Added Net Weight for 14KT
-        netWeight18KT: row["NetWeight(18)"] || 0, // Added Net Weight for 18KT
-        grossWt: row["GrossWt"] || 0, 
-        image01: row.Image || "",
+        netWeight14KT: row["NetWeight(14)"] || 0,
+        netWeight18KT: row["NetWeight(18)"] || 0,
+        grossWt: row["GrossWt"] || 0,
+        image01: row.Image01 || "", // Add image fields
+        image02: row.Image02 || "",
+        image03: row.Image03 || "",
+        video: row.Video || "", // Add video field
         category: row.Category || "category",
         priceType: "14KT", // Default price type
       }));
+
 
       const filteredProducts = newProducts.filter((newProduct) => {
         return !products.some(
@@ -307,12 +311,16 @@ const Adashbord = () => {
         gst18KT: product.gst18KT,
         total14KT: product.total14KT,
         total18KT: product.total18KT,
-        netWeight14KT: product.netWeight14KT, // Sending Net Weight for 14KT
-        netWeight18KT: product.netWeight18KT, // Sending Net Weight for 18KT
+        netWeight14KT: product.netWeight14KT,
+        netWeight18KT: product.netWeight18KT,
         grossWt: product.grossWt,
         img: product.image01,
+        image02: product.image02,
+        image03: product.image03,
+        video: product.video,
         id: product.id,
       }));
+
 
       console.log("Formatted products:", formattedProducts);
 
@@ -358,6 +366,26 @@ const Adashbord = () => {
                   alt={product.title}
                   className="img-fluid"
                 />
+                {product.image02 && (
+                  <img
+                    src={product.image02}
+                    alt={`${product.title} - Image02`}
+                    className="img-fluid mt-2"
+                  />
+                )}
+                {product.image03 && (
+                  <img
+                    src={product.image03}
+                    alt={`${product.title} - Image03`}
+                    className="img-fluid mt-2"
+                  />
+                )}
+                {product.video && (
+                  <video controls width="100%" className="mt-2">
+                    <source src={product.video} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
                 <div className="product-info">
                   <h6>SKU: <span style={{ fontSize: "13px" }}>{product.id}</span></h6>
                   <h5>{product.title}</h5>

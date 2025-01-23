@@ -1368,7 +1368,9 @@ const Productdetails = () => {
     useEffect(() => {
         fetchProductDetails();
         fetchProducts();
-    }, [id])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id]);
+    
 
     // Handle KT button click
     const handleKTClick = (ktType) => {
@@ -1509,7 +1511,7 @@ const Productdetails = () => {
             );
 
             if (response.status === 201 || response.status === 200) {
-                toast.success("Redirecting to cart...", {
+                toast.success("Product added to cart successfully and Redirecting to cart...", {
                     position: "top-center",
                     autoClose: 2000,
                 });
@@ -1914,7 +1916,7 @@ const Productdetails = () => {
                             >
                                 CUSTOMISE
                             </button> */}
-                                <button className='btn add_btn add_btn_md me-2 px-5 mt-3' onClick={addToCart}>
+                                <button className='btn add_btn add_btn_md me-2 px-5 mt-3' onClick={() => addToCart(product.id)}>
                                     {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
                                     ADD TO CART
                                 </button>
