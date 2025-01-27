@@ -105,7 +105,7 @@ const Gift = () => {
                     </Link>
                 </div>
             </section>
-            <section className='container-fluid' style={{ marginBottom: "100px" }}>
+            <section className='container-fluid mb_medium'>
                 <div className='row'>
                     <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-5 pb-3 m-0 p-0'>
                         <div>
@@ -191,7 +191,17 @@ const Gift = () => {
                 </div>
             </section>
             <section className="cart_footer">
-                {/* Footer content */}
+                <div className="cart_footer_left pt-3">
+                    <p>
+                        <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) | contactus@caratlane.com
+                    </p>
+                </div>
+                <div className="cart_footer_right">
+                    <img src="assets/img/cart_footer_logo.png" alt="payment-icon" className="payment-icon" />
+                    <img src="assets/img/cart_footer_logo1.png" alt="MasterCard" className="payment-icon" />
+                    <img src="assets/img/cart_footer_logo2.png" alt="PayPal" className="payment-icon" />
+                    <img src="assets/img/cart_footer_logo3.png" alt="American Express" className="payment-icon" />
+                </div>
             </section>
         </>
     );

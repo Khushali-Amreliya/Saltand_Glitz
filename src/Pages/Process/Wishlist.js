@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import EmptyState from '../EmptyState';
 import { formatCurrency } from '../../Utils/formateCurrency';
 import Aos from 'aos';
@@ -19,24 +19,24 @@ const Wishlist = () => {
   const user = JSON.parse(localStorage.getItem('user'));
 
   // Fetch wishlist items from the backend
-  const fetchWishlist = async () => {
+  const fetchWishlist = useCallback(async () => {
     try {
       const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
-      // console.log("Fetched Wishlist Response:", response.data);
       if (response.status === 200) {
         setWishlistItems(response.data.wishlist.products);
       }
     } catch (error) {
-      // console.error('Error fetching wishlist items:', error.response?.data || error.message);
-      // toast.error("Failed to load wishlist", {
-      //   position: "top-center",
-      //   autoClose: 1000,
-      // });
+      // Handle error
     } finally {
       setLoading(false);
     }
-  };
-
+  }, [user._id]);  // Dependencies for the function
+  
+  useEffect(() => {
+    Aos.init();
+    fetchWishlist();
+  }, [fetchWishlist]);  // No need to add fetchWishlist inside dependency array now
+  
   // Remove item from wishlist
   const handleRemove = async (id) => {
     try {
@@ -76,14 +76,14 @@ const Wishlist = () => {
         'https://saltandglitz-api.vercel.app/v1/cart/addCart',
         cartItem
       );
-      console.log("Cart API Response:", addCartResponse);
+      // console.log("Cart API Response:", addCartResponse);
 
       if (addCartResponse.status === 201 || addCartResponse.status === 200) {
         // Remove item from wishlist
         const removeWishlistResponse = await axios.delete(
           `https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`
         );
-        console.log("Remove Wishlist Response:", removeWishlistResponse);
+        // console.log("Remove Wishlist Response:", removeWishlistResponse);
 
         if (removeWishlistResponse.status === 200) {
           // Update state and Redux store
@@ -114,12 +114,6 @@ const Wishlist = () => {
       setLoading(false)
     }
   };
-
-
-  useEffect(() => {
-    Aos.init();
-    fetchWishlist();
-  }, []);
 
   return (
     <Helmet title="Wishlist">

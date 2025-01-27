@@ -1182,10 +1182,15 @@ const Productdetails = () => {
     const [ringSize, setRingSize] = useState(6);
     const [showClear, setShowClear] = useState(true);
     const [similarProducts, setSimilarProducts] = useState([]);
+    const [isWishlist, setIsWishlist] = useState(false)
     const user = JSON.parse(localStorage.getItem('user'))
     // console.log(user);
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
-
+    useEffect(() => {
+        // Check if product is in wishlist from localStorage
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        setIsWishlist(wishlist.includes(product.id));
+    }, [product.id]);
     useEffect(() => {
         if (product && product.id) {
             dispatch(cartAction.addRecentlyViewed(product));
@@ -1370,7 +1375,7 @@ const Productdetails = () => {
         fetchProducts();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
-    
+
 
     // Handle KT button click
     const handleKTClick = (ktType) => {
@@ -1457,45 +1462,6 @@ const Productdetails = () => {
         }
     };
 
-    // const addToCart = async () => {
-    //     setLoading(true);
-
-    //     const cartItem = {
-    //         id: product.id, // Ensure `product` has these properties
-    //         title: product.title,
-    //         price: product.price, // Use the original price or calculated price
-    //         image01: product.img, // Assuming product.img is the main image
-    //         totalprice: product.price,
-    //         selectedSize: "defaultSize", // Replace with actual size if available
-    //         confirmedMetal: "defaultMetal", // Replace with selected metal if applicable
-    //         confirmedDiamondQuality: "defaultDiamondQuality" // Replace with diamond quality if applicable
-    //     };
-
-    //     try {
-    //         const response = await axios.post('https://saltandglitz-api.vercel.app/v1/cart/addCart', cartItem);
-
-    //         if (response.status === 201) {
-    //             toast.success("Product added to cart successfully!", {
-    //                 position: "top-center",
-    //                 autoClose: 2000,
-    //                 hideProgressBar: false,
-    //                 closeOnClick: true,
-    //                 pauseOnHover: true,
-    //                 draggable: true,
-    //                 progress: undefined,
-    //             });
-    //             dispatch(cartAction.addItem(response.data)); // Assuming cartAction is correctly imported
-    //         } else {
-    //             toast.error("Failed to add product to cart!");
-    //         }
-    //     } catch (error) {
-    //         console.error('Error adding item to cart:', error);
-    //         toast.error("An error occurred while adding to cart!");
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-
     const buyNow = async () => {
         setLoading(true);
 
@@ -1532,6 +1498,70 @@ const Productdetails = () => {
             setLoading(false);
         }
     };
+
+    const addToWishlist = async () => {
+        try {
+            console.log('Adding to wishlist...');
+            await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
+                userId: user._id,
+                productId: product.id,
+            });
+
+            dispatch(cartAction.addToWishlist(product));
+
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            if (!wishlist.includes(product.id)) {
+                wishlist.push(product.id);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            }
+
+            toast.success('Item added to wishlist', {
+                position: 'top-center',
+                autoClose: 1000,
+            });
+            setIsWishlist(true); // Set heart to fill
+        } catch (error) {
+            console.error('Error adding to wishlist:', error);
+            toast.error('Error adding item to wishlist', {
+                position: 'top-center',
+                autoClose: 1000,
+            });
+        }
+    };
+
+    const removeFromWishlist = async () => {
+        try {
+            console.log('Removing from wishlist...');
+            await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product.id}`);
+
+            dispatch(cartAction.removeFromWishlist(product.id));
+
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist = wishlist.filter(item => item !== product.id);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+
+            toast.success('Item removed from wishlist', {
+                position: 'top-center',
+                autoClose: 1000,
+            });
+            setIsWishlist(false); // Set heart to unfill
+        } catch (error) {
+            console.error('Error removing from wishlist:', error);
+            toast.error('Error removing item from wishlist', {
+                position: 'top-center',
+                autoClose: 1000,
+            });
+        }
+    };
+
+    const handleWishlistClick = () => {
+        if (isWishlist) {
+            removeFromWishlist();
+        } else {
+            addToWishlist();
+        }
+    };
+
     const handleMetalClick = (metal) => {
         setSelectedMetal(metal);
         const selectedSizeData = sizeOptions.find((s) => s.size === selectedSize);
@@ -1736,10 +1766,15 @@ const Productdetails = () => {
                                     {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
                                     BUY NOW
                                 </button>
-                                <button className='btn wish_btn my-3'>
-                                    <i className="fa-regular fa-heart fs-5"></i>
+                                <button
+                                    className='btn wish_btn my-3'
+                                    onClick={handleWishlistClick}
+                                >
+                                    <i
+                                        className={`fa-heart fs-5 ${isWishlist ? 'fa-solid' : 'fa-regular'}`}
+                                    ></i>
                                 </button>
-
+                                {/* Video call */}
                                 <div>
                                     <div className='row p-0 m-0 w-100 border rounded-3'>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4 m-0 p-0'>
@@ -2133,14 +2168,12 @@ const Productdetails = () => {
                                         </p>
                                     </ul>
                                 </div>
-
                             </div>
-                            <div className='col-xl-4'>
-
-                            </div>
+                            <div className='col-xl-4'></div>
                         </div>
                     </div>
                 </section>
+                {/* You may also like & Recently viewed */}
                 <section className='container my-3'>
                     <h3 className='text-center pb-4 font_main'>You may also Like</h3>
                     <div className='row'>

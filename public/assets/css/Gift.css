@@ -75,10 +75,12 @@
 .bg_gift h6 {
     color: var(--color);
 }
+
 .bg_gift h6 span {
     color: #05283c;
     font-weight: 500;
 }
+
 .textarea_wrapper {
     position: relative;
     max-width: 468px;
@@ -194,7 +196,21 @@
 /* Highlighted style for selected gift wrap name */
 .absoulate_image.highlighted {
     font-weight: bold;
-    background: #6a9ebb; /* Example highlight color */
+    background: #6a9ebb;
+    /* Example highlight color */
+}
+
+@media (max-width: 768px) {
+    .mb_medium {
+        margin-bottom: 100px;
+    }
+}
+
+@media (min-width: 769px) {
+    .mb_medium {
+        margin-bottom: 60px;
+        /* Large devices mein margin remove */
+    }
 }
 
 @media(max-width:1025px) {

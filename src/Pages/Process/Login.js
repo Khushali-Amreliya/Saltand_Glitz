@@ -95,7 +95,7 @@ const Login = () => {
           </Link>
         </div>
       </section>
-      <section className='container-fluid' style={{ marginBottom: "100px" }}>
+      <section className='container-fluid mb_medium'>
         <div className='row'>
           <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-5 '>
             <section className='container mt-5 login_width'>

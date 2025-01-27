@@ -12,18 +12,22 @@ import { toast } from "react-toastify";
 import Helmet from "../../Components/Helmet";
 // import { data } from "jquery";
 
-const Cart = (props) => {
+const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItem);
   // const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const discountPercentage = useSelector((state) => state.cart.discount); // Renamed for clarity
   const [loading, setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState("");
-  const [subtotal, setSubtotal] = useState(0);
+  // const [subtotal, setSubtotal] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [couponDiscount, setCouponDiscount] = useState(0); // New state for coupon discount in rupees
   const navigate = useNavigate();
   const [copiedCode, setCopiedCode] = useState("");
+  const [totallPrice, setTotallPrice] = useState(0);
+  const [product, setProduct] = useState([]); // Initialize as an array
+  const [tQuantity, setTQuantity] = useState([])
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const handleCopyCode = (code) => {
     navigator.clipboard.writeText(code);
@@ -40,7 +44,7 @@ const Cart = (props) => {
 
   const updateAmounts = useCallback(() => {
     const newSubtotal = calculateSubtotal();
-    setSubtotal(newSubtotal);
+    // setSubtotal(newSubtotal);
 
     // Calculate discount amount in rupees
     const calculatedDiscount = newSubtotal * (discountPercentage / 100);
@@ -55,25 +59,38 @@ const Cart = (props) => {
     updateAmounts();
   }, [cartItems, discountPercentage, updateAmounts]);
 
-  const [product, setProduct] = useState([]); // Initialize as an array
-  const [tQuantity, setTQuantity] = useState([])
-
-  const user = JSON.parse(localStorage.getItem('user'));
-
   useEffect(() => {
     const fetchCart = async () => {
       try {
         setLoading(true); // Start loader
-        const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
+        const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${user._id}`);
+        // console.log(response.data); // Debug response structure
 
         const data = response.data;
-        const quantity = response.data;
-        setTQuantity(quantity)
 
-        const getcart = data?.cart?.quantity || []; // Default to an empty array if no cart data is available
-        setProduct(getcart);
+        // Calculate Main Price (Multiplying total14KT with quantity)
+        const productsWithPrices = data.cart.quantity.map((item) => {
+          const itemPrice = (item.productId.total14KT || 0) * (item.quantity || 0); // Multiply total14KT price with quantity
+          return {
+            ...item, // Spread other product properties
+            itemPrice, // Add calculated price for the product
+          };
+        });
+
+        // Calculate the total main price
+        const mainPrice = productsWithPrices.reduce((acc, item) => acc + item.itemPrice, 0);
+
+        // console.log("Products with Item Prices:", productsWithPrices);
+        // console.log("Calculated Main Price:", mainPrice);
+
+        // Set state
+        setProduct(productsWithPrices); // Updated products with itemPrice
+        setTotallPrice(mainPrice); // Total price
+
+        const quantity = response.data;
+        setTQuantity(quantity) // Total quantity
       } catch (err) {
-        // Handle error (e.g., show a message or set error state)
+        console.error("Error fetching cart data:", err);
       } finally {
         setLoading(false); // Stop loader
       }
@@ -81,22 +98,6 @@ const Cart = (props) => {
 
     fetchCart();
   }, [user._id]);
-
-
-
-  const handleDelete = async (itemId) => {
-    try {
-      const response = await axios.post(
-        "https://saltandglitz-api.vercel.app/v1/carts/delete",
-        { id: itemId }
-      );
-      dispatch(cartAction.deleteItem(response.data)); // Dispatch the deletion action
-      toast.success("Item removed from the cart");
-    } catch (error) {
-      console.error("Error removing item:", error);
-      toast.error("Failed to remove the item");
-    }
-  };
 
   const removeToCart = async (item, id) => {
     // console.log("item.productId:", item.productId);  // Log the productId to check its structure
@@ -137,35 +138,88 @@ const Cart = (props) => {
     }
   };
 
-  const addToCart = async (id) => {
+  const handleIncrement = async (productId) => {
     setLoading(true);
+    const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${user._id}`);
+    // console.log(response);
 
+    const data = response.data;
+
+    // Prepare the payload for increment
     const cartItem = {
-      product: id,
-      user: user._id,
+      cartId: data?.cart?.cart_id, // Pass the cart ID
+      productId, // Pass the product ID
+      quantity: 1, // Increment by 1 (default)
     };
+    // console.log(cartItem);
+    console.log("Increment Payload:", cartItem);
 
     try {
       const response = await axios.post(
-        "https://saltandglitz-api.vercel.app/v1/cart/addCart",
+        "http://localhost:5000/v1/cart/cartIncrement",
         cartItem
       );
 
-
-      if (response.status === 201 || response.status === 200) {
-        toast.success("Product added to cart successfully!", {
+      if (response.status === 200) {
+        toast.success("Product quantity incremented successfully!", {
           position: "top-center",
           autoClose: 2000,
         });
 
-        const updatedCart = response.data.updatedCart || response.data.newCart;
-        dispatch(cartAction.addItem(updatedCart));
+        // Fetch the updated cart from response
+        const updatedCart = response.data.updatedCart;
+
+        // Dispatch updated cart to Redux store
+        dispatch(cartAction.updateCart(updatedCart));
       } else {
-        toast.error("Failed to add product to cart!");
+        toast.error("Failed to increment product quantity!");
       }
     } catch (error) {
-      console.error("Error adding item to cart:", error.message);
-      toast.error("An error occurred while adding to cart!");
+      // console.error("Error incrementing product quantity:", error.message);
+      // toast.error("An error occurred while incrementing quantity!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDecrement = async (productId) => {
+    setLoading(true);
+    const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${user._id}`);
+    // console.log(response);
+
+    const data = response.data;
+    // Prepare the payload for increment
+    const cartItem = {
+      cartId: data?.cart?.cart_id, // Pass the cart ID
+      productId, // Pass the product ID
+      quantity: 1, // Increment by 1 (default)
+    };
+
+    console.log("Increment Payload:", cartItem);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/v1/cart/cartDecrement",
+        cartItem
+      );
+
+      if (response.status === 200) {
+        toast.success("Product quantity decremented successfully!", {
+          position: "top-center",
+          autoClose: 2000,
+        });
+
+        // Fetch the updated cart from response
+        const updatedCart = response.data.updatedCart;
+
+        // Dispatch updated cart to Redux store
+        dispatch(cartAction.updateCart(updatedCart));
+      } else {
+        toast.error("Failed to decrement product quantity!");
+      }
+    } catch (error) {
+      // console.error("Error incrementing product quantity:", error.message);
+      // toast.error("An error occurred while incrementing quantity!");
     } finally {
       setLoading(false);
     }
@@ -315,121 +369,123 @@ const Cart = (props) => {
                         </Link>
                       </div>
                     </div>
-                    {product.map((item) => (
-                      <div
-                        className="row cart_product align-items-center d-flex my-1"
-                        key={item.id}
-                      >
-                        <div className="col-lg-3 col-md-4 col-sm-4 col-4">
-                          <Link to={`/Productdetails/${item.productId.product_id}`}>
-                            <img
-                              alt={item.productId.title}
-                              src={item.productId.image01}
-                              className="img-fluid cart_img"
-                            />
-                          </Link>
-                        </div>
-                        <div className="col-lg-9 col-md-8 col-sm-8 col-8 d-flex justify-content-between">
-                          <div>
-                            <h6 className="cart_Title m-0 p-0">{item.productId.title}</h6>
-                            <p className="m-0 p-0">
-                              <span className="cart_price">
-                                {formatCurrency(item.productId.total14KT)}
-                              </span>
-                            </p>
-                            <p
-                              className="cart_quantity m-0 pt-1"
-                              style={{ cursor: "pointer" }}
-                            >
-                              Quantity: &nbsp;
-                              <span
-                                className=""
-                                onClick={() => addToCart(item.productId.product_id)}
-                              >
-                                <i className="ri-add-line"></i>
-                              </span>
-                              &nbsp;
-                              <span style={{ fontSize: "14.5px" }}>
-                                {item.quantity}
-                              </span>
-                              &nbsp;
-                              <span onClick={() => handleDelete(item.id)}>
-                                <i className="ri-subtract-line"></i>
-                              </span>
-
-                            </p>
-                            <p className="cart_delivery">
-                              Delivery by - 30th Aug
-                            </p>
+                    {product.map((item) => {
+                      return (
+                        <div
+                          className="row cart_product align-items-center d-flex my-1"
+                          key={item.productId.product_id} // Use product_id as key
+                        >
+                          <div className="col-lg-3 col-md-4 col-sm-4 col-4">
+                            <Link to={`/Productdetails/${item.productId.product_id}`}>
+                              <img
+                                alt={item.productId.title}
+                                src={item.productId.image01}
+                                className="img-fluid cart_img"
+                              />
+                            </Link>
                           </div>
-                          {/* Delete Button Floating to the End */}
-                          <button
-                            type="button"
-                            className="border-0 btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop"
-                          >
-                            <span className="delete__btn float-end">
-                              <i className="ri-close-circle-fill"></i>
-                            </span>
-                          </button>
-                          <div
-                            className="modal fade"
-                            id="staticBackdrop"
-                            data-bs-backdrop="static"
-                            data-bs-keyboard="false"
-                            tabIndex="-1"
-                            aria-labelledby="staticBackdropLabel"
-                            aria-hidden="true"
-                          >
-                            <div className="modal-dialog modal-dialog-centered">
-                              <div className="modal-content">
-                                <div className="modal-header border-0">
-                                  <button
-                                    type="button"
-                                    className="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                  ></button>
-                                </div>
-                                <div className="modal-body text-center modal_content">
-                                  <img
-                                    alt={item.productId.title}
-                                    src={item.productId.image01}
-                                    className="w-25 mx-auto d-block"
-                                  />
-                                  <h6 className="m-0 pt-3">
-                                    Move Design from Cart
-                                  </h6>
-                                  <p>
-                                    Are you sure you want to move this design
-                                    from the cart?
-                                  </p>
-                                </div>
-                                <div className="modal-footer border-0 mx-auto d-block">
-                                  <button
-                                    type="button"
-                                    className="btn modal_remove"
-                                    data-bs-dismiss="modal"
-                                    onClick={() => removeToCart(item, item.productId.product_id)}
-                                  >
-                                    REMOVE
-                                  </button>
-                                  <button
-                                    type="button"
-                                    className="btn btn-primary modal_wishlist"
-                                    data-bs-dismiss="modal"
-                                    onClick={() => moveToWishlist(item, item.productId.product_id)}
-                                  >
-                                    MOVE TO WISHLIST
-                                  </button>
+                          <div className="col-lg-9 col-md-8 col-sm-8 col-8 d-flex justify-content-between">
+                            <div>
+                              <h6 className="cart_Title m-0 p-0">{item.productId.title}</h6>
+                              <p className="m-0 p-0">
+                                <span className="cart_price">
+                                  {formatCurrency(item.itemPrice)} {/* Updated item price */}
+                                </span>
+                              </p>
+                              <p
+                                className="cart_quantity m-0 pt-1"
+                                style={{ cursor: "pointer" }}
+                              >
+                                Quantity: &nbsp;
+                                <span
+                                  className=""
+                                  onClick={() => handleIncrement(item.productId.product_id)}
+                                >
+                                  <i className="ri-add-line"></i>
+                                </span>
+                                &nbsp;
+                                <span style={{ fontSize: "14.5px" }}>
+                                  {item.quantity}
+                                </span>
+                                &nbsp;
+                                <span onClick={() => handleDecrement(item.productId.product_id)}>
+                                  <i className="ri-subtract-line"></i>
+                                </span>
+                              </p>
+                              <p className="cart_delivery">
+                                Delivery by - 30th Aug
+                              </p>
+                            </div>
+                            {/* Delete Button Floating to the End */}
+                            <button
+                              type="button"
+                              className="border-0 btn"
+                              data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop"
+                            >
+                              <span className="delete__btn float-end">
+                                <i className="ri-close-circle-fill"></i>
+                              </span>
+                            </button>
+                            <div
+                              className="modal fade"
+                              id="staticBackdrop"
+                              data-bs-backdrop="static"
+                              data-bs-keyboard="false"
+                              tabIndex="-1"
+                              aria-labelledby="staticBackdropLabel"
+                              aria-hidden="true"
+                            >
+                              <div className="modal-dialog modal-dialog-centered">
+                                <div className="modal-content">
+                                  <div className="modal-header border-0">
+                                    <button
+                                      type="button"
+                                      className="btn-close"
+                                      data-bs-dismiss="modal"
+                                      aria-label="Close"
+                                    ></button>
+                                  </div>
+                                  <div className="modal-body text-center modal_content">
+                                    <img
+                                      alt={item.productId.title}
+                                      src={item.productId.image01}
+                                      className="w-25 mx-auto d-block"
+                                    />
+                                    <h6 className="m-0 pt-3">
+                                      Move Design from Cart
+                                    </h6>
+                                    <p>
+                                      Are you sure you want to move this design
+                                      from the cart?
+                                    </p>
+                                  </div>
+                                  <div className="modal-footer border-0 mx-auto d-block">
+                                    <button
+                                      type="button"
+                                      className="btn modal_remove"
+                                      data-bs-dismiss="modal"
+                                      onClick={() => removeToCart(item, item.productId.product_id)}
+                                    >
+                                      REMOVE
+                                    </button>
+                                    <button
+                                      type="button"
+                                      className="btn btn-primary modal_wishlist"
+                                      data-bs-dismiss="modal"
+                                      onClick={() => moveToWishlist(item, item.productId.product_id)}
+                                    >
+                                      MOVE TO WISHLIST
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
+
                   </div>
                 </div>
                 <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 cart_border mt-5">
@@ -642,7 +698,7 @@ const Cart = (props) => {
                         <h6 className="m-0 p-0">
                           <span className="title_amount">Subtotal</span>
                           <span className="text_price text_end">
-                            {formatCurrency(subtotal)}
+                            {formatCurrency(totallPrice)}
                           </span>
                         </h6>
                         <h6 className="m-0 p-0">
@@ -662,7 +718,7 @@ const Cart = (props) => {
                         <h6 className="">
                           Total Cost
                           <span className="">
-                            {formatCurrency(totalAmount.toFixed())}
+                            {formatCurrency(totallPrice.toFixed())}
                           </span>
                         </h6>
                       </div>
