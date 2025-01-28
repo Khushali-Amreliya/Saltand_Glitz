@@ -354,7 +354,7 @@ const Cart = () => {
           <div className="row">
             {product.length > 0 ? (
               <>
-                <div className="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-4 mt-5">
+                <div className="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 mb-4 mt-3 mt-sm-5">
                   <div>
                     <div className="cart_headline">
                       <div className="headline_title pt-3 ps-3">
@@ -488,7 +488,7 @@ const Cart = () => {
 
                   </div>
                 </div>
-                <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 cart_border mt-5">
+                <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 cart_border mt-0 mt-sm-5">
                   <div>
                     {/* coupon code */}
                     <div className="cart_Coupon">

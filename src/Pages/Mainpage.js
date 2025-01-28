@@ -382,7 +382,7 @@ const Mainpage = () => {
         const response = await axios.get("https://saltandglitz-api.vercel.app/v1/banner/bannerGet");
         const data = response.data.banners;
         // console.log(data);
-        
+
         setBanners(data); // Store fetched banners in state
       } catch (err) {
         console.error("Error fetching banners:", err.message);
@@ -400,7 +400,7 @@ const Mainpage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
-        // console.log(response);
+        console.log(response);
         setProducts(response.data); // Set products in state
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -441,6 +441,14 @@ const Mainpage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const graduate = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
 
   var settings = {
     dots: true,
@@ -462,6 +470,22 @@ const Mainpage = () => {
     slidesToShow: slidesToShow,
     slidesToScroll: 1,
     arrows: true,
+    responsive: [
+      {
+        breakpoint: 480, // For small screens
+        settings: {
+          slidesToShow: 2.5, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 375, // For small screens
+        settings: {
+          slidesToShow: 1.5, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   const settings2 = {
@@ -473,6 +497,22 @@ const Mainpage = () => {
     slidesToShow: slidesToShow,
     slidesToScroll: 1,
     arrows: true,
+    responsive: [
+      {
+        breakpoint: 480, // For small screens
+        settings: {
+          slidesToShow: 2.5, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 375, // For small screens
+        settings: {
+          slidesToShow: 1.5, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   const navigate = useNavigate(); // Initialize useNavigate
 
@@ -719,61 +759,119 @@ const Mainpage = () => {
           </div>
         </div>
       </section>
-      <section className='container my-5 pt-5 gift_sec_main'>
-        <div>
-          <div className='row'>
-            <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
-              <div className='card border-0'>
-                <img alt='' src="assets/img/gift_img.webp" className='img-fluid'></img>
-                <div className='card-body text-center'>
+      <section className="container mt-5 mb-3 pt-3 gift_sec_main">
+        {/* Grid layout for large devices */}
+        <div className="d-none d-lg-block d-md-block">
+          <div className="row">
+            <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+              <div className="card border-0">
+                <img
+                  alt=""
+                  src="assets/img/gift_img.webp"
+                  className="img-fluid"
+                />
+                <div className="card-body text-center">
                   <h5>Gifts for the Graduate</h5>
-                  <p className='line_hover'>Shop Now &nbsp; &gt;</p>
+                  <p className="line_hover">Shop Now &nbsp; &gt;</p>
                 </div>
               </div>
             </div>
-            <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
-              <div className='card border-0'>
-                <img alt='' src="assets/img/gift_img.webp" className='img-fluid'></img>
-                <div className='card-body text-center'>
+            <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+              <div className="card border-0">
+                <img
+                  alt=""
+                  src="assets/img/gift_img.webp"
+                  className="img-fluid"
+                />
+                <div className="card-body text-center">
                   <h5>Gifts for the Graduate</h5>
-                  <p className='line_hover'>Shop Now &nbsp; &gt;</p>
+                  <p className="line_hover">Shop Now &nbsp; &gt;</p>
                 </div>
               </div>
             </div>
-            <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
-              <div className='card border-0'>
-                <img alt='' src="assets/img/gift_img.webp" className='img-fluid'></img>
-                <div className='card-body text-center'>
+            <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+              <div className="card border-0">
+                <img
+                  alt=""
+                  src="assets/img/gift_img.webp"
+                  className="img-fluid"
+                />
+                <div className="card-body text-center">
                   <h5>Gifts for the Graduate</h5>
-                  <p className='line_hover'>Shop Now &nbsp; &gt;</p>
+                  <p className="line_hover">Shop Now &nbsp; &gt;</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Carousel for mobile devices */}
+        <div className="d-lg-none d-md-none">
+          <Slider {...graduate}>
+            <div>
+              <div className="card border-0">
+                <img
+                  alt=""
+                  src="assets/img/gift_img.webp"
+                  className="img-fluid"
+                />
+                <div className="card-body text-center">
+                  <h5>Gifts for the Graduate</h5>
+                  <p className="line_hover">Shop Now &nbsp; &gt;</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="card border-0">
+                <img
+                  alt=""
+                  src="assets/img/gift_img.webp"
+                  className="img-fluid"
+                />
+                <div className="card-body text-center">
+                  <h5>Gifts for the Graduate</h5>
+                  <p className="line_hover">Shop Now &nbsp; &gt;</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="card border-0">
+                <img
+                  alt=""
+                  src="assets/img/gift_img.webp"
+                  className="img-fluid"
+                />
+                <div className="card-body text-center">
+                  <h5>Gifts for the Graduate</h5>
+                  <p className="line_hover">Shop Now &nbsp; &gt;</p>
+                </div>
+              </div>
+            </div>
+          </Slider>
+        </div>
       </section>
-      <section className='container my-5 service_main'>
+      <section className='container service_main'>
         <div>
           <div className='row service_p'>
-            <div className='col-lg-3 col-md-6 col-sm-12 col-12 text-center'>
+            <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
               <i className="ri-truck-line fs-2"></i>
               <h6 className=''>Complementary Shiping & Returns</h6>
               <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
               <span className='line_hover'>Learn More &nbsp; &gt;</span>
             </div>
-            <div className='col-lg-3 col-md-6 col-sm-12 col-12 text-center'>
+            <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
               <i className="ri-window-line fs-2"></i>
               <h6 className=''>Tiffany At Your Service</h6>
               <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
               <span className='line_hover'>Contact Us &nbsp; &gt;</span>
             </div>
-            <div className='col-lg-3 col-md-6 col-sm-12 col-12 text-center'>
+            <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
               <i className="ri-calendar-line fs-2"></i>
               <h6 className=''>Book An Appointment</h6>
               <p className='m-0 pb-1'>We’re happy to help with in-store or virtual appointments.</p>
               <span className='line_hover'>Book Now &nbsp; &gt;</span>
             </div>
-            <div className='col-lg-3 col-md-6 col-sm-12 col-12 text-center'>
+            <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
               <i className="ri-mail-send-line fs-2"></i>
               <h6 className=''>The Iconic Blue Box</h6>
               <p className='m-0 pb-1'>Your Tiffany purchase comes wrapped in our Blue Box packaging.</p>
@@ -782,11 +880,11 @@ const Mainpage = () => {
           </div>
         </div>
       </section>
-      <section className='container-fluid p-0 m-0'>
+      {/* <section className='container-fluid p-0 m-0'>
         <div>
           <img alt='' src='assets/img/gift_banner.webp' className='img-fluid'></img>
         </div>
-      </section>
+      </section> */}
       {/* <section className='container-fluid p-0 m-0'>
         <div>
           <img alt='' src='assets/img/diamond_banner.webp' className='img-fluid'></img>

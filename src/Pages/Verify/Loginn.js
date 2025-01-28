@@ -40,7 +40,8 @@ const Loginn = () => {
             toast.success("Login Successfully!");
 
             // Redirect to user profile page
-            navigate('/Userprofile');
+            navigate('/');
+            window.location.reload();
         } catch (err) {
             console.error('Error during login:', err.response?.data);  // Log the full error response
             // Show error toast

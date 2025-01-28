@@ -202,13 +202,13 @@
 
 @media (max-width: 768px) {
     .mb_medium {
-        margin-bottom: 100px;
+        /* margin-bottom: 100px; */
     }
 }
 
 @media (min-width: 769px) {
     .mb_medium {
-        margin-bottom: 60px;
+        /* margin-bottom: 60px; */
         /* Large devices mein margin remove */
     }
 }
@@ -221,17 +221,13 @@
 
 @media(max-width:769px) {
     .gif_video_sec {
-        width: 75% !important;
+        width: 95% !important;
     }
 }
 
 @media(max-width:425px) {
     .absoulate_image {
         width: 93.5% !important;
-    }
-
-    .gif_video_sec {
-        width: 100% !important;
     }
 }
 

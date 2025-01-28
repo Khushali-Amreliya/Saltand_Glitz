@@ -82,12 +82,12 @@ const OrderSummary = () => {
                 {
                     product.map((item) => (
                         <div className='row align-items-center d-flex py-1' key={item.productId.product_id}>
-                            <div className='col-lg-3 col-md-4 col-sm-12 col-12'>
+                            <div className='col-lg-3 col-md-4 col-sm-4 col-4'>
                                 <Link to={`/productDetail/${item.id}`}>
                                     <img alt={item.productId.title} src={item.productId.image01} className='img-fluid cart_img' />
                                 </Link>
                             </div>
-                            <div className='col-lg-9 col-md-8 col-sm-12 col-12 pt-3 d-flex justify-content-between'>
+                            <div className='col-lg-9 col-md-8 col-sm-8 col-8 pt-3 d-flex justify-content-between'>
                                 <div>
                                     <h6 className='m-0 pb-1 login_title'>{item.productId.title}</h6>
                                     <p className='login_SKU m-0 p-0'>SKU: JS02322-1YP900</p>

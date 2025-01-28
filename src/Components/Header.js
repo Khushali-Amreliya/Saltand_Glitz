@@ -144,9 +144,9 @@ const Header = () => {
         setSearchTerm(e.target.value);
     };
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const navigate = useNavigate(); // To redirect after logout
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -182,6 +182,7 @@ const Header = () => {
 
             toast.success('You have successfully logged out');
             navigate('/'); // Redirect to homepage after logout
+            window.location.reload();
         } catch (error) {
             console.error('Error signing out:', error);
             toast.error('Something went wrong during log-out.');
@@ -1957,6 +1958,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
+
             {/*MD OFFCANVAS */}
             <div className="offcanvas offcanvas-bottom rounded-0" tabIndex="-1" id="mdsearchOffcanvas" aria-labelledby="mdoffcanvasSearchLabel">
                 <div className="offcanvas-header offcanvas_header_search">
@@ -2066,7 +2068,7 @@ const Header = () => {
                 </div>
             </div>
         </div>
-    );
-}
+        );
+    }
 
-export default Header;
+    export default Header;

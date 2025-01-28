@@ -516,7 +516,7 @@
 }
 
 .cart_Sec {
-    margin-bottom: 187px;
+    margin-bottom: 20px;
 }
 
 .cart_footer {
@@ -525,7 +525,7 @@
     align-items: center;
     padding: 10px 20px;
     background-color: #f9f6ff;
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     bottom: 0;
 }

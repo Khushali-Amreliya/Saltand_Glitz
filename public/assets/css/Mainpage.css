@@ -72,16 +72,16 @@
   overflow: hidden;
 }
 
-.slick-slide img {
-  width: 100% !important;
-}
+/* .slick-slide img {
+  width: 100%;
+} */
 
 .div_img {
   display: flex;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   padding: 10px;
-  gap: 25px;
+  gap: 12px;
   scroll-padding: 10px;
 }
 
@@ -103,8 +103,9 @@
 }
 
 .div_img h5 {
-  font-size: 14px;
+  font-size: 12px;
   margin-top: 5px;
+  letter-spacing: 0.5px !important;
 }
 
 ::-webkit-scrollbar {
@@ -139,15 +140,12 @@
 .viewall_btn span {
   position: relative;
   background: transparent;
-  /* Keeps the button styling clean */
   border: none;
   cursor: pointer;
   padding: 0;
-  /* Optional: Removes extra padding if necessary */
-  font-size: 16px;
-  /* Adjust as needed */
+  font-size: 14px;
+  letter-spacing: 0.8px;
   color: inherit;
-  /* Keeps inherited text color */
 }
 
 .viewall_btn span::after {
@@ -170,19 +168,17 @@
   /* Full width of the text */
 }
 
-
 .gift_sec_main h5 {
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   font-weight: 400;
   font-style: normal;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .gift_sec_main p,
 .service_main span {
-  letter-spacing: 0.5px;
-  font-style: normal;
-  font-size: 14px !important;
+  letter-spacing: 0.8px;
+  font-size: 12px !important;
   font-weight: 500 !important;
   color: #000 !important;
 }
@@ -244,7 +240,7 @@
   }
 
   .viewall_btn {
-    width: 50% !important;
+    width: 30% !important;
   }
 }
 
@@ -259,7 +255,8 @@
   }
 
   .banner_class {
-    /* height: 40vh !important; */
+    height: 70vh !important;
+    object-fit: fill !important;
   }
 }
 

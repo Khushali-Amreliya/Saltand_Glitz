@@ -68,7 +68,6 @@ const Shipping = () => {
         );
     };
 
-
     const handlePlaceOrder = async () =>{
         const isPincodeValid = /^\d{6}$/.test(formData.pincode);
         const isMobileValid = /^\d{10}$/.test(formData.mobile);
@@ -153,7 +152,7 @@ const Shipping = () => {
             </section>
             <section className='container-fluid mb_medium'>
                 <div className='row'>
-                    <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pt-5 pb-3'>
+                    <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 pb-3'>
                         {loading && <Loader />}
                         <section className='container mt-5 shipping_width'>
                             <div className='text-center row'>
