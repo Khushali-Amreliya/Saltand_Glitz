@@ -41,6 +41,10 @@
     margin-top: 10px !important;
     /* padding: 15px 0px; */
 }
+.card_shadow a{
+    text-decoration: none !important;
+    color: #000 !important;
+}
 
 /* .card_shadow:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -314,6 +318,22 @@
 .pagination ul li.btn.next:hover {
     background-color: #3f91a1;
     color: white;
+}
+.custom-select {
+    border: 1px solid #ddd; /* Light border */
+    background-color: #f8f9fa; /* Light background */
+    padding: 8px 12px;
+    border-radius: 8px; /* Rounded corners */
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Remove blue outline */
+.custom-select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #ccc; /* Light gray border on focus */
 }
 
 

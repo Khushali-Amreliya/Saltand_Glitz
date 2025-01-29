@@ -1186,23 +1186,26 @@ const Productdetails = () => {
     const user = JSON.parse(localStorage.getItem('user'))
     // console.log(user);
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     useEffect(() => {
         // Check if product is in wishlist from localStorage
-        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        setIsWishlist(wishlist.includes(product.id));
+        const wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
+        setIsWishlist(wishlistItem.includes(product.id));
     }, [product.id]);
+
     useEffect(() => {
+        // console.log("Product Data Before Dispatch:", product);
         if (product && product.id) {
             dispatch(cartAction.addRecentlyViewed(product));
-        } else {
-            // console.warn("Product data not available yet");
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [product, dispatch]);
 
     // recently viewed
     const recentlyViewed = useSelector((state) => state.cart.recentlyViewed);
-    // console.log("Recently Viewed Products in Redux:", recentlyViewed);
+    console.log("Recently Viewed Products in Redux:", recentlyViewed);
 
     useEffect(() => {
         // Set initial price based on the selectedKT
@@ -1242,6 +1245,39 @@ const Productdetails = () => {
 
     const slider_search = {
         slidesToShow: 5, // Default: Show 5 slides
+        slidesToScroll: 1, // Scroll one at a time
+        infinite: false, // Disable infinite scrolling
+        afterChange: (index) => setCurrentIndex(index), // Track index after change
+        responsive: [
+            {
+                breakpoint: 1200, // For devices with width <= 1200px
+                settings: {
+                    slidesToShow: 4,
+                },
+            },
+            {
+                breakpoint: 992, // For devices with width <= 992px
+                settings: {
+                    slidesToShow: 3,
+                },
+            },
+            {
+                breakpoint: 768, // For devices with width <= 768px
+                settings: {
+                    slidesToShow: 3,
+                },
+            },
+            {
+                breakpoint: 576, // For devices with width <= 576px
+                settings: {
+                    slidesToShow: 2,
+                },
+            },
+        ],
+    };
+
+    const categoryWise = {
+        slidesToShow: 4, // Default: Show 5 slides
         slidesToScroll: 1, // Scroll one at a time
         infinite: false, // Disable infinite scrolling
         afterChange: (index) => setCurrentIndex(index), // Track index after change
@@ -1341,13 +1377,13 @@ const Productdetails = () => {
         try {
             const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/upload/get_id/${id}`);
             const data = response.data;
-            // console.log("Data",data);
+            console.log("Data", data);
 
             // Map data from Excel file
             setProduct({
-                image01: data.image01,
+                goldImages: data.goldImages,
                 title: data.title,
-                id: data._id,
+                id: data.product_id,
                 grossWt: data.grossWt,
                 netWeight14KT: data.netWeight14KT,
                 netWeight18KT: data.netWeight18KT,
@@ -1509,10 +1545,10 @@ const Productdetails = () => {
 
             dispatch(cartAction.addToWishlist(product));
 
-            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-            if (!wishlist.includes(product.id)) {
-                wishlist.push(product.id);
-                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            let wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
+            if (!wishlistItem.includes(product.id)) {
+                wishlistItem.push(product.id);
+                localStorage.setItem('wishlistItem', JSON.stringify(wishlistItem));
             }
 
             toast.success('Item added to wishlist', {
@@ -1536,9 +1572,9 @@ const Productdetails = () => {
 
             dispatch(cartAction.removeFromWishlist(product.id));
 
-            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-            wishlist = wishlist.filter(item => item !== product.id);
-            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            let wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
+            wishlistItem = wishlistItem.filter(item => item !== product.id);
+            localStorage.setItem('wishlistItem', JSON.stringify(wishlistItem));
 
             toast.success('Item removed from wishlist', {
                 position: 'top-center',
@@ -1758,24 +1794,36 @@ const Productdetails = () => {
                                     </button>
                                 </div>
                             </p> */}
-                                <button className='btn add_btn me-2 my-3' onClick={() => addToCart(product.id)} disabled={!isValidSize}>
-                                    {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
-                                    ADD TO CART
-                                </button>
-                                <button className='btn add_btn my-3 me-2' onClick={buyNow} disabled={!isValidSize}>
-                                    {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
-                                    BUY NOW
-                                </button>
-                                <button
-                                    className='btn wish_btn my-3'
-                                    onClick={handleWishlistClick}
-                                >
-                                    <i
-                                        className={`fa-heart fs-5 ${isWishlist ? 'fa-solid' : 'fa-regular'}`}
-                                    ></i>
-                                </button>
+                                <div className="row g-3">
+                                    <div className="col-5">
+                                        <button
+                                            className='btn add_btn me-2 px-4 mt-3 w-100'
+                                            onClick={() => addToCart(product.id)}
+                                        >
+                                            ADD TO CART
+                                        </button>
+                                    </div>
+                                    <div className="col-5">
+                                        <button
+                                            className='btn add_btn px-4 my-3 w-100'
+                                            onClick={buyNow}
+                                        >
+                                            BUY NOW
+                                        </button>
+                                    </div>
+                                    <div className="col-2">
+                                        <button
+                                            className='btn wish_btn my-3 w-100'
+                                            onClick={handleWishlistClick}
+                                        >
+                                            <i
+                                                className={`fa-heart fs-5 ${isWishlist ? 'fa-solid' : 'fa-regular'}`}
+                                            ></i>
+                                        </button>
+                                    </div>
+                                </div>
                                 {/* Video call */}
-                                <div>
+                                {/* <div>
                                     <div className='row p-0 m-0 w-100 border rounded-3'>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4 m-0 p-0'>
                                             <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/03-MAR/Others/CLlive/TOPBanner.png' className='img-fluid w-100 h-100'></img>
@@ -1798,7 +1846,7 @@ const Productdetails = () => {
                                             </button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className='certified_Sec mt-4'>
                                     <div className='row'>
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
@@ -1853,16 +1901,30 @@ const Productdetails = () => {
                         {/* =========Medium device========= */}
                         <div className='row d-lg-none d-block'>
                             <div className='col-md-12 col-sm-12 col-12 mx-auto d-block'>
-                                <h3 className='font_h'>{product.title}</h3>
-                                <h4 className='font_h'>{formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}</h4>
+                                <div className="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h3 className="font_h">{product.title}</h3>
+                                        <h4 className="font_h">
+                                            {formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}
+                                        </h4>
+                                    </div>
+
+                                    <button
+                                        className='btn wish_btn border-0'
+                                        onClick={handleWishlistClick}
+                                    >
+                                        <i
+                                            className={`fa-heart fs-5 ${isWishlist ? 'fa-solid' : 'fa-regular'}`}
+                                        ></i>
+                                    </button>
+                                </div>
+
                                 <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
                                 <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
 
-                                <p className="KT_button">
-                                    <span className="align-middle">
-                                        color
-                                    </span>
-                                    <span className="ps-3 align-middle" style={{ fontSize: "20px" }}>
+                                <p className="KT_button d-flex justify-content-between align-items-center">
+                                    <span>Color</span>
+                                    <span className="d-flex gap-2">
                                         {colors.map((color) => (
                                             <i
                                                 key={color.id}
@@ -1892,28 +1954,25 @@ const Productdetails = () => {
                                         ))}
                                     </span>
                                 </p>
-
                                 {/* KT Selection Buttons */}
-                                <div className="my-3 KT_button">
-                                    <span className="align-middle pe-3">
-                                        Purity
-                                    </span>
-                                    <button
-                                        className={`btn ${selectedKT === "14KT" ? "bg-dark text-light" : "btn-light text-dark"
-                                            } me-2`}
-                                        onClick={() => handleKTClick("14KT")}
-                                    >
-                                        14KT
-                                    </button>
-                                    <button
-                                        className={`btn ${selectedKT === "18KT" ? "bg-dark text-light" : "btn-light text-dark"
-                                            } me-2`}
-                                        onClick={() => handleKTClick("18KT")}
-                                    >
-                                        18KT
-                                    </button>
+                                <div className="my-3 KT_button d-flex justify-content-between align-items-center">
+                                    <span className="align-middle">Purity</span>
+                                    <div>
+                                        <button
+                                            className={`btn ${selectedKT === "14KT" ? "bg-dark text-light" : "btn-light text-dark"} me-2`}
+                                            onClick={() => handleKTClick("14KT")}
+                                        >
+                                            14KT
+                                        </button>
+                                        <button
+                                            className={`btn ${selectedKT === "18KT" ? "bg-dark text-light" : "btn-light text-dark"}`}
+                                            onClick={() => handleKTClick("18KT")}
+                                        >
+                                            18KT
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="my-3 KT_button d-flex align-items-center">
+                                <div className="my-3 KT_button d-flex justify-content-between align-items-center">
                                     <span className="pe-3">
                                         Ring Size
                                     </span>
@@ -1951,14 +2010,26 @@ const Productdetails = () => {
                             >
                                 CUSTOMISE
                             </button> */}
-                                <button className='btn add_btn add_btn_md me-2 px-5 mt-3' onClick={() => addToCart(product.id)}>
-                                    {/* <i className="ri-shopping-bag-4-line pe-2 fs-5"></i> */}
-                                    ADD TO CART
-                                </button>
-                                <button className='btn add_btn add_btn_md px-5 my-3' onClick={buyNow}>
-                                    {/* <i className="ri-shopping-cart-2-line pe-2 fs-5"></i> */}
-                                    BUY NOW
-                                </button>
+                                <div className="sticky-footer">
+                                    <div className="row g-3 px-2">
+                                        <div className="col">
+                                            <button
+                                                className="btn add_btn add_btn_md me-2 px-4 mt-3 w-100"
+                                                onClick={() => addToCart(product.id)}
+                                            >
+                                                ADD TO CART
+                                            </button>
+                                        </div>
+                                        <div className="col">
+                                            <button
+                                                className="btn add_btn add_btn_md px-4 my-3 w-100"
+                                                onClick={buyNow}
+                                            >
+                                                BUY NOW
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 {/* <p className='delivery_cancellation pt-4'>
                                     <i className="ri-truck-line fs-5 pe-2"></i>
                                     <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 3RD SEP 2024</u>
@@ -1983,7 +2054,7 @@ const Productdetails = () => {
                                     <i className="ri-telegram-fill fs-2 pe-1" style={{ color: "#1c90ca" }}></i>
                                     <i className="ri-clipboard-fill fs-2 pe-1"></i>
                                 </p> */}
-                                <div className='ps-3'>
+                                {/* <div className='ps-3'>
                                     <div className='row w-100 border rounded-3'>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4 m-0 p-0'>
                                             <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/03-MAR/Others/CLlive/TOPBanner.png' className='img-fluid w-100 h-100'></img>
@@ -2007,7 +2078,7 @@ const Productdetails = () => {
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> */}
                                 {/* <div className='mt-3 ps-3'>
                                     <div className='row w-100 border rounded-3 store py-2 my-2'>
                                         <div className='col-md-1 col-sm-1 col-2 m-0 p-0'>
@@ -2181,26 +2252,28 @@ const Productdetails = () => {
                             similarProducts.length > 0 ? (
 
                                 <>
-                                    {
-                                        similarProducts.map((item) => (
-                                            <div
-                                                className="col-lg-3 col-md-4 col-sm-6 mb-4 card border-0"
-                                                key={item._id}
-                                            >
-                                                <Link to={`/Productdetails/${item._id}`}>
-                                                    <img
-                                                        alt={item.title}
-                                                        src={item.image01}
-                                                        className="img-fluid px-2 position-relative"
-                                                    />
-                                                </Link>
-                                                <div className="card-body cartlane">
-                                                    <h6>{formatCurrency(item.total14KT)}</h6>
-                                                    <p>{item.title}</p>
+                                    <Slider ref={search} {...categoryWise}>
+                                        {
+                                            similarProducts.map((item) => (
+                                                <div
+                                                    className="col-lg-3 col-md-4 col-sm-6 mb-4 card border-0"
+                                                    key={item._id}
+                                                >
+                                                    <Link to={`/Productdetails/${item._id}`}>
+                                                        <img
+                                                            alt={item.title}
+                                                            src={item.image01}
+                                                            className="img-fluid px-2 position-relative"
+                                                        />
+                                                    </Link>
+                                                    <div className="card-body cartlane">
+                                                        <h6>{formatCurrency(item.total14KT)}</h6>
+                                                        <p>{item.title}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))
-                                    }
+                                            ))
+                                        }
+                                    </Slider>
                                 </>
                             ) : (
                                 <div className="text-center w-100 py-3">
@@ -2233,7 +2306,7 @@ const Productdetails = () => {
                                             <Link to={`/Productdetails/${item.id}`}>
                                                 <img
                                                     alt={item.title}
-                                                    src={item.image01}
+                                                    src={item.goldImages[0]}
                                                     className="img-fluid px-2 position-relative"
                                                 />
                                             </Link>

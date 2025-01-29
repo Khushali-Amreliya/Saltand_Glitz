@@ -323,12 +323,6 @@ const Header = () => {
                             <div className="offcanvas-header mb-0">
                                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                 {/* <h5 id="offcanvasExampleLabel" className='text-light'>.</h5> */}
-                                {/* <Link to={isLoggedIn ? "/Userprofile" : "/signup"} className='text-decoration-none text-dark'>
-                                    <i className="ri-user-line"></i>
-                                </Link> */}
-                                <Link className="text-decoration-none text-dark dropdown-toggle" id="dropdownUserLink" role="button">
-                                    <i className="ri-user-fill nav_icon text-center"></i>
-                                </Link>
                             </div>
                             <div className="offcanvas-body">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -1078,16 +1072,16 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/aboutUs" id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
-                                            <i className="ri-subtract-line"></i>About Us
+                                        <Link className="nav-link active"  id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
+                                            <i className="ri-subtract-line"></i><Link to="/aboutUs" style={{textDecoration:"none"}}>About Us</Link>
                                         </Link>
                                     </li>
                                 </ul>
                             </div>
-                            <div className='btn_md'>
+                            {/* <div className='btn_md'>
                                 <Link to="/loginn" data-bs-dismiss="offcanvas"><button className='btn'><span>Log In</span></button></Link>
                                 <Link to="/signup" data-bs-dismiss="offcanvas"><button className='btn mt-2'><span>Sign Up</span></button></Link>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className='col-sm-8 col-7 d-flex justify-content-center align-items-center'>
@@ -1111,6 +1105,7 @@ const Header = () => {
                     </div>
 
                     <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center'>
+                        
                         <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
                             <i className="ri-heart-line pe-0 position-relative">
                                 {wishlistLength.length > 0 && (
@@ -1118,12 +1113,18 @@ const Header = () => {
                                 )}
                             </i>
                         </Link>
-                        <Link className='text-decoration-none text-dark' to="/cart">
+                        <Link className='text-decoration-none text-dark pe-3' to="/cart">
                             <i className="ri-shopping-cart-line pe-0 position-relative">
                                 {tQuantity.totalQuantity > 0 && (
                                     <span className="badge badge-icon">{tQuantity.totalQuantity}</span>
                                 )}
                             </i>
+                        </Link>
+                        <Link
+                            className="text-decoration-none text-dark "
+                            to={isLoggedIn ? "/Uprofile" : "/loginn"}
+                        >
+                            <i className="ri-user-line pe-0 position-relative"></i>
                         </Link>
                     </div>
                     <form action="" className='pt-3'>
@@ -1921,7 +1922,7 @@ const Header = () => {
                                             <Link to={`/productDetail/${item.id}`}>
                                                 <img
                                                     alt={item.title}
-                                                    src={item.image01}
+                                                    src={item.goldImages[0]}
                                                     className="img-fluid px-2 position-relative"
                                                 />
                                             </Link>
@@ -2068,7 +2069,7 @@ const Header = () => {
                 </div>
             </div>
         </div>
-        );
-    }
+    );
+}
 
-    export default Header;
+export default Header;

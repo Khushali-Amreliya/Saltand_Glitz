@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Earrings = () => {
     // Initial product images
-    const images = ["assets/img/product_img1.jpg", "assets/img/product_img.jpg"];
+    // const images = ["assets/img/product_img1.jpg", "assets/img/product_img.jpg"];
 
     // Scroll to the top when the component mounts
     useEffect(() => {
@@ -58,7 +58,7 @@ const Earrings = () => {
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);
     const [currentPage, setCurrentPage] = useState(1); // page starts from 1
     const itemsPerPage = 8; // Number of products per page
-    
+
     const handleFilterChange = (type, value) => {
         let updatedSelection;
         switch (type) {
@@ -320,7 +320,7 @@ const Earrings = () => {
                                 </div>
 
                                 {/* Discount */}
-                                <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
+                                {/* <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
                                     <h2 className="filter_title mt-3">Discount</h2>
                                     {discountOptions
                                         .slice(0, showMoreDiscount ? discountOptions.length : 4)
@@ -357,10 +357,10 @@ const Earrings = () => {
                                             </>
                                         )}
                                     </button>
-                                </div>
+                                </div> */}
 
                                 {/* Discount Range */}
-                                <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
+                                {/* <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
                                     <h2 className="filter_title mt-3">Discount Ranges</h2>
                                     <div className="form-check my-2">
                                         <input
@@ -413,7 +413,7 @@ const Earrings = () => {
                                             10 - 15 <span>(26)</span>
                                         </label>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Product Type */}
                                 <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
@@ -443,7 +443,7 @@ const Earrings = () => {
                                 </div>
 
                                 {/* Weight Ranges */}
-                                <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
+                                {/* <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
                                     <h2 className="filter_title mt-3">Weight Ranges</h2>
                                     <div className="form-check my-2">
                                         <input
@@ -487,7 +487,7 @@ const Earrings = () => {
                                             5 - 10 g<span>(55)</span>
                                         </label>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Material */}
                                 <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
@@ -587,7 +587,7 @@ const Earrings = () => {
                                 </div>
 
                                 {/* Metal */}
-                                <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
+                                {/* <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
                                     <h2 className="filter_title mt-3">Metal</h2>
                                     <div className="form-check my-2">
                                         <input
@@ -649,7 +649,7 @@ const Earrings = () => {
                                             <span>(25)</span>
                                         </label>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Shop For */}
                                 <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
@@ -756,10 +756,10 @@ const Earrings = () => {
                         {/* Small Device Filter*/}
                         <div className="container-fluid filter_midium_divice d-lg-none d-xl-none d-block">
                             <div className="row text-center pt-3">
-                                <div className="col-md-4 col-sm-4 col-4">
+                                {/* <div className="col-md-4 col-sm-4 col-4">
                                     <p className="">CATEGORIES</p>
-                                </div>
-                                <div className="col-md-4 col-sm-4 col-4">
+                                </div> */}
+                                <div className="col-md-6 col-sm-6 col-6">
                                     <p
                                         className=""
                                         data-bs-toggle="offcanvas"
@@ -814,7 +814,7 @@ const Earrings = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-md-4 col-sm-4 col-4">
+                                <div className="col-md-6 col-sm-6 col-6">
                                     <p
                                         className=""
                                         data-bs-toggle="offcanvas"
@@ -1359,32 +1359,30 @@ const Earrings = () => {
                         </div>
 
                         <div className="col-lg-9">
-                            {/* <div className='row'>
-                                <div className='d-xl-block d-lg-block d-none d-flex justify-content-end'>
-                                    <div>
-                                        <select className="form-select">
-                                            <option value="default">Default</option>
-                                            <option value="1">Alphabetically, A-Z</option>
-                                            <option value="2">Alphabetically, Z-A</option>
-                                            <option value="3">High Price</option>
-                                            <option value="4">Low Price</option>
-                                        </select>
-                                    </div>
+                            <div className="row">
+                                <div className="col d-lg-flex d-none justify-content-end">
+                                    <select className="form-select custom-select w-auto">
+                                        <option value="Featured">Featured</option>
+                                        <option value="1">Alphabetically, A-Z</option>
+                                        <option value="2">Alphabetically, Z-A</option>
+                                        <option value="3">High Price</option>
+                                        <option value="4">Low Price</option>
+                                    </select>
                                 </div>
-                            </div> */}
+                            </div>
                             <div className="row">
                                 {currentItems.length > 0 ? (
                                     currentItems.map((item, index) => (
                                         <React.Fragment key={item.id} onClick={() => handleProductClick(item.id)}>
                                             {/* Product Card */}
-                                            <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 card_shadow p-0 px-1">
+                                            <div className="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 card_shadow p-0 px-1">
                                                 <Link>
                                                     <ProductCard Productsitem={item} />
                                                 </Link>
                                             </div>
 
                                             {/* Insert Image After Every 4 Products */}
-                                            {(index + 1) % 4 === 0 &&
+                                            {/* {(index + 1) % 4 === 0 &&
                                                 Math.floor(index / 4) < images.length && (
                                                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                                                         <img
@@ -1394,7 +1392,7 @@ const Earrings = () => {
                                                             style={{ borderRadius: "40px" }}
                                                         />
                                                     </div>
-                                                )}
+                                                )} */}
                                         </React.Fragment>
                                     ))
                                 ) : (

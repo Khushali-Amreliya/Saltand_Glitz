@@ -366,7 +366,6 @@ const Mainpage = () => {
     }
   };
 
-
   const slidermenu = React.useRef(null);
   const slider1 = React.useRef(null);
   const [slidesToShow, setSlidesToShow] = useState(getSlidesToShow());
@@ -375,7 +374,9 @@ const Mainpage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   useEffect(() => {
     const fetchBanners = async () => {
       try {
@@ -400,7 +401,7 @@ const Mainpage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
-        console.log(response);
+        console.log(response.data);
         setProducts(response.data); // Set products in state
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -437,15 +438,11 @@ const Mainpage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const graduate = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 1.4,
     slidesToScroll: 1,
     arrows: false,
   };
@@ -474,7 +471,7 @@ const Mainpage = () => {
       {
         breakpoint: 480, // For small screens
         settings: {
-          slidesToShow: 2.5, // Show 2 full slides and part of the 3rd
+          slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
           slidesToScroll: 1,
         },
       },
@@ -501,7 +498,7 @@ const Mainpage = () => {
       {
         breakpoint: 480, // For small screens
         settings: {
-          slidesToShow: 2.5, // Show 2 full slides and part of the 3rd
+          slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
           slidesToScroll: 1,
         },
       },
@@ -612,9 +609,12 @@ const Mainpage = () => {
                     <Link to={`/Productdetails/${item.product_id}`}>
                       <img
                         alt={item.title}
-                        src={item.image01}
+                        src={item.goldImages[0]}
                         className="img-fluid px-2"
                       />
+                      {/* {item.goldImages && item.goldImages.map((img, i) => (
+                        <img key={i} src={img} alt={`Gold Image ${i}`} className="img-fluid px-2" width="200px" />
+                      ))} */}
                       {/* </Link> */}
                     </Link>
                     <div className="card-body">
@@ -717,7 +717,7 @@ const Mainpage = () => {
                     <Link to={`/Productdetails/${item.product_id}`}>
                       <img
                         alt={item.title}
-                        src={item.image01}
+                        src={item.goldImages[0]}
                         className="img-fluid px-2"
                       />
                       {/* </Link> */}
@@ -749,7 +749,7 @@ const Mainpage = () => {
       <section className='container-fluid my-5'>
         <div>
           <div className='row p-0 m-0'>
-            <div className='col-lg-6 col-md-6 col-sm-6 col-12 pe-0 m-0'>
+            <div className='col-lg-6 col-md-6 col-sm-6 col-12 m-0'>
               <img alt='' src='assets/img/Responsive_1.webp' className='img-fluid h-100 festival_img1'></img>
             </div>
             <div className='col-lg-6 col-md-6 col-sm-6 col-12 ps-0 m-0'>
@@ -806,14 +806,14 @@ const Mainpage = () => {
         </div>
 
         {/* Carousel for mobile devices */}
-        <div className="d-lg-none d-md-none">
+        <div className="d-lg-none d-md-none d-block">
           <Slider {...graduate}>
             <div>
               <div className="card border-0">
                 <img
                   alt=""
                   src="assets/img/gift_img.webp"
-                  className="img-fluid"
+                  className="img-fluid px-1"
                 />
                 <div className="card-body text-center">
                   <h5>Gifts for the Graduate</h5>
@@ -826,7 +826,7 @@ const Mainpage = () => {
                 <img
                   alt=""
                   src="assets/img/gift_img.webp"
-                  className="img-fluid"
+                  className="img-fluid px-1"
                 />
                 <div className="card-body text-center">
                   <h5>Gifts for the Graduate</h5>
@@ -839,7 +839,7 @@ const Mainpage = () => {
                 <img
                   alt=""
                   src="assets/img/gift_img.webp"
-                  className="img-fluid"
+                  className="img-fluid px-1"
                 />
                 <div className="card-body text-center">
                   <h5>Gifts for the Graduate</h5>
@@ -880,11 +880,11 @@ const Mainpage = () => {
           </div>
         </div>
       </section>
-      {/* <section className='container-fluid p-0 m-0'>
+      <section className='container-fluid p-0 m-0'>
         <div>
           <img alt='' src='assets/img/gift_banner.webp' className='img-fluid'></img>
         </div>
-      </section> */}
+      </section>
       {/* <section className='container-fluid p-0 m-0'>
         <div>
           <img alt='' src='assets/img/diamond_banner.webp' className='img-fluid'></img>

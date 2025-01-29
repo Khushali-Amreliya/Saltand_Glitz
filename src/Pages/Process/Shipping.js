@@ -68,7 +68,7 @@ const Shipping = () => {
         );
     };
 
-    const handlePlaceOrder = async () =>{
+    const handlePlaceOrder = async () =>{   
         const isPincodeValid = /^\d{6}$/.test(formData.pincode);
         const isMobileValid = /^\d{10}$/.test(formData.mobile);
 

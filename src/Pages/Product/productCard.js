@@ -252,17 +252,15 @@ import { cartAction } from '../../Store/Slice/CartSlice'; // Redux actions for m
 
 const ProductCard = ({ Productsitem }) => {
     const user = JSON.parse(localStorage.getItem('user')); // Get the logged-in user's data from localStorage
-    const { product_id, title, total14KT, image01, image02, image03, video } = Productsitem; // Destructure product details
+    const { product_id, title, total14KT, goldImages, goldVideo } = Productsitem; // Destructure product details
     const slider = useRef(null); // Ref for the slider
     const dispatch = useDispatch(); // Redux dispatch
     const [isWishlist, setIsWishlist] = useState(false);
 
-    // Update the heart icon based on the Redux wishlist state
     useEffect(() => {
-        // Get wishlist from localStorage
-        const savedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        const itemInWishlist = savedWishlist.find((item) => item.product_id === product_id);
-        setIsWishlist(!!itemInWishlist); // Updates heart state based on persisted wishlist
+        // Check if product is in wishlist from localStorage
+        const wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
+        setIsWishlist(wishlistItem.includes(product_id));
     }, [product_id]);
 
     // Function to add an item to the wishlist
@@ -274,6 +272,13 @@ const ProductCard = ({ Productsitem }) => {
             });
 
             dispatch(cartAction.addToWishlist(Productsitem));
+
+            let wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
+            if (!wishlistItem.includes(product_id)) {
+                wishlistItem.push(product_id);
+                localStorage.setItem('wishlistItem', JSON.stringify(wishlistItem));
+            }
+
             toast.success('Item added to wishlist', {
                 position: 'top-center',
                 autoClose: 1000,
@@ -295,6 +300,11 @@ const ProductCard = ({ Productsitem }) => {
             );
 
             dispatch(cartAction.removeFromWishlist(product_id));
+
+            let wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
+            wishlistItem = wishlistItem.filter(item => item !== product_id);
+            localStorage.setItem('wishlistItem', JSON.stringify(wishlistItem));
+
             toast.success('Item removed from wishlist', {
                 position: 'top-center',
                 autoClose: 1000,
@@ -318,7 +328,7 @@ const ProductCard = ({ Productsitem }) => {
     };
 
     // Settings for the image and video slider
-    const settings2 = {
+    const imageVideo = {
         dots: false,
         infinite: true,
         speed: 500,
@@ -332,14 +342,14 @@ const ProductCard = ({ Productsitem }) => {
             <div>
                 <Link to={`/Productdetails/${product_id}`}>
                     {/* Slider for product images and video */}
-                    <Slider ref={slider} {...settings2} className="border border-1">
-                        <img alt="" src={image01} className="img-fluid" />
-                        <img alt="" src={image02} className="img-fluid" />
-                        <img alt="" src={image03} className="img-fluid" />
-                        <video controls autoPlay className="img-fluid" style={{ width: "100%" }}>
-                            <source src={video} type="video/mp4" />
+                    <Slider ref={slider} {...imageVideo} className="border border-1">
+                        <img alt="" src={goldImages[0]} className="img-fluid" />
+                        <img alt="" src={goldImages[1]} className="img-fluid" />
+                        {/* <img alt="" src={goldImages[2]} className="img-fluid" /> */}
+                        {/* <video controls autoPlay className="img-fluid" style={{ width: "100%" }}>
+                            <source src={goldVideo[0]} type="video/mp4" />
                             Your browser does not support the video tag.
-                        </video>
+                        </video> */}
                     </Slider>
                 </Link>
 
@@ -372,7 +382,7 @@ const ProductCard = ({ Productsitem }) => {
 
                 {/* Mobile view content */}
                 <div className="card-body p-0 d-lg-none d-md-block">
-                    <div>
+                    <div className='text-center pt-1'>
                         <p className="m-0">{formatCurrency(total14KT)}</p>
                         <h6>{title}</h6>
                     </div>
