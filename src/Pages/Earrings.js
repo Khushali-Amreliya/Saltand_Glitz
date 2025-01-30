@@ -56,8 +56,8 @@ const Earrings = () => {
 
     const [showMorePrices, setShowMorePrices] = useState(false);
     const [showMoreDiscount, setShowMoreDiscount] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1); // page starts from 1
-    const itemsPerPage = 8; // Number of products per page
+    // const [currentPage, setCurrentPage] = useState(1); // page starts from 1
+    // const itemsPerPage = 8; // Number of products per page
 
     const handleFilterChange = (type, value) => {
         let updatedSelection;
@@ -140,99 +140,99 @@ const Earrings = () => {
 
     // Paginate the filtered products
     const currentItems = filteredProducts.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
+        // (currentPage - 1) * itemsPerPage,
+        // currentPage * itemsPerPage
     );
-    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    // const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
     // Handle pagination
-    const handleNextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
+    // const handleNextPage = () => {
+    //     if (currentPage < totalPages) {
+    //         setCurrentPage(currentPage + 1);
+    //     }
+    // };
 
-    const handlePrevPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
+    // const handlePrevPage = () => {
+    //     if (currentPage > 1) {
+    //         setCurrentPage(currentPage - 1);
+    //     }
+    // };
 
-    const handlePageClick = (pageNum) => {
-        setCurrentPage(pageNum);
-    };
+    // const handlePageClick = (pageNum) => {
+    //     setCurrentPage(pageNum);
+    // };
 
-    const renderPagination = () => {
-        let paginationItems = [];
-        let beforePage = currentPage - 1;
-        let afterPage = currentPage + 1;
+    // const renderPagination = () => {
+    //     let paginationItems = [];
+    //     let beforePage = currentPage - 1;
+    //     let afterPage = currentPage + 1;
 
-        if (currentPage > 1) {
-            paginationItems.push(
-                <li className="btn prev" key="prev" onClick={handlePrevPage}>
-                    <span>Prev</span>
-                </li>
-            );
-        }
+    //     if (currentPage > 1) {
+    //         paginationItems.push(
+    //             <li className="btn prev" key="prev" onClick={handlePrevPage}>
+    //                 <span>Prev</span>
+    //             </li>
+    //         );
+    //     }
 
-        if (currentPage > 2) {
-            paginationItems.push(
-                <li className="numb" key={1} onClick={() => handlePageClick(1)}>
-                    <span>1</span>
-                </li>
-            );
-            if (currentPage > 3) {
-                paginationItems.push(
-                    <li className="dots" key="dots-before">
-                        <span>...</span>
-                    </li>
-                );
-            }
-        }
+    //     if (currentPage > 2) {
+    //         paginationItems.push(
+    //             <li className="numb" key={1} onClick={() => handlePageClick(1)}>
+    //                 <span>1</span>
+    //             </li>
+    //         );
+    //         if (currentPage > 3) {
+    //             paginationItems.push(
+    //                 <li className="dots" key="dots-before">
+    //                     <span>...</span>
+    //                 </li>
+    //             );
+    //         }
+    //     }
 
-        for (let pageNum = beforePage; pageNum <= afterPage; pageNum++) {
-            if (pageNum > 0 && pageNum <= totalPages) {
-                paginationItems.push(
-                    <li
-                        className={`numb ${currentPage === pageNum ? "active" : ""}`}
-                        key={pageNum}
-                        onClick={() => handlePageClick(pageNum)}
-                    >
-                        <span>{pageNum}</span>
-                    </li>
-                );
-            }
-        }
+    //     for (let pageNum = beforePage; pageNum <= afterPage; pageNum++) {
+    //         if (pageNum > 0 && pageNum <= totalPages) {
+    //             paginationItems.push(
+    //                 <li
+    //                     className={`numb ${currentPage === pageNum ? "active" : ""}`}
+    //                     key={pageNum}
+    //                     onClick={() => handlePageClick(pageNum)}
+    //                 >
+    //                     <span>{pageNum}</span>
+    //                 </li>
+    //             );
+    //         }
+    //     }
 
-        if (currentPage < totalPages - 1) {
-            if (currentPage < totalPages - 2) {
-                paginationItems.push(
-                    <li className="dots" key="dots-after">
-                        <span>...</span>
-                    </li>
-                );
-            }
-            paginationItems.push(
-                <li
-                    className="numb"
-                    key={totalPages}
-                    onClick={() => handlePageClick(totalPages)}
-                >
-                    <span>{totalPages}</span>
-                </li>
-            );
-        }
+    //     if (currentPage < totalPages - 1) {
+    //         if (currentPage < totalPages - 2) {
+    //             paginationItems.push(
+    //                 <li className="dots" key="dots-after">
+    //                     <span>...</span>
+    //                 </li>
+    //             );
+    //         }
+    //         paginationItems.push(
+    //             <li
+    //                 className="numb"
+    //                 key={totalPages}
+    //                 onClick={() => handlePageClick(totalPages)}
+    //             >
+    //                 <span>{totalPages}</span>
+    //             </li>
+    //         );
+    //     }
 
-        if (currentPage < totalPages) {
-            paginationItems.push(
-                <li className="btn next" key="next" onClick={handleNextPage}>
-                    <span>Next</span>
-                </li>
-            );
-        }
+    //     if (currentPage < totalPages) {
+    //         paginationItems.push(
+    //             <li className="btn next" key="next" onClick={handleNextPage}>
+    //                 <span>Next</span>
+    //             </li>
+    //         );
+    //     }
 
-        return paginationItems;
-    };
+    //     return paginationItems;
+    // };
 
     const navigate = useNavigate(); // Initialize useNavigate
 
@@ -1405,9 +1405,9 @@ const Earrings = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="pagination">
+                            {/* <div className="pagination">
                                 <ul>{renderPagination()}</ul>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </section>

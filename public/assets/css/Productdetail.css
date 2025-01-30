@@ -316,6 +316,12 @@
     word-spacing: 2px;
     font-weight: 400;
     background-color: #f0f0f0;
+
+}
+
+.section .bg_price_breakup {
+    background-color: #f0f0f0;
+    padding: 0 6px;
 }
 
 /* Product Details */
@@ -330,7 +336,7 @@
     padding: 15px;
     /* width: 50%; */
     border-radius: 8px;
-    border: 1.5px solid #000;
+    border: 1.7px solid #000;
     text-align: center;
     font-weight: 300 !important;
     letter-spacing: 0.5px;
@@ -404,7 +410,8 @@
 }
 
 .price_break_price {
-    color: var(--color);
+    /* color: var(--color); */
+    color: #666666 !important;
     font-weight: 500;
     vertical-align: middle !important;
     padding-top: 10px;
@@ -449,20 +456,23 @@
     color: #333;
 }
 
-.KT_button button{
+.KT_button button {
     font-size: 11px;
     letter-spacing: 1px;
     background-color: #f2f2f2;
 }
-.KT_button span{
+
+.KT_button span {
     font-weight: 500;
     letter-spacing: 0.5px;
     font-size: 11px;
     text-transform: uppercase;
 }
+
 .cursor-not-allowed {
     cursor: not-allowed;
 }
+
 .sticky-footer {
     position: fixed;
     bottom: 0;
@@ -471,13 +481,15 @@
     width: 100%;
     padding-top: 0;
     background: #ffffff;
-    box-shadow: -3px 0px 10px #e9e9e9; /* Optional: adds shadow */
+    box-shadow: -3px 0px 10px #e9e9e9;
+    /* Optional: adds shadow */
 }
 
 .sticky-footer .row {
     margin-left: 0;
     margin-right: 0;
-    gap: 10px;  /* Ensures space between buttons */
+    gap: 10px;
+    /* Ensures space between buttons */
 }
 
 .sticky-footer .col {
@@ -486,7 +498,8 @@
 }
 
 .sticky-footer .btn {
-    margin: 0 auto;  /* Centers the button */
+    margin: 0 auto;
+    /* Centers the button */
 }
 
 /* Responsive Design */

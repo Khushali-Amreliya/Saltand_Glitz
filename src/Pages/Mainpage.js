@@ -413,21 +413,25 @@ const Mainpage = () => {
 
     fetchProducts();
   }, []);
-
-
-  // let getBanner = async () => {
-  //   let res = await axios.get("https://saltandglitz-api.vercel.app/v1/banner/bannerGet")
-  //   // console.log(res, "fdxgfchgvhmbj,n");
-  //   console.log(res.data.banners);
-  //   setBanner(res?.data?.banners || [])
-  // }
-
-  // console.log(banner, "tfchgvjhbkjnlkm");
-
-
+  
+  // ------------------------------------------Category wise product fetch------------------------------
   // useEffect(() => {
-  //   getBanner()
-  // }, [])
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
+  //       const ringProducts = response.data.filter(item => item.category === "RING"); // Filter rings only
+  //       console.log(ringProducts);
+  //       setProducts(ringProducts);
+  //     } catch (err) {
+  //       console.error("Error fetching products:", err);
+  //       setError("Failed to load products.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  
+  //   fetchProducts();
+  // }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -610,7 +614,7 @@ const Mainpage = () => {
                       <img
                         alt={item.title}
                         src={item.goldImages[0]}
-                        className="img-fluid px-2"
+                        className="img-fluid px-1"
                       />
                       {/* {item.goldImages && item.goldImages.map((img, i) => (
                         <img key={i} src={img} alt={`Gold Image ${i}`} className="img-fluid px-2" width="200px" />

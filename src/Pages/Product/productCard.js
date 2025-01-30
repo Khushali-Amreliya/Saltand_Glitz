@@ -252,7 +252,7 @@ import { cartAction } from '../../Store/Slice/CartSlice'; // Redux actions for m
 
 const ProductCard = ({ Productsitem }) => {
     const user = JSON.parse(localStorage.getItem('user')); // Get the logged-in user's data from localStorage
-    const { product_id, title, total14KT, goldImages, goldVideo } = Productsitem; // Destructure product details
+    const { product_id, title, total14KT, goldImages } = Productsitem; // Destructure product details
     const slider = useRef(null); // Ref for the slider
     const dispatch = useDispatch(); // Redux dispatch
     const [isWishlist, setIsWishlist] = useState(false);
@@ -342,7 +342,7 @@ const ProductCard = ({ Productsitem }) => {
             <div>
                 <Link to={`/Productdetails/${product_id}`}>
                     {/* Slider for product images and video */}
-                    <Slider ref={slider} {...imageVideo} className="border border-1">
+                    <Slider ref={slider} {...imageVideo} className="border border-1 rounded-3">
                         <img alt="" src={goldImages[0]} className="img-fluid" />
                         <img alt="" src={goldImages[1]} className="img-fluid" />
                         {/* <img alt="" src={goldImages[2]} className="img-fluid" /> */}
@@ -373,10 +373,15 @@ const ProductCard = ({ Productsitem }) => {
                     {/* Wishlist Heart Icon */}
                     <div className="wishlist-icons position-absolute top-0 end-0 p-2">
                         <i
-                            className={`fs-4 heart-icon ${isWishlist ? 'ri-heart-fill text-dark' : 'ri-heart-line'}`}
+                            className={`fs-5 heart-icon ${isWishlist ? 'fa-solid fa-heart text-dark' : 'fa-regular fa-heart'}`}
                             style={{ cursor: 'pointer' }}
                             onClick={handleWishlistToggle}
                         ></i>
+                    </div>
+                    <div className="review_card position-absolute bottom-0 left-0 my-3">
+                        <p className='m-0'>4.8
+                            <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>
+                        </p>
                     </div>
                 </div>
 
@@ -404,6 +409,11 @@ const ProductCard = ({ Productsitem }) => {
                             style={{ cursor: 'pointer' }}
                             onClick={handleWishlistToggle}
                         ></i>
+                    </div>
+                    <div className="review_card review_card_md position-absolute left-0 my-3">
+                        <p className='m-0'>4.8
+                            <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>
+                        </p>
                     </div>
                 </div>
             </div>

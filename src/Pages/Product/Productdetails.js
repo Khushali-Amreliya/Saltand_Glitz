@@ -1165,8 +1165,10 @@ import Helmet from "../../Components/Helmet";
 
 
 const Productdetails = () => {
-    const search = React.useRef(null);
+    const recently = React.useRef(null);
+    const similar = React.useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [similarIndex, setSimilarIndex] = useState(0);
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
     const { id } = useParams(); // Get the product ID from the URL
@@ -1178,7 +1180,7 @@ const Productdetails = () => {
     const [tempPrice, setTempPrice] = useState(price); // Temporary price for selected size
     const [adjustedPrice, setAdjustedPrice] = useState(price); // Final price
     const [selectedKT, setSelectedKT] = useState("14KT"); // Default selection is 14KT
-    const [isValidSize, setIsValidSize] = useState(true);
+    const [ setIsValidSize] = useState(true);
     const [ringSize, setRingSize] = useState(6);
     const [showClear, setShowClear] = useState(true);
     const [similarProducts, setSimilarProducts] = useState([]);
@@ -1186,7 +1188,12 @@ const Productdetails = () => {
     const user = JSON.parse(localStorage.getItem('user'))
     // console.log(user);
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
+    const [isPriceBreakupVisible, setPriceBreakupVisible] = useState(true);
 
+    // Toggle function to show or hide the price details
+    const togglePriceBreakup = () => {
+        setPriceBreakupVisible(!isPriceBreakupVisible);
+    };
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -1205,7 +1212,7 @@ const Productdetails = () => {
 
     // recently viewed
     const recentlyViewed = useSelector((state) => state.cart.recentlyViewed);
-    console.log("Recently Viewed Products in Redux:", recentlyViewed);
+    // console.log("Recently Viewed Products in Redux:", recentlyViewed);
 
     useEffect(() => {
         // Set initial price based on the selectedKT
@@ -1243,7 +1250,7 @@ const Productdetails = () => {
         setShowClear(false); // Hide the Clear button
     };
 
-    const slider_search = {
+    const recentlySlider = {
         slidesToShow: 5, // Default: Show 5 slides
         slidesToScroll: 1, // Scroll one at a time
         infinite: false, // Disable infinite scrolling
@@ -1275,12 +1282,11 @@ const Productdetails = () => {
             },
         ],
     };
-
-    const categoryWise = {
-        slidesToShow: 4, // Default: Show 5 slides
+    const similarSlider = {
+        slidesToShow: 5, // Default: Show 5 slides
         slidesToScroll: 1, // Scroll one at a time
+        afterChange: (index) => setSimilarIndex(index), // Track index after change
         infinite: false, // Disable infinite scrolling
-        afterChange: (index) => setCurrentIndex(index), // Track index after change
         responsive: [
             {
                 breakpoint: 1200, // For devices with width <= 1200px
@@ -1308,6 +1314,7 @@ const Productdetails = () => {
             },
         ],
     };
+
     const sizeOptions = useMemo(() => [
         { size: 5, mm: "44.8 mm", stock: "Made to Order", price: Math.round(price * 0.95) },
         { size: 6, mm: "45.9 mm", stock: "Made to Order", price: Math.round(price * 0.96) },
@@ -1366,7 +1373,7 @@ const Productdetails = () => {
     const fetchProducts = async () => {
         try {
             const response = await axios.get(`http://localhost:5000/v1/upload/get_similar/${id}`);
-            // console.log(response);
+            console.log(response);
             setSimilarProducts(response.data);
         } catch (err) {
             console.error("Error fetching similar products:", err);
@@ -1436,32 +1443,6 @@ const Productdetails = () => {
 
     const handleColorClick = (colorId) => {
         setSelectedColor(selectedColor === colorId ? null : colorId);
-    };
-    const imagesByColor = {
-        1: [
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_1_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_3_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_5_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_4_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_7_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_16_video.mp4",
-        ],
-        2: [
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_5_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_3_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_1_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_7_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_4_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_16_video.mp4",
-        ],
-        3: [
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_4_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_7_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_1_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_3_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_5_lar.jpg",
-            "https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_16_video.mp4",
-        ],
     };
 
     const addToCart = async (id) => {
@@ -1640,31 +1621,34 @@ const Productdetails = () => {
                 <section className='container-fluid pb-4 pt-2'>
                     <div>
                         <div className='row '>
-                            <div className="col-lg-8 col-md-6 col-sm-12 col-12 m-0 p-0  d-lg-block d-none">
+                            <div className="col-lg-8 col-md-6 col-sm-12 col-12 m-0 p-0 d-lg-block d-none">
                                 <div className="row">
-                                    {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
-                                        <div key={index} className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                            {src.includes(".mp4") ? (
-                                                <video
-                                                    autoPlay
-                                                    loop
-                                                    controls
-                                                    muted
-                                                    style={{ width: "100%" }}
-                                                    className='item1 video p-1'
-                                                >
-                                                    <source src={src} type="video/mp4" />
-                                                </video>
-                                            ) : (
-                                                <img alt="" src={src} className="img-fluid p-1" />
-                                            )}
-                                        </div>
-                                    ))}
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                        <img alt="" src={product?.goldImages?.[0] || "fallback-image.jpg"} className="img-fluid p-1" />
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                        <img alt="" src={product?.goldImages?.[1] || "fallback-image.jpg"} className="img-fluid p-1" />
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                        <img alt="" src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_5_lar.jpg" className="img-fluid p-1" />
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                        <img alt="" src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_4_lar.jpg" className="img-fluid p-1" />
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                        <img alt="" src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_7_lar.jpg" className="img-fluid p-1" />
+                                    </div>
+                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                        <video autoPlay loop controls muted style={{ width: "100%" }} className="item1 video p-1">
+                                            <source src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_16_video.mp4" type="video/mp4" />
+                                        </video>
+                                    </div>
                                 </div>
                             </div>
+
                             <section className='container-fluid m-0 p-0 mb-5 d-lg-none d-block'>
                                 <Slider {...md_carousel}>
-                                    {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
+                                    {/* {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
                                         <div key={index} >
                                             {src.includes(".mp4") ? (
                                                 <video
@@ -1681,7 +1665,10 @@ const Productdetails = () => {
                                                 <img alt="" src={src} className="img-fluid p-1" />
                                             )}
                                         </div>
-                                    ))}
+                                    ))} */}
+                                    <img alt="" src={product?.goldImages?.[0] || "fallback-image.jpg"} className="img-fluid p-1" />
+                                    <img alt="" src={product?.goldImages?.[1] || "fallback-image.jpg"} className="img-fluid p-1" />
+
                                 </Slider>
                             </section>
                             {/* Large */}
@@ -2165,7 +2152,7 @@ const Productdetails = () => {
                             <div className='col-xl-8'>
                                 {/* <h5>PRODUCT DETAILS</h5> */}
                                 <div className="section product-details">
-                                    <h3>Product Details</h3>
+                                    <h3 style={{ textAlign: 'left' }}>Product Details</h3>
                                     <div className="grid">
                                         <div className="detail-box">
                                             <h4>Weight</h4>
@@ -2178,7 +2165,7 @@ const Productdetails = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="diamonds-gemstones">
+                                {/* <div className="diamonds-gemstones">
                                     <h3>Diamond & Gemstones</h3>
                                     <p>Weight: 1.880 Ct</p>
                                     <div className="table-responsive">
@@ -2213,31 +2200,59 @@ const Productdetails = () => {
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="section price-breakup pt-3">
-                                    <h3>Price Breakup</h3>
-                                    <ul className='ps-0'>
-                                        <p className='m-0 p-0'>
-                                            <span className='price_break'>Gold:</span>
-                                            <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.price14KT : product.price18KT)}/-</span>
-                                        </p>
-                                        <p className='m-0 p-0'>
-                                            <span className='price_break'>Diamond:</span>
-                                            <span className='price_break_price text_end_break'>{formatCurrency(product.diamondprice)}/-</span>
-                                        </p>
-                                        <p className='m-0 p-0'>
-                                            <span className='price_break'>Making Charge:</span>
-                                            <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.makingCharge14KT : product.makingCharge18KT)}/-</span>
-                                        </p>
-                                        <p className='m-0 p-0'>
-                                            <span className='price_break'>GST:</span>
-                                            <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.gst14KT : product.gst18KT)}/-</span>
-                                        </p>
-                                        <p className='m-0 p-0'>
-                                            <span className='price_break'>Total:</span>
-                                            <span className='price_break_price text_end_break'>{formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}/-</span>
-                                        </p>
-                                    </ul>
+                                    <div className="bg_price_breakup d-flex justify-content-between align-items-center">
+                                        <h3 className="m-0">Price Breakup</h3> {/* Center the heading */}
+                                        {/* Button for toggling visibility with icon */}
+                                        <button
+                                            className="btn btn-link p-0 text-dark text-decoration-none"
+                                            onClick={togglePriceBreakup}
+                                            style={{ fontSize: '15px', cursor: 'pointer' }}
+                                        >
+                                            {/* Toggling the icon between + and - */}
+                                            {isPriceBreakupVisible ? (
+                                                <i className="ri-subtract-line"></i> // Minus icon when details are visible
+                                            ) : (
+                                                <i className="ri-add-line"></i> // Plus icon when details are hidden
+                                            )}
+                                        </button>
+                                    </div>
+
+                                    {isPriceBreakupVisible && (
+                                        <ul className="ps-0">
+                                            <p className="m-0 p-0">
+                                                <span className="price_break">Gold:</span>
+                                                <span className="price_break_price text_end_break">
+                                                    {formatCurrency(selectedKT === "14KT" ? product.price14KT : product.price18KT)}/-
+                                                </span>
+                                            </p>
+                                            <p className="m-0 p-0">
+                                                <span className="price_break">Diamond:</span>
+                                                <span className="price_break_price text_end_break">
+                                                    {formatCurrency(product.diamondprice)}/-
+                                                </span>
+                                            </p>
+                                            <p className="m-0 p-0">
+                                                <span className="price_break">Making Charge:</span>
+                                                <span className="price_break_price text_end_break">
+                                                    {formatCurrency(selectedKT === "14KT" ? product.makingCharge14KT : product.makingCharge18KT)}/-
+                                                </span>
+                                            </p>
+                                            <p className="m-0 p-0">
+                                                <span className="price_break">GST:</span>
+                                                <span className="price_break_price text_end_break">
+                                                    {formatCurrency(selectedKT === "14KT" ? product.gst14KT : product.gst18KT)}/-
+                                                </span>
+                                            </p>
+                                            <p className="m-0 p-0">
+                                                <span className="price_break">Total:</span>
+                                                <span className="price_break_price text_end_break">
+                                                    {formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}/-
+                                                </span>
+                                            </p>
+                                        </ul>
+                                    )}
                                 </div>
                             </div>
                             <div className='col-xl-4'></div>
@@ -2247,12 +2262,24 @@ const Productdetails = () => {
                 {/* You may also like & Recently viewed */}
                 <section className='container my-3'>
                     <h3 className='text-center pb-4 font_main'>You may also Like</h3>
-                    <div className='row'>
+                    <div className='row position-relative'>
                         {
                             similarProducts.length > 0 ? (
 
                                 <>
-                                    <Slider ref={search} {...categoryWise}>
+                                    {/* Prev Button */}
+                                    {similarIndex > 0 && (
+                                        <div>
+                                            <button
+                                                onClick={() => similar?.current?.slickPrev()}
+                                                className="pre-btn-set"
+                                            >
+                                                <i className="ri-arrow-left-wide-line"></i>
+                                            </button>
+                                        </div>
+                                    )}
+                                    <Slider ref={similar} {...similarSlider}>
+
                                         {
                                             similarProducts.map((item) => (
                                                 <div
@@ -2274,6 +2301,18 @@ const Productdetails = () => {
                                             ))
                                         }
                                     </Slider>
+
+                                    {/* Next Button */}
+                                    {similarIndex < similarProducts.length - similarSlider.slidesToShow && (
+                                        <div>
+                                            <button
+                                                onClick={() => similar?.current?.slickNext()}
+                                                className="next-btn-set float-end"
+                                            >
+                                                <i className="ri-arrow-right-wide-line"></i>
+                                            </button>
+                                        </div>
+                                    )}
                                 </>
                             ) : (
                                 <div className="text-center w-100 py-3">
@@ -2289,7 +2328,7 @@ const Productdetails = () => {
                                 {currentIndex > 0 && (
                                     <div>
                                         <button
-                                            onClick={() => search?.current?.slickPrev()}
+                                            onClick={() => recently?.current?.slickPrev()}
                                             className="pre-btn-set"
                                         >
                                             <i className="ri-arrow-left-wide-line"></i>
@@ -2297,7 +2336,7 @@ const Productdetails = () => {
                                     </div>
                                 )}
 
-                                <Slider ref={search} {...slider_search}>
+                                <Slider ref={recently} {...recentlySlider}>
                                     {recentlyViewed.map((item) => (
                                         <div
                                             className="card border-0 w-100 mx-auto d-block"
@@ -2319,10 +2358,10 @@ const Productdetails = () => {
                                 </Slider>
 
                                 {/* Next Button */}
-                                {currentIndex < recentlyViewed.length - slider_search.slidesToShow && (
+                                {currentIndex < recentlyViewed.length - recentlySlider.slidesToShow && (
                                     <div>
                                         <button
-                                            onClick={() => search?.current?.slickNext()}
+                                            onClick={() => recently?.current?.slickNext()}
                                             className="next-btn-set float-end"
                                         >
                                             <i className="ri-arrow-right-wide-line"></i>

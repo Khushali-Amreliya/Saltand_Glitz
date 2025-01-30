@@ -21,6 +21,7 @@ const Cart = () => {
   const [couponCode, setCouponCode] = useState("");
   // const [subtotal, setSubtotal] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [couponDiscount, setCouponDiscount] = useState(0); // New state for coupon discount in rupees
   const navigate = useNavigate();
   const [copiedCode, setCopiedCode] = useState("");
@@ -28,6 +29,11 @@ const Cart = () => {
   const [product, setProduct] = useState([]); // Initialize as an array
   const [tQuantity, setTQuantity] = useState([])
   const user = JSON.parse(localStorage.getItem('user'));
+
+
+  const openModal = (item) => {
+    setSelectedProduct(item);
+  };
 
   const handleCopyCode = (code) => {
     navigator.clipboard.writeText(code);
@@ -63,8 +69,8 @@ const Cart = () => {
     const fetchCart = async () => {
       try {
         setLoading(true); // Start loader
-        const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${user._id}`);
-        // console.log(response.data); // Debug response structure
+        const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
+        console.log("Cart", response.data); // Debug response structure
 
         const data = response.data;
 
@@ -99,42 +105,35 @@ const Cart = () => {
     fetchCart();
   }, [user._id]);
 
-  const removeToCart = async (item, id) => {
-    // console.log("item.productId:", item.productId);  // Log the productId to check its structure
-
-    setLoading(true)
+  const removeToCart = async (item) => {
+    setLoading(true);
     const cartItem = {
-      user: user._id,  // Make sure user._id is valid
-      productId: item.productId.product_id,   // Passing the correct id here
+      user: user._id,
+      productId: item.productId.product_id,
     };
-    // console.log(cartItem);
-
 
     try {
       const response = await axios.delete(
-        `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${id}`,  // Endpoint
+        `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${item.productId.product_id}`,
         cartItem
       );
+      console.log(response);
 
-      // Check if the response status is 200 (successful request)
       if (response.status === 200) {
-        // Handle success: Update the local cart state or UI
         dispatch(cartAction.removeItem(response.data));
-        // console.log("Removed item from cart:", response.data);
         toast.success('Item removed from the cart', {
           position: 'top-center',
           autoClose: 1000,
         });
-        navigate("/")
+        navigate("/");
       } else {
-        // Handle errors or unexpected responses
         toast.error("Failed to remove item from cart!");
       }
     } catch (error) {
       console.error("Error removing item from cart:", error);
       toast.error("An error occurred while removing item from cart.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -225,7 +224,7 @@ const Cart = () => {
     }
   };
 
-  const moveToWishlist = async (item, id) => {
+  const moveToWishlist = async (item) => {
     setLoading(true);
 
     // Prepare the cart item to be removed
@@ -238,11 +237,9 @@ const Cart = () => {
     try {
       // First, remove the item from the cart
       const removeResponse = await axios.delete(
-        `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${id}`,  // Endpoint to remove from cart
-        { data: cartItem }  // The correct way to send the body in a DELETE request
+        `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${item.productId.product_id}`,  // Correct endpoint for removing from cart
+        { data: cartItem }  // Send cartItem correctly in the DELETE request
       );
-
-      // console.log("removeResponse:", removeResponse); // Log the remove response for debugging
 
       if (removeResponse.status === 200) {
         // Item removed successfully from cart, now add it to the wishlist
@@ -250,11 +247,9 @@ const Cart = () => {
           'https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist',
           {
             userId: user._id,  // Send userId here
-            productId: item.productId.product_id,  // Send productId here
+            productId: item.productId.product_id,  // Send the correct productId
           }
         );
-
-        // console.log("wishlistResponse:", wishlistResponse); // Log the wishlist response for debugging
 
         if (wishlistResponse.status === 200 || wishlistResponse.status === 201) {
           // Add to the wishlist successfully, update the state
@@ -279,6 +274,7 @@ const Cart = () => {
       setLoading(false)
     }
   };
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -316,6 +312,12 @@ const Cart = () => {
     };
   }, [handleScroll]);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  }, [handleScroll])
   return (
     <Helmet title="Cart">
       <>
@@ -397,24 +399,26 @@ const Cart = () => {
                                 style={{ cursor: "pointer" }}
                               >
                                 Quantity: &nbsp;
-                                <span
-                                  className=""
-                                  onClick={() => handleIncrement(item.productId.product_id)}
-                                >
-                                  <i className="ri-add-line"></i>
-                                </span>
-                                &nbsp;
-                                <span style={{ fontSize: "14.5px" }}>
-                                  {item.quantity}
-                                </span>
-                                &nbsp;
-                                <span onClick={() => handleDecrement(item.productId.product_id)}>
-                                  <i className="ri-subtract-line"></i>
+                                <span className="increse_decrese">
+                                  <span
+                                    className="px-3"
+                                    onClick={() => handleIncrement(item.productId.product_id)}
+                                  >
+                                    <i className="ri-add-line"></i>
+                                  </span>
+                                  &nbsp;
+                                  <span style={{ fontSize: "14.5px" }}>
+                                    {item.quantity}
+                                  </span>
+                                  &nbsp;
+                                  <span className="px-3" onClick={() => handleDecrement(item.productId.product_id)}>
+                                    <i className="ri-subtract-line"></i>
+                                  </span>
                                 </span>
                               </p>
-                              <p className="cart_delivery">
+                              {/* <p className="cart_delivery">
                                 Delivery by - 30th Aug
-                              </p>
+                              </p> */}
                             </div>
                             {/* Delete Button Floating to the End */}
                             <button
@@ -422,11 +426,14 @@ const Cart = () => {
                               className="border-0 btn"
                               data-bs-toggle="modal"
                               data-bs-target="#staticBackdrop"
+                              onClick={() => openModal(item)} // Set the selected item when the remove button is clicked
                             >
                               <span className="delete__btn float-end">
                                 <i className="ri-close-circle-fill"></i>
                               </span>
                             </button>
+
+                            {/* Modal for remove cart */}
                             <div
                               className="modal fade"
                               id="staticBackdrop"
@@ -447,25 +454,26 @@ const Cart = () => {
                                     ></button>
                                   </div>
                                   <div className="modal-body text-center modal_content">
-                                    <img
-                                      alt={item.productId.title}
-                                      src={item.productId.image01}
-                                      className="w-25 mx-auto d-block"
-                                    />
-                                    <h6 className="m-0 pt-3">
-                                      Move Design from Cart
-                                    </h6>
-                                    <p>
-                                      Are you sure you want to move this design
-                                      from the cart?
-                                    </p>
+                                    {selectedProduct && (
+                                      <>
+                                        <img
+                                          alt={selectedProduct.productId.title}
+                                          src={selectedProduct.productId.image01}
+                                          className="w-25 mx-auto d-block"
+                                        />
+                                        <h6 className="m-0 pt-3">Move Design from Cart</h6>
+                                        <p>
+                                          Are you sure you want to move this design from the cart?
+                                        </p>
+                                      </>
+                                    )}
                                   </div>
                                   <div className="modal-footer border-0 mx-auto d-block">
                                     <button
                                       type="button"
                                       className="btn modal_remove"
                                       data-bs-dismiss="modal"
-                                      onClick={() => removeToCart(item, item.productId.product_id)}
+                                      onClick={() => removeToCart(selectedProduct, selectedProduct.productId.product_id)}
                                     >
                                       REMOVE
                                     </button>
@@ -473,7 +481,7 @@ const Cart = () => {
                                       type="button"
                                       className="btn btn-primary modal_wishlist"
                                       data-bs-dismiss="modal"
-                                      onClick={() => moveToWishlist(item, item.productId.product_id)}
+                                      onClick={() => moveToWishlist(selectedProduct, selectedProduct.productId.product_id)}
                                     >
                                       MOVE TO WISHLIST
                                     </button>
