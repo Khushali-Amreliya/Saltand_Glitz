@@ -118,7 +118,7 @@ const Userprofile = () => {
                                 <tbody>
                                     <tr>
                                         <th style={{ width: "35%" }}>NAME:</th>
-                                        <td>{user?.name || '-'}</td>
+                                        <td>{user?.firstName || '-'}</td>
                                     </tr>
                                     <tr>
                                         <th>EMAIL:</th>
@@ -126,7 +126,7 @@ const Userprofile = () => {
                                     </tr>
                                     <tr>
                                         <th>MOBILE NO.:</th>
-                                        <td>{user?.mobile || '-'}</td>
+                                        <td>{user?.mobileNumber || '-'}</td>
                                     </tr>
                                     <tr>
                                         <th>PINCODE:</th>

@@ -41,7 +41,7 @@ const OrderSummary = () => {
         const fetchCart = async () => {
             try {
                 setLoading(true); // Start loader
-                const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${user._id}`);
+                const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
                 // console.log(response.data); // Debug response structure
 
                 const data = response.data;

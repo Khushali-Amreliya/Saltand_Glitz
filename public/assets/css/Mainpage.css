@@ -63,6 +63,9 @@
 .cartlane p {
   font-size: 13px !important;
   color: var(--color) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 .banner_class {
@@ -78,17 +81,21 @@
 
 .div_img {
   display: flex;
-  overflow-x: auto; /* Scroll bar hatane ke liye */
+  overflow-x: auto;
+  /* Scroll bar hatane ke liye */
   scroll-snap-type: x mandatory;
   padding: 10px;
   gap: 12px;
   scroll-padding: 10px;
-  -ms-overflow-style: none;  /* IE aur Edge ke liye */
-  scrollbar-width: none;  /* Firefox ke liye */
+  -ms-overflow-style: none;
+  /* IE aur Edge ke liye */
+  scrollbar-width: none;
+  /* Firefox ke liye */
 }
 
 .div_img::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera ke liye */
+  display: none;
+  /* Chrome, Safari, Opera ke liye */
 }
 
 .img_carousel {
@@ -225,6 +232,18 @@
   font-style: normal;
   font-size: 13px;
   padding-bottom: 10px !important;
+}
+
+.whatsapp-logo {
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  z-index: 1000;
+  color: #25D366;
+  /* color: #075E54; */
+}
+.whatsapp-logo:hover {
+  color: #25D366;
 }
 
 @media(max-width:992px) {

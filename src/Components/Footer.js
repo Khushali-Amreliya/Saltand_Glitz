@@ -74,7 +74,7 @@ const Footer = () => {
         <h6 className='m-0 p-0 text-center pb-2'>© T&CO. 2024</h6>
 
       </section>
-      <section className='container footer_main my-5 py-3 d-sm-block d-lg-none d-md-none'>
+      <section className='container footer_main mt-5 py-3 d-sm-block d-lg-none d-md-none'>
         <div className='row'>
           <div className='faq-container'>
             {faqData.map((faq, index) => (
@@ -98,7 +98,7 @@ const Footer = () => {
               </div>
             ))}
           </div>
-          <div className='text-center pt-5'>
+          <div className='text-center pt-3'>
             <i className="ri-instagram-line fs-2 px-3"></i>
             <i className="ri-facebook-box-fill fs-2 px-3"></i>
             <i className="ri-pinterest-fill fs-2 px-3"></i>

@@ -29,6 +29,7 @@ import Warranty from '../Policies/Warranty';
 import Contact from '../Pages/Contact';
 import Productdetails from '../Pages/Product/Productdetails';
 import Plan from '../Purchase/Plan';
+import OtpComponent from '../otpComponent';
 
 const Router = () => {
   return (
@@ -39,6 +40,7 @@ const Router = () => {
         <Route path='/earrings' element={<Earrings />} />
         <Route path='/aboutUs' element={<AboutUs />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/otp' element={<OtpComponent />} />
         
         {/* Process */}
         <Route path='/cart' element={<Cart />} />

@@ -11,10 +11,12 @@ const Signup = () => {
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(null);
     const [formData, setFormData] = useState({
-        name: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
-        gender: ''
+        gender: '',
+        mobileNumber: '',
     });
     const navigate = useNavigate();
     const provider = new GoogleAuthProvider();
@@ -30,11 +32,13 @@ const Signup = () => {
             setLoading(true);
             provider.setCustomParameters({ prompt: 'select_account' });
             const result = await signInWithPopup(auth, provider);
-            const { displayName, email } = result.user;
+            const { displayName, email, mobileNumber } = result.user;
 
             const userData = {
-                name: displayName || '',
+                firstName: displayName || '',
+                lastName: displayName || '',
                 email: email || '',
+                mobileNumber: mobileNumber || '',
                 gender: '' // Ensure gender is being selected or passed
             };
 
@@ -100,10 +104,12 @@ const Signup = () => {
                 if (parsedUser && user) {
                     setUser(parsedUser);
                     setFormData({
-                        name: '',
+                        firstName: '',
+                        lastName: '',
                         email: '',
                         password: '',
-                        gender: ''
+                        gender: '',
+                        mobileNumber: '',
                     });
                 }
             } catch (error) {
@@ -115,7 +121,7 @@ const Signup = () => {
         // Clear form data if user is logged out
         return () => {
             if (!user) {
-                setFormData({ name: '', email: '', password: '', gender: '' }); // Clear form data on unmount
+                setFormData({ firstName: '', lastName: '', email: '', password: '', gender: '', mobileNumber: '', }); // Clear form data on unmount
             }
         };
     }, [user]);
@@ -132,7 +138,7 @@ const Signup = () => {
         setLoading(true);
 
         try {
-            await axios.post('http://localhost:5000/api/users/register', formData);
+            await axios.post('https://saltandglitz-api.vercel.app/api/users/register', formData);
             toast.success('Sign-up successful!');
 
             // Save the user data from the response (if needed)
@@ -140,10 +146,12 @@ const Signup = () => {
 
             // Clear form data after successful signup
             setFormData({
-                name: '',
+                firstName: '',
+                lastName: '',
                 email: '',
                 password: '',
-                gender: ''
+                gender: '',
+                mobileNumber: '',
             });
 
             // Redirect to the user profile page
@@ -180,19 +188,34 @@ const Signup = () => {
                         <div className='col-xl-6 mx-auto d-block'>
                             <form onSubmit={handleSubmit}>
                                 <div className='row'>
-                                    {/* Name Field */}
-                                    <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
+                                    {/* First Name Field */}
+                                    <div className='col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
                                         <div className='input-container'>
                                             <input
                                                 type='text'
                                                 placeholder=' '
                                                 className='input-field'
-                                                name='name'
-                                                value={formData.name}
+                                                name='firstName'
+                                                value={formData.firstName}
                                                 onChange={handleChange}
                                                 required
                                             />
-                                            <label className='input-label'>Name</label>
+                                            <label className='input-label'>First Name</label>
+                                        </div>
+                                    </div>
+                                    {/* Last Name Field */}
+                                    <div className='col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
+                                        <div className='input-container'>
+                                            <input
+                                                type='text'
+                                                placeholder=' '
+                                                className='input-field'
+                                                name='lastName'
+                                                value={formData.lastName}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                            <label className='input-label'>Last Name</label>
                                         </div>
                                     </div>
                                     {/* Email Field */}
@@ -208,6 +231,21 @@ const Signup = () => {
                                                 required
                                             />
                                             <label className='input-label'>Email</label>
+                                        </div>
+                                    </div>
+                                    {/* Mobile Number Field */}
+                                    <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
+                                        <div className='input-container'>
+                                            <input
+                                                type='text'
+                                                placeholder=' '
+                                                className='input-field'
+                                                name='mobileNumber'
+                                                value={formData.mobileNumber}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                            <label className='input-label'>Mobile</label>
                                         </div>
                                     </div>
                                     {/* Password Field */}

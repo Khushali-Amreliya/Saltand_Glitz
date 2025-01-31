@@ -139,7 +139,7 @@ const Cart = () => {
 
   const handleIncrement = async (productId) => {
     setLoading(true);
-    const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${user._id}`);
+    const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
     // console.log(response);
 
     const data = response.data;
@@ -155,7 +155,7 @@ const Cart = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/v1/cart/cartIncrement",
+        "https://saltandglitz-api.vercel.app/v1/cart/cartIncrement",
         cartItem
       );
 
@@ -183,7 +183,7 @@ const Cart = () => {
 
   const handleDecrement = async (productId) => {
     setLoading(true);
-    const response = await axios.get(`http://localhost:5000/v1/cart/getCart/${user._id}`);
+    const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
     // console.log(response);
 
     const data = response.data;
@@ -198,7 +198,7 @@ const Cart = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/v1/cart/cartDecrement",
+        "https://saltandglitz-api.vercel.app/v1/cart/cartDecrement",
         cartItem
       );
 
@@ -396,12 +396,12 @@ const Cart = () => {
                               </p>
                               <p
                                 className="cart_quantity m-0 pt-1"
-                                style={{ cursor: "pointer" }}
+                                style={{ cursor: "pointer", letterSpacing:"0.5px", fontSize:"11px" }}
                               >
                                 Quantity: &nbsp;
                                 <span className="increse_decrese">
                                   <span
-                                    className="px-3"
+                                    className="px-2"
                                     onClick={() => handleIncrement(item.productId.product_id)}
                                   >
                                     <i className="ri-add-line"></i>
@@ -411,7 +411,7 @@ const Cart = () => {
                                     {item.quantity}
                                   </span>
                                   &nbsp;
-                                  <span className="px-3" onClick={() => handleDecrement(item.productId.product_id)}>
+                                  <span className="px-2" onClick={() => handleDecrement(item.productId.product_id)}>
                                     <i className="ri-subtract-line"></i>
                                   </span>
                                 </span>
@@ -745,7 +745,7 @@ const Cart = () => {
             )}
           </div>
         </section>
-        <section className="cart_footer">
+        <section className="cart_footer position_cart">
           <div className="cart_footer_left pt-3">
             <p>
               <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) |

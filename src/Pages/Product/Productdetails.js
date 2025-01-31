@@ -1373,7 +1373,7 @@ const Productdetails = () => {
     const fetchProducts = async () => {
         try {
             const response = await axios.get(`http://localhost:5000/v1/upload/get_similar/${id}`);
-            console.log(response);
+            // console.log(response);
             setSimilarProducts(response.data);
         } catch (err) {
             console.error("Error fetching similar products:", err);
@@ -1971,6 +1971,7 @@ const Productdetails = () => {
                                         ))}
                                     </select>
                                 </div>
+                                <hr className="custom-hr" />
                                 {/* <div className=" align-items-center customize_sec container-fluid">
                                 <div className="row">
                                     <div className="col-12 border my-1 bg-white">

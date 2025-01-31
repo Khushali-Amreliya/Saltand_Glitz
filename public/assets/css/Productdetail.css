@@ -348,6 +348,13 @@
     font-size: 16px;
     color: #555;
 }
+.custom-hr {
+    border: none;
+    border-top: 2px solid #e1e1e4; /* 1px border with light gray color */
+    width: 100%; /* Full width */
+    margin: 10px 0; /* Adjust spacing */
+}
+
 
 /* Diamonds & Gemstones */
 .diamonds-gemstones table {

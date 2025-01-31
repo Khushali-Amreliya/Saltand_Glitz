@@ -2031,16 +2031,16 @@ const Header = () => {
                                             <Link to={`/productDetail/${item.id}`}>
                                                 <img
                                                     alt={item.title}
-                                                    src={item.image01}
+                                                    src={item.goldImages[0]}
                                                     className="img-fluid px-2 position-relative"
                                                 />
                                             </Link>
                                             <div className="card-body cartlane">
                                                 <h6>
-                                                    {formatCurrency(item.price)}{" "}
-                                                    <span>
+                                                    {formatCurrency(item.total14KT)}{" "}
+                                                    {/* <span>
                                                         <del>{formatCurrency(item.delprice)}</del>
-                                                    </span>
+                                                    </span> */}
                                                 </h6>
                                                 <p>{item.title}</p>
                                             </div>

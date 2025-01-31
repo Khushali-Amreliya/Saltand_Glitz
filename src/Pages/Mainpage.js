@@ -401,10 +401,13 @@ const Mainpage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
-        console.log(response.data);
+        // console.log(response.data);
         setProducts(response.data); // Set products in state
       } catch (err) {
-        console.error("Error fetching products:", err);
+        console.error("Error fetching products:", err);<a href="https://wa.me/919662044820" target="_blank" rel="noopener noreferrer" className="whatsapp-logo text-decoration-none">
+    <i class="ri-whatsapp-fill fs-1"></i> Contact Us on WhatsApp
+</a>
+
         setError("Failed to load products.");
       } finally {
         setLoading(false); // Stop loader
@@ -413,7 +416,7 @@ const Mainpage = () => {
 
     fetchProducts();
   }, []);
-  
+
   // ------------------------------------------Category wise product fetch------------------------------
   // useEffect(() => {
   //   const fetchProducts = async () => {
@@ -429,7 +432,7 @@ const Mainpage = () => {
   //       setLoading(false);
   //     }
   //   };
-  
+
   //   fetchProducts();
   // }, []);
 
@@ -894,6 +897,9 @@ const Mainpage = () => {
           <img alt='' src='assets/img/diamond_banner.webp' className='img-fluid'></img>
         </div>
       </section> */}
+      <a href="https://wa.me/+919662044820" target="_blank" rel="noopener noreferrer" className="whatsapp-logo text-decoration-none">
+        <i class="ri-whatsapp-fill fs-1"></i>
+      </a>
     </>
   )
 }
