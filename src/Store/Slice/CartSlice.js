@@ -122,10 +122,10 @@ const cartSlice = createSlice({
 
         addRecentlyViewed(state, action) {
             const newItem = action.payload;
-            console.log("New Recently Viewed Item:", newItem);
-        
+            // console.log("New Recently Viewed Item:", newItem);
+
             const existingItem = state.recentlyViewed.find(item => item.id === newItem.id);
-        
+
             if (!existingItem) {
                 state.recentlyViewed.unshift(newItem);
                 if (state.recentlyViewed.length > 8) {
@@ -133,10 +133,10 @@ const cartSlice = createSlice({
                 }
                 console.log("Updated Recently Viewed List:", state.recentlyViewed);
             }
-        
+
             setRecentlyViewed(state.recentlyViewed); // Save to localStorage
-        },        
-        
+        },
+
         applyCoupon(state, action) {
             const discountCode = action.payload;
             let discountPercent = 0;
@@ -178,7 +178,7 @@ const cartSlice = createSlice({
                     id: newItem.id,
                     title: newItem.title,
                     image01: newItem.image01,
-                    total14KT:newItem.total14KT
+                    total14KT: newItem.total14KT
                 });
                 // toast.success("Item added to wishlist!");
             }

@@ -898,7 +898,8 @@ const Mainpage = () => {
         </div>
       </section> */}
       <a href="https://wa.me/+919662044820" target="_blank" rel="noopener noreferrer" className="whatsapp-logo text-decoration-none">
-        <i class="ri-whatsapp-fill fs-1"></i>
+        {/* <i class="ri-whatsapp-fill fs-1"></i> */}
+        <i class="fa-brands fa-whatsapp"></i>
       </a>
     </>
   )

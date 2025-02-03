@@ -9,7 +9,7 @@ const App = () => {
     <div>
       {/* <ImportExcel></ImportExcel> */}
       <Layout></Layout>
-      <ToastContainer autoClose={1000} position='top-center' />
+      <ToastContainer autoClose={1000} position='bottom-center' />
     </div>
   )
 }

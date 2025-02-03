@@ -258,10 +258,22 @@ const ProductCard = ({ Productsitem }) => {
     const [isWishlist, setIsWishlist] = useState(false);
 
     useEffect(() => {
-        // Check if product is in wishlist from localStorage
-        const wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
-        setIsWishlist(wishlistItem.includes(product_id));
-    }, [product_id]);
+        const fetchWishlist = async () => {
+            try {
+                
+                const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
+                const wishlistData = response.data.wishlist || {};
+                const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
+                
+                localStorage.setItem('wishlist', JSON.stringify({ [user._id]: wishlistProductIds }));
+                setIsWishlist(wishlistProductIds.includes(product_id));
+            } catch (error) {
+                // toast.error('Unable to fetch wishlist');
+            }
+        };
+    
+        fetchWishlist();
+    }, [product_id, user?._id]);
 
     // Function to add an item to the wishlist
     const addToWishlist = async () => {
@@ -273,21 +285,19 @@ const ProductCard = ({ Productsitem }) => {
 
             dispatch(cartAction.addToWishlist(Productsitem));
 
-            let wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
-            if (!wishlistItem.includes(product_id)) {
-                wishlistItem.push(product_id);
-                localStorage.setItem('wishlistItem', JSON.stringify(wishlistItem));
-            }
-
             toast.success('Item added to wishlist', {
-                position: 'top-center',
+                position: 'bottom-center',
                 autoClose: 1000,
             });
-            setIsWishlist(true); // Set heart to fill
+            setIsWishlist(true);
         } catch (error) {
-            console.error('Error adding to wishlist:', error);
+            if (error.response) {
+                console.error('Error adding to wishlist:', error.response.data);
+            } else {
+                console.error('Error adding to wishlist:', error.message);
+            }
             toast.error('Error adding item to wishlist', {
-                position: 'top-center',
+                position: 'bottom-center',
                 autoClose: 1000,
             });
         }
@@ -295,25 +305,23 @@ const ProductCard = ({ Productsitem }) => {
 
     const removeFromWishlist = async () => {
         try {
-            await axios.delete(
-                `https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`
-            );
+            await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
 
             dispatch(cartAction.removeFromWishlist(product_id));
 
-            let wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
-            wishlistItem = wishlistItem.filter(item => item !== product_id);
-            localStorage.setItem('wishlistItem', JSON.stringify(wishlistItem));
-
             toast.success('Item removed from wishlist', {
-                position: 'top-center',
+                position: 'bottom-center',
                 autoClose: 1000,
             });
-            setIsWishlist(false); // Set heart to unfill
+            setIsWishlist(false);
         } catch (error) {
-            console.error('Error removing from wishlist:', error);
+            if (error.response) {
+                console.error('Error removing from wishlist:', error.response.data);
+            } else {
+                console.error('Error removing from wishlist:', error.message);
+            }
             toast.error('Error removing item from wishlist', {
-                position: 'top-center',
+                position: 'bottom-center',
                 autoClose: 1000,
             });
         }
@@ -422,3 +430,210 @@ const ProductCard = ({ Productsitem }) => {
 };
 
 export default ProductCard;
+
+
+// import React, { useRef, useState, useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { Link } from 'react-router-dom';
+// import Slider from 'react-slick';
+// import axios from 'axios';
+// import { toast } from 'react-toastify';
+// import { formatCurrency } from '../../Utils/formateCurrency';
+// import { cartAction } from '../../Store/Slice/CartSlice';
+
+// const ProductCard = ({ Productsitem }) => {
+//   const user = JSON.parse(localStorage.getItem('user'));
+//   const { product_id, title, total14KT, goldImages } = Productsitem;
+//   const slider = useRef(null);
+//   const dispatch = useDispatch();
+
+//   // Local state to track if the current product is in the wishlist
+//   const [isWishlist, setIsWishlist] = useState(false);
+
+//   useEffect(() => {
+//     const fetchWishlist = async () => {
+//       try {
+//         if (!user || !user._id) {
+//           console.error('User not defined or missing _id:', user);
+//           return;
+//         }
+
+//         const url = `https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`;
+//         console.log('Fetching wishlist from:', url);
+
+//         const response = await axios.get(url);
+//         console.log('Wishlist response:', response.data);
+
+//         // Extract the wishlist object
+//         const wishlistData = response.data.wishlist;
+//         if (!wishlistData) {
+//           console.log('No wishlist data available');
+//           return;
+//         }
+
+//         // Extract products array
+//         const productsArray = wishlistData.products || [];
+//         // Map to an array of product IDs (assuming each item is structured as { productId: { product_id: "..." } })
+//         const wishlistProductIds = productsArray.map(item => item.productId.product_id);
+
+//         console.log('Wishlist Product IDs:', wishlistProductIds);
+//         setIsWishlist(wishlistProductIds.includes(product_id));
+//       } catch (error) {
+//         if (error.response) {
+//           console.error('Error fetching wishlist:', error.response.data);
+//         } else {
+//           console.error('Error fetching wishlist:', error.message);
+//         }
+//         toast.error('Unable to fetch wishlist', {
+//           position: 'bottom-center',
+//           autoClose: 1000,
+//         });
+//       }
+//     };
+
+//     fetchWishlist();
+//   }, [product_id, user]);
+
+//   const addToWishlist = async () => {
+//     try {
+//       await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
+//         userId: user._id,
+//         productId: product_id,
+//       });
+
+//       dispatch(cartAction.addToWishlist(Productsitem));
+
+//       toast.success('Item added to wishlist', {
+//         position: 'bottom-center',
+//         autoClose: 1000,
+//       });
+//       setIsWishlist(true);
+//     } catch (error) {
+//       if (error.response) {
+//         console.error('Error adding to wishlist:', error.response.data);
+//       } else {
+//         console.error('Error adding to wishlist:', error.message);
+//       }
+//       toast.error('Error adding item to wishlist', {
+//         position: 'bottom-center',
+//         autoClose: 1000,
+//       });
+//     }
+//   };
+
+//   const removeFromWishlist = async () => {
+//     try {
+//       await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
+
+//       dispatch(cartAction.removeFromWishlist(product_id));
+
+//       toast.success('Item removed from wishlist', {
+//         position: 'bottom-center',
+//         autoClose: 1000,
+//       });
+//       setIsWishlist(false);
+//     } catch (error) {
+//       if (error.response) {
+//         console.error('Error removing from wishlist:', error.response.data);
+//       } else {
+//         console.error('Error removing from wishlist:', error.message);
+//       }
+//       toast.error('Error removing item from wishlist', {
+//         position: 'bottom-center',
+//         autoClose: 1000,
+//       });
+//     }
+//   };
+
+//   const handleWishlistToggle = () => {
+//     if (isWishlist) {
+//       removeFromWishlist();
+//     } else {
+//       addToWishlist();
+//     }
+//   };
+
+//   const sliderSettings = {
+//     dots: false,
+//     infinite: true,
+//     speed: 500,
+//     slidesToShow: 1,
+//     slidesToScroll: 1,
+//     arrows: true,
+//   };
+
+//   return (
+//     <div className="card-container position-relative">
+//       <div>
+//         <Link to={`/Productdetails/${product_id}`}>
+//           <Slider ref={slider} {...sliderSettings} className="border border-1 rounded-3">
+//             <img alt="Product" src={goldImages[0]} className="img-fluid" />
+//             <img alt="Product" src={goldImages[1]} className="img-fluid" />
+//           </Slider>
+//         </Link>
+
+//         {/* Desktop View */}
+//         <div className="card-body p-0 d-lg-block d-none">
+//           <div className="hover-details position-absolute w-100">
+//             <p className="m-0">{formatCurrency(total14KT)}</p>
+//             <h6>{title}</h6>
+//           </div>
+
+//           <div>
+//             <button onClick={() => slider?.current?.slickPrev()} className="absolute_prev_btn d-lg-block d-none">
+//               <i className="ri-arrow-left-wide-line"></i>
+//             </button>
+//             <button onClick={() => slider?.current?.slickNext()} className="absolute_next_btn d-lg-block d-none">
+//               <i className="ri-arrow-right-wide-line"></i>
+//             </button>
+//           </div>
+
+//           <div className="wishlist-icons position-absolute top-0 end-0 p-2">
+//             <i
+//               className={`fs-5 heart-icon ${isWishlist ? 'fa-solid fa-heart text-dark' : 'fa-regular fa-heart'}`}
+//               style={{ cursor: 'pointer' }}
+//               onClick={handleWishlistToggle}
+//             ></i>
+//           </div>
+//           <div className="review_card position-absolute bottom-0 left-0 my-3">
+//             <p className="m-0">
+//               4.8 <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Mobile View */}
+//         <div className="card-body p-0 d-lg-none d-md-block">
+//           <div className="text-center pt-1">
+//             <p className="m-0">{formatCurrency(total14KT)}</p>
+//             <h6>{title}</h6>
+//           </div>
+
+//           <div>
+//             <button onClick={() => slider?.current?.slickPrev()} className="absolute_prev_btn d-lg-none d-block">
+//               <i className="ri-arrow-left-wide-line"></i>
+//             </button>
+//             <button onClick={() => slider?.current?.slickNext()} className="absolute_next_btn d-lg-none d-block">
+//               <i className="ri-arrow-right-wide-line"></i>
+//             </button>
+//           </div>
+
+//           <div className="d-flex align-items-center color_md">
+//             <i
+//               className={`fs-4 absolute_heart heart-icon ${isWishlist ? 'ri-heart-fill text-dark' : 'ri-heart-line'}`}
+//               style={{ cursor: 'pointer' }}
+//               onClick={handleWishlistToggle}
+//             ></i>
+//           </div>
+//           <div className="review_card review_card_md position-absolute left-0 my-3">
+//             <p className="m-0">
+//               4.8 <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ProductCard;

@@ -236,10 +236,11 @@
 
 .whatsapp-logo {
   position: fixed;
-  bottom: 20px;
+  bottom: 25px;
   right: 25px;
   z-index: 1000;
   color: #25D366;
+  font-size: 35px;
   /* color: #075E54; */
 }
 .whatsapp-logo:hover {

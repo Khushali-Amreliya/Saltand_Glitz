@@ -1180,7 +1180,7 @@ const Productdetails = () => {
     const [tempPrice, setTempPrice] = useState(price); // Temporary price for selected size
     const [adjustedPrice, setAdjustedPrice] = useState(price); // Final price
     const [selectedKT, setSelectedKT] = useState("14KT"); // Default selection is 14KT
-    const [ setIsValidSize] = useState(true);
+    const [setIsValidSize] = useState(true);
     const [ringSize, setRingSize] = useState(6);
     const [showClear, setShowClear] = useState(true);
     const [similarProducts, setSimilarProducts] = useState([]);
@@ -1197,11 +1197,24 @@ const Productdetails = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
     useEffect(() => {
-        // Check if product is in wishlist from localStorage
-        const wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
-        setIsWishlist(wishlistItem.includes(product.id));
-    }, [product.id]);
+        const fetchWishlist = async () => {
+            try {
+
+                const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
+                const wishlistData = response.data.wishlist || {};
+                const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
+
+                localStorage.setItem('wishlist', JSON.stringify({ [user._id]: wishlistProductIds }));
+                setIsWishlist(wishlistProductIds.includes(product.id));
+            } catch (error) {
+                // toast.error('Unable to fetch wishlist');
+            }
+        };
+
+        fetchWishlist();
+    }, [product.id, user?._id]);
 
     useEffect(() => {
         // console.log("Product Data Before Dispatch:", product);
@@ -1384,7 +1397,7 @@ const Productdetails = () => {
         try {
             const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/upload/get_id/${id}`);
             const data = response.data;
-            console.log("Data", data);
+            // console.log("Data", data);
 
             // Map data from Excel file
             setProduct({
@@ -1462,7 +1475,7 @@ const Productdetails = () => {
 
             if (response.status === 201 || response.status === 200) {
                 toast.success("Product added to cart successfully!", {
-                    position: "top-center",
+                    position: "bottom-center",
                     autoClose: 2000,
                 });
 
@@ -1495,7 +1508,7 @@ const Productdetails = () => {
 
             if (response.status === 201 || response.status === 200) {
                 toast.success("Product added to cart successfully and Redirecting to cart...", {
-                    position: "top-center",
+                    position: "bottom-center",
                     autoClose: 2000,
                 });
                 setTimeout(() => {
@@ -1518,7 +1531,6 @@ const Productdetails = () => {
 
     const addToWishlist = async () => {
         try {
-            console.log('Adding to wishlist...');
             await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
                 userId: user._id,
                 productId: product.id,
@@ -1526,21 +1538,19 @@ const Productdetails = () => {
 
             dispatch(cartAction.addToWishlist(product));
 
-            let wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
-            if (!wishlistItem.includes(product.id)) {
-                wishlistItem.push(product.id);
-                localStorage.setItem('wishlistItem', JSON.stringify(wishlistItem));
-            }
-
             toast.success('Item added to wishlist', {
-                position: 'top-center',
+                position: 'bottom-center',
                 autoClose: 1000,
             });
-            setIsWishlist(true); // Set heart to fill
+            setIsWishlist(true);
         } catch (error) {
-            console.error('Error adding to wishlist:', error);
+            if (error.response) {
+                console.error('Error adding to wishlist:', error.response.data);
+            } else {
+                console.error('Error adding to wishlist:', error.message);
+            }
             toast.error('Error adding item to wishlist', {
-                position: 'top-center',
+                position: 'bottom-center',
                 autoClose: 1000,
             });
         }
@@ -1548,24 +1558,23 @@ const Productdetails = () => {
 
     const removeFromWishlist = async () => {
         try {
-            console.log('Removing from wishlist...');
             await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product.id}`);
 
             dispatch(cartAction.removeFromWishlist(product.id));
 
-            let wishlistItem = JSON.parse(localStorage.getItem('wishlistItem')) || [];
-            wishlistItem = wishlistItem.filter(item => item !== product.id);
-            localStorage.setItem('wishlistItem', JSON.stringify(wishlistItem));
-
             toast.success('Item removed from wishlist', {
-                position: 'top-center',
+                position: 'bottom-center',
                 autoClose: 1000,
             });
-            setIsWishlist(false); // Set heart to unfill
+            setIsWishlist(false);
         } catch (error) {
-            console.error('Error removing from wishlist:', error);
+            if (error.response) {
+                console.error('Error removing from wishlist:', error.response.data);
+            } else {
+                console.error('Error removing from wishlist:', error.message);
+            }
             toast.error('Error removing item from wishlist', {
-                position: 'top-center',
+                position: 'bottom-center',
                 autoClose: 1000,
             });
         }

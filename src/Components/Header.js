@@ -40,7 +40,7 @@ const Header = () => {
                 setWishlistItems(response.data.wishlist.products); // Update the local state with fetched data
             }
         } catch (error) {
-            console.error('Error fetching wishlist items:', error);
+            // console.error('Error fetching wishlist items:', error);
             // toast.error("Failed to load wishlist", {
             //     position: "top-center",
             //     autoClose: 1000,
@@ -295,7 +295,14 @@ const Header = () => {
                                 )}
                             </ul>
                         </div>
-
+                        {/* <Link className="text-decoration-none text-dark position-relative" to="/wishlist">
+                            <CiHeart className="fs-4 position-relative" />
+                            {wishlistLength.length > 0 && (
+                                <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
+                                    {wishlistLength.length}
+                                </span>
+                            )}
+                        </Link> */}
                         <Link className='text-decoration-none text-dark' to="/wishlist">
                             <i className="ri-heart-line text-center position-relative">
                                 {wishlistLength.length > 0 && (
@@ -1919,7 +1926,7 @@ const Header = () => {
                                             className="card border-0 w-100 mx-auto d-block"
                                             key={item.id}
                                         >
-                                            <Link to={`/productDetail/${item.id}`}>
+                                            <Link to={`/Productdetails/${item.id}`}>
                                                 <img
                                                     alt={item.title}
                                                     src={item.goldImages[0]}
@@ -2028,7 +2035,7 @@ const Header = () => {
                                             className="card border-0 w-100 mx-auto d-block"
                                             key={item.id}
                                         >
-                                            <Link to={`/productDetail/${item.id}`}>
+                                            <Link to={`/Productdetails/${item.id}`}>
                                                 <img
                                                     alt={item.title}
                                                     src={item.goldImages[0]}

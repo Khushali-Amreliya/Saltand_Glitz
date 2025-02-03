@@ -143,7 +143,6 @@ const Cart = () => {
     // console.log(response);
 
     const data = response.data;
-
     // Prepare the payload for increment
     const cartItem = {
       cartId: data?.cart?.cart_id, // Pass the cart ID
@@ -161,7 +160,7 @@ const Cart = () => {
 
       if (response.status === 200) {
         toast.success("Product quantity incremented successfully!", {
-          position: "top-center",
+          position: "bottom-center",
           autoClose: 2000,
         });
 
@@ -204,7 +203,7 @@ const Cart = () => {
 
       if (response.status === 200) {
         toast.success("Product quantity decremented successfully!", {
-          position: "top-center",
+          position: "top-bottom",
           autoClose: 2000,
         });
 
@@ -257,7 +256,7 @@ const Cart = () => {
           dispatch(cartAction.addToWishlist(wishlistResponse.data));  // Add to wishlist in the store
 
           toast.success('Item moved to wishlist', {
-            position: 'top-center',
+            position: 'top-bottom',
             autoClose: 1000,
           });
           navigate('/wishlist');

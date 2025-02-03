@@ -47,7 +47,7 @@ const Wishlist = () => {
           prev.filter((item) => item.productId.product_id !== id)
         );
         toast.success("Item removed from wishlist", {
-          position: "top-center",
+          position: "bottom-center",
           autoClose: 1000,
         });
       } else {
@@ -56,7 +56,7 @@ const Wishlist = () => {
     } catch (error) {
       console.error("Error removing item from wishlist:", error.response?.data || error.message);
       toast.error("Error removing item from wishlist", {
-        position: "top-center",
+        position: "bottom-center",
         autoClose: 1000,
       });
     }
@@ -94,7 +94,7 @@ const Wishlist = () => {
           dispatch(cartAction.addItem(updatedCart));
 
           toast.success("Item moved to cart successfully!", {
-            position: "top-center",
+            position: "bottom-center",
             autoClose: 1000,
           });
           navigate('/cart');
@@ -107,7 +107,7 @@ const Wishlist = () => {
     } catch (error) {
       console.error("Error Details:", error.response?.data || error.message);
       toast.error("Error processing your request", {
-        position: "top-center",
+        position: "bottom-center",
         autoClose: 1000,
       });
     } finally{
