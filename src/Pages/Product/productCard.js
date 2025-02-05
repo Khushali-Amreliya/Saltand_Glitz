@@ -249,6 +249,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { formatCurrency } from '../../Utils/formateCurrency'; // Utility for formatting currency
 import { cartAction } from '../../Store/Slice/CartSlice'; // Redux actions for managing cart and wishlist
+import { IoHeart } from "react-icons/io5";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 const ProductCard = ({ Productsitem }) => {
     const user = JSON.parse(localStorage.getItem('user')); // Get the logged-in user's data from localStorage
@@ -260,18 +262,18 @@ const ProductCard = ({ Productsitem }) => {
     useEffect(() => {
         const fetchWishlist = async () => {
             try {
-                
+
                 const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
                 const wishlistData = response.data.wishlist || {};
                 const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
-                
+
                 localStorage.setItem('wishlist', JSON.stringify({ [user._id]: wishlistProductIds }));
                 setIsWishlist(wishlistProductIds.includes(product_id));
             } catch (error) {
                 // toast.error('Unable to fetch wishlist');
             }
         };
-    
+
         fetchWishlist();
     }, [product_id, user?._id]);
 
@@ -379,12 +381,15 @@ const ProductCard = ({ Productsitem }) => {
                     </div>
 
                     {/* Wishlist Heart Icon */}
-                    <div className="wishlist-icons position-absolute top-0 end-0 p-2">
+                    {/* <div className="wishlist-icons position-absolute top-0 end-0 p-2">
                         <i
                             className={`fs-5 heart-icon ${isWishlist ? 'fa-solid fa-heart text-dark' : 'fa-regular fa-heart'}`}
                             style={{ cursor: 'pointer' }}
                             onClick={handleWishlistToggle}
                         ></i>
+                    </div> */}
+                    <div className="wishlist-icons position-absolute top-0 end-0 p-2" style={{ cursor: 'pointer' }} onClick={handleWishlistToggle}>
+                        {isWishlist ? <IoHeart className="fs-5 text-dark" /> : <IoMdHeartEmpty className="fs-5" />}
                     </div>
                     <div className="review_card position-absolute bottom-0 left-0 my-3">
                         <p className='m-0'>4.8
@@ -411,12 +416,15 @@ const ProductCard = ({ Productsitem }) => {
                     </div>
 
                     {/* Wishlist Heart Icon for mobile */}
-                    <div className="d-flex align-items-center color_md">
+                    {/* <div className="d-flex align-items-center color_md">
                         <i
                             className={`fs-4 absolute_heart heart-icon ${isWishlist ? 'ri-heart-fill text-dark' : 'ri-heart-line'}`}
                             style={{ cursor: 'pointer' }}
                             onClick={handleWishlistToggle}
                         ></i>
+                    </div> */}
+                    <div className="wishlist-icons position-absolute top-0 end-0 p-2" style={{ cursor: 'pointer' }} onClick={handleWishlistToggle}>
+                        {isWishlist ? <IoHeart className="fs-5 text-dark" /> : <IoMdHeartEmpty className="fs-5" />}
                     </div>
                     <div className="review_card review_card_md position-absolute left-0 my-3">
                         <p className='m-0'>4.8

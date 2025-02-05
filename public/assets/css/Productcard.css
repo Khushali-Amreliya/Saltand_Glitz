@@ -51,14 +51,14 @@
 
 /* Wishlist Icons */
 .wishlist-icons {
-    z-index: 2;
+    /* z-index: 2; */
     top: 10px;
     right: 10px;
     color: #000 !important;
 }
 
 .review_card {
-    z-index: 2;
+    /* z-index: 2; */
     left: 15px;
     color: #000 !important;
     border-radius: 15px;

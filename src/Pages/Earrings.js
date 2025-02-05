@@ -791,11 +791,11 @@ const Earrings = () => {
                                         <div className="offcanvas-body small m-0 p-0">
                                             <div className="mb-2 text-left">
                                                 <p>Featured</p>
-                                                <p>Alphabetically, A-Z</p>
-                                                <p>Alphabetically, Z-A</p>
+                                                <p>Latest</p>
+                                                {/* <p>Alphabetically, A-Z</p> */}
+                                                {/* <p>Alphabetically, Z-A</p> */}
                                                 <p>High to Low</p>
                                                 <p>Low to High</p>
-                                                <p>Latest</p>
                                             </div>
                                             <div className="container-fluid filter_offcanvas py-3">
                                                 <div className="row">
@@ -1363,10 +1363,9 @@ const Earrings = () => {
                                 <div className="col d-lg-flex d-none justify-content-end">
                                     <select className="form-select custom-select w-auto">
                                         <option value="Featured">Featured</option>
-                                        <option value="1">Alphabetically, A-Z</option>
-                                        <option value="2">Alphabetically, Z-A</option>
-                                        <option value="3">High Price</option>
-                                        <option value="4">Low Price</option>
+                                        <option value="Latest">Latest</option>
+                                        <option value="High">High to Low</option>
+                                        <option value="Low">Low to High</option>
                                     </select>
                                 </div>
                             </div>

@@ -234,7 +234,7 @@
     border-radius: 6px !important;
     display: inline-block;
     position: absolute;
-    top: -7px;
+    top: 6px;
     line-height: 18px;
     text-align: center;
     right: -10px;
@@ -312,10 +312,14 @@
     transition: 0.3s ;
     font-weight: bold;
 } */
+.header_login{
+    /* margin: 0px -100px !important; */
 
+}
 .header_login a:hover {
     padding-left: 0px !important;
     font-weight: normal !important;
+
 }
 
 .header_login .dropdown-item>a:first-child>button {
@@ -335,11 +339,11 @@
     border-top: 1px solid #e0e3e3 !important;
     font-size: 12px !important;
     border-radius: 0 !important;
-    margin: 0px -80px !important;
+    margin: 2px -130px !important;
     border-radius: 8px !important;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     padding: 5px !important;
-    min-width: 14rem !important;
+    /* min-width: 14rem !important; */
 }
 
 .dropdown-item:active {
@@ -366,6 +370,7 @@
     color: #333;
     margin-bottom: 10px;
     font-size: 12px;
+    letter-spacing: 0.5px;
 }
 
 /* List styles */
@@ -391,7 +396,6 @@
     margin-right: 10px !important;
     font-size: 15px !important;
     padding: 0 !important;
-    margin-right: 10px !important;
 }
 
 /* Hover effect */

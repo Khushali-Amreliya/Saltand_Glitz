@@ -9,6 +9,11 @@ import { cartAction } from '../Store/Slice/CartSlice';
 import { signOut } from 'firebase/auth';
 import auth from './firebase';
 import axios from 'axios';
+import { CiHeart, CiShoppingCart , CiLogout  } from "react-icons/ci";
+import { GrContactInfo } from "react-icons/gr";
+import { RiUserLine } from "react-icons/ri";
+import { MdAccountCircle } from "react-icons/md";
+import { IoIosSearch } from "react-icons/io";
 
 const Header = () => {
     const search = React.useRef(null);
@@ -219,7 +224,7 @@ const Header = () => {
                                 <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas" aria-controls="searchOffcanvas">
                                     <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                     <div className="input-group-append">
-                                        <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><i className="fa fa-search"></i></button>
+                                        <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><IoIosSearch /></button>
                                     </div>
                                 </div>
                             </div>
@@ -247,39 +252,39 @@ const Header = () => {
                         </div>
                     </div>
                     <div className='col-lg-3 col-md-3 col-sm-12 header_logo d-flex justify-content-end align-items-center'>
-                        <Link className='text-decoration-none text-dark' to="/contact">
-                            <i className="ri-contacts-line">
+                        <div className="d-flex align-items-center gap-3">
+                            <Link className='text-decoration-none text-dark' to="/contact">
+                                <GrContactInfo className='fs-5' />
                                 <span className='align-middle' style={{ fontSize: "14px", fontWeight: "500" }}>&nbsp; Contact us</span>
-
-                            </i>
-                        </Link>
-                        <div className="dropdown drp_main">
-                            <Link className="text-decoration-none text-dark dropdown-toggle" id="dropdownUserLink" role="button">
-                                <i className="ri-user-line nav_icon text-center"></i>
                             </Link>
-                            <ul className="dropdown-menu drp_icon" aria-labelledby="dropdownUserLink">
-                                {isLoggedIn ? (
-                                    <>
-                                        <div className="">
+
+                            <div className="dropdown drp_main">
+                                <Link className="text-decoration-none text-dark dropdown-toggle" id="dropdownUserLink" role="button">
+                                    <RiUserLine className='text-center fs-5' />
+                                </Link>
+                                <ul className="dropdown-menu drp_icon" aria-labelledby="dropdownUserLink">
+                                    {isLoggedIn ? (
+                                        <div className='p-2'>
                                             <p className="user-email px-3">{user ? user.email : 'Guest'}</p>
                                             <div className="underline mb-3 ms-3"></div>
                                             <ul className="profile-menu">
                                                 <li className="mb-2">
-                                                    <Link to="/Userprofile" className="profile-menu-item">
-                                                        <i className="ri-user-3-fill"></i> My Account
+                                                    <Link to="/Userprofile" className="profile-menu-item ms-2">
+                                                        <MdAccountCircle className='me-2 fs-5' /> My Account
                                                     </Link>
+                                                    {/* <Link to="/Userprofile" className="profile-menu-item">
+                                                        <i className="ri-user-3-fill"></i> My Account
+                                                    </Link> */}
                                                 </li>
                                                 <li>
-                                                    <Link to="" className="profile-menu-item logout" onClick={handleLogout}>
-                                                        <i className="ri-logout-box-line"></i> Logout
+                                                    <Link to="" className="profile-menu-item logout ms-2" onClick={handleLogout}>
+                                                        <CiLogout className='me-2 fs-5' /> Logout
                                                     </Link>
                                                 </li>
                                             </ul>
                                         </div>
-                                    </>
-                                ) : (
-                                    <>
-                                        <div className='p-3 header_login'>
+                                    ) : (
+                                        <div className='p-2 header_login'>
                                             <h5>Your Account</h5>
                                             <p className='m-0 pt-2'>Access account & manage your orders.</p>
                                             <li className="dropdown-item pt-3">
@@ -291,33 +296,30 @@ const Header = () => {
                                                 </Link>
                                             </li>
                                         </div>
-                                    </>
-                                )}
-                            </ul>
-                        </div>
-                        {/* <Link className="text-decoration-none text-dark position-relative" to="/wishlist">
-                            <CiHeart className="fs-4 position-relative" />
-                            {wishlistLength.length > 0 && (
-                                <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
-                                    {wishlistLength.length}
-                                </span>
-                            )}
-                        </Link> */}
-                        <Link className='text-decoration-none text-dark' to="/wishlist">
-                            <i className="ri-heart-line text-center position-relative">
+                                    )}
+                                </ul>
+                            </div>
+
+                            <Link className="text-decoration-none text-dark position-relative" to="/wishlist">
+                                <CiHeart className="fs-4 position-relative" />
                                 {wishlistLength.length > 0 && (
-                                    <span className="badge badge-icon badge_icon_w text-center">{wishlistLength.length}</span>
+                                    <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
+                                        {wishlistLength.length}
+                                    </span>
                                 )}
-                            </i>
-                        </Link>
-                        <Link className='text-decoration-none text-dark' to="/cart">
-                            <i className="ri-shopping-cart-2-line pe-0 position-relative">
+                            </Link>
+
+                            <Link className="text-decoration-none text-dark position-relative" to="/cart">
+                                <CiShoppingCart className="fs-4 position-relative" />
                                 {tQuantity.totalQuantity > 0 && (
-                                    <span className="badge badge-icon">{tQuantity.totalQuantity}</span>
+                                    <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
+                                        {tQuantity.totalQuantity}
+                                    </span>
                                 )}
-                            </i>
-                        </Link>
+                            </Link>
+                        </div>
                     </div>
+
                 </div>
             </section>
 
@@ -1079,8 +1081,8 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active"  id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
-                                            <i className="ri-subtract-line"></i><Link to="/aboutUs" style={{textDecoration:"none"}}>About Us</Link>
+                                        <Link className="nav-link active" id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
+                                            <i className="ri-subtract-line"></i><Link to="/aboutUs" style={{ textDecoration: "none" }}>About Us</Link>
                                         </Link>
                                     </li>
                                 </ul>
@@ -1112,26 +1114,43 @@ const Header = () => {
                     </div>
 
                     <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center'>
-                        
-                        <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
+
+                        {/* <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
                             <i className="ri-heart-line pe-0 position-relative">
                                 {wishlistLength.length > 0 && (
                                     <span className="badge badge-icon">{wishlistLength.length}</span>
                                 )}
                             </i>
+                        </Link> */}
+                        <Link className="text-decoration-none text-dark position-relative me-2" to="/wishlist">
+                            <CiHeart className="fs-5 position-relative" />
+                            {wishlistLength.length > 0 && (
+                                <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
+                                    {wishlistLength.length}
+                                </span>
+                            )}
                         </Link>
-                        <Link className='text-decoration-none text-dark pe-3' to="/cart">
+                        <Link className="text-decoration-none text-dark position-relative me-2" to="/cart">
+                            <CiShoppingCart className="fs-5 pe-0 position-relative" />
+                            {tQuantity.totalQuantity > 0 && (
+                                <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
+                                    {tQuantity.totalQuantity}
+                                </span>
+                            )}
+                        </Link>
+                        {/* <Link className='text-decoration-none text-dark pe-3' to="/cart">
                             <i className="ri-shopping-cart-line pe-0 position-relative">
                                 {tQuantity.totalQuantity > 0 && (
                                     <span className="badge badge-icon">{tQuantity.totalQuantity}</span>
                                 )}
                             </i>
-                        </Link>
+                        </Link> */}
                         <Link
-                            className="text-decoration-none text-dark "
+                            className="text-decoration-none text-dark"
                             to={isLoggedIn ? "/Uprofile" : "/loginn"}
                         >
-                            <i className="ri-user-line pe-0 position-relative"></i>
+                            <RiUserLine className="pe-0 position-relative" />
+                            {/* <i className="ri-user-line "></i> */}
                         </Link>
                     </div>
                     <form action="" className='pt-3'>
@@ -1139,7 +1158,7 @@ const Header = () => {
                             <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#mdsearchOffcanvas" aria-controls="mdsearchOffcanvas">
                                 <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                 <div className="input-group-append">
-                                    <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><i className="fa fa-search"></i></button>
+                                    <button id="button-addon1" type="submit" className="btn btn-link search_btn_header"><IoIosSearch className='fs-5' /></button>
                                 </div>
                             </div>
                         </div>
@@ -1874,7 +1893,8 @@ const Header = () => {
                                     />
                                     <div className="input-group-append">
                                         <button type="submit" className="btn btn-link search_btn_header">
-                                            <i className="fa fa-search"></i>
+                                            {/* <i className="fa fa-search"></i> */}
+                                            <IoIosSearch className='fs-5' />
                                         </button>
                                     </div>
                                 </div>
@@ -1983,7 +2003,8 @@ const Header = () => {
                                     />
                                     <div className="input-group-append">
                                         <button type="submit" className="btn btn-link search_btn_header">
-                                            <i className="fa fa-search"></i>
+                                            {/* <i className="fa fa-search"></i> */}
+                                            <IoIosSearch className='fs-5' />
                                         </button>
                                     </div>
                                 </div>

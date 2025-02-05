@@ -14,27 +14,68 @@
   padding-right: 0px !important;
 }
 
-.service_p p {
-  font-size: 13px;
+.service_main h6 {
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
 }
 
-.next_btn {
-  background-color: #fff;
-  border: none;
-  font-size: 20px;
-  margin-top: 140px !important;
+.service_main p {
+  letter-spacing: 0.7px;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  padding-bottom: 10px !important;
+}
 
+.service_p {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.service_p>div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.service_p h6 {
+  min-height: 31px;
+}
+
+.service_p p {
+  min-height: 60px;
+
+}
+
+.prev_btn,
+.next_btn {
+  position: absolute !important;
+  top: 25% !important;
+  transform: translateY(-50%) !important;
+  background: white;
+  /* Optional */
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  background-color: transparent !important;
+  font-size: 20px;
+  z-index: 10;
 }
 
 .prev_btn {
-  border: none;
-  margin-top: 140px !important;
-  font-size: 20px;
-  padding-left: 50px;
-  background-color: #fff;
-
-  margin-top: 140px !important;
+  left: -40px;
+  /* Adjust as needed */
 }
+
+.next_btn {
+  right: -40px;
+  /* Adjust as needed */
+}
+
 
 .absoluteSlider {
   position: absolute;
@@ -219,21 +260,6 @@
   width: 100%;
 }
 
-.service_main h6 {
-  letter-spacing: 0.5px;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 15px;
-}
-
-.service_main p {
-  letter-spacing: 0.5px;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 13px;
-  padding-bottom: 10px !important;
-}
-
 .whatsapp-logo {
   position: fixed;
   bottom: 25px;
@@ -243,6 +269,7 @@
   font-size: 35px;
   /* color: #075E54; */
 }
+
 .whatsapp-logo:hover {
   color: #25D366;
 }
@@ -269,6 +296,14 @@
   .viewall_btn {
     width: 30% !important;
   }
+
+  .prev_btn {
+    left: -23px !important;
+  }
+
+  .next_btn {
+    right: -23px !important;
+  }
 }
 
 @media(max-width:575px) {
@@ -284,6 +319,14 @@
   .banner_class {
     height: 70vh !important;
     object-fit: fill !important;
+  }
+
+  .prev_btn {
+    left: 0 !important;
+  }
+
+  .next_btn {
+    right: 0 !important;
   }
 }
 

@@ -347,9 +347,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Slider from 'react-slick'
-// import products from '../fakedata/Product';
 import { formatCurrency } from '../Utils/formateCurrency';
 import axios from 'axios';
+import { CiDeliveryTruck, CiCalendar, CiGift } from "react-icons/ci";
+import { BsWindowFullscreen } from "react-icons/bs";
 // import ScheduledTask from '../ScheduledTask';
 
 const Mainpage = () => {
@@ -373,10 +374,14 @@ const Mainpage = () => {
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
+  // Window refresh
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Fetch web Banners
   useEffect(() => {
     const fetchBanners = async () => {
       try {
@@ -404,10 +409,7 @@ const Mainpage = () => {
         // console.log(response.data);
         setProducts(response.data); // Set products in state
       } catch (err) {
-        console.error("Error fetching products:", err);<a href="https://wa.me/919662044820" target="_blank" rel="noopener noreferrer" className="whatsapp-logo text-decoration-none">
-    <i class="ri-whatsapp-fill fs-1"></i> Contact Us on WhatsApp
-</a>
-
+        console.error("Error fetching products:", err);
         setError("Failed to load products.");
       } finally {
         setLoading(false); // Stop loader
@@ -436,6 +438,7 @@ const Mainpage = () => {
   //   fetchProducts();
   // }, []);
 
+  // Slider
   useEffect(() => {
     const handleResize = () => {
       setSlidesToShow(getSlidesToShow());
@@ -445,16 +448,17 @@ const Mainpage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const graduate = {
+  const mobileBanners = {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 1.4,
+    slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
   };
 
-  var settings = {
+  var webBanners = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -465,7 +469,16 @@ const Mainpage = () => {
     arrows: true,
   };
 
-  const settings1 = {
+  const graduate = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1.4,
+    slidesToScroll: 1,
+    arrows: false,
+  };
+
+  const solitaire = {
     dots: false,
     infinite: false,
     speed: 500,
@@ -475,6 +488,13 @@ const Mainpage = () => {
     slidesToScroll: 1,
     arrows: true,
     responsive: [
+      {
+        breakpoint: 601, // For small screens
+        settings: {
+          slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
       {
         breakpoint: 480, // For small screens
         settings: {
@@ -492,7 +512,7 @@ const Mainpage = () => {
     ],
   };
 
-  const settings2 = {
+  const newArrivals = {
     dots: false,
     infinite: false,
     speed: 500,
@@ -502,6 +522,13 @@ const Mainpage = () => {
     slidesToScroll: 1,
     arrows: true,
     responsive: [
+      {
+        breakpoint: 601, // For small screens
+        settings: {
+          slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
       {
         breakpoint: 480, // For small screens
         settings: {
@@ -518,8 +545,8 @@ const Mainpage = () => {
       },
     ],
   };
-  const navigate = useNavigate(); // Initialize useNavigate
 
+  // Product Click and open productdetails page
   const handleProductClick = (id) => {
     // navigate(`/product/${id}`); // Navigate to ProductDetails page with the product ID
     navigate(`/Productdetails/${id}`); // Navigate to ProductDetails page with the product ID
@@ -529,6 +556,8 @@ const Mainpage = () => {
     <>
       {/* <h1>Scheduled Task at 3:00 AM IST</h1>
       <ScheduledTask /> */}
+
+      {/* Mobile Category */}
       <section className='container-fluid d-lg-none d-md-none d-block'>
         <div className='row'>
           <div className='div_img'>
@@ -581,14 +610,18 @@ const Mainpage = () => {
         </div>
       </section>
 
-      {/* Banner section */}
-      <section className="container-fluid m-0 p-0 mb-5">
+      {/* Web Banners */}
+      <section className="container-fluid m-0 p-0 mb-5 d-lg-block d-md-block d-none">
         {loading ? (
-          <p>Loading banners...</p>
+          <div className="shimmer-container">
+            {[...Array(1)].map((_, index) => (
+              <div key={index} className="shimmer-box"></div>
+            ))}
+          </div>
         ) : error ? (
           <p>{error}</p>
         ) : (
-          <Slider {...settings}>
+          <Slider {...webBanners}>
             {banners.map((banner, index) => (
               <div key={banner.banner_id}>
                 <img
@@ -601,24 +634,50 @@ const Mainpage = () => {
           </Slider>
         )}
       </section>
+
+      {/* Mobile Banners */}
+      <section className="container-fluid d-lg-none d-md-none d-block p-0 mb-5">
+        {loading ? (
+          <div className="shimmer-container">
+            {[...Array(1)].map((_, index) => (
+              <div key={index} className="shimmer-box"></div>
+            ))}
+          </div>
+        ) : (
+          <Slider {...mobileBanners}>
+            <div>
+              <img alt="" src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/Blog/Mobile.webp" className="img-fluid" />
+            </div>
+            <div>
+              <img alt="" src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/VT_Offer/01/Mobile_768x890.webp" className="img-fluid" />
+            </div>
+            <div>
+              <img alt="" src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/Extra5/02/Mobile_768x890.jpg" className="img-fluid" />
+            </div>
+          </Slider>
+        )}
+      </section>
+
+      {/* Solitaire */}
       <section className='container pb-5 pt-3'>
         <div>
           <h3 className='font_main text-center pb-3'>Solitaire</h3>
           <div className='row position-relative'>
-            <div className='d-lg-block d-md-block d-sm-block d-none'>
-              <button onClick={() => slidermenu?.current?.slickPrev()} className='prev_btn absoluteSlider' ><i className="ri-arrow-left-wide-line"></i></button>
+            <div className=''>
+              <button
+                onClick={() => slidermenu?.current?.slickPrev()}
+                className='prev_btn'
+              >
+                <i className="ri-arrow-left-wide-line"></i>
+              </button>
             </div>
             <div className=''>
-              <Slider ref={slidermenu} {...settings1}>
+              <Slider ref={slidermenu} {...solitaire}>
                 {products.map((item) => (
                   <div className='card border-0' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
                     {/* <Link to={`/productDetail/${item._id}`}> */}
                     <Link to={`/Productdetails/${item.product_id}`}>
-                      <img
-                        alt={item.title}
-                        src={item.goldImages[0]}
-                        className="img-fluid px-1"
-                      />
+                      <img alt={item.title} src={item.goldImages[0]} className="img-fluid px-1" />
                       {/* {item.goldImages && item.goldImages.map((img, i) => (
                         <img key={i} src={img} alt={`Gold Image ${i}`} className="img-fluid px-2" width="200px" />
                       ))} */}
@@ -628,9 +687,9 @@ const Mainpage = () => {
                       <h6>{item.title}</h6>
                       <p>
                         {formatCurrency(item.total14KT)}{" "}
-                        <span>
+                        {/* <span>
                           <del>{item.delprice ? formatCurrency(item.delprice) : ""}</del>
-                        </span>
+                        </span> */}
                       </p>
                     </div>
                   </div>
@@ -641,14 +700,20 @@ const Mainpage = () => {
                   <span>View All</span>
                 </button>
               </Link>
-
             </div>
-            <div className='d-lg-block d-md-block d-sm-block d-none'>
-              <button onClick={() => slidermenu?.current?.slickNext()} className="next_btn absolute1"><i className="ri-arrow-right-wide-line"></i></button>
+            <div className=''>
+              <button
+                onClick={() => slidermenu?.current?.slickNext()}
+                className="next_btn"
+              >
+                <i className="ri-arrow-right-wide-line"></i>
+              </button>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Category */}
       <section className='container pb-5 shop_category'>
         <div>
           <div className='text-center'>
@@ -708,16 +773,22 @@ const Mainpage = () => {
           </div>
         </div>
       </section>
-      {/* Product Section */}
+
+      {/* New Arrivals */}
       <section className='container'>
         <div>
           <h3 className='font_main text-center pb-4'>New Arrivals</h3>
           <div className='row position-relative'>
-            <div className='d-lg-block d-md-block d-sm-block d-none'>
-              <button onClick={() => slider1?.current?.slickPrev()} className='prev_btn absoluteSlider' ><i className="ri-arrow-left-wide-line"></i></button>
+            <div className=''>
+              <button
+                onClick={() => slider1?.current?.slickPrev()}
+                className='prev_btn'
+              >
+                <i className="ri-arrow-left-wide-line"></i>
+              </button>
             </div>
             <div className=''>
-              <Slider ref={slider1} {...settings2}>
+              <Slider ref={slider1} {...newArrivals}>
                 {products.map((item) => (
                   <div className='card border-0' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
                     {/* <Link to={`/productDetail/${item._id}`}> */}
@@ -747,12 +818,19 @@ const Mainpage = () => {
                 </button>
               </Link>
             </div>
-            <div className='d-lg-block d-md-block d-sm-block d-none'>
-              <button onClick={() => slider1?.current?.slickNext()} className="next_btn absolute1"><i className="ri-arrow-right-wide-line"></i></button>
+            <div className=''>
+              <button
+                onClick={() => slider1?.current?.slickNext()}
+                className="next_btn"
+              >
+                <i className="ri-arrow-right-wide-line"></i>
+              </button>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Banner */}
       <section className='container-fluid my-5'>
         <div>
           <div className='row p-0 m-0'>
@@ -766,6 +844,8 @@ const Mainpage = () => {
           </div>
         </div>
       </section>
+
+      {/* Gift */}
       <section className="container mt-5 mb-3 pt-3 gift_sec_main">
         {/* Grid layout for large devices */}
         <div className="d-none d-lg-block d-md-block">
@@ -857,29 +937,34 @@ const Mainpage = () => {
           </Slider>
         </div>
       </section>
-      <section className='container service_main'>
+
+      {/* Service */}
+      <section className='container service_main py-3'>
         <div>
           <div className='row service_p'>
             <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-              <i className="ri-truck-line fs-2"></i>
+              <CiDeliveryTruck className='fs-2 mb-2' />
               <h6 className=''>Complementary Shiping & Returns</h6>
               <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
               <span className='line_hover'>Learn More &nbsp; &gt;</span>
             </div>
             <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-              <i className="ri-window-line fs-2"></i>
+              {/* <i className="ri-window-line fs-2"></i> */}
+              <BsWindowFullscreen className='fs-2 mb-2' />
               <h6 className=''>Tiffany At Your Service</h6>
               <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
               <span className='line_hover'>Contact Us &nbsp; &gt;</span>
             </div>
             <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-              <i className="ri-calendar-line fs-2"></i>
+              {/* <i className="ri-calendar-line fs-2"></i> */}
+              <CiCalendar className='fs-2 mb-2' />
               <h6 className=''>Book An Appointment</h6>
               <p className='m-0 pb-1'>We’re happy to help with in-store or virtual appointments.</p>
               <span className='line_hover'>Book Now &nbsp; &gt;</span>
             </div>
             <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-              <i className="ri-mail-send-line fs-2"></i>
+              {/* <i className="ri-mail-send-line fs-2"></i> */}
+              <CiGift className='fs-2 mb-2' />
               <h6 className=''>The Iconic Blue Box</h6>
               <p className='m-0 pb-1'>Your Tiffany purchase comes wrapped in our Blue Box packaging.</p>
               <span className='line_hover'>Explore All Gifts &nbsp; &gt;</span>
@@ -887,16 +972,15 @@ const Mainpage = () => {
           </div>
         </div>
       </section>
+
+      {/* Last Banner */}
       <section className='container-fluid p-0 m-0'>
         <div>
           <img alt='' src='assets/img/gift_banner.webp' className='img-fluid'></img>
         </div>
       </section>
-      {/* <section className='container-fluid p-0 m-0'>
-        <div>
-          <img alt='' src='assets/img/diamond_banner.webp' className='img-fluid'></img>
-        </div>
-      </section> */}
+
+      {/* Whatsapp Icon */}
       <a href="https://wa.me/+919662044820" target="_blank" rel="noopener noreferrer" className="whatsapp-logo text-decoration-none">
         {/* <i class="ri-whatsapp-fill fs-1"></i> */}
         <i class="fa-brands fa-whatsapp"></i>

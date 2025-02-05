@@ -1161,8 +1161,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from '../../Store/Slice/CartSlice';
 import Loader from "../Loader";
 import Helmet from "../../Components/Helmet";
+import { IoHeart } from "react-icons/io5";
+import { IoMdHeartEmpty } from "react-icons/io";
 // import { productCard } from "../Product/productCard"
-
 
 const Productdetails = () => {
     const recently = React.useRef(null);
@@ -1812,9 +1813,10 @@ const Productdetails = () => {
                                             className='btn wish_btn my-3 w-100'
                                             onClick={handleWishlistClick}
                                         >
-                                            <i
+                                            {/* <i
                                                 className={`fa-heart fs-5 ${isWishlist ? 'fa-solid' : 'fa-regular'}`}
-                                            ></i>
+                                            ></i> */}
+                                            {isWishlist ? <IoHeart className="fs-4 text-dark" /> : <IoMdHeartEmpty className="fs-4" />}
                                         </button>
                                     </div>
                                 </div>
@@ -1909,9 +1911,7 @@ const Productdetails = () => {
                                         className='btn wish_btn border-0'
                                         onClick={handleWishlistClick}
                                     >
-                                        <i
-                                            className={`fa-heart fs-5 ${isWishlist ? 'fa-solid' : 'fa-regular'}`}
-                                        ></i>
+                                        {isWishlist ? <IoHeart className="fs-4 text-dark" /> : <IoMdHeartEmpty className="fs-4" />}
                                     </button>
                                 </div>
 
