@@ -14,6 +14,7 @@ import { GrContactInfo } from "react-icons/gr";
 import { RiUserLine } from "react-icons/ri";
 import { MdAccountCircle } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
 
 const Header = () => {
     const search = React.useRef(null);
@@ -327,7 +328,7 @@ const Header = () => {
             <section className='container-fluid pt-2 d-md-block d-sm-block d-lg-none'>
                 <div className='row'>
                     <div className='col-sm-2 col-2'>
-                        <i className="ri-menu-line fs-5 fw-bolder" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" ></i>
+                        <HiOutlineMenuAlt1 className="fs-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" />
                         <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                             <div className="offcanvas-header mb-0">
                                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -1112,8 +1113,7 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-
-                    <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center'>
+                    <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center justify-content-between'>
 
                         {/* <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
                             <i className="ri-heart-line pe-0 position-relative">
@@ -1122,7 +1122,7 @@ const Header = () => {
                                 )}
                             </i>
                         </Link> */}
-                        <Link className="text-decoration-none text-dark position-relative me-2" to="/wishlist">
+                        <Link className="text-decoration-none text-dark position-relative" to="/wishlist">
                             <CiHeart className="fs-5 position-relative" />
                             {wishlistLength.length > 0 && (
                                 <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
@@ -1130,7 +1130,7 @@ const Header = () => {
                                 </span>
                             )}
                         </Link>
-                        <Link className="text-decoration-none text-dark position-relative me-2" to="/cart">
+                        <Link className="text-decoration-none text-dark position-relative" to="/cart">
                             <CiShoppingCart className="fs-5 pe-0 position-relative" />
                             {tQuantity.totalQuantity > 0 && (
                                 <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">

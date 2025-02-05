@@ -30,6 +30,7 @@ import Contact from '../Pages/Contact';
 import Productdetails from '../Pages/Product/Productdetails';
 import Plan from '../Purchase/Plan';
 import OtpComponent from '../otpComponent';
+import Shimmer from '../ShimmerEffect/shimmer';
 
 const Router = () => {
   return (
@@ -41,7 +42,7 @@ const Router = () => {
         <Route path='/aboutUs' element={<AboutUs />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/otp' element={<OtpComponent />} />
-        
+
         {/* Process */}
         <Route path='/cart' element={<Cart />} />
         <Route path='/login' element={<Login />} />
@@ -50,20 +51,20 @@ const Router = () => {
         <Route path='/gift' element={<Gift />} />
         <Route path='/wishlist' element={<Wishlist />} />
         <Route path='/payment' element={<Payment />} />
-        
+
         {/* product */}
         <Route path='/Productdetails/:id' element={<Productdetails />} />
-        
+
         {/* verify */}
         <Route path='/signup' element={<Signup />} />
         <Route path='/loginn' element={<Loginn />} />
         <Route path='/login-success' element={<LoginSuccess />} />
-        
+
         {/* admin-dashboard */}
         <Route path='/112/admin' element={<Admin />} />
         <Route path='/112/admin/dashboard ' element={<Dashboard />} />
         <Route path='/adashbord' element={<Adashbord />} />
-        
+
         {/* User-profile */}
         <Route path='/Uprofile' element={<Uprofile />} />
         <Route path='/Userprofile' element={<Userprofile />} />
@@ -72,7 +73,6 @@ const Router = () => {
         <Route path='/U-order' element={<Uorder />} />
         <Route path="/edit-profile" element={<EditProfile />} />
 
-
         {/* Policies */}
         <Route path='/return' element={<Return />} />
         <Route path='/exchange' element={<Exchange />} />
@@ -80,6 +80,9 @@ const Router = () => {
 
         {/* Purchaes */}
         <Route path='/plan-of-purchaes' element={<Plan />} />
+
+        {/* Shimmer */}
+        <Route path='/shimmer' element={<Shimmer />} />
       </Routes>
     </div>
   );

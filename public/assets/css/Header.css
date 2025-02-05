@@ -120,17 +120,12 @@
 }
 
 .dropdown-content {
-    display: none;
     left: 0;
     right: 0;
     width: 100% !important;
-    margin-top: 0;
-    background-color: #f9f9f9;
-    z-index: 1;
     box-shadow: 0px 2px 10px #fcffff;
     border-radius: 0px !important;
     border: none !important;
-    padding: 10px 20px;
     border-top: 1px solid #e0e3e3 !important;
 }
 

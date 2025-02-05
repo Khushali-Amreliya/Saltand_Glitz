@@ -33,8 +33,8 @@
 //     window.scrollTo(0, 0);
 //   }, []);
 
-//   const slidermenu = React.useRef(null);
-//   const slider1 = React.useRef(null);
+//   const solitaire = React.useRef(null);
+//   const arrvial = React.useRef(null);
 
 //   var settings = {
 //     dots: true,
@@ -126,10 +126,10 @@
 //           <h3 className='font_main text-center pb-3'>Solitaire</h3>
 //           <div className='row position-relative'>
 //             <div className='d-lg-block d-md-block d-sm-block d-none'>
-//               <button onClick={() => slidermenu?.current?.slickPrev()} className='prev_btn absoluteSlider' ><i className="ri-arrow-left-wide-line"></i></button>
+//               <button onClick={() => solitaire?.current?.slickPrev()} className='prev_btn absoluteSlider' ><i className="ri-arrow-left-wide-line"></i></button>
 //             </div>
 //             <div className=''>
-//               <Slider ref={slidermenu} {...settings1}>
+//               <Slider ref={solitaire} {...settings1}>
 //                 {products.map((item) => (
 //                   <div className='card border-0' key={item.id}>
 //                     <Link to={`/productDetail/${item.id}`}>
@@ -152,7 +152,7 @@
 
 //             </div>
 //             <div className='d-lg-block d-md-block d-sm-block d-none'>
-//               <button onClick={() => slidermenu?.current?.slickNext()} className="next_btn absolute1"><i className="ri-arrow-right-wide-line"></i></button>
+//               <button onClick={() => solitaire?.current?.slickNext()} className="next_btn absolute1"><i className="ri-arrow-right-wide-line"></i></button>
 //             </div>
 //           </div>
 //         </div>
@@ -222,10 +222,10 @@
 //           <h3 className='font_main text-center pb-4'>New Arrivals</h3>
 //           <div className='row position-relative'>
 //             <div className='d-lg-block d-md-block d-sm-block d-none'>
-//               <button onClick={() => slider1?.current?.slickPrev()} className='prev_btn absoluteSlider' ><i className="ri-arrow-left-wide-line"></i></button>
+//               <button onClick={() => arrvial?.current?.slickPrev()} className='prev_btn absoluteSlider' ><i className="ri-arrow-left-wide-line"></i></button>
 //             </div>
 //             <div className=''>
-//               <Slider ref={slider1} {...settings2}>
+//               <Slider ref={arrvial} {...settings2}>
 //                 {products.map((item) => (
 //                   <div className='card border-0' key={item.id}>
 //                     <Link to={`/productDetail/${item.id}`}>
@@ -247,7 +247,7 @@
 //               </Link>
 //             </div>
 //             <div className='d-lg-block d-md-block d-sm-block d-none'>
-//               <button onClick={() => slider1?.current?.slickNext()} className="next_btn absolute1"><i className="ri-arrow-right-wide-line"></i></button>
+//               <button onClick={() => arrvial?.current?.slickNext()} className="next_btn absolute1"><i className="ri-arrow-right-wide-line"></i></button>
 //             </div>
 //           </div>
 //         </div>
@@ -350,7 +350,8 @@ import Slider from 'react-slick'
 import { formatCurrency } from '../Utils/formateCurrency';
 import axios from 'axios';
 import { CiDeliveryTruck, CiCalendar, CiGift } from "react-icons/ci";
-import { BsWindowFullscreen } from "react-icons/bs";
+import { LuConciergeBell } from "react-icons/lu";
+import Shimmer from '../ShimmerEffect/shimmer';
 // import ScheduledTask from '../ScheduledTask';
 
 const Mainpage = () => {
@@ -367,13 +368,14 @@ const Mainpage = () => {
     }
   };
 
-  const slidermenu = React.useRef(null);
-  const slider1 = React.useRef(null);
+  const solitaire = React.useRef(null);
+  const arrvial = React.useRef(null);
   const [slidesToShow, setSlidesToShow] = useState(getSlidesToShow());
   const [products, setProducts] = useState([]);
+  const [solitaires, setsSolitaires] = useState([]);
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const navigate = useNavigate(); // Initialize useNavigate
 
   // Window refresh
@@ -392,7 +394,7 @@ const Mainpage = () => {
         setBanners(data); // Store fetched banners in state
       } catch (err) {
         console.error("Error fetching banners:", err.message);
-        setError("Failed to load banners.");
+        // setError("Failed to load banners.");
       } finally {
         setLoading(false);
       }
@@ -410,7 +412,7 @@ const Mainpage = () => {
         setProducts(response.data); // Set products in state
       } catch (err) {
         console.error("Error fetching products:", err);
-        setError("Failed to load products.");
+        // setError("Failed to load products.");
       } finally {
         setLoading(false); // Stop loader
       }
@@ -420,23 +422,23 @@ const Mainpage = () => {
   }, []);
 
   // ------------------------------------------Category wise product fetch------------------------------
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
-  //       const ringProducts = response.data.filter(item => item.category === "RING"); // Filter rings only
-  //       console.log(ringProducts);
-  //       setProducts(ringProducts);
-  //     } catch (err) {
-  //       console.error("Error fetching products:", err);
-  //       setError("Failed to load products.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchSolitaire = async () => {
+      try {
+        const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
+        const ringProducts = response.data.filter(item => item.subCategory === "solitire"); // Filter rings only
+        // console.log(ringProducts);
+        setsSolitaires(ringProducts);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        // setError("Failed to load products.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchProducts();
-  // }, []);
+    fetchSolitaire();
+  }, []);
 
   // Slider
   useEffect(() => {
@@ -455,7 +457,7 @@ const Mainpage = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 7000,
   };
 
   var webBanners = {
@@ -463,7 +465,7 @@ const Mainpage = () => {
     infinite: true,
     speed: 500,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 7000,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
@@ -478,7 +480,7 @@ const Mainpage = () => {
     arrows: false,
   };
 
-  const solitaire = {
+  const solitaireSlider = {
     dots: false,
     infinite: false,
     speed: 500,
@@ -522,6 +524,20 @@ const Mainpage = () => {
     slidesToScroll: 1,
     arrows: true,
     responsive: [
+      {
+        breakpoint: 1198, // For small screens
+        settings: {
+          slidesToShow: 4, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 991, // For small screens
+        settings: {
+          slidesToShow: 3, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
       {
         breakpoint: 601, // For small screens
         settings: {
@@ -613,13 +629,11 @@ const Mainpage = () => {
       {/* Web Banners */}
       <section className="container-fluid m-0 p-0 mb-5 d-lg-block d-md-block d-none">
         {loading ? (
-          <div className="shimmer-container">
+          <Slider {...webBanners}>
             {[...Array(1)].map((_, index) => (
-              <div key={index} className="shimmer-box"></div>
+              <Shimmer key={index} type="banner" />
             ))}
-          </div>
-        ) : error ? (
-          <p>{error}</p>
+          </Slider>
         ) : (
           <Slider {...webBanners}>
             {banners.map((banner, index) => (
@@ -637,22 +651,28 @@ const Mainpage = () => {
 
       {/* Mobile Banners */}
       <section className="container-fluid d-lg-none d-md-none d-block p-0 mb-5">
-        {loading ? (
-          <div className="shimmer-container">
-            {[...Array(1)].map((_, index) => (
-              <div key={index} className="shimmer-box"></div>
-            ))}
-          </div>
-        ) : (
+        {loading ? <Shimmer height="500px" type="banner" /> : (
           <Slider {...mobileBanners}>
             <div>
-              <img alt="" src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/Blog/Mobile.webp" className="img-fluid" />
+              <img
+                alt=""
+                src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/Blog/Mobile.webp"
+                className="img-fluid"
+              />
             </div>
             <div>
-              <img alt="" src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/VT_Offer/01/Mobile_768x890.webp" className="img-fluid" />
+              <img
+                alt=""
+                src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/VT_Offer/01/Mobile_768x890.webp"
+                className="img-fluid"
+              />
             </div>
             <div>
-              <img alt="" src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/Extra5/02/Mobile_768x890.jpg" className="img-fluid" />
+              <img
+                alt=""
+                src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/Extra5/02/Mobile_768x890.jpg"
+                className="img-fluid"
+              />
             </div>
           </Slider>
         )}
@@ -665,15 +685,15 @@ const Mainpage = () => {
           <div className='row position-relative'>
             <div className=''>
               <button
-                onClick={() => slidermenu?.current?.slickPrev()}
+                onClick={() => solitaire?.current?.slickPrev()}
                 className='prev_btn'
               >
                 <i className="ri-arrow-left-wide-line"></i>
               </button>
             </div>
             <div className=''>
-              <Slider ref={slidermenu} {...solitaire}>
-                {products.map((item) => (
+              <Slider ref={solitaire} {...solitaireSlider}>
+                {solitaires.map((item) => (
                   <div className='card border-0' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
                     {/* <Link to={`/productDetail/${item._id}`}> */}
                     <Link to={`/Productdetails/${item.product_id}`}>
@@ -694,6 +714,15 @@ const Mainpage = () => {
                     </div>
                   </div>
                 ))}
+                {/* {products.length > 8 && (
+                  <div className="d-flex justify-content-center align-items-center slider_viewall_btn">
+                    <Link to="/earrings" className="text-decoration-none">
+                      <button className="btn">
+                        <span>View All</span>
+                      </button>
+                    </Link>
+                  </div>
+                )} */}
               </Slider>
               <Link to="/earrings" className='text-decoration-none'>
                 <button className='btn mx-auto d-block viewall_btn'>
@@ -703,7 +732,7 @@ const Mainpage = () => {
             </div>
             <div className=''>
               <button
-                onClick={() => slidermenu?.current?.slickNext()}
+                onClick={() => solitaire?.current?.slickNext()}
                 className="next_btn"
               >
                 <i className="ri-arrow-right-wide-line"></i>
@@ -714,7 +743,7 @@ const Mainpage = () => {
       </section>
 
       {/* Category */}
-      <section className='container pb-5 shop_category'>
+      <section className='container pb-3 shop_category'>
         <div>
           <div className='text-center'>
             <h3 className='font_main pb-1 m-0 p-0'>Shop by Category</h3>
@@ -779,17 +808,17 @@ const Mainpage = () => {
         <div>
           <h3 className='font_main text-center pb-4'>New Arrivals</h3>
           <div className='row position-relative'>
-            <div className=''>
+            <div className='d-lg-none d-block'>
               <button
-                onClick={() => slider1?.current?.slickPrev()}
+                onClick={() => arrvial?.current?.slickPrev()}
                 className='prev_btn'
               >
                 <i className="ri-arrow-left-wide-line"></i>
               </button>
             </div>
             <div className=''>
-              <Slider ref={slider1} {...newArrivals}>
-                {products.map((item) => (
+              <Slider ref={arrvial} {...newArrivals}>
+                {products.toReversed().slice(0, 4).map((item) => (
                   <div className='card border-0' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
                     {/* <Link to={`/productDetail/${item._id}`}> */}
                     <Link to={`/Productdetails/${item.product_id}`}>
@@ -811,6 +840,15 @@ const Mainpage = () => {
                     </div>
                   </div>
                 ))}
+                {/* {products.length > 8 && (
+                  <div className="d-flex justify-content-center align-items-center slider_viewall_btn">
+                    <Link to="/earrings" className="text-decoration-none">
+                      <button className="btn">
+                        <span>View All</span>
+                      </button>
+                    </Link>
+                  </div>
+                )} */}
               </Slider>
               <Link to="/earrings" className='text-decoration-none'>
                 <button className='btn mx-auto d-block viewall_btn'>
@@ -818,9 +856,9 @@ const Mainpage = () => {
                 </button>
               </Link>
             </div>
-            <div className=''>
+            <div className='d-lg-none d-block'>
               <button
-                onClick={() => slider1?.current?.slickNext()}
+                onClick={() => arrvial?.current?.slickNext()}
                 className="next_btn"
               >
                 <i className="ri-arrow-right-wide-line"></i>
@@ -831,15 +869,15 @@ const Mainpage = () => {
       </section>
 
       {/* Banner */}
-      <section className='container-fluid my-5'>
+      <section className='container-fluid my-5 px-lg-3 px-md-3 px-0'>
         <div>
-          <div className='row p-0 m-0'>
-            <div className='col-lg-6 col-md-6 col-sm-6 col-12 m-0'>
-              <img alt='' src='assets/img/Responsive_1.webp' className='img-fluid h-100 festival_img1'></img>
+          <div className='row pe-0 ps-0 m-0'>
+            <div className='col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0'>
+              <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/Shaya/01-Jan/Responsive/31/Responsive_2.jpg' className='img-fluid h-100 festival_img1'></img>
             </div>
-            <div className='col-lg-6 col-md-6 col-sm-6 col-12 ps-0 m-0'>
-              <img alt='' src='assets/img/Responsive_2.webp' className='img-fluid pb-1 festival_img2'></img>
-              <img alt='' src='assets/img/Responsive_3.webp' className='img-fluid  pt-3 festival_img3'></img>
+            <div className='col-lg-6 col-md-6 col-sm-6 col-12 p-0 m-0'>
+              <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/VTcuration_2/2x.jpg' className='img-fluid festival_img2'></img>
+              <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/9KT/05/2x.webp' className='img-fluid festival_img3'></img>
             </div>
           </div>
         </div>
@@ -939,35 +977,38 @@ const Mainpage = () => {
       </section>
 
       {/* Service */}
-      <section className='container service_main py-3'>
-        <div>
-          <div className='row service_p'>
-            <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-              <CiDeliveryTruck className='fs-2 mb-2' />
-              <h6 className=''>Complementary Shiping & Returns</h6>
-              <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
-              <span className='line_hover'>Learn More &nbsp; &gt;</span>
-            </div>
-            <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-              {/* <i className="ri-window-line fs-2"></i> */}
-              <BsWindowFullscreen className='fs-2 mb-2' />
-              <h6 className=''>Tiffany At Your Service</h6>
-              <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
-              <span className='line_hover'>Contact Us &nbsp; &gt;</span>
-            </div>
-            <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-              {/* <i className="ri-calendar-line fs-2"></i> */}
-              <CiCalendar className='fs-2 mb-2' />
-              <h6 className=''>Book An Appointment</h6>
-              <p className='m-0 pb-1'>We’re happy to help with in-store or virtual appointments.</p>
-              <span className='line_hover'>Book Now &nbsp; &gt;</span>
-            </div>
-            <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-              {/* <i className="ri-mail-send-line fs-2"></i> */}
-              <CiGift className='fs-2 mb-2' />
-              <h6 className=''>The Iconic Blue Box</h6>
-              <p className='m-0 pb-1'>Your Tiffany purchase comes wrapped in our Blue Box packaging.</p>
-              <span className='line_hover'>Explore All Gifts &nbsp; &gt;</span>
+      <section className='service_main'>
+        <div className='container py-5'>
+          <div>
+            <div className='row service_p'>
+              <h3 className='font_main pb-5 m-0 p-0 text-center'>The Salt & Glitz Experience</h3>
+              <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
+                <CiDeliveryTruck className='fs-2 mb-2' />
+                <h6 className=''>Complementary Shiping & Returns</h6>
+                <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
+                <span className='line_hover'>Learn More &nbsp; &gt;</span>
+              </div>
+              <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
+                {/* <i className="ri-window-line fs-2"></i> */}
+                <LuConciergeBell className='fs-2 mb-2' />
+                <h6 className=''>Tiffany At Your Service</h6>
+                <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
+                <span className='line_hover'>Contact Us &nbsp; &gt;</span>
+              </div>
+              <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
+                {/* <i className="ri-calendar-line fs-2"></i> */}
+                <CiCalendar className='fs-2 mb-2' />
+                <h6 className=''>Book An Appointment</h6>
+                <p className='m-0 pb-1'>We’re happy to help with in-store or virtual appointments.</p>
+                <span className='line_hover'>Book Now &nbsp; &gt;</span>
+              </div>
+              <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
+                {/* <i className="ri-mail-send-line fs-2"></i> */}
+                <CiGift className='fs-2 mb-2' />
+                <h6 className=''>The Iconic Blue Box</h6>
+                <p className='m-0 pb-1'>Your Tiffany purchase comes wrapped in our Blue Box packaging.</p>
+                <span className='line_hover'>Explore All Gifts &nbsp; &gt;</span>
+              </div>
             </div>
           </div>
         </div>
@@ -981,10 +1022,10 @@ const Mainpage = () => {
       </section>
 
       {/* Whatsapp Icon */}
-      <a href="https://wa.me/+919662044820" target="_blank" rel="noopener noreferrer" className="whatsapp-logo text-decoration-none">
+      <Link to="https://wa.me/+919662044820" target="_blank" rel="noopener noreferrer" className="whatsapp-logo text-decoration-none">
         {/* <i class="ri-whatsapp-fill fs-1"></i> */}
-        <i class="fa-brands fa-whatsapp"></i>
-      </a>
+        <i className="fa-brands fa-whatsapp"></i>
+      </Link>
     </>
   )
 }

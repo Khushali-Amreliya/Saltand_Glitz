@@ -13,7 +13,9 @@
 .home-img {
   padding-right: 0px !important;
 }
-
+.service_main{
+  background-color: #fafafa;
+}
 .service_main h6 {
   letter-spacing: 0.5px;
   font-weight: 500;
@@ -54,7 +56,7 @@
 .prev_btn,
 .next_btn {
   position: absolute !important;
-  top: 25% !important;
+  top: 36% !important;
   transform: translateY(-50%) !important;
   background: white;
   /* Optional */
@@ -183,13 +185,26 @@
   letter-spacing: 0.5px;
 }
 
+.slider_viewall_btn {
+  height: 290px !important;
+}
+
+.slider_viewall_btn button {
+  border-bottom: 0.5px solid #a5a5a5 !important;
+  border-radius: 0 !important;
+  font-size: 14px !important;
+  letter-spacing: 0.8px;
+  /* padding: 8px 24px !important; */
+}
+
 .viewall_btn {
   background-color: #fff;
   color: #000;
   height: 40px;
-  padding: 12px 24px;
-  border: 1px solid #000 !important;
-  width: 10% !important;
+  /* padding: 12px 24px; */
+  border-bottom: 0.5px solid #a5a5a5 !important;
+  border-radius: 0 !important;
+  /* width: 10% !important; */
 }
 
 .viewall_btn span {
@@ -273,16 +288,18 @@
 .whatsapp-logo:hover {
   color: #25D366;
 }
-
+.festival_img3 {
+  padding-top: 20px !important;
+}
 @media(max-width:992px) {
-  .viewall_btn {
+  /* .viewall_btn {
     width: 50% !important;
-  }
+  } */
 }
 
 @media(max-width:992px) {
   .festival_img1 {
-    padding-right: 10px !important;
+    /* padding-right: 10px !important; */
   }
 
   .festival_img3 {
@@ -293,9 +310,9 @@
     padding-bottom: 0 !important;
   }
 
-  .viewall_btn {
+  /* .viewall_btn {
     width: 30% !important;
-  }
+  } */
 
   .prev_btn {
     left: -23px !important;
@@ -308,12 +325,13 @@
 
 @media(max-width:575px) {
   .festival_img2 {
-    padding-top: 18px !important;
-    padding-left: 10px !important;
+    padding-top: 10px !important;
+    padding-left: 0px !important;
   }
 
   .festival_img3 {
-    padding-left: 10px !important;
+    padding-top: 10px !important;
+    padding-left: 0px !important;
   }
 
   .banner_class {
@@ -328,6 +346,10 @@
   .next_btn {
     right: 0 !important;
   }
+
+  .slider_viewall_btn {
+    height: 167px !important;
+  }
 }
 
 @media(max-width:1024px) {
@@ -335,7 +357,7 @@
     padding-left: 10px;
     width: 100% !important;
     height: 53% !important;
-    padding-top: 0% !important;
+    padding-top: 10px !important;
   }
 
   .festival_img2 {
