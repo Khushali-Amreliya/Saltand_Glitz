@@ -389,7 +389,12 @@ const ProductCard = ({ Productsitem }) => {
                         ></i>
                     </div> */}
                     <div className="wishlist-icons position-absolute top-0 end-0 p-2" style={{ cursor: 'pointer' }} onClick={handleWishlistToggle}>
-                        {isWishlist ? <IoHeart className="fs-5 text-dark" /> : <IoMdHeartEmpty className="fs-5" />}
+                        {isWishlist ? <IoHeart className="fs-5 text-dark" /> : <IoMdHeartEmpty
+                            className="fs-5"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="Add to Wishlist"
+                        />}
                     </div>
                     <div className="review_card position-absolute bottom-0 left-0 my-3">
                         <p className='m-0'>4.8

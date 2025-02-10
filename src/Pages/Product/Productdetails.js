@@ -1241,7 +1241,7 @@ const Productdetails = () => {
     const handleSizeChange = (e) => {
         const size = e.target.value; // Get selected size
         setRingSize(size); // Update ringSize state
-        setIsValidSize(size !== 'choose');
+        // setIsValidSize(size !== 'choose');
 
         // Calculate the price based on size
         let basePrice = selectedKT === "14KT" ? product.total14KT : product.total18KT;
@@ -2269,6 +2269,26 @@ const Productdetails = () => {
                         </div>
                     </div>
                 </section>
+
+                {/* Reviews */}
+                {/* <section className="container-fluid">
+                    <div className="row">
+                        <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+                            <div className="review_box">
+                                <h5>Reviews</h5>
+                                <div className="text-center review_part">
+                                    <p className='m-0'>
+                                        <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>4.8
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-8 col-md-8 col-sm-12 col-12">
+                            <div></div>
+                        </div>
+                    </div>
+                </section> */}
+
                 {/* You may also like & Recently viewed */}
                 <section className='container my-3'>
                     <h3 className='text-center pb-4 font_main'>You may also Like</h3>
@@ -2386,6 +2406,7 @@ const Productdetails = () => {
                         )}
                     </div>
                 </section>
+
                 {/* Large Offcanvas */}
                 <div className="offcanvas offcanvas-end offcanvas_end_size" tabIndex="-1" id="offcanvassize" aria-labelledby="offcanvassizeLabel">
                     <div className="offcanvas-header offcanvas_size_header d-flex justify-content-between align-items-center">

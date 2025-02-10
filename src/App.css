@@ -123,3 +123,12 @@ div:where(.swal2-container) .swal2-html-container {
     font-size: 33px;
     cursor: pointer;
 }
+
+@media(max-width:768px) {
+    .font_main {
+        font-size: 23px !important;
+    }
+    .p_main{
+        font-size: 13px !important;
+    }
+}
