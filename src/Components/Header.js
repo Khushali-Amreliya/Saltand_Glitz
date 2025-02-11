@@ -75,7 +75,7 @@ const Header = () => {
         fetchWishlist();
     }, []);
 
-    var settings = {
+    var upBannerSlider = {
         dots: false,
         infinite: true,
         speed: 1000,
@@ -201,7 +201,7 @@ const Header = () => {
     return (
         <div className=" m-0 p-0 header_shadow">
             <section className='container-fluid text-center header_color py-1'>
-                <Slider {...settings}>
+                <Slider {...upBannerSlider}>
                     <div>
                         <h6>This Holiday, enjoy complimentary shipping & extended returns with our Tiffany Blue® packaging.</h6>
                     </div>
@@ -1593,7 +1593,7 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center justify-content-between'>
+                    <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center justify-content-sm-between'>
 
                         {/* <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
                             <i className="ri-heart-line pe-0 position-relative">
@@ -1602,7 +1602,7 @@ const Header = () => {
                                 )}
                             </i>
                         </Link> */}
-                        <Link className="text-decoration-none text-dark position-relative" to="/wishlist">
+                        <Link className="text-decoration-none text-dark position-relative me-2 me-sm-0" to="/wishlist">
                             <CiHeart className="fs-5 position-relative" />
                             {wishlistLength.length > 0 && (
                                 <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
@@ -1610,7 +1610,7 @@ const Header = () => {
                                 </span>
                             )}
                         </Link>
-                        <Link className="text-decoration-none text-dark position-relative" to="/cart">
+                        <Link className="text-decoration-none text-dark position-relative me-2 me-sm-0" to="/cart">
                             <CiShoppingCart className="fs-5 pe-0 position-relative" />
                             {tQuantity.totalQuantity > 0 && (
                                 <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">

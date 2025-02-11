@@ -1152,7 +1152,7 @@
 
 // Productdetails.js
 import { Link, useNavigate, useParams } from "react-router-dom";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Slider from "react-slick";
 import { formatCurrency } from "../../Utils/formateCurrency";
 import { toast } from "react-toastify";
@@ -1163,9 +1163,38 @@ import Loader from "../Loader";
 import Helmet from "../../Components/Helmet";
 import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
+import { IoStar } from "react-icons/io5";
 // import { productCard } from "../Product/productCard"
 
+const ratingsData = [
+    { stars: 5, count: 9, percentage: (9 / 10) * 100 },
+    { stars: 4, count: 1, percentage: (1 / 10) * 100 },
+    { stars: 3, count: 0, percentage: (0 / 10) * 100 },
+    { stars: 2, count: 0, percentage: (0 / 10) * 100 },
+    { stars: 1, count: 0, percentage: (0 / 10) * 100 },
+];
+
+const RatingBar = ({ stars, count, percentage }) => {
+    return (
+        <div className="rating-row">
+            <span className="star-label">{stars} ★</span>
+            <div className="progress-bar">
+                <div className="filled-bar" style={{ width: `${percentage}%` }}></div>
+            </div>
+            <span className="count">{count}</span>
+        </div>
+    );
+};
 const Productdetails = () => {
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(0);
+    const [files, setFiles] = useState([]);
+    const [modalRating, setModalRating] = useState(0);
+    const [modalHover, setModalHover] = useState(0);
+    const [name, setName] = useState("");
+    const [feedback, setFeedback] = useState("");
+    const [step, setStep] = useState(1); // Step tracking for modal
+    const modalRef = useRef(null);
     const recently = React.useRef(null);
     const similar = React.useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -1191,13 +1220,92 @@ const Productdetails = () => {
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
     const [isPriceBreakupVisible, setPriceBreakupVisible] = useState(true);
 
+    useEffect(() => {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new window.bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    }, []);
+
+    const reviews = [
+        { name: "Shrishti", title: "Beautiful Saree" },
+        { name: "Aarav", title: "Loved the Fabric" },
+        { name: "Priya", title: "Amazing Design" },
+        { name: "Rohan", title: "Perfect Fit" },
+        { name: "Meera", title: "Great Quality" },
+        { name: "Vikram", title: "Value for Money" },
+        { name: "Ananya", title: "Stunning Look" },
+        { name: "Kunal", title: "Highly Recommended" }
+    ];
+
+    const reviewSlider = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        responsive: [
+            { breakpoint: 992, settings: { slidesToShow: 3 } },
+            { breakpoint: 768, settings: { slidesToShow: 2 } },
+            { breakpoint: 576, settings: { slidesToShow: 1 } },
+        ],
+    };
+
+    // Star Click → Open Modal
+    const handleStarClick = (star) => {
+        setRating(star);
+        setModalRating(star); // Sync modal rating
+        setModalHover(0); // Reset hover state
+        setStep(1); // Reset to first step
+        const modal = new window.bootstrap.Modal(modalRef.current);
+        modal.show();
+    };
+
+    // File Upload Handler
+    const handleFileChange = (e) => {
+        const uploadedFiles = Array.from(e.target.files);
+        setFiles([...files, ...uploadedFiles]);
+    };
+
+    // Next Button Click Handler
+    const handleNext = () => {
+        if (!feedback.trim()) {
+            toast.error("Please enter your feedback before proceeding.");
+            return;
+        }
+        setStep(2); // Move to next step
+    };
+
+    // Submit Button Click Handler
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!name.trim()) {
+            toast.error("Name is required.");
+            return;
+        }
+        toast.success("Review submitted successfully!");
+    };
+
+    // Rating Labels
+    const getRatingLabel = (currentRating) => {
+        switch (currentRating) {
+            case 1: return "Very bad";
+            case 2: return "Poor";
+            case 3: return "Medium";
+            case 4: return "Good";
+            case 5: return "Excellent";
+            default: return "Rate this product";
+        }
+    };
+
+
     // Toggle function to show or hide the price details
     const togglePriceBreakup = () => {
         setPriceBreakupVisible(!isPriceBreakupVisible);
     };
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    // }, []);
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -1438,11 +1546,10 @@ const Productdetails = () => {
     const handleKTClick = (ktType) => {
         setSelectedKT(ktType);
     };
-    // if (loading) return <p>Loading...</p>;
-    if (!product) return <p>Product not found</p>;
+
     var md_carousel = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 1000,
         autoplay: true,
         autoplaySpeed: 5000,
@@ -1450,14 +1557,63 @@ const Productdetails = () => {
         slidesToScroll: 1,
     };
     const colors = [
-        { id: 1, color: "#ffcccc" },
-        { id: 2, color: "#cccccc" },
-        { id: 3, color: "#ffcc66" }
-    ]
+        { id: 1, color: "#ffcccc", name: "Rose Gold" },
+        { id: 2, color: "#cccccc", name: "Silver Gold" },
+        { id: 3, color: "#ffcc66", name: "Gold" }
+    ];
 
     const handleColorClick = (colorId) => {
         setSelectedColor(selectedColor === colorId ? null : colorId);
     };
+
+    // const addToCart = async (id) => {
+    //     setLoading(true);
+
+    //     const cartItem = {
+    //         product: id,
+    //         user: user._id,
+    //         price: price, // Final selected price
+    //         ktType: selectedKT, // Store selected KT
+    //         ringSize: ringSize !== "choose" ? ringSize : null, // Store selected ring size
+    //     };
+
+    //     try {
+    //         console.log("🛒 Sending cart item:", cartItem);
+
+    //         const response = await axios.post(
+    //             "https://saltandglitz-api.vercel.app/v1/cart/addCart",
+    //             cartItem
+    //         );
+
+    //         console.log("✅ API Response:", response.data);
+
+    //         if (response.status === 201 || response.status === 200) {
+    //             toast.success("Product added to cart successfully!", {
+    //                 position: "bottom-center",
+    //                 autoClose: 2000,
+    //             });
+
+    //             const updatedCart = response.data.updatedCart || response.data.newCart;
+
+    //             if (updatedCart) {
+    //                 console.log("🔄 Updated Cart:", updatedCart);
+
+    //                 // Store updated cart in Redux
+    //                 dispatch(cartAction.addItem(updatedCart));
+
+    //                 // Update localStorage
+    //                 localStorage.setItem("cart", JSON.stringify(updatedCart));
+    //             }
+    //         } else {
+    //             toast.error("Failed to add product to cart!");
+    //         }
+    //     } catch (error) {
+    //         console.error("❌ Error adding item to cart:", error.message);
+    //         toast.error("An error occurred while adding to cart!");
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };  
 
     const addToCart = async (id) => {
         setLoading(true);
@@ -1684,14 +1840,21 @@ const Productdetails = () => {
                             {/* Large */}
                             <div className='col-lg-4 col-md-6 col-sm-12 col-12 px-4 mt-4 mx-auto d-block d-lg-block d-none sticky-header'>
                                 <h3 className='font_h'>{product.title}</h3>
+                                <div className="d-flex align-items-center mb-2">
+                                    <div className="star_list me-2">
+                                        {Array.from({ length: 5 }).map((_, i) => (
+                                            <IoStar key={i} className="list_star_icon" />
+                                        ))}
+                                    </div>
+                                    <h6 className="mb-0" style={{ fontSize: "13px", verticalAlign: "middle" }}>(10)</h6>
+                                </div>
+
                                 <h4 className='font_h'>{formatCurrency(price)}</h4>
                                 <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
                                 <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
 
                                 <p className="KT_button">
-                                    <span className=" align-middle">
-                                        color
-                                    </span>
+                                    <span className="align-middle">Color</span>
                                     <span className="ps-3 align-middle" style={{ fontSize: "20px" }}>
                                         {colors.map((color) => (
                                             <i
@@ -1704,6 +1867,9 @@ const Productdetails = () => {
                                                     cursor: "pointer",
                                                 }}
                                                 onClick={() => handleColorClick(color.id)}
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="bottom"
+                                                title={color.name}  // Tooltip mein color ka naam show karega
                                             >
                                                 {selectedColor === color.id && (
                                                     <i
@@ -1902,6 +2068,14 @@ const Productdetails = () => {
                                 <div className="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h3 className="font_h">{product.title}</h3>
+                                        <div className="d-flex align-items-center mb-2">
+                                            <div className="star_list me-2">
+                                                {Array.from({ length: 5 }).map((_, i) => (
+                                                    <IoStar key={i} className="list_star_icon" />
+                                                ))}
+                                            </div>
+                                            <h6 className="mb-0" style={{ fontSize: "13px", verticalAlign: "middle" }}>(10)</h6>
+                                        </div>
                                         <h4 className="font_h">
                                             {formatCurrency(selectedKT === "14KT" ? product.total14KT : product.total18KT)}
                                         </h4>
@@ -1932,6 +2106,9 @@ const Productdetails = () => {
                                                     cursor: "pointer",
                                                 }}
                                                 onClick={() => handleColorClick(color.id)}
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="bottom"
+                                                title={color.name}  // Tooltip mein color ka naam show karega
                                             >
                                                 {selectedColor === color.id && (
                                                     <i
@@ -2271,23 +2448,72 @@ const Productdetails = () => {
                 </section>
 
                 {/* Reviews */}
-                {/* <section className="container-fluid">
+                <section className="container-fluid py-3">
                     <div className="row">
-                        <div className="col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div className="col-lg-4 col-md-6 col-sm-12 col-12">
                             <div className="review_box">
-                                <h5>Reviews</h5>
+                                <h5 className="p-2">Reviews</h5>
                                 <div className="text-center review_part">
                                     <p className='m-0'>
-                                        <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>4.8
+                                        <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>&nbsp;4.9
                                     </p>
+                                    <div className="review_count">
+                                        <h6>10</h6>
+                                        <span>Reviews</span>
+                                    </div>
+                                </div>
+                                <div className="text-center review_part">
+                                    <div className="rating-container">
+                                        {ratingsData.map((rating, index) => (
+                                            <RatingBar key={index} {...rating} />
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="text-center review_part">
+                                    <div className="review_container">
+                                        <h5 className="review_text mb-0">Click to review</h5>
+                                        <div className="star-rating">
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                <span
+                                                    key={star}
+                                                    className={`star ${star <= (hover || rating) ? "filled" : ""}`}
+                                                    onClick={() => handleStarClick(star)}
+                                                    onMouseEnter={() => setHover(star)}
+                                                    onMouseLeave={() => setHover(0)}
+                                                >
+                                                    <IoStar />
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-8 col-md-8 col-sm-12 col-12">
-                            <div></div>
+                        <div className="col-lg-8 col-md-6 col-sm-12 col-12 py-3 d-flex align-items-center justify-content-center">
+                            <div className="w-100">
+                                <Slider {...reviewSlider}>
+                                    {reviews.map((review, index) => (
+                                        <div key={index} className="p-2">
+                                            <div className="review_list_box">
+                                                <div className="star_list">
+                                                    {Array.from({ length: 5 }).map((_, i) => (
+                                                        <IoStar key={i} className="list_star_icon" />
+                                                    ))}
+                                                </div>
+                                                <div className="py-4">
+                                                    <p className="mb-0">
+                                                        <span className="">{review.name.charAt(0)}</span>&nbsp;{review.name}
+                                                    </p>
+                                                </div>
+                                                <h5 className="mb-0">{review.title}</h5>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </Slider>
+                            </div>
                         </div>
                     </div>
-                </section> */}
+                </section>
 
                 {/* You may also like & Recently viewed */}
                 <section className='container my-3'>
@@ -2507,7 +2733,6 @@ const Productdetails = () => {
                                 <p className='m-0 p-0'>Delivery By</p>
                                 <span className="fw-bold">14th Oct</span>
                             </div> */}
-
                         </div>
                     </div>
 
@@ -2576,6 +2801,133 @@ const Productdetails = () => {
                     </div>
                     <div className="offcanvas-footer text-center offcanvas_size_btn" data-bs-dismiss="offcanvas" aria-label="Close">
                         <button className="btn w-100 py-3 fw-bold text-uppercase" onClick={handleConfirm}>Confirm Customisation</button>
+                    </div>
+                </div>
+
+                {/* Review Model */}
+                <div ref={modalRef} className="modal fade" id="reviewModal" tabIndex="-1" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content p-3">
+                            <div className="modal-header border-0">
+                                {step === 1 ? (
+                                    <h5 className="modal-title">How do you like this item?</h5>
+                                ) : (
+                                    <div className="d-flex align-items-center">
+                                        <img
+                                            src={product?.goldImages?.[0] || "fallback-image.jpg"}
+                                            alt="Product"
+                                            className="img-fluid me-2"
+                                            style={{ width: "60px", height: "60px", objectFit: "cover" }}
+                                        />
+                                        <h6 className="modal-title mb-0">{product?.title}</h6>
+                                    </div>
+                                )}
+                                <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div className="modal-body">
+                                {step === 1 ? (
+                                    <>
+                                        {/* Product Info */}
+                                        <div className="d-flex align-items-center">
+                                            <div className="row">
+                                                <div className="col-3">
+                                                    <img src={product?.goldImages?.[0] || "fallback-image.jpg"} alt="Product" className="img-fluid" />
+                                                </div>
+                                                <div className="col-9 align-items-center d-flex">
+                                                    <p className="mb-0">{product?.title}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Modal Star Rating */}
+                                        <div className="star-rating">
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                <span
+                                                    key={star}
+                                                    className={`star ${star <= (modalHover || modalRating) ? "filled" : ""}`}
+                                                    onClick={() => {
+                                                        setModalRating(star);
+                                                        setRating(star); // Sync with outside
+                                                    }}
+                                                    onMouseEnter={() => setModalHover(star)}
+                                                    onMouseLeave={() => setModalHover(0)}
+                                                >
+                                                    <IoStar />
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        <p className="mt-2 text-center" style={{ fontSize: "13px" }}>{getRatingLabel(modalHover || modalRating)}</p>
+
+                                        {/* Feedback Field */}
+                                        <div className="mt-3 feedback_rating">
+                                            <label className="form-label">Feedback <span className="text-danger">*</span></label>
+                                            <textarea
+                                                className="form-control"
+                                                name="feedback"
+                                                placeholder="Write your feedback..."
+                                                rows="3"
+                                                value={feedback}
+                                                onChange={(e) => setFeedback(e.target.value)}
+                                                required
+                                            ></textarea>
+                                        </div>
+
+                                        {/* File Upload */}
+                                        <div className="mt-3 text-center border p-3 rounded">
+                                            <label className="btn btn-light">
+                                                Add files
+                                                <input type="file" multiple hidden onChange={handleFileChange} />
+                                            </label>
+                                            <p className="mt-1 text-muted">Accepts .gif, .jpg, .png (Max 5MB)</p>
+
+                                            {/* Display Uploaded Files */}
+                                            {files.length > 0 && (
+                                                <ul className="list-group mt-2">
+                                                    {files.map((file, index) => (
+                                                        <li key={index} className="list-group-item text-start">{file.name}</li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                        </div>
+
+                                        {/* Next Button */}
+                                        <button className="btn btn-dark w-100 mt-3" onClick={handleNext}>Next</button>
+                                    </>
+                                ) : (
+                                    <>
+                                        {/* Name Field */}
+                                        <div className="mt-3">
+                                            <label className="form-label" style={{ fontSize: "13.5px" }}>Name <span className="text-danger">*</span></label>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                name="name"
+                                                placeholder="Enter your name..."
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                required
+                                            />
+                                        </div>
+
+                                        {/* Email Field */}
+                                        <div className="mt-3">
+                                            <label className="form-label" style={{ fontSize: "13.5px" }}>Email</label>
+                                            <input
+                                                type="email"
+                                                className="form-control"
+                                                name="email"
+                                                placeholder="Enter your email..."
+                                            />
+                                        </div>
+
+                                        {/* Submit Button */}
+                                        <button className="btn btn-dark w-100 mt-3" onClick={handleSubmit}>Submit</button>
+                                    </>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </>

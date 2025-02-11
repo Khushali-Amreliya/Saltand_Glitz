@@ -48,6 +48,12 @@ input::placeholder {
     font-size: 10px !important;
 }
 
+:focus,
+:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 button,
 input {
     outline: none !important;
@@ -128,7 +134,8 @@ div:where(.swal2-container) .swal2-html-container {
     .font_main {
         font-size: 23px !important;
     }
-    .p_main{
+
+    .p_main {
         font-size: 13px !important;
     }
 }

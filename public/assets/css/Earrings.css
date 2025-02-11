@@ -370,7 +370,12 @@
     border-color: #ccc !important;
 }
 
-
+.show_more_btn{
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+    color: var(--color) !important;
+    font-weight: 600 !important;
+}
 
 @media(max-width:1024px) {
     /* .absolute_next_btn {

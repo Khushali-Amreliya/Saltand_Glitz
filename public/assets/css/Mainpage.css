@@ -222,20 +222,16 @@
   content: '';
   position: absolute;
   left: 50%;
-  bottom: -4px;
-  /* Adjust the distance below the text */
+  bottom: -10px;
   transform: translateX(-50%);
   width: 0;
   height: 0.5px;
-  /* Height of the line */
   background-color: black;
-  /* Color of the underline */
   transition: width 0.3s ease-in-out;
 }
 
 .viewall_btn span:hover::after {
   width: 100%;
-  /* Full width of the text */
 }
 
 .gift_sec_main h5 {

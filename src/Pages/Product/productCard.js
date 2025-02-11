@@ -254,10 +254,17 @@ import { IoMdHeartEmpty } from "react-icons/io";
 
 const ProductCard = ({ Productsitem }) => {
     const user = JSON.parse(localStorage.getItem('user')); // Get the logged-in user's data from localStorage
-    const { product_id, title, total14KT, goldImages } = Productsitem; // Destructure product details
+    const { product_id, title, total14KT, goldImages, media, rating } = Productsitem; // Destructure product details
     const slider = useRef(null); // Ref for the slider
     const dispatch = useDispatch(); // Redux dispatch
     const [isWishlist, setIsWishlist] = useState(false);
+    let displayImages = [];
+
+    if (goldImages && goldImages.length > 0) {
+        displayImages = goldImages;
+    } else if (media && media.length > 0) {
+        displayImages = media.filter(item => item.type === 'goldImage').map(item => item.productAsset)
+    }
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -350,16 +357,15 @@ const ProductCard = ({ Productsitem }) => {
     return (
         <div className="card-container position-relative">
             <div>
+                
                 <Link to={`/Productdetails/${product_id}`}>
-                    {/* Slider for product images and video */}
+                    {/* Slider for product images */}
                     <Slider ref={slider} {...imageVideo} className="border border-1 rounded-3">
-                        <img alt="" src={goldImages[0]} className="img-fluid" />
-                        <img alt="" src={goldImages[1]} className="img-fluid" />
-                        {/* <img alt="" src={goldImages[2]} className="img-fluid" /> */}
-                        {/* <video controls autoPlay className="img-fluid" style={{ width: "100%" }}>
-                            <source src={goldVideo[0]} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video> */}
+                        {displayImages?.length > 0 &&
+                            displayImages.map((img, index) => (
+                                <img key={index} alt={`product-image-${index}`} src={img} className="img-fluid" />
+                            ))
+                        }
                     </Slider>
                 </Link>
 
@@ -397,7 +403,7 @@ const ProductCard = ({ Productsitem }) => {
                         />}
                     </div>
                     <div className="review_card position-absolute bottom-0 left-0 my-3">
-                        <p className='m-0'>4.8
+                        <p className='m-0'>{rating}
                             <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>
                         </p>
                     </div>
@@ -438,7 +444,7 @@ const ProductCard = ({ Productsitem }) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
