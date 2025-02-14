@@ -389,8 +389,10 @@
 
 .place_order_btn {
     background: var(--background);
-    color: #000;
-    width: 50%;
+    color: #000 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.5px !important;
+    padding: 10px !important;
 }
 
 .cart_headline {

@@ -70,7 +70,7 @@ const Cart = () => {
       try {
         setLoading(true); // Start loader
         const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
-        console.log("Cart", response.data); // Debug response structure
+        // console.log("Cart", response.data); // Debug response structure
 
         const data = response.data;
 
@@ -103,7 +103,7 @@ const Cart = () => {
     };
 
     fetchCart();
-  }, [user._id]);
+  }, [user?._id]);
 
   const removeToCart = async (item) => {
     setLoading(true);
@@ -414,6 +414,10 @@ const Cart = () => {
                                   </span>
                                 </span>
                               </p>
+                              <h6 className=" pt-2" style={{fontSize:"12px"}}>Color: Rose Gold</h6>
+                              <h6 className="" style={{fontSize:"12px"}}>Purity: 14KT</h6>
+                              <h6 className="" style={{fontSize:"12px"}}>Ring size: 10</h6>
+
                               {/* <p className="cart_delivery">
                                 Delivery by - 30th Aug
                               </p> */}

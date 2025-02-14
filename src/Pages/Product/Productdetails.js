@@ -1474,7 +1474,6 @@ const Productdetails = () => {
         setTempPrice(selectedSizeData ? selectedSizeData.price : price);
     }, [price, sizeOptions]);
 
-
     const calculateTempPrice = (sizePrice, metalPrice, diamondPrice) => {
         return sizePrice + metalPrice + diamondPrice - price;
     };
@@ -1559,7 +1558,7 @@ const Productdetails = () => {
     const colors = [
         { id: 1, color: "#ffcccc", name: "Rose Gold" },
         { id: 2, color: "#cccccc", name: "Silver Gold" },
-        { id: 3, color: "#ffcc66", name: "Gold" }
+        { id: 3, color: "#ffcc66", name: "Yellow Gold" }
     ];
 
     const handleColorClick = (colorId) => {
@@ -1617,7 +1616,11 @@ const Productdetails = () => {
 
     const addToCart = async (id) => {
         setLoading(true);
-
+        if (!user || !user?._id) {
+            toast.error("Please login first to view your wishlist!");
+            navigate('/login');
+            return;
+        }
         const cartItem = {
             product: id,
             user: user._id,
@@ -1631,10 +1634,7 @@ const Productdetails = () => {
 
 
             if (response.status === 201 || response.status === 200) {
-                toast.success("Product added to cart successfully!", {
-                    position: "bottom-center",
-                    autoClose: 2000,
-                });
+                toast.success("Product added to cart successfully!");
 
                 const updatedCart = response.data.updatedCart || response.data.newCart;
                 dispatch(cartAction.addItem(updatedCart));
@@ -1651,7 +1651,11 @@ const Productdetails = () => {
 
     const buyNow = async () => {
         setLoading(true);
-
+        if (!user || !user?._id) {
+            toast.error("Please login first to view your wishlist!");
+            navigate('/login');
+            return;
+        }
         const cartItem = {
             product: id,
             user: user._id,
@@ -1664,10 +1668,7 @@ const Productdetails = () => {
             );
 
             if (response.status === 201 || response.status === 200) {
-                toast.success("Product added to cart successfully and Redirecting to cart...", {
-                    position: "bottom-center",
-                    autoClose: 2000,
-                });
+                toast.success("Product added to cart successfully");
                 setTimeout(() => {
                     setLoading(false);
                     navigate('/cart'); // Ensure `navigate` is imported from `react-router-dom`
@@ -1694,11 +1695,6 @@ const Productdetails = () => {
             });
 
             dispatch(cartAction.addToWishlist(product));
-
-            toast.success('Item added to wishlist', {
-                position: 'bottom-center',
-                autoClose: 1000,
-            });
             setIsWishlist(true);
         } catch (error) {
             if (error.response) {
@@ -1706,10 +1702,6 @@ const Productdetails = () => {
             } else {
                 console.error('Error adding to wishlist:', error.message);
             }
-            toast.error('Error adding item to wishlist', {
-                position: 'bottom-center',
-                autoClose: 1000,
-            });
         }
     };
 
@@ -1718,11 +1710,6 @@ const Productdetails = () => {
             await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product.id}`);
 
             dispatch(cartAction.removeFromWishlist(product.id));
-
-            toast.success('Item removed from wishlist', {
-                position: 'bottom-center',
-                autoClose: 1000,
-            });
             setIsWishlist(false);
         } catch (error) {
             if (error.response) {
@@ -1730,10 +1717,6 @@ const Productdetails = () => {
             } else {
                 console.error('Error removing from wishlist:', error.message);
             }
-            toast.error('Error removing item from wishlist', {
-                position: 'bottom-center',
-                autoClose: 1000,
-            });
         }
     };
 

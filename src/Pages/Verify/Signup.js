@@ -173,7 +173,7 @@ const Signup = () => {
                     <div className='text-center row'>
                         <div className='signup_logo'>
                             <i className="ri-fingerprint-line fs-2"></i>
-                            <h6>Signup with Tiffany & Co.</h6>
+                            <h6>Signup with Salt & Glitz</h6>
                             <div>
                                 <p>Unlock Best prices and become an insider for our exclusive launches & offers. Complete your profile and get ₹250 worth of xCLusive Points.</p>
                             </div>

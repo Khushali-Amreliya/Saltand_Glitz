@@ -31,6 +31,7 @@ import Productdetails from '../Pages/Product/Productdetails';
 import Plan from '../Purchase/Plan';
 import OtpComponent from '../otpComponent';
 import Shimmer from '../ShimmerEffect/shimmer';
+import Test from '../test/Test';
 
 const Router = () => {
   return (
@@ -83,6 +84,9 @@ const Router = () => {
 
         {/* Shimmer */}
         <Route path='/shimmer' element={<Shimmer />} />
+
+        {/* Test */}
+        <Route path='/test' element={<Test />} />
       </Routes>
     </div>
   );

@@ -372,7 +372,7 @@ const Mainpage = () => {
   const arrvial = React.useRef(null);
   const [slidesToShow, setSlidesToShow] = useState(getSlidesToShow());
   const [products, setProducts] = useState([]);
-  const [solitaires, setsSolitaires] = useState([]);
+  const [solitaires, setSolitaires] = useState([]);
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
@@ -426,9 +426,11 @@ const Mainpage = () => {
     const fetchSolitaire = async () => {
       try {
         const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
+        // console.log(response);
+        
         const ringProducts = response.data.filter(item => item.subCategory === "solitire"); // Filter rings only
         // console.log(ringProducts);
-        setsSolitaires(ringProducts);
+        setSolitaires(ringProducts);
       } catch (err) {
         console.error("Error fetching products:", err);
         // setError("Failed to load products.");

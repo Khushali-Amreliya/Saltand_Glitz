@@ -27,11 +27,12 @@ const Wishlist = () => {
         setWishlistItems(response.data.wishlist.products);
       }
     } catch (error) {
-      // Handle error
+      console.error("Error fetching wishlist:", error);
     } finally {
       setLoading(false);
     }
-  }, [user._id]);  // Dependencies for the function
+  }, [user?._id]);
+
 
   useEffect(() => {
     Aos.init();

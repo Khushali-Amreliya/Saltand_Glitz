@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import OrderSummary from '../Process/OrderSummary';
 import Loader from '../Loader';
@@ -10,43 +10,158 @@ const Login = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const [loading, setLoading] = useState(false);
+  const otpRefs = useRef([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
+  const [otp, setOtp] = useState('');
+  const [step, setStep] = useState(1);
   const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
-  const handleSubmit = async (e) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleContinue = (e) => {
+    e.preventDefault();
+    if (!email) {
+      toast.error("Please enter your email");
+      return;
+    }
+    setStep(2);
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
-      // Perform the login request
       const res = await axios.post('https://saltandglitz-api.vercel.app/api/users/login', { email, password });
+      localStorage.setItem('token', res.data.user.token);
+      localStorage.setItem('userId', res.data.user._id); // ID Store
 
-      // Store the token in local storage
-      localStorage.setItem('token', res.data.token);
+      // console.log("User ID:", res.data.user._id);
 
-      // Fetch the user's profile data using the token
       const userRes = await axios.get('https://saltandglitz-api.vercel.app/api/users/profile', {
-        headers: {
-          'Authorization': `Bearer ${res.data.token}`,  // Send the token for authentication
-        }
+        headers: { 'Authorization': `Bearer ${res.data.user.token}` }
       });
-
-      // Store user data in local storage under 'user'
       localStorage.setItem('user', JSON.stringify(userRes.data));
 
-      // Show success toast
       toast.success("Login Successfully!");
-
-      // Redirect to user profile page
-      navigate('/Userprofile');
+      navigate('/');
+      window.location.reload();
     } catch (err) {
-      console.error('Error during login:', err.response?.data);  // Log the full error response
-      // Show error toast
       toast.error(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleOtpLogin = async () => {
+    setLoading(true);
+    try {
+      await axios.post('https://saltandglitz-api.vercel.app/v1/otp/send-otp', { email });
+      toast.success("OTP sent to your email!");
+      setStep(3); // Move to OTP input step
+    } catch (err) {
+      toast.error("Error sending OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.post('https://saltandglitz-api.vercel.app/v1/otp/get-otp', { email, otp });
+      localStorage.setItem('token', res.data.user.token);
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+
+      toast.success("OTP Verified! Login successful.");
+      navigate('/');
+      window.location.reload();
+    } catch (err) {
+      toast.error("Invalid OTP. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    setLoading(true);
+    try {
+      await axios.post('https://saltandglitz-api.vercel.app/v1/otp/send-otp', { email });
+      toast.success("New OTP sent to your email!");
+    } catch (err) {
+      toast.error("Error resending OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForgotPassword = () => {
+    setStep(4);
+  };
+
+  const handleSendForgotPasswordOtp = async () => {
+    setLoading(true);
+    try {
+      const userId = localStorage.getItem("userId"); // 👈 Yaha se ID le rahe hain
+
+      if (!userId) {
+        toast.error("User ID not found. Please login again.");
+        return setLoading(false);
+      }
+
+      await axios.post(`https://saltandglitz-api.vercel.app/api/users/forgotPassword/${userId}`, { email });
+      toast.success("OTP sent to your email for password reset!");
+      setStep(5);
+    } catch (err) {
+      toast.error("Error sending OTP for password reset");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  const handleResetPassword = async () => {
+    setLoading(true);
+    try {
+      const userId = localStorage.getItem("userId"); // 👈 Yaha se ID le rahe hain
+
+      if (!userId) {
+        toast.error("User ID not found. Please login again.");
+        return setLoading(false);
+      }
+      await axios.post(`https://saltandglitz-api.vercel.app/api/users/verifyOtpAndResetPassword/${userId}`, { email, otp, newPassword });
+      toast.success("Password reset successful. Please login with your new password.");
+      setStep(2);
+    } catch (err) {
+      toast.error("Invalid OTP or error resetting password");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOtpChange = (e, index) => {
+    const value = e.target.value.replace(/[^0-9]/g, ""); // Only allow numbers
+    if (value) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp.join(""));
+
+      // Move to next input
+      if (index < 3) otpRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleBackspace = (e, index) => {
+    if (e.key === "Backspace" && index > 0) {
+      const newOtp = [...otp];
+      newOtp[index] = "";
+      setOtp(newOtp.join(""));
+      otpRefs.current[index - 1].focus();
     }
   };
   // header scroll
@@ -102,48 +217,149 @@ const Login = () => {
               <div className='text-center row'>
                 <div className='signup_logo'>
                   <i className="ri-fingerprint-line fs-2"></i>
-                  <h6>Signup with Tiffany & Co.</h6>
-                  <div>
-                    <p className='p_width_loginn'>
-                      Unlock Best prices and become an insider for our exclusive launches & offers. Complete your profile and get ₹250 worth of xCLusive Points.
-                    </p>
-                  </div>
-                  <div className='pt-4 mx-auto d-block'>
-                    <img alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />
-                  </div>
+                  <h6>Login with Salt & Glitz</h6>
+                  <p className='p_width_loginn'>
+                    Unlock Best prices and become an insider for our exclusive launches & offers.
+                  </p>
+                  {/* <div className='pt-4 mx-auto d-block'>
+                                              <img alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />
+                                          </div> */}
                 </div>
-                <div className='mx-auto d-block pb-4'>
-                  <form onSubmit={handleSubmit}>
+                <div className='mx-auto d-block pb-4 pt-4'>
+                  <form onSubmit={step === 1 ? handleContinue : handleLogin}>
 
-                    <div className="form__div">
-                      <input
-                        type="email"
-                        className="form__input"
-                        placeholder=" "
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                      />
-                      <label className="form__label">Email</label>
-                    </div>
+                    {/* Step 1: Email Input */}
+                    {step === 1 && (
+                      <>
+                        <div className="form__div">
+                          <input
+                            type="email"
+                            className="form__input"
+                            placeholder=" "
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                          />
+                          <label className="form__label">Email</label>
+                        </div>
+                        <button className='mt-4 btn w-100 place_order_btn text-light' type='submit'>
+                          CONTINUE
+                        </button>
+                      </>
+                    )}
+                    {/* Step 2: Password + OTP Login Options */}
+                    {step === 2 && (
+                      <>
+                        <div className="form__div">
+                          <input
+                            type="password"
+                            className="form__input"
+                            placeholder=" "
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                          />
+                          <label className="form__label">Password</label>
+                        </div>
+                        <button className='btn w-100 place_order_btn text-light' type='submit' onClick={handleLogin}>
+                          LOGIN
+                        </button>
 
-                    <div className="form__div">
-                      <input
-                        type="password"
-                        className="form__input"
-                        placeholder=" "
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                      />
-                      <label className="form__label">Password</label>
-                    </div>
+                        <p className='mt-2 forgot_password'>
+                          <Link onClick={handleForgotPassword}>
+                            Forgot Password ?
+                          </Link>
+                        </p>
+                        <p className='m-0 p-0'>OR</p>
+                        <button type="button" className='mt-4 w-100 btn get_otp_loginn' onClick={handleOtpLogin}>
+                          Get OTP on your Email
+                        </button>
+                      </>
+                    )}
+                    {/* Step 3: Enter OTP */}
+                    {step === 3 && (
+                      <>
+                        <p className="email-text pb-2">
+                          OTP sent to <strong>{email}</strong>
+                        </p>
+                        <div className="otp-container">
+                          {[...Array(4)].map((_, index) => (
+                            <input
+                              key={index}
+                              type="text"
+                              className="otp-input"
+                              maxLength="1"
+                              value={otp[index] || ""}
+                              onChange={(e) => handleOtpChange(e, index)}
+                              onKeyDown={(e) => handleBackspace(e, index)}
+                              ref={(el) => (otpRefs.current[index] = el)}
+                            />
+                          ))}
+                        </div>
+                        <button className='mt-3 btn w-100 place_order_btn text-light' type='button' onClick={handleVerifyOtp} disabled={otp.length !== 4}>
+                          LOGIN
+                        </button>
 
-                    <button className='mt-4 btn w-100 place_order_btn text-light' type='submit' disabled={loading}>
-                      {loading ? 'Logging in...' : 'CONTINUE TO LOGIN'}
-                    </button>
+                        {/* Resend OTP */}
+                        <p className='mt-2 forgot_password'>
+                          <Link onClick={handleResendOtp}>
+                            RESEND OTP
+                          </Link>
+                        </p>
+                      </>
+                    )}
+                    {step === 4 && (
+                      <>
+                        <p>Enter your email to reset your password.</p>
+                        <div className="form__div">
+                          <input
+                            type="email"
+                            className="form__input"
+                            placeholder=" "
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                          />
+                          <label className="form__label">Email</label>
+                        </div>
+                        <button className='btn w-100 place_order_btn text-light mt-3' type='button' onClick={handleSendForgotPasswordOtp}>
+                          SEND OTP
+                        </button>
+                      </>
+                    )}
+                    {step === 5 && (
+                      <>
+                        <p>Enter OTP and your new password.</p>
+                        <div className="otp-container">
+                          {[...Array(4)].map((_, index) => (
+                            <input
+                              key={index}
+                              type="text"
+                              className="otp-input"
+                              maxLength="1"
+                              value={otp[index] || ""}
+                              onChange={(e) => handleOtpChange(e, index)}
+                              onKeyDown={(e) => handleBackspace(e, index)}
+                              ref={(el) => (otpRefs.current[index] = el)}
+                            />
+                          ))}
+                        </div>
+                        <div className="form__div mt-3">
+                          <input
+                            type="password"
+                            className="form__input"
+                            placeholder="New Password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <button className='btn w-100 place_order_btn text-light mt-3' type='button' onClick={handleResetPassword}>
+                          CONFIRM
+                        </button>
+                      </>
+                    )}
                   </form>
-
                 </div>
                 <p className='m-0 p-0 create_acc'>
                   New to Tiffany & Co.? <Link to="/signup" className='text-decoration-none'><span>Create an Account</span></Link>

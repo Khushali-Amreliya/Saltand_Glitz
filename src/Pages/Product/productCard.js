@@ -246,11 +246,11 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import { formatCurrency } from '../../Utils/formateCurrency'; // Utility for formatting currency
 import { cartAction } from '../../Store/Slice/CartSlice'; // Redux actions for managing cart and wishlist
 import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
+import { toast } from 'react-toastify';
 
 const ProductCard = ({ Productsitem }) => {
     const user = JSON.parse(localStorage.getItem('user')); // Get the logged-in user's data from localStorage
@@ -286,6 +286,10 @@ const ProductCard = ({ Productsitem }) => {
 
     // Function to add an item to the wishlist
     const addToWishlist = async () => {
+        if (!user || !user._id) {
+            toast.error("Please login first to add items to wishlist!"); // You can replace this with a modal or toast
+            return;
+        }
         try {
             await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
                 userId: user._id,
@@ -293,11 +297,6 @@ const ProductCard = ({ Productsitem }) => {
             });
 
             dispatch(cartAction.addToWishlist(Productsitem));
-
-            toast.success('Item added to wishlist', {
-                position: 'bottom-center',
-                autoClose: 1000,
-            });
             setIsWishlist(true);
         } catch (error) {
             if (error.response) {
@@ -305,10 +304,6 @@ const ProductCard = ({ Productsitem }) => {
             } else {
                 console.error('Error adding to wishlist:', error.message);
             }
-            toast.error('Error adding item to wishlist', {
-                position: 'bottom-center',
-                autoClose: 1000,
-            });
         }
     };
 
@@ -317,11 +312,6 @@ const ProductCard = ({ Productsitem }) => {
             await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
 
             dispatch(cartAction.removeFromWishlist(product_id));
-
-            toast.success('Item removed from wishlist', {
-                position: 'bottom-center',
-                autoClose: 1000,
-            });
             setIsWishlist(false);
         } catch (error) {
             if (error.response) {
@@ -329,10 +319,6 @@ const ProductCard = ({ Productsitem }) => {
             } else {
                 console.error('Error removing from wishlist:', error.message);
             }
-            toast.error('Error removing item from wishlist', {
-                position: 'bottom-center',
-                autoClose: 1000,
-            });
         }
     };
 
