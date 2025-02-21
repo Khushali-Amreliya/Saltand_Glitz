@@ -3061,7 +3061,7 @@ const Header = () => {
     var upBannerSlider = {
         dots: false,
         infinite: true,
-        speed: 1000,
+        speed: 1500,
         autoplay: true,
         autoplaySpeed: 3000,
         slidesToShow: 1,
