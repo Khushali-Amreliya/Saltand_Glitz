@@ -245,7 +245,7 @@
 //                             <Link to="/" className="text-decoration-none fs-5 text-dark">
 //                                 {/* <img
 //                                     alt=''
-//                                     src='assets/img/tiffco-logo-2.svg'
+//                                     src='/assets/img/tiffco-logo-2.svg'
 //                                     className='img-fluid w-50 mx-auto d-block'
 //                                 /> */}
 //                                 SALT & GLITZ
@@ -353,7 +353,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center" data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         ENGAGEMENT
@@ -364,7 +364,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         DAILY WEAR
@@ -375,7 +375,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COUPLE RINGS
@@ -386,7 +386,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COCKTAIL
@@ -397,7 +397,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings5.jpg'
+//                                                                             src='/assets/img/rings5.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         INFINITY
@@ -412,7 +412,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         Solitaire
@@ -423,7 +423,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         platinum
@@ -434,7 +434,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings8.jpg'
+//                                                                             src='/assets/img/rings8.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bands
@@ -445,7 +445,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings9.jpg'
+//                                                                             src='/assets/img/rings9.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         promise rings
@@ -456,7 +456,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings10.jpg'
+//                                                                             src='/assets/img/rings10.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         adjustable rings
@@ -474,7 +474,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             gold
@@ -485,7 +485,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             diamond
@@ -496,7 +496,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             Gemstone
@@ -507,7 +507,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             navratna
@@ -518,7 +518,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pearl
@@ -529,7 +529,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             yellow gold
@@ -540,7 +540,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             rose gold
@@ -551,7 +551,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal8.png'
+//                                                                 src='/assets/img/metal8.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             white gold
@@ -593,7 +593,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         ENGAGEMENT
@@ -604,7 +604,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         DAILY WEAR
@@ -615,7 +615,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COUPLE RINGS
@@ -626,7 +626,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COCKTAIL
@@ -637,7 +637,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings5.jpg'
+//                                                                             src='/assets/img/rings5.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         INFINITY
@@ -652,7 +652,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         Solitaire
@@ -663,7 +663,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         platinum
@@ -674,7 +674,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings8.jpg'
+//                                                                             src='/assets/img/rings8.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bands
@@ -685,7 +685,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings9.jpg'
+//                                                                             src='/assets/img/rings9.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         promise rings
@@ -696,7 +696,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings10.jpg'
+//                                                                             src='/assets/img/rings10.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         adjustable rings
@@ -714,7 +714,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             gold
@@ -725,7 +725,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             diamond
@@ -736,7 +736,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             Gemstone
@@ -747,7 +747,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             navratna
@@ -758,7 +758,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pearl
@@ -769,7 +769,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             yellow gold
@@ -780,7 +780,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             rose gold
@@ -791,7 +791,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal8.png'
+//                                                                 src='/assets/img/metal8.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             white gold
@@ -833,7 +833,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         ENGAGEMENT
@@ -844,7 +844,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         DAILY WEAR
@@ -855,7 +855,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COUPLE RINGS
@@ -866,7 +866,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COCKTAIL
@@ -877,7 +877,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings5.jpg'
+//                                                                             src='/assets/img/rings5.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         INFINITY
@@ -892,7 +892,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         Solitaire
@@ -903,7 +903,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         platinum
@@ -914,7 +914,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings8.jpg'
+//                                                                             src='/assets/img/rings8.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bands
@@ -925,7 +925,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings9.jpg'
+//                                                                             src='/assets/img/rings9.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         promise rings
@@ -936,7 +936,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings10.jpg'
+//                                                                             src='/assets/img/rings10.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         adjustable rings
@@ -954,7 +954,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             gold
@@ -965,7 +965,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             diamond
@@ -976,7 +976,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             Gemstone
@@ -987,7 +987,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             navratna
@@ -998,7 +998,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pearl
@@ -1009,7 +1009,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             yellow gold
@@ -1020,7 +1020,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             rose gold
@@ -1031,7 +1031,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal8.png'
+//                                                                 src='/assets/img/metal8.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             white gold
@@ -1073,7 +1073,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         ENGAGEMENT
@@ -1084,7 +1084,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         DAILY WEAR
@@ -1095,7 +1095,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COUPLE RINGS
@@ -1106,7 +1106,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COCKTAIL
@@ -1117,7 +1117,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings5.jpg'
+//                                                                             src='/assets/img/rings5.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         INFINITY
@@ -1132,7 +1132,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         Solitaire
@@ -1143,7 +1143,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         platinum
@@ -1154,7 +1154,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings8.jpg'
+//                                                                             src='/assets/img/rings8.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bands
@@ -1165,7 +1165,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings9.jpg'
+//                                                                             src='/assets/img/rings9.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         promise rings
@@ -1176,7 +1176,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings10.jpg'
+//                                                                             src='/assets/img/rings10.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         adjustable rings
@@ -1194,7 +1194,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             gold
@@ -1205,7 +1205,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             diamond
@@ -1216,7 +1216,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             Gemstone
@@ -1227,7 +1227,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             navratna
@@ -1238,7 +1238,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pearl
@@ -1249,7 +1249,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             yellow gold
@@ -1260,7 +1260,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             rose gold
@@ -1271,7 +1271,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal8.png'
+//                                                                 src='/assets/img/metal8.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             white gold
@@ -1313,7 +1313,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         ENGAGEMENT
@@ -1324,7 +1324,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         DAILY WEAR
@@ -1335,7 +1335,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COUPLE RINGS
@@ -1346,7 +1346,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COCKTAIL
@@ -1357,7 +1357,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings5.jpg'
+//                                                                             src='/assets/img/rings5.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         INFINITY
@@ -1372,7 +1372,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         Solitaire
@@ -1383,7 +1383,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         platinum
@@ -1394,7 +1394,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings8.jpg'
+//                                                                             src='/assets/img/rings8.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bands
@@ -1405,7 +1405,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings9.jpg'
+//                                                                             src='/assets/img/rings9.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         promise rings
@@ -1416,7 +1416,7 @@
 //                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings10.jpg'
+//                                                                             src='/assets/img/rings10.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         adjustable rings
@@ -1434,7 +1434,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             gold
@@ -1445,7 +1445,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             diamond
@@ -1456,7 +1456,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             Gemstone
@@ -1467,7 +1467,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             navratna
@@ -1478,7 +1478,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pearl
@@ -1489,7 +1489,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             yellow gold
@@ -1500,7 +1500,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             rose gold
@@ -1511,7 +1511,7 @@
 //                                                             data-bs-dismiss="offcanvas" aria-label="Close">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal8.png'
+//                                                                 src='/assets/img/metal8.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             white gold
@@ -1579,14 +1579,14 @@
 //                             {/* <Link to="/">
 //                                 <img
 //                                     alt=''
-//                                     src='assets/img/tiffco-logo-2.svg'
+//                                     src='/assets/img/tiffco-logo-2.svg'
 //                                     className='mx-auto d-block main_logo'
 //                                 />
 //                             </Link> */}
 //                             <Link to="/" className="text-decoration-none fs-5 text-dark">
 //                                 {/* <img
 //                                     alt=''
-//                                     src='assets/img/tiffco-logo-2.svg'
+//                                     src='/assets/img/tiffco-logo-2.svg'
 //                                     className='img-fluid w-50 mx-auto d-block'
 //                                 /> */}
 //                                 SALT & GLITZ
@@ -1670,7 +1670,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         ENGAGEMENT
@@ -1680,7 +1680,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         DAILY WEAR
@@ -1690,7 +1690,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COUPLE RINGS
@@ -1700,7 +1700,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COCKTAIL
@@ -1710,7 +1710,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings5.jpg'
+//                                                                             src='/assets/img/rings5.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         INFINITY
@@ -1724,7 +1724,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         Solitaire
@@ -1734,7 +1734,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         platinum
@@ -1744,7 +1744,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings8.jpg'
+//                                                                             src='/assets/img/rings8.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bands
@@ -1754,7 +1754,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings9.jpg'
+//                                                                             src='/assets/img/rings9.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         promise rings
@@ -1764,7 +1764,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings10.jpg'
+//                                                                             src='/assets/img/rings10.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         adjustable rings
@@ -1781,7 +1781,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             gold
@@ -1791,7 +1791,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             diamond
@@ -1801,7 +1801,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             Gemstone
@@ -1811,7 +1811,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             navratna
@@ -1821,7 +1821,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pearl
@@ -1831,7 +1831,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             yellow gold
@@ -1841,7 +1841,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             rose gold
@@ -1851,7 +1851,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal8.png'
+//                                                                 src='/assets/img/metal8.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             white gold
@@ -1892,7 +1892,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         ENGAGEMENT
@@ -1902,7 +1902,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         DAILY WEAR
@@ -1912,7 +1912,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COUPLE RINGS
@@ -1922,7 +1922,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COCKTAIL
@@ -1932,7 +1932,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings5.jpg'
+//                                                                             src='/assets/img/rings5.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         INFINITY
@@ -1946,7 +1946,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         Solitaire
@@ -1956,7 +1956,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         platinum
@@ -1966,7 +1966,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings8.jpg'
+//                                                                             src='/assets/img/rings8.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bands
@@ -1976,7 +1976,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings9.jpg'
+//                                                                             src='/assets/img/rings9.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         promise rings
@@ -1986,7 +1986,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings10.jpg'
+//                                                                             src='/assets/img/rings10.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         adjustable rings
@@ -2003,7 +2003,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             gold
@@ -2013,7 +2013,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             diamond
@@ -2023,7 +2023,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             Gemstone
@@ -2033,7 +2033,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             navratna
@@ -2043,7 +2043,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pearl
@@ -2053,7 +2053,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             yellow gold
@@ -2063,7 +2063,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             rose gold
@@ -2073,7 +2073,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal8.png'
+//                                                                 src='/assets/img/metal8.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             white gold
@@ -2114,7 +2114,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         ENGAGEMENT
@@ -2124,7 +2124,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         DAILY WEAR
@@ -2134,7 +2134,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COUPLE RINGS
@@ -2144,7 +2144,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COCKTAIL
@@ -2154,7 +2154,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings5.jpg'
+//                                                                             src='/assets/img/rings5.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         INFINITY
@@ -2168,7 +2168,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         Solitaire
@@ -2178,7 +2178,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         platinum
@@ -2188,7 +2188,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings8.jpg'
+//                                                                             src='/assets/img/rings8.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bands
@@ -2198,7 +2198,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings9.jpg'
+//                                                                             src='/assets/img/rings9.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         promise rings
@@ -2208,7 +2208,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings10.jpg'
+//                                                                             src='/assets/img/rings10.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         adjustable rings
@@ -2225,7 +2225,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             gold
@@ -2235,7 +2235,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             diamond
@@ -2245,7 +2245,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             Gemstone
@@ -2255,7 +2255,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             navratna
@@ -2265,7 +2265,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pearl
@@ -2275,7 +2275,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             yellow gold
@@ -2285,7 +2285,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             rose gold
@@ -2295,7 +2295,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal8.png'
+//                                                                 src='/assets/img/metal8.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             white gold
@@ -2336,7 +2336,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         RINGS
@@ -2346,7 +2346,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         Pendents
@@ -2356,7 +2356,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         Necklace
@@ -2366,7 +2366,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         men's solitaires
@@ -2380,7 +2380,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         earrings
@@ -2390,7 +2390,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bridal set
@@ -2407,7 +2407,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             round
@@ -2417,7 +2417,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pear
@@ -2427,7 +2427,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             heart
@@ -2437,7 +2437,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             princess
@@ -2447,7 +2447,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             oval
@@ -2457,7 +2457,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             cushion
@@ -2467,7 +2467,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             emerald
@@ -2508,7 +2508,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings1.jpg'
+//                                                                             src='/assets/img/rings1.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         ENGAGEMENT
@@ -2518,7 +2518,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings2.jpg'
+//                                                                             src='/assets/img/rings2.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         DAILY WEAR
@@ -2528,7 +2528,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings3.jpg'
+//                                                                             src='/assets/img/rings3.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COUPLE RINGS
@@ -2538,7 +2538,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings4.jpg'
+//                                                                             src='/assets/img/rings4.jpg'
 //                                                                             className=' me-2'
 //                                                                         />
 //                                                                         COCKTAIL
@@ -2548,7 +2548,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings5.jpg'
+//                                                                             src='/assets/img/rings5.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         INFINITY
@@ -2562,7 +2562,7 @@
 //                                                                     <Link to="/earrings" className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings6.jpg'
+//                                                                             src='/assets/img/rings6.jpg'
 //                                                                             className=' me-2' // Added margin to the right
 //                                                                         />
 //                                                                         Solitaire
@@ -2572,7 +2572,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings7.jpg'
+//                                                                             src='/assets/img/rings7.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         platinum
@@ -2582,7 +2582,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings8.jpg'
+//                                                                             src='/assets/img/rings8.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         bands
@@ -2592,7 +2592,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings9.jpg'
+//                                                                             src='/assets/img/rings9.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         promise rings
@@ -2602,7 +2602,7 @@
 //                                                                     <Link className="d-flex align-items-center">
 //                                                                         <img
 //                                                                             alt='Jewelry Style'
-//                                                                             src='assets/img/rings10.jpg'
+//                                                                             src='/assets/img/rings10.jpg'
 //                                                                             className='me-2'
 //                                                                         />
 //                                                                         adjustable rings
@@ -2619,7 +2619,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal1.png'
+//                                                                 src='/assets/img/metal1.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             gold
@@ -2629,7 +2629,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal2.png'
+//                                                                 src='/assets/img/metal2.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             diamond
@@ -2639,7 +2639,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal3.png'
+//                                                                 src='/assets/img/metal3.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             Gemstone
@@ -2649,7 +2649,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal4.png'
+//                                                                 src='/assets/img/metal4.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             navratna
@@ -2659,7 +2659,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal5.png'
+//                                                                 src='/assets/img/metal5.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             pearl
@@ -2669,7 +2669,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal6.png'
+//                                                                 src='/assets/img/metal6.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             yellow gold
@@ -2679,7 +2679,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal7.png'
+//                                                                 src='/assets/img/metal7.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             rose gold
@@ -2689,7 +2689,7 @@
 //                                                         <Link to="/earrings" className="d-flex align-items-center">
 //                                                             <img
 //                                                                 alt='Jewelry Style'
-//                                                                 src='assets/img/metal8.png'
+//                                                                 src='/assets/img/metal8.png'
 //                                                                 className='img-fluid me-2'
 //                                                             />
 //                                                             white gold
@@ -3280,7 +3280,7 @@ const Header = () => {
                             <Link to="/" className="text-decoration-none fs-5 text-dark">
                                 {/* <img
                                     alt=''
-                                    src='assets/img/tiffco-logo-2.svg'
+                                    src='/assets/img/tiffco-logo-2.svg'
                                     className='img-fluid w-50 mx-auto d-block'
                                 /> */}
                                 SALT & GLITZ
@@ -3387,7 +3387,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center" data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         ENGAGEMENT
@@ -3398,7 +3398,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         DAILY WEAR
@@ -3409,7 +3409,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COUPLE RINGS
@@ -3420,7 +3420,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COCKTAIL
@@ -3431,7 +3431,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings5.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         INFINITY
@@ -3446,7 +3446,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         Solitaire
@@ -3457,7 +3457,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         platinum
@@ -3468,7 +3468,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings8.jpg'
+                                                                            src='/assets/img/rings8.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bands
@@ -3479,7 +3479,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings9.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         promise rings
@@ -3490,7 +3490,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings10.jpg'
+                                                                            src='/assets/img/rings10.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         adjustable rings
@@ -3508,7 +3508,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             gold
@@ -3519,7 +3519,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             diamond
@@ -3530,7 +3530,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             Gemstone
@@ -3541,7 +3541,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             navratna
@@ -3552,7 +3552,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pearl
@@ -3563,7 +3563,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             yellow gold
@@ -3574,7 +3574,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             rose gold
@@ -3585,7 +3585,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal8.png'
+                                                                src='/assets/img/metal8.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             white gold
@@ -3627,7 +3627,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         ENGAGEMENT
@@ -3638,7 +3638,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         DAILY WEAR
@@ -3649,7 +3649,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COUPLE RINGS
@@ -3660,7 +3660,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COCKTAIL
@@ -3671,7 +3671,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings5.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         INFINITY
@@ -3686,7 +3686,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         Solitaire
@@ -3697,7 +3697,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         platinum
@@ -3708,7 +3708,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings8.jpg'
+                                                                            src='/assets/img/rings8.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bands
@@ -3719,7 +3719,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings9.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         promise rings
@@ -3730,7 +3730,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings10.jpg'
+                                                                            src='/assets/img/rings10.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         adjustable rings
@@ -3748,7 +3748,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             gold
@@ -3759,7 +3759,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             diamond
@@ -3770,7 +3770,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             Gemstone
@@ -3781,7 +3781,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             navratna
@@ -3792,7 +3792,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pearl
@@ -3803,7 +3803,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             yellow gold
@@ -3814,7 +3814,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             rose gold
@@ -3825,7 +3825,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal8.png'
+                                                                src='/assets/img/metal8.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             white gold
@@ -3867,7 +3867,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         ENGAGEMENT
@@ -3878,7 +3878,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         DAILY WEAR
@@ -3889,7 +3889,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COUPLE RINGS
@@ -3900,7 +3900,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COCKTAIL
@@ -3911,7 +3911,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings5.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         INFINITY
@@ -3926,7 +3926,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         Solitaire
@@ -3937,7 +3937,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         platinum
@@ -3948,7 +3948,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings8.jpg'
+                                                                            src='/assets/img/rings8.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bands
@@ -3959,7 +3959,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings9.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         promise rings
@@ -3970,7 +3970,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings10.jpg'
+                                                                            src='/assets/img/rings10.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         adjustable rings
@@ -3988,7 +3988,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             gold
@@ -3999,7 +3999,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             diamond
@@ -4010,7 +4010,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             Gemstone
@@ -4021,7 +4021,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             navratna
@@ -4032,7 +4032,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pearl
@@ -4043,7 +4043,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             yellow gold
@@ -4054,7 +4054,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             rose gold
@@ -4065,7 +4065,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal8.png'
+                                                                src='/assets/img/metal8.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             white gold
@@ -4107,7 +4107,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         ENGAGEMENT
@@ -4118,7 +4118,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         DAILY WEAR
@@ -4129,7 +4129,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COUPLE RINGS
@@ -4140,7 +4140,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COCKTAIL
@@ -4151,7 +4151,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings5.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         INFINITY
@@ -4166,7 +4166,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         Solitaire
@@ -4177,7 +4177,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         platinum
@@ -4188,7 +4188,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings8.jpg'
+                                                                            src='/assets/img/rings8.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bands
@@ -4199,7 +4199,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings9.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         promise rings
@@ -4210,7 +4210,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings10.jpg'
+                                                                            src='/assets/img/rings10.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         adjustable rings
@@ -4228,7 +4228,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             gold
@@ -4239,7 +4239,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             diamond
@@ -4250,7 +4250,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             Gemstone
@@ -4261,7 +4261,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             navratna
@@ -4272,7 +4272,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pearl
@@ -4283,7 +4283,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             yellow gold
@@ -4294,7 +4294,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             rose gold
@@ -4305,7 +4305,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal8.png'
+                                                                src='/assets/img/metal8.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             white gold
@@ -4347,7 +4347,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         ENGAGEMENT
@@ -4358,7 +4358,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         DAILY WEAR
@@ -4369,7 +4369,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COUPLE RINGS
@@ -4380,7 +4380,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COCKTAIL
@@ -4391,7 +4391,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings5.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         INFINITY
@@ -4406,7 +4406,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         Solitaire
@@ -4417,7 +4417,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         platinum
@@ -4428,7 +4428,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings8.jpg'
+                                                                            src='/assets/img/rings8.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bands
@@ -4439,7 +4439,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings9.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         promise rings
@@ -4450,7 +4450,7 @@ const Header = () => {
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings10.jpg'
+                                                                            src='/assets/img/rings10.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         adjustable rings
@@ -4468,7 +4468,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             gold
@@ -4479,7 +4479,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             diamond
@@ -4490,7 +4490,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             Gemstone
@@ -4501,7 +4501,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             navratna
@@ -4512,7 +4512,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pearl
@@ -4523,7 +4523,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             yellow gold
@@ -4534,7 +4534,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             rose gold
@@ -4545,7 +4545,7 @@ const Header = () => {
                                                             data-bs-dismiss="offcanvas" aria-label="Close">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal8.png'
+                                                                src='/assets/img/metal8.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             white gold
@@ -4613,14 +4613,14 @@ const Header = () => {
                             {/* <Link to="/">
                                 <img
                                     alt=''
-                                    src='assets/img/tiffco-logo-2.svg'
+                                    src='/assets/img/tiffco-logo-2.svg'
                                     className='mx-auto d-block main_logo'
                                 />
                             </Link> */}
                             <Link to="/" className="text-decoration-none fs-5 text-dark">
                                 {/* <img
                                     alt=''
-                                    src='assets/img/tiffco-logo-2.svg'
+                                    src='/assets/img/tiffco-logo-2.svg'
                                     className='img-fluid w-50 mx-auto d-block'
                                 /> */}
                                 SALT & GLITZ
@@ -4704,7 +4704,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         ENGAGEMENT
@@ -4714,7 +4714,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         DAILY WEAR
@@ -4724,7 +4724,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COUPLE RINGS
@@ -4734,7 +4734,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COCKTAIL
@@ -4744,7 +4744,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings5.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         INFINITY
@@ -4758,7 +4758,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         Solitaire
@@ -4768,7 +4768,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         platinum
@@ -4778,7 +4778,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings8.jpg'
+                                                                            src='/assets/img/rings8.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bands
@@ -4788,7 +4788,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings9.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         promise rings
@@ -4798,7 +4798,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings10.jpg'
+                                                                            src='/assets/img/rings10.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         adjustable rings
@@ -4815,7 +4815,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             gold
@@ -4825,7 +4825,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             diamond
@@ -4835,7 +4835,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             Gemstone
@@ -4845,7 +4845,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             navratna
@@ -4855,7 +4855,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pearl
@@ -4865,7 +4865,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             yellow gold
@@ -4875,7 +4875,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             rose gold
@@ -4885,7 +4885,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal8.png'
+                                                                src='/assets/img/metal8.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             white gold
@@ -4926,7 +4926,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         ENGAGEMENT
@@ -4936,7 +4936,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         DAILY WEAR
@@ -4946,7 +4946,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COUPLE RINGS
@@ -4956,7 +4956,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COCKTAIL
@@ -4966,7 +4966,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings5.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         INFINITY
@@ -4980,7 +4980,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         Solitaire
@@ -4990,7 +4990,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         platinum
@@ -5000,7 +5000,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings8.jpg'
+                                                                            src='/assets/img/rings8.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bands
@@ -5010,7 +5010,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings9.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         promise rings
@@ -5020,7 +5020,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings10.jpg'
+                                                                            src='/assets/img/rings10.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         adjustable rings
@@ -5037,7 +5037,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             gold
@@ -5047,7 +5047,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             diamond
@@ -5057,7 +5057,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             Gemstone
@@ -5067,7 +5067,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             navratna
@@ -5077,7 +5077,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pearl
@@ -5087,7 +5087,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             yellow gold
@@ -5097,7 +5097,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             rose gold
@@ -5107,7 +5107,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal8.png'
+                                                                src='/assets/img/metal8.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             white gold
@@ -5148,7 +5148,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         ENGAGEMENT
@@ -5158,7 +5158,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         DAILY WEAR
@@ -5168,7 +5168,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COUPLE RINGS
@@ -5178,7 +5178,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COCKTAIL
@@ -5188,7 +5188,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings5.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         INFINITY
@@ -5202,7 +5202,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         Solitaire
@@ -5212,7 +5212,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         platinum
@@ -5222,7 +5222,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings8.jpg'
+                                                                            src='/assets/img/rings8.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bands
@@ -5232,7 +5232,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings9.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         promise rings
@@ -5242,7 +5242,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings10.jpg'
+                                                                            src='/assets/img/rings10.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         adjustable rings
@@ -5259,7 +5259,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             gold
@@ -5269,7 +5269,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             diamond
@@ -5279,7 +5279,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             Gemstone
@@ -5289,7 +5289,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             navratna
@@ -5299,7 +5299,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pearl
@@ -5309,7 +5309,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             yellow gold
@@ -5319,7 +5319,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             rose gold
@@ -5329,7 +5329,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal8.png'
+                                                                src='/assets/img/metal8.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             white gold
@@ -5370,7 +5370,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         RINGS
@@ -5380,7 +5380,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         Pendents
@@ -5390,7 +5390,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         Necklace
@@ -5400,7 +5400,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         men's solitaires
@@ -5414,7 +5414,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         earrings
@@ -5424,7 +5424,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bridal set
@@ -5441,7 +5441,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             round
@@ -5451,7 +5451,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pear
@@ -5461,7 +5461,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             heart
@@ -5471,7 +5471,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             princess
@@ -5481,7 +5481,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             oval
@@ -5491,7 +5491,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             cushion
@@ -5501,7 +5501,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             emerald
@@ -5542,7 +5542,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings1.jpg'
+                                                                            src='/assets/img/rings1.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         ENGAGEMENT
@@ -5552,7 +5552,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings2.jpg'
+                                                                            src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         DAILY WEAR
@@ -5562,7 +5562,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings3.jpg'
+                                                                            src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COUPLE RINGS
@@ -5572,7 +5572,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings4.jpg'
+                                                                            src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
                                                                         COCKTAIL
@@ -5582,7 +5582,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings5.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         INFINITY
@@ -5596,7 +5596,7 @@ const Header = () => {
                                                                     <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings6.jpg'
+                                                                            src='/assets/img/rings6.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
                                                                         Solitaire
@@ -5606,7 +5606,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings7.jpg'
+                                                                            src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         platinum
@@ -5616,7 +5616,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings8.jpg'
+                                                                            src='/assets/img/rings8.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         bands
@@ -5626,7 +5626,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings9.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         promise rings
@@ -5636,7 +5636,7 @@ const Header = () => {
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='assets/img/rings10.jpg'
+                                                                            src='/assets/img/rings10.jpg'
                                                                             className='me-2'
                                                                         />
                                                                         adjustable rings
@@ -5653,7 +5653,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal1.png'
+                                                                src='/assets/img/metal1.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             gold
@@ -5663,7 +5663,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal2.png'
+                                                                src='/assets/img/metal2.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             diamond
@@ -5673,7 +5673,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal3.png'
+                                                                src='/assets/img/metal3.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             Gemstone
@@ -5683,7 +5683,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal4.png'
+                                                                src='/assets/img/metal4.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             navratna
@@ -5693,7 +5693,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal5.png'
+                                                                src='/assets/img/metal5.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             pearl
@@ -5703,7 +5703,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal6.png'
+                                                                src='/assets/img/metal6.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             yellow gold
@@ -5713,7 +5713,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal7.png'
+                                                                src='/assets/img/metal7.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             rose gold
@@ -5723,7 +5723,7 @@ const Header = () => {
                                                         <Link to="/earrings" className="d-flex align-items-center">
                                                             <img
                                                                 alt='Jewelry Style'
-                                                                src='assets/img/metal8.png'
+                                                                src='/assets/img/metal8.png'
                                                                 className='img-fluid me-2'
                                                             />
                                                             white gold

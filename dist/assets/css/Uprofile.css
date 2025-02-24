@@ -1,0 +1,378 @@
+.bg_uprofile {
+    background: rgb(249, 249, 250);
+    padding: 146px 20px;
+}
+
+.sidebar {
+    padding: 20px;
+    padding-left: 70px;
+    background-color: #f8f9fa;
+    height: 100%;
+    overflow-y: auto;
+    /* Enable scrolling if content exceeds viewport height */
+}
+
+
+.sidebar p {
+    font-size: 12px;
+    font-weight: bold;
+    color: #9d9fa4;
+}
+
+.edit-profile-link {
+    color: #ff33cc;
+    font-size: 12px;
+    margin-bottom: 20px;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.edit-profile-link:hover {
+    color: #ff33cc;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+
+.sidebar-menu a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    font-size: 14px;
+    color: #231535;
+    font-weight: bold;
+}
+
+.sidebar-menu a {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.line_profile {
+    background-color: #e6dce6;
+    height: 2px;
+    width: 35px;
+}
+
+.option_menu li {
+    padding-bottom: 5px !important;
+}
+
+.option_menu {
+    padding: 10px 0 !important;
+}
+
+.table>:not(caption)>*>* {
+    border-bottom-width: 0px !important;
+}
+
+.table_up tbody tr th {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.table_up tbody tr td {
+    font-size: 12px;
+}
+
+/* Profile container */
+.profile-container {
+    background-color: #f9f9f9;
+    overflow: hidden;
+}
+
+/* Profile details card */
+.profile-details-card {
+    padding: 0px 20px;
+}
+
+.bg_up {
+    background-color: #fff !important;
+    border: 1px solid #dddddd;
+}
+
+.profile-details-card .profile_title {
+    font-size: 15px;
+    border-bottom: 1px solid #dddddd;
+    /* background-color: #000; */
+    padding: 10px 0px;
+    margin-bottom: 10px;
+}
+
+.profile_title h2 {
+    font-size: 15px;
+}
+
+.profile_title h2 span {
+    color: var(--color);
+    font-weight: bold;
+}
+
+.profile-details-card .profile_title button {
+    font-size: 14px;
+    color: #000;
+    background: var(--background) !important;
+    padding: 6px 28px !important;
+}
+
+.profile-info p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.profile-info p strong {
+    font-weight: 600;
+    color: #000;
+}
+
+/* Buttons styling */
+.profile-buttons {
+    margin-top: 20px;
+}
+
+.profile-buttons .btn {
+    margin-right: 10px;
+    padding: 10px 20px;
+}
+
+.profile-buttons .btn-link {
+    font-size: 14px;
+}
+
+/* editprofile */
+/* Container setup */
+.l-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form {
+    width: 360px;
+    padding: 4rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+}
+
+.form__div {
+    position: relative;
+    height: 48px;
+    margin-bottom: 1.5rem;
+}
+
+.form__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: .5rem;
+    outline: none;
+    padding: 5px 1rem 0.25rem;
+    background: none;
+    z-index: 1;
+    transition: border 0.3s ease;
+}
+
+/* Input field focus state */
+.form__input:focus {
+    border: 1.5px solid #3f91a1;
+}
+
+.form__input:focus::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 10px;
+    width: 75px;
+    height: 5px;
+    background-color: #fff;
+    z-index: 3;
+}
+
+/* Label styling */
+.form__label {
+    position: absolute;
+    left: 1rem;
+    top: 27%;
+    padding: 0 .25rem;
+    background-color: #fff;
+    color: #777;
+    font-size: 14px;
+    transition: all .3s ease;
+    z-index: 2;
+}
+
+.form__input:focus+.form__label,
+.form__input:not(:placeholder-shown)+.form__label {
+    top: -0.6rem;
+    left: 0.8rem;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color);
+    padding: 0 .3rem;
+}
+
+/* Submit button styling */
+.form__button {
+    margin-left: auto;
+    float: inline-end;
+    padding: 10px 28px;
+    outline: none;
+    border: none;
+    background: var(--background);
+    color: #000;
+    font-size: 16px;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.form__button_cancel {
+    padding: 10px 28px;
+    outline: none;
+    border: none;
+    background: #723232 !important;
+    color: #fff !important;
+    font-size: 16px;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.edit-profile {
+    width: 50% !important;
+}
+
+.wishlist_uprofile {
+    max-height: 650px;
+    /* Adjust height as per your requirement */
+    overflow-y: scroll;
+    padding-right: 10px;
+    /* Adds padding for scrollbar */
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+    /* Hides the dropdown arrow */
+}
+
+/* coupon code */
+.main_title_copoun_profile {
+    font-size: 14px;
+}
+
+.coupon-cards-container {
+    padding: 20px;
+    max-height: 650px;
+    /* Adjust height as per your requirement */
+    overflow-y: scroll;
+    padding-right: 10px;
+    /* Adds padding for scrollbar */
+}
+
+.coupon-card {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.discount-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background: url('../img/coupon_border.png') no-repeat center;
+    background-size: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.discount-circle h2 {
+    color: var(--color) !important;
+    font-size: 20px;
+    margin: 0;
+}
+
+.coupon-details p {
+    margin: 0;
+    font-size: 12px;
+}
+
+.copy-code {
+    color: #e91e63;
+    cursor: pointer;
+}
+
+.expiration {
+    font-size: 10px;
+    color: #888888;
+    padding-top: 10px;
+}
+
+.taxes {
+    font-size: 10px;
+    color: #888888;
+    margin-top: 8px;
+}
+
+.popover {
+    background-color: #f0f0f0;
+    border: none !important;
+    font-size: 12px !important;
+    padding: 10px !important;
+    transition: opacity 0.3s ease !important;
+    z-index: 1000 !important;
+
+}
+
+@media(max-width:1024px) {
+    .sidebar {
+        padding-left: 0% !important;
+    }
+
+    .edit-profile {
+        width: 75% !important;
+    }
+}
+
+@media(max-width:768px) {
+    .bg_uprofile {
+        padding: 20px 20px !important;
+    }
+
+    .discount-circle {
+        width: 86px !important;
+    }
+}
+
+@media(max-width:520px) {
+    .edit-profile {
+        width: 100% !important;
+    }
+}

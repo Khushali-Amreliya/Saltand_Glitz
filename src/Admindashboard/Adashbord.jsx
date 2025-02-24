@@ -325,7 +325,7 @@ const Adashbord = () => {
       console.log("Formatted products:", formattedProducts);
 
       const response = await axios.post(
-        "https://saltandglitz-api.vercel.app/v1/upload/post_upload",
+        "http://localhost:5000/v1/upload/post_upload",
         { products: formattedProducts }
       );
 

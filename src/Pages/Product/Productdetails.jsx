@@ -524,7 +524,7 @@
 //                                     <div className='row m-0 p-0 w-100 border rounded-3 store py-2 my-2'>
 //                                         <div className='col-lg-1 col-md-2 col-sm-2 col-2 m-0 p-0'>
 //                                             <i className="ri-store-2-line fs-2 ps-2"></i>
-//                                             <img alt='' src='assets/img/store.png' className='img-fluid'></img>
+//                                             <img alt='' src='/assets/img/store.png' className='img-fluid'></img>
 //                                         </div>
 //                                         <div className='col-lg-11 col-md-10 col-sm-10 col-10'>
 //                                             <h6>Nearest Store - <span className='fw-bold'>Adajan</span> (2km)</h6>
@@ -544,22 +544,22 @@
 //                                 <div className='certified_Sec mt-4'>
 //                                     <div className='row'>
 //                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-//                                             {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
+//                                             {/* <img alt='' src='/assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
 //                                             <i className="ri-verified-badge-line fs-1"></i>
 //                                             <p>100% <br />Certified</p>
 //                                         </div>
 //                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-//                                             {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
+//                                             {/* <img alt='' src='/assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
 //                                             <i className="ri-replay-15-line fs-1"></i>
 //                                             <p>15 Day <br />Money Back</p>
 //                                         </div>
 //                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-//                                             {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
+//                                             {/* <img alt='' src='/assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
 //                                             <i className="ri-exchange-funds-line fs-1"></i>
 //                                             <p>Lifetime Exchange</p>
 //                                         </div>
 //                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-//                                             {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
+//                                             {/* <img alt='' src='/assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
 //                                             <i className="ri-calendar-line fs-1"></i>
 //                                             <p>One Year Warranty</p>
 //                                         </div>
@@ -575,20 +575,20 @@
 //                                 <div className='mt-2'>
 //                                     <div className='row text-center'>
 //                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12  mt-2'>
-//                                             {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
+//                                             {/* <img alt='' src='/assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
 //                                             <i className="ri-discount-percent-line fs-1"></i>
 //                                             <p className='p_main m-0 pt-2'>100% BIS</p>
 //                                             <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
 //                                         </div>
 //                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
-//                                             {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
+//                                             {/* <img alt='' src='/assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
 //                                             <i className="ri-bubble-chart-line fs-1"></i>
 //                                             <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
 //                                             <p style={{ fontSize: "11px" }}>Titan Privileges</p>
 //                                         </div>
 //                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
 //                                             <i className="ri-verified-badge-line fs-1 text-success"></i>
-//                                             {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
+//                                             {/* <img alt='' src='/assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
 //                                             <p className='m-0 pt-2 p_main'>100% Certified</p>
 //                                             <p style={{ fontSize: "11px" }}>by CaratLane</p>
 //                                         </div>
@@ -732,7 +732,7 @@
 //             <div className='row w-100 border rounded-3 store py-2 my-2'>
 //                 <div className='col-md-1 col-sm-1 col-2 m-0 p-0'>
 //                     <i className="ri-store-2-line fs-1 ps-2"></i>
-//                     <img alt='' src='assets/img/store.png' className='img-fluid'></img>
+//                     <img alt='' src='/assets/img/store.png' className='img-fluid'></img>
 //                 </div>
 //                 <div className='col-md-11 col-sm-11 col-10'>
 //                     <h6>Nearest Store - <span className='fw-bold'>Adajan</span> (2km)</h6>
@@ -752,22 +752,22 @@
 //         <div className='certified_Sec mt-4'>
 //             <div className='row'>
 //                 <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-//                     {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
+//                     {/* <img alt='' src='/assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
 //                     <i className="ri-verified-badge-line fs-1"></i>
 //                     <p>100% <br />Certified</p>
 //                 </div>
 //                 <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-//                     {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
+//                     {/* <img alt='' src='/assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
 //                     <i className="ri-replay-15-line fs-1"></i>
 //                     <p>15 Day <br />Money Back</p>
 //                 </div>
 //                 <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-//                     {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
+//                     {/* <img alt='' src='/assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
 //                     <i className="ri-exchange-funds-line fs-1"></i>
 //                     <p>Lifetime Exchange</p>
 //                 </div>
 //                 <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-//                     {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
+//                     {/* <img alt='' src='/assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
 //                     <i className="ri-calendar-line fs-1"></i>
 //                     <p>One Year Warranty</p>
 //                 </div>
@@ -783,20 +783,20 @@
 //         <div className='mt-2'>
 //             <div className='row text-center'>
 //                 <div className='col-lg-4 col-md-4 col-sm-4 col-4  mt-2'>
-//                     {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
+//                     {/* <img alt='' src='/assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
 //                     <i className="ri-discount-percent-line fs-1"></i>
 //                     <p className='p_main m-0 pt-2'>100% BIS</p>
 //                     <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
 //                 </div>
 //                 <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
-//                     {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
+//                     {/* <img alt='' src='/assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
 //                     <i className="ri-bubble-chart-line fs-1"></i>
 //                     <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
 //                     <p style={{ fontSize: "11px" }}>Titan Privileges</p>
 //                 </div>
 //                 <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
 //                     <i className="ri-verified-badge-line fs-1 text-success"></i>
-//                     {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
+//                     {/* <img alt='' src='/assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
 //                     <p className='m-0 pt-2 p_main'>100% Certified</p>
 //                     <p style={{ fontSize: "11px" }}>by CaratLane</p>
 //                 </div>
@@ -1311,7 +1311,7 @@ const Productdetails = () => {
     useEffect(() => {
         const fetchRatings = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/v1/rating/getRating/${id}`);
+                const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/rating/getRating/${id}`);
                 console.log("Review Data", response.data);
 
                 setProductRating(response.data.productRating);
@@ -1334,7 +1334,7 @@ const Productdetails = () => {
         console.log(reviewSchema);
 
         try {
-            const response = await axios.post("http://localhost:5000/v1/rating/addRating", reviewSchema);  // Send the fields directly
+            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/rating/addRating", reviewSchema);  // Send the fields directly
             // console.log("REVIEW", response);
 
             if (response.status === 201) {
@@ -1370,7 +1370,7 @@ const Productdetails = () => {
         console.log("Review Data", reviewData);
 
         try {
-            const response = await axios.put("http://localhost:5000/v1/rating/updateRating", reviewData, {
+            const response = await axios.put("https://saltandglitz-api.vercel.app/v1/rating/updateRating", reviewData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
@@ -1873,7 +1873,7 @@ const Productdetails = () => {
                                         <img alt="Product" src={product?.images?.[1] || "fallback-image.jpg"} className="img-fluid p-1" />
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                        <img alt="" src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_5_lar.jpg" className="img-fluid p-1" />
+                                        <img alt="" src={product?.images?.[2] || "fallback-image.jpg"} className="img-fluid p-1" />
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
                                         <img alt="" src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_4_lar.jpg" className="img-fluid p-1" />
@@ -2090,23 +2090,23 @@ const Productdetails = () => {
                                 <div className='certified_Sec mt-4'>
                                     <div className='row'>
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                            <i className="ri-verified-badge-line fs-1"></i>
+                                            <img alt='' src='/assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img>
+                                            {/* <i className="ri-verified-badge-line fs-1"></i> */}
                                             <p>100% <br />Certified</p>
                                         </div>
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                            <i className="ri-replay-15-line fs-1"></i>
+                                            <img alt='' src='/assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img>
+                                            {/* <i className="ri-replay-15-line fs-1"></i> */}
                                             <p>15 Day <br />Money Back</p>
                                         </div>
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                            <i className="ri-exchange-funds-line fs-1"></i>
+                                            <img alt='' src='/assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img>
+                                            {/* <i className="ri-exchange-funds-line fs-1"></i> */}
                                             <p>Lifetime Exchange</p>
                                         </div>
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                            <i className="ri-calendar-line fs-1"></i>
+                                            <img alt='' src='/assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img>
+                                            {/* <i className="ri-calendar-line fs-1"></i> */}
                                             <p>One Year Warranty</p>
                                         </div>
                                     </div>
@@ -2117,20 +2117,20 @@ const Productdetails = () => {
                                 <div className='mt-2'>
                                     <div className='row text-center'>
                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12  mt-2'>
-                                            {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
-                                            <i className="ri-discount-percent-line fs-1"></i>
+                                            <img alt='' src='/assets/img/delivery.png' className='img-fluid mx-auto d-block'></img>
+                                            {/* <i className="ri-discount-percent-line fs-1"></i> */}
                                             <p className='p_main m-0 pt-2'>100% BIS</p>
                                             <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
                                         </div>
                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
-                                            {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
-                                            <i className="ri-bubble-chart-line fs-1"></i>
+                                            <img alt='' src='/assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img>
+                                            {/* <i className="ri-bubble-chart-line fs-1"></i> */}
                                             <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
                                             <p style={{ fontSize: "11px" }}>Titan Privileges</p>
                                         </div>
                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
-                                            <i className="ri-verified-badge-line fs-1 text-success"></i>
-                                            {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
+                                            {/* <i className="ri-verified-badge-line fs-1 text-success"></i> */}
+                                            <img alt='' src='/assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img>
                                             <p className='m-0 pt-2 p_main'>100% Certified</p>
                                             <p style={{ fontSize: "11px" }}>by CaratLane</p>
                                         </div>
@@ -2333,7 +2333,7 @@ const Productdetails = () => {
                                     <div className='row w-100 border rounded-3 store py-2 my-2'>
                                         <div className='col-md-1 col-sm-1 col-2 m-0 p-0'>
                                             <i className="ri-store-2-line fs-1 ps-2"></i>
-                                            <img alt='' src='assets/img/store.png' className='img-fluid'></img>
+                                            <img alt='' src='/assets/img/store.png' className='img-fluid'></img>
                                         </div>
                                         <div className='col-md-11 col-sm-11 col-10'>
                                             <h6>Nearest Store - <span className='fw-bold'>Adajan</span> (2km)</h6>
@@ -2352,24 +2352,24 @@ const Productdetails = () => {
                                 </div> */}
                                 <div className='certified_Sec mt-4'>
                                     <div className='row'>
-                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                            <i className="ri-verified-badge-line fs-1"></i>
+                                        <div className='col-lg-3 col-md-3 col-sm-3 col-3 text-center'>
+                                            <img alt='' src='/assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block w-50'></img>
+                                            {/* <i className="ri-verified-badge-line fs-1"></i> */}
                                             <p>100% <br />Certified</p>
                                         </div>
-                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                            <i className="ri-replay-15-line fs-1"></i>
+                                        <div className='col-lg-3 col-md-3 col-sm-3 col-3 text-center'>
+                                            <img alt='' src='/assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img>
+                                            {/* <i className="ri-replay-15-line fs-1"></i> */}
                                             <p>15 Day <br />Money Back</p>
                                         </div>
-                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                            <i className="ri-exchange-funds-line fs-1"></i>
+                                        <div className='col-lg-3 col-md-3 col-sm-3 col-3 text-center'>
+                                            <img alt='' src='/assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img>
+                                            {/* <i className="ri-exchange-funds-line fs-1"></i> */}
                                             <p>Lifetime Exchange</p>
                                         </div>
-                                        <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
-                                            {/* <img alt='' src='assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img> */}
-                                            <i className="ri-calendar-line fs-1"></i>
+                                        <div className='col-lg-3 col-md-3 col-sm-3 col-3 text-center'>
+                                            <img alt='' src='/assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img>
+                                            {/* <i className="ri-calendar-line fs-1"></i> */}
                                             <p>One Year Warranty</p>
                                         </div>
                                     </div>
@@ -2384,20 +2384,20 @@ const Productdetails = () => {
                                 <div className='mt-2'>
                                     <div className='row text-center'>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4  mt-2'>
-                                            {/* <img alt='' src='assets/img/delivery.png' className='img-fluid mx-auto d-block'></img> */}
-                                            <i className="ri-discount-percent-line fs-1"></i>
+                                            <img alt='' src='/assets/img/delivery.png' className='img-fluid mx-auto d-block'></img>
+                                            {/* <i className="ri-discount-percent-line fs-1"></i> */}
                                             <p className='p_main m-0 pt-2'>100% BIS</p>
                                             <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
                                         </div>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
-                                            {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img> */}
-                                            <i className="ri-bubble-chart-line fs-1"></i>
+                                            <img alt='' src='/assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img>
+                                            {/* <i className="ri-bubble-chart-line fs-1"></i> */}
                                             <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
                                             <p style={{ fontSize: "11px" }}>Titan Privileges</p>
                                         </div>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
-                                            <i className="ri-verified-badge-line fs-1 text-success"></i>
-                                            {/* <img alt='' src='assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img> */}
+                                            {/* <i className="ri-verified-badge-line fs-1 text-success"></i> */}
+                                            <img alt='' src='/assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img>
                                             <p className='m-0 pt-2 p_main'>100% Certified</p>
                                             <p style={{ fontSize: "11px" }}>by CaratLane</p>
                                         </div>

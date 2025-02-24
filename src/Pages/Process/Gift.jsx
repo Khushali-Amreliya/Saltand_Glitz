@@ -83,10 +83,13 @@ const Gift = () => {
                     <Link to="/shipping" className="back-button">
                         <i className="ri-arrow-left-line"></i>
                     </Link>
-                    <div className="cart_logo">
+                    {/* <div className="cart_logo">
                         <i className="ri-shopping-cart-fill cart_logo_icon d-lg-block d-md-block d-sm-block d-none"></i>
-                        {/* <img alt='' src='assets/img/tiffco-logo-2.svg' className='cart_logo_icon'></img> */}
-                    </div>
+                        <img alt='' src='assets/img/tiffco-logo-2.svg' className='cart_logo_icon'></img>
+                    </div> */}
+                    <Link to="/" className="text-decoration-none text-dark">
+                        SALT & GLITZ
+                    </Link>
                 </div>
 
                 {/* <div className="cart_header_center">

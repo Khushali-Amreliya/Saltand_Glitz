@@ -68,7 +68,7 @@ const Shipping = () => {
         );
     };
 
-    const handlePlaceOrder = async () =>{   
+    const handlePlaceOrder = async () => {
         const isPincodeValid = /^\d{6}$/.test(formData.pincode);
         const isMobileValid = /^\d{10}$/.test(formData.mobile);
 
@@ -107,13 +107,13 @@ const Shipping = () => {
 
     // header scroll
     const [isScrolled, setIsScrolled] = useState(false);
-    
+
     const handleScroll = useCallback(() => {
         console.log(window.scrollY);
         setIsScrolled(window.scrollY > 50);
         console.log(isScrolled);
     }, [isScrolled]);
-    
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {
@@ -129,9 +129,12 @@ const Shipping = () => {
                         <i className="ri-arrow-left-line"></i>
                     </Link>
                     <div className="cart_logo">
-                        <i className="ri-shopping-cart-fill cart_logo_icon d-lg-block d-md-block d-sm-block d-none"></i>
-                        {/* <img alt='' src='assets/img/tiffco-logo-2.svg' className='cart_logo_icon'></img> */}
+                        {/* <i className="ri-shopping-cart-fill cart_logo_icon d-lg-block d-md-block d-sm-block d-none"></i> */}
+                        {/* <img alt='' src='/assets/img/tiffco-logo-2.svg' className='cart_logo_icon'></img> */}
                     </div>
+                    <Link to="/" className="text-decoration-none text-dark">
+                        SALT & GLITZ
+                    </Link>
                 </div>
 
                 {/* <div className="cart_header_center">
@@ -447,10 +450,10 @@ const Shipping = () => {
                     </p>
                 </div>
                 <div className="cart_footer_right">
-                    <img src="assets/img/cart_footer_logo.png" alt="payment-icon" className="payment-icon" />
-                    <img src="assets/img/cart_footer_logo1.png" alt="MasterCard" className="payment-icon" />
-                    <img src="assets/img/cart_footer_logo2.png" alt="PayPal" className="payment-icon" />
-                    <img src="assets/img/cart_footer_logo3.png" alt="American Express" className="payment-icon" />
+                    <img src="/assets/img/cart_footer_logo.png" alt="payment-icon" className="payment-icon" />
+                    <img src="/assets/img/cart_footer_logo1.png" alt="MasterCard" className="payment-icon" />
+                    <img src="/assets/img/cart_footer_logo2.png" alt="PayPal" className="payment-icon" />
+                    <img src="/assets/img/cart_footer_logo3.png" alt="American Express" className="payment-icon" />
                 </div>
             </section>
         </>

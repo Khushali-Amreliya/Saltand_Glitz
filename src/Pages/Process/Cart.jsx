@@ -111,36 +111,36 @@ const Cart = () => {
     console.log("Removing item:", item); // Debugging
 
     try {
-        const productId = item.productId?.product_id || item?.product_id; // Handle undefined case
+      const productId = item.productId?.product_id || item?.product_id; // Handle undefined case
 
-        if (!productId) {
-            console.error("Error: product_id is missing!", item);
-            toast.error("Error: Unable to remove item.");
-            return;
-        }
+      if (!productId) {
+        console.error("Error: product_id is missing!", item);
+        toast.error("Error: Unable to remove item.");
+        return;
+      }
 
-        const response = await axios.delete(
-            `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${productId}`
-        );
+      const response = await axios.delete(
+        `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${productId}`
+      );
 
-        console.log(response);
+      console.log(response);
 
-        if (response.status === 200) {
-            dispatch(cartAction.deleteItem(productId));
-            toast.success("Item removed from cart", {
-                position: "top-center",
-                autoClose: 1000,
-            });
-        } else {
-            toast.error("Failed to remove item from cart!");
-        }
+      if (response.status === 200) {
+        dispatch(cartAction.deleteItem(productId));
+        toast.success("Item removed from cart", {
+          position: "top-center",
+          autoClose: 1000,
+        });
+      } else {
+        toast.error("Failed to remove item from cart!");
+      }
     } catch (error) {
-        console.error("Error removing item from cart:", error);
-        toast.error("An error occurred while removing item from cart.");
+      console.error("Error removing item from cart:", error);
+      toast.error("An error occurred while removing item from cart.");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
   const handleIncrement = async (product) => {
     setLoading(true);
@@ -370,9 +370,12 @@ const Cart = () => {
             <Link to="/" className="back-button">
               <i className="ri-arrow-left-line"></i>
             </Link>
-            <div className="cart_logo">
+            {/* <div className="cart_logo">
               <i className="ri-shopping-cart-fill cart_logo_icon d-lg-block d-md-block d-sm-block d-none"></i>
-            </div>
+            </div> */}
+            <Link to="/" className="text-decoration-none text-dark">
+              SALT & GLITZ
+            </Link>
           </div>
 
           <div className="cart_header_center">
