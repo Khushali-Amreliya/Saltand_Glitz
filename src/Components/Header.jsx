@@ -3040,7 +3040,7 @@ const Header = () => {
     const getCart = async () => {
         try {
             const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${userFetch._id}`);
-            console.log(response.data);
+            // console.log(response.data);
 
             const quantity = response.data;
             // console.log(tQuantity);

@@ -261,6 +261,8 @@ const Adashbord = () => {
         image01: row.Image01 || "", // Add image fields
         image02: row.Image02 || "",
         image03: row.Image03 || "",
+        image04: row.Image04 || "",
+        image05: row.Image05 || "",
         video: row.Video || "", // Add video field
         category: row.Category || "category",
         priceType: "14KT", // Default price type
@@ -317,6 +319,8 @@ const Adashbord = () => {
         img: product.image01,
         image02: product.image02,
         image03: product.image03,
+        image04: product.image04,
+        image05: product.image05,
         video: product.video,
         id: product.id,
       }));
@@ -377,6 +381,20 @@ const Adashbord = () => {
                   <img
                     src={product.image03}
                     alt={`${product.title} - Image03`}
+                    className="img-fluid mt-2"
+                  />
+                )}
+                {product.image04 && (
+                  <img
+                    src={product.image04}
+                    alt={`${product.title} - Image04`}
+                    className="img-fluid mt-2"
+                  />
+                )}
+                {product.image05 && (
+                  <img
+                    src={product.image05}
+                    alt={`${product.title} - Image05`}
                     className="img-fluid mt-2"
                   />
                 )}

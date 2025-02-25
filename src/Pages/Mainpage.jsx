@@ -701,12 +701,6 @@ const Mainpage = () => {
           <div className='row position-relative'>
             <div className='d-lg-none d-block'>
               <button
-                onClick={() => solitaire}
-              >
-              </button>
-            </div>
-            <div className='d-lg-none d-block'>
-              <button
                 onClick={() => solitaire?.current?.slickPrev()}
                 className="pre-btn-set"
               >
@@ -1015,7 +1009,7 @@ const Mainpage = () => {
                 <LuConciergeBell className='fs-2 mb-2' />
                 <h6 className=''>Tiffany At Your Service</h6>
                 <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
-                <span className='line_hover'>Contact Us &nbsp; &gt;</span>
+                <Link className='text-decoration-none' to="/contact"><span className='line_hover'>Contact Us &nbsp; &gt;</span></Link>
               </div>
               <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
                 {/* <i className="ri-calendar-line fs-2"></i> */}

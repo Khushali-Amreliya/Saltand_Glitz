@@ -127,10 +127,7 @@ const Cart = () => {
 
       if (response.status === 200) {
         dispatch(cartAction.deleteItem(productId));
-        toast.success("Item removed from cart", {
-          position: "top-center",
-          autoClose: 1000,
-        });
+        toast.success("Item removed from cart");
       } else {
         toast.error("Failed to remove item from cart!");
       }
@@ -300,10 +297,7 @@ const Cart = () => {
           dispatch(cartAction.removeItem(removeResponse.data));  // Remove from cart in the store
           dispatch(cartAction.addToWishlist(wishlistResponse.data));  // Add to wishlist in the store
 
-          toast.success('Item moved to wishlist', {
-            position: 'top-bottom',
-            autoClose: 1000,
-          });
+          toast.success('Item moved to wishlist');
           navigate('/wishlist');
         } else {
           toast.error('Failed to add item to wishlist. Response status: ' + wishlistResponse.status);

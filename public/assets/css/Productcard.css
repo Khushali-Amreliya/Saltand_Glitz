@@ -62,7 +62,7 @@
     left: 15px;
     color: #000 !important;
     border-radius: 15px;
-    padding: 4px 10px !important;
+    padding: 0px 10px !important;
     border: 1.3px solid var(--color);
     vertical-align: middle;
 }

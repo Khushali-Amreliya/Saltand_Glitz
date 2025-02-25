@@ -252,12 +252,44 @@ import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { toast } from 'react-toastify';
 
+
+const renderStar = (rating) => {
+    const adjustedPercentage = ((rating / 5) * 100); // Adjust fill percentage
+    return (
+        <span
+            style={{
+                display: "inline-block",
+                position: "relative",
+                fontSize: "17px",
+                verticalAlign:"middle",
+                color: "#ccc", // Default gray star
+            }}
+        >
+            ★{/* Empty gray star */}
+            <span
+                style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: `${adjustedPercentage}%`, // Adjusted fill percentage
+                    overflow: "hidden",
+                    color: "gold", // Filled star color
+                    // textShadow: "0 0 3px rgba(0, 0, 0, 0.5)", // Improve visibility
+                }}
+            >
+                ★
+            </span>
+        </span>
+    );
+};
+
 const ProductCard = ({ Productsitem }) => {
     const user = JSON.parse(localStorage.getItem('user')); // Get the logged-in user's data from localStorage
-    const { product_id, title, total14KT, goldImages, media, rating } = Productsitem; // Destructure product details
+    const { product_id, title, total14KT, goldImages, media } = Productsitem; // Destructure product details
     const slider = useRef(null); // Ref for the slider
     const dispatch = useDispatch(); // Redux dispatch
     const [isWishlist, setIsWishlist] = useState(false);
+    const [rating, setRating] = useState(0);
     let displayImages = [];
 
     if (goldImages && goldImages.length > 0) {
@@ -265,6 +297,37 @@ const ProductCard = ({ Productsitem }) => {
     } else if (media && media.length > 0) {
         displayImages = media.filter(item => item.type === 'goldImage').map(item => item.productAsset)
     }
+
+    useEffect(() => {
+        const fetchRating = async () => {
+            try {
+                const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/rating/getRating/${product_id}`);
+                // console.log("Fetched Rating Data:", response.data);
+
+                const { approvedRating } = response.data;
+
+                if (approvedRating && approvedRating.length > 0) {
+                    // Calculate Average Rating
+                    const totalRatings = approvedRating.length;
+                    const avgRating = approvedRating.reduce((sum, item) => sum + item.userRating, 0) / totalRatings;
+
+                    setRating(avgRating.toFixed(1)); // Rounded to 1 decimal
+                } else {
+                    setRating(0);
+                }
+            } catch (error) {
+                if (error.response && error.response.status === 404) {
+                    console.warn("Product rating not found, setting rating to 0");
+                    // setProductRating(0);
+                } else {
+                    console.error("Error fetching rating:", error);
+                    setProductRating(0);
+                }
+            }
+
+        };
+        fetchRating();
+    }, [product_id]);
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -343,7 +406,7 @@ const ProductCard = ({ Productsitem }) => {
     return (
         <div className="card-container position-relative">
             <div>
-                
+
                 <Link to={`/Productdetails/${product_id}`}>
                     {/* Slider for product images */}
                     <Slider ref={slider} {...imageVideo} className="border border-1 rounded-3">
@@ -388,11 +451,11 @@ const ProductCard = ({ Productsitem }) => {
                             title="Add to Wishlist"
                         />}
                     </div>
-                    <div className="review_card position-absolute bottom-0 left-0 my-3">
-                        <p className='m-0'>{rating}
-                            <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>
-                        </p>
+                    <div className="review_card position-absolute bottom-0 left-0 my-3 d-flex align-items-center">
+                        <p className="m-0 pe-1">{rating}</p>
+                        {renderStar(rating)}
                     </div>
+
                 </div>
 
                 {/* Mobile view content */}
@@ -423,10 +486,9 @@ const ProductCard = ({ Productsitem }) => {
                     <div className="wishlist-icons position-absolute top-0 end-0 p-2" style={{ cursor: 'pointer' }} onClick={handleWishlistToggle}>
                         {isWishlist ? <IoHeart className="fs-5 text-dark" /> : <IoMdHeartEmpty className="fs-5" />}
                     </div>
-                    <div className="review_card review_card_md position-absolute left-0 my-3">
-                        <p className='m-0'>4.8
-                            <span><i className="fa-solid fa-star ps-1 text-warning"></i></span>
-                        </p>
+                    <div className="review_card review_card_md position-absolute left-0 my-3 d-flex align-items-center">
+                        <p className="m-0 pe-1">{rating}</p>
+                        {renderStar(rating)}
                     </div>
                 </div>
             </div>

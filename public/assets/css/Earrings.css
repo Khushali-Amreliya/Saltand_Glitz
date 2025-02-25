@@ -53,7 +53,7 @@
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    /* max-width: 100%; */
+    max-width: 100% !important;
     display: block;
     font-weight: 400;
 }

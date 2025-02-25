@@ -1167,7 +1167,6 @@ import { IoStar } from "react-icons/io5";
 import { GoArrowLeft } from "react-icons/go";
 // import { productCard } from "../Product/productCard"
 
-
 const renderStars = (rating) => {
     return [...Array(5)].map((_, i) => {
         const fullStars = Math.floor(rating); // Whole number of stars
@@ -1266,6 +1265,10 @@ const Productdetails = () => {
     const [isPriceBreakupVisible, setPriceBreakupVisible] = useState(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    useEffect(() => {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new window.bootstrap.Tooltip(tooltipTriggerEl);
@@ -1294,7 +1297,7 @@ const Productdetails = () => {
             { breakpoint: 576, settings: { slidesToShow: 1 } },
         ],
     };
-    
+
     // File Upload Handler
     const handleFileChange = (e) => {
         const selectedFiles = Array.from(e.target.files);
@@ -1308,13 +1311,46 @@ const Productdetails = () => {
 
         setFiles((prevFiles) => [...prevFiles, ...validFiles]); // Append new files
     };
+
+    // useEffect(() => {
+    //     const fetchRatings = async () => {
+    //         try {
+    //             // const response = await axios.get(`http://localhost:5000/v1/rating/getRating/${id}`);
+    //             const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/rating/getRating/${id}`);
+    //             console.log("Review Data", response.data);
+
+    //             setProductRating(response.data.productRating);
+    //         } catch (error) {
+    //             console.error("Error fetching product ratings", error);
+    //         }
+    //     };
+    //     fetchRatings();
+    // }, [id]);
+
     useEffect(() => {
         const fetchRatings = async () => {
             try {
                 const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/rating/getRating/${id}`);
-                console.log("Review Data", response.data);
+                // console.log("Review Data", response.data);
 
-                setProductRating(response.data.productRating);
+                const { approvedRating } = response.data;
+
+                if (approvedRating.length > 0) {
+                    // Calculate average rating
+                    const totalRatings = approvedRating.length;
+                    const avgRating =
+                        approvedRating.reduce((sum, item) => sum + item.userRating, 0) / totalRatings;
+
+                    setProductRating({
+                        rating: avgRating.toFixed(1),
+                        ratings: approvedRating, // User reviews
+                    });
+                } else {
+                    setProductRating({
+                        rating: 0,
+                        ratings: [],
+                    });
+                }
             } catch (error) {
                 console.error("Error fetching product ratings", error);
             }
@@ -1374,7 +1410,7 @@ const Productdetails = () => {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
-            console.log(response);
+            // console.log(response);
 
             if (response.status === 200) {
                 toast.success("Rating updated successfully!");
@@ -1422,9 +1458,7 @@ const Productdetails = () => {
     const togglePriceBreakup = () => {
         setPriceBreakupVisible(!isPriceBreakupVisible);
     };
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -1627,9 +1661,13 @@ const Productdetails = () => {
 
             // Extract images from the media array
             const images = data.media?.filter(item => item.type === "image").map(item => item.url) || [];
+            const videos = data.media?.filter(item => item.type === "video").map(item => item.url) || [];
+            // console.log("Video URL:", data.media?.find(item => item.type === "video")?.url);
 
             setProduct({
+                media: data.media || [], // ✅ Add media here
                 images, // Store extracted images
+                videos, // Store extracted videos
                 title: data.title,
                 id: data.product_id,
                 grossWt: data.grossWt,
@@ -1664,7 +1702,7 @@ const Productdetails = () => {
         setCaratBy(ktType);
     };
 
-    var md_carousel = {
+    const md_carousel = {
         dots: true,
         infinite: false,
         speed: 1000,
@@ -1672,7 +1710,30 @@ const Productdetails = () => {
         autoplaySpeed: 5000,
         slidesToShow: 1,
         slidesToScroll: 1,
+        customPaging: (i) => {
+            if (product?.media?.[i]?.type === "video") {
+                return (
+                    <div style={{ 
+                        width: "10px", 
+                        height: "10px", 
+                        position: "relative",
+                    }}>
+                        <div style={{ 
+                            width: "0", 
+                            height: "0", 
+                            borderLeft: "6px solid #999", 
+                            borderTop: "4px solid transparent", 
+                            borderBottom: "4px solid transparent",
+                            position: "absolute"
+                        }}></div>
+                    </div>
+                );
+            }
+            // Normal dot for images
+            return <div style={{ width: "6px", height: "6px", background: "#999", borderRadius: "50%" }}></div>;
+        }
     };
+    
 
 
     // const handleColorClick = (colorId) => {
@@ -1866,7 +1927,7 @@ const Productdetails = () => {
                         <div className='row '>
                             <div className="col-lg-8 col-md-6 col-sm-12 col-12 m-0 p-0 d-lg-block d-none">
                                 <div className="row">
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                    {/* <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
                                         <img alt="Product" src={product?.images?.[0] || "fallback-image.jpg"} className="img-fluid p-1" />
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
@@ -1876,40 +1937,47 @@ const Productdetails = () => {
                                         <img alt="" src={product?.images?.[2] || "fallback-image.jpg"} className="img-fluid p-1" />
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                        <img alt="" src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_4_lar.jpg" className="img-fluid p-1" />
+                                        <img alt="" src={product?.images?.[0] || "fallback-image.jpg"} className="img-fluid p-1" />
                                     </div>
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                        <img alt="" src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_7_lar.jpg" className="img-fluid p-1" />
-                                    </div>
+                                        <img alt="" src={product?.images?.[1] || "fallback-image.jpg"} className="img-fluid p-1" />
+                                    </div> */}
+                                    {product?.images?.length > 0 &&
+                                        product.images.map((image, index) => (
+                                            <div key={`image-${index}`} className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                                <img alt="Product" src={image} className="img-fluid p-1" />
+                                            </div>
+                                        ))
+                                    }
                                     <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
                                         <video autoPlay loop controls muted style={{ width: "100%" }} className="item1 video p-1">
-                                            <source src="https://cdn.caratlane.com/media/catalog/product/J/R/JR08210-PTP600_16_video.mp4" type="video/mp4" />
+                                            {product?.videos?.length > 0 ? (
+                                                <source src={product.videos[0]} type="video/mp4" />
+                                            ) : (
+                                                <p>Video not available</p>
+                                            )}
                                         </video>
                                     </div>
                                 </div>
                             </div>
                             <section className='container-fluid m-0 p-0 mb-5 d-lg-none d-block'>
                                 <Slider {...md_carousel}>
-                                    {/* {selectedColor && imagesByColor[selectedColor]?.map((src, index) => (
-                                        <div key={index} >
-                                            {src.includes(".mp4") ? (
-                                                <video
-                                                    autoPlay
-                                                    loop
-                                                    controls
-                                                    muted
-                                                    style={{ width: "100%" }}
-                                                    className='item1 video p-1'
-                                                >
-                                                    <source src={src} type="video/mp4" />
-                                                </video>
-                                            ) : (
-                                                <img alt="" src={src} className="img-fluid p-1" />
-                                            )}
-                                        </div>
-                                    ))} */}
-                                    <img alt="" src={product?.images?.[0] || "fallback-image.jpg"} className="img-fluid p-1" />
-                                    <img alt="" src={product?.images?.[1] || "fallback-image.jpg"} className="img-fluid p-1" />
+                                    {product?.media?.length > 0 ? (
+                                        product.media.map((item, index) => (
+                                            <div key={index}>
+                                                {item.type === "video" ? (
+                                                    <video autoPlay loop controls muted style={{ width: "100%" }}>
+                                                        <source src={item.url} type="video/mp4" />
+                                                    </video>
+                                                ) : (
+                                                    <img src={item.url} alt="" className="img-fluid p-1 mb-2" />
+                                                )}
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>No media available</p> // Agar koi media na ho toh yeh dikhao
+                                    )}
+
 
                                 </Slider>
                             </section>
@@ -2146,11 +2214,11 @@ const Productdetails = () => {
                                         <h3 className="font_h">{product.title}</h3>
                                         <div className="d-flex align-items-center mb-2">
                                             <div className="star_list me-2">
-                                                {Array.from({ length: 5 }).map((_, i) => (
-                                                    <IoStar key={i} className="list_star_icon" />
-                                                ))}
+                                                {renderStars(productRating?.rating || 0)}
                                             </div>
-                                            <h6 className="mb-0" style={{ fontSize: "13px", verticalAlign: "middle" }}>(10)</h6>
+                                            <h6 className="mb-0" style={{ fontSize: "13px", verticalAlign: "middle" }}>
+                                                ({productRating?.ratings?.length || 0})
+                                            </h6>
                                         </div>
                                         <h4 className="font_h">
                                             {formatCurrency(caratBy === "14KT" ? product.total14KT : product.total18KT)}
@@ -2217,7 +2285,7 @@ const Productdetails = () => {
                                             className={`btn ${caratBy === "18KT" ? "bg-dark text-light" : "btn-light text-dark"}`}
                                             onClick={() => handleKTClick("18KT")}
                                         >
-                                            18KT
+                                            18KT2
                                         </button>
                                     </div>
                                 </div>
@@ -2533,7 +2601,7 @@ const Productdetails = () => {
                                         <h5 className="p-2">Reviews</h5>
                                         <div className="text-center review_part">
                                             <p className='m-0'>
-                                                {renderStar(productRating.rating || 0)}&nbsp;{productRating?.rating?.toFixed(1)}
+                                                {renderStar(productRating.rating || 0)}&nbsp;{productRating?.rating}
                                             </p>
 
                                             <p className='m-0'>
@@ -2644,7 +2712,7 @@ const Productdetails = () => {
                         } */}
                         <div className="col-lg-8 col-md-6 col-sm-12 col-12 py-3 d-flex align-items-center justify-content-center">
                             <div className="w-100">
-                                {productRating && productRating.ratings.length > 0 ? (
+                                {productRating && productRating.ratings?.length > 0 ? (
                                     <Slider {...reviewSlider}>
                                         {productRating.ratings.map((rating, index) => (
                                             <div key={index} className="p-2">
@@ -2658,8 +2726,8 @@ const Productdetails = () => {
                                                     </div>
                                                     <div className="py-4">
                                                         <p className="mb-0">
-                                                            <span>{rating.userReview?.charAt(0) || "N/A"}</span>&nbsp;
-                                                            {rating.userReview || "No Review"}
+                                                            <span>{rating.userId.firstName.charAt(0) || "User"}</span>&nbsp;
+                                                            {rating.userId.firstName || "No Review"}
                                                         </p>
                                                     </div>
                                                     <h5 className="mb-0">{rating.userReview || "No Review"}</h5>
@@ -2672,6 +2740,7 @@ const Productdetails = () => {
                                         <p className="m-0 p-0">No reviews yet, lead the way and share your thoughts</p>
                                     </div>
                                 )}
+
                             </div>
                         </div>
                     </div>
