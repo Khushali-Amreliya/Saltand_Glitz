@@ -74,7 +74,6 @@
 .cart_img {
     border: 1px solid rgb(222, 214, 251);
     border-radius: 10px;
-    width: 100% !important;
     /* height: 200px !important; */
 }
 
@@ -780,6 +779,13 @@ body {
 
     .place_order_btn {
         width: 100% !important;
+    }
+
+    /* .cart_img{
+        height: 140px !important;
+    } */
+    .toggle-button {
+        font-size: 11px !important;
     }
 }
 

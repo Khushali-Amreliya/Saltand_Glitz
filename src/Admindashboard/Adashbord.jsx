@@ -265,6 +265,9 @@ const Adashbord = () => {
         image05: row.Image05 || "",
         video: row.Video || "", // Add video field
         category: row.Category || "category",
+        subCategory: row.SubCategory || "subCategory",
+        material: row.Material || "material",
+        gift: row.Gift || "gift",
         priceType: "14KT", // Default price type
       }));
 
@@ -304,6 +307,9 @@ const Adashbord = () => {
         title: product.title,
         gender: product.gender,
         category: product.category,
+        subCategory: product.subCategory,
+        material: product.material,
+        gift: product.gift,
         price14KT: product.price14KT,
         price18KT: product.price18KT,
         diamondprice: product.diamondprice,
@@ -424,6 +430,10 @@ const Adashbord = () => {
                     </button>
                   </div>
                   <p><strong>Purity:</strong> {product.priceType}</p>
+                  <p><strong>Category:</strong> {product.category}</p>
+                  <p><strong>Subcategory:</strong> {product.subCategory}</p>
+                  <p><strong>Material:</strong> {product.material}</p>
+                  <p><strong>Gift:</strong> {product.gift}</p>
                   <p><strong>Gender:</strong> {product.gender}</p>
                   <p><strong>Gross Weight:</strong> {product.grossWt}</p>
                   <p>

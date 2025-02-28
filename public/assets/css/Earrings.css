@@ -376,6 +376,14 @@
     color: var(--color) !important;
     font-weight: 600 !important;
 }
+.filter_viewmore_btn{
+    border: 1px solid #3f91a1 !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    letter-spacing: 0.5px;
+    padding: 10px 0 !important;
+    text-transform: uppercase;
+}
 
 @media(max-width:1024px) {
     /* .absolute_next_btn {

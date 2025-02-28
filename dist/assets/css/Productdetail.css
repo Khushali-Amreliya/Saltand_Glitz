@@ -719,6 +719,32 @@
     height: 100%;
 }
 
+.productdetails_img{
+    height: 420px !important;
+    width: 100% !important;
+}
+.star_list_container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+}
+
+.star_item {
+    font-size: 12px !important;
+    padding: 0px 3px !important;
+    border-radius: 3px !important;
+    margin: 0 !important;
+}
+
+.star_filled {
+    background-color: gold !important; /* Yellow */
+    color: white !important;
+}
+
+.star_empty {
+    background-color: #ccc !important; /* Gray */
+    color: white !important;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {

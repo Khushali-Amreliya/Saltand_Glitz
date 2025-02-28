@@ -70,9 +70,11 @@
 .review_card p {
     font-size: 10px !important;
 }
-.review_card_md{
+
+.review_card_md {
     bottom: 46px !important;
 }
+
 .absolute_next_btn,
 .absolute_prev_btn {
     position: absolute;
@@ -172,6 +174,10 @@
     /* Center alignment */
 }
 
+.heart_icon {
+    color: #DE1A31 !important;
+}
+
 @media(max-width:768px) {
 
     .absolute_next_btn,
@@ -182,6 +188,11 @@
 
     .card-container img {
         height: 250px !important;
+    }
+
+    .pre-btn-set,
+    .next-btn-set {
+        top: 31% !important;
     }
 }
 

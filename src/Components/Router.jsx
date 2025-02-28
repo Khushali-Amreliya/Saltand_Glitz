@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Mainpage from '../Pages/Mainpage';
-import Earrings from '../Pages/Earrings';
 import Cart from '../Pages/Process/Cart';
 import Signup from '../Pages/Verify/Signup';
 import Login from '../Pages/Process/Login';
@@ -32,6 +31,25 @@ import Plan from '../Purchase/Plan';
 import OtpComponent from '../otpComponent';
 import Shimmer from '../ShimmerEffect/shimmer';
 import Test from '../test/Test';
+import Solitaire from '../category/solitaire';
+import Earrings from '../category/Earrings';
+import Rings from '../Category/Rings';
+import Bracelet from '../Category/Bracelet';
+import Jewellery from '../Category/Jewellery';
+import Newarrival from '../Category/Newarrival';
+import Engagement from '../Category/Ring/Engagement';
+import Dailywear from '../Category/Ring/Dailywear';
+import Couple from '../Category/Ring/Couple';
+import Cocktail from '../Category/Ring/Cocktail';
+import Infinity from '../Category/Ring/Infinity';
+import Platinum from '../Category/Ring/Platinum';
+import Bands from '../Category/Ring/Bands';
+import Promise from '../Category/Ring/Promise';
+import Studs from '../Category/Earring/Studs';
+import Drops from '../Category/Earring/Drops';
+import Jhumkas from '../Category/Earring/Jhumkas';
+import Chain from '../Category/Bracelet/Chain';
+import Oval from '../Category/Bracelet/Oval';
 
 const Router = () => {
   return (
@@ -39,10 +57,32 @@ const Router = () => {
       <Routes>
         {/* Pages */}
         <Route path='/' element={<Mainpage />} />
-        <Route path='/earrings' element={<Earrings />} />
         <Route path='/aboutUs' element={<AboutUs />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/otp' element={<OtpComponent />} />
+
+        {/* Category */}
+        <Route path='/solitaire' element={<Solitaire />} />
+        <Route path='/earrings' element={<Earrings />} />
+        <Route path='/ring' element={<Rings />} />
+        <Route path='/bracelet' element={<Bracelet />} />
+        <Route path='/jewellery' element={<Jewellery />} />
+        <Route path='/arrival' element={<Newarrival />} />
+
+        {/* SubCategory */}
+        <Route path='/engagementring' element={<Engagement />} />
+        <Route path='/dailywearring' element={<Dailywear />} />
+        <Route path='/couplering' element={<Couple />} />
+        <Route path='/cocktailring' element={<Cocktail />} />
+        <Route path='/infinityring' element={<Infinity />} />
+        <Route path='/platinumring' element={<Platinum />} />
+        <Route path='/bandsring' element={<Bands />} />
+        <Route path='/promisering' element={<Promise />} />
+        <Route path='/studsearring' element={<Studs />} />
+        <Route path='/dropsearring' element={<Drops />} />
+        <Route path='/jhumkasearring' element={<Jhumkas />} />
+        <Route path='/chainbracelet' element={<Chain />} />
+        <Route path='/ovalbracelet' element={<Oval />} />
 
         {/* Process */}
         <Route path='/cart' element={<Cart />} />

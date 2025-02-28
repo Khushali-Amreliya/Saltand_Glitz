@@ -1168,31 +1168,17 @@ import { GoArrowLeft } from "react-icons/go";
 // import { productCard } from "../Product/productCard"
 
 const renderStars = (rating) => {
-    return [...Array(5)].map((_, i) => {
-        const fullStars = Math.floor(rating); // Whole number of stars
-        const decimalPart = rating - fullStars; // Fractional part
-
-        let starClass = "empty-star"; // Default: gray star
-        let fillPercentage = "0%"; // Default: no fill
-
-        if (i < fullStars) {
-            starClass = "filled-stars"; // Fully filled stars
-        } else if (i === fullStars && decimalPart > 0) {
-            starClass = "partial-star"; // Partial star
-            fillPercentage = `${decimalPart * 100}%`; // Fill dynamically
-        }
-
-        return (
-            <span
-                key={i}
-                className={`stars ${starClass}`}
-                style={i === fullStars ? { "--fill-percent": fillPercentage } : {}}
-            >
-                ★
-            </span>
-        );
-    });
+    return (
+        <div className="star_list_container">
+            {[...Array(5)].map((_, i) => (
+                <span key={i} className={`star_item ${i < rating ? "star_filled" : "star_empty"}`}>
+                    ★
+                </span>
+            ))}
+        </div>
+    );
 };
+
 
 const renderStar = (rating) => {
     const adjustedPercentage = ((rating / 5) * 100) * 0.9; // Adjust fill percentage
@@ -1659,13 +1645,12 @@ const Productdetails = () => {
             const data = response.data;
             // console.log("Data", data);
 
-            // Extract images from the media array
-            const images = data.media?.filter(item => item.type === "image").map(item => item.url) || [];
-            const videos = data.media?.filter(item => item.type === "video").map(item => item.url) || [];
-            // console.log("Video URL:", data.media?.find(item => item.type === "video")?.url);
+            // Extract images and videos
+            const images = data.media?.filter(item => item.type === "goldImage").map(item => item.url) || [];
+            const videos = data.media?.filter(item => item.type === 'goldVideo').map(item => item.url) || [];
 
             setProduct({
-                media: data.media || [], // ✅ Add media here
+                media: [...images, ...videos], // ✅ Store combined media
                 images, // Store extracted images
                 videos, // Store extracted videos
                 title: data.title,
@@ -1691,11 +1676,16 @@ const Productdetails = () => {
         }
     };
 
+
     useEffect(() => {
         fetchProductDetails();
         fetchProducts();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
+    const availableMedia = [...(product?.images || []), ...(product?.videos || [])].filter(Boolean);
+    // console.log("Images:", product?.images);
+    // console.log("Videos:", product?.videos);
+    // console.log("Available Media:", availableMedia);
 
     // Handle KT button click
     const handleKTClick = (ktType) => {
@@ -1711,18 +1701,19 @@ const Productdetails = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         customPaging: (i) => {
-            if (product?.media?.[i]?.type === "video") {
+            // `availableMedia` se check karein ki video hai ya nahi
+            if (availableMedia[i]?.includes('.mp4')) {
                 return (
-                    <div style={{ 
-                        width: "10px", 
-                        height: "10px", 
+                    <div style={{
+                        width: "10px",
+                        height: "10px",
                         position: "relative",
                     }}>
-                        <div style={{ 
-                            width: "0", 
-                            height: "0", 
-                            borderLeft: "6px solid #999", 
-                            borderTop: "4px solid transparent", 
+                        <div style={{
+                            width: "0",
+                            height: "0",
+                            borderLeft: "6px solid #999",
+                            borderTop: "4px solid transparent",
                             borderBottom: "4px solid transparent",
                             position: "absolute"
                         }}></div>
@@ -1734,7 +1725,6 @@ const Productdetails = () => {
         }
     };
     
-
 
     // const handleColorClick = (colorId) => {
     //     setColorBy(colorBy === colorId ? null : colorId);
@@ -1929,69 +1919,53 @@ const Productdetails = () => {
                                 <div className="row">
                                     {/* <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
                                         <img alt="Product" src={product?.images?.[0] || "fallback-image.jpg"} className="img-fluid p-1" />
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                        <img alt="Product" src={product?.images?.[1] || "fallback-image.jpg"} className="img-fluid p-1" />
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                        <img alt="" src={product?.images?.[2] || "fallback-image.jpg"} className="img-fluid p-1" />
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                        <img alt="" src={product?.images?.[0] || "fallback-image.jpg"} className="img-fluid p-1" />
-                                    </div>
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                        <img alt="" src={product?.images?.[1] || "fallback-image.jpg"} className="img-fluid p-1" />
                                     </div> */}
-                                    {product?.images?.length > 0 &&
-                                        product.images.map((image, index) => (
-                                            <div key={`image-${index}`} className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                                <img alt="Product" src={image} className="img-fluid p-1" />
-                                            </div>
-                                        ))
-                                    }
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
-                                        <video autoPlay loop controls muted style={{ width: "100%" }} className="item1 video p-1">
-                                            {product?.videos?.length > 0 ? (
-                                                <source src={product.videos[0]} type="video/mp4" />
-                                            ) : (
-                                                <p>Video not available</p>
+                                    {availableMedia.map((media, index) => (
+                                        <div key={`media-${index}`} className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
+                                            {media.includes('.mp4') ? ( //  Agar video hai toh video tag use karo
+                                                <video autoPlay loop controls muted style={{ width: "100%" }} className="item1 video p-1">
+                                                    <source src={media} type="video/mp4" />
+                                                </video>
+                                            ) : ( //  Otherwise image show karo
+                                                <img alt="Product" src={media} className="img-fluid p-1" />
                                             )}
-                                        </video>
-                                    </div>
+                                        </div>
+                                    ))}
+
                                 </div>
                             </div>
                             <section className='container-fluid m-0 p-0 mb-5 d-lg-none d-block'>
                                 <Slider {...md_carousel}>
-                                    {product?.media?.length > 0 ? (
-                                        product.media.map((item, index) => (
-                                            <div key={index}>
-                                                {item.type === "video" ? (
-                                                    <video autoPlay loop controls muted style={{ width: "100%" }}>
-                                                        <source src={item.url} type="video/mp4" />
+                                    {availableMedia.length > 0 ? (
+                                        availableMedia.map((media, index) => (
+                                            <div key={`media-${index}`}>
+                                                {media.includes('.mp4') ? ( // Agar video hai toh video tag use karo
+                                                    <video autoPlay loop controls muted style={{ width: "100%" }} className="item1 video p-1">
+                                                        <source src={media} type="video/mp4" />
                                                     </video>
-                                                ) : (
-                                                    <img src={item.url} alt="" className="img-fluid p-1 mb-2" />
+                                                ) : ( // Otherwise image show karo
+                                                    <img alt="Product" src={media} className="productdetails_img p-1 mb-2" />
                                                 )}
                                             </div>
                                         ))
                                     ) : (
-                                        <p>No media available</p> // Agar koi media na ho toh yeh dikhao
+                                        <p>No media available</p>
                                     )}
-
-
                                 </Slider>
                             </section>
                             {/* Large */}
                             <div className='col-lg-4 col-md-6 col-sm-12 col-12 px-4 mt-4 mx-auto d-block d-lg-block d-none sticky-header'>
                                 <h3 className='font_h'>{product.title}</h3>
-                                <div className="d-flex align-items-center mb-2">
-                                    <div className="star_list me-2">
-                                        {renderStars(productRating?.rating || 0)}
+                                {productRating?.rating > 0 && (
+                                    <div className="d-flex align-items-center mt-3 mb-2">
+                                        <div className="star_list me-2">
+                                            {renderStars(productRating?.rating)}
+                                        </div>
+                                        <h6 className="mb-0" style={{ fontSize: "13px", verticalAlign: "middle" }}>
+                                            ({productRating?.ratings?.length || 0})
+                                        </h6>
                                     </div>
-                                    <h6 className="mb-0" style={{ fontSize: "13px", verticalAlign: "middle" }}>
-                                        ({productRating?.ratings?.length || 0})
-                                    </h6>
-                                </div>
+                                )}
                                 <h4 className='font_h'>{formatCurrency(price)}</h4>
                                 <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
                                 <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
@@ -2212,14 +2186,16 @@ const Productdetails = () => {
                                 <div className="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h3 className="font_h">{product.title}</h3>
-                                        <div className="d-flex align-items-center mb-2">
-                                            <div className="star_list me-2">
-                                                {renderStars(productRating?.rating || 0)}
+                                        {productRating?.rating > 0 && (
+                                            <div className="d-flex align-items-center mt-3 mb-2">
+                                                <div className="star_list me-2">
+                                                    {renderStars(productRating?.rating)}
+                                                </div>
+                                                <h6 className="mb-0" style={{ fontSize: "13px", verticalAlign: "middle" }}>
+                                                    ({productRating?.ratings?.length || 0})
+                                                </h6>
                                             </div>
-                                            <h6 className="mb-0" style={{ fontSize: "13px", verticalAlign: "middle" }}>
-                                                ({productRating?.ratings?.length || 0})
-                                            </h6>
-                                        </div>
+                                        )}
                                         <h4 className="font_h">
                                             {formatCurrency(caratBy === "14KT" ? product.total14KT : product.total18KT)}
                                         </h4>
@@ -2492,7 +2468,7 @@ const Productdetails = () => {
                                         </div>
                                         <div className="detail-box">
                                             <h4>Purity</h4>
-                                            <p>{caratBy} Yellow Gold</p>
+                                            <p>{caratBy} {colorBy}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -2703,13 +2679,6 @@ const Productdetails = () => {
                                 </div>
                             </>
                         )}
-                        {/* {
-                            productRating ? (
-                                <></>
-                            ) : (
-                                <></>
-                            )
-                        } */}
                         <div className="col-lg-8 col-md-6 col-sm-12 col-12 py-3 d-flex align-items-center justify-content-center">
                             <div className="w-100">
                                 {productRating && productRating.ratings?.length > 0 ? (
@@ -2718,11 +2687,12 @@ const Productdetails = () => {
                                             <div key={index} className="p-2">
                                                 <div className="review_list_box">
                                                     <div className="star_list">
-                                                        {[...Array(5)].map((_, i) => (
+                                                        {/* {[...Array(5)].map((_, i) => (
                                                             <span key={i} className={i < rating.userRating ? "filled-star" : "empty-star"}>
                                                                 ★
                                                             </span>
-                                                        ))}
+                                                        ))} */}
+                                                        {renderStars(rating.userRating || 0)}
                                                     </div>
                                                     <div className="py-4">
                                                         <p className="mb-0">
@@ -2777,7 +2747,7 @@ const Productdetails = () => {
                                                         <img
                                                             alt={item.title}
                                                             src={item.image01}
-                                                            className="img-fluid px-2 position-relative"
+                                                            className="w-100 height_Set px-2 position-relative"
                                                         />
                                                     </Link>
                                                     <div className="card-body cartlane">
@@ -2833,7 +2803,7 @@ const Productdetails = () => {
                                                 <img
                                                     alt={item.title}
                                                     src={item.images?.[0]}
-                                                    className="img-fluid px-2 position-relative"
+                                                    className="height_Set w-100 px-2 position-relative"
                                                 />
                                             </Link>
                                             <div className="card-body cartlane">

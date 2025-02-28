@@ -321,7 +321,7 @@ const ProductCard = ({ Productsitem }) => {
                     // setProductRating(0);
                 } else {
                     console.error("Error fetching rating:", error);
-                    setProductRating(0);
+                    // setProductRating(0);
                 }
             }
 
@@ -444,8 +444,8 @@ const ProductCard = ({ Productsitem }) => {
                         ></i>
                     </div> */}
                     <div className="wishlist-icons position-absolute top-0 end-0 p-2" style={{ cursor: 'pointer' }} onClick={handleWishlistToggle}>
-                        {isWishlist ? <IoHeart className="fs-5 text-dark" /> : <IoMdHeartEmpty
-                            className="fs-5"
+                        {isWishlist ? <IoHeart className="fs-5 heart_icon" /> : <IoMdHeartEmpty
+                            className="fs-5 heart_icon"
                             data-bs-toggle="tooltip"
                             data-bs-placement="bottom"
                             title="Add to Wishlist"
@@ -484,7 +484,7 @@ const ProductCard = ({ Productsitem }) => {
                         ></i>
                     </div> */}
                     <div className="wishlist-icons position-absolute top-0 end-0 p-2" style={{ cursor: 'pointer' }} onClick={handleWishlistToggle}>
-                        {isWishlist ? <IoHeart className="fs-5 text-dark" /> : <IoMdHeartEmpty className="fs-5" />}
+                        {isWishlist ? <IoHeart className="fs-5 heart_icon" /> : <IoMdHeartEmpty className="fs-5 heart_icon" />}
                     </div>
                     <div className="review_card review_card_md position-absolute left-0 my-3 d-flex align-items-center">
                         <p className="m-0 pe-1">{rating}</p>

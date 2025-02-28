@@ -119,7 +119,7 @@ div:where(.swal2-container) .swal2-html-container {
     right: 5%;
     font-size: 21px;
     cursor: pointer;
-    color: #9d9a9f;
+    color: #00000073;
 }
 
 .wishlist_cart {
@@ -129,7 +129,15 @@ div:where(.swal2-container) .swal2-html-container {
     font-size: 33px;
     cursor: pointer;
 }
+.height_Set{
+    height: 350px;
+}
 
+@media(max-width:1024px) {
+    .height_Set{
+        height: 280px !important;
+    }
+}
 @media(max-width:768px) {
     .font_main {
         font-size: 23px !important;
@@ -137,5 +145,16 @@ div:where(.swal2-container) .swal2-html-container {
 
     .p_main {
         font-size: 13px !important;
+    }
+}
+
+@media(max-width:426px) {
+    .height_Set{
+        height: 250px !important;
+    }
+}
+@media(max-width:376px) {
+    .height_Set{
+        height: 200px !important;
     }
 }
