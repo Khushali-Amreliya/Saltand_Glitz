@@ -19,11 +19,19 @@ const Mdfilter = ({ onFilterApply }) => {
     const [showMoreGifts, setShowMoreGifts] = useState(false);
 
     const handleSelectFilterChange = (combinedValue) => {
-        const [sortBy, priceOrder] = combinedValue.split('_');  // Split combined value
-        const updatedFilters = { ...filters, sortBy, priceOrder };
+        let updatedFilters = { ...filters };
+    
+        if (combinedValue === "featured") {
+            updatedFilters = { ...filters, featured: "featured", sortBy: "", priceOrder: "" };
+        } else {
+            const [sortBy, priceOrder] = combinedValue.split("_");
+            updatedFilters = { ...filters, featured: "", sortBy, priceOrder };
+        }
+    
         setFilters(updatedFilters);
-        onFilterApply(updatedFilters); // Parent component ko notify karo
+        onFilterApply(updatedFilters);
     };
+    
     const handleFilterChange = (type, value) => {
         const updatedFilters = { ...filters, [type]: value };
         setFilters(updatedFilters);

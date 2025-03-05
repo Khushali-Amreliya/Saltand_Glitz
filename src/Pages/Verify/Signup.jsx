@@ -6,6 +6,8 @@ import auth from '../../Components/firebase';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import Helmet from '../../Components/Helmet';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const Signup = () => {
     const [loading, setLoading] = useState(false);
@@ -236,16 +238,17 @@ const Signup = () => {
                                     {/* Mobile Number Field */}
                                     <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 my-2'>
                                         <div className='input-container'>
-                                            <input
-                                                type='text'
-                                                placeholder=' '
-                                                className='input-field'
-                                                name='mobileNumber'
+                                            <PhoneInput
+                                                country={'in'} // Default country (India)
                                                 value={formData.mobileNumber}
-                                                onChange={handleChange}
+                                                onChange={(value, countryData) => {
+                                                    // Ensure the number starts with '+'
+                                                    const formattedNumber = `+${value}`;
+                                                    setFormData({ ...formData, mobileNumber: formattedNumber });
+                                                }}
+                                                inputStyle={{ width: '100%' }} // Adjust width
                                                 required
                                             />
-                                            <label className='input-label'>Mobile</label>
                                         </div>
                                     </div>
                                     {/* Password Field */}

@@ -16,26 +16,28 @@ const OrderSummary = () => {
     const [totallPrice, setTotallPrice] = useState(0);
     const [product, setProduct] = useState([]); // Initialize as an array
 
-    const calculateSubtotal = useCallback(() => {
-        return cartItems.reduce((total, item) => total + Number(item.totalprice), 0);
-    }, [cartItems]);
+     const calculateSubtotal = useCallback(() => {
+        return (cartItems || []).reduce(
+          (total, item) => total + Number(item.totalprice),
+          0
+        );
+      }, [cartItems]);
 
     const updateAmounts = useCallback(() => {
         const newSubtotal = calculateSubtotal();
-        setSubtotal(newSubtotal);
-
+    
         // Calculate discount amount in rupees
         const calculatedDiscount = newSubtotal * (discountPercentage / 100);
         setCouponDiscount(calculatedDiscount);
-
+    
         // Calculate total amount after discount
         const discountedAmount = newSubtotal - calculatedDiscount;
         setTotalAmount(discountedAmount);
-    }, [calculateSubtotal, discountPercentage]);
-
-    useEffect(() => {
+      }, [calculateSubtotal, discountPercentage]);
+    
+      useEffect(() => {
         updateAmounts();
-    }, [cartItems, discountPercentage, updateAmounts]);
+      }, [cartItems, discountPercentage, updateAmounts]);
 
     useEffect(() => {
         const fetchCart = async () => {

@@ -10,7 +10,7 @@ const parseJSON = (value) => {
     }
 };
 
-const cartItems = parseJSON(localStorage.getItem("cartItem")) || [];
+// const cartItems = parseJSON(localStorage.getItem("cartItem")) || [];
 const wishlistItems = parseJSON(localStorage.getItem("wishlistItem")) || [];
 const totalQuantity = parseJSON(localStorage.getItem("totalQuantity")) || 0;
 const subtotal = parseJSON(localStorage.getItem("subtotal")) || 0;
@@ -31,9 +31,13 @@ const setWishlist = (wishlist) => {
 const setRecentlyViewed = (recentlyViewed) => {
     localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
 };
+const getCartFromLocalStorage = () => {
+    const storedCart = localStorage.getItem("cartItems");
+    return storedCart ? JSON.parse(storedCart) : [];
+};
 
 const initialState = {
-    cartItem: cartItems,
+    cartItems: getCartFromLocalStorage(),  // ✅ LocalStorage se cart load ho raha hai
     recentlyViewed: localStorage.getItem("recentlyViewed")
         ? JSON.parse(localStorage.getItem("recentlyViewed"))
         : [],
@@ -44,6 +48,9 @@ const initialState = {
     discount: discount,
     error: null
 };
+const setCartToLocalStorage = (cartItem) => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItem)); // ✅ LocalStorage update ho raha hai
+};
 
 const cartSlice = createSlice({
     name: "Cart",
@@ -51,11 +58,10 @@ const cartSlice = createSlice({
     reducers: {
         addItem(state, action) {
             const newItem = action.payload;
-            const existingItem = state.cartItem.find(item => item.id === newItem.id);
+            const existingItem = state.cartItems.find(item => item.id === newItem.id);
 
-            state.totalQuantity++;
             if (!existingItem) {
-                state.cartItem.push({
+                state.cartItems.push({
                     id: newItem.id,
                     title: newItem.title,
                     image01: newItem.image01,
@@ -68,13 +74,14 @@ const cartSlice = createSlice({
                 existingItem.totalprice = Number(existingItem.totalprice) + Number(newItem.price);
             }
 
-            state.subtotal = state.cartItem.reduce((total, item) =>
+            state.subtotal = state.cartItems.reduce((total, item) =>
                 total + Number(item.price) * Number(item.quantity), 0);
 
             state.totalAmount = state.subtotal - (state.subtotal * (state.discount / 100));
 
-            setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
+            setCartToLocalStorage(state.cartItems); // ✅ LocalStorage update ho raha hai
         },
+
 
         removeItem(state, action) {
             const newItem = action.payload;
@@ -121,34 +128,19 @@ const cartSlice = createSlice({
         // },
 
         deleteItem(state, action) {
-            // console.log("Removing Item:", action.payload);  //  Debugging
-            const newItem = action.payload;
-            const existingItem = state.cartItem.find(item => item.id === newItem.id);
-        
-            if (!existingItem) {
-                console.error("Product not found in cart:", newItem);
-                return;
-            }
-        
-            state.totalQuantity--;
-        
-            if (existingItem.quantity === 1) {
-                state.cartItem = state.cartItem.filter(item => item.id !== newItem.id);
-            } else {
-                existingItem.quantity--;
-                existingItem.totalprice = Number(existingItem.totalprice) - Number(newItem.price);
-            }
-        
-            state.subtotal = state.cartItem.reduce((total, item) =>
+            const id = action.payload;
+            state.cartItems = state.cartItems.filter(item => item.id !== id);
+
+            state.subtotal = state.cartItems.reduce((total, item) =>
                 total + Number(item.price) * Number(item.quantity), 0);
-        
+
             state.totalAmount = state.subtotal - (state.subtotal * (state.discount / 100));
-        
-            setItem(state.cartItem, state.totalQuantity, state.subtotal, state.discount);
+
+            setCartToLocalStorage(state.cartItems); // ✅ LocalStorage se remove ho raha hai
         },
-        
-        
-        
+
+
+
         addRecentlyViewed(state, action) {
             const newItem = action.payload;
             // console.log("New Recently Viewed Item:", newItem);

@@ -721,6 +721,41 @@ const Mainpage = () => {
           )}
         </section>
 
+        {/* topBanner */}
+        <section className="container-fluid my-5 px-lg-3 px-md-3 px-0">
+          <div>
+            <div className="row pe-0 ps-0 m-0">
+              {/*  Left Side Banner (Single Image) */}
+              {bottomBanners.length > 0 && (
+                <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
+                  <img
+                    alt="Bottom Banner 1"
+                    src={bottomBanners[0]?.bannerImage}
+                    className="img-fluid h-100 festival_img1"
+                  />
+                </div>
+              )}
+              {/* Right Side Banners (Two Images) */}
+              <div className="col-lg-6 col-md-6 col-sm-6 col-12 p-0 m-0">
+                {bottomBanners.length > 1 && (
+                  <img
+                    alt="Bottom Banner 2"
+                    src={bottomBanners[1]?.bannerImage}
+                    className="img-fluid festival_img2"
+                  />
+                )}
+                {bottomBanners.length > 2 && (
+                  <img
+                    alt="Bottom Banner 3"
+                    src={bottomBanners[2]?.bannerImage}
+                    className="img-fluid festival_img3"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Solitaire */}
         <section className='container pb-5 pt-3'>
           <div>

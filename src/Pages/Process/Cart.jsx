@@ -40,9 +40,8 @@ const Cart = () => {
     setCopiedCode(code); // Track the copied code
     setTimeout(() => setCopiedCode(""), 1000); // Hide the popover after 2 seconds
   };
-
   const calculateSubtotal = useCallback(() => {
-    return cartItems.reduce(
+    return (cartItems || []).reduce(
       (total, item) => total + Number(item.totalprice),
       0
     );
@@ -50,7 +49,6 @@ const Cart = () => {
 
   const updateAmounts = useCallback(() => {
     const newSubtotal = calculateSubtotal();
-    // setSubtotal(newSubtotal);
 
     // Calculate discount amount in rupees
     const calculatedDiscount = newSubtotal * (discountPercentage / 100);
@@ -65,36 +63,27 @@ const Cart = () => {
     updateAmounts();
   }, [cartItems, discountPercentage, updateAmounts]);
 
+
   useEffect(() => {
     const fetchCart = async () => {
       try {
         setLoading(true); // Start loader
-        const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
+        const response = await axios.get(
+          `https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`
+        );
         console.log("Cart", response.data); // Debug response structure
 
         const data = response.data;
 
-        // Calculate Main Price (Multiplying total14KT with quantity)
-        const productsWithPrices = data.cart.quantity.map((item) => {
-          const itemPrice = (item.productId.total14KT || 0) * (item.quantity || 0); // Multiply total14KT price with quantity
-          return {
-            ...item, // Spread other product properties
-            itemPrice, // Add calculated price for the product
-          };
-        });
+        // Directly set total price from API
+        setTotallPrice(data.totalPrice);
 
-        // Calculate the total main price
-        const mainPrice = productsWithPrices.reduce((acc, item) => acc + item.itemPrice, 0);
+        // Update Product State
+        setProduct(data.cart.quantity);
 
-        // console.log("Products with Item Prices:", productsWithPrices);
-        // console.log("Calculated Main Price:", mainPrice);
+        // Update Total Quantity
+        setTQuantity(data.totalQuantity);
 
-        // Set state
-        setProduct(productsWithPrices); // Updated products with itemPrice
-        setTotallPrice(mainPrice); // Total price
-
-        const quantity = response.data;
-        setTQuantity(quantity) // Total quantity
       } catch (err) {
         console.error("Error fetching cart data:", err);
       } finally {
@@ -547,7 +536,7 @@ const Cart = () => {
                       <h6>
                         <i className="ri-discount-percent-line pe-2 fs-4"></i>
                         <span style={{ fontSize: "13px" }}>Apply Coupon</span>
-                        <span className="arrow">
+                        <span className="arrow_coupon">
                           <i
                             className="ri-arrow-right-line  fs-5 text-center mx-auto d-block"
                             data-bs-toggle="modal"
@@ -750,19 +739,17 @@ const Cart = () => {
                         <h6 className="m-0 p-0">
                           <span className="title_amount">Subtotal</span>
                           <span className="text_price text_end">
-                            {formatCurrency(totallPrice)}
+                            {formatCurrency(totallPrice?.toFixed(2))}
                           </span>
                         </h6>
                         <h6 className="m-0 p-0">
                           <span className="title_amount">Coupon Discount</span>
-                          <span className="text_coupon  text_end">
-                            - {formatCurrency(couponDiscount.toFixed())}
+                          <span className="text_coupon text_end">
+                            - {formatCurrency(couponDiscount?.toFixed(2))}
                           </span>
                         </h6>
                         <h6 className="m-0 p-0">
-                          <span className="title_amount">
-                            Shipping (Standard)
-                          </span>
+                          <span className="title_amount">Shipping (Standard)</span>
                           <span className="text_free text_end">Free</span>
                         </h6>
                       </div>
@@ -770,7 +757,7 @@ const Cart = () => {
                         <h6 className="">
                           Total Cost
                           <span className="">
-                            {formatCurrency(totallPrice.toFixed())}
+                            {formatCurrency(totallPrice?.toFixed(2))}
                           </span>
                         </h6>
                       </div>

@@ -3187,19 +3187,16 @@ const Header = () => {
             setLoading(true);
             try {
                 // Default products API call
-                const response = await axios.post("https://saltandglitz-api.vercel.app/v1/search/searchProduct", { query: "b" });
-                // console.log(response);
+                const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
 
                 let productList = response.data;
                 if (!Array.isArray(productList)) {
                     productList = response.data.data || [];
                 }
 
-                // console.log("API Response:", productList); // Debugging
-
-                // Sirf 8 products set karo
-                setProducts(productList.slice(0, 5));
-                setDefaultProducts(productList.slice(0, 5));
+                // 🔹 Last 5 products set karo (not first 5)
+                setProducts(productList.slice(-5));
+                setDefaultProducts(productList.slice(-5));
             } catch (error) {
                 console.error("Error fetching latest products:", error);
             }
@@ -3208,6 +3205,7 @@ const Header = () => {
 
         fetchLatestProducts();
     }, []);
+
 
     // Search API Call
     const handleSearchChange = async (e) => {
@@ -4971,7 +4969,7 @@ const Header = () => {
                                                                         chain bracelet
                                                                     </Link>
                                                                 </li>
-                                                                
+
                                                             </ul>
                                                         </div>
                                                         <div className='col-lg-6'>

@@ -1246,6 +1246,7 @@ const Productdetails = () => {
     const [similarProducts, setSimilarProducts] = useState([]);
     const [isWishlist, setIsWishlist] = useState(false)
     const user = JSON.parse(localStorage.getItem('user'))
+    const cartItems = useSelector(state => state.cart.cartItems);
     // console.log(user);
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
     const [isPriceBreakupVisible, setPriceBreakupVisible] = useState(true);
@@ -1724,30 +1725,43 @@ const Productdetails = () => {
             return <div style={{ width: "6px", height: "6px", background: "#999", borderRadius: "50%" }}></div>;
         }
     };
-    
+
 
     // const handleColorClick = (colorId) => {
     //     setColorBy(colorBy === colorId ? null : colorId);
     // };
 
-    const addToCart = async (id) => {
+    const buyNow = async () => {
         setLoading(true);
+
         if (!user || !user?._id) {
-            toast.error("Please login first to view your wishlist!");
+            toast.error("Please login first to proceed!");
             navigate('/login');
             return;
         }
 
-        // Ensure the user has selected all required options
         if (!size || !caratBy || !colorBy) {
-            toast.error("Please select size, purity, and color before adding to cart.");
+            toast.error("Please select size, purity, and color before proceeding.");
+            setLoading(false);
+            return;
+        }
+
+        // ✅ Ensure `cartItems` is always an array
+        const isProductInCart = Array.isArray(cartItems) && cartItems.some(item => item.id === product.id);
+
+        if (isProductInCart) {
+            navigate('/cart');
             setLoading(false);
             return;
         }
 
         const cartItem = {
-            product: id,
-            user: user._id,
+            id: product.id,
+            title: product.title,
+            image01: product.image01,
+            price: product.price,
+            quantity: 1,
+            totalprice: product.price,
             size,
             caratBy,
             colorBy
@@ -1756,13 +1770,76 @@ const Productdetails = () => {
         try {
             const response = await axios.post(
                 "https://saltandglitz-api.vercel.app/v1/cart/addCart",
-                cartItem
+                {
+                    product: product.id,
+                    user: user._id,
+                    size,
+                    caratBy,
+                    colorBy
+                }
             );
 
             if (response.status === 201 || response.status === 200) {
                 toast.success("Product added to cart successfully!");
-                const updatedCart = response.data.updatedCart || response.data.newCart;
-                dispatch(cartAction.addItem(updatedCart));
+
+                dispatch(cartAction.addItem(cartItem)); // ✅ Redux state update
+
+                setTimeout(() => {
+                    navigate('/cart');
+                }, 1000);
+            } else {
+                toast.error("Failed to add product to cart!");
+            }
+        } catch (error) {
+            console.error("Error buying item:", error);
+            toast.error("An error occurred during checkout!");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const addToCart = async (id) => {
+        setLoading(true);
+
+        if (!user || !user?._id) {
+            toast.error("Please login first!");
+            navigate('/login');
+            return;
+        }
+
+        if (!size || !caratBy || !colorBy) {
+            toast.error("Please select size, purity, and color before adding to cart.");
+            setLoading(false);
+            return;
+        }
+
+        const cartItem = {
+            id,
+            title: product.title,
+            image01: product.image01,
+            price: product.price,
+            quantity: 1,
+            totalprice: product.price,
+            size,
+            caratBy,
+            colorBy
+        };
+
+        try {
+            const response = await axios.post(
+                "https://saltandglitz-api.vercel.app/v1/cart/addCart",
+                {
+                    product: id,
+                    user: user._id,
+                    size,
+                    caratBy,
+                    colorBy
+                }
+            );
+
+            if (response.status === 201 || response.status === 200) {
+                toast.success("Product added to cart successfully!");
+                dispatch(cartAction.addItem(cartItem)); // ✅ Redux update
             } else {
                 toast.error("Failed to add product to cart!");
             }
@@ -1774,86 +1851,6 @@ const Productdetails = () => {
         }
     };
 
-    const buyNow = async () => {
-        setLoading(true);
-        if (!user || !user?._id) {
-            toast.error("Please login first to view your wishlist!");
-            navigate('/login');
-            return;
-        }
-        // Ensure the user has selected all required options
-        if (!size || !caratBy || !colorBy) {
-            toast.error("Please select size, purity, and color before adding to cart.");
-            setLoading(false);
-            return;
-        }
-
-        const cartItem = {
-            product: id,
-            user: user._id,
-            size,
-            caratBy,
-            colorBy
-        };
-
-        try {
-            const response = await axios.post(
-                "https://saltandglitz-api.vercel.app/v1/cart/addCart",
-                cartItem
-            );
-
-            if (response.status === 201 || response.status === 200) {
-                toast.success("Product added to cart successfully");
-                setTimeout(() => {
-                    setLoading(false);
-                    navigate('/cart'); // Ensure `navigate` is imported from `react-router-dom`
-                }, 2000);
-
-                const updatedCart = response.data.updatedCart || response.data.newCart;
-                dispatch(cartAction.addItem(updatedCart));
-            } else {
-                toast.error("Failed to add product to cart!");
-            }
-        } catch (error) {
-            console.error('Error buying item:', error);
-            toast.error("An error occurred during checkout!");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const addToWishlist = async () => {
-        try {
-            await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
-                userId: user._id,
-                productId: product.id,
-            });
-
-            dispatch(cartAction.addToWishlist(product));
-            setIsWishlist(true);
-        } catch (error) {
-            if (error.response) {
-                console.error('Error adding to wishlist:', error.response.data);
-            } else {
-                console.error('Error adding to wishlist:', error.message);
-            }
-        }
-    };
-
-    const removeFromWishlist = async () => {
-        try {
-            await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product.id}`);
-
-            dispatch(cartAction.removeFromWishlist(product.id));
-            setIsWishlist(false);
-        } catch (error) {
-            if (error.response) {
-                console.error('Error removing from wishlist:', error.response.data);
-            } else {
-                console.error('Error removing from wishlist:', error.message);
-            }
-        }
-    };
 
     const handleWishlistClick = () => {
         if (isWishlist) {
@@ -2555,7 +2552,8 @@ const Productdetails = () => {
                                             <p className="m-0 p-0">
                                                 <span className="price_break">Total:</span>
                                                 <span className="price_break_price text_end_break">
-                                                    {formatCurrency(caratBy === "14KT" ? product.total14KT : product.total18KT)}/-
+                                                    {formatCurrency(price)}/-
+                                                    {/* {formatCurrency(caratBy === "14KT" ? product.total14KT : product.total18KT)}/- */}
                                                 </span>
                                             </p>
                                         </ul>
