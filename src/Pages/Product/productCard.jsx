@@ -261,7 +261,7 @@ const renderStar = (rating) => {
                 display: "inline-block",
                 position: "relative",
                 fontSize: "17px",
-                verticalAlign:"middle",
+                verticalAlign: "middle",
                 color: "#ccc", // Default gray star
             }}
         >
@@ -348,48 +348,67 @@ const ProductCard = ({ Productsitem }) => {
     }, [product_id, user?._id]);
 
     // Function to add an item to the wishlist
-    const addToWishlist = async () => {
+    // const addToWishlist = async () => {
+    //     if (!user || !user._id) {
+    //         toast.error("Please login first to add items to wishlist!"); // You can replace this with a modal or toast
+    //         return;
+    //     }
+    //     try {
+    //         await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
+    //             userId: user._id,
+    //             productId: product_id,
+    //         });
+
+    //         // dispatch(cartAction.addToWishlist(Productsitem));
+    //         setIsWishlist(true);
+    //     } catch (error) {
+    //         if (error.response) {
+    //             console.error('Error adding to wishlist:', error.response.data);
+    //         } else {
+    //             console.error('Error adding to wishlist:', error.message);
+    //         }
+    //     }
+    // };
+
+    // const removeFromWishlist = async () => {
+    //     try {
+    //         await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
+
+    //         dispatch(cartAction.removeFromWishlist(product_id));
+    //         setIsWishlist(false);
+    //     } catch (error) {
+    //         if (error.response) {
+    //             console.error('Error removing from wishlist:', error.response.data);
+    //         } else {
+    //             console.error('Error removing from wishlist:', error.message);
+    //         }
+    //     }
+    // };
+
+    const handleWishlistToggle = async (event) => {
+        event.preventDefault(); // Page reload ya navigate hone se roke
         if (!user || !user._id) {
-            toast.error("Please login first to add items to wishlist!"); // You can replace this with a modal or toast
+            toast.error("Please login first to add items to wishlist!");
             return;
         }
+
+        const newWishlistStatus = !isWishlist;  // UI ko pehle update karenge
+        setIsWishlist(newWishlistStatus);  // Optimistic UI Update
+
         try {
-            await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
-                userId: user._id,
-                productId: product_id,
-            });
-
-            dispatch(cartAction.addToWishlist(Productsitem));
-            setIsWishlist(true);
-        } catch (error) {
-            if (error.response) {
-                console.error('Error adding to wishlist:', error.response.data);
+            if (newWishlistStatus) {
+                // Add to Wishlist API
+                await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
+                    userId: user._id,
+                    productId: product_id,
+                });
             } else {
-                console.error('Error adding to wishlist:', error.message);
+                // Remove from Wishlist API
+                await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
             }
-        }
-    };
-
-    const removeFromWishlist = async () => {
-        try {
-            await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
-
-            dispatch(cartAction.removeFromWishlist(product_id));
-            setIsWishlist(false);
         } catch (error) {
-            if (error.response) {
-                console.error('Error removing from wishlist:', error.response.data);
-            } else {
-                console.error('Error removing from wishlist:', error.message);
-            }
-        }
-    };
-
-    const handleWishlistToggle = () => {
-        if (isWishlist) {
-            removeFromWishlist();
-        } else {
-            addToWishlist();
+            console.error("Wishlist error:", error);
+            setIsWishlist(!newWishlistStatus);  // Agar error aaye to state wapas reset kar do
         }
     };
 
@@ -409,17 +428,35 @@ const ProductCard = ({ Productsitem }) => {
 
                 <Link to={`/Productdetails/${product_id}`}>
                     {/* Slider for product images */}
-                    <Slider ref={slider} {...imageVideo} className="border border-1 rounded-3">
-                        {displayImages?.length > 0 &&
-                            displayImages.map((img, index) => (
-                                <img key={index} alt={`product-image-${index}`} src={img} className="img-fluid" />
-                            ))
-                        }
-                    </Slider>
+                    {displayImages?.length > 0 ? (
+                        <Slider ref={slider} {...imageVideo} className="border border-1 rounded-3">
+                            {displayImages.map((img, index) => (
+                                <img
+                                    key={index}
+                                    alt={`product-image-${index}`}
+                                    src={img}
+                                    className="img-fluid"
+                                    onError={(e) => {
+                                        e.target.onerror = null; // Prevent infinite loop
+                                        e.target.style.display = "none";
+                                        e.target.parentElement.innerHTML = `
+                                        <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
+                                            <span class='exlimation_mark'>!</span>
+                                        </div>`;
+                                    }}
+                                />
+                            ))}
+                        </Slider>
+                    ) : (
+                        <div className="no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3">
+                            <span className="exlimation_mark">!</span>
+                        </div>
+                    )}
+
                 </Link>
 
                 {/* Hover Content for large screens */}
-                <div className="card-body p-0 d-lg-block d-none">
+                <div className="card-body p-0 d-lg-block d-none px-1">
                     <div className="hover-details position-absolute w-100">
                         <p className="m-0">{formatCurrency(total14KT)}</p>
                         <h6>{title}</h6>

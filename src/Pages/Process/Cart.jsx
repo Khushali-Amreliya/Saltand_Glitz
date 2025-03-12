@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAction } from "../../Store/Slice/CartSlice";
+import { cartAction, getItemQuantity } from "../../Store/Slice/CartSlice";
 import EmptyState from "../EmptyState";
 import { formatCurrency } from "../../Utils/formateCurrency";
 import Aos from "aos";
@@ -14,7 +14,7 @@ import Helmet from "../../Components/Helmet";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.cartItem);
+  // const cartItems = useSelector((state) => state.cart.cartItem);
   // const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const discountPercentage = useSelector((state) => state.cart.discount); // Renamed for clarity
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,21 @@ const Cart = () => {
   const [product, setProduct] = useState([]); // Initialize as an array
   const [tQuantity, setTQuantity] = useState([])
   const user = JSON.parse(localStorage.getItem('user'));
+  const discount = useSelector(state => state.cart.discount);
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const forceUpdate = useState()[1]; // Force re-render trick
 
+  product.forEach((prod) => {
+    const itemId = prod?.productId?.product_id;
+    const item = cartItems.find(cartItem => cartItem.id === itemId);
+    // console.log(item);
+  });
+
+  // console.log("redux cart", cartItems);
+  useEffect(() => {
+    forceUpdate(Math.random()); // React ko force render karne ka tarika
+  }, [cartItems]);
 
   const openModal = (item) => {
     setSelectedProduct(item);
@@ -40,58 +54,63 @@ const Cart = () => {
     setCopiedCode(code); // Track the copied code
     setTimeout(() => setCopiedCode(""), 1000); // Hide the popover after 2 seconds
   };
-  const calculateSubtotal = useCallback(() => {
-    return (cartItems || []).reduce(
-      (total, item) => total + Number(item.totalprice),
-      0
-    );
-  }, [cartItems]);
-
-  const updateAmounts = useCallback(() => {
-    const newSubtotal = calculateSubtotal();
-
-    // Calculate discount amount in rupees
-    const calculatedDiscount = newSubtotal * (discountPercentage / 100);
-    setCouponDiscount(calculatedDiscount);
-
-    // Calculate total amount after discount
-    const discountedAmount = newSubtotal - calculatedDiscount;
-    setTotalAmount(discountedAmount);
-  }, [calculateSubtotal, discountPercentage]);
+  const calculateTotal = () => {
+    let subtotal = cartItems.reduce((total, item) => total + item.totalPrice, 0);
+    let discountAmount = subtotal * (discount / 100);
+    setTotalAmount(subtotal - discountAmount);
+  };
 
   useEffect(() => {
-    updateAmounts();
-  }, [cartItems, discountPercentage, updateAmounts]);
+    calculateTotal();
+  }, [cartItems, totalQuantity]);
 
+
+  // const updateAmounts = useCallback(() => {
+  //   const newSubtotal = calculateSubtotal();
+
+  //   // Calculate discount amount in rupees
+  //   const calculatedDiscount = newSubtotal * (discountPercentage / 100);
+  //   setCouponDiscount(calculatedDiscount);
+
+  //   // Calculate total amount after discount
+  //   const discountedAmount = newSubtotal - calculatedDiscount;
+  //   setTotalAmount(discountedAmount);
+  // }, [calculateSubtotal, discountPercentage]);
+
+  // useEffect(() => {
+  //   updateAmounts();
+  // }, [cartItems, discountPercentage, updateAmounts]);
+
+  const fetchCart = async () => {
+    try {
+      setLoading(true); // Start loader
+      const response = await axios.get(
+        `https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`
+      );
+
+      const data = response.data;
+
+      // ✅ Wait for total price to update before stopping loader
+      setTotallPrice(data.totalPrice);
+
+      // Update Product State
+      setProduct(data.cart.quantity);
+
+      // Update Total Quantity
+      setTQuantity(data.totalQuantity);
+
+    } catch (err) {
+      console.error("Error fetching cart data:", err);
+    } finally {
+      // ✅ Loader ko tabhi stop karo jab price update ho chuka ho
+      setTimeout(() => {
+        setLoading(false);
+      }); // Thoda delay dena helpful hota hai
+    }
+  };
 
   useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        setLoading(true); // Start loader
-        const response = await axios.get(
-          `https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`
-        );
-        console.log("Cart", response.data); // Debug response structure
-
-        const data = response.data;
-
-        // Directly set total price from API
-        setTotallPrice(data.totalPrice);
-
-        // Update Product State
-        setProduct(data.cart.quantity);
-
-        // Update Total Quantity
-        setTQuantity(data.totalQuantity);
-
-      } catch (err) {
-        console.error("Error fetching cart data:", err);
-      } finally {
-        setLoading(false); // Stop loader
-      }
-    };
-
-    fetchCart();
+    fetchCart(); // 👈 useEffect ke andar sirf call karo
   }, [user?._id]);
 
   const removeToCart = async (item) => {
@@ -117,6 +136,7 @@ const Cart = () => {
       if (response.status === 200) {
         dispatch(cartAction.deleteItem(productId));
         toast.success("Item removed from cart");
+        navigate("/")
       } else {
         toast.error("Failed to remove item from cart!");
       }
@@ -130,30 +150,19 @@ const Cart = () => {
 
   const handleIncrement = async (product) => {
     setLoading(true);
-
     try {
-      // Fetch the cart first
       const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
       const data = response.data;
 
-      let cartProduct;
+      let cartProduct = typeof product === "string"
+        ? data.cart.quantity.find((item) => item?.productId?.product_id === product)
+        : product;
 
-      if (typeof product === "string") {
-        cartProduct = data.cart.quantity.find(
-          (item) => item?.productId?.product_id === product
-        );
-
-        if (!cartProduct) {
-          console.error("Product not found in cart:", product);
-          toast.error("Product not found in cart!");
-          setLoading(false);
-          return;
-        }
-      } else {
-        cartProduct = product;
+      if (!cartProduct) {
+        toast.error("Product not found in cart!");
+        setLoading(false);
+        return;
       }
-
-      // console.log("Product found:", cartProduct);
 
       const cartItem = {
         cartId: data?.cart?.cart_id,
@@ -164,59 +173,38 @@ const Cart = () => {
         size: cartProduct?.size,
       };
 
-      // console.log("Increment Payload:", cartItem);
-
-      // Send the increment request
       const res = await axios.post(
         "https://saltandglitz-api.vercel.app/v1/cart/cartIncrement",
         cartItem
       );
 
       if (res.status === 200) {
-        toast.success("Product quantity incremented successfully!", {
-          position: "bottom-center",
-          autoClose: 2000,
-        });
-
-        // Update cart state in Redux
-        dispatch(cartAction.addItem(res.data.updatedCart));
+        dispatch(cartAction.incrementItem(cartProduct?.productId?.product_id || cartProduct?.product_id));
+        await fetchCart();
       } else {
         toast.error("Failed to increment product quantity!");
       }
     } catch (error) {
       console.error("Error incrementing product quantity:", error);
       toast.error("An error occurred while incrementing quantity!");
-    } finally {
-      setLoading(false);
     }
   };
 
   const handleDecrement = async (product) => {
     setLoading(true);
-
     try {
-      // Fetch the cart first
       const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
       const data = response.data;
 
-      let cartProduct;
+      let cartProduct = typeof product === "string"
+        ? data.cart.quantity.find((item) => item?.productId?.product_id === product)
+        : product;
 
-      if (typeof product === "string") {
-        cartProduct = data.cart.quantity.find(
-          (item) => item?.productId?.product_id === product
-        );
-
-        if (!cartProduct) {
-          console.error("Product not found in cart:", product);
-          toast.error("Product not found in cart!");
-          setLoading(false);
-          return;
-        }
-      } else {
-        cartProduct = product;
+      if (!cartProduct) {
+        toast.error("Product not found in cart!");
+        setLoading(false);
+        return;
       }
-
-      // console.log("Product found:", cartProduct);
 
       const cartItem = {
         cartId: data?.cart?.cart_id,
@@ -227,22 +215,14 @@ const Cart = () => {
         size: cartProduct?.size,
       };
 
-      // console.log("Decrement Payload:", cartItem);
-
-      // Send the decrement request
       const res = await axios.post(
         "https://saltandglitz-api.vercel.app/v1/cart/cartDecrement",
         cartItem
       );
 
       if (res.status === 200) {
-        toast.success("Product quantity decremented successfully!", {
-          position: "bottom-center",
-          autoClose: 2000,
-        });
-
-        // Update cart state in Redux
-        dispatch(cartAction.removeItem(res.data.updatedCart));
+        dispatch(cartAction.decrementItem(cartProduct?.productId?.product_id,));
+        await fetchCart();
       } else {
         toast.error("Failed to decrement product quantity!");
       }
@@ -364,7 +344,7 @@ const Cart = () => {
           <div className="cart_header_center">
             <div className="toggle-buttons">
               <button className="toggle-button ">
-                Shopping Cart ({tQuantity.totalQuantity})
+                Shopping Cart ({tQuantity})
               </button>
               <button className="toggle-button active d-lg-block d-none">
                 Trial Cart (0)
@@ -412,6 +392,14 @@ const Cart = () => {
                                 alt={item.productId.title}
                                 src={item.productId.image01}
                                 className="img-fluid cart_img"
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.style.display = "none";
+                                  e.target.parentElement.innerHTML = `
+                                  <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 200px;">
+                                      <span class='exlimation_mark'>!</span>
+                                  </div>`;
+                                }}
                               />
                             </Link>
                           </div>
@@ -431,20 +419,23 @@ const Cart = () => {
                                 <span className="increse_decrese">
                                   <span
                                     className="px-2"
-                                    onClick={() => handleIncrement(item.productId.product_id)}
+                                    onClick={() => handleIncrement(item?.productId?.product_id || item?.product_id)}
                                   >
                                     <i className="ri-add-line"></i>
                                   </span>
                                   &nbsp;
                                   <span style={{ fontSize: "14.5px" }}>
-                                    {item.quantity}
+                                    {cartItems.find(cartItem => cartItem.id === item?.productId?.product_id)?.quantity || 0}
                                   </span>
                                   &nbsp;
-                                  <span className="px-2" onClick={() => handleDecrement(item.productId.product_id)}>
+                                  <span className="px-2"
+                                    onClick={() => handleDecrement(item?.productId?.product_id || item?.product_id)}
+                                  >
                                     <i className="ri-subtract-line"></i>
                                   </span>
                                 </span>
                               </p>
+
                               <h6 className=" pt-2" style={{ fontSize: "12px" }}>Color: {item.colorBy}</h6>
                               <h6 className="" style={{ fontSize: "12px" }}>Purity: {item.caratBy}</h6>
                               <h6 className="" style={{ fontSize: "12px" }}>Ring size: {item.size}</h6>

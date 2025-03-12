@@ -378,7 +378,9 @@ const Mainpage = () => {
   const [bottomBanners, setBottomBanners] = useState([]);
   const [gifts, setGifts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [filterCategory, setFilterCategory] = useState([]);
   const [newArrivals, setNewArrivals] = useState([]);
+  // const [solitaire, setSolitaires] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // const [error, setError] = useState(null);
@@ -397,8 +399,10 @@ const Mainpage = () => {
       setBanners(response.data.banner || []); //  Set only 'banner' array
       setBottomBanners(response.data.bottomBanner || []); //  Set only 'bottomBanner' array
       setGifts(response.data.gifts || []); //  Set only 'gifts' array
-      setCategories(response.data.category || [])
+      setCategories(response.data.categoryImage || []);
+      setFilterCategory(response.data.filterCategory || []);
       setNewArrivals(response.data.newArrivals || []);
+      setSolitaires(response.data.solitire || []);
     } catch (err) {
       console.error("Error fetching banners:", err.message);
     } finally {
@@ -448,25 +452,25 @@ const Mainpage = () => {
   }, []);
 
   // ------------------------------------------Category wise product fetch------------------------------
-  useEffect(() => {
-    const fetchSolitaire = async () => {
-      try {
-        const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
-        // console.log(response);
+  // useEffect(() => {
+  //   const fetchSolitaire = async () => {
+  //     try {
+  //       const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
+  //       // console.log(response);
 
-        const ringProducts = response.data.filter(item => item.subCategory === "Solitaire Rings"); // Filter rings only
-        // console.log(ringProducts);
-        setSolitaires(ringProducts);
-      } catch (err) {
-        console.error("Error fetching products:", err);
-        // setError("Failed to load products.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  //       const ringProducts = response.data.filter(item => item.subCategory === "Solitaire Rings"); // Filter rings only
+  //       // console.log(ringProducts);
+  //       setSolitaires(ringProducts);
+  //     } catch (err) {
+  //       console.error("Error fetching products:", err);
+  //       // setError("Failed to load products.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchSolitaire();
-  }, []);
+  //   fetchSolitaire();
+  // }, []);
 
   // Slider
   useEffect(() => {
@@ -620,51 +624,31 @@ const Mainpage = () => {
         <section className='container-fluid d-lg-none d-md-none d-block'>
           <div className='row'>
             <div className='div_img'>
-              <div className='img_carousel'>
-                <img alt='Latest' src='assets/img/carousel1.webp' className='img-fluid item3' />
-                <h5>Latest</h5>
-              </div>
-              <div className='img_carousel'>
-                {/* {banner.map((banner, index) => (
-                <div key={index} className="banner-item">
+              {categories.map((item, index) => (
+                <Link
+                  to={`/products/${item.categoryName.replace(/ /g, "-")}`}
+                  key={index}
+                  className='img_carousel text-decoration-none'
+                >
                   <img
-                    src={banner.bannerImage}  // Set the banner image
-                    alt={`Banner ${index + 1}`}  // Provide an alt text
-                    className="banner-image"   // Optionally, apply some styles
+                    alt={item.categoryName}
+                    src={item.categoryImage}
+                    className='img-fluid item3'
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.style.display = "none";
+
+                      if (e.target.parentElement) {
+                        e.target.parentElement.innerHTML = `
+                  <div class='no-image-placeholder-category d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 200px;">
+                    <span class='exlimation_mark'>!</span>
+                  </div>`;
+                      }
+                    }}
                   />
-                </div>
-              ))} */}
-                <img alt='Best Sellers' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/11_NOV/Topmenu/mobile/mobile_bestseller.png' className='img-fluid item3' />
-                <h5>Best Sellers</h5>
-              </div>
-              <div className='img_carousel'>
-                <img alt='Rings' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/11_NOV/Topmenu/App/mobile_rings_1.png' className='img-fluid item3' />
-                <h5>Rings</h5>
-              </div>
-              <div className='img_carousel'>
-                <img alt='Earrings' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/11_NOV/Topmenu/mobile/mobile_earrings.png' className='img-fluid item3' />
-                <h5>Earrings</h5>
-              </div>
-              <div className='img_carousel'>
-                <img alt='Earrings' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/11_NOV/Topmenu/mobile/mobile_mangalsutra.png' className='img-fluid item3' />
-                <h5>Mangalsutras</h5>
-              </div>
-              <div className='img_carousel'>
-                <img alt='Earrings' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/11_NOV/Topmenu/mobile/mobile_necklace.png' className='img-fluid item3' />
-                <h5>Necklaces</h5>
-              </div> <div className='img_carousel'>
-                <img alt='Earrings' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/11_NOV/Topmenu/mobile/mobile_gifts.png' className='img-fluid item3' />
-                {/* {banner.map((banner, index) => (
-                <div key={index} className="banner-item">
-                  <img
-                    src={banner.bannerImage}  // Set the banner image
-                    alt={`Banner ${index + 1}`}  // Provide an alt text
-                    className="banner-image"   // Optionally, apply some styles
-                  />
-                </div>
-              ))} */}
-                <h5>Wedding Gifs</h5>
-              </div>
+                  <h5 className="text-center text-dark">{item.categoryName}</h5>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -770,38 +754,37 @@ const Mainpage = () => {
                 </button>
               </div>
               <div className=''>
-                <Slider ref={solitaire} {...solitaireSlider}>
-                  {solitaires.map((item) => (
-                    <div className='card border-0' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
-                      {/* <Link to={`/productDetail/${item._id}`}> */}
-                      <Link to={`/Productdetails/${item.product_id}`}>
-                        <img alt={item.title} src={item.goldImages[0]} className="w-100 px-1 height_Set" />
-                        {/* {item.goldImages && item.goldImages.map((img, i) => (
-                        <img key={i} src={img} alt={`Gold Image ${i}`} className="img-fluid px-2" width="200px" />
-                      ))} */}
-                        {/* </Link> */}
-                      </Link>
-                      <div className="card-body">
-                        <h6>{item.title}</h6>
-                        <p>
-                          {formatCurrency(item.total14KT)}{" "}
-                          {/* <span>
-                          <del>{item.delprice ? formatCurrency(item.delprice) : ""}</del>
-                        </span> */}
-                        </p>
+                {solitaires.length > 0 ? (
+                  <Slider ref={solitaire} {...solitaireSlider}>
+                    {solitaires.slice(9,13).map((item) => (
+                      <div className='card border-0 px-1' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
+                        <Link to={`/Productdetails/${item.product_id}`} className='text-decoration-none'>
+                          <img
+                            alt={item.title}
+                            src={item.image01}
+                            className="w-100 height_Set"
+                            onError={(e) => {
+                              e.target.onerror = null; // Prevent infinite loop
+                              e.target.style.display = "none";
+                              e.target.parentElement.innerHTML = `
+                                <div class='no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3'>
+                                    <span class='exlimation_mark'>!</span>
+                                </div>`;
+                            }}
+                          />
+                        </Link>
+                        <div className="card-body px-1">
+                          <h6>{item.title}</h6>
+                          <p>{formatCurrency(item.total14KT)}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                  {/* {products.length > 8 && (
-                  <div className="d-flex justify-content-center align-items-center slider_viewall_btn">
-                    <Link to="/earrings" className="text-decoration-none">
-                      <button className="btn">
-                        <span>View All</span>
-                      </button>
-                    </Link>
+                    ))}
+                  </Slider>
+                ) : (
+                  <div className="no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3">
+                    <span className="exlimation_mark">!</span>
                   </div>
-                )} */}
-                </Slider>
+                )}
                 <Link to="/solitaire" className='text-decoration-none'>
                   <button className='btn mx-auto d-block viewall_btn'>
                     <span>View All</span>
@@ -821,7 +804,7 @@ const Mainpage = () => {
         </section>
 
         {/* Category */}
-        <section className="container pb-3 shop_category">
+        <section className="container pb-3 shop_category d-lg-block d-md-block d-none">
           <div>
             <div className="text-center">
               <h3 className="font_main pb-1 m-0 p-0">Shop by Category</h3>
@@ -829,9 +812,31 @@ const Mainpage = () => {
             </div>
             <div className="row">
               {categories.map((item, index) => (
-                <div key={index} className="col-lg-2 col-md-4 col-sm-6 col-6 p-0 px-2">
+                <div key={index} className="col-lg-2 col-md-4 col-sm-6 col-6 p-0 px-2 py-2 ">
                   <div className="card border-0">
-                    <img alt={item.categoryName} src={item.images} className="" style={{ height: "200px" }} />
+                    <Link
+                      to={`/products/${item.categoryName.replace(/ /g, "-")}`}
+                      key={index}
+                      className='text-decoration-none'
+                    >
+                      <img
+                        alt={item.categoryName}
+                        src={item.categoryImage}
+                        className="img-fluid"
+                        onError={(e) => {
+                          e.target.onerror = null; // Prevent infinite loop
+                          e.target.style.display = "none";
+
+                          // Ensure parentElement exists before modifying innerHTML
+                          if (e.target.parentElement) {
+                            e.target.parentElement.innerHTML = `
+                          <div class='no-image-placeholder-category d-flex justify-content-center align-items-center border border-1 rounded-3'  style="height: 200px;">
+                            <span class='exlimation_mark'>!</span>
+                          </div>`;
+                          }
+                        }}
+                      />
+                    </Link>
                     <div className="card-body text-center">
                       <h5>{item.categoryName}</h5>
                     </div>
@@ -853,19 +858,37 @@ const Mainpage = () => {
                 </button>
               </div>
               <div>
-                <Slider ref={arrvial} {...newarrivals}>
-                  {newArrivals.slice(0, 4).map((item) => (
-                    <div className="card border-0" key={item.product_id}>
-                      <Link to={`/Productdetails/${item.product_id}`}>
-                        <img alt={item.title} src={item.image01} className="w-100 height_Set px-2" />
-                      </Link>
-                      <div className="card-body">
-                        <h6>{item.title}</h6>
-                        <p>{formatCurrency(item.total14KT)}</p>
+                {newArrivals.length > 0 ? (
+                  <Slider ref={arrvial} {...newarrivals}>
+                    {newArrivals.slice(0, 4).map((item) => (
+                      <div className="card border-0 px-1" key={item.product_id}>
+                        <Link to={`/Productdetails/${item.product_id}`} className="text-decoration-none">
+                          <img
+                            alt={item.title}
+                            src={item.image01}
+                            className="w-100 height_Set"
+                            onError={(e) => {
+                              e.target.onerror = null; // Prevent infinite loop
+                              e.target.style.display = "none";
+                              e.target.parentElement.innerHTML = `
+                              <div class='no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3'>
+                                  <span class='exlimation_mark'>!</span>
+                              </div>`;
+                            }}
+                          />
+                        </Link>
+                        <div className="card-body px-1">
+                          <h6>{item.title}</h6>
+                          <p>{formatCurrency(item.total14KT)}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </Slider>
+                    ))}
+                  </Slider>
+                ) : (
+                  <div className="no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3">
+                    <span className="exlimation_mark">!</span>
+                  </div>
+                )}
                 <Link to="/arrival" className="text-decoration-none">
                   <button className="btn mx-auto d-block viewall_btn">
                     <span>View All</span>
@@ -916,8 +939,52 @@ const Mainpage = () => {
           </div>
         </section>
 
+        {/* Filter Category */}
+        <section className="container mt-2 shop_category">
+          <div>
+            <div className="text-center">
+              <h3 className="font_main pb-1 m-0 p-0">Wrapped with love!</h3>
+              <p className="p_main pb-3">Brilliant design and unparalleled craftsmanship.</p>
+            </div>
+            <div className="row">
+              {filterCategory.map((item, index) => (
+                <div key={index} className="col-lg-2 col-md-4 col-sm-6 col-6 p-0 px-2 py-2">
+                  <div className="card border-0">
+                    <Link
+
+                      key={index}
+                      className='text-decoration-none'
+                    >
+                      <img
+                        alt={item.filterCategoryName}
+                        src={item.filterCategoryImage}
+                        className="img-fluid"
+                        onError={(e) => {
+                          e.target.onerror = null; // Prevent infinite loop
+                          e.target.style.display = "none";
+
+                          // Ensure parentElement exists before modifying innerHTML
+                          if (e.target.parentElement) {
+                            e.target.parentElement.innerHTML = `
+                          <div class='no-image-placeholder-category d-flex justify-content-center align-items-center border border-1 rounded-3'  style="height: 200px;">
+                            <span class='exlimation_mark'>!</span>
+                          </div>`;
+                          }
+                        }}
+                      />
+                    </Link>
+                    <div className="card-body text-center">
+                      <h5>{item.filterCategoryName}</h5>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Gift */}
-        <section className="container mt-5 mb-3 pt-3 gift_sec_main">
+        <section className="container my-3 pt-3 gift_sec_main">
           {/* Grid layout for large devices */}
           <div className="d-none d-lg-block d-md-block">
             <div className="row">

@@ -109,9 +109,9 @@ const Shipping = () => {
     const [isScrolled, setIsScrolled] = useState(false);
 
     const handleScroll = useCallback(() => {
-        console.log(window.scrollY);
+        // console.log(window.scrollY);
         setIsScrolled(window.scrollY > 50);
-        console.log(isScrolled);
+        // console.log(isScrolled);
     }, [isScrolled]);
 
     useEffect(() => {

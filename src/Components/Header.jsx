@@ -3010,6 +3010,7 @@ const Header = () => {
     const [products, setProducts] = useState([]);
     const [defaultProducts, setDefaultProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -3127,6 +3128,8 @@ const Header = () => {
     const filteredProducts = products.filter((product) =>
         product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    // console.log(filteredProducts);
+
 
     // const handleSearchChange = (e) => {
     //     setSearchTerm(e.target.value);
@@ -3161,7 +3164,7 @@ const Header = () => {
             await signOut(auth);
 
             // Clear Redux cart and wishlist
-            dispatch(cartAction.clearCartAndWishlist());
+            dispatch(cartAction.resetState());
 
             // Clear user data
             localStorage.removeItem('user');
@@ -3176,7 +3179,6 @@ const Header = () => {
             toast.error('Something went wrong during log-out.');
         }
     };
-
 
     // recently viewd
     const recentlyViewed = useSelector(state => state.cart.recentlyViewed);
@@ -3194,9 +3196,15 @@ const Header = () => {
                     productList = response.data.data || [];
                 }
 
-                // 🔹 Last 5 products set karo (not first 5)
-                setProducts(productList.slice(-5));
-                setDefaultProducts(productList.slice(-5));
+                let latestProducts = productList.slice(-5);
+
+                latestProducts = latestProducts.map(product => ({
+                    ...product,
+                    image01: product.image01 || "placeholder.jpg"
+                }));
+
+                setProducts(latestProducts);
+                setDefaultProducts(latestProducts);
             } catch (error) {
                 console.error("Error fetching latest products:", error);
             }
@@ -3205,7 +3213,6 @@ const Header = () => {
 
         fetchLatestProducts();
     }, []);
-
 
     // Search API Call
     const handleSearchChange = async (e) => {
@@ -3230,6 +3237,22 @@ const Header = () => {
             console.error("Error searching products:", error);
         }
     };
+    // const fetchFilteredProducts = async (category) => {
+    //     try {
+    //         setLoading(true);
+    //         const response = await axios.post("https://saltandglitz-api.vercel.app/v1/products/filter", {
+    //             title: category,  // Filtering by category "Ring"
+    //         });
+
+    //         if (response.status === 200) {
+    //             setProducts(response.data.products); // Update products state
+    //         }
+    //     } catch (error) {
+    //         console.error("Error fetching filtered products:", error);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     return (
         <div className=" m-0 p-0 header_shadow">
@@ -3276,12 +3299,13 @@ const Header = () => {
                     <div className='col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center align-items-center'>
                         <div>
                             <Link to="/" className="text-decoration-none fs-5 text-dark">
-                                {/* <img
+                                <img
                                     alt=''
-                                    src='/assets/img/tiffco-logo-2.svg'
-                                    className='img-fluid w-50 mx-auto d-block'
-                                /> */}
-                                SALT & GLITZ
+                                    src='/assets/img/logo_website.png'
+                                    className='img-fluid mx-auto d-block logo-fixed'
+                                />
+
+                                {/* SALT & GLITZ */}
                             </Link>
                         </div>
                     </div>
@@ -3304,7 +3328,7 @@ const Header = () => {
                                             <ul className="profile-menu">
                                                 <li className="mb-2">
                                                     <Link to="/Userprofile" className="profile-menu-item ms-2">
-                                                        <MdAccountCircle className='me-2 fs-5' /> My Account
+                                                        <MdAccountCircle className='me-2 fs-5' /> MY ACCOUNT
                                                     </Link>
                                                     {/* <Link to="/Userprofile" className="profile-menu-item">
                                                         <i className="ri-user-3-fill"></i> My Account
@@ -3312,7 +3336,7 @@ const Header = () => {
                                                 </li>
                                                 <li>
                                                     <Link to="" className="profile-menu-item logout ms-2" onClick={handleLogout}>
-                                                        <CiLogout className='me-2 fs-5' /> Logout
+                                                        <CiLogout className='me-2 fs-5' /> LOG OUT
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -3369,7 +3393,7 @@ const Header = () => {
                             <div className="offcanvas-body">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/ring" id="ringsmd">
+                                        <Link className="nav-link active" to="" id="ringsmd">
                                             <i className="ri-subtract-line"></i>Rings
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="ringsmd">
@@ -3382,7 +3406,7 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/engagementring" className="d-flex align-items-center" data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link to={`/products/Ring/${"Engagement Rings".replace(/ /g, "-")}`} className="d-flex align-items-center" data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings1.jpg'
@@ -3392,7 +3416,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/dailywearring"
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Dailywear Rings".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3403,7 +3428,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/couplering"
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Couple Rings".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3414,7 +3440,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/cocktailring"
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Cocktail Rings".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3425,7 +3452,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/infinityring"
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Infinity Rings".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3440,7 +3468,7 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/solitaire" className="d-flex align-items-center"
+                                                                    <Link to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`} className="d-flex align-items-center"
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3451,7 +3479,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/platinumring"
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Platinum Rings".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3462,7 +3491,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/bandsring"
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Bands Rings".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3473,7 +3503,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/promisering"
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Promise Rings".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3483,17 +3514,6 @@ const Header = () => {
                                                                         promise rings
                                                                     </Link>
                                                                 </li>
-                                                                {/* <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings10.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        adjustable rings
-                                                                    </Link>
-                                                                </li> */}
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -3608,7 +3628,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/earrings" id="earringsmd">
+                                        <Link className="nav-link active" to="" id="earringsmd">
                                             <i className="ri-subtract-line"></i>Earrings
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="earringsmd">
@@ -3621,7 +3641,7 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/studsearring" className="d-flex align-items-center"
+                                                                    <Link to={`/products/Earring/${"Studs Earring".replace(/ /g, "-")}`} className="d-flex align-items-center"
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3632,7 +3652,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/dropsearring"
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Earring/${"Drops Earring".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3643,7 +3664,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/jhumkasearring"
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Earring/${"Jhumkas Earring".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3767,7 +3789,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/bracelet" id="braceletmd">
+                                        <Link className="nav-link active" to="" id="braceletmd">
                                             <i className="ri-subtract-line"></i>Bracelets & Bangles
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="braceletmd">
@@ -3780,7 +3802,7 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/chainbracelet" className="d-flex align-items-center"
+                                                                    <Link to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Chain Bracelet".replace(/ /g, "-")}`} className="d-flex align-items-center"
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3791,7 +3813,7 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/ovalbracelet"
+                                                                    <Link className="d-flex align-items-center" to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Oval Bracelet".replace(/ /g, "-")}`}
                                                                         data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -3915,7 +3937,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/solitaire" id="solitairesmd">
+                                        <Link className="nav-link active" to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`} id="solitairesmd">
                                             <i className="ri-subtract-line"></i>Solitaires
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="solitairesmd">
@@ -4443,12 +4465,12 @@ const Header = () => {
                                 />
                             </Link> */}
                             <Link to="/" className="text-decoration-none fs-5 text-dark">
-                                {/* <img
+                            <img
                                     alt=''
-                                    src='/assets/img/tiffco-logo-2.svg'
-                                    className='img-fluid w-50 mx-auto d-block'
-                                /> */}
-                                SALT & GLITZ
+                                    src='/assets/img/logo_website.png'
+                                    className='img-fluid mx-auto d-block logo-fixed'
+                                />
+                                {/* SALT & GLITZ */}
                             </Link>
                         </div>
                     </div>
@@ -4513,7 +4535,11 @@ const Header = () => {
                             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/ring" id="rings">
+                                        <Link
+                                            className="nav-link active"
+                                            to="/products/Ring"
+                                            id="rings"
+                                        >
                                             Rings
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="rings">
@@ -4526,17 +4552,19 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/engagementring" className="d-flex align-items-center">
+                                                                    <Link to={`/products/Ring/${"Engagement Rings".replace(/ /g, "-")}`} className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings1.jpg'
-                                                                            className=' me-2' // Added margin to the right
+                                                                            className='me-2' // Added margin to the right
                                                                         />
                                                                         ENGAGEMENT
                                                                     </Link>
+
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/dailywearring">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Dailywear Rings".replace(/ /g, "-")}`}>
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings2.jpg'
@@ -4546,7 +4574,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/couplering">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Couple Rings".replace(/ /g, "-")}`}>
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings3.jpg'
@@ -4556,7 +4585,9 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/cocktailring">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Cocktail Rings".replace(/ /g, "-")}`}
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings4.jpg'
@@ -4566,7 +4597,9 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/infinityring">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Infinity Rings".replace(/ /g, "-")}`}
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings5.jpg'
@@ -4580,7 +4613,8 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/solitaire" className="d-flex align-items-center">
+                                                                    <Link to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings6.jpg'
@@ -4590,7 +4624,9 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/platinumring">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Platinum Rings".replace(/ /g, "-")}`}
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings7.jpg'
@@ -4600,7 +4636,9 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/bandsring">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Bands Rings".replace(/ /g, "-")}`}
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings8.jpg'
@@ -4610,7 +4648,8 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/promisering">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Promise Rings".replace(/ /g, "-")}`}>
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings9.jpg'
@@ -4735,7 +4774,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/earrings" id="earrings">
+                                        <Link className="nav-link active" to="/products/Earring" id="earrings">
                                             Earrings
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="earrings">
@@ -4748,7 +4787,8 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/studsearring" className="d-flex align-items-center">
+                                                                    <Link to={`/products/Earring/${"Studs Earring".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings1.jpg'
@@ -4758,7 +4798,9 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/jhumkasearring">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Earring/${"Jhumkas Earring".replace(/ /g, "-")}`}
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings3.jpg'
@@ -4767,32 +4809,14 @@ const Header = () => {
                                                                         Jhumkas
                                                                     </Link>
                                                                 </li>
-                                                                {/* <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings4.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        COCKTAIL
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings5.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        INFINITY
-                                                                    </Link>
-                                                                </li> */}
                                                             </ul>
                                                         </div>
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to="/dropsearring">
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Earring/${"Drops Earring".replace(/ /g, "-")}`}
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings2.jpg'
@@ -4947,7 +4971,9 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/bracelet" id="bracelet">
+                                        <Link className="nav-link active"
+                                            to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}`}
+                                            id="bracelet">
                                             Bracelets & Bangles
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="bracelet">
@@ -4960,13 +4986,16 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/chainbracelet" className="d-flex align-items-center">
+                                                                    <Link
+                                                                        to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Chain Bracelet".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center"
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings1.jpg'
-                                                                            className=' me-2' // Added margin to the right
+                                                                            className='me-2'
                                                                         />
-                                                                        chain bracelet
+                                                                        Chain Bracelet
                                                                     </Link>
                                                                 </li>
 
@@ -4975,7 +5004,8 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/ovalbracelet" className="d-flex align-items-center">
+                                                                    <Link to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Oval Bracelet".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings6.jpg'
@@ -5090,7 +5120,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/solitaire" id="solitaires">
+                                        <Link className="nav-link active" to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`} id="solitaires">
                                             Solitaires
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="solitaires">
@@ -5103,7 +5133,7 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/earrings" className="d-flex align-items-center">
+                                                                    <Link to="" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings1.jpg'
@@ -5262,7 +5292,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/jewellery" id="moreJewellery">
+                                        <Link className="nav-link active" to="/products/All-Jewellery" id="moreJewellery">
                                             More Jewellery
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="moreJewellery">
@@ -5558,7 +5588,16 @@ const Header = () => {
                                         <div className="search-item">
                                             <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark">
                                                 <div className="left">
-                                                    <img src={item.image01} alt={item.title} className="img-fluid search_offcanvas_arrow" />
+                                                    <img src={item.goldImages[0]} alt={item.title} className="img-fluid search_offcanvas_arrow"
+                                                        onError={(e) => {
+                                                            e.target.onerror = null;
+                                                            e.target.style.display = "none";
+                                                            e.target.parentElement.innerHTML = `
+                                                        <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 95px; width: 100px;">
+                                                            <span class='exlimation_mark'>!</span>
+                                                        </div>`;
+                                                        }}
+                                                    />
                                                     <span>{item.title}</span>
                                                 </div>
                                             </Link>
@@ -5589,17 +5628,25 @@ const Header = () => {
                                 <Slider ref={search} {...slider_search}>
                                     {recentlyViewed.map((item) => (
                                         <div
-                                            className="card border-0 w-100 mx-auto d-block"
+                                            className="card border-0 w-100 mx-auto d-block px-1"
                                             key={item.id}
                                         >
                                             <Link to={`/Productdetails/${item.id}`}>
                                                 <img
                                                     alt={item.title}
                                                     src={item.images?.[0]}
-                                                    className="img-fluid px-2 position-relative"
+                                                    className="img-fluid position-relative"
+                                                    onError={(e) => {
+                                                        e.target.onerror = null;
+                                                        e.target.style.display = "none";
+                                                        e.target.parentElement.innerHTML = `
+                                                        <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 190px;">
+                                                            <span class='exlimation_mark'>!</span>
+                                                        </div>`;
+                                                    }}
                                                 />
                                             </Link>
-                                            <div className="card-body cartlane">
+                                            <div className="card-body cartlane px-1">
                                                 <h6>
                                                     {formatCurrency(item.total14KT)}{" "}
                                                     {/* <span>
@@ -5664,11 +5711,23 @@ const Header = () => {
                     <div className='row offcanvas_search'>
                         {filteredProducts.length > 0 ? (
                             filteredProducts.map((item) => (
-                                <div className='col-lg-6 px-4' key={item.id}>
+                                <div className='col-lg-6 px-4' key={item._id}>
                                     <div className="search-item">
-                                        <Link to={`/Productdetails/${item.id}`} className="text-decoration-none text-dark">
+                                        <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
                                             <div className="left">
-                                                <img src={item.image01} alt={item.title} className='img-fluid search_offcanvas_arrow' />
+                                                <img
+                                                    src={item.image01}
+                                                    alt={item.title}
+                                                    className='img-fluid search_offcanvas_arrow'
+                                                    onError={(e) => {
+                                                        e.target.onerror = null;
+                                                        e.target.style.display = "none";
+                                                        e.target.parentElement.innerHTML = `
+                                                        <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 95px; width: 100px;">
+                                                            <span class='exlimation_mark'>!</span>
+                                                        </div>`;
+                                                    }}
+                                                />
                                                 <span>{item.title}</span>
                                             </div>
                                         </Link>
@@ -5679,6 +5738,7 @@ const Header = () => {
                             <p>No products found.</p>
                         )}
                     </div>
+
 
                     <h5 className="trending_title pt-4">Recently Viewed</h5>
                     <div className="row position-relative">
@@ -5707,6 +5767,14 @@ const Header = () => {
                                                     alt={item.title}
                                                     src={item.images?.[0]}
                                                     className="img-fluid px-2 position-relative"
+                                                    onError={(e) => {
+                                                        e.target.onerror = null;
+                                                        e.target.style.display = "none";
+                                                        e.target.parentElement.innerHTML = `
+                                                        <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 190px;">
+                                                            <span class='exlimation_mark'>!</span>
+                                                        </div>`;
+                                                    }}
                                                 />
                                             </Link>
                                             <div className="card-body cartlane">

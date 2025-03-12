@@ -130,9 +130,17 @@ const Wishlist = () => {
                     <div key={item.productId.product_id} className='col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6'>
                       <div className='card border-0'>
                         <Link to={`/Productdetails/${item.productId.product_id}`}>
-                          <img alt={item.productId.title} src={item.productId.image01} className='position-relative w-100 height_Set'></img>
+                          <img alt={item.productId.title} src={item.productId.image01} className='position-relative w-100 height_Set'
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.style.display = "none";
+                              e.target.parentElement.innerHTML = `
+                                <div class='no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 200px;">
+                                    <span class='exlimation_mark'>!</span>
+                                </div>`;
+                            }}></img>
                         </Link>
-                        <div className='card-body d-flex justify-content-between align-items-center px-0'>
+                        <div className='card-body d-flex justify-content-between align-items-center px-1'>
                           <div>
                             <p className='m-0'>{formatCurrency(item.productId.total14KT)}</p>
                             <h6 className='d-inline-block'>{item.productId.title}</h6>

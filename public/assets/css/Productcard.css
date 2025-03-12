@@ -1,3 +1,18 @@
+.exlimation_mark {
+    font-size: 10px !important;
+    background: #000!important;
+    padding: 1px 7px !important;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.no-image-placeholder {
+    height: 320px !important;
+    width: 100%;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
 /* Card Container */
 .card-container {
     position: relative;
@@ -187,7 +202,11 @@
     }
 
     .card-container img {
-        height: 250px !important;
+        height: 235px !important;
+    }
+
+    .no-image-placeholder {
+        height: 235px !important;
     }
 
     .pre-btn-set,

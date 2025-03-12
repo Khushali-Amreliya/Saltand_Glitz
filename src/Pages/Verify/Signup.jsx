@@ -98,6 +98,7 @@ const Signup = () => {
     // };
 
     // Load user from local storage on mount
+    
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {

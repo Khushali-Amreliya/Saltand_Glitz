@@ -50,11 +50,15 @@ import Drops from '../Category/Earring/Drops';
 import Jhumkas from '../Category/Earring/Jhumkas';
 import Chain from '../Category/Bracelet/Chain';
 import Oval from '../Category/Bracelet/Oval';
+import CollectionPage from '../Category/Collection';
 
 const Router = () => {
   return (
     <div>
       <Routes>
+      <Route path="/products" element={<CollectionPage />} />  {/* All Products */}
+      <Route path="/products/:category/:subCategory?" element={<CollectionPage />} />
+
         {/* Pages */}
         <Route path='/' element={<Mainpage />} />
         <Route path='/aboutUs' element={<AboutUs />} />

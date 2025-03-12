@@ -8,11 +8,11 @@
 }
 
 :root {
+    /* --background: linear-gradient(90deg, #005b3d 0%, #00402b 100%); */
     --background: linear-gradient(90deg, rgba(178, 235, 247, 1) 0%, rgba(143, 195, 205, 1) 0%, rgba(90, 188, 209, 1) 100%);
-    --color: #3f91a1;
+    --color: #005b3d;
     --underline: linear-gradient(90deg, rgba(156, 216, 228, 1) 0%, rgba(98, 176, 193, 1) 50%, rgba(52, 124, 139, 1) 100%);
     --font: Santral W01;
-
 }
 
 .font_h {
@@ -129,15 +129,43 @@ div:where(.swal2-container) .swal2-html-container {
     font-size: 33px;
     cursor: pointer;
 }
-.height_Set{
+
+.height_Set {
     height: 350px;
 }
 
+.no-image-placeholder-home {
+    height: 350px !important;
+    width: 100%;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.no-image-placeholder-category {
+    height: 200px !important;
+    width: 100%;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.no-image-placeholder-cart {
+    height: auto;
+    width: 100%;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+.logo-fixed {
+    width: 150px; /* Fixed width for all devices */
+}
+
 @media(max-width:1024px) {
-    .height_Set{
+
+    .height_Set,
+    .no-image-placeholder-home {
         height: 280px !important;
     }
 }
+
 @media(max-width:768px) {
     .font_main {
         font-size: 23px !important;
@@ -149,12 +177,17 @@ div:where(.swal2-container) .swal2-html-container {
 }
 
 @media(max-width:426px) {
-    .height_Set{
-        height: 250px !important;
+
+    .height_Set,
+    .no-image-placeholder-home {
+        height: 210px !important;
     }
 }
+
 @media(max-width:376px) {
-    .height_Set{
+
+    .height_Set,
+    .no-image-placeholder-home {
         height: 200px !important;
     }
 }

@@ -194,6 +194,7 @@ const Loginn = () => {
             const res = await axios.post('https://saltandglitz-api.vercel.app/v1/otp/get-otp', { email, otp });
             localStorage.setItem('token', res.data.user.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
+            dispatch(setUserData(res.data.user)); // Redux mein data set karna
 
             toast.success("OTP Verified! Login successful.");
             navigate('/');
@@ -240,7 +241,6 @@ const Loginn = () => {
             setLoading(false);
         }
     };
-    
 
     const handleResetPassword = async () => {
         setLoading(true);

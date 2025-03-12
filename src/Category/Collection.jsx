@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Loader from '../Pages/Loader';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -8,22 +9,36 @@ import Mdfilter from '../Filter/Mdfilter';
 import Helmet from '../Components/Helmet';
 import Sort from '../Filter/Sort';
 
-const Rings = () => {
+const CollectionPage = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [filters, setFilters] = useState({});
+    const { category = "", subCategory = "" } = useParams(); // Provide default empty string
 
-    const fetchFilteredProducts = async (category) => {
+    // Convert hyphen (-) back to space only if it's not empty
+    const decodedCategory = category ? category.replace(/-/g, " ") : "";
+    const decodedSubCategory = subCategory ? subCategory.replace(/-/g, " ") : "";
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    const fetchFilteredProducts = async (filters = {}) => {
         setLoading(true);
         setError(null);
+
         try {
-            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/upload/filterProduct", { title: category });
-            
-            const filteredProducts = response.data.updatedProducts.filter(item => item.category === category);
-            
+            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/upload/filterProduct", {
+                title: decodedCategory,  // Convert back from hyphen to space
+                subCategory: decodedSubCategory,
+                ...filters,
+            });
+
+            let filteredProducts = response.data.updatedProducts.filter(item =>
+                item.category === decodedCategory && (!decodedSubCategory || item.subCategory === decodedSubCategory)
+            );
+
             if (filteredProducts.length === 0) {
-                setError("Oops! There are no products available under your current selection.");
+                setError("Oops! No products found.");
                 setProducts([]);
             } else {
                 setError(null);
@@ -33,27 +48,27 @@ const Rings = () => {
             setError(err.response?.data?.message || "Something went wrong.");
             setProducts([]);
         }
+
         setLoading(false);
     };
 
     useEffect(() => {
-        if (window.location.pathname === "/ring") {
-            fetchFilteredProducts("Ring");
-        }
-    }, []);
+        fetchFilteredProducts();
+    }, [category, subCategory]); // Trigger fetch on param change
+
 
     return (
-        <Helmet title="Rings">
+        <Helmet title={`${category} Products`}>
             <>
                 <section className="bg_product_page mb-2 mb-lg-5">
                     <div className="container">
                         <div className=" flex-column text-start min-vh-25 py-3">
                             <div>
                                 <h6 className="mb-1">
-                                    Rings Designs &nbsp;
+                                    {category} Designs &nbsp;
                                     <span>{products.length} Designs</span>
                                 </h6>
-                                <p>Home &gt; Jewellery</p>
+                                <p>Home &gt; Jewellery &gt; {category}</p>
                             </div>
                         </div>
                     </div>
@@ -61,11 +76,14 @@ const Rings = () => {
                 <section className='container-fluid mt-2 mb-4'>
                     <div className='row'>
                         <div className="col-xl-3 col-lg-3 d-lg-block d-none">
-                            <Filter onFilterApply={fetchFilteredProducts} />
+                            <Filter onFilterApply={(filterData) => fetchFilteredProducts(filterData)} />
+
                         </div>
-                        <Mdfilter onFilterApply={fetchFilteredProducts} />
+                        <Mdfilter onFilterApply={(filterData) => fetchFilteredProducts(filterData)} />
+
                         <div className="col-lg-9">
-                            <Sort onFilterApply={fetchFilteredProducts} />
+                            <Sort onFilterApply={(sortData) => fetchFilteredProducts(sortData)} />
+
                             <div className="row">
                                 {loading ? (
                                     <Loader />
@@ -77,7 +95,7 @@ const Rings = () => {
                                 ) : products.length > 0 ? (
                                     products.map((item) => (
                                         <div className="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 card_shadow p-0 px-1" key={item.id}>
-                                            <Link>
+                                            <Link to={`/product/${item.id}`}>
                                                 <ProductCard Productsitem={item} />
                                             </Link>
                                         </div>
@@ -94,4 +112,4 @@ const Rings = () => {
     )
 }
 
-export default Rings;
+export default CollectionPage;

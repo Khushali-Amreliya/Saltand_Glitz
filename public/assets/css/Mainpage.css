@@ -13,9 +13,11 @@
 .home-img {
   padding-right: 0px !important;
 }
-.service_main{
+
+.service_main {
   background-color: #fafafa;
 }
+
 .service_main h6 {
   letter-spacing: 0.5px;
   font-weight: 500;
@@ -147,11 +149,10 @@
   text-align: center;
 }
 
-
 .item3 {
   width: 90px;
   height: auto;
-  border-radius: 10px;
+  border-radius: 20px;
   transition: transform 0.3s ease;
 }
 
@@ -284,9 +285,11 @@
 .whatsapp-logo:hover {
   color: #25D366;
 }
+
 .festival_img3 {
   padding-top: 20px !important;
 }
+
 @media(max-width:992px) {
   /* .viewall_btn {
     width: 50% !important;

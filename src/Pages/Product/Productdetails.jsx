@@ -1181,7 +1181,9 @@ const renderStars = (rating) => {
 
 
 const renderStar = (rating) => {
-    const adjustedPercentage = ((rating / 5) * 100) * 0.9; // Adjust fill percentage
+    const clampedRating = Math.min(Math.max(rating, 0), 5); // Ensure rating is between 0 and 5
+    const adjustedPercentage = (clampedRating / 5) * 100; // Ensure correct fill percentage
+
     return (
         <span
             style={{
@@ -1197,10 +1199,9 @@ const renderStar = (rating) => {
                     position: "absolute",
                     top: 0,
                     left: 0,
-                    width: `${adjustedPercentage}%`, // Adjusted fill percentage
+                    width: `${adjustedPercentage}%`, // Fill only up to 100%
                     overflow: "hidden",
                     color: "gold", // Filled star color
-                    // textShadow: "0 0 3px rgba(0, 0, 0, 0.5)", // Improve visibility
                 }}
             >
                 ★
@@ -1208,6 +1209,7 @@ const renderStar = (rating) => {
         </span>
     );
 };
+
 
 const colors = [
     { id: 1, color: "#ffcccc", name: "Rose Gold" },
@@ -1218,7 +1220,7 @@ const Productdetails = () => {
     const [size, setSize] = useState(6); // For ring size
     const [caratBy, setCaratBy] = useState("14KT"); // For Purity (KT)
     const [colorBy, setColorBy] = useState(colors.length >= 3 ? colors[2].name : ""); // For selected color
-    const [productRating, setProductRating] = useState(null);
+    // const [productRating, setProductRating] = useState(null);
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [files, setFiles] = useState([]);
@@ -1250,6 +1252,10 @@ const Productdetails = () => {
     // console.log(user);
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
     const [isPriceBreakupVisible, setPriceBreakupVisible] = useState(true);
+    const [productRating, setProductRating] = useState({
+        rating: 0,
+        ratings: []
+    });
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -1318,24 +1324,23 @@ const Productdetails = () => {
         const fetchRatings = async () => {
             try {
                 const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/rating/getRating/${id}`);
-                // console.log("Review Data", response.data);
+                console.log("Review Data", response.data);
 
                 const { approvedRating } = response.data;
 
                 if (approvedRating.length > 0) {
-                    // Calculate average rating
                     const totalRatings = approvedRating.length;
                     const avgRating =
-                        approvedRating.reduce((sum, item) => sum + item.userRating, 0) / totalRatings;
+                        approvedRating.reduce((sum, item) => sum + Number(item.userRating), 0) / totalRatings;
 
                     setProductRating({
                         rating: avgRating.toFixed(1),
-                        ratings: approvedRating, // User reviews
+                        ratings: approvedRating
                     });
                 } else {
                     setProductRating({
                         rating: 0,
-                        ratings: [],
+                        ratings: []
                     });
                 }
             } catch (error) {
@@ -1677,7 +1682,6 @@ const Productdetails = () => {
         }
     };
 
-
     useEffect(() => {
         fetchProductDetails();
         fetchProducts();
@@ -1850,13 +1854,30 @@ const Productdetails = () => {
             setLoading(false);
         }
     };
+    const handleWishlistClick = async (event) => {
+        event.preventDefault(); // Page reload ya navigate hone se roke
+        if (!user || !user._id) {
+            toast.error("Please login first to add items to wishlist!");
+            return;
+        }
 
+        const newWishlistStatus = !isWishlist;  // UI ko pehle update karenge
+        setIsWishlist(newWishlistStatus);  // Optimistic UI Update
 
-    const handleWishlistClick = () => {
-        if (isWishlist) {
-            removeFromWishlist();
-        } else {
-            addToWishlist();
+        try {
+            if (newWishlistStatus) {
+                // Add to Wishlist API
+                await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
+                    userId: user._id,
+                    productId: product.id,
+                });
+            } else {
+                // Remove from Wishlist API
+                await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product.id}`);
+            }
+        } catch (error) {
+            console.error("Wishlist error:", error);
+            setIsWishlist(!newWishlistStatus);  // Agar error aaye to state wapas reset kar do
         }
     };
 
@@ -1896,15 +1917,15 @@ const Productdetails = () => {
         offcanvasInstance.hide();
     };
 
-    const ratings = productRating?.ratings || [];
+    const { ratings } = productRating;
+    const totalRatings = ratings.length;
 
-    // Rating distribution calculate karna (kitne 5-star, 4-star, etc.)
     const ratingCounts = [5, 4, 3, 2, 1].map((star) => ({
         star,
-        count: ratings.filter((r) => r.userRating === star).length,
+        count: ratings.filter((r) => Number(r.userRating) === star).length // Convert string to number
     }));
 
-    const totalRatings = ratings.length || 1;
+    // const totalRatings = ratings.length || 1;
     return (
         <Helmet title={product.title}>
             <>
@@ -2595,7 +2616,7 @@ const Productdetails = () => {
                                                             <div
                                                                 className="rating-fill"
                                                                 style={{
-                                                                    width: `${(count / totalRatings) * 100}%`
+                                                                    width: totalRatings > 0 ? `${(count / totalRatings) * 100}%` : "0%"
                                                                 }}
                                                             ></div>
                                                         </div>
@@ -2718,63 +2739,59 @@ const Productdetails = () => {
                 <section className='container my-3'>
                     <h3 className='text-center pb-4 font_main'>You may also Like</h3>
                     <div className='row position-relative'>
-                        {
-                            similarProducts.length > 0 ? (
+                        {similarProducts.length > 0 ? (
+                            <>
+                                {/* Prev Button */}
+                                {similarIndex > 0 && (
+                                    <div>
+                                        <button onClick={() => similar?.current?.slickPrev()} className="pre-btn-set">
+                                            <i className="ri-arrow-left-wide-line"></i>
+                                        </button>
+                                    </div>
+                                )}
 
-                                <>
-                                    {/* Prev Button */}
-                                    {similarIndex > 0 && (
-                                        <div>
-                                            <button
-                                                onClick={() => similar?.current?.slickPrev()}
-                                                className="pre-btn-set"
-                                            >
-                                                <i className="ri-arrow-left-wide-line"></i>
-                                            </button>
+                                <Slider ref={similar} {...similarSlider}>
+                                    {similarProducts.map((item) => (
+                                        <div className="col-lg-3 col-md-4 col-sm-6 mb-4 card border-0 px-1" key={item._id}>
+                                            <Link to={`/Productdetails/${item._id}`}>
+                                                <img
+                                                    alt={item.title}
+                                                    src={item.image01}
+                                                    className="w-100 height_Set position-relative"
+                                                    onError={(e) => {
+                                                        e.target.onerror = null;
+                                                        e.target.style.display = "none";
+                                                        e.target.parentElement.innerHTML = `
+                                                        <div class='no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 200px;">
+                                                            <span class='exlimation_mark'>!</span>
+                                                        </div>`;
+                                                    }}
+                                                />
+                                            </Link>
+                                            <div className="card-body cartlane">
+                                                <h6>{formatCurrency(item.total14KT)}</h6>
+                                                <p>{item.title}</p>
+                                            </div>
                                         </div>
-                                    )}
-                                    <Slider ref={similar} {...similarSlider}>
+                                    ))}
+                                </Slider>
 
-                                        {
-                                            similarProducts.map((item) => (
-                                                <div
-                                                    className="col-lg-3 col-md-4 col-sm-6 mb-4 card border-0"
-                                                    key={item._id}
-                                                >
-                                                    <Link to={`/Productdetails/${item._id}`}>
-                                                        <img
-                                                            alt={item.title}
-                                                            src={item.image01}
-                                                            className="w-100 height_Set px-2 position-relative"
-                                                        />
-                                                    </Link>
-                                                    <div className="card-body cartlane">
-                                                        <h6>{formatCurrency(item.total14KT)}</h6>
-                                                        <p>{item.title}</p>
-                                                    </div>
-                                                </div>
-                                            ))
-                                        }
-                                    </Slider>
-
-                                    {/* Next Button */}
-                                    {similarIndex < similarProducts.length - similarSlider.slidesToShow && (
-                                        <div>
-                                            <button
-                                                onClick={() => similar?.current?.slickNext()}
-                                                className="next-btn-set float-end"
-                                            >
-                                                <i className="ri-arrow-right-wide-line"></i>
-                                            </button>
-                                        </div>
-                                    )}
-                                </>
-                            ) : (
-                                <div className="text-center w-100 py-3">
-                                    <p>No related products available. Please check back later!</p>
-                                </div>
-                            )}
+                                {/* Next Button */}
+                                {similarIndex < similarProducts.length - similarSlider.slidesToShow && (
+                                    <div>
+                                        <button onClick={() => similar?.current?.slickNext()} className="next-btn-set float-end">
+                                            <i className="ri-arrow-right-wide-line"></i>
+                                        </button>
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <div className="text-center w-100 py-3">
+                                <p>No related products available. Please check back later!</p>
+                            </div>
+                        )}
                     </div>
+
                     <h3 className='text-center py-4 font_main'>Recently Viewed</h3>
                     <div className="row position-relative mb-4">
                         {recentlyViewed.length > 0 ? (
@@ -2782,10 +2799,7 @@ const Productdetails = () => {
                                 {/* Prev Button */}
                                 {currentIndex > 0 && (
                                     <div>
-                                        <button
-                                            onClick={() => recently?.current?.slickPrev()}
-                                            className="pre-btn-set"
-                                        >
+                                        <button onClick={() => recently?.current?.slickPrev()} className="pre-btn-set">
                                             <i className="ri-arrow-left-wide-line"></i>
                                         </button>
                                     </div>
@@ -2793,15 +2807,20 @@ const Productdetails = () => {
 
                                 <Slider ref={recently} {...recentlySlider}>
                                     {recentlyViewed.map((item) => (
-                                        <div
-                                            className="card border-0 w-100 mx-auto d-block"
-                                            key={item.id}
-                                        >
+                                        <div className="card border-0 w-100 mx-auto d-block px-1" key={item.id}>
                                             <Link to={`/Productdetails/${item.id}`}>
                                                 <img
                                                     alt={item.title}
                                                     src={item.images?.[0]}
-                                                    className="height_Set w-100 px-2 position-relative"
+                                                    className="height_Set w-100 position-relative"
+                                                    onError={(e) => {
+                                                        e.target.onerror = null;
+                                                        e.target.style.display = "none";
+                                                        e.target.parentElement.innerHTML = `
+                                                        <div class='no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 200px;">
+                                                            <span class='exlimation_mark'>!</span>
+                                                        </div>`;
+                                                    }}
                                                 />
                                             </Link>
                                             <div className="card-body cartlane">
@@ -2815,10 +2834,7 @@ const Productdetails = () => {
                                 {/* Next Button */}
                                 {currentIndex < recentlyViewed.length - recentlySlider.slidesToShow && (
                                     <div>
-                                        <button
-                                            onClick={() => recently?.current?.slickNext()}
-                                            className="next-btn-set float-end"
-                                        >
+                                        <button onClick={() => recently?.current?.slickNext()} className="next-btn-set float-end">
                                             <i className="ri-arrow-right-wide-line"></i>
                                         </button>
                                     </div>
