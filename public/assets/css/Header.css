@@ -1,4 +1,4 @@
-.header_shadow{
+.header_shadow {
     /* box-shadow: 0 2px 2px 0 #e9e9e9; */
 }
 
@@ -221,7 +221,7 @@
 .dropdown a:hover {
     color: #000 !important;
     /* padding-left: 20px !important; */
-    transition: all 0.4s ease-in-out !important; 
+    transition: all 0.4s ease-in-out !important;
     font-weight: 400 !important;
 }
 
@@ -312,10 +312,11 @@
     transition: 0.3s ;
     font-weight: bold;
 } */
-.header_login{
+.header_login {
     /* margin: 0px -100px !important; */
 
 }
+
 .header_login a:hover {
     padding-left: 0px !important;
     font-weight: normal !important;
@@ -570,6 +571,10 @@
 .offcanvas-header .btn_close {
     margin-top: 0.5rem !important;
     margin-right: 0.5rem !important;
+}
+
+.logo-fixed {
+    width: 130px;
 }
 
 /* Media Query */

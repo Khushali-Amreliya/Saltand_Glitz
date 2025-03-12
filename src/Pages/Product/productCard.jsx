@@ -242,12 +242,10 @@
 // export default ProductCard;
 
 import React, { useRef, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import axios from 'axios';
 import { formatCurrency } from '../../Utils/formateCurrency'; // Utility for formatting currency
-import { cartAction } from '../../Store/Slice/CartSlice'; // Redux actions for managing cart and wishlist
 import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { toast } from 'react-toastify';
@@ -287,7 +285,6 @@ const ProductCard = ({ Productsitem }) => {
     const user = JSON.parse(localStorage.getItem('user')); // Get the logged-in user's data from localStorage
     const { product_id, title, total14KT, goldImages, media } = Productsitem; // Destructure product details
     const slider = useRef(null); // Ref for the slider
-    const dispatch = useDispatch(); // Redux dispatch
     const [isWishlist, setIsWishlist] = useState(false);
     const [rating, setRating] = useState(0);
     let displayImages = [];
@@ -346,44 +343,6 @@ const ProductCard = ({ Productsitem }) => {
 
         fetchWishlist();
     }, [product_id, user?._id]);
-
-    // Function to add an item to the wishlist
-    // const addToWishlist = async () => {
-    //     if (!user || !user._id) {
-    //         toast.error("Please login first to add items to wishlist!"); // You can replace this with a modal or toast
-    //         return;
-    //     }
-    //     try {
-    //         await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
-    //             userId: user._id,
-    //             productId: product_id,
-    //         });
-
-    //         // dispatch(cartAction.addToWishlist(Productsitem));
-    //         setIsWishlist(true);
-    //     } catch (error) {
-    //         if (error.response) {
-    //             console.error('Error adding to wishlist:', error.response.data);
-    //         } else {
-    //             console.error('Error adding to wishlist:', error.message);
-    //         }
-    //     }
-    // };
-
-    // const removeFromWishlist = async () => {
-    //     try {
-    //         await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
-
-    //         dispatch(cartAction.removeFromWishlist(product_id));
-    //         setIsWishlist(false);
-    //     } catch (error) {
-    //         if (error.response) {
-    //             console.error('Error removing from wishlist:', error.response.data);
-    //         } else {
-    //             console.error('Error removing from wishlist:', error.message);
-    //         }
-    //     }
-    // };
 
     const handleWishlistToggle = async (event) => {
         event.preventDefault(); // Page reload ya navigate hone se roke
@@ -464,10 +423,10 @@ const ProductCard = ({ Productsitem }) => {
 
                     {/* Slider navigation buttons */}
                     <div>
-                        <button onClick={() => slider?.current?.slickPrev()} className="absolute_prev_btn d-lg-block d-none">
+                        <button onClick={(e) => { e.preventDefault(); slider?.current?.slickPrev(); }} className="absolute_prev_btn d-lg-block d-none">
                             <i className="ri-arrow-left-wide-line"></i>
                         </button>
-                        <button onClick={() => slider?.current?.slickNext()} className="absolute_next_btn d-lg-block d-none">
+                        <button onClick={(e) => {e.preventDefault(); slider?.current?.slickNext();}} className="absolute_next_btn d-lg-block d-none">
                             <i className="ri-arrow-right-wide-line"></i>
                         </button>
                     </div>
@@ -504,10 +463,10 @@ const ProductCard = ({ Productsitem }) => {
 
                     {/* Slider navigation buttons for mobile */}
                     <div>
-                        <button onClick={() => slider?.current?.slickPrev()} className="absolute_prev_btn d-lg-none d-block">
+                        <button onClick={(e) => { e.preventDefault(); slider?.current?.slickPrev(); }} className="absolute_prev_btn d-lg-none d-block">
                             <i className="ri-arrow-left-wide-line"></i>
                         </button>
-                        <button onClick={() => slider?.current?.slickNext()} className="absolute_next_btn d-lg-none d-block">
+                        <button onClick={(e) => {e.preventDefault(); slider?.current?.slickNext();}} className="absolute_next_btn d-lg-none d-block">
                             <i className="ri-arrow-right-wide-line"></i>
                         </button>
                     </div>

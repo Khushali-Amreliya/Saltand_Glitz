@@ -152,6 +152,7 @@ const Cart = () => {
     setLoading(true);
     try {
       const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
+      // console.log(response);
       const data = response.data;
 
       let cartProduct = typeof product === "string"
@@ -337,7 +338,11 @@ const Cart = () => {
               <i className="ri-shopping-cart-fill cart_logo_icon d-lg-block d-md-block d-sm-block d-none"></i>
             </div> */}
             <Link to="/" className="text-decoration-none text-dark">
-              SALT & GLITZ
+              <img
+                alt=''
+                src='/assets/img/logo_website.png'
+                className='img-fluid mx-auto d-block cart-logo-fixed'
+              />
             </Link>
           </div>
 

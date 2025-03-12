@@ -80,7 +80,7 @@ const Exchange = () => {
                     <p className='elementor-heading-title'>
                         <b>4.</b> Wallet Expiry:
                     </p>
-                    <li className='list_style'>If wallet cash is not used within 6 months, the amount will be transferred to your bank account, subject to a deduction of 10% of the invoice value.</li>
+                    <li className='list_style'>If wallet cash is not used within 180 days, the amount will be transferred to your bank account, subject to a deduction of 10% of the invoice value.</li>
                 </div>
                 {/*  */}
                 <div className="elementor-widget-container">

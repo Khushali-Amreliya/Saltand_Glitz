@@ -50,7 +50,8 @@ const Return = () => {
                         <b>1.</b> Product Condition:
                     </p>
                     <li className='list_style'>The item must be in its original condition with no alterations or damages.</li>
-                    <li className='list_style'>Items with broken tags, damaged boxes, or missing accessories will not be accepted.</li>
+                    <li className='list_style'>Items with broken tags, damaged boxes will not be accepted.</li>
+                    {/* or missing accessories  */}
                 </div>
                 <div className="elementor-menu-container">
                     <p className='elementor-heading-title'>

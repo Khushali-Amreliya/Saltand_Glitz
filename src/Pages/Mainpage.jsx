@@ -376,6 +376,7 @@ const Mainpage = () => {
   const [solitaires, setSolitaires] = useState([]);
   const [banners, setBanners] = useState([]);
   const [bottomBanners, setBottomBanners] = useState([]);
+  const [poster, setPoster] = useState([]);
   const [gifts, setGifts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filterCategory, setFilterCategory] = useState([]);
@@ -393,13 +394,14 @@ const Mainpage = () => {
 
   const fetchHome = async () => {
     try {
-      const response = await axios.get("https://saltandglitz-api.vercel.app/v1/homePage/home");
+      const response = await axios.get("http://localhost:5000/v1/homePage/home");
       console.log("API Response:", response.data); // Debugging
 
       setBanners(response.data.banner || []); //  Set only 'banner' array
       setBottomBanners(response.data.bottomBanner || []); //  Set only 'bottomBanner' array
       setGifts(response.data.gifts || []); //  Set only 'gifts' array
       setCategories(response.data.categoryImage || []);
+      setPoster(response.data.poster || []);
       setFilterCategory(response.data.filterCategory || []);
       setNewArrivals(response.data.newArrivals || []);
       setSolitaires(response.data.solitire || []);
@@ -710,6 +712,15 @@ const Mainpage = () => {
           <div>
             <div className="row pe-0 ps-0 m-0">
               {/*  Left Side Banner (Single Image) */}
+              {/* {poster.length > 0 && (
+                <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
+                  <img
+                    alt="Bottom Banner 1"
+                    src={poster[0]?.posterImage}
+                    className="img-fluid h-100 festival_img1"
+                  />
+                </div>
+              )} */}
               {bottomBanners.length > 0 && (
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
                   <img
@@ -721,17 +732,17 @@ const Mainpage = () => {
               )}
               {/* Right Side Banners (Two Images) */}
               <div className="col-lg-6 col-md-6 col-sm-6 col-12 p-0 m-0">
-                {bottomBanners.length > 1 && (
+                {poster.length > 1 && (
                   <img
                     alt="Bottom Banner 2"
-                    src={bottomBanners[1]?.bannerImage}
+                    src={poster[2]?.posterImage}
                     className="img-fluid festival_img2"
                   />
                 )}
-                {bottomBanners.length > 2 && (
+                {poster.length > 2 && (
                   <img
                     alt="Bottom Banner 3"
-                    src={bottomBanners[2]?.bannerImage}
+                    src={poster[1]?.posterImage}
                     className="img-fluid festival_img3"
                   />
                 )}
@@ -741,7 +752,7 @@ const Mainpage = () => {
         </section>
 
         {/* Solitaire */}
-        <section className='container pb-5 pt-3'>
+        {/* <section className='container pb-5 pt-3'>
           <div>
             <h3 className='font_main text-center pb-3'>Solitaire</h3>
             <div className='row position-relative'>
@@ -801,54 +812,8 @@ const Mainpage = () => {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Category */}
-        <section className="container pb-3 shop_category d-lg-block d-md-block d-none">
-          <div>
-            <div className="text-center">
-              <h3 className="font_main pb-1 m-0 p-0">Shop by Category</h3>
-              <p className="p_main pb-3">Brilliant design and unparalleled craftsmanship.</p>
-            </div>
-            <div className="row">
-              {categories.map((item, index) => (
-                <div key={index} className="col-lg-2 col-md-4 col-sm-6 col-6 p-0 px-2 py-2 ">
-                  <div className="card border-0">
-                    <Link
-                      to={`/products/${item.categoryName.replace(/ /g, "-")}`}
-                      key={index}
-                      className='text-decoration-none'
-                    >
-                      <img
-                        alt={item.categoryName}
-                        src={item.categoryImage}
-                        className="img-fluid"
-                        onError={(e) => {
-                          e.target.onerror = null; // Prevent infinite loop
-                          e.target.style.display = "none";
-
-                          // Ensure parentElement exists before modifying innerHTML
-                          if (e.target.parentElement) {
-                            e.target.parentElement.innerHTML = `
-                          <div class='no-image-placeholder-category d-flex justify-content-center align-items-center border border-1 rounded-3'  style="height: 200px;">
-                            <span class='exlimation_mark'>!</span>
-                          </div>`;
-                          }
-                        }}
-                      />
-                    </Link>
-                    <div className="card-body text-center">
-                      <h5>{item.categoryName}</h5>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* New Arrivals */}
-        <section className="container">
+        </section> */}
+        <section className="container pb-5 pt-3">
           <div>
             <h3 className="font_main text-center pb-4">New Arrivals</h3>
             <div className="row position-relative">
@@ -904,16 +869,126 @@ const Mainpage = () => {
           </div>
         </section>
 
+        {/* Category */}
+        <section className="container pb-2 shop_category d-lg-block d-md-block d-none">
+          <div>
+            <div className="text-center">
+              <h3 className="font_main pb-1 m-0 p-0">Shop by Category</h3>
+              <p className="p_main pb-3">Brilliant design and unparalleled craftsmanship.</p>
+            </div>
+            <div className="row">
+              {categories.map((item, index) => (
+                <div key={index} className="col-lg-2 col-md-4 col-sm-6 col-6 p-0 px-2 py-2 ">
+                  <div className="card border-0">
+                    <Link
+                      to={`/products/${item.categoryName.replace(/ /g, "-")}`}
+                      key={index}
+                      className='text-decoration-none'
+                    >
+                      <img
+                        alt={item.categoryName}
+                        src={item.categoryImage}
+                        className="img-fluid"
+                        onError={(e) => {
+                          e.target.onerror = null; // Prevent infinite loop
+                          e.target.style.display = "none";
+
+                          // Ensure parentElement exists before modifying innerHTML
+                          if (e.target.parentElement) {
+                            e.target.parentElement.innerHTML = `
+                          <div class='no-image-placeholder-category d-flex justify-content-center align-items-center border border-1 rounded-3'  style="height: 200px;">
+                            <span class='exlimation_mark'>!</span>
+                          </div>`;
+                          }
+                        }}
+                      />
+                    </Link>
+                    <div className="card-body text-center">
+                      <h5>{item.categoryName}</h5>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* New Arrivals */}
+        {/* <section className="container">
+          <div>
+            <h3 className="font_main text-center pb-4">New Arrivals</h3>
+            <div className="row position-relative">
+              <div className="d-lg-none d-block">
+                <button onClick={() => arrvial?.current?.slickPrev()} className="pre-btn-set">
+                  <i className="ri-arrow-left-wide-line"></i>
+                </button>
+              </div>
+              <div>
+                {newArrivals.length > 0 ? (
+                  <Slider ref={arrvial} {...newarrivals}>
+                    {newArrivals.slice(0, 4).map((item) => (
+                      <div className="card border-0 px-1" key={item.product_id}>
+                        <Link to={`/Productdetails/${item.product_id}`} className="text-decoration-none">
+                          <img
+                            alt={item.title}
+                            src={item.image01}
+                            className="w-100 height_Set"
+                            onError={(e) => {
+                              e.target.onerror = null; // Prevent infinite loop
+                              e.target.style.display = "none";
+                              e.target.parentElement.innerHTML = `
+                              <div class='no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3'>
+                                  <span class='exlimation_mark'>!</span>
+                              </div>`;
+                            }}
+                          />
+                        </Link>
+                        <div className="card-body px-1">
+                          <h6>{item.title}</h6>
+                          <p>{formatCurrency(item.total14KT)}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </Slider>
+                ) : (
+                  <div className="no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3">
+                    <span className="exlimation_mark">!</span>
+                  </div>
+                )}
+                <Link to="/arrival" className="text-decoration-none">
+                  <button className="btn mx-auto d-block viewall_btn">
+                    <span>View All</span>
+                  </button>
+                </Link>
+              </div>
+              <div className="d-lg-none d-block">
+                <button onClick={() => arrvial?.current?.slickNext()} className="next-btn-set">
+                  <i className="ri-arrow-right-wide-line"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section> */}
+
         {/* Bottom Banner */}
         <section className="container-fluid my-5 px-lg-3 px-md-3 px-0">
           <div>
             <div className="row pe-0 ps-0 m-0">
               {/*  Left Side Banner (Single Image) */}
-              {bottomBanners.length > 0 && (
+              {/* {bottomBanners.length > 0 && (
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
                   <img
                     alt="Bottom Banner 1"
                     src={bottomBanners[0]?.bannerImage}
+                    className="img-fluid h-100 festival_img1"
+                  />
+                </div>
+              )} */}
+              {poster.length > 0 && (
+                <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
+                  <img
+                    alt="Bottom Banner 1"
+                    src={poster[0]?.posterImage}
                     className="img-fluid h-100 festival_img1"
                   />
                 </div>
