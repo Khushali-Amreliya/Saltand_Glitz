@@ -376,7 +376,6 @@ const Mainpage = () => {
   const [solitaires, setSolitaires] = useState([]);
   const [banners, setBanners] = useState([]);
   const [bottomBanners, setBottomBanners] = useState([]);
-  const [poster, setPoster] = useState([]);
   const [gifts, setGifts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filterCategory, setFilterCategory] = useState([]);
@@ -394,14 +393,13 @@ const Mainpage = () => {
 
   const fetchHome = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/v1/homePage/home");
+      const response = await axios.get("https://saltandglitz-api.vercel.app/v1/homePage/home");
       console.log("API Response:", response.data); // Debugging
 
       setBanners(response.data.banner || []); //  Set only 'banner' array
       setBottomBanners(response.data.bottomBanner || []); //  Set only 'bottomBanner' array
       setGifts(response.data.gifts || []); //  Set only 'gifts' array
       setCategories(response.data.categoryImage || []);
-      setPoster(response.data.poster || []);
       setFilterCategory(response.data.filterCategory || []);
       setNewArrivals(response.data.newArrivals || []);
       setSolitaires(response.data.solitire || []);
@@ -712,15 +710,6 @@ const Mainpage = () => {
           <div>
             <div className="row pe-0 ps-0 m-0">
               {/*  Left Side Banner (Single Image) */}
-              {/* {poster.length > 0 && (
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
-                  <img
-                    alt="Bottom Banner 1"
-                    src={poster[0]?.posterImage}
-                    className="img-fluid h-100 festival_img1"
-                  />
-                </div>
-              )} */}
               {bottomBanners.length > 0 && (
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
                   <img
@@ -732,17 +721,17 @@ const Mainpage = () => {
               )}
               {/* Right Side Banners (Two Images) */}
               <div className="col-lg-6 col-md-6 col-sm-6 col-12 p-0 m-0">
-                {poster.length > 1 && (
+                {bottomBanners.length > 1 && (
                   <img
                     alt="Bottom Banner 2"
-                    src={poster[2]?.posterImage}
+                    src={bottomBanners[4]?.bannerImage}
                     className="img-fluid festival_img2"
                   />
                 )}
-                {poster.length > 2 && (
+                {bottomBanners.length > 2 && (
                   <img
                     alt="Bottom Banner 3"
-                    src={poster[1]?.posterImage}
+                    src={bottomBanners[5]?.bannerImage}
                     className="img-fluid festival_img3"
                   />
                 )}
@@ -975,20 +964,11 @@ const Mainpage = () => {
           <div>
             <div className="row pe-0 ps-0 m-0">
               {/*  Left Side Banner (Single Image) */}
-              {/* {bottomBanners.length > 0 && (
+              {bottomBanners.length > 0 && (
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
                   <img
                     alt="Bottom Banner 1"
-                    src={bottomBanners[0]?.bannerImage}
-                    className="img-fluid h-100 festival_img1"
-                  />
-                </div>
-              )} */}
-              {poster.length > 0 && (
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
-                  <img
-                    alt="Bottom Banner 1"
-                    src={poster[0]?.posterImage}
+                    src={bottomBanners[3]?.bannerImage}
                     className="img-fluid h-100 festival_img1"
                   />
                 </div>
@@ -998,14 +978,14 @@ const Mainpage = () => {
                 {bottomBanners.length > 1 && (
                   <img
                     alt="Bottom Banner 2"
-                    src={bottomBanners[1]?.bannerImage}
+                    src={bottomBanners[2]?.bannerImage}
                     className="img-fluid festival_img2"
                   />
                 )}
                 {bottomBanners.length > 2 && (
                   <img
                     alt="Bottom Banner 3"
-                    src={bottomBanners[2]?.bannerImage}
+                    src={bottomBanners[1]?.bannerImage}
                     className="img-fluid festival_img3"
                   />
                 )}
