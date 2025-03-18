@@ -34,7 +34,7 @@
 
 //     const fetchWishlist = async () => {
 //         try {
-//             const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${userFetch._id}`);
+//             const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userFetch._id}`);
 //             // console.log(response);
 
 //             const length = response.data.wishlist.products
@@ -56,7 +56,7 @@
 
 //     const getCart = async () => {
 //         try {
-//             const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${userFetch._id}`);
+//             const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userFetch._id}`);
 //             // console.log(response.data.totalQuantity);
 
 //             const quantity = response.data;
@@ -3010,7 +3010,7 @@ const Header = () => {
     const [products, setProducts] = useState([]);
     const [defaultProducts, setDefaultProducts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+    // const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -3018,7 +3018,7 @@ const Header = () => {
 
     const fetchWishlist = async () => {
         try {
-            const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${userFetch._id}`);
+            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userFetch._id}`);
             // console.log(response);
 
             const length = response.data.wishlist.products
@@ -3040,7 +3040,7 @@ const Header = () => {
 
     const getCart = async () => {
         try {
-            const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${userFetch._id}`);
+            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userFetch._id}`);
             // console.log(response.data);
 
             const quantity = response.data;
@@ -3189,7 +3189,7 @@ const Header = () => {
             setLoading(true);
             try {
                 // Default products API call
-                const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
+                const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
 
                 let productList = response.data;
                 if (!Array.isArray(productList)) {
@@ -3226,7 +3226,7 @@ const Header = () => {
         }
 
         try {
-            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/search/searchProduct", { query });
+            const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/search/searchProduct", { query });
             let searchResults = response.data;
             if (!Array.isArray(searchResults)) {
                 searchResults = response.data.data || [];
@@ -3240,7 +3240,7 @@ const Header = () => {
     // const fetchFilteredProducts = async (category) => {
     //     try {
     //         setLoading(true);
-    //         const response = await axios.post("https://saltandglitz-api.vercel.app/v1/products/filter", {
+    //         const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/products/filter", {
     //             title: category,  // Filtering by category "Ring"
     //         });
 
@@ -4177,7 +4177,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/jewellery" id="moreJewellerymd">
+                                        <Link className="nav-link active" to="/products" id="moreJewellerymd">
                                             <i className="ri-subtract-line"></i>More Jewellery
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="moreJewellerymd">
@@ -4465,7 +4465,7 @@ const Header = () => {
                                 />
                             </Link> */}
                             <Link to="/" className="text-decoration-none fs-5 text-dark">
-                            <img
+                                <img
                                     alt=''
                                     src='/assets/img/logo_website.png'
                                     className='img-fluid mx-auto d-block logo-fixed'
@@ -5292,7 +5292,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/products/All-Jewellery" id="moreJewellery">
+                                        <Link className="nav-link active" to="/products" id="moreJewellery">
                                             More Jewellery
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="moreJewellery">
@@ -5582,20 +5582,24 @@ const Header = () => {
                         <Loader />
                     ) : (
                         <div className="row offcanvas_search">
-                            {filteredProducts.length > 0 ? (
-                                filteredProducts.map((item) => (
+                            {searchTerm.trim() === "" ? (
+                                // Jab tak search nahi kiya, tab tak default products dikhaye
+                                defaultProducts.map((item) => (
                                     <div className="col-lg-6 px-4" key={item._id}>
                                         <div className="search-item">
                                             <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark">
                                                 <div className="left">
-                                                    <img src={item.goldImages[0]} alt={item.title} className="img-fluid search_offcanvas_arrow"
+                                                    <img
+                                                        src={item.goldImages[0]}
+                                                        alt={item.title}
+                                                        className="img-fluid search_offcanvas_arrow"
                                                         onError={(e) => {
                                                             e.target.onerror = null;
                                                             e.target.style.display = "none";
                                                             e.target.parentElement.innerHTML = `
-                                                        <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 95px; width: 100px;">
-                                                            <span class='exlimation_mark'>!</span>
-                                                        </div>`;
+                                                            <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 95px; width: 100px;">
+                                                                <span class='exlimation_mark'>!</span>
+                                                            </div>`;
                                                         }}
                                                     />
                                                     <span>{item.title}</span>
@@ -5605,7 +5609,35 @@ const Header = () => {
                                     </div>
                                 ))
                             ) : (
-                                <p>No products found.</p>
+                                // Search hone ke baad search results dikhaye
+                                filteredProducts.length > 0 ? (
+                                    filteredProducts.map((item) => (
+                                        <div className="col-lg-6 px-4" key={item._id}>
+                                            <div className="search-item">
+                                                <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark">
+                                                    <div className="left">
+                                                        <img
+                                                            src={item.image01}
+                                                            alt={item.title}
+                                                            className="img-fluid search_offcanvas_arrow"
+                                                            onError={(e) => {
+                                                                e.target.onerror = null;
+                                                                e.target.style.display = "none";
+                                                                e.target.parentElement.innerHTML = `
+                                                    <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 95px; width: 100px;">
+                                                        <span class='exlimation_mark'>!</span>
+                                                    </div>`;
+                                                            }}
+                                                        />
+                                                        <span>{item.title}</span>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>No products found.</p>
+                                )
                             )}
                         </div>
                     )}
@@ -5709,37 +5741,70 @@ const Header = () => {
                 <div className="offcanvas-body">
                     <h5 className='trending_title'>Search Results</h5>
                     <div className='row offcanvas_search'>
-                        {filteredProducts.length > 0 ? (
-                            filteredProducts.map((item) => (
-                                <div className='col-lg-6 px-4' key={item._id}>
-                                    <div className="search-item">
-                                        <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
-                                            <div className="left">
-                                                <img
-                                                    src={item.image01}
-                                                    alt={item.title}
-                                                    className='img-fluid search_offcanvas_arrow'
-                                                    onError={(e) => {
-                                                        e.target.onerror = null;
-                                                        e.target.style.display = "none";
-                                                        e.target.parentElement.innerHTML = `
-                                                        <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 95px; width: 100px;">
-                                                            <span class='exlimation_mark'>!</span>
-                                                        </div>`;
-                                                    }}
-                                                />
-                                                <span>{item.title}</span>
-                                            </div>
-                                        </Link>
-                                    </div>
-                                </div>
-                            ))
+                        {loading ? (
+                            <Loader />
                         ) : (
-                            <p>No products found.</p>
+                            <div className="row offcanvas_search">
+                                {searchTerm.trim() === "" ? (
+                                    // Jab tak search nahi kiya, tab tak default products dikhaye
+                                    defaultProducts.map((item) => (
+                                        <div className="col-lg-6 px-4" key={item._id}>
+                                            <div className="search-item">
+                                                <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark">
+                                                    <div className="left">
+                                                        <img
+                                                            src={item.goldImages[0]}
+                                                            alt={item.title}
+                                                            className="img-fluid search_offcanvas_arrow"
+                                                            onError={(e) => {
+                                                                e.target.onerror = null;
+                                                                e.target.style.display = "none";
+                                                                e.target.parentElement.innerHTML = `
+                                                            <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 95px; width: 100px;">
+                                                                <span class='exlimation_mark'>!</span>
+                                                            </div>`;
+                                                            }}
+                                                        />
+                                                        <span>{item.title}</span>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    // Search hone ke baad search results dikhaye
+                                    filteredProducts.length > 0 ? (
+                                        filteredProducts.map((item) => (
+                                            <div className="col-lg-6 px-4" key={item._id}>
+                                                <div className="search-item">
+                                                    <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark">
+                                                        <div className="left">
+                                                            <img
+                                                                src={item.image01}
+                                                                alt={item.title}
+                                                                className="img-fluid search_offcanvas_arrow"
+                                                                onError={(e) => {
+                                                                    e.target.onerror = null;
+                                                                    e.target.style.display = "none";
+                                                                    e.target.parentElement.innerHTML = `
+                                                    <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 95px; width: 100px;">
+                                                        <span class='exlimation_mark'>!</span>
+                                                    </div>`;
+                                                                }}
+                                                            />
+                                                            <span>{item.title}</span>
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>No products found.</p>
+                                    )
+                                )}
+                            </div>
                         )}
                     </div>
-
-
                     <h5 className="trending_title pt-4">Recently Viewed</h5>
                     <div className="row position-relative">
                         {recentlyViewed.length > 0 ? (

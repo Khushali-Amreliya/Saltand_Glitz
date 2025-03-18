@@ -85,7 +85,7 @@ const Cart = () => {
     try {
       setLoading(true); // Start loader
       const response = await axios.get(
-        `https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`
+        `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${user._id}`
       );
 
       const data = response.data;
@@ -128,7 +128,7 @@ const Cart = () => {
       }
 
       const response = await axios.delete(
-        `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${productId}`
+        `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${user._id}/${productId}`
       );
 
       console.log(response);
@@ -151,7 +151,7 @@ const Cart = () => {
   const handleIncrement = async (product) => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
+      const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${user._id}`);
       // console.log(response);
       const data = response.data;
 
@@ -175,7 +175,7 @@ const Cart = () => {
       };
 
       const res = await axios.post(
-        "https://saltandglitz-api.vercel.app/v1/cart/cartIncrement",
+        "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/cartIncrement",
         cartItem
       );
 
@@ -194,7 +194,7 @@ const Cart = () => {
   const handleDecrement = async (product) => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/cart/getCart/${user._id}`);
+      const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${user._id}`);
       const data = response.data;
 
       let cartProduct = typeof product === "string"
@@ -217,7 +217,7 @@ const Cart = () => {
       };
 
       const res = await axios.post(
-        "https://saltandglitz-api.vercel.app/v1/cart/cartDecrement",
+        "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/cartDecrement",
         cartItem
       );
 
@@ -248,14 +248,14 @@ const Cart = () => {
     try {
       // First, remove the item from the cart
       const removeResponse = await axios.delete(
-        `https://saltandglitz-api.vercel.app/v1/cart/remove/${user._id}/${item.productId.product_id}`,  // Correct endpoint for removing from cart
+        `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${user._id}/${item.productId.product_id}`,  // Correct endpoint for removing from cart
         { data: cartItem }  // Send cartItem correctly in the DELETE request
       );
 
       if (removeResponse.status === 200) {
         // Item removed successfully from cart, now add it to the wishlist
         const wishlistResponse = await axios.post(
-          'https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist',
+          'https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist',
           {
             userId: user._id,  // Send userId here
             productId: item.productId.product_id,  // Send the correct productId

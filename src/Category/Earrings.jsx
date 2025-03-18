@@ -20,7 +20,7 @@ const Earrings = () => {
         setLoading(true);
         setError(null);
         try {
-            let response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
+            let response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
             // console.log(response);
 
             const categoryProducts = response.data.filter(item => item.category === "Earring");
@@ -42,7 +42,7 @@ const Earrings = () => {
         setLoading(true);
         setFilters(appliedFilters);
         try {
-            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/upload/filterProduct", appliedFilters);
+            const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/filterProduct", appliedFilters);
 
             console.log("Filtered Response:", response.data.updatedProducts);
 
@@ -184,7 +184,7 @@ export default Earrings;
 //         }
 
 //         try {
-//             const response = await axios.post("https://saltandglitz-api.vercel.app/v1/upload/filterProduct", {
+//             const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/filterProduct", {
 //                 ...filters,
 //             });
 
@@ -231,7 +231,7 @@ export default Earrings;
 
 //     const getUploadData = async () => {
 
-//         let response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload")
+//         let response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload")
 //         // const ringProducts = response.data.filter(item => item.category === "Ring"); // Filter rings only
 //         // console.log("Get Data", response.data);
 //         setProducts(response.data);

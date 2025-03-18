@@ -37,13 +37,13 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('https://saltandglitz-api.vercel.app/api/users/login', { email, password });
+      const res = await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/login', { email, password });
       localStorage.setItem('token', res.data.user.token);
       localStorage.setItem('userId', res.data.user._id); // ID Store
 
       // console.log("User ID:", res.data.user._id);
 
-      const userRes = await axios.get('https://saltandglitz-api.vercel.app/api/users/profile', {
+      const userRes = await axios.get('https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/profile', {
         headers: { 'Authorization': `Bearer ${res.data.user.token}` }
       });
       localStorage.setItem('user', JSON.stringify(userRes.data));
@@ -61,7 +61,7 @@ const Login = () => {
   const handleOtpLogin = async () => {
     setLoading(true);
     try {
-      await axios.post('https://saltandglitz-api.vercel.app/v1/otp/send-otp', { email });
+      await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/otp/send-otp', { email });
       toast.success("OTP sent to your email!");
       setStep(3); // Move to OTP input step
     } catch (err) {
@@ -74,7 +74,7 @@ const Login = () => {
   const handleVerifyOtp = async () => {
     setLoading(true);
     try {
-      const res = await axios.post('https://saltandglitz-api.vercel.app/v1/otp/get-otp', { email, otp });
+      const res = await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/otp/get-otp', { email, otp });
       localStorage.setItem('token', res.data.user.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
 
@@ -91,7 +91,7 @@ const Login = () => {
   const handleResendOtp = async () => {
     setLoading(true);
     try {
-      await axios.post('https://saltandglitz-api.vercel.app/v1/otp/send-otp', { email });
+      await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/otp/send-otp', { email });
       toast.success("New OTP sent to your email!");
     } catch (err) {
       toast.error("Error resending OTP");
@@ -114,7 +114,7 @@ const Login = () => {
         return setLoading(false);
       }
 
-      await axios.post(`https://saltandglitz-api.vercel.app/api/users/forgotPassword/${userId}`, { email });
+      await axios.post(`https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/forgotPassword/${userId}`, { email });
       toast.success("OTP sent to your email for password reset!");
       setStep(5);
     } catch (err) {
@@ -134,7 +134,7 @@ const Login = () => {
         toast.error("User ID not found. Please login again.");
         return setLoading(false);
       }
-      await axios.post(`https://saltandglitz-api.vercel.app/api/users/verifyOtpAndResetPassword/${userId}`, { email, otp, newPassword });
+      await axios.post(`https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/verifyOtpAndResetPassword/${userId}`, { email, otp, newPassword });
       toast.success("Password reset successful. Please login with your new password.");
       setStep(2);
     } catch (err) {

@@ -30,7 +30,7 @@
 //         if (isHeartFilled) {
 //             try {
 //                 // Call the API to remove the item from the wishlist
-//                 await axios.post(`https://saltandglitz-api.vercel.app/v1/wishlist/remove-wishlist/${id}`);
+//                 await axios.post(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove-wishlist/${id}`);
 //                 dispatch(cartAction.removeFromWishlist(id));
 //                 toast.success("Item removed from wishlist", {
 //                     position: "top-center",
@@ -46,7 +46,7 @@
 //         } else {
 //             try {
 //                 // Call the API to add the item to the wishlist
-//                 await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create-wishlist', {
+//                 await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create-wishlist', {
 //                     id,
 //                     title,
 //                     price,
@@ -82,7 +82,7 @@
 
 //         const cartItem = { id, title, price, image01 };
 //         try {
-//             const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/add', cartItem);
+//             const response = await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/carts/add', cartItem);
 
 //             if (response.status === 201) {
 //                 dispatch(cartAction.addItem(response.data));
@@ -244,12 +244,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import { v4 as uuidv4 } from "uuid";
 import axios from 'axios';
 import { formatCurrency } from '../../Utils/formateCurrency'; // Utility for formatting currency
 import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { toast } from 'react-toastify';
-
 
 const renderStar = (rating) => {
     const adjustedPercentage = ((rating / 5) * 100); // Adjust fill percentage
@@ -298,7 +298,7 @@ const ProductCard = ({ Productsitem }) => {
     useEffect(() => {
         const fetchRating = async () => {
             try {
-                const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/rating/getRating/${product_id}`);
+                const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/getRating/${product_id}`);
                 // console.log("Fetched Rating Data:", response.data);
 
                 const { approvedRating } = response.data;
@@ -329,15 +329,18 @@ const ProductCard = ({ Productsitem }) => {
     useEffect(() => {
         const fetchWishlist = async () => {
             try {
+                let userId = user?._id || localStorage.getItem("guestUserId");
 
-                const response = await axios.get(`http://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
+                if (!userId) return; // Agar dono null hain, toh call na karein
+
+                const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
                 const wishlistData = response.data.wishlist || {};
                 const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
 
-                localStorage.setItem('wishlist', JSON.stringify({ [user._id]: wishlistProductIds }));
+                localStorage.setItem('wishlist', JSON.stringify({ [userId]: wishlistProductIds }));
                 setIsWishlist(wishlistProductIds.includes(product_id));
             } catch (error) {
-                // toast.error('Unable to fetch wishlist');
+                console.error("Wishlist fetch error:", error);
             }
         };
 
@@ -345,29 +348,40 @@ const ProductCard = ({ Productsitem }) => {
     }, [product_id, user?._id]);
 
     const handleWishlistToggle = async (event) => {
-        event.preventDefault(); // Page reload ya navigate hone se roke
-        if (!user || !user._id) {
-            toast.error("Please login first to add items to wishlist!");
-            return;
+        event.preventDefault(); // Page reload hone se roke
+
+        let userId = user?._id; // Logged-in user ka ID check kare
+
+        if (!userId) {
+            // Guest user ke liye userId generate karo
+            let guestUserId = localStorage.getItem("guestUserId");
+            if (!guestUserId) {
+                guestUserId = uuidv4();
+                localStorage.setItem("guestUserId", guestUserId);
+            }
+            userId = guestUserId; // Guest ID ko userId ke jaisa treat karenge
         }
 
-        const newWishlistStatus = !isWishlist;  // UI ko pehle update karenge
-        setIsWishlist(newWishlistStatus);  // Optimistic UI Update
+        const newWishlistStatus = !isWishlist; // UI ko pehle update karenge
+        setIsWishlist(newWishlistStatus); // Optimistic UI Update
 
         try {
             if (newWishlistStatus) {
                 // Add to Wishlist API
-                await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
-                    userId: user._id,
+                await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist', {
+                    userId,
                     productId: product_id,
                 });
+                // toast.success("Added to Wishlist!");
             } else {
                 // Remove from Wishlist API
-                await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
+                await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${userId}/${product_id}`);
+                // toast.info("Removed from Wishlist!");
             }
         } catch (error) {
             console.error("Wishlist error:", error);
-            setIsWishlist(!newWishlistStatus);  // Agar error aaye to state wapas reset kar do
+            setIsWishlist(!newWishlistStatus); // Agar error aaye to state reset karo
+            toast.error("Something went wrong!");
         }
     };
 
@@ -384,7 +398,6 @@ const ProductCard = ({ Productsitem }) => {
     return (
         <div className="card-container position-relative">
             <div>
-
                 <Link to={`/Productdetails/${product_id}`}>
                     {/* Slider for product images */}
                     {displayImages?.length > 0 ? (
@@ -426,7 +439,7 @@ const ProductCard = ({ Productsitem }) => {
                         <button onClick={(e) => { e.preventDefault(); slider?.current?.slickPrev(); }} className="absolute_prev_btn d-lg-block d-none">
                             <i className="ri-arrow-left-wide-line"></i>
                         </button>
-                        <button onClick={(e) => {e.preventDefault(); slider?.current?.slickNext();}} className="absolute_next_btn d-lg-block d-none">
+                        <button onClick={(e) => { e.preventDefault(); slider?.current?.slickNext(); }} className="absolute_next_btn d-lg-block d-none">
                             <i className="ri-arrow-right-wide-line"></i>
                         </button>
                     </div>
@@ -447,6 +460,7 @@ const ProductCard = ({ Productsitem }) => {
                             title="Add to Wishlist"
                         />}
                     </div>
+
                     <div className="review_card position-absolute bottom-0 left-0 my-3 d-flex align-items-center">
                         <p className="m-0 pe-1">{rating}</p>
                         {renderStar(rating)}
@@ -466,7 +480,7 @@ const ProductCard = ({ Productsitem }) => {
                         <button onClick={(e) => { e.preventDefault(); slider?.current?.slickPrev(); }} className="absolute_prev_btn d-lg-none d-block">
                             <i className="ri-arrow-left-wide-line"></i>
                         </button>
-                        <button onClick={(e) => {e.preventDefault(); slider?.current?.slickNext();}} className="absolute_next_btn d-lg-none d-block">
+                        <button onClick={(e) => { e.preventDefault(); slider?.current?.slickNext(); }} className="absolute_next_btn d-lg-none d-block">
                             <i className="ri-arrow-right-wide-line"></i>
                         </button>
                     </div>
@@ -521,7 +535,7 @@ export default ProductCard;
 //           return;
 //         }
 
-//         const url = `https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`;
+//         const url = `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${user._id}`;
 //         console.log('Fetching wishlist from:', url);
 
 //         const response = await axios.get(url);
@@ -559,7 +573,7 @@ export default ProductCard;
 
 //   const addToWishlist = async () => {
 //     try {
-//       await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
+//       await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist', {
 //         userId: user._id,
 //         productId: product_id,
 //       });
@@ -586,7 +600,7 @@ export default ProductCard;
 
 //   const removeFromWishlist = async () => {
 //     try {
-//       await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
+//       await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${product_id}`);
 
 //       dispatch(cartAction.removeFromWishlist(product_id));
 

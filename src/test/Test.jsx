@@ -13,7 +13,7 @@ const Test = () => {
     // Send OTP
     const sendOtp = async () => {
         try {
-            await axios.post("https://saltandglitz-api.vercel.app/v1/otp/send-otp", { email });
+            await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/otp/send-otp", { email });
             toast.success("OTP sent successfully!");
             setOtpSent(true);
         } catch (error) {
@@ -24,7 +24,7 @@ const Test = () => {
     // Verify OTP & Login
     const verifyOtp = async () => {
         try {
-            const res = await axios.post("https://saltandglitz-api.vercel.app/v1/otp/get-otp", { email, otp });
+            const res = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/otp/get-otp", { email, otp });
             toast.success("Login successful!");
             localStorage.setItem("token", res.data.token);
         } catch (error) {
@@ -35,7 +35,7 @@ const Test = () => {
     // Login with Password
     const loginWithPassword = async () => {
         try {
-            const res = await axios.post("https://saltandglitz-api.vercel.app/api/users/login", { email, password });
+            const res = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/login", { email, password });
             toast.success("Login successful!");
             localStorage.setItem("token", res.data.token);
         } catch (error) {

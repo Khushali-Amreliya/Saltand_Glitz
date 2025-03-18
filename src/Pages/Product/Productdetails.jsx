@@ -102,7 +102,7 @@
 //         };
 
 //         try {
-//             const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/add', cartItem);
+//             const response = await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/carts/add', cartItem);
 
 //             if (response.status === 201) {
 //                 dispatch(cartAction.addItem(response.data));
@@ -130,7 +130,7 @@
 //         };
 
 //         try {
-//             const response = await axios.post('https://saltandglitz-api.vercel.app/v1/carts/add', cartItem);
+//             const response = await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/carts/add', cartItem);
 
 //             if (response.status === 201) {
 //                 dispatch(cartAction.addItem(response.data)); // Dispatch action to add item
@@ -1309,7 +1309,7 @@ const Productdetails = () => {
     //     const fetchRatings = async () => {
     //         try {
     //             // const response = await axios.get(`http://localhost:5000/v1/rating/getRating/${id}`);
-    //             const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/rating/getRating/${id}`);
+    //             const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/getRating/${id}`);
     //             console.log("Review Data", response.data);
 
     //             setProductRating(response.data.productRating);
@@ -1323,7 +1323,7 @@ const Productdetails = () => {
     useEffect(() => {
         const fetchRatings = async () => {
             try {
-                const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/rating/getRating/${id}`);
+                const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/getRating/${id}`);
                 console.log("Review Data", response.data);
 
                 const { approvedRating } = response.data;
@@ -1362,7 +1362,7 @@ const Productdetails = () => {
         console.log(reviewSchema);
 
         try {
-            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/rating/addRating", reviewSchema);  // Send the fields directly
+            const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/addRating", reviewSchema);  // Send the fields directly
             // console.log("REVIEW", response);
 
             if (response.status === 201) {
@@ -1398,7 +1398,7 @@ const Productdetails = () => {
         console.log("Review Data", reviewData);
 
         try {
-            const response = await axios.put("https://saltandglitz-api.vercel.app/v1/rating/updateRating", reviewData, {
+            const response = await axios.put("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/updateRating", reviewData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
@@ -1455,15 +1455,18 @@ const Productdetails = () => {
     useEffect(() => {
         const fetchWishlist = async () => {
             try {
+                let userId = user?._id || localStorage.getItem("guestUserId");
 
-                const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
+                if (!userId) return; // Agar dono null hain, toh call na karein
+
+                const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
                 const wishlistData = response.data.wishlist || {};
                 const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
 
-                localStorage.setItem('wishlist', JSON.stringify({ [user._id]: wishlistProductIds }));
+                localStorage.setItem('wishlist', JSON.stringify({ [userId]: wishlistProductIds }));
                 setIsWishlist(wishlistProductIds.includes(product.id));
             } catch (error) {
-                // toast.error('Unable to fetch wishlist');
+                console.error("Wishlist fetch error:", error);
             }
         };
 
@@ -1637,7 +1640,7 @@ const Productdetails = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/v1/upload/get_similar/${id}`);
+            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_similar/${id}`);
             // console.log(response);
             setSimilarProducts(response.data);
         } catch (err) {
@@ -1647,7 +1650,7 @@ const Productdetails = () => {
 
     const fetchProductDetails = async () => {
         try {
-            const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/upload/get_id/${id}`);
+            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_id/${id}`);
             const data = response.data;
             // console.log("Data", data);
 
@@ -1773,7 +1776,7 @@ const Productdetails = () => {
 
         try {
             const response = await axios.post(
-                "https://saltandglitz-api.vercel.app/v1/cart/addCart",
+                "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/addCart",
                 {
                     product: product.id,
                     user: user._id,
@@ -1831,7 +1834,7 @@ const Productdetails = () => {
 
         try {
             const response = await axios.post(
-                "https://saltandglitz-api.vercel.app/v1/cart/addCart",
+                "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/addCart",
                 {
                     product: id,
                     user: user._id,
@@ -1867,13 +1870,13 @@ const Productdetails = () => {
         try {
             if (newWishlistStatus) {
                 // Add to Wishlist API
-                await axios.post('https://saltandglitz-api.vercel.app/v1/wishlist/create_wishlist', {
+                await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist', {
                     userId: user._id,
                     productId: product.id,
                 });
             } else {
                 // Remove from Wishlist API
-                await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${product.id}`);
+                await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${product.id}`);
             }
         } catch (error) {
             console.error("Wishlist error:", error);
@@ -2157,12 +2160,12 @@ const Productdetails = () => {
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                             <img alt='' src='/assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img>
                                             {/* <i className="ri-replay-15-line fs-1"></i> */}
-                                            <p>15 Day <br />Money Back</p>
+                                            <p>30 Days <br />Easy Returns</p>
                                         </div>
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                             <img alt='' src='/assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img>
                                             {/* <i className="ri-exchange-funds-line fs-1"></i> */}
-                                            <p>Lifetime Exchange</p>
+                                            <p>Lifetime Exchange & Buyback</p>
                                         </div>
                                         <div className='col-lg-3 col-md-3 col-sm-6 col-6 text-center'>
                                             <img alt='' src='/assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img>
@@ -2172,27 +2175,27 @@ const Productdetails = () => {
                                     </div>
                                 </div>
                                 <div className='mt-2'>
-                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></p>
+                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <Link to="/exchange" className="text-decoration-none"><span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></Link></p>
                                 </div>
                                 <div className='mt-2'>
                                     <div className='row text-center'>
                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12  mt-2'>
-                                            <img alt='' src='/assets/img/delivery.png' className='img-fluid mx-auto d-block'></img>
+                                            <img alt='' src='/assets/img/certified_logo[1].png' className='img-fluid mx-auto d-block'></img>
                                             {/* <i className="ri-discount-percent-line fs-1"></i> */}
-                                            <p className='p_main m-0 pt-2'>100% BIS</p>
-                                            <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
+                                            {/* <p className='p_main m-0 pt-2'>100% BIS</p> */}
+                                            <p style={{ fontSize: "12px" }} className="pt-1">Certified By Recognised lab</p>
                                         </div>
                                         <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
-                                            <img alt='' src='/assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img>
+                                            <img alt='' src='/assets/img/VVS_GRADE_DIAMOND.png' className='img-fluid mx-auto d-block'></img>
                                             {/* <i className="ri-bubble-chart-line fs-1"></i> */}
-                                            <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
-                                            <p style={{ fontSize: "11px" }}>Titan Privileges</p>
+                                            {/* <p className='m-0 pt-2  p_main'>Trust of Tanishq</p> */}
+                                            {/* <p style={{ fontSize: "11px" }}>Titan Privileges</p> */}
                                         </div>
-                                        <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-2'>
+                                        <div className='col-lg-4 col-md-4 col-sm-6 col-12 mt-3'>
                                             {/* <i className="ri-verified-badge-line fs-1 text-success"></i> */}
                                             <img alt='' src='/assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img>
-                                            <p className='m-0 pt-2 p_main'>100% Certified</p>
-                                            <p style={{ fontSize: "11px" }}>by CaratLane</p>
+                                            <p style={{ fontSize: "13px" }} className='m-0 pt-2'>100% Certified</p>
+                                            <p style={{ fontSize: "13px" }}>by Salt</p>
                                         </div>
                                     </div>
                                 </div>
@@ -2422,12 +2425,12 @@ const Productdetails = () => {
                                         <div className='col-lg-3 col-md-3 col-sm-3 col-3 text-center'>
                                             <img alt='' src='/assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block w-50'></img>
                                             {/* <i className="ri-replay-15-line fs-1"></i> */}
-                                            <p>15 Day <br />Money Back</p>
+                                            <p>30 Days <br />Easy Returns</p>
                                         </div>
                                         <div className='col-lg-3 col-md-3 col-sm-3 col-3 text-center'>
                                             <img alt='' src='/assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block w-50'></img>
                                             {/* <i className="ri-exchange-funds-line fs-1"></i> */}
-                                            <p>Lifetime Exchange</p>
+                                            <p>Lifetime Exchange & Buyback</p>
                                         </div>
                                         <div className='col-lg-3 col-md-3 col-sm-3 col-3 text-center'>
                                             <img alt='' src='/assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block w-50'></img>
@@ -2441,27 +2444,27 @@ const Productdetails = () => {
                                     <p>(1 xClusive point = ₹1)</p>
                                 </div> */}
                                 <div className='mt-2'>
-                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></p>
+                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <Link to="/exchange" className="text-decoration-none"><span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></Link></p>
                                 </div>
                                 <div className='mt-2'>
                                     <div className='row text-center'>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4  mt-2'>
-                                            <img alt='' src='/assets/img/delivery.png' className='img-fluid mx-auto d-block'></img>
+                                            <img alt='' src='/assets/img/certified_logo[1].png' className='img-fluid mx-auto d-block'></img>
                                             {/* <i className="ri-discount-percent-line fs-1"></i> */}
-                                            <p className='p_main m-0 pt-2'>100% BIS</p>
-                                            <p style={{ fontSize: "11px" }}>Hallmarked Jewellery</p>
+                                            {/* <p className='p_main m-0 pt-2'>100% BIS</p> */}
+                                            <p style={{ fontSize: "12px" }} className="pt-2">Certified By Recognised lab</p>
                                         </div>
                                         <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
-                                            <img alt='' src='/assets/img/pdp-delivery-tah-sprite (3).png' className='img-fluid mx-auto d-block'></img>
+                                            <img alt='' src='/assets/img/VVS_GRADE_DIAMOND.png' className='img-fluid mx-auto d-block'></img>
                                             {/* <i className="ri-bubble-chart-line fs-1"></i> */}
-                                            <p className='m-0 pt-2  p_main'>Trust of Tanishq</p>
-                                            <p style={{ fontSize: "11px" }}>Titan Privileges</p>
+                                            {/* <p className='m-0 pt-2  p_main'>Trust of Tanishq</p> */}
+                                            {/* <p style={{ fontSize: "11px" }}>Titan Privileges</p> */}
                                         </div>
-                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-2'>
+                                        <div className='col-lg-4 col-md-4 col-sm-4 col-4 mt-3'>
                                             {/* <i className="ri-verified-badge-line fs-1 text-success"></i> */}
                                             <img alt='' src='/assets/img/pdp-delivery-tah-sprite (2).png' className='img-fluid mx-auto d-block'></img>
-                                            <p className='m-0 pt-2 p_main'>100% Certified</p>
-                                            <p style={{ fontSize: "11px" }}>by CaratLane</p>
+                                            <p style={{ fontSize: "13px" }} className='m-0 pt-2'>100% Certified</p>
+                                            <p style={{ fontSize: "13px" }}>by Salt</p>
                                         </div>
                                     </div>
                                 </div>
@@ -3170,7 +3173,7 @@ export default Productdetails;
 //   useEffect(() => {
 //     const fetchProductDetails = async () => {
 //       try {
-//         const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/upload/get_id/${id}`);
+//         const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_id/${id}`);
 //         setProduct(response.data); // Set product details in state
 //       } catch (err) {
 //         console.error("Error fetching product details:", err.response || err);

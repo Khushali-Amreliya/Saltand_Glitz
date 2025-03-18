@@ -88,7 +88,7 @@
 
 //   const handleUploadToBackend = async () => {
 //     try {
-//       const response = await axios.post("https://saltandglitz-api.vercel.app/v1/upload/post_upload", {
+//       const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/post_upload", {
 //         products,
 //       });
 //       alert("Data uploaded successfully!");

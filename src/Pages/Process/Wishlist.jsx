@@ -22,7 +22,7 @@ const Wishlist = () => {
   // Fetch wishlist items from the backend
   const fetchWishlist = useCallback(async () => {
     try {
-      const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
+      const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${user._id}`);
       if (response.status === 200) {
         setWishlistItems(response.data.wishlist.products);
       }
@@ -42,7 +42,7 @@ const Wishlist = () => {
   // Remove item from wishlist
   const handleRemove = async (id) => {
     try {
-      const res = await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`);
+      const res = await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${id}`);
       // console.log("Remove Wishlist Response:", res);
       if (res.status === 200) {
         setWishlistItems((prev) =>
@@ -75,7 +75,7 @@ const Wishlist = () => {
     try {
       // Add item to cart
       const addCartResponse = await axios.post(
-        "https://saltandglitz-api.vercel.app/v1/cart/addCart",
+        "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/addCart",
         cartItem
       );
       // console.log("Cart API Response:", addCartResponse);
@@ -83,7 +83,7 @@ const Wishlist = () => {
       if (addCartResponse.status === 201 || addCartResponse.status === 200) {
         // Remove item from wishlist
         const removeWishlistResponse = await axios.delete(
-          `https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`
+          `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${id}`
         );
         // console.log("Remove Wishlist Response:", removeWishlistResponse);
 
@@ -201,7 +201,7 @@ export default Wishlist;
 //   // Fetch wishlist items from the backend
 //   const fetchWishlist = useCallback(async () => {
 //     try {
-//       const response = await axios.get(`https://saltandglitz-api.vercel.app/v1/wishlist/get_wishlist/${user._id}`);
+//       const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${user._id}`);
 //       if (response.status === 200) {
 //         setWishlistItems(response.data.wishlist.products);
 //       }
@@ -220,7 +220,7 @@ export default Wishlist;
 //   // Remove item from wishlist
 //   const handleRemove = async (id) => {
 //     try {
-//       const res = await axios.delete(`https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`);
+//       const res = await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${id}`);
 //       if (res.status === 200) {
 //         setWishlistItems((prev) =>
 //           prev.filter((item) => item.productId.product_id !== id)
@@ -252,14 +252,14 @@ export default Wishlist;
 //     try {
 //       // Add item to cart
 //       const addCartResponse = await axios.post(
-//         'https://saltandglitz-api.vercel.app/v1/cart/addCart',
+//         'https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/addCart',
 //         cartItem
 //       );
 
 //       if (addCartResponse.status === 201 || addCartResponse.status === 200) {
 //         // Remove item from wishlist
 //         const removeWishlistResponse = await axios.delete(
-//           `https://saltandglitz-api.vercel.app/v1/wishlist/remove_wishlist/${user._id}/${id}`
+//           `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${id}`
 //         );
 
 //         if (removeWishlistResponse.status === 200) {

@@ -18,7 +18,7 @@ const Rings = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/upload/filterProduct", { title: category });
+            const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/filterProduct", { title: category });
             
             const filteredProducts = response.data.updatedProducts.filter(item => item.category === category);
             

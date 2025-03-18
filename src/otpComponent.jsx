@@ -9,7 +9,7 @@ const OtpComponent = () => {
 
     const sendOtp = async () => {
         try {
-            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/otp/send-otp", { email });
+            const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/otp/send-otp", { email });
             setMessage(response.data.message);
             setStep(2);
         } catch (error) {
@@ -19,7 +19,7 @@ const OtpComponent = () => {
 
     const verifyOtp = async () => {
         try {
-            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/otp/get-otp", { email, otp });
+            const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/otp/get-otp", { email, otp });
             setMessage(response.data.message);
             console.log("Token:", response.data.token);
         } catch (error) {

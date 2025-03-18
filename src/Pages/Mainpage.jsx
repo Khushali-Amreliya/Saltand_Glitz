@@ -393,7 +393,7 @@ const Mainpage = () => {
 
   const fetchHome = async () => {
     try {
-      const response = await axios.get("https://saltandglitz-api.vercel.app/v1/homePage/home");
+      const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/homePage/home");
       console.log("API Response:", response.data); // Debugging
 
       setBanners(response.data.banner || []); //  Set only 'banner' array
@@ -417,7 +417,7 @@ const Mainpage = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await axios.get("https://saltandglitz-api.vercel.app/v1/banner/bannerGet");
+        const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/banner/bannerGet");
         const data = response.data.banners;
         // console.log(data);
 
@@ -437,7 +437,7 @@ const Mainpage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
+        const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
         // console.log(response.data);
         setProducts(response.data); // Set products in state
       } catch (err) {
@@ -455,7 +455,7 @@ const Mainpage = () => {
   // useEffect(() => {
   //   const fetchSolitaire = async () => {
   //     try {
-  //       const response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
+  //       const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
   //       // console.log(response);
 
   //       const ringProducts = response.data.filter(item => item.subCategory === "Solitaire Rings"); // Filter rings only
@@ -618,7 +618,7 @@ const Mainpage = () => {
     <Helmet title="Home">
       <>
         {/* <h1>Scheduled Task at 3:00 AM IST</h1>
-      <ScheduledTask /> */}
+        <ScheduledTask /> */}
 
         {/* Mobile Category */}
         <section className='container-fluid d-lg-none d-md-none d-block'>
@@ -663,15 +663,26 @@ const Mainpage = () => {
             </Slider>
           ) : (
             <Slider {...webBanners}>
-              {banners.map((banner, index) => (
-                <div key={banner.banner_id}>
-                  <img
-                    alt={`Banner ${index + 1}`}
-                    src={banner.bannerImage}
-                    className="img-fluid banner_class"
-                  />
-                </div>
-              ))}
+              {banners.map((banner, index) => {
+                const isVideo = index === 2; // Check if it's the 3rd banner (index 2)
+
+                return (
+                  <div key={banner.banner_id}>
+                    {isVideo ? (
+                      <video autoPlay muted loop className="img-fluid banner_class">
+                        <source src={banner.bannerImage} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <img
+                        alt={`Banner ${index + 1}`}
+                        src={banner.bannerImage}
+                        className="img-fluid banner_class"
+                      />
+                    )}
+                  </div>
+                );
+              })}
             </Slider>
           )}
         </section>
@@ -683,27 +694,31 @@ const Mainpage = () => {
               <div>
                 <img
                   alt=""
-                  src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/Blog/Mobile.webp"
+                  src="https://storage.googleapis.com/uncultered-stream/SALT%20AND%20GLITZ/mobile%202.png"
                   className="img-fluid"
                 />
               </div>
               <div>
                 <img
                   alt=""
-                  src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/VT_Offer/01/Mobile_768x890.webp"
+                  src="https://storage.googleapis.com/uncultered-stream/SALT%20AND%20GLITZ/mobile.png"
                   className="img-fluid"
                 />
               </div>
               <div>
-                <img
-                  alt=""
-                  src="https://cdn.caratlane.com/media/static/images/V4/2025/CL/01-JAN/Banner/Extra5/02/Mobile_768x890.jpg"
-                  className="img-fluid"
-                />
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  className="img-fluid h-100 border-0"
+                >
+                  <source src="https://storage.googleapis.com/uncultered-stream/SALT%20AND%20GLITZ/mobile.mp4" type="video/mp4" />
+                </video>
               </div>
             </Slider>
           )}
         </section>
+
 
         {/* topBanner */}
         <section className="container-fluid my-5 px-lg-3 px-md-3 px-0">
@@ -711,13 +726,30 @@ const Mainpage = () => {
             <div className="row pe-0 ps-0 m-0">
               {/*  Left Side Banner (Single Image) */}
               {bottomBanners.length > 0 && (
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
-                  <img
-                    alt="Bottom Banner 1"
-                    src={bottomBanners[0]?.bannerImage}
-                    className="img-fluid h-100 festival_img1"
-                  />
+                <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                  {bottomBanners[0] ? (
+                    bottomBanners[0].bannerImage.endsWith(".mp4") ||
+                      bottomBanners[0].bannerImage.endsWith(".mkv") ||
+                      bottomBanners[0].bannerImage.endsWith(".avi") ? (
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        className="img-fluid h-100 border-0"
+                      >
+                        <source src={bottomBanners[0].bannerImage} type="video/mp4" />
+                      </video>
+                    ) : (
+                      <img
+                        alt="Bottom Banner 1"
+                        src={bottomBanners[0].bannerImage}
+                        className="img-fluid h-100 festival_img1"
+                      />
+                    )
+                  ) : null}
                 </div>
+
+
               )}
               {/* Right Side Banners (Two Images) */}
               <div className="col-lg-6 col-md-6 col-sm-6 col-12 p-0 m-0">
@@ -725,20 +757,22 @@ const Mainpage = () => {
                   <img
                     alt="Bottom Banner 2"
                     src={bottomBanners[4]?.bannerImage}
-                    className="img-fluid festival_img2"
+                    className="img-fluid festival_img2 mt-1"
                   />
                 )}
                 {bottomBanners.length > 2 && (
                   <img
+                    style={{ paddingTop: "15px !important" }}
                     alt="Bottom Banner 3"
                     src={bottomBanners[5]?.bannerImage}
-                    className="img-fluid festival_img3"
+                    className="img-fluid festival_img3 pt-3"
                   />
                 )}
               </div>
             </div>
           </div>
         </section>
+
 
         {/* Solitaire */}
         {/* <section className='container pb-5 pt-3'>
@@ -802,6 +836,7 @@ const Mainpage = () => {
             </div>
           </div>
         </section> */}
+        {/* New Arrivals */}
         <section className="container pb-5 pt-3">
           <div>
             <h3 className="font_main text-center pb-4">New Arrivals</h3>
@@ -843,11 +878,12 @@ const Mainpage = () => {
                     <span className="exlimation_mark">!</span>
                   </div>
                 )}
-                <Link to="/arrival" className="text-decoration-none">
+                <Link to="/products" className="text-decoration-none">
                   <button className="btn mx-auto d-block viewall_btn">
                     <span>View All</span>
                   </button>
                 </Link>
+
               </div>
               <div className="d-lg-none d-block">
                 <button onClick={() => arrvial?.current?.slickNext()} className="next-btn-set">
@@ -965,12 +1001,28 @@ const Mainpage = () => {
             <div className="row pe-0 ps-0 m-0">
               {/*  Left Side Banner (Single Image) */}
               {bottomBanners.length > 0 && (
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12 m-0 p-0">
-                  <img
-                    alt="Bottom Banner 1"
-                    src={bottomBanners[3]?.bannerImage}
-                    className="img-fluid h-100 festival_img1"
-                  />
+                <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                  {bottomBanners[3] ? (
+                    bottomBanners[3].bannerImage.endsWith(".mp4") ||
+                      bottomBanners[3].bannerImage.endsWith(".mkv") ||
+                      bottomBanners[3].bannerImage.endsWith(".avi") ? (
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        className="img-fluid h-100 festival_img1"
+                      >
+                        <source src={bottomBanners[3].bannerImage} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <img
+                        alt="Bottom Banner 1"
+                        src={bottomBanners[3].bannerImage}
+                        className="img-fluid h-100 festival_img1"
+                      />
+                    )
+                  ) : null}
                 </div>
               )}
               {/* Right Side Banners (Two Images) */}
@@ -979,14 +1031,14 @@ const Mainpage = () => {
                   <img
                     alt="Bottom Banner 2"
                     src={bottomBanners[2]?.bannerImage}
-                    className="img-fluid festival_img2"
+                    className="img-fluid festival_img2 mt-1"
                   />
                 )}
                 {bottomBanners.length > 2 && (
                   <img
                     alt="Bottom Banner 3"
                     src={bottomBanners[1]?.bannerImage}
-                    className="img-fluid festival_img3"
+                    className="img-fluid festival_img3 pt-3"
                   />
                 )}
               </div>
@@ -994,7 +1046,7 @@ const Mainpage = () => {
           </div>
         </section>
 
-        {/* Filter Category */}
+        {/* Wrapped with love! */}
         <section className="container mt-2 shop_category">
           <div>
             <div className="text-center">
@@ -1003,7 +1055,7 @@ const Mainpage = () => {
             </div>
             <div className="row">
               {filterCategory.map((item, index) => (
-                <div key={index} className="col-lg-2 col-md-4 col-sm-6 col-6 p-0 px-2 py-2">
+                <div key={index} className="col-lg-2 col-md-4 col-sm-4 col-4 p-0 px-2 py-2">
                   <div className="card border-0">
                     <Link
 
@@ -1044,7 +1096,7 @@ const Mainpage = () => {
           <div className="d-none d-lg-block d-md-block">
             <div className="row">
               {gifts.map((gift) => (
-                <div key={gift.gift_id} className="col-lg-4 col-md-4 col-sm-12 col-12">
+                <div key={gift.gift_id} className="col-lg-3 col-md-3 col-sm-12 col-12">
                   <div className="card border-0">
                     <img alt={gift.giftName} src={gift.giftImage} className="img-fluid" />
                     <div className="card-body text-center">

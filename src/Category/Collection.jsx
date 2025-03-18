@@ -27,15 +27,24 @@ const CollectionPage = () => {
         setError(null);
 
         try {
-            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/upload/filterProduct", {
-                title: decodedCategory,  // Convert back from hyphen to space
-                subCategory: decodedSubCategory,
-                ...filters,
-            });
-
-            let filteredProducts = response.data.updatedProducts.filter(item =>
-                item.category === decodedCategory && (!decodedSubCategory || item.subCategory === decodedSubCategory)
+            const response = await axios.post(
+                "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/filterProduct",
+                {
+                    title: decodedCategory || "",  // Agar category empty ho toh "" bheje
+                    subCategory: decodedSubCategory || "",
+                    ...filters,
+                }
             );
+
+            let filteredProducts = response.data.updatedProducts;
+
+            // Agar category ya subCategory nahi hai, toh saare products show karo
+            if (decodedCategory) {
+                filteredProducts = filteredProducts.filter(item =>
+                    item.category === decodedCategory &&
+                    (!decodedSubCategory || item.subCategory === decodedSubCategory)
+                );
+            }
 
             if (filteredProducts.length === 0) {
                 setError("Oops! No products found.");
@@ -54,8 +63,7 @@ const CollectionPage = () => {
 
     useEffect(() => {
         fetchFilteredProducts();
-    }, [category, subCategory]); // Trigger fetch on param change
-
+    }, [category, subCategory]);
 
     return (
         <Helmet title={`${category} Products`}>

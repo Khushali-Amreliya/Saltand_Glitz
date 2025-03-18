@@ -20,7 +20,7 @@ const Jewellery = () => {
         setLoading(true);
         setError(null);
         try {
-            let response = await axios.get("https://saltandglitz-api.vercel.app/v1/upload/get_upload");
+            let response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
             // console.log(response);
 
             const categoryProducts = response.data
@@ -42,7 +42,7 @@ const Jewellery = () => {
         setLoading(true);
         setFilters(appliedFilters);
         try {
-            const response = await axios.post("https://saltandglitz-api.vercel.app/v1/upload/filterProduct", appliedFilters);
+            const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/filterProduct", appliedFilters);
 
             console.log("Filtered Response:", response.data.updatedProducts);
 

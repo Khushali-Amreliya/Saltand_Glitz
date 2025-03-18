@@ -80,7 +80,7 @@ const Signup = () => {
     //         };
 
     //         // Send the Google token to the backend
-    //         const response = await axios.post('https://saltandglitz-api.vercel.app/api/users/google-login', {
+    //         const response = await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/google-login', {
     //             token: accessToken, // Send the Firebase token
     //         });
 
@@ -141,7 +141,7 @@ const Signup = () => {
         setLoading(true);
 
         try {
-            await axios.post('https://saltandglitz-api.vercel.app/api/users/register', formData);
+            await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/register', formData);
             toast.success('Sign-up successful!');
 
             // Save the user data from the response (if needed)
