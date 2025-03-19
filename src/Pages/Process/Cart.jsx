@@ -87,6 +87,7 @@ const Cart = () => {
       const response = await axios.get(
         `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${user._id}`
       );
+      console.log("Cart", response.data.cart.quantity);
 
       const data = response.data;
 
@@ -178,6 +179,8 @@ const Cart = () => {
         "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/cartIncrement",
         cartItem
       );
+      console.log("Increment", res);
+
 
       if (res.status === 200) {
         dispatch(cartAction.incrementItem(cartProduct?.productId?.product_id || cartProduct?.product_id));
@@ -430,7 +433,7 @@ const Cart = () => {
                                   </span>
                                   &nbsp;
                                   <span style={{ fontSize: "14.5px" }}>
-                                    {cartItems.find(cartItem => cartItem.id === item?.productId?.product_id)?.quantity || 0}
+                                    {item.quantity}
                                   </span>
                                   &nbsp;
                                   <span className="px-2"

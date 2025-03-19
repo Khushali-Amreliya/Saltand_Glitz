@@ -394,7 +394,7 @@ const Mainpage = () => {
   const fetchHome = async () => {
     try {
       const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/homePage/home");
-      console.log("API Response:", response.data); // Debugging
+      // console.log("API Response:", response.data); // Debugging
 
       setBanners(response.data.banner || []); //  Set only 'banner' array
       setBottomBanners(response.data.bottomBanner || []); //  Set only 'bottomBanner' array
@@ -512,53 +512,53 @@ const Mainpage = () => {
     arrows: false,
   };
 
-  const solitaireSlider = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    autoplay: true,
-    autoplaySpeed: 6000,
-    slidesToShow: slidesToShow,
-    slidesToScroll: 1,
-    arrows: true,
-    responsive: [
-      {
-        breakpoint: 1198, // For small screens
-        settings: {
-          slidesToShow: 4, // Show 2 full slides and part of the 3rd
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 991, // For small screens
-        settings: {
-          slidesToShow: 3, // Show 2 full slides and part of the 3rd
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 601, // For small screens
-        settings: {
-          slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480, // For small screens
-        settings: {
-          slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 375, // For small screens
-        settings: {
-          slidesToShow: 1.5, // Show 2 full slides and part of the 3rd
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  // const solitaireSlider = {
+  //   dots: false,
+  //   infinite: false,
+  //   speed: 500,
+  //   autoplay: true,
+  //   autoplaySpeed: 6000,
+  //   slidesToShow: slidesToShow,
+  //   slidesToScroll: 1,
+  //   arrows: true,
+  //   responsive: [
+  //     {
+  //       breakpoint: 1198, // For small screens
+  //       settings: {
+  //         slidesToShow: 4, // Show 2 full slides and part of the 3rd
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 991, // For small screens
+  //       settings: {
+  //         slidesToShow: 3, // Show 2 full slides and part of the 3rd
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 601, // For small screens
+  //       settings: {
+  //         slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 480, // For small screens
+  //       settings: {
+  //         slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 375, // For small screens
+  //       settings: {
+  //         slidesToShow: 1.5, // Show 2 full slides and part of the 3rd
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //   ],
+  // };
 
   const newarrivals = {
     dots: false,
@@ -655,13 +655,7 @@ const Mainpage = () => {
 
         {/* Web Banners */}
         <section className="container-fluid m-0 p-0 mb-5 d-lg-block d-md-block d-none">
-          {loading ? (
-            <Slider {...webBanners}>
-              {[...Array(1)].map((_, index) => (
-                <Shimmer key={index} type="banner" />
-              ))}
-            </Slider>
-          ) : (
+          {banners && banners.length > 0 ? (
             <Slider {...webBanners}>
               {banners.map((banner, index) => {
                 const isVideo = index === 2; // Check if it's the 3rd banner (index 2)
@@ -670,7 +664,7 @@ const Mainpage = () => {
                   <div key={banner.banner_id}>
                     {isVideo ? (
                       <video autoPlay muted loop className="img-fluid banner_class">
-                        <source src={banner.bannerImage} type="video/mp4" />
+                        <source src={banner.bannerVideo} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
                     ) : (
@@ -684,41 +678,54 @@ const Mainpage = () => {
                 );
               })}
             </Slider>
+          ) : (
+            <>
+              <Slider {...webBanners}>
+                {[...Array(1)].map((_, index) => (
+                  <Shimmer key={index} type="banner" />
+                ))}
+              </Slider>
+            </>
           )}
+
         </section>
 
         {/* Mobile Banners */}
         <section className="container-fluid d-lg-none d-md-none d-block p-0 mb-5">
-          {loading ? <Shimmer height="500px" type="banner" /> : (
+          {banners?.length > 0 ? (
             <Slider {...mobileBanners}>
-              <div>
-                <img
-                  alt=""
-                  src="https://storage.googleapis.com/uncultered-stream/SALT%20AND%20GLITZ/mobile%202.png"
-                  className="img-fluid"
-                />
-              </div>
-              <div>
-                <img
-                  alt=""
-                  src="https://storage.googleapis.com/uncultered-stream/SALT%20AND%20GLITZ/mobile.png"
-                  className="img-fluid"
-                />
-              </div>
-              <div>
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  className="img-fluid h-100 border-0"
-                >
-                  <source src="https://storage.googleapis.com/uncultered-stream/SALT%20AND%20GLITZ/mobile.mp4" type="video/mp4" />
-                </video>
-              </div>
-            </Slider>
-          )}
-        </section>
+              {banners.map((banner, index) => {
+                const isVideo = index === 2; // Check if it's the 3rd banner (index 2)
 
+                return (
+                  <div key={banner.banner_id}>
+                    {isVideo ? (
+                      <video autoPlay muted loop className="img-fluid">
+                        <source src={banner.mobileBannerVideo} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <img
+                        alt={`Banner ${index + 1}`}
+                        src={banner.mobileBannerImage}
+                        className="img-fluid"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </Slider>
+          ) : (
+            <>
+              <Slider {...mobileBanners}>
+                {[...Array(1)].map((_, index) => (
+                  <Shimmer key={index} type="banner" />
+                ))}
+              </Slider>
+            </>
+          )}
+
+        </section>
 
         {/* topBanner */}
         <section className="container-fluid my-5 px-lg-3 px-md-3 px-0">
@@ -772,7 +779,6 @@ const Mainpage = () => {
             </div>
           </div>
         </section>
-
 
         {/* Solitaire */}
         {/* <section className='container pb-5 pt-3'>
@@ -998,7 +1004,7 @@ const Mainpage = () => {
         {/* Bottom Banner */}
         <section className="container-fluid my-5 px-lg-3 px-md-3 px-0">
           <div>
-            <div className="row pe-0 ps-0 m-0">
+            <div className="row p-0 m-0">
               {/*  Left Side Banner (Single Image) */}
               {bottomBanners.length > 0 && (
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -1051,11 +1057,11 @@ const Mainpage = () => {
           <div>
             <div className="text-center">
               <h3 className="font_main pb-1 m-0 p-0">Wrapped with love!</h3>
-              <p className="p_main pb-3">Brilliant design and unparalleled craftsmanship.</p>
+              <p className="p_main pb-4">Brilliant design and unparalleled craftsmanship.</p>
             </div>
             <div className="row">
               {filterCategory.map((item, index) => (
-                <div key={index} className="col-lg-2 col-md-4 col-sm-4 col-4 p-0 px-2 py-2">
+                <div key={index} className="col-lg-2 col-md-4 col-sm-4 col-4 p-0 px-1 px-md-2">
                   <div className="card border-0">
                     <Link
 
@@ -1065,7 +1071,7 @@ const Mainpage = () => {
                       <img
                         alt={item.filterCategoryName}
                         src={item.filterCategoryImage}
-                        className="img-fluid"
+                        className="img-fluid rounded-3"
                         onError={(e) => {
                           e.target.onerror = null; // Prevent infinite loop
                           e.target.style.display = "none";

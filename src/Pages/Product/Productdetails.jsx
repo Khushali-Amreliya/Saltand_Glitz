@@ -1652,14 +1652,14 @@ const Productdetails = () => {
         try {
             const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_id/${id}`);
             const data = response.data;
-            // console.log("Data", data);
+            console.log("Data", data);
 
             // Extract images and videos
             const images = data.media?.filter(item => item.type === "goldImage").map(item => item.url) || [];
             const videos = data.media?.filter(item => item.type === 'goldVideo').map(item => item.url) || [];
 
             setProduct({
-                media: [...images, ...videos], // ✅ Store combined media
+                media: [...images, ...videos],
                 images, // Store extracted images
                 videos, // Store extracted videos
                 title: data.title,
@@ -1732,7 +1732,6 @@ const Productdetails = () => {
             return <div style={{ width: "6px", height: "6px", background: "#999", borderRadius: "50%" }}></div>;
         }
     };
-
 
     // const handleColorClick = (colorId) => {
     //     setColorBy(colorBy === colorId ? null : colorId);

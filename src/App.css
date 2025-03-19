@@ -166,6 +166,9 @@ div:where(.swal2-container) .swal2-html-container {
     }
 }
 
+
+  
+  
 @media(max-width:768px) {
     .font_main {
         font-size: 23px !important;

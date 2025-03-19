@@ -3167,7 +3167,7 @@ const Header = () => {
             dispatch(cartAction.resetState());
 
             // Clear user data
-            localStorage.removeItem('user');
+            localStorage.clear();
             setUser(null);
             setIsLoggedIn(false); // Update the login state to false
 
