@@ -2281,7 +2281,7 @@ const Productdetails = () => {
                                             className={`btn ${caratBy === "18KT" ? "bg-dark text-light" : "btn-light text-dark"}`}
                                             onClick={() => handleKTClick("18KT")}
                                         >
-                                            18KT2
+                                            18KT
                                         </button>
                                     </div>
                                 </div>

@@ -3384,6 +3384,13 @@ const Header = () => {
             <section className='container-fluid pt-2 d-md-block d-sm-block d-lg-none'>
                 <div className='row'>
                     <div className='col-sm-2 col-2'>
+                        <Link
+                            className="text-decoration-none text-dark"
+                            to={isLoggedIn ? "/Userprofile" : "/loginn"}
+                        >
+                            <RiUserLine className="pe-0 position-relative fs-5" />
+                            {/* <i className="ri-user-line "></i> */}
+                        </Link>
                         <HiOutlineMenuAlt1 className="fs-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" />
                         <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                             <div className="offcanvas-header mb-0">
@@ -4455,7 +4462,7 @@ const Header = () => {
                             </div> */}
                         </div>
                     </div>
-                    <div className='col-sm-8 col-7 d-flex justify-content-center align-items-center'>
+                    <div className='col-sm-8 col-8 d-flex justify-content-center align-items-center'>
                         <div>
                             {/* <Link to="/">
                                 <img
@@ -4474,7 +4481,7 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className='col-sm-2 col-3 d-flex justify-content-center align-items-center justify-content-sm-between'>
+                    <div className='col-sm-2 col-2 d-flex justify-content-center align-items-center justify-content-sm-between'>
 
                         {/* <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
                             <i className="ri-heart-line pe-0 position-relative">
@@ -4506,13 +4513,7 @@ const Header = () => {
                                 )}
                             </i>
                         </Link> */}
-                        <Link
-                            className="text-decoration-none text-dark"
-                            to={isLoggedIn ? "/Userprofile" : "/loginn"}
-                        >
-                            <RiUserLine className="pe-0 position-relative" />
-                            {/* <i className="ri-user-line "></i> */}
-                        </Link>
+                        
                     </div>
                     <form action="" className='pt-3'>
                         <div className="p-1 bg-light rounded rounded-pill shadow-sm">

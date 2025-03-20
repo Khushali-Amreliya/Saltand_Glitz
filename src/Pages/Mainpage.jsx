@@ -394,9 +394,9 @@ const Mainpage = () => {
   const fetchHome = async () => {
     try {
       const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/homePage/home");
-      // console.log("API Response:", response.data); // Debugging
+      console.log("API Response:", response.data); // Debugging
 
-      setBanners(response.data.banner || []); //  Set only 'banner' array
+      setBanners(response.data.media || []); //  Set only 'banner' array
       setBottomBanners(response.data.bottomBanner || []); //  Set only 'bottomBanner' array
       setGifts(response.data.gifts || []); //  Set only 'gifts' array
       setCategories(response.data.categoryImage || []);
@@ -434,22 +434,22 @@ const Mainpage = () => {
   }, []);
 
   // Fetch products from the backend
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
-        // console.log(response.data);
-        setProducts(response.data); // Set products in state
-      } catch (err) {
-        console.error("Error fetching products:", err);
-        // setError("Failed to load products.");
-      } finally {
-        setLoading(false); // Stop loader
-      }
-    };
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
+  //       // console.log(response.data);
+  //       setProducts(response.data); // Set products in state
+  //     } catch (err) {
+  //       console.error("Error fetching products:", err);
+  //       // setError("Failed to load products.");
+  //     } finally {
+  //       setLoading(false); // Stop loader
+  //     }
+  //   };
 
-    fetchProducts();
-  }, []);
+  //   fetchProducts();
+  // }, []);
 
   // ------------------------------------------Category wise product fetch------------------------------
   // useEffect(() => {
@@ -504,10 +504,10 @@ const Mainpage = () => {
   };
 
   const graduate = {
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 1.4,
+    slidesToShow: 1.1,
     slidesToScroll: 1,
     arrows: false,
   };
@@ -634,6 +634,7 @@ const Mainpage = () => {
                     alt={item.categoryName}
                     src={item.categoryImage}
                     className='img-fluid item3'
+                    style={{ borderRadius: "10px", objectFit: "cover" }}
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.style.display = "none";
@@ -654,17 +655,16 @@ const Mainpage = () => {
         </section>
 
         {/* Web Banners */}
-        <section className="container-fluid m-0 p-0 mb-5 d-lg-block d-md-block d-none">
+        <section className="container-fluid mb-5 d-lg-block d-md-block d-none">
           {banners && banners.length > 0 ? (
             <Slider {...webBanners}>
-              {banners.map((banner, index) => {
-                const isVideo = index === 2; // Check if it's the 3rd banner (index 2)
-
-                return (
-                  <div key={banner.banner_id}>
-                    {isVideo ? (
-                      <video autoPlay muted loop className="img-fluid banner_class">
-                        <source src={banner.bannerVideo} type="video/mp4" />
+              {banners
+                .filter((_, index) => index % 2 === 0) // ✅ Only 0, 2, 4 index
+                .map((banner, index) => (
+                  <div key={index}>
+                    {banner.type === "video" ? (
+                      <video autoPlay muted loop className="img-fluid banner_class" style={{ borderRadius: "10px", objectFit: "cover" }}>
+                        <source src={banner.bannerImage} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
                     ) : (
@@ -672,36 +672,32 @@ const Mainpage = () => {
                         alt={`Banner ${index + 1}`}
                         src={banner.bannerImage}
                         className="img-fluid banner_class"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
                       />
                     )}
                   </div>
-                );
-              })}
+                ))}
             </Slider>
           ) : (
-            <>
-              <Slider {...webBanners}>
-                {[...Array(1)].map((_, index) => (
-                  <Shimmer key={index} type="banner" />
-                ))}
-              </Slider>
-            </>
+            <Slider {...webBanners}>
+              {[...Array(1)].map((_, index) => (
+                <Shimmer key={index} type="banner" />
+              ))}
+            </Slider>
           )}
-
         </section>
 
         {/* Mobile Banners */}
-        <section className="container-fluid d-lg-none d-md-none d-block p-0 mb-5">
+        <section className="container-fluid d-lg-none d-md-none d-block mb-5">
           {banners?.length > 0 ? (
             <Slider {...mobileBanners}>
-              {banners.map((banner, index) => {
-                const isVideo = index === 2; // Check if it's the 3rd banner (index 2)
-
-                return (
-                  <div key={banner.banner_id}>
-                    {isVideo ? (
-                      <video autoPlay muted loop className="img-fluid">
-                        <source src={banner.mobileBannerVideo} type="video/mp4" />
+              {banners
+                .filter((_, index) => index % 2 !== 0) // ✅ Only 1, 3, 5 index
+                .map((banner, index) => (
+                  <div key={index}>
+                    {banner.type === "video" ? (
+                      <video autoPlay muted loop className="img-fluid" style={{ borderRadius: "10px", objectFit: "cover" }}>
+                        <source src={banner.mobileBannerImage} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
                     ) : (
@@ -709,32 +705,30 @@ const Mainpage = () => {
                         alt={`Banner ${index + 1}`}
                         src={banner.mobileBannerImage}
                         className="img-fluid"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
                       />
                     )}
                   </div>
-                );
-              })}
+                ))}
             </Slider>
           ) : (
-            <>
-              <Slider {...mobileBanners}>
-                {[...Array(1)].map((_, index) => (
-                  <Shimmer key={index} type="banner" />
-                ))}
-              </Slider>
-            </>
+            <Slider {...mobileBanners}>
+              {[...Array(1)].map((_, index) => (
+                <Shimmer key={index} type="banner" />
+              ))}
+            </Slider>
           )}
-
         </section>
 
+
         {/* topBanner */}
-        <section className="container-fluid my-5 px-lg-3 px-md-3 px-0">
-          <div>
-            <div className="row pe-0 ps-0 m-0">
-              {/*  Left Side Banner (Single Image) */}
+        <section className="container-fluid my-5">
+          <div className="row g-3 align-items-stretch">
+            {/* Left Side Banner (Single Image/Video) */}
+            <div className="col-lg-6 col-md-6 col-sm-12 d-flex">
               {bottomBanners.length > 0 && (
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                  {bottomBanners[0] ? (
+                <div className="w-100">
+                  {bottomBanners[0] && (
                     bottomBanners[0].bannerImage.endsWith(".mp4") ||
                       bottomBanners[0].bannerImage.endsWith(".mkv") ||
                       bottomBanners[0].bannerImage.endsWith(".avi") ? (
@@ -742,7 +736,8 @@ const Mainpage = () => {
                         autoPlay
                         muted
                         loop
-                        className="img-fluid h-100 border-0"
+                        className="img-fluid w-100 h-100"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
                       >
                         <source src={bottomBanners[0].bannerImage} type="video/mp4" />
                       </video>
@@ -750,32 +745,33 @@ const Mainpage = () => {
                       <img
                         alt="Bottom Banner 1"
                         src={bottomBanners[0].bannerImage}
-                        className="img-fluid h-100 festival_img1"
+                        className="img-fluid w-100 h-100"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
                       />
                     )
-                  ) : null}
+                  )}
                 </div>
-
-
               )}
-              {/* Right Side Banners (Two Images) */}
-              <div className="col-lg-6 col-md-6 col-sm-6 col-12 p-0 m-0">
-                {bottomBanners.length > 1 && (
-                  <img
-                    alt="Bottom Banner 2"
-                    src={bottomBanners[4]?.bannerImage}
-                    className="img-fluid festival_img2 mt-1"
-                  />
-                )}
-                {bottomBanners.length > 2 && (
-                  <img
-                    style={{ paddingTop: "15px !important" }}
-                    alt="Bottom Banner 3"
-                    src={bottomBanners[5]?.bannerImage}
-                    className="img-fluid festival_img3 pt-3"
-                  />
-                )}
-              </div>
+            </div>
+
+            {/* Right Side Banners (Two Images, Equal Spacing) */}
+            <div className="col-lg-6 col-md-6 col-sm-12 d-flex flex-column gap-3">
+              {bottomBanners.length > 1 && (
+                <img
+                  alt="Bottom Banner 2"
+                  src={bottomBanners[4]?.bannerImage}
+                  className="img-fluid w-100"
+                  style={{ flex: 1, objectFit: "cover", borderRadius: "10px" }}
+                />
+              )}
+              {bottomBanners.length > 2 && (
+                <img
+                  alt="Bottom Banner 3"
+                  src={bottomBanners[5]?.bannerImage}
+                  className="img-fluid w-100"
+                  style={{ flex: 1, objectFit: "cover", borderRadius: "10px" }}
+                />
+              )}
             </div>
           </div>
         </section>
@@ -907,7 +903,7 @@ const Mainpage = () => {
               <h3 className="font_main pb-1 m-0 p-0">Shop by Category</h3>
               <p className="p_main pb-3">Brilliant design and unparalleled craftsmanship.</p>
             </div>
-            <div className="row">
+            <div className="row m-0">
               {categories.map((item, index) => (
                 <div key={index} className="col-lg-2 col-md-4 col-sm-6 col-6 p-0 px-2 py-2 ">
                   <div className="card border-0">
@@ -919,6 +915,7 @@ const Mainpage = () => {
                       <img
                         alt={item.categoryName}
                         src={item.categoryImage}
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
                         className="img-fluid"
                         onError={(e) => {
                           e.target.onerror = null; // Prevent infinite loop
@@ -1002,13 +999,13 @@ const Mainpage = () => {
         </section> */}
 
         {/* Bottom Banner */}
-        <section className="container-fluid my-5 px-lg-3 px-md-3 px-0">
-          <div>
-            <div className="row p-0 m-0">
-              {/*  Left Side Banner (Single Image) */}
+        <section className="container-fluid mb-5">
+          <div className="row g-3 align-items-stretch">
+            {/* Left Side Banner (Single Image/Video) */}
+            <div className="col-lg-6 col-md-6 col-sm-12 d-flex">
               {bottomBanners.length > 0 && (
-                <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                  {bottomBanners[3] ? (
+                <div className="w-100">
+                  {bottomBanners[3] && (
                     bottomBanners[3].bannerImage.endsWith(".mp4") ||
                       bottomBanners[3].bannerImage.endsWith(".mkv") ||
                       bottomBanners[3].bannerImage.endsWith(".avi") ? (
@@ -1016,38 +1013,42 @@ const Mainpage = () => {
                         autoPlay
                         muted
                         loop
-                        className="img-fluid h-100 festival_img1"
+                        className="img-fluid w-100 h-100"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
                       >
                         <source src={bottomBanners[3].bannerImage} type="video/mp4" />
-                        Your browser does not support the video tag.
                       </video>
                     ) : (
                       <img
                         alt="Bottom Banner 1"
                         src={bottomBanners[3].bannerImage}
-                        className="img-fluid h-100 festival_img1"
+                        className="img-fluid w-100 h-100"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
                       />
                     )
-                  ) : null}
+                  )}
                 </div>
               )}
-              {/* Right Side Banners (Two Images) */}
-              <div className="col-lg-6 col-md-6 col-sm-6 col-12 p-0 m-0">
-                {bottomBanners.length > 1 && (
-                  <img
-                    alt="Bottom Banner 2"
-                    src={bottomBanners[2]?.bannerImage}
-                    className="img-fluid festival_img2 mt-1"
-                  />
-                )}
-                {bottomBanners.length > 2 && (
-                  <img
-                    alt="Bottom Banner 3"
-                    src={bottomBanners[1]?.bannerImage}
-                    className="img-fluid festival_img3 pt-3"
-                  />
-                )}
-              </div>
+            </div>
+
+            {/* Right Side Banners (Two Images, Equal Spacing) */}
+            <div className="col-lg-6 col-md-6 col-sm-12 d-flex flex-column gap-3">
+              {bottomBanners.length > 1 && (
+                <img
+                  alt="Bottom Banner 2"
+                  src={bottomBanners[2]?.bannerImage}
+                  className="img-fluid w-100"
+                  style={{ flex: 1, objectFit: "cover", borderRadius: "10px" }}
+                />
+              )}
+              {bottomBanners.length > 2 && (
+                <img
+                  alt="Bottom Banner 3"
+                  src={bottomBanners[1]?.bannerImage}
+                  className="img-fluid w-100"
+                  style={{ flex: 1, objectFit: "cover", borderRadius: "10px" }}
+                />
+              )}
             </div>
           </div>
         </section>
@@ -1059,9 +1060,9 @@ const Mainpage = () => {
               <h3 className="font_main pb-1 m-0 p-0">Wrapped with love!</h3>
               <p className="p_main pb-4">Brilliant design and unparalleled craftsmanship.</p>
             </div>
-            <div className="row">
+            <div className="row m-0">
               {filterCategory.map((item, index) => (
-                <div key={index} className="col-lg-2 col-md-4 col-sm-4 col-4 p-0 px-1 px-md-2">
+                <div key={index} className="col-lg-2 col-md-4 col-sm-4 col-4 p-0 px-2 px-md-2">
                   <div className="card border-0">
                     <Link
 
@@ -1071,7 +1072,8 @@ const Mainpage = () => {
                       <img
                         alt={item.filterCategoryName}
                         src={item.filterCategoryImage}
-                        className="img-fluid rounded-3"
+                        className="img-fluid"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
                         onError={(e) => {
                           e.target.onerror = null; // Prevent infinite loop
                           e.target.style.display = "none";
@@ -1100,11 +1102,16 @@ const Mainpage = () => {
         <section className="container my-3 pt-3 gift_sec_main">
           {/* Grid layout for large devices */}
           <div className="d-none d-lg-block d-md-block">
-            <div className="row">
+            <div className="row m-0"> {/* g-3 for uniform gap */}
               {gifts.map((gift) => (
-                <div key={gift.gift_id} className="col-lg-3 col-md-3 col-sm-12 col-12">
-                  <div className="card border-0">
-                    <img alt={gift.giftName} src={gift.giftImage} className="img-fluid" />
+                <div key={gift.gift_id} className="col-lg-4 col-md-4 col-sm-12 col-12 p-0 ">
+                  <div className="card border-0 p-2"> {/* p-2 for internal spacing */}
+                    <img
+                      alt={gift.giftName}
+                      src={gift.giftImage}
+                      className="img-fluid"
+                      style={{ borderRadius: "10px", objectFit: "cover" }}
+                    />
                     <div className="card-body text-center">
                       <h5>{gift.giftName}</h5>
                       <p className="line_hover">Shop Now &nbsp; &gt;</p>
@@ -1119,9 +1126,14 @@ const Mainpage = () => {
           <div className="d-lg-none d-md-none d-block">
             <Slider {...graduate}>
               {gifts.map((gift) => (
-                <div key={gift.gift_id}>
+                <div key={gift.gift_id} className="p-2">
                   <div className="card border-0">
-                    <img alt={gift.giftName} src={gift.giftImage} className="img-fluid px-1" />
+                    <img
+                      alt={gift.giftName}
+                      src={gift.giftImage}
+                      className="img-fluid"
+                      style={{ borderRadius: "10px", objectFit: "cover" }}
+                    />
                     <div className="card-body text-center">
                       <h5>{gift.giftName}</h5>
                       <p className="line_hover">Shop Now &nbsp; &gt;</p>
@@ -1133,8 +1145,9 @@ const Mainpage = () => {
           </div>
         </section>
 
+
         {/* Service */}
-        <section className='service_main'>
+        {/* <section className='service_main'>
           <div className='container py-5'>
             <div>
               <div className='row service_p'>
@@ -1146,21 +1159,18 @@ const Mainpage = () => {
                   <span className='line_hover'>Learn More &nbsp; &gt;</span>
                 </div>
                 <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-                  {/* <i className="ri-window-line fs-2"></i> */}
                   <LuConciergeBell className='fs-2 mb-2' />
                   <h6 className=''>Tiffany At Your Service</h6>
                   <p className='m-0 pb-1'>We offer complimentary shipping and returns on all Tiffany orders.</p>
                   <Link className='text-decoration-none' to="/contact"><span className='line_hover'>Contact Us &nbsp; &gt;</span></Link>
                 </div>
                 <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-                  {/* <i className="ri-calendar-line fs-2"></i> */}
                   <CiCalendar className='fs-2 mb-2' />
                   <h6 className=''>Book An Appointment</h6>
                   <p className='m-0 pb-1'>We’re happy to help with in-store or virtual appointments.</p>
                   <span className='line_hover'>Book Now &nbsp; &gt;</span>
                 </div>
                 <div className='col-lg-3 col-md-6 col-sm-6 col-6 py-4 text-center'>
-                  {/* <i className="ri-mail-send-line fs-2"></i> */}
                   <CiGift className='fs-2 mb-2' />
                   <h6 className=''>The Iconic Blue Box</h6>
                   <p className='m-0 pb-1'>Your Tiffany purchase comes wrapped in our Blue Box packaging.</p>
@@ -1169,12 +1179,12 @@ const Mainpage = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Last Banner */}
-        <section className='container-fluid p-0 m-0'>
-          <div>
-            <img alt='' src='assets/img/gift_banner.webp' className='img-fluid'></img>
+        <section className='container-fluid pb-3'>
+          <div className=''>
+            <img alt='' src='assets/img/gift_banner.webp' className='img-fluid' style={{ borderRadius: "10px", objectFit: "cover" }}></img>
           </div>
         </section>
 

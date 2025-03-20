@@ -401,29 +401,46 @@ const ProductCard = ({ Productsitem }) => {
                 <Link to={`/Productdetails/${product_id}`}>
                     {/* Slider for product images */}
                     {displayImages?.length > 0 ? (
-                        <Slider ref={slider} {...imageVideo} className="border border-1 rounded-3">
-                            {displayImages.map((img, index) => (
-                                <img
-                                    key={index}
-                                    alt={`product-image-${index}`}
-                                    src={img}
-                                    className="img-fluid"
-                                    onError={(e) => {
-                                        e.target.onerror = null; // Prevent infinite loop
-                                        e.target.style.display = "none";
-                                        e.target.parentElement.innerHTML = `
-                                        <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
-                                            <span class='exlimation_mark'>!</span>
-                                        </div>`;
-                                    }}
-                                />
-                            ))}
-                        </Slider>
+                        displayImages.length === 1 ? (
+                            <img
+                                alt="product-image"
+                                src={displayImages[0]}
+                                className="img-fluid border border-1 rounded-3"
+                                onError={(e) => {
+                                    e.target.onerror = null; // Prevent infinite loop
+                                    e.target.style.display = "none";
+                                    e.target.parentElement.innerHTML = `
+                <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
+                    <span class='exlimation_mark'>!</span>
+                </div>`;
+                                }}
+                            />
+                        ) : (
+                            <Slider ref={slider} {...imageVideo} className="border border-1 rounded-3">
+                                {displayImages.map((img, index) => (
+                                    <img
+                                        key={index}
+                                        alt={`product-image-${index}`}
+                                        src={img}
+                                        className="img-fluid"
+                                        onError={(e) => {
+                                            e.target.onerror = null; // Prevent infinite loop
+                                            e.target.style.display = "none";
+                                            e.target.parentElement.innerHTML = `
+                        <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
+                            <span class='exlimation_mark'>!</span>
+                        </div>`;
+                                        }}
+                                    />
+                                ))}
+                            </Slider>
+                        )
                     ) : (
                         <div className="no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3">
                             <span className="exlimation_mark">!</span>
                         </div>
                     )}
+
 
                 </Link>
 

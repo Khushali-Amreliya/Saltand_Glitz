@@ -30,7 +30,7 @@
     background-color: white;
 } */
 .header_color {
-    background: #005b3d;
+    background: #00362A;
     color: #fff;
 }
 
@@ -574,7 +574,7 @@
 }
 
 .logo-fixed {
-    width: 130px;
+    width: 165px !important;
 }
 
 /* Media Query */
