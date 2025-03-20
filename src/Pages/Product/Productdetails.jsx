@@ -2174,7 +2174,7 @@ const Productdetails = () => {
                                     </div>
                                 </div>
                                 <div className='mt-2'>
-                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <Link to="/exchange" className="text-decoration-none"><span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></Link></p>
+                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <Link to="/exchange" className="text-decoration-none"><span className='fw-bold' style={{ color: "#00362A" }}>TERMS & POLICIES</span></Link></p>
                                 </div>
                                 <div className='mt-2'>
                                     <div className='row text-center'>
@@ -2443,7 +2443,7 @@ const Productdetails = () => {
                                     <p>(1 xClusive point = ₹1)</p>
                                 </div> */}
                                 <div className='mt-2'>
-                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <Link to="/exchange" className="text-decoration-none"><span className='fw-bold' style={{ color: "#de57e5" }}>TERMS & POLICIES</span></Link></p>
+                                    <p className='text-center' style={{ fontSize: "13px" }}>Learn more on about our <Link to="/exchange" className="text-decoration-none"><span className='fw-bold' style={{ color: "#00362A" }}>TERMS & POLICIES</span></Link></p>
                                 </div>
                                 <div className='mt-2'>
                                     <div className='row text-center'>

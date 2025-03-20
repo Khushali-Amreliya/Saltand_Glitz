@@ -2987,7 +2987,7 @@ import { cartAction } from '../Store/Slice/CartSlice';
 import { signOut } from 'firebase/auth';
 import auth from './firebase';
 import axios from 'axios';
-import { CiHeart, CiShoppingCart, CiLogout } from "react-icons/ci";
+import { CiMenuFries, CiUser, CiHeart, CiShoppingCart, CiLogout } from "react-icons/ci";
 import { GrContactInfo } from "react-icons/gr";
 import { RiUserLine } from "react-icons/ri";
 import { MdAccountCircle } from "react-icons/md";
@@ -3287,8 +3287,8 @@ const Header = () => {
                             </div>
                         </form>
                         {/* <i className="ri-map-pin-line"></i>
-                        <i className="ri-contacts-line"></i> */}
-                        {/* <form className='serach-box'>
+                        <i className="ri-contacts-line"></i>
+                        <form className='serach-box'>
                             <input type="text" className='serach' />
                             <div className="after"></div>
                             <input type="submit" className='serach'  />
@@ -3318,7 +3318,7 @@ const Header = () => {
 
                             <div className="dropdown drp_main">
                                 <Link className="text-decoration-none text-dark dropdown-toggle" id="dropdownUserLink" role="button">
-                                    <RiUserLine className='text-center fs-5' />
+                                    <CiUser className='text-center fs-5' />
                                 </Link>
                                 <ul className="dropdown-menu drp_icon" aria-labelledby="dropdownUserLink">
                                     {isLoggedIn ? (
@@ -3383,15 +3383,16 @@ const Header = () => {
             {/* Small device */}
             <section className='container-fluid pt-2 d-md-block d-sm-block d-lg-none'>
                 <div className='row'>
-                    <div className='col-sm-2 col-2'>
+                    <div className='col-sm-2 col-2 p-0 d-flex justify-content-center align-items-center'>
+                        <CiMenuFries className="fs-3 me-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" />
                         <Link
                             className="text-decoration-none text-dark"
                             to={isLoggedIn ? "/Userprofile" : "/loginn"}
                         >
-                            <RiUserLine className="pe-0 position-relative fs-5" />
+                            <CiUser className="pe-0 position-relative fs-5" />
                             {/* <i className="ri-user-line "></i> */}
                         </Link>
-                        <HiOutlineMenuAlt1 className="fs-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" />
+
                         <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                             <div className="offcanvas-header mb-0">
                                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -4481,7 +4482,7 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className='col-sm-2 col-2 d-flex justify-content-center align-items-center justify-content-sm-between'>
+                    <div className='col-sm-2 col-2 p-0 d-flex justify-content-center align-items-center'>
 
                         {/* <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
                             <i className="ri-heart-line pe-0 position-relative">
@@ -4513,7 +4514,7 @@ const Header = () => {
                                 )}
                             </i>
                         </Link> */}
-                        
+
                     </div>
                     <form action="" className='pt-3'>
                         <div className="p-1 bg-light rounded rounded-pill shadow-sm">

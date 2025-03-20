@@ -125,7 +125,7 @@
 .form-check-label {
     font-size: 13.8px;
     /* padding-top: 5px; */
-    color: #294246;
+    color: var(--color);
     font-weight: 500;
     letter-spacing: 0.5px;
 }
@@ -377,7 +377,7 @@
     font-weight: 600 !important;
 }
 .filter_viewmore_btn{
-    border: 1px solid #3f91a1 !important;
+    border: 1px solid var(--color) !important;
     border-radius: 8px !important;
     font-size: 13px !important;
     letter-spacing: 0.5px;

@@ -29,11 +29,11 @@ const Footer = () => {
 
           <div className='col-lg-2 col-md-6 col-sm-12 footer_sec pb-5'>
             <h6 className='fw-bolder pb-3'>Our Company</h6>
-            <p><Link to="">World of Tiffany</Link></p>
+            <p><Link to="">World of Salt</Link></p>
             <p><Link to="">Sustainability</Link></p>
             <p><Link to="">California Supply Chains Act</Link></p>
             <p><Link to="">California Privacy</Link></p>
-            <p><Link to="">Tiffany Careers</Link></p>
+            <p><Link to="">Salt Careers</Link></p>
             <p><Link to="/return">Return Policies</Link></p>
             <p><Link to="/exchange">Exchange & Buy Back Policies</Link></p>
             <p><Link to="/warranty">Warranty Policies</Link></p>
@@ -41,17 +41,17 @@ const Footer = () => {
           </div>
 
           <div className='col-lg-3 col-md-6 col-sm-12 footer_sec pb-5'>
-            <h6 className='fw-bolder pb-3'>Related Tiffany Sites</h6>
+            <h6 className='fw-bolder pb-3'>Related Salt Sites</h6>
             <p><Link to="">Wedding & Gift Registry</Link></p>
             <p><Link to="">Business Accounts</Link></p>
-            <p><Link to="">Tiffany for the Press</Link></p>
-            <p><Link to="">The Tiffany & Co. Foundation</Link></p>
-            <p><Link to="">Tiffany Alertline</Link></p>
+            <p><Link to="">Salt for the Press</Link></p>
+            <p><Link to="">The Salt & Co. Foundation</Link></p>
+            <p><Link to="">Salt Alertline</Link></p>
             <p><Link to="">Site Index</Link></p>
           </div>
 
           <div className='col-lg-5 col-md-6 col-sm-12 footer_sec pb-5'>
-            <h6 className='fw-bolder pb-3'>Latest from Tiffany</h6>
+            <h6 className='fw-bolder pb-3'>Latest from Salt</h6>
             <p style={{ fontSize: "13px" }} className='footer_email_p'>
               Be the first to know about exciting new designs, special events, store openings, and much more.
             </p>
@@ -134,11 +134,11 @@ const faqData = [
     question: "Our Company",
     answer: (
       <div>
-        <p><Link to="">World of Tiffany</Link></p>
+        <p><Link to="">World of Salt</Link></p>
         <p><Link to="">Sustainability</Link></p>
         <p><Link to="">California Supply Chains Act</Link></p>
         <p><Link to="">California Privacy</Link></p>
-        <p><Link to="">Tiffany Careers</Link></p>
+        <p><Link to="">Salt Careers</Link></p>
         <p><Link to="/return">Return Policy</Link></p>
         <p><Link to="/exchange">Transparency in Coverage</Link></p>
         <p><Link to="/warranty">Warranty Policies</Link></p>
@@ -147,20 +147,20 @@ const faqData = [
     ),
   },
   {
-    question: 'Related Tiffany Sites',
+    question: 'Related Salt Sites',
     answer: (
       <div>
         <p><Link to="">Wedding & Gift Registry</Link></p>
         <p><Link to="">Business Accounts</Link></p>
-        <p><Link to="">Tiffany for the Press</Link></p>
-        <p><Link to="">The Tiffany & Co. Foundation</Link></p>
-        <p><Link to="">Tiffany Alertline</Link></p>
+        <p><Link to="">Salt for the Press</Link></p>
+        <p><Link to="">The Salt & Co. Foundation</Link></p>
+        <p><Link to="">Salt Alertline</Link></p>
         <p><Link to="">Site Index</Link></p>
       </div>
     ),
   },
   {
-    question: 'Latest from Tiffany',
+    question: 'Latest from Salt',
     answer: (
       <div>
         <p style={{ fontSize: "13px" }}>

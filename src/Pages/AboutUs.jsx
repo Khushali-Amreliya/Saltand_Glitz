@@ -8,7 +8,7 @@ const AboutUs = () => {
   const [currentData, setCurrentData] = useState({
     title: 'The Beginning',
     year: '2008',
-    content: 'CaratLane was founded by Mithun Sacheti and Srinivasa Gopalan with a refreshing and courageous objective – to make beautiful jewellery accessible, affordable and forever wearable.',
+    content: 'Salt was founded by Mithun Sacheti and Srinivasa Gopalan with a refreshing and courageous objective – to make beautiful jewellery accessible, affordable and forever wearable.',
     img: 'https://cdn.caratlane.com/media/static/images/V4/2020/caratlane/sample-01.png'
   });
 
@@ -18,7 +18,7 @@ const AboutUs = () => {
   const data = {
     2008: {
       title: 'The Beginning',
-      content: 'CaratLane was founded by Mithun Sacheti and Srinivasa Gopalan with a refreshing and courageous objective – to make beautiful jewellery accessible, affordable and forever wearable.',
+      content: 'Salt was founded by Mithun Sacheti and Srinivasa Gopalan with a refreshing and courageous objective – to make beautiful jewellery accessible, affordable and forever wearable.',
       img: 'https://cdn.caratlane.com/media/static/images/V4/2020/caratlane/sample-01.png',
     },
     2012: {
@@ -53,7 +53,7 @@ const AboutUs = () => {
   const getYearStyle = (year) => {
     return {
       cursor: 'pointer',
-      color: selectedYear === year ? '#3f91a1' : 'black', // Apply color conditionally
+      color: selectedYear === year ? '#00362A' : 'black', // Apply color conditionally
       fontWeight: selectedYear === year ? 'bold' : 'normal' // Optional: Bold for selected year
     };
   };
@@ -120,9 +120,9 @@ const AboutUs = () => {
             <h3 className='font_main'>Who Are We</h3>
             <div className="underline mb-3 mx-auto d-block"></div>
             <p>Conversations with hundreds of women across the country revealed a common problem: buying expensive jewellery for momentous events & settling for mediocre designs that failed to keep up with their dynamic lifestyles.</p>
-            <p>CaratLane was founded in 2008 to bridge the gap between exquisite jewellery meant for special occasions and everyday wear, making diamond jewellery accessible, affordable, and a timeless part of your life that you could wear effortlessly every day.</p>
+            <p>Salt was founded in 2008 to bridge the gap between exquisite jewellery meant for special occasions and everyday wear, making diamond jewellery accessible, affordable, and a timeless part of your life that you could wear effortlessly every day.</p>
             <p>
-              <strong>Today, CaratLane stands as India's largest omni-channel jeweller, with a robust presence in more than 100 Indian cities through an extensive network of over 250 retail stores.</strong>
+              <strong>Today, Salt stands as India's largest omni-channel jeweller, with a robust presence in more than 100 Indian cities through an extensive network of over 250 retail stores.</strong>
             </p>
           </div>
         </section>
@@ -296,9 +296,9 @@ const AboutUs = () => {
         {/* Advantage-Two */}
         <section className="container-fluid advantage_two_bg">
           <div className="">
-            <h3 className='font_main'>CaratLane Advantage</h3>
+            <h3 className='font_main'>Salt Advantage</h3>
             <div className="underline mb-3 mx-auto d-block"></div>
-            <p>When you shop at CaratLane, you can always be assured of the highest quality standards. Every piece of jewellery is meticulously crafted with the utmost care. It goes through a thorough quality check and is then taken through certification.</p>
+            <p>When you shop at Salt, you can always be assured of the highest quality standards. Every piece of jewellery is meticulously crafted with the utmost care. It goes through a thorough quality check and is then taken through certification.</p>
           </div>
         </section>
 
@@ -313,7 +313,7 @@ const AboutUs = () => {
               </div>
               <div>
                 <img alt="" src="assets/img/Instagram.png" className="img-fluid mx-auto d-block"></img>
-                <h2>“I wanted to buy a cute and trendy Nazaria for my newborn that is rash-free & has no sharp edges. That's when I came across CaratLane & found the cutest Nazaria for my boy!”</h2>
+                <h2>“I wanted to buy a cute and trendy Nazaria for my newborn that is rash-free & has no sharp edges. That's when I came across Salt & found the cutest Nazaria for my boy!”</h2>
                 <p>- Dipali Nimavat via Instagram</p>
               </div>
               <div>
@@ -337,7 +337,7 @@ const AboutUs = () => {
               <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 process_bg align-items-center d-flex">
                 <div>
                   <h4>Making Process</h4>
-                  <p>Our designs always come with a unique CaratLane touch through innovative designs or techniques, or both. Uncover our jewellery-making process, from the inspiration to the final outcome.</p>
+                  <p>Our designs always come with a unique Salt touch through innovative designs or techniques, or both. Uncover our jewellery-making process, from the inspiration to the final outcome.</p>
                 </div>
               </div>
               <Link to="/" className="text-decoration-none"><button>Continue Shopping</button></Link>

@@ -353,6 +353,10 @@ import { CiDeliveryTruck, CiCalendar, CiGift } from "react-icons/ci";
 import { LuConciergeBell } from "react-icons/lu";
 import Shimmer from '../ShimmerEffect/shimmer';
 import Helmet from '../Components/Helmet';
+import { FaExchangeAlt } from "react-icons/fa";
+import { MdCalendarToday } from "react-icons/md";
+import { AiOutlineSafetyCertificate } from "react-icons/ai";
+import { TbArrowsExchange } from "react-icons/tb";
 // import ScheduledTask from '../ScheduledTask';
 
 const Mainpage = () => {
@@ -722,7 +726,7 @@ const Mainpage = () => {
 
 
         {/* topBanner */}
-        <section className="container-fluid my-5">
+        <section className="container-fluid my-3">
           <div className="row g-3 align-items-stretch">
             {/* Left Side Banner (Single Image/Video) */}
             <div className="col-lg-6 col-md-6 col-sm-12 d-flex">
@@ -736,11 +740,13 @@ const Mainpage = () => {
                         autoPlay
                         muted
                         loop
+                        playsInline
                         className="img-fluid w-100 h-100"
                         style={{ borderRadius: "10px", objectFit: "cover" }}
                       >
                         <source src={bottomBanners[0].bannerImage} type="video/mp4" />
                       </video>
+
                     ) : (
                       <img
                         alt="Bottom Banner 1"
@@ -838,8 +844,42 @@ const Mainpage = () => {
             </div>
           </div>
         </section> */}
+
+        <section className='container-fluid my-4'>
+          <div className='row'>
+            <div className="features-container py-4">
+              <div className="feature-item text-center">
+                <div className="p-0 icon-wrapper bg-blue mx-auto d-block">
+                  <img alt='' src='/assets/img/cl-advantage-sprite (1).png' className='img-fluid mx-auto d-block'></img>
+                </div>
+                <span className="feature-text">30 Days Easy Returns</span>
+              </div>
+
+              <div className="feature-item text-center">
+                <div className="p-0 icon-wrapper bg-red mx-auto d-block">
+                  <img alt='' src='/assets/img/cl-advantage-sprite (4).png' className='img-fluid mx-auto d-block'></img>
+                </div>
+                <span className="feature-text">One Year Warranty</span>
+              </div>
+
+              <div className="feature-item text-center">
+                <div className="p-0 icon-wrapper bg-green mx-auto d-block">
+                  <img alt='' src='/assets/img/cl-advantage-sprite (2).png' className='img-fluid mx-auto d-block'></img>
+                </div>
+                <span className="feature-text">100% Certified</span>
+              </div>
+
+              <div className="feature-item text-center">
+                <div className="p-0 icon-wrapper bg-yellow mx-auto d-block">
+                  <img alt='' src='/assets/img/cl-advantage-sprite (3).png' className='img-fluid mx-auto d-block'></img>
+                </div>
+                <span className="feature-text">Lifetime Exchange & Buyback</span>
+              </div>
+            </div>
+          </div>
+        </section>
         {/* New Arrivals */}
-        <section className="container pb-5 pt-3">
+        {/* <section className="container pb-5 pt-3">
           <div>
             <h3 className="font_main text-center pb-4">New Arrivals</h3>
             <div className="row position-relative">
@@ -894,18 +934,18 @@ const Mainpage = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Category */}
-        <section className="container pb-2 shop_category d-lg-block d-md-block d-none">
+        <section className="container-fluid shop_category d-lg-block d-md-block d-none">
           <div>
             <div className="text-center">
               <h3 className="font_main pb-1 m-0 p-0">Shop by Category</h3>
-              <p className="p_main pb-3">Brilliant design and unparalleled craftsmanship.</p>
+              <p className="p_main pb-4">Brilliant design and unparalleled craftsmanship.</p>
             </div>
-            <div className="row m-0">
+            <div className="row p-1">
               {categories.map((item, index) => (
-                <div key={index} className="col-lg-2 col-md-4 col-sm-6 col-6 p-0 px-2 py-2 ">
+                <div key={index} className="col-lg-2 col-md-4 col-sm-4 col-4 p-0 px-2 px-md-2">
                   <div className="card border-0">
                     <Link
                       to={`/products/${item.categoryName.replace(/ /g, "-")}`}
@@ -913,10 +953,10 @@ const Mainpage = () => {
                       className='text-decoration-none'
                     >
                       <img
-                        alt={item.categoryName}
+                        alt={item.filterCategoryName}
                         src={item.categoryImage}
-                        style={{ borderRadius: "10px", objectFit: "cover" }}
                         className="img-fluid"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
                         onError={(e) => {
                           e.target.onerror = null; // Prevent infinite loop
                           e.target.style.display = "none";
@@ -1054,13 +1094,13 @@ const Mainpage = () => {
         </section>
 
         {/* Wrapped with love! */}
-        <section className="container mt-2 shop_category">
+        <section className="container-fluid mt-2 shop_category">
           <div>
             <div className="text-center">
               <h3 className="font_main pb-1 m-0 p-0">Wrapped with love!</h3>
               <p className="p_main pb-4">Brilliant design and unparalleled craftsmanship.</p>
             </div>
-            <div className="row m-0">
+            <div className="row p-1">
               {filterCategory.map((item, index) => (
                 <div key={index} className="col-lg-2 col-md-4 col-sm-4 col-4 p-0 px-2 px-md-2">
                   <div className="card border-0">
@@ -1099,7 +1139,7 @@ const Mainpage = () => {
         </section>
 
         {/* Gift */}
-        <section className="container my-3 pt-3 gift_sec_main">
+        <section className="container-fluid my-3 pt-3 px-1 gift_sec_main">
           {/* Grid layout for large devices */}
           <div className="d-none d-lg-block d-md-block">
             <div className="row m-0"> {/* g-3 for uniform gap */}
@@ -1144,7 +1184,6 @@ const Mainpage = () => {
             </Slider>
           </div>
         </section>
-
 
         {/* Service */}
         {/* <section className='service_main'>

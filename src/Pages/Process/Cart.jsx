@@ -377,12 +377,12 @@ const Cart = () => {
                   <div>
                     <div className="cart_headline">
                       <div className="headline_title pt-3 ps-3">
-                        <strong>Get ₹1078 xCLusive points on this Order</strong>
+                        <span className="fw-bold">Get ₹1078 xCLusive points on this Order</span>
                         &nbsp;Redeem these points on your next order&nbsp;
                         <Link
                           to="/"
-                          className="text-decoration-none"
-                          style={{ color: "#3f91a1" }}
+                          className="text-decoration-none fw-bold"
+                          style={{ color: "#00362A" }}
                         >
                           Know More
                         </Link>

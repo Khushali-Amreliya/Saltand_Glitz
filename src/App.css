@@ -154,10 +154,67 @@ div:where(.swal2-container) .swal2-html-container {
     background-color: #f8f9fa;
     text-align: center;
 }
+
 .logo-fixed {
-    width: 150px; /* Fixed width for all devices */
+    width: 150px;
+    /* Fixed width for all devices */
 }
 
+
+.features-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+    padding: 10px;
+    background-color: #faf7fc;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Icon styles */
+.icon-wrapper {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.icon-wrapper i {
+    font-size: 18px;
+    color: #3d1b6b;
+}
+
+.feature-text {
+    font-size: 12px;
+    font-weight: 500;
+    color: #3d1b6b;
+}
+
+/* Background colors */
+.bg-blue {
+    background-color: #e0e7ff;
+}
+
+.bg-red {
+    background-color: #fde2e4;
+}
+
+.bg-green {
+    background-color: #eaffd0;
+}
+
+.bg-yellow {
+    background-color: #fff4c3;
+}
+
+/* Responsive */
 @media(max-width:1024px) {
 
     .height_Set,
@@ -166,9 +223,6 @@ div:where(.swal2-container) .swal2-html-container {
     }
 }
 
-
-  
-  
 @media(max-width:768px) {
     .font_main {
         font-size: 23px !important;
@@ -177,6 +231,20 @@ div:where(.swal2-container) .swal2-html-container {
     .p_main {
         font-size: 13px !important;
     }
+
+    .features-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        text-align: center;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
 }
 
 @media(max-width:426px) {
@@ -184,6 +252,13 @@ div:where(.swal2-container) .swal2-html-container {
     .height_Set,
     .no-image-placeholder-home {
         height: 210px !important;
+    }
+
+    .features-container {
+        display: flex;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        text-align: center;
     }
 }
 
