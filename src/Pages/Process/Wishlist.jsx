@@ -17,12 +17,13 @@ const Wishlist = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('user'));
 
+  const user = JSON.parse(localStorage.getItem('user'));
   // Fetch wishlist items from the backend
   const fetchWishlist = useCallback(async () => {
+    let userId = user?._id || localStorage.getItem("guestUserId");
     try {
-      const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${user._id}`);
+      const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
       if (response.status === 200) {
         setWishlistItems(response.data.wishlist.products);
       }
@@ -31,7 +32,7 @@ const Wishlist = () => {
     } finally {
       setLoading(false);
     }
-  }, [user?._id]);
+  }, []);
 
 
   useEffect(() => {
