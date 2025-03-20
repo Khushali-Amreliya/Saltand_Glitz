@@ -3259,13 +3259,16 @@ const Header = () => {
             <section className='container-fluid text-center header_color py-1'>
                 <Slider {...upBannerSlider}>
                     <div>
-                        <h6>This Holiday, enjoy complimentary shipping & extended returns with our Tiffany Blue® packaging.</h6>
+                        <h6>Exquisite Lab Grown diamond jewellery</h6>
                     </div>
                     <div>
-                        <h6>Our gift to you: A Bird on a Rock charm to adorn your Tiffany Blue® bag, complimentary with every online delivery order.</h6>
+                        <h6>Flat 10% off on diamond above 1 carat | Use Code: Nature10</h6>
                     </div>
                     <div>
-                        <h6>New for the holidays: limited-edition Return to Tiffany® designs. </h6>
+                        <h6>Flat 20% off on making charges | Use Code: craft20</h6>
+                    </div>
+                    <div>
+                        <h6>Tag SALT&GLITZ and Get Flat 4% off</h6>
                     </div>
                 </Slider>
             </section>
@@ -3277,7 +3280,7 @@ const Header = () => {
                         {/* <i className="ri-search-line"></i> */}
                         {/* searchbar */}
                         <form action="" className='ps-4'>
-                            <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                            <div className="bg-light rounded rounded-pill shadow-sm">
                                 <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas" aria-controls="searchOffcanvas">
                                     <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                     <div className="input-group-append">
@@ -4517,7 +4520,7 @@ const Header = () => {
 
                     </div>
                     <form action="" className='pt-3'>
-                        <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                        <div className="bg-light rounded rounded-pill shadow-sm">
                             <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#mdsearchOffcanvas" aria-controls="mdsearchOffcanvas">
                                 <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                 <div className="input-group-append">
@@ -5558,7 +5561,7 @@ const Header = () => {
                 <div className="offcanvas-header offcanvas_header_search">
                     <h5 className="offcanvas-title w-100 pe-3" id="offcanvasSearchLabel">
                         <form action="" className="pt-3" onSubmit={(e) => e.preventDefault()}>
-                            <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                            <div className="bg-light rounded rounded-pill shadow-sm">
                                 <div className="input-group">
                                     <input
                                         type="search"
@@ -5719,7 +5722,7 @@ const Header = () => {
                 <div className="offcanvas-header offcanvas_header_search">
                     <h5 className="offcanvas-title w-100 pe-3" id="offcanvasSearchLabel">
                         <form action="" className='pt-3' onSubmit={(e) => e.preventDefault()}>
-                            <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                            <div className=" bg-light rounded rounded-pill shadow-sm">
                                 <div className="input-group">
                                     <input
                                         type="search"

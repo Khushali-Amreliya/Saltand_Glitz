@@ -667,7 +667,18 @@ const Mainpage = () => {
                 .map((banner, index) => (
                   <div key={index}>
                     {banner.type === "video" ? (
-                      <video autoPlay muted loop className="img-fluid banner_class" style={{ borderRadius: "10px", objectFit: "cover" }}>
+                      // <video autoPlay muted loop className="img-fluid banner_class" style={{ borderRadius: "10px", objectFit: "cover" }}>
+                      //   <source src={banner.bannerImage} type="video/mp4" />
+                      //   Your browser does not support the video tag.
+                      // </video>
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="img-fluid banner_class"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
+                      >
                         <source src={banner.bannerImage} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
@@ -700,10 +711,21 @@ const Mainpage = () => {
                 .map((banner, index) => (
                   <div key={index}>
                     {banner.type === "video" ? (
-                      <video autoPlay muted loop className="img-fluid" style={{ borderRadius: "10px", objectFit: "cover" }}>
-                        <source src={banner.mobileBannerImage} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
+                      // <video autoPlay muted loop className="img-fluid" style={{ borderRadius: "10px", objectFit: "cover" }}>
+                      //   <source src={banner.mobileBannerImage} type="video/mp4" />
+                      //   Your browser does not support the video tag.
+                      // </video>
+                      <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="img-fluid"
+                      style={{ borderRadius: "10px", objectFit: "cover" }}
+                    >
+                      <source src={banner.mobileBannerImage} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
                     ) : (
                       <img
                         alt={`Banner ${index + 1}`}
@@ -746,7 +768,6 @@ const Mainpage = () => {
                       >
                         <source src={bottomBanners[0].bannerImage} type="video/mp4" />
                       </video>
-
                     ) : (
                       <img
                         alt="Bottom Banner 1"
@@ -845,7 +866,7 @@ const Mainpage = () => {
           </div>
         </section> */}
 
-        <section className='container-fluid my-4'>
+        <section className='container-fluid my-5'>
           <div className='row'>
             <div className="features-container py-4">
               <div className="feature-item text-center">
@@ -1053,6 +1074,7 @@ const Mainpage = () => {
                         autoPlay
                         muted
                         loop
+                        playsInline
                         className="img-fluid w-100 h-100"
                         style={{ borderRadius: "10px", objectFit: "cover" }}
                       >

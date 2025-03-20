@@ -350,6 +350,9 @@
   .slider_viewall_btn {
     height: 167px !important;
   }
+  .shop_category h5 {
+    font-size: 9px !important;
+  }
 }
 
 @media(max-width:1024px) {
