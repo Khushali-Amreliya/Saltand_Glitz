@@ -331,6 +331,9 @@ const ProductCard = ({ Productsitem }) => {
             try {
                 let userId = user?._id || localStorage.getItem("guestUserId");
 
+                console.log(userId,"ninjlnmod");
+                
+
                 if (!userId) return; // Agar dono null hain, toh call na karein
 
                 const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);

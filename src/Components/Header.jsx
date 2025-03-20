@@ -2995,13 +2995,14 @@ import { IoIosSearch } from "react-icons/io";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import Loader from '../Pages/Loader';
 
+const userFetch = localStorage.getItem('user')
 const Header = () => {
     const search = React.useRef(null);
     const searchmd = React.useRef(null);
 
     // const totalQuantity = useSelector(state => state.cart.totalQuantity);
     // const wishlistItem = useSelector(state => state.cart.wishlistItem);
-    const userFetch = JSON.parse(localStorage.getItem('user'));
+    let userId = userFetch?._id || localStorage.getItem('guestUserId');
     const [tQuantity, setTQuantity] = useState([])
     const [wishlistItems, setWishlistItems] = useState([])
     const [wishlistLength, setWishlistLength] = useState([])
@@ -3018,7 +3019,7 @@ const Header = () => {
 
     const fetchWishlist = async () => {
         try {
-            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userFetch._id}`);
+            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
             // console.log(response);
 
             const length = response.data.wishlist.products
