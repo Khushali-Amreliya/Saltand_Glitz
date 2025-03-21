@@ -254,7 +254,9 @@ div:where(.swal2-container) .swal2-html-container {
 }
 
 @media(max-width:426px) {
-
+    .font_main {
+        font-size: 19px !important;
+    }
     .height_Set,
     .no-image-placeholder-home {
         height: 210px !important;

@@ -909,11 +909,12 @@ const Mainpage = () => {
           </div>
         </section>
 
+        {/* Exclusive Prodcut */}
         <section className='container-fluid py-4 mb-5' style={{ background: "rgb(235, 235, 255)" }}>
           <div className='container '>
             <div className="text-center">
               {/* <h3 className="font_main m-0 p-0"></h3> */}
-              <p className=" m-0">Exclusive deals</p>
+              <p className=" m-0 p_main">Exclusive deals</p>
               <h3 className="font_main pb-4 m-0 p-0">Curated only for you</h3>
             </div>
             <div className='row m-0'>
@@ -950,10 +951,10 @@ const Mainpage = () => {
                 </div>
               )}
               <Link to="/products" className="text-decoration-none">
-                  <button className="btn mx-auto d-block viewall_btn">
-                    <span>View All</span>
-                  </button>
-                </Link>
+                <button className="btn mx-auto d-block viewall_btn">
+                  <span>View All</span>
+                </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -1017,7 +1018,7 @@ const Mainpage = () => {
         </section> */}
 
         {/* Category */}
-        <section className="container-fluid shop_category d-lg-block d-md-block d-none">
+        <section className="container-fluid shop_category pb-4 d-lg-block d-md-block d-none">
           <div>
             <div className="text-center">
               <h3 className="font_main pb-1 m-0 p-0">Shop by Category</h3>
@@ -1175,7 +1176,7 @@ const Mainpage = () => {
         </section>
 
         {/* Wrapped with love! */}
-        <section className="container-fluid mt-2 shop_category">
+        <section className="container-fluid pb-4 shop_category">
           <div>
             <div className="text-center">
               <h3 className="font_main pb-1 m-0 p-0">Wrapped with love!</h3>
@@ -1219,8 +1220,8 @@ const Mainpage = () => {
           </div>
         </section>
 
-
-        <section className="container-fluid">
+        {/* Latest design */}
+        <section className="container-fluid pb-4">
           {bottomBanners?.length >= 8 && (
             <>
               {/* Web Banner (7th Banner - Index 6) */}
@@ -1263,7 +1264,7 @@ const Mainpage = () => {
         </section>
 
         {/* Gift */}
-        <section className="container-fluid mb-3 pt-2 px-1 gift_sec_main">
+        <section className="container-fluid pt-2 px-1 gift_sec_main">
           {/* Grid layout for large devices */}
           <div className="d-none d-lg-block d-md-block">
             <div className="row m-0">
@@ -1374,11 +1375,47 @@ const Mainpage = () => {
           </div>
         </section> */}
 
-        {/* Last Banner */}
-        <section className='container-fluid pb-3'>
-          <div className=''>
-            <img alt='' src='assets/img/gift_banner.webp' className='img-fluid' style={{ borderRadius: "10px", objectFit: "cover" }}></img>
-          </div>
+        {/* Privilage Banner */}
+        <section className="container-fluid pb-4">
+          {bottomBanners?.length >= 8 && (
+            <>
+              {/* Web Banner (7th Banner - Index 6) */}
+              <img
+                alt="Web Banner"
+                src={bottomBanners[8]?.bannerImage}
+                className="img-fluid d-none d-md-block"
+                style={{ borderRadius: "10px", objectFit: "cover" }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.style.display = "none";
+                  if (e.target.parentElement) {
+                    e.target.parentElement.innerHTML = `
+              <div class='no-image-placeholder-category d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 200px;">
+                <span class='exlimation_mark'>!</span>
+              </div>`;
+                  }
+                }}
+              />
+
+              {/* Mobile Banner (8th Banner - Index 7) */}
+              <img
+                alt="Mobile Banner"
+                src={bottomBanners[9]?.bannerImage}
+                className="img-fluid d-md-none"
+                style={{ borderRadius: "10px", objectFit: "cover" }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.style.display = "none";
+                  if (e.target.parentElement) {
+                    e.target.parentElement.innerHTML = `
+              <div class='no-image-placeholder-category d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 200px;">
+                <span class='exlimation_mark'>!</span>
+              </div>`;
+                  }
+                }}
+              />
+            </>
+          )}
         </section>
 
         {/* Whatsapp Icon */}
