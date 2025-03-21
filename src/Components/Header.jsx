@@ -2989,13 +2989,11 @@ import auth from './firebase';
 import axios from 'axios';
 import { CiMenuFries, CiUser, CiHeart, CiShoppingCart, CiLogout } from "react-icons/ci";
 import { GrContactInfo } from "react-icons/gr";
-import { RiUserLine } from "react-icons/ri";
 import { MdAccountCircle } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import Loader from '../Pages/Loader';
 
-const userFetch = localStorage.getItem('user')
+const userFetch = JSON.parse(localStorage.getItem('user'))
 const Header = () => {
     const search = React.useRef(null);
     const searchmd = React.useRef(null);

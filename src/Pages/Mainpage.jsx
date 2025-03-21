@@ -386,7 +386,6 @@ const Mainpage = () => {
   const [newArrivals, setNewArrivals] = useState([]);
   // const [solitaire, setSolitaires] = useState([]);
   const [loading, setLoading] = useState(true);
-
   // const [error, setError] = useState(null);
   const navigate = useNavigate(); // Initialize useNavigate
 
@@ -438,22 +437,22 @@ const Mainpage = () => {
   }, []);
 
   // Fetch products from the backend
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
-  //       // console.log(response.data);
-  //       setProducts(response.data); // Set products in state
-  //     } catch (err) {
-  //       console.error("Error fetching products:", err);
-  //       // setError("Failed to load products.");
-  //     } finally {
-  //       setLoading(false); // Stop loader
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
+        console.log(response.data);
+        setProducts(response.data); // Set products in state
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        // setError("Failed to load products.");
+      } finally {
+        setLoading(false); // Stop loader
+      }
+    };
 
-  //   fetchProducts();
-  // }, []);
+    fetchProducts();
+  }, []);
 
   // ------------------------------------------Category wise product fetch------------------------------
   // useEffect(() => {
@@ -516,53 +515,60 @@ const Mainpage = () => {
     arrows: false,
   };
 
-  // const solitaireSlider = {
-  //   dots: false,
-  //   infinite: false,
-  //   speed: 500,
-  //   autoplay: true,
-  //   autoplaySpeed: 6000,
-  //   slidesToShow: slidesToShow,
-  //   slidesToScroll: 1,
-  //   arrows: true,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1198, // For small screens
-  //       settings: {
-  //         slidesToShow: 4, // Show 2 full slides and part of the 3rd
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 991, // For small screens
-  //       settings: {
-  //         slidesToShow: 3, // Show 2 full slides and part of the 3rd
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 601, // For small screens
-  //       settings: {
-  //         slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 480, // For small screens
-  //       settings: {
-  //         slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 375, // For small screens
-  //       settings: {
-  //         slidesToShow: 1.5, // Show 2 full slides and part of the 3rd
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //   ],
-  // };
+  const solitaireSlider = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    slidesToShow: slidesToShow,
+    slidesToScroll: 1,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 2000, // For small screens
+        settings: {
+          slidesToShow: 5, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1198, // For small screens
+        settings: {
+          slidesToShow: 4, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 991, // For small screens
+        settings: {
+          slidesToShow: 3, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 601, // For small screens
+        settings: {
+          slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480, // For small screens
+        settings: {
+          slidesToShow: 2.2, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 375, // For small screens
+        settings: {
+          slidesToShow: 1.5, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   const newarrivals = {
     dots: false,
@@ -716,16 +722,16 @@ const Mainpage = () => {
                       //   Your browser does not support the video tag.
                       // </video>
                       <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="img-fluid"
-                      style={{ borderRadius: "10px", objectFit: "cover" }}
-                    >
-                      <source src={banner.mobileBannerImage} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="img-fluid"
+                        style={{ borderRadius: "10px", objectFit: "cover" }}
+                      >
+                        <source src={banner.mobileBannerImage} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
                     ) : (
                       <img
                         alt={`Banner ${index + 1}`}
@@ -745,7 +751,6 @@ const Mainpage = () => {
             </Slider>
           )}
         </section>
-
 
         {/* topBanner */}
         <section className="container-fluid my-3">
@@ -786,7 +791,7 @@ const Mainpage = () => {
               {bottomBanners.length > 1 && (
                 <img
                   alt="Bottom Banner 2"
-                  src={bottomBanners[4]?.bannerImage}
+                  src={bottomBanners[1]?.bannerImage}
                   className="img-fluid w-100"
                   style={{ flex: 1, objectFit: "cover", borderRadius: "10px" }}
                 />
@@ -794,7 +799,7 @@ const Mainpage = () => {
               {bottomBanners.length > 2 && (
                 <img
                   alt="Bottom Banner 3"
-                  src={bottomBanners[5]?.bannerImage}
+                  src={bottomBanners[2]?.bannerImage}
                   className="img-fluid w-100"
                   style={{ flex: 1, objectFit: "cover", borderRadius: "10px" }}
                 />
@@ -866,7 +871,11 @@ const Mainpage = () => {
           </div>
         </section> */}
 
+        {/* Salt Promise */}
         <section className='container-fluid my-5'>
+          <div className="text-center">
+            <h3 className="font_main pb-4 m-0 p-0">The Salt Promise</h3>
+          </div>
           <div className='row'>
             <div className="features-container py-4">
               <div className="feature-item text-center">
@@ -899,6 +908,56 @@ const Mainpage = () => {
             </div>
           </div>
         </section>
+
+        <section className='container-fluid py-4 mb-5' style={{ background: "rgb(235, 235, 255)" }}>
+          <div className='container '>
+            <div className="text-center">
+              {/* <h3 className="font_main m-0 p-0"></h3> */}
+              <p className=" m-0">Exclusive deals</p>
+              <h3 className="font_main pb-4 m-0 p-0">Curated only for you</h3>
+            </div>
+            <div className='row m-0'>
+              {products.length > 0 ? (
+                <Slider ref={solitaire} {...solitaireSlider}>
+                  {products.slice(30, 36).map((item) => (
+                    <div className='card border-0 px-1 bg-transparent' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
+                      <Link to={`/Productdetails/${item.product_id}`} className='text-decoration-none'>
+                        <img
+                          alt={item.title}
+                          src={item.goldImages[0]}
+                          className="w-100 img-fluid"
+                          style={{ borderRadius: "10px", objectFit: "cover" }}
+                          onError={(e) => {
+                            e.target.onerror = null; // Prevent infinite loop
+                            e.target.style.display = "none";
+                            e.target.parentElement.innerHTML = `
+                                <div class='no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3'>
+                                    <span class='exlimation_mark'>!</span>
+                                </div>`;
+                          }}
+                        />
+                      </Link>
+                      <div className="card-body px-1">
+                        <h6>{item.title}</h6>
+                        <p>{formatCurrency(item.total14KT)}</p>
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
+              ) : (
+                <div className="no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3">
+                  <span className="exlimation_mark">!</span>
+                </div>
+              )}
+              <Link to="/products" className="text-decoration-none">
+                  <button className="btn mx-auto d-block viewall_btn">
+                    <span>View All</span>
+                  </button>
+                </Link>
+            </div>
+          </div>
+        </section>
+
         {/* New Arrivals */}
         {/* <section className="container pb-5 pt-3">
           <div>
@@ -962,7 +1021,7 @@ const Mainpage = () => {
           <div>
             <div className="text-center">
               <h3 className="font_main pb-1 m-0 p-0">Shop by Category</h3>
-              <p className="p_main pb-4">Brilliant design and unparalleled craftsmanship.</p>
+              <p className="p_main pb-3">Brilliant design and unparalleled craftsmanship.</p>
             </div>
             <div className="row p-1">
               {categories.map((item, index) => (
@@ -1098,7 +1157,7 @@ const Mainpage = () => {
               {bottomBanners.length > 1 && (
                 <img
                   alt="Bottom Banner 2"
-                  src={bottomBanners[2]?.bannerImage}
+                  src={bottomBanners[4]?.bannerImage}
                   className="img-fluid w-100"
                   style={{ flex: 1, objectFit: "cover", borderRadius: "10px" }}
                 />
@@ -1106,7 +1165,7 @@ const Mainpage = () => {
               {bottomBanners.length > 2 && (
                 <img
                   alt="Bottom Banner 3"
-                  src={bottomBanners[1]?.bannerImage}
+                  src={bottomBanners[5]?.bannerImage}
                   className="img-fluid w-100"
                   style={{ flex: 1, objectFit: "cover", borderRadius: "10px" }}
                 />
@@ -1120,7 +1179,7 @@ const Mainpage = () => {
           <div>
             <div className="text-center">
               <h3 className="font_main pb-1 m-0 p-0">Wrapped with love!</h3>
-              <p className="p_main pb-4">Brilliant design and unparalleled craftsmanship.</p>
+              <p className="p_main pb-3">Brilliant design and unparalleled craftsmanship.</p>
             </div>
             <div className="row p-1">
               {filterCategory.map((item, index) => (
@@ -1160,20 +1219,78 @@ const Mainpage = () => {
           </div>
         </section>
 
+
+        <section className="container-fluid">
+          {bottomBanners?.length >= 8 && (
+            <>
+              {/* Web Banner (7th Banner - Index 6) */}
+              <img
+                alt="Web Banner"
+                src={bottomBanners[6]?.bannerImage}
+                className="img-fluid d-none d-md-block"
+                style={{ borderRadius: "10px", objectFit: "cover" }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.style.display = "none";
+                  if (e.target.parentElement) {
+                    e.target.parentElement.innerHTML = `
+              <div class='no-image-placeholder-category d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 200px;">
+                <span class='exlimation_mark'>!</span>
+              </div>`;
+                  }
+                }}
+              />
+
+              {/* Mobile Banner (8th Banner - Index 7) */}
+              <img
+                alt="Mobile Banner"
+                src={bottomBanners[7]?.bannerImage}
+                className="img-fluid d-md-none"
+                style={{ borderRadius: "10px", objectFit: "cover" }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.style.display = "none";
+                  if (e.target.parentElement) {
+                    e.target.parentElement.innerHTML = `
+              <div class='no-image-placeholder-category d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 200px;">
+                <span class='exlimation_mark'>!</span>
+              </div>`;
+                  }
+                }}
+              />
+            </>
+          )}
+        </section>
+
         {/* Gift */}
-        <section className="container-fluid my-3 pt-3 px-1 gift_sec_main">
+        <section className="container-fluid mb-3 pt-2 px-1 gift_sec_main">
           {/* Grid layout for large devices */}
           <div className="d-none d-lg-block d-md-block">
-            <div className="row m-0"> {/* g-3 for uniform gap */}
+            <div className="row m-0">
               {gifts.map((gift) => (
-                <div key={gift.gift_id} className="col-lg-4 col-md-4 col-sm-12 col-12 p-0 ">
-                  <div className="card border-0 p-2"> {/* p-2 for internal spacing */}
-                    <img
-                      alt={gift.giftName}
-                      src={gift.giftImage}
-                      className="img-fluid"
-                      style={{ borderRadius: "10px", objectFit: "cover" }}
-                    />
+                <div key={gift.gift_id} className="col-lg-4 col-md-4 col-sm-12 col-12 p-0">
+                  <div className="card border-0 p-2">
+                    {
+                      gift.giftImage && gift.giftImage.endsWith(".mp4") ||
+                        gift.giftImage && gift.giftImage.endsWith(".mkv") ||
+                        gift.giftImage && gift.giftImage.endsWith(".avi") ? (
+                        <video
+                          src={gift.giftImage}
+                          className="img-fluid"
+                          style={{ borderRadius: "10px", objectFit: "cover" }}
+                          autoPlay
+                          playsInline
+                          muted
+                          loop
+                        />
+                      ) : (
+                        <img
+                          alt={gift.giftName}
+                          src={gift.giftImage}
+                          className="img-fluid"
+                          style={{ borderRadius: "10px", objectFit: "cover" }}
+                        />
+                      )}
                     <div className="card-body text-center">
                       <h5>{gift.giftName}</h5>
                       <p className="line_hover">Shop Now &nbsp; &gt;</p>
@@ -1190,12 +1307,27 @@ const Mainpage = () => {
               {gifts.map((gift) => (
                 <div key={gift.gift_id} className="p-2">
                   <div className="card border-0">
-                    <img
-                      alt={gift.giftName}
-                      src={gift.giftImage}
-                      className="img-fluid"
-                      style={{ borderRadius: "10px", objectFit: "cover" }}
-                    />
+                    {
+                      gift.giftImage && gift.giftImage.endsWith(".mp4") ||
+                        gift.giftImage && gift.giftImage.endsWith(".mkv") ||
+                        gift.giftImage && gift.giftImage.endsWith(".avi") ? (
+                        <video
+                          src={gift.giftImage}
+                          className="img-fluid"
+                          style={{ borderRadius: "10px", objectFit: "cover" }}
+                          autoPlay
+                          playsInline
+                          muted
+                          loop
+                        />
+                      ) : (
+                        <img
+                          alt={gift.giftName}
+                          src={gift.giftImage}
+                          className="img-fluid"
+                          style={{ borderRadius: "10px", objectFit: "cover" }}
+                        />
+                      )}
                     <div className="card-body text-center">
                       <h5>{gift.giftName}</h5>
                       <p className="line_hover">Shop Now &nbsp; &gt;</p>

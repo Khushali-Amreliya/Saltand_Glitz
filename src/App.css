@@ -11,6 +11,8 @@
     /* --background: linear-gradient(90deg, #005b3d 0%, #00402b 100%); */
     --background: linear-gradient(90deg, rgba(178, 235, 247, 1) 0%, rgba(143, 195, 205, 1) 0%, rgba(90, 188, 209, 1) 100%);
     --color: #00362A;
+    --text: #fff;
+    /* --background: linear-gradient(303.1deg, rgb(136 182 165) 24.89%, rgb(124 150 138) 88.2%); */
     --underline: linear-gradient(90deg, rgba(156, 216, 228, 1) 0%, rgba(98, 176, 193, 1) 50%, rgba(52, 124, 139, 1) 100%);
     --font: Santral W01;
 }

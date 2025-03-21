@@ -321,7 +321,6 @@ const ProductCard = ({ Productsitem }) => {
                     // setProductRating(0);
                 }
             }
-
         };
         fetchRating();
     }, [product_id]);
@@ -331,8 +330,8 @@ const ProductCard = ({ Productsitem }) => {
             try {
                 let userId = user?._id || localStorage.getItem("guestUserId");
 
-                console.log(userId,"ninjlnmod");
-                
+                console.log(userId, "ninjlnmod");
+
 
                 if (!userId) return; // Agar dono null hain, toh call na karein
 
