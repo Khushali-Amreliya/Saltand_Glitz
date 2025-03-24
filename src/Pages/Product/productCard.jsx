@@ -250,6 +250,7 @@ import { formatCurrency } from '../../Utils/formateCurrency'; // Utility for for
 import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { toast } from 'react-toastify';
+import Header from '../../Components/Header';
 
 const renderStar = (rating) => {
     const adjustedPercentage = ((rating / 5) * 100); // Adjust fill percentage
@@ -330,9 +331,11 @@ const ProductCard = ({ Productsitem }) => {
         const fetchWishlist = async () => {
             try {
                 let userId = user?._id || localStorage.getItem("guestUserId");
+                console.log(userId);
 
-                console.log(userId,"ninjlnmod");
-                
+
+                // console.log(userId, "ninjlnmod");
+
 
                 if (!userId) return; // Agar dono null hain, toh call na karein
 
@@ -340,14 +343,20 @@ const ProductCard = ({ Productsitem }) => {
                 const wishlistData = response.data.wishlist || {};
                 const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
 
-                localStorage.setItem('wishlist', JSON.stringify({ [userId]: wishlistProductIds }));
+                localStorage.setItem('wishlist', JSON.stringify(wishlistProductIds));
+                // console.log(wishlistProductIds);
+
                 setIsWishlist(wishlistProductIds.includes(product_id));
             } catch (error) {
                 console.error("Wishlist fetch error:", error);
             }
+
+            // Header()
         };
 
         fetchWishlist();
+
+
     }, [product_id, user?._id]);
 
     const handleWishlistToggle = async (event) => {
@@ -386,6 +395,7 @@ const ProductCard = ({ Productsitem }) => {
             setIsWishlist(!newWishlistStatus); // Agar error aaye to state reset karo
             toast.error("Something went wrong!");
         }
+        // Header()
     };
 
     // Settings for the image and video slider

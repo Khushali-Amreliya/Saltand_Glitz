@@ -1457,7 +1457,7 @@ const Productdetails = () => {
             try {
                 let userId = user?._id || localStorage.getItem("guestUserId");
 
-                if (!userId) return; // Agar dono null hain, toh call na karein
+                // if (!userId) return; // Agar dono null hain, toh call na karein
 
                 const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
                 const wishlistData = response.data.wishlist || {};
@@ -1858,24 +1858,26 @@ const Productdetails = () => {
     };
     const handleWishlistClick = async (event) => {
         event.preventDefault(); // Page reload ya navigate hone se roke
-        if (!user || !user._id) {
-            toast.error("Please login first to add items to wishlist!");
-            return;
-        }
+        // if (!user || !user._id) {
+        //     toast.error("Please login first to add items to wishlist!");
+        //     return;
+        // }
 
         const newWishlistStatus = !isWishlist;  // UI ko pehle update karenge
+
+
         setIsWishlist(newWishlistStatus);  // Optimistic UI Update
 
         try {
             if (newWishlistStatus) {
-                // Add to Wishlist API
+                let userId = user?._id || localStorage.getItem("guestUserId");
                 await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist', {
-                    userId: user._id,
+                    userId: userId,
                     productId: product.id,
                 });
             } else {
                 // Remove from Wishlist API
-                await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${product.id}`);
+                await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${userId}/${product.id}`);
             }
         } catch (error) {
             console.error("Wishlist error:", error);

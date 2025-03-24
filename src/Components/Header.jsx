@@ -2995,7 +2995,7 @@ import { IoIosSearch } from "react-icons/io";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import Loader from '../Pages/Loader';
 
-const userFetch = localStorage.getItem('user')
+const userFetch = JSON.parse(localStorage.getItem('user'));
 const Header = () => {
     const search = React.useRef(null);
     const searchmd = React.useRef(null);
@@ -3005,7 +3005,7 @@ const Header = () => {
     let userId = userFetch?._id || localStorage.getItem('guestUserId');
     const [tQuantity, setTQuantity] = useState([])
     const [wishlistItems, setWishlistItems] = useState([])
-    const [wishlistLength, setWishlistLength] = useState([])
+    const [wishlistLength, setWishlistLength] = useState("")
     const [currentIndex, setCurrentIndex] = useState(0);
     const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
@@ -3017,7 +3017,7 @@ const Header = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const fetchWishlist = async () => {
+    const fetchWishlistHeader = async () => {
         try {
             const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
             // console.log(response);
@@ -3039,6 +3039,8 @@ const Header = () => {
         }
     };
 
+    // fetchWishlist()
+
     const getCart = async () => {
         try {
             const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userFetch._id}`);
@@ -3057,8 +3059,8 @@ const Header = () => {
 
     useEffect(() => {
         getCart();
-        fetchWishlist();
-    }, []);
+        fetchWishlistHeader();
+    },[] );
 
     var upBannerSlider = {
         dots: false,
