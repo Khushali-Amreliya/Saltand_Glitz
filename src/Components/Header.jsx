@@ -3166,7 +3166,8 @@ const Header = () => {
             dispatch(cartAction.resetState());
 
             // Clear user data
-            localStorage.clear();
+            // localStorage.clear();
+            localStorage.removeItem('user')
             setUser(null);
             setIsLoggedIn(false); // Update the login state to false
 
@@ -4493,7 +4494,7 @@ const Header = () => {
                                 )}
                             </i>
                         </Link> */}
-                        <Link className="text-decoration-none text-dark position-relative me-2 me-sm-0" to="/wishlist">
+                        <Link className="text-decoration-none text-dark position-relative me-3 me-sm-0" to="/wishlist">
                             <CiHeart className="fs-5 position-relative" />
                             {wishlistLength.length > 0 && (
                                 <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
@@ -4532,7 +4533,7 @@ const Header = () => {
             </section>
 
             {/* Dropdown */}
-            <section className='container-fluid'>
+            <section className='container-fluid d-lg-block d-md-none d-none'>
                 <div className='row'>
                     <div>
                         <nav className="navbar navbar-expand-lg navbar-light pt-0 pb-1">

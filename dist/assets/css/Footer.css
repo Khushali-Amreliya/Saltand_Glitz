@@ -21,7 +21,7 @@
 
 .footer_main {
     border-top: 0.5px solid var(--color);
-    /* padding-top: 60px; */
+    padding-top: 26px;
 }
 
 .faq-container {
@@ -80,11 +80,11 @@
 }
 
 .app-download-container {
-    background: linear-gradient(303.1deg, rgb(165 184 177) 24.89%, rgb(243 255 249) 88.2%);
+    background:var(--shadow-color);
     padding: 20px;
     border-radius: 10px;
     max-width: 400px;
-    margin: 15px auto;
+    margin: 6px auto;
     text-align: center;
 }
 

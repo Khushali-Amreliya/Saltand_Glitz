@@ -441,7 +441,7 @@ const Mainpage = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_upload");
-        console.log(response.data);
+        // console.log(response.data);
         setProducts(response.data); // Set products in state
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -535,14 +535,14 @@ const Mainpage = () => {
       {
         breakpoint: 1198, // For small screens
         settings: {
-          slidesToShow: 4, // Show 2 full slides and part of the 3rd
+          slidesToShow: 4.2, // Show 2 full slides and part of the 3rd
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 991, // For small screens
         settings: {
-          slidesToShow: 3, // Show 2 full slides and part of the 3rd
+          slidesToShow: 3.2, // Show 2 full slides and part of the 3rd
           slidesToScroll: 1,
         },
       },
@@ -581,16 +581,23 @@ const Mainpage = () => {
     arrows: true,
     responsive: [
       {
+        breakpoint: 2000, // For small screens
+        settings: {
+          slidesToShow: 5, // Show 2 full slides and part of the 3rd
+          slidesToScroll: 1,
+        },
+      },
+      {
         breakpoint: 1198, // For small screens
         settings: {
-          slidesToShow: 4, // Show 2 full slides and part of the 3rd
+          slidesToShow: 4.2, // Show 2 full slides and part of the 3rd
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 991, // For small screens
         settings: {
-          slidesToShow: 3, // Show 2 full slides and part of the 3rd
+          slidesToShow: 3.2, // Show 2 full slides and part of the 3rd
           slidesToScroll: 1,
         },
       },
@@ -682,7 +689,7 @@ const Mainpage = () => {
                         muted
                         loop
                         playsInline
-                        className="img-fluid banner_class"
+                        className="img-fluid"
                         style={{ borderRadius: "10px", objectFit: "cover" }}
                       >
                         <source src={banner.bannerImage} type="video/mp4" />
@@ -876,7 +883,7 @@ const Mainpage = () => {
           <div className="text-center">
             <h3 className="font_main pb-4 m-0 p-0">The Salt Promise</h3>
           </div>
-          <div className='row'>
+          <div className='row m-0'>
             <div className="features-container py-4">
               <div className="feature-item text-center">
                 <div className="p-0 icon-wrapper bg-blue mx-auto d-block">
@@ -909,52 +916,54 @@ const Mainpage = () => {
           </div>
         </section>
 
-        {/* Exclusive Prodcut */}
-        <section className='container-fluid py-4 mb-5' style={{ background: "rgb(235, 235, 255)" }}>
-          <div className='container '>
-            <div className="text-center">
-              {/* <h3 className="font_main m-0 p-0"></h3> */}
-              <p className=" m-0 p_main">Exclusive deals</p>
-              <h3 className="font_main pb-4 m-0 p-0">Curated only for you</h3>
-            </div>
-            <div className='row m-0'>
-              {products.length > 0 ? (
-                <Slider ref={solitaire} {...solitaireSlider}>
-                  {products.slice(30, 36).map((item) => (
-                    <div className='card border-0 px-1 bg-transparent' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
-                      <Link to={`/Productdetails/${item.product_id}`} className='text-decoration-none'>
-                        <img
-                          alt={item.title}
-                          src={item.goldImages[0]}
-                          className="w-100 img-fluid"
-                          style={{ borderRadius: "10px", objectFit: "cover" }}
-                          onError={(e) => {
-                            e.target.onerror = null; // Prevent infinite loop
-                            e.target.style.display = "none";
-                            e.target.parentElement.innerHTML = `
+        {/* Exclusive Prodcut mobile */}
+        <section className='container-fluid mb-5 d-lg-none d-md-none d-block'>
+          <div className='py-4 exclusive_product'>
+            <div className='container'>
+              <div className="text-center">
+                {/* <h3 className="font_main m-0 p-0"></h3> */}
+                <p className=" m-0 p_main">Exclusive deals</p>
+                <h3 className="font_main pb-4 m-0 p-0">Curated only for you</h3>
+              </div>
+              <div className='row m-0'>
+                {products.length > 0 ? (
+                  <Slider ref={solitaire} {...solitaireSlider}>
+                    {products.slice(30, 35).map((item) => (
+                      <div className='card border-0 px-1 bg-transparent' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
+                        <Link to={`/Productdetails/${item.product_id}`} className='text-decoration-none'>
+                          <img
+                            alt={item.title}
+                            src={item.goldImages[0]}
+                            className="w-100 img-fluid"
+                            style={{ borderRadius: "10px", objectFit: "cover" }}
+                            onError={(e) => {
+                              e.target.onerror = null; // Prevent infinite loop
+                              e.target.style.display = "none";
+                              e.target.parentElement.innerHTML = `
                                 <div class='no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3'>
                                     <span class='exlimation_mark'>!</span>
                                 </div>`;
-                          }}
-                        />
-                      </Link>
-                      <div className="card-body px-1">
-                        <h6>{item.title}</h6>
-                        <p>{formatCurrency(item.total14KT)}</p>
+                            }}
+                          />
+                        </Link>
+                        <div className="card-body px-1">
+                          <h6>{item.title}</h6>
+                          <p>{formatCurrency(item.total14KT)}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </Slider>
-              ) : (
-                <div className="no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3">
-                  <span className="exlimation_mark">!</span>
-                </div>
-              )}
-              <Link to="/products" className="text-decoration-none">
-                <button className="btn mx-auto d-block viewall_btn">
-                  <span>View All</span>
-                </button>
-              </Link>
+                    ))}
+                  </Slider>
+                ) : (
+                  <div className="no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3">
+                    <span className="exlimation_mark">!</span>
+                  </div>
+                )}
+                <Link to="/products" className="text-decoration-none">
+                  <button className="btn mx-auto d-block viewall_btn">
+                    <span>View All</span>
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -1221,7 +1230,7 @@ const Mainpage = () => {
         </section>
 
         {/* Latest design */}
-        <section className="container-fluid pb-4">
+        <section className="container-fluid pb-5">
           {bottomBanners?.length >= 8 && (
             <>
               {/* Web Banner (7th Banner - Index 6) */}
@@ -1263,8 +1272,60 @@ const Mainpage = () => {
           )}
         </section>
 
+        {/* Exclusive Product web */}
+        <section className='container-fluid mb-5 d-lg-block d-md-block d-none'>
+          <div style={{ background: "rgb(224 242 232)", borderRadius: "10px" }} className='py-4'>
+            <div className='container'>
+              <div className="text-center">
+                {/* <h3 className="font_main m-0 p-0"></h3> */}
+                <p className=" m-0 p_main">Exclusive deals</p>
+                <h3 className="font_main pb-4 m-0 p-0">Curated only for you</h3>
+              </div>
+              <div className='row m-0'>
+                {products.length > 0 ? (
+                  <Slider ref={solitaire} {...solitaireSlider}>
+                    {products.slice(30, 35).map((item) => (
+                      <div className='card border-0 px-1 bg-transparent' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
+                        <Link to={`/Productdetails/${item.product_id}`} className='text-decoration-none'>
+                          <img
+                            alt={item.title}
+                            src={item.goldImages[0]}
+                            className="w-100 img-fluid"
+                            style={{ borderRadius: "10px", objectFit: "cover" }}
+                            onError={(e) => {
+                              e.target.onerror = null; // Prevent infinite loop
+                              e.target.style.display = "none";
+                              e.target.parentElement.innerHTML = `
+                                <div class='no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3'>
+                                    <span class='exlimation_mark'>!</span>
+                                </div>`;
+                            }}
+                          />
+                        </Link>
+                        <div className="card-body px-1">
+                          <h6>{item.title}</h6>
+                          <p>{formatCurrency(item.total14KT)}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </Slider>
+                ) : (
+                  <div className="no-image-placeholder-home d-flex justify-content-center align-items-center border border-1 rounded-3">
+                    <span className="exlimation_mark">!</span>
+                  </div>
+                )}
+                <Link to="/products" className="text-decoration-none">
+                  <button className="btn mx-auto d-block viewall_btn">
+                    <span>View All</span>
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Gift */}
-        <section className="container-fluid pt-2 px-1 gift_sec_main">
+        <section className="container-fluid px-1 gift_sec_main">
           {/* Grid layout for large devices */}
           <div className="d-none d-lg-block d-md-block">
             <div className="row m-0">
