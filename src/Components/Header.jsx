@@ -2989,13 +2989,15 @@ import auth from './firebase';
 import axios from 'axios';
 import { CiMenuFries, CiUser, CiHeart, CiShoppingCart, CiLogout } from "react-icons/ci";
 import { GrContactInfo } from "react-icons/gr";
-import { RiUserLine } from "react-icons/ri";
 import { MdAccountCircle } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import Loader from '../Pages/Loader';
 
+<<<<<<< HEAD
 const userFetch = JSON.parse(localStorage.getItem('user'));
+=======
+const userFetch = JSON.parse(localStorage.getItem('user'))
+>>>>>>> 4f5aee437fca63bd686ae338e87ee7d18c84eae6
 const Header = () => {
     const search = React.useRef(null);
     const searchmd = React.useRef(null);
@@ -3170,7 +3172,8 @@ const Header = () => {
             dispatch(cartAction.resetState());
 
             // Clear user data
-            localStorage.clear();
+            // localStorage.clear();
+            localStorage.removeItem('user')
             setUser(null);
             setIsLoggedIn(false); // Update the login state to false
 
@@ -3262,13 +3265,16 @@ const Header = () => {
             <section className='container-fluid text-center header_color py-1'>
                 <Slider {...upBannerSlider}>
                     <div>
-                        <h6>This Holiday, enjoy complimentary shipping & extended returns with our Tiffany Blue® packaging.</h6>
+                        <h6>Exquisite Lab Grown diamond jewellery</h6>
                     </div>
                     <div>
-                        <h6>Our gift to you: A Bird on a Rock charm to adorn your Tiffany Blue® bag, complimentary with every online delivery order.</h6>
+                        <h6>Flat 10% off on diamond above 1 carat | Use Code: Nature10</h6>
                     </div>
                     <div>
-                        <h6>New for the holidays: limited-edition Return to Tiffany® designs. </h6>
+                        <h6>Flat 20% off on making charges | Use Code: craft20</h6>
+                    </div>
+                    <div>
+                        <h6>Tag SALT&GLITZ and Get Flat 4% off</h6>
                     </div>
                 </Slider>
             </section>
@@ -3280,7 +3286,7 @@ const Header = () => {
                         {/* <i className="ri-search-line"></i> */}
                         {/* searchbar */}
                         <form action="" className='ps-4'>
-                            <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                            <div className="bg-light rounded rounded-pill shadow-sm">
                                 <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas" aria-controls="searchOffcanvas">
                                     <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                     <div className="input-group-append">
@@ -4494,7 +4500,7 @@ const Header = () => {
                                 )}
                             </i>
                         </Link> */}
-                        <Link className="text-decoration-none text-dark position-relative me-2 me-sm-0" to="/wishlist">
+                        <Link className="text-decoration-none text-dark position-relative me-3 me-sm-0" to="/wishlist">
                             <CiHeart className="fs-5 position-relative" />
                             {wishlistLength.length > 0 && (
                                 <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
@@ -4520,7 +4526,7 @@ const Header = () => {
 
                     </div>
                     <form action="" className='pt-3'>
-                        <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                        <div className="bg-light rounded rounded-pill shadow-sm">
                             <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#mdsearchOffcanvas" aria-controls="mdsearchOffcanvas">
                                 <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                 <div className="input-group-append">
@@ -4533,7 +4539,7 @@ const Header = () => {
             </section>
 
             {/* Dropdown */}
-            <section className='container-fluid'>
+            <section className='container-fluid d-lg-block d-md-none d-none'>
                 <div className='row'>
                     <div>
                         <nav className="navbar navbar-expand-lg navbar-light pt-0 pb-1">
@@ -5561,7 +5567,7 @@ const Header = () => {
                 <div className="offcanvas-header offcanvas_header_search">
                     <h5 className="offcanvas-title w-100 pe-3" id="offcanvasSearchLabel">
                         <form action="" className="pt-3" onSubmit={(e) => e.preventDefault()}>
-                            <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                            <div className="bg-light rounded rounded-pill shadow-sm">
                                 <div className="input-group">
                                     <input
                                         type="search"
@@ -5722,7 +5728,7 @@ const Header = () => {
                 <div className="offcanvas-header offcanvas_header_search">
                     <h5 className="offcanvas-title w-100 pe-3" id="offcanvasSearchLabel">
                         <form action="" className='pt-3' onSubmit={(e) => e.preventDefault()}>
-                            <div className="p-1 bg-light rounded rounded-pill shadow-sm">
+                            <div className=" bg-light rounded rounded-pill shadow-sm">
                                 <div className="input-group">
                                     <input
                                         type="search"

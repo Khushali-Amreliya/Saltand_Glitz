@@ -121,6 +121,7 @@
     height: 34px;
     border-radius: 50%;
     box-shadow: rgb(87, 128, 133) 2px 2px 4px, rgb(87, 210, 232) -3px -3px 6px;
+    /* rgb(87, 128, 133) 2px 2px 4px, rgb(137 189 162) -3px -3px 6px */
     align-items: center;
     display: flex;
 }

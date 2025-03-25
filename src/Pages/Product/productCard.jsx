@@ -322,7 +322,6 @@ const ProductCard = ({ Productsitem }) => {
                     // setProductRating(0);
                 }
             }
-
         };
         fetchRating();
     }, [product_id]);
@@ -336,6 +335,11 @@ const ProductCard = ({ Productsitem }) => {
 
                 // console.log(userId, "ninjlnmod");
 
+<<<<<<< HEAD
+=======
+                console.log(userId, "ninjlnmod");
+
+>>>>>>> 4f5aee437fca63bd686ae338e87ee7d18c84eae6
 
                 if (!userId) return; // Agar dono null hain, toh call na karein
 
@@ -423,9 +427,9 @@ const ProductCard = ({ Productsitem }) => {
                                     e.target.onerror = null; // Prevent infinite loop
                                     e.target.style.display = "none";
                                     e.target.parentElement.innerHTML = `
-                <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
-                    <span class='exlimation_mark'>!</span>
-                </div>`;
+                                    <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
+                                        <span class='exlimation_mark'>!</span>
+                                    </div>`;
                                 }}
                             />
                         ) : (
@@ -440,9 +444,9 @@ const ProductCard = ({ Productsitem }) => {
                                             e.target.onerror = null; // Prevent infinite loop
                                             e.target.style.display = "none";
                                             e.target.parentElement.innerHTML = `
-                        <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
-                            <span class='exlimation_mark'>!</span>
-                        </div>`;
+                                            <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
+                                                <span class='exlimation_mark'>!</span>
+                                            </div>`;
                                         }}
                                     />
                                 ))}

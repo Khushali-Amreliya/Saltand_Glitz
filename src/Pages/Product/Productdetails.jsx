@@ -1979,7 +1979,7 @@ const Productdetails = () => {
                                                         <source src={media} type="video/mp4" />
                                                     </video>
                                                 ) : ( // Otherwise image show karo
-                                                    <img alt="Product" src={media} className="productdetails_img p-1 mb-2" />
+                                                    <img alt="Product" src={media} className="img-fluid p-1 mb-2" />
                                                 )}
                                             </div>
                                         ))

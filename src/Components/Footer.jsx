@@ -14,6 +14,36 @@ const Footer = () => {
   return (
     <>
       <section className='container-fluid footer_main d-lg-block d-md-block d-none  '>
+        {/* <div className="app-download-container">
+          <h2 className="app-title text-start">Download the Salt&Glitz App</h2>
+          <p className="app-description text-start">
+            Shop & Save more on app by redeeming xCLusive points
+          </p>
+          <div className="d-flex justify-content-center gap-3 mt-3">
+            <a
+              href="https://www.apple.com/app-store/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Download on the App Store"
+                className=""
+              />
+            </a>
+            <a
+              href="https://play.google.com/store/games"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png"
+                alt="Get it on Google Play"
+                className="store-badge"
+              />
+            </a>
+          </div>
+        </div> */}
         <div className='row ps-3'>
           <div className='col-lg-2 col-md-6 col-sm-12 footer_sec pb-5'>
             <h6 className='fw-bolder pb-3'>Client Care</h6>
@@ -69,12 +99,72 @@ const Footer = () => {
               <i className="ri-twitter-x-line fs-3 px-3"></i>
               <i className="ri-youtube-fill fs-2 px-3"></i>
             </div>
+            <div className="app-download-container mt-5">
+              <h2 className="app-title">Download the Salt&Glitz App</h2>
+              <p className="app-description">
+                Shop & Save more on app by redeeming xCLusive points
+              </p>
+              <div className="d-flex justify-content-center gap-3 mt-3">
+                <a
+                  href="https://www.apple.com/app-store/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                    alt="Download on the App Store"
+                    className=""
+                  />
+                </a>
+                <a
+                  href="https://play.google.com/store/games"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png"
+                    alt="Get it on Google Play"
+                    className="store-badge"
+                  />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        <h6 className='m-0 p-0 text-center pb-2'>© T&CO. 2024</h6>
 
+        <h6 className='m-0 p-0 text-center pb-2'>© S&G 2025</h6>
       </section>
       <section className='container footer_main py-3 d-sm-block d-lg-none d-md-none'>
+        <div className="app-download-container">
+          <h2 className="app-title">Download the Salt&Glitz App</h2>
+          <p className="app-description">
+            Shop & Save more on app by redeeming xCLusive points
+          </p>
+          <div className="d-flex justify-content-center gap-3 mt-3">
+            <a
+              href="https://www.apple.com/app-store/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                alt="Download on the App Store"
+                className=""
+              />
+            </a>
+            <a
+              href="https://play.google.com/store/games"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png"
+                alt="Get it on Google Play"
+                className="store-badge"
+              />
+            </a>
+          </div>
+        </div>
         <div className='row'>
           <div className='faq-container'>
             {faqData.map((faq, index) => (
@@ -104,14 +194,11 @@ const Footer = () => {
             <i className="ri-pinterest-fill fs-2 px-3"></i>
             <i className="ri-twitter-x-line fs-3 px-3"></i>
             <i className="ri-youtube-fill fs-2 px-3"></i>
-
-            <h6 className='m-0 p-0 text-center pt-3'>© T&CO. 2024</h6>
-
+            <h6 className='m-0 p-0 text-center pt-3'>© S&G 2025</h6>
           </div>
         </div>
       </section>
     </>
-
   );
 };
 const faqData = [
