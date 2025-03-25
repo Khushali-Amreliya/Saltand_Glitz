@@ -1160,6 +1160,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from '../../Store/Slice/CartSlice';
 import Loader from "../Loader";
+import { v4 as uuidv4 } from 'uuid';
 import Helmet from "../../Components/Helmet";
 import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
@@ -1463,7 +1464,7 @@ const Productdetails = () => {
                 const wishlistData = response.data.wishlist || {};
                 const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
 
-                localStorage.setItem('wishlist', JSON.stringify({ [userId]: wishlistProductIds }));
+                localStorage.setItem('wishlist', JSON.stringify(wishlistProductIds));
                 setIsWishlist(wishlistProductIds.includes(product.id));
             } catch (error) {
                 console.error("Wishlist fetch error:", error);
@@ -1856,32 +1857,44 @@ const Productdetails = () => {
             setLoading(false);
         }
     };
+
     const handleWishlistClick = async (event) => {
-        event.preventDefault(); // Page reload ya navigate hone se roke
-        // if (!user || !user._id) {
-        //     toast.error("Please login first to add items to wishlist!");
-        //     return;
-        // }
+        event.preventDefault(); // Prevents page reload or navigation
 
-        const newWishlistStatus = !isWishlist;  // UI ko pehle update karenge
+        let userId = user?._id; // Check if the user is logged in
 
+        if (!userId) {
+            // Generate a guest user ID if not available
+            let guestUserId = localStorage.getItem("guestUserId");
+            if (!guestUserId) {
+                guestUserId = uuidv4();
+            }
+            localStorage.setItem("guestUserId", guestUserId);
+            userId = guestUserId; // Treat guest ID as userId
+        }
 
-        setIsWishlist(newWishlistStatus);  // Optimistic UI Update
+        const newWishlistStatus = !isWishlist; // Optimistic UI update
+        setIsWishlist(newWishlistStatus);
 
         try {
             if (newWishlistStatus) {
-                let userId = user?._id || localStorage.getItem("guestUserId");
-                await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist', {
-                    userId: userId,
-                    productId: product.id,
-                });
+                // Add to Wishlist API
+                await axios.post(
+                    'https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist',
+                    { userId, productId: product.id }
+                );
+                // toast.success("Added to Wishlist!");
             } else {
                 // Remove from Wishlist API
-                await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${userId}/${product.id}`);
+                await axios.delete(
+                    `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${userId}/${product?.id}`
+                );
+                // toast.info("Removed from Wishlist!");
             }
         } catch (error) {
             console.error("Wishlist error:", error);
-            setIsWishlist(!newWishlistStatus);  // Agar error aaye to state wapas reset kar do
+            setIsWishlist(!newWishlistStatus); // Rollback UI update on error
+            toast.error("Something went wrong!");
         }
     };
 
