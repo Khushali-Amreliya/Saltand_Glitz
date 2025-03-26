@@ -11,6 +11,7 @@ import Loader from '../Loader';
 import { useDispatch } from 'react-redux';
 import { cartAction } from '../../Store/Slice/CartSlice';
 import { HiShoppingCart } from "react-icons/hi2";
+import Header from '../../Components/Header';
 
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
@@ -22,6 +23,8 @@ const Wishlist = () => {
   // Fetch wishlist items from the backend
   const fetchWishlist = useCallback(async () => {
     let userId = user?._id || localStorage.getItem("guestUserId");
+    console.log(userId);
+
     try {
       const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
       if (response.status === 200) {
@@ -32,6 +35,7 @@ const Wishlist = () => {
     } finally {
       setLoading(false);
     }
+    Header()
   }, []);
 
 
@@ -42,8 +46,9 @@ const Wishlist = () => {
 
   // Remove item from wishlist
   const handleRemove = async (id) => {
+    let userId = user?._id || localStorage.getItem("guestUserId");
     try {
-      const res = await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${id}`);
+      const res = await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${userId}/${id}`);
       // console.log("Remove Wishlist Response:", res);
       if (res.status === 200) {
         setWishlistItems((prev) =>
