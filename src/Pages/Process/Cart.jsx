@@ -83,32 +83,37 @@ const Cart = () => {
 
   const fetchCart = async () => {
     try {
-      setLoading(true); // Start loader
-      const response = await axios.get(
-        `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${user._id}`
-      );
-      console.log("Cart", response.data.cart.quantity);
+        setLoading(true);
 
-      const data = response.data;
+        let userId = user?._id || localStorage.getItem("guestId");
 
-      // ✅ Wait for total price to update before stopping loader
-      setTotallPrice(data.totalPrice);
+        if (!userId) {
+            setLoading(false);
+            return;
+        }
 
-      // Update Product State
-      setProduct(data.cart.quantity);
+        const response = await axios.get(
+            `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`
+        );
 
-      // Update Total Quantity
-      setTQuantity(data.totalQuantity);
+        console.log("Cart Data:", response.data);
+
+        const data = response.data;
+
+        setTotallPrice(data.totalPrice);
+        setProduct(Array.isArray(data.cart.quantity) ? data.cart.quantity : []);
+
+        setTQuantity(data.totalQuantity);
 
     } catch (err) {
-      console.error("Error fetching cart data:", err);
+        console.error("Error fetching cart data:", err);
     } finally {
-      // ✅ Loader ko tabhi stop karo jab price update ho chuka ho
-      setTimeout(() => {
-        setLoading(false);
-      }); // Thoda delay dena helpful hota hai
+        setTimeout(() => {
+            setLoading(false);
+        });
     }
-  };
+};
+
 
   useEffect(() => {
     fetchCart(); // 👈 useEffect ke andar sirf call karo

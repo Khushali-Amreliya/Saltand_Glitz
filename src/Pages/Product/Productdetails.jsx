@@ -1165,6 +1165,7 @@ import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoStar } from "react-icons/io5";
 import { GoArrowLeft } from "react-icons/go";
+
 // import { productCard } from "../Product/productCard"
 
 const renderStars = (rating) => {
@@ -1806,19 +1807,22 @@ const Productdetails = () => {
 
     const addToCart = async (id) => {
         setLoading(true);
-
+    
+        let guestId = localStorage.getItem("guestId");
+    
         if (!user || !user?._id) {
-            toast.error("Please login first!");
-            navigate('/login');
-            return;
+            if (!guestId) {
+                guestId = crypto.randomUUID(); // Generate a unique guest ID
+                localStorage.setItem("guestId", guestId);
+            }
         }
-
+    
         if (!size || !caratBy || !colorBy) {
             toast.error("Please select size, purity, and color before adding to cart.");
             setLoading(false);
             return;
         }
-
+    
         const cartItem = {
             id,
             title: product.title,
@@ -1830,19 +1834,19 @@ const Productdetails = () => {
             caratBy,
             colorBy
         };
-
+    
         try {
             const response = await axios.post(
                 "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/addCart",
                 {
                     product: id,
-                    user: user._id,
+                    user: user?._id || guestId, // ✅ Use guestId if user is not logged in
                     size,
                     caratBy,
                     colorBy
                 }
             );
-
+    
             if (response.status === 201 || response.status === 200) {
                 toast.success("Product added to cart successfully!");
                 dispatch(cartAction.addItem(cartItem)); // ✅ Redux update
@@ -1856,6 +1860,7 @@ const Productdetails = () => {
             setLoading(false);
         }
     };
+    
     const handleWishlistClick = async (event) => {
         event.preventDefault(); // Page reload ya navigate hone se roke
         if (!user || !user._id) {

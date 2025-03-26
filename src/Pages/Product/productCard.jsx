@@ -339,7 +339,7 @@ const ProductCard = ({ Productsitem }) => {
                 const wishlistData = response.data.wishlist || {};
                 const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
 
-                localStorage.setItem('wishlist', JSON.stringify({ [userId]: wishlistProductIds }));
+                localStorage.setItem('wishlist', JSON.stringify(wishlistProductIds));
                 setIsWishlist(wishlistProductIds.includes(product_id));
             } catch (error) {
                 console.error("Wishlist fetch error:", error);

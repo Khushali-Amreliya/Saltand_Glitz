@@ -3417,19 +3417,19 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to={`/products/Ring/${"Engagement Rings".replace(/ /g, "-")}`} className="d-flex align-items-center" data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link to={`/products/Ring/${"Engagement Rings".replace(/ /g, "-")}`} className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings1.jpg'
-                                                                            className=' me-2'
+                                                                            className='me-2' // Added margin to the right
                                                                         />
                                                                         ENGAGEMENT
                                                                     </Link>
+
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Dailywear Rings".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        to={`/products/Ring/${"Dailywear Rings".replace(/ /g, "-")}`}>
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings2.jpg'
@@ -3440,8 +3440,19 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Couple Rings".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        to={`/products/Ring/${"Platinum Rings".replace(/ /g, "-")}`}
+                                                                    >
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        office wear
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Couple Rings".replace(/ /g, "-")}`}>
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings3.jpg'
@@ -3452,59 +3463,8 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Cocktail Rings".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings4.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        COCKTAIL
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Infinity Rings".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings5.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        INFINITY
-                                                                    </Link>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className='col-lg-6'>
-                                                            <ul className='ps-0'>
-                                                                <li>
-                                                                    <Link to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`} className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings6.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        Solitaire
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Platinum Rings".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings7.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        platinum
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
                                                                         to={`/products/Ring/${"Bands Rings".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings8.jpg'
@@ -3515,8 +3475,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Promise Rings".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        to={`/products/Ring/${"Promise Rings".replace(/ /g, "-")}`}>
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings9.jpg'
@@ -3527,99 +3486,34 @@ const Header = () => {
                                                                 </li>
                                                             </ul>
                                                         </div>
+                                                        <div className='col-lg-6'>
+                                                            <ul className='ps-0'>
+                                                                <li>
+                                                                    <Link to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings6.jpg'
+                                                                            className=' me-2' // Added margin to the right
+                                                                        />
+                                                                        Solitaire
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Platinum Rings".replace(/ /g, "-")}`}
+                                                                    >
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        Party wear
+                                                                    </Link>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div className='col-lg-2 category_metal'>
-                                                    <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
-                                                    <div className="underline mb-3"></div>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal1.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal2.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            diamond
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal3.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            Gemstone
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal4.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            navratna
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal5.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            pearl
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal6.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            yellow gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal7.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            rose gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal8.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            white gold
-                                                        </Link>
-                                                    </li>
                                                 </div>
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
@@ -3632,17 +3526,21 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/08-AUG/others/PostCard/RightSideBanner/RightSideBanner_Postcard.jpg' className='img-fluid'></img>
+                                                </div>
+                                                <div className='col-lg-3 mb-2'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_MB.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_PC.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="" id="earringsmd">
-                                            <i className="ri-subtract-line"></i>Earrings
+                                        <Link className="nav-link active" to="/products/Earring" id="earrings">
+                                        <i className="ri-subtract-line"></i>Earrings
                                         </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="earringsmd">
+                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="earrings">
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Shop By Style
@@ -3652,32 +3550,20 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to={`/products/Earring/${"Studs Earring".replace(/ /g, "-")}`} className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link to={`/products/Earring/${"Studs Earring".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings1.jpg'
-                                                                            className=' me-2'
+                                                                            className=' me-2' // Added margin to the right
                                                                         />
                                                                         Studs
                                                                     </Link>
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                        to={`/products/Earring/${"Drops Earring".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings2.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        drops
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
                                                                         to={`/products/Earring/${"Jhumkas Earring".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings3.jpg'
@@ -3686,102 +3572,58 @@ const Header = () => {
                                                                         Jhumkas
                                                                     </Link>
                                                                 </li>
+
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        hoops
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings8.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        sui dhaga
+                                                                    </Link>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className='col-lg-6'>
+                                                            <ul className='ps-0'>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center"
+                                                                        to={`/products/Earring/${"Drops Earring".replace(/ /g, "-")}`}
+                                                                    >
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings2.jpg'
+                                                                            className=' me-2'
+                                                                        />
+                                                                        Drops
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings9.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        men's studs
+                                                                    </Link>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='col-lg-2 category_metal'>
-                                                    <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
-                                                    <div className="underline mb-3"></div>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal1.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal2.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            diamond
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal3.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            Gemstone
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal4.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            navratna
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal5.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            pearl
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal6.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            yellow gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal7.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            rose gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal8.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            white gold
-                                                        </Link>
-                                                    </li>
-                                                </div>
+                                                
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
                                                     <div className="underline mb-3"></div>
@@ -3793,17 +3635,23 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/12_DEC/HP%20banner/Down_1/Stud.jpg' className='img-fluid'></img>
+                                                </div>
+                                                <div className='col-lg-3 mb-2'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_Switch.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_DH.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="" id="braceletmd">
+                                        <Link className="nav-link active"
+                                            to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}`}
+                                            id="bracelet">
                                             <i className="ri-subtract-line"></i>Bracelets & Bangles
                                         </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="braceletmd">
+                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="bracelet">
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Shop By Style
@@ -3811,124 +3659,51 @@ const Header = () => {
                                                     </h6>
                                                     <div className='row'>
                                                         <div className='col-lg-6'>
+                                                            <p className='pt-0 border-dropdown'>All Bracelets</p>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Chain Bracelet".replace(/ /g, "-")}`} className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link
+                                                                        to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Chain Bracelet".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center"
+                                                                    >
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings1.jpg'
-                                                                            className=' me-2'
+                                                                            className='me-2'
                                                                         />
-                                                                        chain bracelet
+                                                                        Chain Bracelet
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center" to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Oval Bracelet".replace(/ /g, "-")}`}
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Oval Bracelet".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='/assets/img/rings2.jpg'
-                                                                            className=' me-2'
+                                                                            src='/assets/img/rings6.jpg'
+                                                                            className=' me-2' // Added margin to the right
                                                                         />
-                                                                        oval bracelet
+                                                                        Tennis bracelet
+                                                                    </Link>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className='col-lg-6'>
+                                                            <p className='pt-0 border-dropdown'>All Bangles</p>
+                                                            <ul className='ps-0'>
+                                                                <li>
+                                                                    <Link to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Oval Bracelet".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings6.jpg'
+                                                                            className=' me-2' // Added margin to the right
+                                                                        />
+                                                                        light weight bangle
                                                                     </Link>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className='col-lg-2 category_metal'>
-                                                    <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
-                                                    <div className="underline mb-3"></div>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal1.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal2.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            diamond
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal3.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            Gemstone
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal4.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            navratna
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal5.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            pearl
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal6.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            yellow gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal7.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            rose gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal8.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            white gold
-                                                        </Link>
-                                                    </li>
                                                 </div>
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
@@ -3941,17 +3716,21 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/12_DEC/HP%20banner/Down_1/Bracelets.jpg' className='img-fluid'></img>
+                                                </div>
+                                                <div className='col-lg-3 mb-2'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_SB.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_WC.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`} id="solitairesmd">
-                                            <i className="ri-subtract-line"></i>Solitaires
+                                        <Link className="nav-link active" to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`} id="solitaires">
+                                        <i className="ri-subtract-line"></i>Mangalsutras
                                         </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="solitairesmd">
+                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="solitaires">
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Shop By Style
@@ -3961,58 +3740,43 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/earrings" className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link to="" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings1.jpg'
-                                                                            className=' me-2'
+                                                                            className=' me-2' // Added margin to the right
                                                                         />
-                                                                        ENGAGEMENT
+                                                                        mangalsutra Bracelets
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
-                                                                        DAILY WEAR
+                                                                        hand mangalsutra
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
-                                                                        COUPLE RINGS
+                                                                        fancy
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
-                                                                        COCKTAIL
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings5.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        INFINITY
+                                                                        traditional
                                                                     </Link>
                                                                 </li>
                                                             </ul>
@@ -4020,160 +3784,22 @@ const Header = () => {
                                                         <div className='col-lg-6'>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/earrings" className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings6.jpg'
-                                                                            className=' me-2'
+                                                                            className=' me-2' // Added margin to the right
                                                                         />
-                                                                        Solitaire
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings7.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        platinum
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings8.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        bands
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings9.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        promise rings
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings10.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        adjustable rings
+                                                                        modern
                                                                     </Link>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='col-lg-2 category_metal'>
-                                                    <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
-                                                    <div className="underline mb-3"></div>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal1.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal2.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            diamond
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal3.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            Gemstone
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal4.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            navratna
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal5.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            pearl
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal6.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            yellow gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal7.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            rose gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal8.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            white gold
-                                                        </Link>
-                                                    </li>
-                                                </div>
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
                                                     <div className="underline mb-3"></div>
-
                                                     <li><Link>Under ₹ 10k</Link></li>
                                                     <li><Link>₹10k to ₹20k</Link></li>
                                                     <li><Link>₹20k to ₹30k</Link></li>
@@ -4181,17 +3807,21 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/12_DEC/HP%20banner/Down_1/Solitaires.jpg' className='img-fluid'></img>
+                                                </div>
+                                                <div className='col-lg-3 mb-2'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_ME.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_TN.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/products" id="moreJewellerymd">
-                                            <i className="ri-subtract-line"></i>More Jewellery
+                                        <Link className="nav-link active" to="/products" id="moreJewellery">
+                                        <i className="ri-subtract-line"></i>Necklaces & Pendants
                                         </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="moreJewellerymd">
+                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="moreJewellery">
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Shop By Style
@@ -4199,216 +3829,67 @@ const Header = () => {
                                                     </h6>
                                                     <div className='row'>
                                                         <div className='col-lg-6'>
+                                                            <p className='pt-0 border-dropdown'>All Necklaces</p>
                                                             <ul className='ps-0'>
                                                                 <li>
-                                                                    <Link to="/earrings" className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings1.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        ENGAGEMENT
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings2.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        DAILY WEAR
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings3.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        COUPLE RINGS
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings4.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        COCKTAIL
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings5.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        INFINITY
-                                                                    </Link>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className='col-lg-6'>
-                                                            <ul className='ps-0'>
-                                                                <li>
-                                                                    <Link to="/earrings" className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link to="/earrings" className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings6.jpg'
-                                                                            className=' me-2'
+                                                                            className=' me-2' // Added margin to the right
                                                                         />
-                                                                        Solitaire
+                                                                        lightweight
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
-                                                                        platinum
+                                                                        evil eye
+                                                                    </Link>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                        <div className='col-lg-6'>
+                                                            <p className='pt-0 border-dropdown'>All Pendents</p>
+                                                            <ul className='ps-0'>
+                                                                <li>
+                                                                    <Link to="/earrings" className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings1.jpg'
+                                                                            className=' me-2' // Added margin to the right
+                                                                        />
+                                                                        pendent set
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='/assets/img/rings8.jpg'
-                                                                            className='me-2'
+                                                                            src='/assets/img/rings2.jpg'
+                                                                            className=' me-2'
                                                                         />
-                                                                        bands
+                                                                        heart pendent
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                    <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='/assets/img/rings9.jpg'
-                                                                            className='me-2'
+                                                                            src='/assets/img/rings3.jpg'
+                                                                            className=' me-2'
                                                                         />
-                                                                        promise rings
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings10.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        adjustable rings
+                                                                        alphabet pendent
                                                                     </Link>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className='col-lg-2 category_metal'>
-                                                    <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
-                                                    <div className="underline mb-3"></div>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal1.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal2.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            diamond
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal3.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            Gemstone
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal4.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            navratna
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal5.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            pearl
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal6.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            yellow gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal7.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            rose gold
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="/earrings" className="d-flex align-items-center"
-                                                            data-bs-dismiss="offcanvas" aria-label="Close">
-                                                            <img
-                                                                alt='Jewelry Style'
-                                                                src='/assets/img/metal8.png'
-                                                                className='img-fluid me-2'
-                                                            />
-                                                            white gold
-                                                        </Link>
-                                                    </li>
                                                 </div>
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
@@ -4421,41 +3902,127 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/12_DEC/HP%20banner/Down_1/Mangalsutras.jpg' className='img-fluid'></img>
+                                                </div>
+                                                <div className='col-lg-3 mb-2'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_LN.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_IN.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="" id="giftsmd">
-                                            <i className="ri-subtract-line"></i>Gifts
+                                        <Link className="nav-link active" to="" id="gifts">
+                                        <i className="ri-subtract-line"></i>Gifts
                                         </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="giftsmd">
+                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="gifts">
                                             <div className='row'>
-                                                <div className='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 p-0 m-0'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/07_JULY/others/PostCard/PostCard_DropDown.jpg' className='img-fluid'></img>
+                                                <div className='col-lg-4 category_jwellery'>
+                                                    <h6 className='border-dropdown'>Gifting
+                                                        <div className="underline mb-3"></div>
+                                                    </h6>
+                                                    <div className='row'>
+                                                        <div className='col-lg-6'>
+                                                            {/* <p className='pt-0 border-dropdown'>All Necklaces</p> */}
+                                                            <ul className='ps-0'>
+                                                                <li>
+                                                                    <Link to="/earrings" className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings6.jpg'
+                                                                            className=' me-2' // Added margin to the right
+                                                                        />
+                                                                        wife
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        daughter
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        mother
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        husband
+                                                                    </Link>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className='col-lg-6'>
+                                                            <ul className='ps-0'>
+
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        son
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        father
+                                                                    </Link>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 p-0 m-0'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/11_NOV/HPBanner/Gift/01/Mark-Your-Anniversary_DropDown2X.jpg' className='img-fluid'></img>
+                                                <div className='col-lg-2 shop_by'>
+                                                    <h6 to="" className='border-dropdown'>Shop By</h6>
+                                                    <div className="underline mb-3"></div>
+
+                                                    <li><Link>Under ₹ 10k</Link></li>
+                                                    <li><Link>₹10k to ₹20k</Link></li>
+                                                    <li><Link>₹20k to ₹30k</Link></li>
+                                                    <li><Link>₹30k to ₹50k</Link></li>
+                                                    <li><Link>₹50k to ₹75k</Link></li>
+                                                    <li><Link>Above ₹ 75k</Link></li>
+                                                    <li><Link>FOR MEN</Link></li>
+                                                </div><div className='col-lg-3 mb-2'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/03_MAR/Banner/hamburger/03/egold_d.png' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
-                                                <div className='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 p-0 m-0'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/11_NOV/HPBanner/Gift/01/Gifts-Under-20K_DropDown2X.jpg' className='img-fluid'></img>
-                                                </div>
-                                                <div className='col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6 p-0 m-0'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/07_JULY/others/DropDown/GiftingPeak_DropDown.jpg' className='img-fluid'></img>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_Ww.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            <i className="ri-subtract-line"></i>Know Your Diamond
+                                        <i className="ri-subtract-line"></i>Trending
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
-                                            <i className="ri-subtract-line"></i><Link to="/aboutUs" style={{ textDecoration: "none" }}>About Us</Link>
+                                        <Link className="nav-link active" to="/aboutUs" id="navbarDropdown">
+                                        <i className="ri-subtract-line"></i>About Us
                                         </Link>
                                     </li>
                                 </ul>
@@ -4580,6 +4147,18 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
+                                                                        to={`/products/Ring/${"Platinum Rings".replace(/ /g, "-")}`}
+                                                                    >
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        office wear
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center"
                                                                         to={`/products/Ring/${"Couple Rings".replace(/ /g, "-")}`}>
                                                                         <img
                                                                             alt='Jewelry Style'
@@ -4591,26 +4170,25 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Cocktail Rings".replace(/ /g, "-")}`}
+                                                                        to={`/products/Ring/${"Bands Rings".replace(/ /g, "-")}`}
                                                                     >
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='/assets/img/rings4.jpg'
-                                                                            className=' me-2'
+                                                                            src='/assets/img/rings8.jpg'
+                                                                            className='me-2'
                                                                         />
-                                                                        COCKTAIL
+                                                                        bands
                                                                     </Link>
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Infinity Rings".replace(/ /g, "-")}`}
-                                                                    >
+                                                                        to={`/products/Ring/${"Promise Rings".replace(/ /g, "-")}`}>
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='/assets/img/rings5.jpg'
+                                                                            src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
-                                                                        INFINITY
+                                                                        promise rings
                                                                     </Link>
                                                                 </li>
                                                             </ul>
@@ -4637,47 +4215,14 @@ const Header = () => {
                                                                             src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
-                                                                        platinum
+                                                                        Party wear
                                                                     </Link>
                                                                 </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Bands Rings".replace(/ /g, "-")}`}
-                                                                    >
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings8.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        bands
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center"
-                                                                        to={`/products/Ring/${"Promise Rings".replace(/ /g, "-")}`}>
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings9.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        promise rings
-                                                                    </Link>
-                                                                </li>
-                                                                {/* <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings10.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        adjustable rings
-                                                                    </Link>
-                                                                </li> */}
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='col-lg-2 category_metal'>
+                                                {/* <div className='col-lg-2 category_metal'>
                                                     <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
                                                     <div className="underline mb-3"></div>
                                                     <li>
@@ -4760,7 +4305,7 @@ const Header = () => {
                                                             white gold
                                                         </Link>
                                                     </li>
-                                                </div>
+                                                </div> */}
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
                                                     <div className="underline mb-3"></div>
@@ -4772,8 +4317,12 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/08-AUG/others/PostCard/RightSideBanner/RightSideBanner_Postcard.jpg' className='img-fluid'></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_MB.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_PC.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
@@ -4814,6 +4363,27 @@ const Header = () => {
                                                                         Jhumkas
                                                                     </Link>
                                                                 </li>
+
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        hoops
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings8.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        sui dhaga
+                                                                    </Link>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                         <div className='col-lg-6'>
@@ -4830,26 +4400,6 @@ const Header = () => {
                                                                         Drops
                                                                     </Link>
                                                                 </li>
-                                                                {/* <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings7.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        platinum
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings8.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        bands
-                                                                    </Link>
-                                                                </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
@@ -4857,24 +4407,14 @@ const Header = () => {
                                                                             src='/assets/img/rings9.jpg'
                                                                             className='me-2'
                                                                         />
-                                                                        promise rings
+                                                                        men's studs
                                                                     </Link>
                                                                 </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings10.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        adjustable rings
-                                                                    </Link>
-                                                                </li> */}
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='col-lg-2 category_metal'>
+                                                {/* <div className='col-lg-2 category_metal'>
                                                     <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
                                                     <div className="underline mb-3"></div>
                                                     <li>
@@ -4957,7 +4497,7 @@ const Header = () => {
                                                             white gold
                                                         </Link>
                                                     </li>
-                                                </div>
+                                                </div> */}
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
                                                     <div className="underline mb-3"></div>
@@ -4969,8 +4509,12 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/12_DEC/HP%20banner/Down_1/Stud.jpg' className='img-fluid'></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_Switch.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_DH.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
@@ -4989,6 +4533,7 @@ const Header = () => {
                                                     </h6>
                                                     <div className='row'>
                                                         <div className='col-lg-6'>
+                                                            <p className='pt-0 border-dropdown'>All Bracelets</p>
                                                             <ul className='ps-0'>
                                                                 <li>
                                                                     <Link
@@ -5003,10 +4548,21 @@ const Header = () => {
                                                                         Chain Bracelet
                                                                     </Link>
                                                                 </li>
-
+                                                                <li>
+                                                                    <Link to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Oval Bracelet".replace(/ /g, "-")}`}
+                                                                        className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings6.jpg'
+                                                                            className=' me-2' // Added margin to the right
+                                                                        />
+                                                                        Tennis bracelet
+                                                                    </Link>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                         <div className='col-lg-6'>
+                                                            <p className='pt-0 border-dropdown'>All Bangles</p>
                                                             <ul className='ps-0'>
                                                                 <li>
                                                                     <Link to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Oval Bracelet".replace(/ /g, "-")}`}
@@ -5016,14 +4572,14 @@ const Header = () => {
                                                                             src='/assets/img/rings6.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
-                                                                        oval bracelet
+                                                                        light weight bangle
                                                                     </Link>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='col-lg-2 category_metal'>
+                                                {/* <div className='col-lg-2 category_metal'>
                                                     <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
                                                     <div className="underline mb-3"></div>
                                                     <li>
@@ -5106,7 +4662,7 @@ const Header = () => {
                                                             white gold
                                                         </Link>
                                                     </li>
-                                                </div>
+                                                </div> */}
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
                                                     <div className="underline mb-3"></div>
@@ -5118,15 +4674,19 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/12_DEC/HP%20banner/Down_1/Bracelets.jpg' className='img-fluid'></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_SB.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_WC.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`} id="solitaires">
-                                            Solitaires
+                                            Mangalsutras
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="solitaires">
                                             <div className='row'>
@@ -5144,7 +4704,7 @@ const Header = () => {
                                                                             src='/assets/img/rings1.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
-                                                                        RINGS
+                                                                        mangalsutra Bracelets
                                                                     </Link>
                                                                 </li>
                                                                 <li>
@@ -5154,7 +4714,7 @@ const Header = () => {
                                                                             src='/assets/img/rings2.jpg'
                                                                             className=' me-2'
                                                                         />
-                                                                        Pendents
+                                                                        hand mangalsutra
                                                                     </Link>
                                                                 </li>
                                                                 <li>
@@ -5164,7 +4724,7 @@ const Header = () => {
                                                                             src='/assets/img/rings3.jpg'
                                                                             className=' me-2'
                                                                         />
-                                                                        Necklace
+                                                                        fancy
                                                                     </Link>
                                                                 </li>
                                                                 <li>
@@ -5174,7 +4734,7 @@ const Header = () => {
                                                                             src='/assets/img/rings4.jpg'
                                                                             className=' me-2'
                                                                         />
-                                                                        men's solitaires
+                                                                        traditional
                                                                     </Link>
                                                                 </li>
                                                             </ul>
@@ -5188,24 +4748,14 @@ const Header = () => {
                                                                             src='/assets/img/rings6.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
-                                                                        earrings
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings7.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        bridal set
+                                                                        modern
                                                                     </Link>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='col-lg-2 category_metal'>
+                                                {/* <div className='col-lg-2 category_metal'>
                                                     <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
                                                     <div className="underline mb-3"></div>
                                                     <li>
@@ -5278,7 +4828,7 @@ const Header = () => {
                                                             emerald
                                                         </Link>
                                                     </li>
-                                                </div>
+                                                </div> */}
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
                                                     <div className="underline mb-3"></div>
@@ -5290,15 +4840,18 @@ const Header = () => {
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
                                                 </div>
-                                                <div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/12_DEC/HP%20banner/Down_1/Solitaires.jpg' className='img-fluid'></img>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_ME.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_TN.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="/products" id="moreJewellery">
-                                            More Jewellery
+                                            Necklaces & Pendants
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="moreJewellery">
                                             <div className='row'>
@@ -5308,60 +4861,7 @@ const Header = () => {
                                                     </h6>
                                                     <div className='row'>
                                                         <div className='col-lg-6'>
-                                                            <ul className='ps-0'>
-                                                                <li>
-                                                                    <Link to="/earrings" className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings1.jpg'
-                                                                            className=' me-2' // Added margin to the right
-                                                                        />
-                                                                        ENGAGEMENT
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings2.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        DAILY WEAR
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings3.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        COUPLE RINGS
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings4.jpg'
-                                                                            className=' me-2'
-                                                                        />
-                                                                        COCKTAIL
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings5.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        INFINITY
-                                                                    </Link>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className='col-lg-6'>
+                                                            <p className='pt-0 border-dropdown'>All Necklaces</p>
                                                             <ul className='ps-0'>
                                                                 <li>
                                                                     <Link to="/earrings" className="d-flex align-items-center">
@@ -5370,7 +4870,7 @@ const Header = () => {
                                                                             src='/assets/img/rings6.jpg'
                                                                             className=' me-2' // Added margin to the right
                                                                         />
-                                                                        Solitaire
+                                                                        lightweight
                                                                     </Link>
                                                                 </li>
                                                                 <li>
@@ -5380,44 +4880,50 @@ const Header = () => {
                                                                             src='/assets/img/rings7.jpg'
                                                                             className='me-2'
                                                                         />
-                                                                        platinum
+                                                                        evil eye
+                                                                    </Link>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                        <div className='col-lg-6'>
+                                                            <p className='pt-0 border-dropdown'>All Pendents</p>
+                                                            <ul className='ps-0'>
+                                                                <li>
+                                                                    <Link to="/earrings" className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings1.jpg'
+                                                                            className=' me-2' // Added margin to the right
+                                                                        />
+                                                                        pendent set
                                                                     </Link>
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='/assets/img/rings8.jpg'
-                                                                            className='me-2'
+                                                                            src='/assets/img/rings2.jpg'
+                                                                            className=' me-2'
                                                                         />
-                                                                        bands
+                                                                        heart pendent
                                                                     </Link>
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'
-                                                                            src='/assets/img/rings9.jpg'
-                                                                            className='me-2'
+                                                                            src='/assets/img/rings3.jpg'
+                                                                            className=' me-2'
                                                                         />
-                                                                        promise rings
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link className="d-flex align-items-center">
-                                                                        <img
-                                                                            alt='Jewelry Style'
-                                                                            src='/assets/img/rings10.jpg'
-                                                                            className='me-2'
-                                                                        />
-                                                                        adjustable rings
+                                                                        alphabet pendent
                                                                     </Link>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='col-lg-2 category_metal'>
+                                                {/* <div className='col-lg-2 category_metal'>
                                                     <h6 to="" className='border-dropdown'>SHOP BY METAL & STONE</h6>
                                                     <div className="underline mb-3"></div>
                                                     <li>
@@ -5500,6 +5006,110 @@ const Header = () => {
                                                             white gold
                                                         </Link>
                                                     </li>
+                                                </div> */}
+                                                <div className='col-lg-2 shop_by'>
+                                                    <h6 to="" className='border-dropdown'>Shop By</h6>
+                                                    <div className="underline mb-3"></div>
+
+                                                    <li><Link>Under ₹ 10k</Link></li>
+                                                    <li><Link>₹10k to ₹20k</Link></li>
+                                                    <li><Link>₹20k to ₹30k</Link></li>
+                                                    <li><Link>₹30k to ₹50k</Link></li>
+                                                    <li><Link>₹50k to ₹75k</Link></li>
+                                                    <li><Link>Above ₹ 75k</Link></li>
+                                                    <li><Link>FOR MEN</Link></li>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_LN.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_IN.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </li>
+                                    <li className="nav-item dropdown">
+                                        <Link className="nav-link active" to="" id="gifts">
+                                            Gifts
+                                        </Link>
+                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="gifts">
+                                            <div className='row'>
+                                                <div className='col-lg-4 category_jwellery'>
+                                                    <h6 className='border-dropdown'>Gifting
+                                                        <div className="underline mb-3"></div>
+                                                    </h6>
+                                                    <div className='row'>
+                                                        <div className='col-lg-6'>
+                                                            {/* <p className='pt-0 border-dropdown'>All Necklaces</p> */}
+                                                            <ul className='ps-0'>
+                                                                <li>
+                                                                    <Link to="/earrings" className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings6.jpg'
+                                                                            className=' me-2' // Added margin to the right
+                                                                        />
+                                                                        wife
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        daughter
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        mother
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        husband
+                                                                    </Link>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div className='col-lg-6'>
+                                                            <ul className='ps-0'>
+
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        son
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link className="d-flex align-items-center">
+                                                                        <img
+                                                                            alt='Jewelry Style'
+                                                                            src='/assets/img/rings7.jpg'
+                                                                            className='me-2'
+                                                                        />
+                                                                        father
+                                                                    </Link>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div className='col-lg-2 shop_by'>
                                                     <h6 to="" className='border-dropdown'>Shop By</h6>
@@ -5512,36 +5122,18 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-4 pe-5'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/12_DEC/HP%20banner/Down_1/Mangalsutras.jpg' className='img-fluid'></img>
+                                                </div><div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/03_MAR/Banner/hamburger/03/egold_d.png' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
-                                            </div>
-                                        </ul>
-                                    </li>
-                                    <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="" id="gifts">
-                                            Gifts
-                                        </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="gifts">
-                                            <div className='row px-4'>
-                                                <div className='col-lg-3 p-0 m-0'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/07_JULY/others/PostCard/PostCard_DropDown.jpg' className='img-fluid'></img>
-                                                </div>
-                                                <div className='col-lg-3 p-0 m-0'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/11_NOV/HPBanner/Gift/01/Mark-Your-Anniversary_DropDown2X.jpg' className='img-fluid'></img>
-                                                </div>
-                                                <div className='col-lg-3 p-0 m-0'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2023/CL/11_NOV/HPBanner/Gift/01/Gifts-Under-20K_DropDown2X.jpg' className='img-fluid'></img>
-                                                </div>
-                                                <div className='col-lg-3 p-0 m-0'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2024/CL/07_JULY/others/DropDown/GiftingPeak_DropDown.jpg' className='img-fluid'></img>
+                                                <div className='col-lg-3'>
+                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_Ww.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active" to="" id="navbarDropdown">
-                                            Know Your Diamond
+                                            Trending
                                         </Link>
                                     </li>
                                     <li className="nav-item dropdown">
