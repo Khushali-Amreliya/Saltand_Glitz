@@ -94,7 +94,7 @@ const CollectionPage = () => {
                         <div className="col-lg-9">
                             <Sort onFilterApply={(sortData) => fetchFilteredProducts(sortData)} />
 
-                            <div className="row">
+                            <div className="row px-1">
                                 {loading ? (
                                     <Loader />
                                 ) : error ? (
