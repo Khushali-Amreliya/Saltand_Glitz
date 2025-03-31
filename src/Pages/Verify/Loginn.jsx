@@ -167,38 +167,43 @@ const Loginn = () => {
             localStorage.setItem('userId', user._id);
             localStorage.setItem('user', JSON.stringify(user));
     
-            const guestCart = JSON.parse(localStorage.getItem('cart')) || [];
+            const guestCart = JSON.parse(localStorage.getItem('cartItems')) || [];
             const guestWishlist = (JSON.parse(localStorage.getItem('wishlist')) || []).map(item =>
-                typeof item == "string" ? { productId: item } : item
+                typeof item === "string" ? { productId: item } : item
             );
+    
+            console.log("Guest Cart Items Before Merge:", guestCart);
     
             if (guestCart.length > 0 || guestWishlist.length > 0) {
                 const cartProducts = guestCart.map(item => ({
-                    productId: item.productId,
-                    size: item.size || "",
-                    caratBy: item.caratBy || "",
-                    colorBy: item.colorBy || ""
-                })) || [];
+                    productId: item?.productId || item?.id,  // Ensure correct productId
+                    size: item?.size ? String(item.size) : "6",  // Default size if missing
+                    caratBy: item?.caratBy ? String(item.caratBy) : "14KT",  // Default caratBy if missing
+                    colorBy: item?.colorBy ? String(item.colorBy) : "Yellow Gold",  // Default color if missing
+                })).filter(item => item.productId); // Remove invalid entries
+    
+                console.log("Formatted Cart Data to Send:", cartProducts);
     
                 const wishlistProducts = guestWishlist.map(item => ({
                     productId: item.productId
                 })) || [];
     
-                console.log("Merging Cart & Wishlist:", { cartProducts, wishlistProducts });
+                console.log("Wishlist Data to Send:", wishlistProducts);
     
                 try {
                     const mergeResponse = await axios.post(
                         "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/merge/mergeCartAndWishlist",
                         { userId: user._id, cartProducts, wishlistProducts }
                     );
-                    console.log("Merge API Response:", mergeResponse.data);
+                    // console.log("Cart API Response:", JSON.stringify(mergeResponse.data, null, 2));
+                    console.log("Cart API Response:", mergeResponse.data)
+
                 } catch (mergeError) {
                     console.error("Merge API Error:", mergeError.response?.data || mergeError.message);
                     toast.error("Failed to merge cart & wishlist");
                 }
             }
     
-            localStorage.removeItem('cart');
             localStorage.removeItem('wishlist');
             localStorage.removeItem('guestUser');
     
@@ -210,7 +215,7 @@ const Loginn = () => {
     
             toast.success("Login Successful!");
             // window.location.reload(); // Commented to prevent navigation
-            navigate("/")
+            // navigate("/")
         } catch (err) {
             console.error("Login Error:", err.response?.data || err.message);
             toast.error(err.response?.data?.message || "Login failed");
@@ -359,7 +364,7 @@ const Loginn = () => {
                                             />
                                             <label className="form__label">Email</label>
                                         </div>
-                                        <button className='mt-4 btn w-100 place_order_btn text-light' type='submit'>
+                                        <button className='mt-4 btn w-100 place_order_btn' type='submit'>
                                             CONTINUE
                                         </button>
                                     </>
@@ -378,7 +383,7 @@ const Loginn = () => {
                                             />
                                             <label className="form__label">Password</label>
                                         </div>
-                                        <button className='btn w-100 place_order_btn text-light' type='submit' onClick={handleLogin}>
+                                        <button className='btn w-100 place_order_btn' type='submit' onClick={handleLogin}>
                                             LOGIN
                                         </button>
 
@@ -413,7 +418,7 @@ const Loginn = () => {
                                                 />
                                             ))}
                                         </div>
-                                        <button className='mt-3 btn w-100 place_order_btn text-light' type='button' onClick={handleVerifyOtp} disabled={otp.length !== 4}>
+                                        <button className='mt-3 btn w-100 place_order_btn' type='button' onClick={handleVerifyOtp} disabled={otp.length !== 4}>
                                             LOGIN
                                         </button>
 
@@ -439,7 +444,7 @@ const Loginn = () => {
                                             />
                                             <label className="form__label">Email</label>
                                         </div>
-                                        <button className='btn w-100 place_order_btn text-light mt-3' type='button' onClick={handleSendForgotPasswordOtp}>
+                                        <button className='btn w-100 place_order_btn mt-3' type='button' onClick={handleSendForgotPasswordOtp}>
                                             SEND OTP
                                         </button>
                                     </>
@@ -471,7 +476,7 @@ const Loginn = () => {
                                                 required
                                             />
                                         </div>
-                                        <button className='btn w-100 place_order_btn text-light mt-3' type='button' onClick={handleResetPassword}>
+                                        <button className='btn w-100 place_order_btn mt-3' type='button' onClick={handleResetPassword}>
                                             CONFIRM
                                         </button>
                                     </>

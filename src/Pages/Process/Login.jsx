@@ -36,22 +36,72 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const res = await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/login', { email, password });
-      localStorage.setItem('token', res.data.user.token);
-      localStorage.setItem('userId', res.data.user._id); // ID Store
 
-      // console.log("User ID:", res.data.user._id);
+    try {
+      const res = await axios.post(
+        'https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/login',
+        { email, password }
+      );
+      const user = res.data.user;
+
+      if (!user || !user.token) {
+        throw new Error("Invalid user data received");
+      }
+
+      localStorage.setItem('token', user.token);
+      localStorage.setItem('userId', user._id);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      const guestCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+      const guestWishlist = (JSON.parse(localStorage.getItem('wishlist')) || []).map(item =>
+        typeof item === "string" ? { productId: item } : item
+      );
+
+      console.log("Guest Cart Items Before Merge:", guestCart);
+
+      if (guestCart.length > 0 || guestWishlist.length > 0) {
+        const cartProducts = guestCart.map(item => ({
+          productId: item?.productId || item?.id,  // Ensure correct productId
+          size: item?.size ? String(item.size) : "6",  // Default size if missing
+          caratBy: item?.caratBy ? String(item.caratBy) : "14KT",  // Default caratBy if missing
+          colorBy: item?.colorBy ? String(item.colorBy) : "Yellow Gold",  // Default color if missing
+        })).filter(item => item.productId); // Remove invalid entries
+
+        console.log("Formatted Cart Data to Send:", cartProducts);
+
+        const wishlistProducts = guestWishlist.map(item => ({
+          productId: item.productId
+        })) || [];
+
+        console.log("Wishlist Data to Send:", wishlistProducts);
+
+        try {
+          const mergeResponse = await axios.post(
+            "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/merge/mergeCartAndWishlist",
+            { userId: user._id, cartProducts, wishlistProducts }
+          );
+          console.log("Cart API Response:", JSON.stringify(mergeResponse.data, null, 2));
+
+        } catch (mergeError) {
+          console.error("Merge API Error:", mergeError.response?.data || mergeError.message);
+          toast.error("Failed to merge cart & wishlist");
+        }
+      }
+
+      localStorage.removeItem('wishlist');
+      localStorage.removeItem('guestUser');
 
       const userRes = await axios.get('https://saltandglitz-api-131827005467.asia-south2.run.app/api/users/profile', {
-        headers: { 'Authorization': `Bearer ${res.data.user.token}` }
+        headers: { 'Authorization': `Bearer ${user.token}` }
       });
+
       localStorage.setItem('user', JSON.stringify(userRes.data));
 
-      toast.success("Login Successfully!");
-      navigate('/');
-      window.location.reload();
+      toast.success("Login Successful!");
+      window.location.reload(); // Commented to prevent navigation
+      navigate("/")
     } catch (err) {
+      console.error("Login Error:", err.response?.data || err.message);
       toast.error(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);

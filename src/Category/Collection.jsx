@@ -35,6 +35,8 @@ const CollectionPage = () => {
                     ...filters,
                 }
             );
+            console.log(response);
+            
 
             let filteredProducts = response.data.updatedProducts;
 

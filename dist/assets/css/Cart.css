@@ -120,7 +120,7 @@
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    box-shadow: rgb(87, 128, 133) 2px 2px 4px, rgb(87, 210, 232) -3px -3px 6px;
+    box-shadow: var(--background) -3px -3px 4px;
     /* rgb(87, 128, 133) 2px 2px 4px, rgb(137 189 162) -3px -3px 6px */
     align-items: center;
     display: flex;
@@ -388,7 +388,7 @@
 }
 
 .place_order_btn {
-    background: var(--background);
+    background: var(--background) !important;
     color: #000 !important;
     font-size: 13px !important;
     letter-spacing: 0.5px !important;
@@ -492,7 +492,7 @@
     padding: 8px 16px;
     border: 1px solid #eaeaea;
     border-radius: 20px;
-    background: linear-gradient(180deg, rgb(216, 242, 246) 0%, rgb(175, 216, 226) 0%, rgb(191, 211, 215) 100%);
+    background: var(--background);
     color: #4a4a4a;
     cursor: pointer;
     font-size: 14px;
@@ -709,16 +709,16 @@ body {
 }
 
 .modal_remove {
-    border: 1px solid #3f91a1 !important;
+    border: 0.5px solid var(--color) !important;
     font-size: 13px !important;
     border-radius: 8px !important;
     padding: 10px 20px !important;
 }
 
 .modal_wishlist {
-    border: 1px solid #a5ecfb !important;
+    border: 0.5px solid var(--color) !important;
     font-size: 13px !important;
-    background: var(--background);
+    background: var(--background) !important;
     color: #000 !important;
     border-radius: 8px !important;
     padding: 10px 20px !important;

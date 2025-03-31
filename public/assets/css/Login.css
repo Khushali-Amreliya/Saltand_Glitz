@@ -98,8 +98,9 @@
 }
 
 .create_acc span {
-    color: #de57f5;
+    color: var(--color);
     cursor: pointer;
+    font-weight: bold;
 }
 
 .loginn_width {

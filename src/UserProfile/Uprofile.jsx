@@ -40,6 +40,7 @@ const Uprofile = () => {
 
             // Clear user data
             localStorage.removeItem('user');
+            localStorage.removeItem('guestUserId')
 
             setUser(null);
             toast.success('You have successfully logged out');

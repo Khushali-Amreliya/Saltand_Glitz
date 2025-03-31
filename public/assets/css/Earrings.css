@@ -59,7 +59,7 @@
 }
 
 .card_shadow img {
-    border-radius: 10px 10px 10px 10px;
+    /* border-radius: 10px 10px 10px 10px; */
 }
 
 .card_shadow {
@@ -162,7 +162,8 @@
 }
 
 .filter_midium_divice {
-    background: var(--background);
+    background: var(--color);
+    color: #fff;
     width: 40%;
     position: fixed;
     z-index: 2;

@@ -22,8 +22,8 @@
 /* Card Slider (image content) */
 .card-container img {
     transition: transform 0.3s ease-in-out;
-    border-radius: 5px !important;
-    height: 320px !important;
+    /* border-radius: 5px !important; */
+    /* height: 320px !important; */
 }
 
 .card-container:hover .absolute_next_btn,
@@ -202,7 +202,7 @@
     }
 
     .card-container img {
-        height: 235px !important;
+        /* height: 235px !important; */
     }
 
     .no-image-placeholder {

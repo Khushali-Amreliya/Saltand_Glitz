@@ -407,7 +407,7 @@ const ProductCard = ({ Productsitem }) => {
                             <img
                                 alt="product-image"
                                 src={displayImages[0]}
-                                className="img-fluid border border-1 rounded-3"
+                                className="img-fluid border border-1"
                                 onError={(e) => {
                                     e.target.onerror = null; // Prevent infinite loop
                                     e.target.style.display = "none";
@@ -418,7 +418,7 @@ const ProductCard = ({ Productsitem }) => {
                                 }}
                             />
                         ) : (
-                            <Slider ref={slider} {...imageVideo} className="border border-1 rounded-3">
+                            <Slider ref={slider} {...imageVideo} className="border border-1">
                                 {displayImages.map((img, index) => (
                                     <img
                                         key={index}

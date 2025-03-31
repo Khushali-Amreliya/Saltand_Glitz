@@ -60,7 +60,8 @@
     background-color: #ebebff !important;
 }
 .pay_btn{
-    background:var(--background);
+    background:var(--background) !important;
+    color: #000 !important;
     border-radius: 12px !important;
     padding: 10px 15px !important;
     font-size: 13px !important;

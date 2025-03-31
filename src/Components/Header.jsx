@@ -3042,8 +3042,8 @@ const Header = () => {
 
     const getCart = async () => {
         try {
-            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userFetch._id}`);
-            // console.log(response.data);
+            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`);
+            console.log(response.data);
 
             const quantity = response.data;
             // console.log(tQuantity);
@@ -3161,22 +3161,28 @@ const Header = () => {
             toast.warn('You are not signed in.');
             return;
         }
-
+    
         try {
             await signOut(auth);
-
+    
             // Clear Redux cart and wishlist
             dispatch(cartAction.resetState());
-
+    
             // Clear user data
-            // localStorage.clear();
-            localStorage.removeItem('user')
+            localStorage.removeItem('user');
+            localStorage.removeItem('guestUserId');
+    
+            console.log("After removal, guestUserId:", localStorage.getItem('guestUserId')); // Debugging
+    
             setUser(null);
-            setIsLoggedIn(false); // Update the login state to false
-
+            setIsLoggedIn(false);
+    
             toast.success('You have successfully logged out');
-            navigate('/'); // Redirect to homepage after logout
-            window.location.reload();
+            
+            setTimeout(() => {
+                navigate('/');
+                window.location.reload();
+            }, 500); // Delay to ensure localStorage is cleared
         } catch (error) {
             console.error('Error signing out:', error);
             toast.error('Something went wrong during log-out.');

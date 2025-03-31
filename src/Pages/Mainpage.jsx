@@ -928,7 +928,7 @@ const Mainpage = () => {
               <div className='row m-0'>
                 {products.length > 0 ? (
                   <Slider ref={solitaire} {...solitaireSlider}>
-                    {products.slice(30, 35).map((item) => (
+                    {products.slice(37, 42).map((item) => (
                       <div className='card border-0 px-1 bg-transparent' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
                         <Link to={`/Productdetails/${item.product_id}`} className='text-decoration-none'>
                           <img
@@ -1284,7 +1284,7 @@ const Mainpage = () => {
               <div className='row m-0'>
                 {products.length > 0 ? (
                   <Slider ref={solitaire} {...solitaireSlider}>
-                    {products.slice(30, 35).map((item) => (
+                    {products.slice(37, 42).map((item) => (
                       <div className='card border-0 px-1 bg-transparent' key={item.product_id} onClick={() => handleProductClick(item.product_id)}>
                         <Link to={`/Productdetails/${item.product_id}`} className='text-decoration-none'>
                           <img

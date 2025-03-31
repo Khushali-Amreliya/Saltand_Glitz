@@ -176,7 +176,7 @@
 .payment_btn {
     background: var(--background) !important;
     border-radius: 12px !important;
-    color: #fff !important;
+    /* color: #fff !important; */
     font-size: 13px !important;
     padding: 10px 15px !important;
 }

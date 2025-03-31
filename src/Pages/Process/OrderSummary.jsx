@@ -16,66 +16,67 @@ const OrderSummary = () => {
     const [totallPrice, setTotallPrice] = useState(0);
     const [product, setProduct] = useState([]); // Initialize as an array
 
-     const calculateSubtotal = useCallback(() => {
+    const calculateSubtotal = useCallback(() => {
         return (cartItems || []).reduce(
-          (total, item) => total + Number(item.totalprice),
-          0
+            (total, item) => total + Number(item.totalprice),
+            0
         );
-      }, [cartItems]);
+    }, [cartItems]);
 
     const updateAmounts = useCallback(() => {
         const newSubtotal = calculateSubtotal();
-    
+
         // Calculate discount amount in rupees
         const calculatedDiscount = newSubtotal * (discountPercentage / 100);
         setCouponDiscount(calculatedDiscount);
-    
+
         // Calculate total amount after discount
         const discountedAmount = newSubtotal - calculatedDiscount;
         setTotalAmount(discountedAmount);
-      }, [calculateSubtotal, discountPercentage]);
-    
-      useEffect(() => {
-        updateAmounts();
-      }, [cartItems, discountPercentage, updateAmounts]);
+    }, [calculateSubtotal, discountPercentage]);
 
     useEffect(() => {
-        const fetchCart = async () => {
-            try {
-                setLoading(true); // Start loader
-                const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${user._id}`);
-                // console.log(response.data); // Debug response structure
+        updateAmounts();
+    }, [cartItems, discountPercentage, updateAmounts]);
 
-                const data = response.data;
+    const fetchCart = async () => {
+        try {
+            setLoading(true); // Start loader
+            let userId = user?._id || localStorage.getItem("guestUserId");
 
-                // Calculate Main Price (Multiplying total14KT with quantity)
-                const productsWithPrices = data.cart.quantity.map((item) => {
-                    const itemPrice = (item.productId.total14KT || 0) * (item.quantity || 0); // Multiply total14KT price with quantity
-                    return {
-                        ...item, // Spread other product properties
-                        itemPrice, // Add calculated price for the product
-                    };
-                });
+            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`);
+            console.log(response.data); // Debug response structure
 
-                // Calculate the total main price
-                const mainPrice = productsWithPrices.reduce((acc, item) => acc + item.itemPrice, 0);
+            const data = response.data;
 
-                // console.log("Products with Item Prices:", productsWithPrices);
-                // console.log("Calculated Main Price:", mainPrice);
+            // Calculate Main Price (Multiplying total14KT with quantity)
+            const productsWithPrices = data.cart.quantity.map((item) => {
+                const itemPrice = (item.productId.total14KT || 0) * (item.quantity || 0); // Multiply total14KT price with quantity
+                return {
+                    ...item, // Spread other product properties
+                    itemPrice, // Add calculated price for the product
+                };
+            });
 
-                // Set state
-                setProduct(productsWithPrices); // Updated products with itemPrice
-                setTotallPrice(mainPrice); // Total price
+            // Calculate the total main price
+            const mainPrice = productsWithPrices.reduce((acc, item) => acc + item.itemPrice, 0);
 
-            } catch (err) {
-                console.error("Error fetching cart data:", err);
-            } finally {
-                setLoading(false); // Stop loader
-            }
-        };
+            // console.log("Products with Item Prices:", productsWithPrices);
+            // console.log("Calculated Main Price:", mainPrice);
 
+            // Set state
+            setProduct(productsWithPrices); // Updated products with itemPrice
+            setTotallPrice(mainPrice); // Total price
+
+        } catch (err) {
+            console.error("Error fetching cart data:", err);
+        } finally {
+            setLoading(false); // Stop loader
+        }
+    };
+    useEffect(() => {
         fetchCart();
-    }, [user._id]);
+    }, [user?._id]);
     return (
         <>
             {loading && <Loader />}
@@ -92,7 +93,7 @@ const OrderSummary = () => {
                             <div className='col-lg-9 col-md-8 col-sm-8 col-8 pt-3 d-flex justify-content-between'>
                                 <div>
                                     <h6 className='m-0 pb-1 login_title'>{item.productId.title}</h6>
-                                    <p className='login_SKU m-0 p-0'>SKU: JS02322-1YP900</p>
+                                    <p className='login_SKU m-0 p-0'>SKU: {item.productId.id}</p>
                                     <p className='login_quantity m-0 py-2'>Quantity: {item.quantity}</p>
                                     {/* <p className='login_delivery m-0 p-0'>Expected Delivery by - 30th Aug</p> */}
                                     <p className='login_price'>{formatCurrency(item.itemPrice)}</p>

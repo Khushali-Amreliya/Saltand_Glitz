@@ -45,7 +45,7 @@ const initialState = {
     totalAmount: subtotal - (subtotal * (discount / 100)), // Apply discount calculation
     discount,
     error: null
-    
+
 };
 // const setCartToLocalStorage = (cartItem) => {
 //     localStorage.setItem("cartItems", JSON.stringify(cartItem)); // LocalStorage update ho raha hai
@@ -68,6 +68,9 @@ const cartSlice = createSlice({
                     title: newItem.title,
                     image: newItem.image,
                     price: newItem.price,
+                    caratBy: newItem.caratBy,
+                    colorBy: newItem.colorBy,
+                    size: newItem.size,
                     quantity: 1,
                     totalPrice: newItem.price
                 });
@@ -103,16 +106,16 @@ const cartSlice = createSlice({
                     ? { ...item, quantity: item.quantity + 1, totalPrice: (item.quantity + 1) * item.price }
                     : item
             );
-        
+
             state.cartItems = updatedCartItems;
-        
+
             state.totalQuantity = updatedCartItems.reduce((total, item) => total + item.quantity, 0);
             state.subtotal = updatedCartItems.reduce((total, item) => total + item.totalPrice, 0);
             state.totalAmount = state.subtotal - (state.subtotal * (state.discount / 100));
-        
+
             setItem(state.cartItems, state.totalQuantity, state.subtotal, state.discount);
         },
-        
+
 
         decrementItem(state, action) {
             const id = action.payload;
@@ -121,13 +124,13 @@ const cartSlice = createSlice({
                     ? { ...item, quantity: item.quantity - 1, totalPrice: (item.quantity - 1) * item.price }
                     : item
             ).filter(item => item.quantity > 0);
-        
+
             state.cartItems = updatedCartItems;
-        
+
             state.totalQuantity = updatedCartItems.reduce((total, item) => total + item.quantity, 0);
             state.subtotal = updatedCartItems.reduce((total, item) => total + item.totalPrice, 0);
             state.totalAmount = state.subtotal - (state.subtotal * (state.discount / 100));
-        
+
             setItem(state.cartItems, state.totalQuantity, state.subtotal, state.discount);
         }
         ,
@@ -218,20 +221,32 @@ const cartSlice = createSlice({
 
         addToWishlist(state, action) {
             const newItem = action.payload;
-            const existingItem = state.wishlistItem.find(item => item.id === newItem.id);
 
-            if (!existingItem) {
-                state.wishlistItem.push({
-                    id: newItem.id,
-                    title: newItem.title,
-                    image01: newItem.image01,
-                    total14KT: newItem.total14KT
-                });
-                // toast.success("Item added to wishlist!");
+            // Ensure wishlist is initialized
+            if (!state.wishlist) {
+                state.wishlist = [];
             }
 
-            setWishlist(state.wishlistItem);
+            // Validate newItem properties before using
+            if (!newItem || !newItem.id) {
+                console.error("Invalid item received for wishlist:", newItem);
+                return;
+            }
+
+            const existingItem = state.wishlist.find(item => item.id === newItem.id);
+
+            if (!existingItem) {
+                state.wishlist.push({
+                    id: newItem.id,
+                    title: newItem.title || "Unknown Product",
+                    image01: newItem.image01 || "",
+                    total14KT: newItem.total14KT || 0
+                });
+            }
+
+            setWishlist(state.wishlist);
         },
+
 
         removeFromWishlist(state, action) {
             const itemId = action.payload;
@@ -264,7 +279,7 @@ const cartSlice = createSlice({
             state.subtotal = 0;
             state.totalAmount = 0;
             state.discount = 0;
-        
+
             localStorage.removeItem('cartItems');
             localStorage.removeItem('wishlistItem');
             localStorage.removeItem('totalQuantity');
@@ -276,7 +291,7 @@ const cartSlice = createSlice({
             state.user = action.payload;
         },
         resetState: () => initialState, // Reset the entire state
-        
+
         updateCart(state, action) {
             return action.payload; // Poora cart state replace karega
         },

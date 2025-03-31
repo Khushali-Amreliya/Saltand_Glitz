@@ -284,7 +284,7 @@ const Signup = () => {
                                         </div>
                                     ))}
                                 </div>
-                                <button className='mt-4 btn w-50 place_order_btn text-light' type='submit'>Sign Up</button>
+                                <button className='mt-4 btn w-50 place_order_btn' type='submit'>Sign Up</button>
                             </form>
                         </div>
                         <p className='create_acc pt-2'>Already have an account?

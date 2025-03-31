@@ -147,7 +147,7 @@ const Payment = () => {
                                     Add
                                 </div>
                             </div>
-                            <button className='btn w-100 mx-auto d-block text-light pay_btn my-3'>PAY NOW</button>
+                            <button className='btn w-100 mx-auto d-block pay_btn my-3'>PAY NOW</button>
                         </div>
                     </div>
                     <div className='col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 bg_login sticky-header'>

@@ -83,37 +83,44 @@ const Cart = () => {
 
   const fetchCart = async () => {
     try {
-        setLoading(true);
+      setLoading(true);
 
-        let userId = user?._id || localStorage.getItem("guestId");
+      let userId = user?._id || localStorage.getItem("guestUserId");
+      // console.log("Stored guestUserId:", localStorage.getItem("guestUserId"));
+      // console.log("Current userId used for fetching:", user?._id || localStorage.getItem("guestUserId"));
 
-        if (!userId) {
-            setLoading(false);
-            return;
-        }
 
-        const response = await axios.get(
-            `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`
-        );
+      if (!userId) {
+        console.error("User ID not found! Cannot fetch cart.");
+        setLoading(false);
+        return;
+      }
 
-        console.log("Cart Data:", response.data);
+      // console.log("Fetching Cart for User ID:", userId); // ✅ Debugging line
 
+      const response = await axios.get(
+        `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`
+      );
+
+      if (response.status === 200) {
+        console.log("Cart Response:", response.data); // ✅ Debugging
         const data = response.data;
-
-        setTotallPrice(data.totalPrice);
-        setProduct(Array.isArray(data.cart.quantity) ? data.cart.quantity : []);
-
-        setTQuantity(data.totalQuantity);
-
+        setTotallPrice(data.totalPrice || 0);
+        setProduct(data.cart?.quantity || []); // ✅ Ensure cart is an array
+        setTQuantity(data.totalQuantity || 0);
+      } else {
+        console.error("Cart Fetch Failed:", response);
+        setProduct([]); // ✅ Default empty cart
+      }
     } catch (err) {
-        console.error("Error fetching cart data:", err);
+      console.error("Error fetching cart data:", err);
+      setProduct([]); // ✅ Default empty cart on error
     } finally {
-        setTimeout(() => {
-            setLoading(false);
-        });
+      setTimeout(() => {
+        setLoading(false);
+      });
     }
-};
-
+  };
 
   useEffect(() => {
     fetchCart(); // 👈 useEffect ke andar sirf call karo
@@ -127,6 +134,8 @@ const Cart = () => {
     try {
       const productId = item.productId?.product_id || item?.product_id; // Handle undefined case
 
+      let guestUserId = localStorage.getItem("guestUserId");
+      const userId = user?._id || guestUserId;
       if (!productId) {
         console.error("Error: product_id is missing!", item);
         toast.error("Error: Unable to remove item.");
@@ -134,7 +143,7 @@ const Cart = () => {
       }
 
       const response = await axios.delete(
-        `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${user._id}/${productId}`
+        `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${userId}/${productId}`
       );
 
       console.log(response);
@@ -154,55 +163,11 @@ const Cart = () => {
     }
   };
 
-  const handleIncrement = async (product) => {
-    setLoading(true);
-    try {
-      const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${user._id}`);
-      // console.log(response);
-      const data = response.data;
-
-      let cartProduct = typeof product === "string"
-        ? data.cart.quantity.find((item) => item?.productId?.product_id === product)
-        : product;
-
-      if (!cartProduct) {
-        toast.error("Product not found in cart!");
-        setLoading(false);
-        return;
-      }
-
-      const cartItem = {
-        cartId: data?.cart?.cart_id,
-        productId: cartProduct?.productId?.product_id,
-        quantity: 1,
-        caratBy: cartProduct?.caratBy,
-        colorBy: cartProduct?.colorBy,
-        size: cartProduct?.size,
-      };
-
-      const res = await axios.post(
-        "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/cartIncrement",
-        cartItem
-      );
-      console.log("Increment", res);
-
-
-      if (res.status === 200) {
-        dispatch(cartAction.incrementItem(cartProduct?.productId?.product_id || cartProduct?.product_id));
-        await fetchCart();
-      } else {
-        toast.error("Failed to increment product quantity!");
-      }
-    } catch (error) {
-      console.error("Error incrementing product quantity:", error);
-      toast.error("An error occurred while incrementing quantity!");
-    }
-  };
-
   const handleDecrement = async (product) => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${user._id}`);
+      let userId = user?._id || localStorage.getItem("guestUserId");
+      const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`);
       const data = response.data;
 
       let cartProduct = typeof product === "string"
@@ -222,6 +187,7 @@ const Cart = () => {
         caratBy: cartProduct?.caratBy,
         colorBy: cartProduct?.colorBy,
         size: cartProduct?.size,
+        userId: userId // Pass userId (either logged-in user or guest)
       };
 
       const res = await axios.post(
@@ -230,7 +196,7 @@ const Cart = () => {
       );
 
       if (res.status === 200) {
-        dispatch(cartAction.decrementItem(cartProduct?.productId?.product_id,));
+        dispatch(cartAction.decrementItem(cartProduct?.productId?.product_id));
         await fetchCart();
       } else {
         toast.error("Failed to decrement product quantity!");
@@ -243,51 +209,109 @@ const Cart = () => {
     }
   };
 
+  const handleIncrement = async (product) => {
+    setLoading(true);
+    try {
+      let userId = user?._id || localStorage.getItem("guestUserId");
+      const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`);
+      console.log(response);
+      
+      const data = response.data;
+
+      let cartProduct = typeof product === "string"
+        ? data.cart.quantity.find((item) => item?.productId?.product_id === product)
+        : product;
+
+      if (!cartProduct) {
+        toast.error("Product not found in cart!");
+        setLoading(false);
+        return;
+      }
+
+      const cartItem = {
+        cartId: data?.cart?.cart_id,
+        productId: cartProduct?.productId?.product_id,
+        quantity: 1,
+        caratBy: cartProduct?.caratBy,
+        colorBy: cartProduct?.colorBy,
+        size: cartProduct?.size,
+        userId: userId // Pass userId (either logged-in user or guest)
+      };
+
+      const res = await axios.post(
+        "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/cartIncrement",
+        cartItem
+      );
+      console.log("Increment Response:", res.data);
+      
+
+      if (res.status === 200) {
+        dispatch(cartAction.incrementItem(cartProduct?.productId?.product_id || cartProduct?.product_id));
+        await fetchCart();
+      } else {
+        toast.error("Failed to increment product quantity!");
+      }
+    } catch (error) {
+      console.error("Error incrementing product quantity:", error);
+      toast.error("An error occurred while incrementing quantity!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const moveToWishlist = async (item) => {
     setLoading(true);
 
-    // Prepare the cart item to be removed
+    const userId = user?._id || localStorage.getItem("guestUserId");
+    const productId = item?.productId?.product_id;
+
+    if (!productId) {
+      toast.error("Invalid product data!");
+      setLoading(false);
+      return;
+    }
+
     const cartItem = {
-      user: user._id,
-      productId: item.productId.product_id, // Use the correct productId
+      user: userId,
+      productId: productId,
     };
-    // console.log(cartItem);
 
     try {
-      // First, remove the item from the cart
       const removeResponse = await axios.delete(
-        `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${user._id}/${item.productId.product_id}`,  // Correct endpoint for removing from cart
-        { data: cartItem }  // Send cartItem correctly in the DELETE request
+        `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${userId}/${productId}`,
+        { data: cartItem }
       );
 
       if (removeResponse.status === 200) {
-        // Item removed successfully from cart, now add it to the wishlist
         const wishlistResponse = await axios.post(
-          'https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist',
-          {
-            userId: user._id,  // Send userId here
-            productId: item.productId.product_id,  // Send the correct productId
-          }
+          "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist",
+          { userId: userId, productId: productId }
         );
 
-        if (wishlistResponse.status === 200 || wishlistResponse.status === 201) {
-          // Add to the wishlist successfully, update the state
-          dispatch(cartAction.removeItem(removeResponse.data));  // Remove from cart in the store
-          dispatch(cartAction.addToWishlist(wishlistResponse.data));  // Add to wishlist in the store
+        console.log("Wishlist Response Data:", wishlistResponse.data);
 
-          toast.success('Item moved to wishlist');
-          navigate('/wishlist');
+        if (wishlistResponse.status === 200 || wishlistResponse.status === 201) {
+          dispatch(cartAction.removeItem(productId));
+
+          // Validate wishlistResponse.data before dispatching
+          if (wishlistResponse.data && wishlistResponse.data.id) {
+            dispatch(cartAction.addToWishlist(wishlistResponse.data));
+            toast.success("Item moved to wishlist");
+            navigate("/wishlist");
+          } else {
+            // toast.error("Invalid response from wishlist API.");
+          }
         } else {
-          toast.error('Failed to add item to wishlist. Response status: ' + wishlistResponse.status);
+          toast.error("Failed to add item to wishlist. Response status: " + wishlistResponse.status);
         }
       } else {
-        toast.error('Failed to remove item from cart');
+        toast.error("Failed to remove item from cart");
       }
     } catch (error) {
-      console.error('Error moving item to wishlist:', error);
-      toast.error('An error occurred while moving item to wishlist');
+      console.error("Error moving item to wishlist:", error);
+      toast.error("An error occurred while moving item to wishlist");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -359,9 +383,9 @@ const Cart = () => {
               <button className="toggle-button ">
                 Shopping Cart ({tQuantity})
               </button>
-              <button className="toggle-button active d-lg-block d-none">
+              {/* <button className="toggle-button active d-lg-block d-none">
                 Trial Cart (0)
-              </button>
+              </button> */}
             </div>
           </div>
 

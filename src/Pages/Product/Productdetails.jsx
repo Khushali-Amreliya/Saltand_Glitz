@@ -1160,12 +1160,12 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from '../../Store/Slice/CartSlice';
 import Loader from "../Loader";
+import { v4 as uuidv4 } from 'uuid';
 import Helmet from "../../Components/Helmet";
 import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoStar } from "react-icons/io5";
 import { GoArrowLeft } from "react-icons/go";
-
 // import { productCard } from "../Product/productCard"
 
 const renderStars = (rating) => {
@@ -1458,13 +1458,13 @@ const Productdetails = () => {
             try {
                 let userId = user?._id || localStorage.getItem("guestUserId");
 
-                if (!userId) return; // Agar dono null hain, toh call na karein
+                // if (!userId) return; // Agar dono null hain, toh call na karein
 
                 const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
                 const wishlistData = response.data.wishlist || {};
                 const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
 
-                localStorage.setItem('wishlist', JSON.stringify({ [userId]: wishlistProductIds }));
+                localStorage.setItem('wishlist', JSON.stringify(wishlistProductIds));
                 setIsWishlist(wishlistProductIds.includes(product.id));
             } catch (error) {
                 console.error("Wishlist fetch error:", error);
@@ -1741,16 +1741,20 @@ const Productdetails = () => {
     const buyNow = async () => {
         setLoading(true);
 
-        if (!user || !user?._id) {
-            toast.error("Please login first to proceed!");
-            navigate('/login');
-            return;
-        }
-
         if (!size || !caratBy || !colorBy) {
             toast.error("Please select size, purity, and color before proceeding.");
             setLoading(false);
             return;
+        }
+        let userId = user?._id; // Check if user is logged in
+    
+        if (!userId) {
+            let guestUserId = localStorage.getItem("guestUserId");
+            if (!guestUserId) {
+                guestUserId = uuidv4();
+                localStorage.setItem("guestUserId", guestUserId);
+            }
+            userId = guestUserId; // Assign guest ID as userId
         }
 
         // ✅ Ensure `cartItems` is always an array
@@ -1779,7 +1783,7 @@ const Productdetails = () => {
                 "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/addCart",
                 {
                     product: product.id,
-                    user: user._id,
+                    user: userId,
                     size,
                     caratBy,
                     colorBy
@@ -1808,19 +1812,21 @@ const Productdetails = () => {
     const addToCart = async (id) => {
         setLoading(true);
     
-        let guestId = localStorage.getItem("guestId");
-    
-        if (!user || !user?._id) {
-            if (!guestId) {
-                guestId = crypto.randomUUID(); // Generate a unique guest ID
-                localStorage.setItem("guestId", guestId);
-            }
-        }
-    
         if (!size || !caratBy || !colorBy) {
             toast.error("Please select size, purity, and color before adding to cart.");
             setLoading(false);
             return;
+        }
+    
+        let userId = user?._id; // Check if user is logged in
+    
+        if (!userId) {
+            let guestUserId = localStorage.getItem("guestUserId");
+            if (!guestUserId) {
+                guestUserId = uuidv4();
+                localStorage.setItem("guestUserId", guestUserId);
+            }
+            userId = guestUserId; // Assign guest ID as userId
         }
     
         const cartItem = {
@@ -1840,7 +1846,7 @@ const Productdetails = () => {
                 "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/addCart",
                 {
                     product: id,
-                    user: user?._id || guestId, // ✅ Use guestId if user is not logged in
+                    user: userId,
                     size,
                     caratBy,
                     colorBy
@@ -1861,30 +1867,44 @@ const Productdetails = () => {
         }
     };
     
+
     const handleWishlistClick = async (event) => {
-        event.preventDefault(); // Page reload ya navigate hone se roke
-        if (!user || !user._id) {
-            toast.error("Please login first to add items to wishlist!");
-            return;
+        event.preventDefault(); // Prevents page reload or navigation
+
+        let userId = user?._id; // Check if the user is logged in
+
+        if (!userId) {
+            // Generate a guest user ID if not available
+            let guestUserId = localStorage.getItem("guestUserId");
+            if (!guestUserId) {
+                guestUserId = uuidv4();
+            }
+            localStorage.setItem("guestUserId", guestUserId);
+            userId = guestUserId; // Treat guest ID as userId
         }
 
-        const newWishlistStatus = !isWishlist;  // UI ko pehle update karenge
-        setIsWishlist(newWishlistStatus);  // Optimistic UI Update
+        const newWishlistStatus = !isWishlist; // Optimistic UI update
+        setIsWishlist(newWishlistStatus);
 
         try {
             if (newWishlistStatus) {
                 // Add to Wishlist API
-                await axios.post('https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist', {
-                    userId: user._id,
-                    productId: product.id,
-                });
+                await axios.post(
+                    'https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist',
+                    { userId, productId: product.id }
+                );
+                // toast.success("Added to Wishlist!");
             } else {
                 // Remove from Wishlist API
-                await axios.delete(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${product.id}`);
+                await axios.delete(
+                    `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${userId}/${product?.id}`
+                );
+                // toast.info("Removed from Wishlist!");
             }
         } catch (error) {
             console.error("Wishlist error:", error);
-            setIsWishlist(!newWishlistStatus);  // Agar error aaye to state wapas reset kar do
+            setIsWishlist(!newWishlistStatus); // Rollback UI update on error
+            toast.error("Something went wrong!");
         }
     };
 
@@ -1948,7 +1968,7 @@ const Productdetails = () => {
                                     {availableMedia.map((media, index) => (
                                         <div key={`media-${index}`} className="col-lg-6 col-md-6 col-sm-12 col-12 m-0 p-0">
                                             {media.includes('.mp4') ? ( //  Agar video hai toh video tag use karo
-                                                <video autoPlay loop controls muted style={{ width: "100%" }} className="item1 video p-1">
+                                                <video autoPlay loop controls playsInline muted style={{ width: "100%" }} className="item1 video p-1">
                                                     <source src={media} type="video/mp4" />
                                                 </video>
                                             ) : ( //  Otherwise image show karo
@@ -1965,7 +1985,7 @@ const Productdetails = () => {
                                         availableMedia.map((media, index) => (
                                             <div key={`media-${index}`}>
                                                 {media.includes('.mp4') ? ( // Agar video hai toh video tag use karo
-                                                    <video autoPlay loop controls muted style={{ width: "100%" }} className="item1 video p-1">
+                                                    <video autoPlay loop controls muted playsInline style={{ width: "100%" }} className="item1 video p-1">
                                                         <source src={media} type="video/mp4" />
                                                     </video>
                                                 ) : ( // Otherwise image show karo
@@ -3218,4 +3238,3 @@ export default Productdetails;
 // };
 
 // export default ProductDetails;
-
