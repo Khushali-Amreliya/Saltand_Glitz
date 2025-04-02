@@ -76,14 +76,6 @@ const Filter = ({ onFilterApply }) => {
         <h2 className="mt-3 filter_title">Price</h2>
         {priceRanges.slice(0, showMorePrices ? priceRanges.length : 4).map((price, index) => (
           <div className="form-check my-2" key={index}>
-            {/* <input
-              className="form-check-input"
-              type="checkbox"
-              id={price.id}
-              name="priceLimit"
-              checked={filters.priceLimit === price.id}
-              onChange={() => handleFilterChange("priceLimit", price.id)}
-            /> */}
             <input
               className="form-check-input"
               type="checkbox"

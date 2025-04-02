@@ -80,7 +80,8 @@ const Login = () => {
             "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/merge/mergeCartAndWishlist",
             { userId: user._id, cartProducts, wishlistProducts }
           );
-          console.log("Cart API Response:", JSON.stringify(mergeResponse.data, null, 2));
+          // console.log("Cart API Response:", JSON.stringify(mergeResponse.data, null, 2));
+          console.log("Cart API Response:", mergeResponse.data)
 
         } catch (mergeError) {
           console.error("Merge API Error:", mergeError.response?.data || mergeError.message);
@@ -98,8 +99,8 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(userRes.data));
 
       toast.success("Login Successful!");
-      window.location.reload(); // Commented to prevent navigation
       navigate("/")
+      window.location.reload(); // Commented to prevent navigation
     } catch (err) {
       console.error("Login Error:", err.response?.data || err.message);
       toast.error(err.response?.data?.message || "Login failed");
