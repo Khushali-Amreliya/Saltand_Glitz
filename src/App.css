@@ -217,6 +217,7 @@ div:where(.swal2-container) .swal2-html-container {
     background-color: #fff4c3;
 }
 
+
 /* Responsive */
 @media(max-width:1024px) {
 

@@ -214,8 +214,8 @@ const Loginn = () => {
             localStorage.setItem('user', JSON.stringify(userRes.data));
     
             toast.success("Login Successful!");
-            // window.location.reload(); // Commented to prevent navigation
-            // navigate("/")
+            navigate("/")
+            window.location.reload(); // Commented to prevent navigation
         } catch (err) {
             console.error("Login Error:", err.response?.data || err.message);
             toast.error(err.response?.data?.message || "Login failed");

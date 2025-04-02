@@ -3169,13 +3169,15 @@ const Header = () => {
             dispatch(cartAction.resetState());
     
             // Clear user data
-            localStorage.removeItem('user');
-            localStorage.removeItem('guestUserId');
+            // localStorage.removeItem('user');
+            // localStorage.removeItem('guestUserId');
     
             console.log("After removal, guestUserId:", localStorage.getItem('guestUserId')); // Debugging
     
             setUser(null);
             setIsLoggedIn(false);
+
+            localStorage.clear()
     
             toast.success('You have successfully logged out');
             
@@ -3656,7 +3658,7 @@ const Header = () => {
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active"
-                                            to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}`}
+                                            to={`/products/${"Bracelet".replace(/ /g, "-")}`}
                                             id="bracelet">
                                             <i className="ri-subtract-line"></i>Bracelets & Bangles
                                         </Link>
@@ -4530,7 +4532,7 @@ const Header = () => {
                                     </li>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link active"
-                                            to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}`}
+                                            to="/products/Bracelet"
                                             id="bracelet">
                                             Bracelets & Bangles
                                         </Link>
@@ -4546,7 +4548,7 @@ const Header = () => {
                                                             <ul className='ps-0'>
                                                                 <li>
                                                                     <Link
-                                                                        to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Chain Bracelet".replace(/ /g, "-")}`}
+                                                                        to={`/products/${"Bracelet".replace(/ /g, "-")}/${"Chain Bracelet".replace(/ /g, "-")}`}
                                                                         className="d-flex align-items-center"
                                                                     >
                                                                         <img
@@ -4558,7 +4560,7 @@ const Header = () => {
                                                                     </Link>
                                                                 </li>
                                                                 <li>
-                                                                    <Link to={`/products/${"Ladies Bracelet".replace(/ /g, "-")}/${"Oval Bracelet".replace(/ /g, "-")}`}
+                                                                    <Link to={`/products/${"Bracelet".replace(/ /g, "-")}/${"Oval Bracelet".replace(/ /g, "-")}`}
                                                                         className="d-flex align-items-center">
                                                                         <img
                                                                             alt='Jewelry Style'

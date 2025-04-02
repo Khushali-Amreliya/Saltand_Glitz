@@ -745,6 +745,13 @@
     background-color: #ccc !important; /* Gray */
     color: white !important;
 }
+.star_half {
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(90deg, gold 50%, #ccc 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {

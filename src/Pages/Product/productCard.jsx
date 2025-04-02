@@ -299,7 +299,8 @@ const ProductCard = ({ Productsitem }) => {
         const fetchRating = async () => {
             try {
                 const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/getRating/${product_id}`);
-                // console.log("Fetched Rating Data:", response.data);
+                console.log("Fetched Rating Data:", response.data);
+                const averageRating = response.data.averageRating
 
                 const { approvedRating } = response.data;
 
@@ -308,13 +309,13 @@ const ProductCard = ({ Productsitem }) => {
                     const totalRatings = approvedRating.length;
                     const avgRating = approvedRating.reduce((sum, item) => sum + item.userRating, 0) / totalRatings;
 
-                    setRating(avgRating.toFixed(1)); // Rounded to 1 decimal
+                    setRating(averageRating); // Rounded to 1 decimal
                 } else {
                     setRating(0);
                 }
             } catch (error) {
                 if (error.response && error.response.status === 404) {
-                    console.warn("Product rating not found, setting rating to 0");
+                    // console.warn("Product rating not found, setting rating to 0");
                     // setProductRating(0);
                 } else {
                     console.error("Error fetching rating:", error);
@@ -407,18 +408,18 @@ const ProductCard = ({ Productsitem }) => {
                             <img
                                 alt="product-image"
                                 src={displayImages[0]}
-                                className="img-fluid border border-1 rounded-3"
+                                className="img-fluid border border-1 "
                                 onError={(e) => {
                                     e.target.onerror = null; // Prevent infinite loop
                                     e.target.style.display = "none";
                                     e.target.parentElement.innerHTML = `
-                                    <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
+                                    <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1' style='height: 200px;'>
                                         <span class='exlimation_mark'>!</span>
                                     </div>`;
                                 }}
                             />
                         ) : (
-                            <Slider ref={slider} {...imageVideo} className="border border-1 rounded-3">
+                            <Slider ref={slider} {...imageVideo} className="border border-1">
                                 {displayImages.map((img, index) => (
                                     <img
                                         key={index}
@@ -429,7 +430,7 @@ const ProductCard = ({ Productsitem }) => {
                                             e.target.onerror = null; // Prevent infinite loop
                                             e.target.style.display = "none";
                                             e.target.parentElement.innerHTML = `
-                                            <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3' style='height: 200px;'>
+                                            <div class='no-image-placeholder d-flex justify-content-center align-items-center border border-1' style='height: 200px;'>
                                                 <span class='exlimation_mark'>!</span>
                                             </div>`;
                                         }}
@@ -438,7 +439,7 @@ const ProductCard = ({ Productsitem }) => {
                             </Slider>
                         )
                     ) : (
-                        <div className="no-image-placeholder d-flex justify-content-center align-items-center border border-1 rounded-3">
+                        <div className="no-image-placeholder d-flex justify-content-center align-items-center border border-1">
                             <span className="exlimation_mark">!</span>
                         </div>
                     )}

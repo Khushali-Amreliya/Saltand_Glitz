@@ -1171,14 +1171,32 @@ import { GoArrowLeft } from "react-icons/go";
 const renderStars = (rating) => {
     return (
         <div className="star_list_container">
-            {[...Array(5)].map((_, i) => (
-                <span key={i} className={`star_item ${i < rating ? "star_filled" : "star_empty"}`}>
-                    ★
-                </span>
-            ))}
+            {[...Array(5)].map((_, i) => {
+                let bgStyle = {};
+
+                if (i < Math.floor(rating)) {
+                    // Pure full star (gold)
+                    bgStyle = { backgroundColor: "gold" };
+                } else if (i === Math.floor(rating) && rating % 1 !== 0) {
+                    // Half star effect using linear gradient
+                    bgStyle = {
+                        background: "linear-gradient(to right, gold 50%, #ccc 50%)"
+                    };
+                } else {
+                    // Empty star (gray)
+                    bgStyle = { backgroundColor: "#ccc" };
+                }
+
+                return (
+                    <span key={i} className="star_item text-light" style={bgStyle}>
+                        ★
+                    </span>
+                );
+            })}
         </div>
     );
 };
+
 
 
 const renderStar = (rating) => {
@@ -1218,6 +1236,10 @@ const colors = [
     { id: 3, color: "#ffcc66", name: "Yellow Gold" }
 ];
 const Productdetails = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const [size, setSize] = useState(6); // For ring size
     const [caratBy, setCaratBy] = useState("14KT"); // For Purity (KT)
     const [colorBy, setColorBy] = useState(colors.length >= 3 ? colors[2].name : ""); // For selected color
@@ -1259,10 +1281,6 @@ const Productdetails = () => {
     });
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    useEffect(() => {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new window.bootstrap.Tooltip(tooltipTriggerEl);
@@ -1283,11 +1301,11 @@ const Productdetails = () => {
         dots: true,
         infinite: false,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3.5,
         slidesToScroll: 1,
         responsive: [
             { breakpoint: 992, settings: { slidesToShow: 3 } },
-            { breakpoint: 768, settings: { slidesToShow: 2 } },
+            { breakpoint: 768, settings: { slidesToShow: 1.5 } },
             { breakpoint: 576, settings: { slidesToShow: 1 } },
         ],
     };
@@ -1326,16 +1344,12 @@ const Productdetails = () => {
             try {
                 const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/getRating/${id}`);
                 console.log("Review Data", response.data);
-
+                const averageRating = response.data.averageRating
                 const { approvedRating } = response.data;
 
                 if (approvedRating.length > 0) {
-                    const totalRatings = approvedRating.length;
-                    const avgRating =
-                        approvedRating.reduce((sum, item) => sum + Number(item.userRating), 0) / totalRatings;
-
                     setProductRating({
-                        rating: avgRating.toFixed(1),
+                        rating: averageRating,
                         ratings: approvedRating
                     });
                 } else {
@@ -1352,6 +1366,11 @@ const Productdetails = () => {
     }, [id]);
 
     const handleStarClick = async (star) => {
+        if (!user?._id) {
+            toast.error("To place your rating, please log in first.");
+            return;
+        }
+
         setRating(star);
         setLoading(true);
 
@@ -1367,7 +1386,7 @@ const Productdetails = () => {
             // console.log("REVIEW", response);
 
             if (response.status === 201) {
-                toast.success("Rating added successfully!");
+                // toast.success("Rating added successfully!");
             }
         } catch (error) {
             toast.error(error.response?.data?.message || "Failed to add rating");
@@ -1747,7 +1766,7 @@ const Productdetails = () => {
             return;
         }
         let userId = user?._id; // Check if user is logged in
-    
+
         if (!userId) {
             let guestUserId = localStorage.getItem("guestUserId");
             if (!guestUserId) {
@@ -1811,15 +1830,15 @@ const Productdetails = () => {
 
     const addToCart = async (id) => {
         setLoading(true);
-    
+
         if (!size || !caratBy || !colorBy) {
             toast.error("Please select size, purity, and color before adding to cart.");
             setLoading(false);
             return;
         }
-    
+
         let userId = user?._id; // Check if user is logged in
-    
+
         if (!userId) {
             let guestUserId = localStorage.getItem("guestUserId");
             if (!guestUserId) {
@@ -1828,7 +1847,7 @@ const Productdetails = () => {
             }
             userId = guestUserId; // Assign guest ID as userId
         }
-    
+
         const cartItem = {
             id,
             title: product.title,
@@ -1840,7 +1859,7 @@ const Productdetails = () => {
             caratBy,
             colorBy
         };
-    
+
         try {
             const response = await axios.post(
                 "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/addCart",
@@ -1852,7 +1871,7 @@ const Productdetails = () => {
                     colorBy
                 }
             );
-    
+
             if (response.status === 201 || response.status === 200) {
                 toast.success("Product added to cart successfully!");
                 dispatch(cartAction.addItem(cartItem)); // ✅ Redux update
@@ -1866,7 +1885,7 @@ const Productdetails = () => {
             setLoading(false);
         }
     };
-    
+
 
     const handleWishlistClick = async (event) => {
         event.preventDefault(); // Prevents page reload or navigation
@@ -2745,6 +2764,9 @@ const Productdetails = () => {
                                                             <span>{rating.userId.firstName.charAt(0) || "User"}</span>&nbsp;
                                                             {rating.userId.firstName || "No Review"}
                                                         </p>
+                                                    </div>
+                                                    <div className="pb-2">
+                                                        <img src={rating.productImage} className="img-fluid w-25"></img>
                                                     </div>
                                                     <h5 className="mb-0">{rating.userReview || "No Review"}</h5>
                                                 </div>

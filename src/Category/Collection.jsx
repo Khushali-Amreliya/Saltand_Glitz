@@ -15,6 +15,15 @@ const CollectionPage = () => {
     const [error, setError] = useState(null);
     const { category = "", subCategory = "" } = useParams(); // Provide default empty string
 
+    const [appliedFilters, setAppliedFilters] = useState({
+        title: category || "",
+        subCategory: subCategory || "",
+        sortBy: "",
+        priceOrder: "",
+        featured: "",
+        priceLimit: []
+    });
+
     // Convert hyphen (-) back to space only if it's not empty
     const decodedCategory = category ? category.replace(/-/g, " ") : "";
     const decodedSubCategory = subCategory ? subCategory.replace(/-/g, " ") : "";
@@ -36,7 +45,7 @@ const CollectionPage = () => {
                 }
             );
             console.log(response);
-            
+
 
             let filteredProducts = response.data.updatedProducts;
 
@@ -63,6 +72,11 @@ const CollectionPage = () => {
         setLoading(false);
     };
 
+    const handleFilterApply = (newFilters) => {
+        const updatedFilters = { ...appliedFilters, ...newFilters };
+        setAppliedFilters(updatedFilters);
+        fetchFilteredProducts(updatedFilters);
+    };
     useEffect(() => {
         fetchFilteredProducts();
     }, [category, subCategory]);
@@ -86,13 +100,12 @@ const CollectionPage = () => {
                 <section className='container-fluid mt-2 mb-4'>
                     <div className='row'>
                         <div className="col-xl-3 col-lg-3 d-lg-block d-none">
-                            <Filter onFilterApply={(filterData) => fetchFilteredProducts(filterData)} />
-
+                            <Filter onFilterApply={handleFilterApply} />
                         </div>
-                        <Mdfilter onFilterApply={(filterData) => fetchFilteredProducts(filterData)} />
+                        <Mdfilter onFilterApply={handleFilterApply} />
 
                         <div className="col-lg-9">
-                            <Sort onFilterApply={(sortData) => fetchFilteredProducts(sortData)} />
+                            <Sort onFilterApply={handleFilterApply} />
 
                             <div className="row px-1">
                                 {loading ? (

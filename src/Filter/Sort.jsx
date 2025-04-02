@@ -8,17 +8,16 @@ const Sort = ({ onFilterApply }) => {
     });
 
     const handleSelectFilterChange = (combinedValue) => {
-        let updatedFilters = { sortBy: "", priceOrder: "", featured: "" };
+        let updatedFilters = {};
 
         if (combinedValue === "featured") {
-            updatedFilters.featured = "featured";
+            updatedFilters = { featured: "featured", sortBy: "", priceOrder: "" };
         } else if (combinedValue !== "default") {
             const [sortBy, priceOrder] = combinedValue.split("_");
-            updatedFilters.sortBy = sortBy || "";
-            updatedFilters.priceOrder = priceOrder || "";
+            updatedFilters = { sortBy: sortBy || "", priceOrder: priceOrder || "", featured: "" };
         }
 
-        setFilters(updatedFilters);
+        // ✅ Preserve previous filters while applying sort
         onFilterApply(updatedFilters);
     };
 

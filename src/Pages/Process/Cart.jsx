@@ -808,7 +808,7 @@ const Cart = () => {
           <div className="cart_footer_left pt-3">
             <p>
               <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) |
-              contact us@caratlane.com
+              contact us@saltandglitz.com
             </p>
           </div>
           <div className="cart_footer_right">

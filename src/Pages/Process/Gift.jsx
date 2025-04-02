@@ -196,7 +196,7 @@ const Gift = () => {
             <section className="cart_footer">
                 <div className="cart_footer_left pt-3">
                     <p>
-                        <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) | contactus@caratlane.com
+                        <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) | contactus@saltandglitz.com
                     </p>
                 </div>
                 <div className="cart_footer_right">

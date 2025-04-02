@@ -679,7 +679,7 @@ const Mainpage = () => {
                 .filter((_, index) => index % 2 === 0) // ✅ Only 0, 2, 4 index
                 .map((banner, index) => (
                   <div key={index}>
-                    {banner.type === "video" ? (
+                    {banner.type === "goldVideo" ? (
                       // <video autoPlay muted loop className="img-fluid banner_class" style={{ borderRadius: "10px", objectFit: "cover" }}>
                       //   <source src={banner.bannerImage} type="video/mp4" />
                       //   Your browser does not support the video tag.
@@ -723,7 +723,7 @@ const Mainpage = () => {
                 .filter((_, index) => index % 2 !== 0) // ✅ Only 1, 3, 5 index
                 .map((banner, index) => (
                   <div key={index}>
-                    {banner.type === "video" ? (
+                    {banner.type === "goldVideo" ? (
                       // <video autoPlay muted loop className="img-fluid" style={{ borderRadius: "10px", objectFit: "cover" }}>
                       //   <source src={banner.mobileBannerImage} type="video/mp4" />
                       //   Your browser does not support the video tag.

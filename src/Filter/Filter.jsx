@@ -22,9 +22,25 @@ const Filter = ({ onFilterApply }) => {
   const [showViewMore, setShowViewMore] = useState(false);
 
   const handleFilterChange = (type, value) => {
-    const updatedFilters = { ...filters, [type]: value };
-    setFilters(updatedFilters);
-    onFilterApply(updatedFilters); // Parent component ko notify karo
+    setFilters(prevFilters => {
+      let updatedFilter = prevFilters[type] || [];
+
+      if (Array.isArray(updatedFilter)) {
+        if (updatedFilter.includes(value)) {
+          updatedFilter = updatedFilter.filter(item => item !== value);
+        } else {
+          updatedFilter = [...updatedFilter, value];
+        }
+      } else {
+        updatedFilter = [value];
+      }
+
+      const updatedFilters = { ...prevFilters, [type]: updatedFilter };
+
+      // ✅ Preserve sorting filters while applying category/price filter
+      onFilterApply(updatedFilters);
+      return updatedFilters;
+    });
   };
 
   const clearFilters = () => {
@@ -32,7 +48,7 @@ const Filter = ({ onFilterApply }) => {
     window.location.reload(); // Refresh the page
   };
 
-  const categories = ["Earring", "Ring", "Ladies Bracelet"];
+  const categories = ["Earring", "Ring", "Bracelet"];
   const priceRanges = [
     { id: "below20k", label: "Below ₹20,000" },
     { id: "20kTo30k", label: "₹20,000 - ₹30,000" },
@@ -60,14 +76,23 @@ const Filter = ({ onFilterApply }) => {
         <h2 className="mt-3 filter_title">Price</h2>
         {priceRanges.slice(0, showMorePrices ? priceRanges.length : 4).map((price, index) => (
           <div className="form-check my-2" key={index}>
-            <input
+            {/* <input
               className="form-check-input"
               type="checkbox"
               id={price.id}
               name="priceLimit"
               checked={filters.priceLimit === price.id}
               onChange={() => handleFilterChange("priceLimit", price.id)}
+            /> */}
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id={price.id}
+              name="priceLimit"
+              checked={filters.priceLimit?.includes(price.id) || false} // Correct checking
+              onChange={() => handleFilterChange("priceLimit", price.id)}
             />
+
             <label className="form-check-label" htmlFor={price.id}>
               {price.label}
             </label>
@@ -136,7 +161,7 @@ const Filter = ({ onFilterApply }) => {
             className="form-check-input"
             type="checkbox"
             id="shopForWomen"
-            checked={filters.typeBy === "female"}
+            checked={filters.typeBy?.includes("female") || false}
             onChange={() => handleFilterChange("typeBy", "female")}
           />
           <label className="form-check-label" htmlFor="shopForWomen">
@@ -149,7 +174,7 @@ const Filter = ({ onFilterApply }) => {
             className="form-check-input"
             type="checkbox"
             id="shopForMen"
-            checked={filters.typeBy === "male"}
+            checked={filters.typeBy?.includes("male") || false}
             onChange={() => handleFilterChange("typeBy", "male")}
           />
           <label className="form-check-label" htmlFor="shopForMen">
@@ -208,7 +233,9 @@ const Filter = ({ onFilterApply }) => {
                 type="checkbox"
                 value={gift}
                 id={`giftFor${index}`}
-                checked={filters.giftFor === gift}
+                // checked={filters.giftFor === gift}
+                checked={filters.giftFor?.includes(gift) || false}
+
                 onChange={() => handleFilterChange("giftFor", gift)}
               />
               <label className="form-check-label" htmlFor={`giftFor${index}`}>
