@@ -615,9 +615,9 @@
 .star.filled {
     color: #000;
 }
-
 .review_list_box {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, .15); */
+    box-shadow: 0 2px 8px var(--background);
     border-radius: 4px;
     padding: 20px;
 }
