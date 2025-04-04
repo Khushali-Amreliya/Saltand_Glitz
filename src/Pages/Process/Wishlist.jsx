@@ -27,6 +27,10 @@ const Wishlist = () => {
 
     try {
       const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
+      console.log("Wishlist", response);
+      console.log(response.data.wishlist.products);
+
+
       if (response.status === 200) {
         setWishlistItems(response.data.wishlist.products);
       }
@@ -72,11 +76,17 @@ const Wishlist = () => {
 
   // Move item from wishlist to cart
   const handleMoveToCart = async (item, id) => {
+    let userId = user?._id || localStorage.getItem("guestUserId");
     setLoading(true)
     const cartItem = {
       product: item.productId.product_id,
-      user: user._id,
+      user: userId,
+      caratBy: item.caratBy || "14KT",
+      colorBy: item.colorBy || "Yellow Gold",
+      size: item.size || "6"
     };
+    console.log("cartItem", cartItem);
+
 
     try {
       // Add item to cart
@@ -84,12 +94,12 @@ const Wishlist = () => {
         "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/addCart",
         cartItem
       );
-      // console.log("Cart API Response:", addCartResponse);
+      console.log("Cart API Response:", addCartResponse);
 
       if (addCartResponse.status === 201 || addCartResponse.status === 200) {
         // Remove item from wishlist
         const removeWishlistResponse = await axios.delete(
-          `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${user._id}/${id}`
+          `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/remove_wishlist/${userId}/${id}`
         );
         // console.log("Remove Wishlist Response:", removeWishlistResponse);
 
@@ -136,7 +146,7 @@ const Wishlist = () => {
                     <div key={item.productId.product_id} className='col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6'>
                       <div className='card border-0'>
                         <Link to={`/Productdetails/${item.productId.product_id}`}>
-                          <img alt={item.productId.title} src={item.productId.image01} className='position-relative w-100 height_Set'
+                          <img alt={item.productId.title} src={item.productId.image01} className='position-relative img-fluid'
                             onError={(e) => {
                               e.target.onerror = null;
                               e.target.style.display = "none";

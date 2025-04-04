@@ -1280,6 +1280,7 @@ const Productdetails = () => {
         ratings: []
     });
 
+
     useEffect(() => {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -1352,6 +1353,10 @@ const Productdetails = () => {
                         rating: averageRating,
                         ratings: approvedRating
                     });
+                    const userReview = approvedRating.find((review) => review.userId._id === user?._id);
+                    if (userReview) {
+                        setRating(userReview.userRating); // ⭐ Set user rating if exists
+                    }
                 } else {
                     setProductRating({
                         rating: 0,
@@ -1387,6 +1392,11 @@ const Productdetails = () => {
 
             if (response.status === 201) {
                 // toast.success("Rating added successfully!");
+                // ✅ Update ratings locally after submission
+                setProductRating((prev) => ({
+                    ...prev,
+                    ratings: [...prev.ratings, reviewSchema]
+                }));
             }
         } catch (error) {
             toast.error(error.response?.data?.message || "Failed to add rating");
@@ -1425,7 +1435,7 @@ const Productdetails = () => {
             // console.log(response);
 
             if (response.status === 200) {
-                toast.success("Rating updated successfully!");
+                // toast.success("Rating updated successfully!");
                 const modal = new window.bootstrap.Modal(modalRef.current);
                 modal.hide(); // Hide modal after success
                 setFiles([]); // Clear uploaded files after submit
@@ -1452,6 +1462,7 @@ const Productdetails = () => {
             return;
         }
         toast.success("Review submitted successfully!");
+        window.location.reload(); // Commented to prevent navigation
     };
 
     // Rating Labels
@@ -2761,10 +2772,13 @@ const Productdetails = () => {
                                                     </div>
                                                     <div className="py-4">
                                                         <p className="mb-0">
-                                                            <span>{rating.userId.firstName.charAt(0) || "User"}</span>&nbsp;
-                                                            {rating.userId.firstName || "No Review"}
+                                                            <span>
+                                                                {rating?.userId?.firstName ? rating.userId.firstName.charAt(0) : "U"}
+                                                            </span>&nbsp;
+                                                            {rating?.userId?.firstName || "No Review"}
                                                         </p>
                                                     </div>
+
                                                     <div className="pb-2">
                                                         <img src={rating.productImage} className="img-fluid w-25"></img>
                                                     </div>
@@ -2778,7 +2792,6 @@ const Productdetails = () => {
                                         <p className="m-0 p-0">No reviews yet, lead the way and share your thoughts</p>
                                     </div>
                                 )}
-
                             </div>
                         </div>
                     </div>
@@ -2806,7 +2819,7 @@ const Productdetails = () => {
                                                 <img
                                                     alt={item.title}
                                                     src={item.image01}
-                                                    className="w-100 height_Set position-relative"
+                                                    className="w-100 position-relative"
                                                     onError={(e) => {
                                                         e.target.onerror = null;
                                                         e.target.style.display = "none";
@@ -2861,7 +2874,7 @@ const Productdetails = () => {
                                                 <img
                                                     alt={item.title}
                                                     src={item.images?.[0]}
-                                                    className="height_Set w-100 position-relative"
+                                                    className="img-fluid position-relative"
                                                     onError={(e) => {
                                                         e.target.onerror = null;
                                                         e.target.style.display = "none";

@@ -215,7 +215,7 @@ const Cart = () => {
       let userId = user?._id || localStorage.getItem("guestUserId");
       const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`);
       console.log(response);
-      
+
       const data = response.data;
 
       let cartProduct = typeof product === "string"
@@ -243,7 +243,7 @@ const Cart = () => {
         cartItem
       );
       console.log("Increment Response:", res.data);
-      
+
 
       if (res.status === 200) {
         dispatch(cartAction.incrementItem(cartProduct?.productId?.product_id || cartProduct?.product_id));
@@ -258,6 +258,72 @@ const Cart = () => {
       setLoading(false);
     }
   };
+
+  // const moveToWishlist = async (item) => {
+  //   setLoading(true);
+
+  //   const userId = user?._id || localStorage.getItem("guestUserId");
+  //   const productId = item?.productId?.product_id;
+
+  //   if (!productId) {
+  //     toast.error("Invalid product data!");
+  //     setLoading(false);
+  //     return;
+  //   }
+
+  //   const cartItem = {
+  //     user: userId,
+  //     productId: productId,
+  //   };
+
+  //   try {
+  //     const removeResponse = await axios.delete(
+  //       `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${userId}/${productId}`,
+  //       { data: cartItem }
+  //     );
+
+  //     if (removeResponse.status === 200) {
+  //       const wishlistItem = {
+  //         userId: userId,
+  //         productId: productId,
+  //         size: item?.size,          // Send size
+  //         colorBy: item?.colorBy,    // Send colorBy
+  //         caratBy: item?.caratBy     // Send caratBy
+  //       };
+  //       console.log("wishlistItem", wishlistItem);
+
+  //       const wishlistResponse = await axios.post(
+  //         "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist",
+  //         wishlistItem
+  //       );
+
+  //       console.log("Wishlist Response Data:", wishlistResponse.data);
+
+  //       if (wishlistResponse.status === 200 || wishlistResponse.status === 201) {
+  //         dispatch(cartAction.removeItem(productId));
+
+  //         // Validate wishlistResponse.data before dispatching
+  //         if (wishlistResponse.data && wishlistResponse.data.id) {
+  //           dispatch(cartAction.addToWishlist(wishlistResponse.data));
+  //           navigate("/wishlist");
+  //           toast.success("Item moved to wishlist");
+  //         } else {
+  //           // toast.error("Invalid response from wishlist API.");
+  //         }
+  //       } else {
+  //         toast.error("Failed to add item to wishlist. Response status: " + wishlistResponse.status);
+  //       }
+  //     } else {
+  //       toast.error("Failed to remove item from cart");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error moving item to wishlist:", error);
+  //     toast.error("An error occurred while moving item to wishlist");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
 
   const moveToWishlist = async (item) => {
     setLoading(true);
@@ -277,15 +343,27 @@ const Cart = () => {
     };
 
     try {
+      // Step 1: Remove from Cart
       const removeResponse = await axios.delete(
         `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${userId}/${productId}`,
         { data: cartItem }
       );
 
       if (removeResponse.status === 200) {
+        // Step 2: Add to Wishlist
+        const wishlistItem = {
+          userId: userId,
+          productId: productId,
+          size: item?.size,
+          colorBy: item?.colorBy,
+          caratBy: item?.caratBy
+        };
+
+        console.log("Sending wishlistItem:", wishlistItem);
+
         const wishlistResponse = await axios.post(
           "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist",
-          { userId: userId, productId: productId }
+          wishlistItem
         );
 
         console.log("Wishlist Response Data:", wishlistResponse.data);
@@ -293,13 +371,20 @@ const Cart = () => {
         if (wishlistResponse.status === 200 || wishlistResponse.status === 201) {
           dispatch(cartAction.removeItem(productId));
 
-          // Validate wishlistResponse.data before dispatching
-          if (wishlistResponse.data && wishlistResponse.data.id) {
-            dispatch(cartAction.addToWishlist(wishlistResponse.data));
-            toast.success("Item moved to wishlist");
-            navigate("/wishlist");
+          // Fix API Response Handling
+          const wishlistData = wishlistResponse.data.wishlist;
+          if (wishlistData && wishlistData._id) {
+            const wishlistProduct = wishlistData.products.find(p => p.productId === productId);
+
+            if (wishlistProduct) {
+              dispatch(cartAction.addToWishlist(wishlistProduct));
+              navigate("/wishlist");
+              toast.success("Item moved to wishlist");
+            } else {
+              toast.error("Product not found in wishlist response.");
+            }
           } else {
-            // toast.error("Invalid response from wishlist API.");
+            toast.error("Invalid wishlist response: " + JSON.stringify(wishlistResponse.data));
           }
         } else {
           toast.error("Failed to add item to wishlist. Response status: " + wishlistResponse.status);
@@ -309,7 +394,13 @@ const Cart = () => {
       }
     } catch (error) {
       console.error("Error moving item to wishlist:", error);
-      toast.error("An error occurred while moving item to wishlist");
+
+      if (error.response) {
+        console.error("Wishlist API Error Response:", error.response.data);
+        toast.error("Wishlist API Error: " + (error.response.data.message || "Unexpected error"));
+      } else {
+        toast.error("An error occurred while moving item to wishlist");
+      }
     } finally {
       setLoading(false);
     }

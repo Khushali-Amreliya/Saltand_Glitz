@@ -185,7 +185,10 @@ const Loginn = () => {
                 console.log("Formatted Cart Data to Send:", cartProducts);
     
                 const wishlistProducts = guestWishlist.map(item => ({
-                    productId: item.productId
+                    productId: item.productId,
+                    size: item?.size ? String(item.size) : "6",  // Default size if missing
+                    caratBy: item?.caratBy ? String(item.caratBy) : "14KT",  // Default caratBy if missing
+                    colorBy: item?.colorBy ? String(item.colorBy) : "Yellow Gold",  // Default color if missing
                 })) || [];
     
                 console.log("Wishlist Data to Send:", wishlistProducts);
@@ -214,8 +217,8 @@ const Loginn = () => {
             localStorage.setItem('user', JSON.stringify(userRes.data));
     
             toast.success("Login Successful!");
-            navigate("/")
-            window.location.reload(); // Commented to prevent navigation
+            // navigate("/")
+            // window.location.reload(); // Commented to prevent navigation
         } catch (err) {
             console.error("Login Error:", err.response?.data || err.message);
             toast.error(err.response?.data?.message || "Login failed");

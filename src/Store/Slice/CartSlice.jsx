@@ -240,7 +240,10 @@ const cartSlice = createSlice({
                     id: newItem.id,
                     title: newItem.title || "Unknown Product",
                     image01: newItem.image01 || "",
-                    total14KT: newItem.total14KT || 0
+                    total14KT: newItem.total14KT || 0,
+                    caratBy: newItem.caratBy,
+                    colorBy: newItem.colorBy,
+                    size: newItem.size,
                 });
             }
 
@@ -250,38 +253,41 @@ const cartSlice = createSlice({
 
         removeFromWishlist(state, action) {
             const itemId = action.payload;
-            state.wishlistItem = state.wishlistItem.filter(item => item.id !== itemId);
+            state.wishlist = state.wishlist.filter(item => item.id !== itemId);
 
-            setWishlist(state.wishlistItem);
+            setWishlist(state.wishlist);
         },
 
         moveToWishlist(state, action) {
             const newItem = action.payload; // Ensure this has all necessary properties
 
-            const existingItem = state.wishlistItem.find(item => item.id === newItem.id);
+            const existingItem = state.wishlist.find(item => item.id === newItem.id);
 
             if (!existingItem) {
-                state.wishlistItem.push({
+                state.wishlist.push({
                     id: newItem.id,
                     title: newItem.title,
                     image01: newItem.image01,
-                    price: newItem.price
+                    price: newItem.price,
+                    caratBy: newItem.caratBy,
+                    colorBy: newItem.colorBy,
+                    size: newItem.size,
                 });
             }
 
-            setWishlist(state.wishlistItem);
+            setWishlist(state.wishlist);
         },
 
         clearCartAndWishlist(state) {
             state.cartItems = [];
-            state.wishlistItems = [];
+            state.wishlist = [];
             state.totalQuantity = 0;
             state.subtotal = 0;
             state.totalAmount = 0;
             state.discount = 0;
 
             localStorage.removeItem('cartItems');
-            localStorage.removeItem('wishlistItem');
+            localStorage.removeItem('wishlist');
             localStorage.removeItem('totalQuantity');
             localStorage.removeItem('subtotal');
             localStorage.removeItem('discount');
