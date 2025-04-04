@@ -70,7 +70,10 @@ const Login = () => {
         console.log("Formatted Cart Data to Send:", cartProducts);
 
         const wishlistProducts = guestWishlist.map(item => ({
-          productId: item.productId
+          productId: item.productId || item?.id,
+          size: item?.size ? String(item.size) : "6",  // Default size if missing
+          caratBy: item?.caratBy ? String(item.caratBy) : "14KT",  // Default caratBy if missing
+          colorBy: item?.colorBy ? String(item.colorBy) : "Yellow Gold",  // Default color if missing
         })) || [];
 
         console.log("Wishlist Data to Send:", wishlistProducts);
@@ -174,7 +177,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-
 
   const handleResetPassword = async () => {
     setLoading(true);
