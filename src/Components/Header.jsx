@@ -3238,6 +3238,8 @@ const Header = () => {
 
         try {
             const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/search/searchProduct", { query });
+            console.log("search",response);
+            
             let searchResults = response.data;
             if (!Array.isArray(searchResults)) {
                 searchResults = response.data.data || [];
@@ -3740,7 +3742,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`} id="solitaires">
+                                        <Link className="nav-link active" to="/products/Mangalsutra" id="solitaires">
                                             <i className="ri-subtract-line"></i>Mangalsutras
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="solitaires">
@@ -3831,7 +3833,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/products" id="moreJewellery">
+                                        <Link className="nav-link active" to="/products/Pendant" id="moreJewellery">
                                             <i className="ri-subtract-line"></i>Necklaces & Pendants
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="moreJewellery">
@@ -4698,7 +4700,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to={`/products/Ring/${"Solitaire Rings".replace(/ /g, "-")}`} id="solitaires">
+                                        <Link className="nav-link active" to="/products/Mangalsutra" id="solitaires">
                                             Mangalsutras
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="solitaires">
@@ -4863,7 +4865,7 @@ const Header = () => {
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/products" id="moreJewellery">
+                                        <Link className="nav-link active" to="/products/Pendant" id="moreJewellery">
                                             Necklaces & Pendants
                                         </Link>
                                         <ul className="dropdown-menu dropdown-content" aria-labelledby="moreJewellery">
@@ -5197,7 +5199,7 @@ const Header = () => {
                                 defaultProducts.map((item) => (
                                     <div className="col-lg-6 px-4" key={item._id}>
                                         <div className="search-item">
-                                            <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark">
+                                            <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
                                                 <div className="left">
                                                     <img
                                                         src={item.goldImages[0]}
@@ -5224,7 +5226,7 @@ const Header = () => {
                                     filteredProducts.map((item) => (
                                         <div className="col-lg-6 px-4" key={item._id}>
                                             <div className="search-item">
-                                                <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark">
+                                                <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
                                                     <div className="left">
                                                         <img
                                                             src={item.image01}
@@ -5273,13 +5275,13 @@ const Header = () => {
                                             className="card border-0 w-100 mx-auto d-block px-1"
                                             key={item.id}
                                         >
-                                            <Link to={`/Productdetails/${item.id}`}>
+                                            <Link to={`/Productdetails/${item.id}`} data-bs-dismiss="offcanvas" aria-label="Close">
                                                 <img
                                                     alt={item.title}
                                                     src={item.images?.[0]}
                                                     className="img-fluid position-relative"
                                                     onError={(e) => {
-                                                        e.target.onerror = null;
+                                                        e.target.onerror = null; 
                                                         e.target.style.display = "none";
                                                         e.target.parentElement.innerHTML = `
                                                         <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 190px;">

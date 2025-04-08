@@ -43,7 +43,7 @@ const Mdfilter = ({ onFilterApply }) => {
         window.location.reload(); // Refresh the page
     };
 
-    const categories = ["Earring", "Ring", "Ladies Bracelet"];
+    const categories = ["Earring", "Ring", "Bracelet","Pendant","Mangalsutra"];
     const priceRanges = [
         { id: "below20k", label: "Below ₹20,000" },
         { id: "20kTo30k", label: "₹20,000 - ₹30,000" },
@@ -204,7 +204,7 @@ const Mdfilter = ({ onFilterApply }) => {
                                     </div>
 
                                     {/* Material */}
-                                    <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
+                                    {/* <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
                                         <h2 className="filter_title mt-3">Material</h2>
                                         {material.map((material, index) => (
                                             <div className="form-check my-2" key={index}>
@@ -221,7 +221,7 @@ const Mdfilter = ({ onFilterApply }) => {
                                                 </label>
                                             </div>
                                         ))}
-                                    </div>
+                                    </div> */}
 
                                     {/* Shop For */}
                                     <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">

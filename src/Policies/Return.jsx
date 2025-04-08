@@ -80,7 +80,7 @@ const Return = () => {
                 </div>
                 <div className="elementor-menu-container">
                     <p className='elementor-menu-title'>
-                        <b>1.</b> Refunds will be processed within 15 working days from the date of return approval.
+                        <b>1.</b> Refunds will be processed within 3 working days excluding bank holiday from the date of return approval.
                     </p>
                     <p className='elementor-menu-title'>
                         <b>2.</b> For returns within 7 days, the refund will be credited to the original payment method.

@@ -271,11 +271,11 @@ const renderStar = (rating) => {
                     left: 0,
                     width: `${adjustedPercentage}%`, // Adjusted fill percentage
                     overflow: "hidden",
-                    color: "gold",
-                }} // Filled star color
+                    color: "#FABF46", // Filled star color
                     // textShadow: "0 0 3px rgba(0, 0, 0, 0.5)", // Improve visibility
+                }}
             >
-                
+                ★
             </span>
         </span>
     );
@@ -294,35 +294,35 @@ const ProductCard = ({ Productsitem }) => {
     } else if (media && media.length > 0) {
         displayImages = media.filter(item => item.type === 'goldImage').map(item => item.productAsset)
     }
+    const fetchRating = async () => {
+        try {
+            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/getRating/${product_id}`);
+            console.log("Fetched Rating Data:", response.data);
+            const averageRating = response.data.averageRating
 
-    useEffect(() => {
-        const fetchRating = async () => {
-            try {
-                const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/getRating/${product_id}`);
-                console.log("Fetched Rating Data:", response.data);
-                const averageRating = response.data.averageRating
+            const { approvedRating } = response.data;
 
-                const { approvedRating } = response.data;
+            if (approvedRating && approvedRating.length > 0) {
+                // Calculate Average Rating
+                const totalRatings = approvedRating.length;
+                const avgRating = approvedRating.reduce((sum, item) => sum + item.userRating, 0) / totalRatings;
 
-                if (approvedRating && approvedRating.length > 0) {
-                    // Calculate Average Rating
-                    const totalRatings = approvedRating.length;
-                    const avgRating = approvedRating.reduce((sum, item) => sum + item.userRating, 0) / totalRatings;
-
-                    setRating(averageRating); // Rounded to 1 decimal
-                } else {
-                    setRating(0);
-                }
-            } catch (error) {
-                if (error.response && error.response.status === 404) {
-                    // console.warn("Product rating not found, setting rating to 0");
-                    // setProductRating(0);
-                } else {
-                    console.error("Error fetching rating:", error);
-                    // setProductRating(0);
-                }
+                setRating(averageRating); // Rounded to 1 decimal
+            } else {
+                setRating(0);
             }
-        };
+        } catch (error) {
+            console.warn("Product rating not found, setting rating to 0");
+            // if (error.response) {
+                
+            //     // setProductRating(0);
+            // } else {
+            //     // console.error("Error fetching rating:", error);
+            //     // setProductRating(0);
+            // }
+        }
+    };
+    useEffect(() => {
         fetchRating();
     }, [product_id]);
 

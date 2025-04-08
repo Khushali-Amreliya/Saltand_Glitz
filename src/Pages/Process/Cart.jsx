@@ -794,7 +794,7 @@ const Cart = () => {
                       </div>
                     </div>
                     {/* pincode code */}
-                    <div className="cart_Pincode">
+                    {/* <div className="cart_Pincode">
                       <h6>
                         <i className="ri-focus-3-line pe-2 fs-4"></i>
                         <span style={{ fontSize: "13px" }}>
@@ -864,7 +864,7 @@ const Cart = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     {/* total amount */}
                     <div className="cart_amount">
                       <div className="m-0 p-0 px-2">

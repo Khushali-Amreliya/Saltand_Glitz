@@ -1176,11 +1176,11 @@ const renderStars = (rating) => {
 
                 if (i < Math.floor(rating)) {
                     // Pure full star (gold)
-                    bgStyle = { backgroundColor: "gold" };
+                    bgStyle = { backgroundColor: "#FABF46" };
                 } else if (i === Math.floor(rating) && rating % 1 !== 0) {
                     // Half star effect using linear gradient
                     bgStyle = {
-                        background: "linear-gradient(to right, gold 50%, #ccc 50%)"
+                        background: "linear-gradient(to right, #FABF46 50%, #ccc 50%)"
                     };
                 } else {
                     // Empty star (gray)
@@ -1196,8 +1196,6 @@ const renderStars = (rating) => {
         </div>
     );
 };
-
-
 
 const renderStar = (rating) => {
     const clampedRating = Math.min(Math.max(rating, 0), 5); // Ensure rating is between 0 and 5
@@ -1220,7 +1218,7 @@ const renderStar = (rating) => {
                     left: 0,
                     width: `${adjustedPercentage}%`, // Fill only up to 100%
                     overflow: "hidden",
-                    color: "gold", // Filled star color
+                    color: "#FABF46", // Filled star color
                 }}
             >
                 ★
@@ -1228,7 +1226,6 @@ const renderStar = (rating) => {
         </span>
     );
 };
-
 
 const colors = [
     { id: 1, color: "#ffcccc", name: "Rose Gold" },
@@ -1271,10 +1268,16 @@ const Productdetails = () => {
     const [similarProducts, setSimilarProducts] = useState([]);
     const [isWishlist, setIsWishlist] = useState(false)
     const user = JSON.parse(localStorage.getItem('user'))
+    const [existingUserRating, setExistingUserRating] = useState(null);
+    const priceBreakupRef = useRef(null);
+
     const cartItems = useSelector(state => state.cart.cartItems);
     // console.log(user);
     // const [recentlyViewed, setRecentlyViewed] = useState([]);
     const [isPriceBreakupVisible, setPriceBreakupVisible] = useState(true);
+    const [isDetailsBreakupVisible, setDetailsBreakupVisible] = useState(true);
+    const [isDescriptsBreakupVisible, setDescriptBreakupVisible] = useState(false);
+    const [isfaqsBreakupVisible, setfaqsBreakupVisible] = useState(false);
     const [productRating, setProductRating] = useState({
         rating: 0,
         ratings: []
@@ -1370,49 +1373,107 @@ const Productdetails = () => {
         fetchRatings();
     }, [id]);
 
-    const handleStarClick = async (star) => {
+    // const existingUserRating = productRating?.ratings?.find((r) => r.userId === user._id);
+
+
+    const handleStarClick = (star) => {
         if (!user?._id) {
             toast.error("To place your rating, please log in first.");
             return;
         }
 
         setRating(star);
-        setLoading(true);
+        setModalRating(star);
+        setModalHover(0);
 
-        const reviewSchema = {
-            productId: id,
-            userId: user._id,
-            userRating: star
-        };
-        console.log(reviewSchema);
-
-        try {
-            const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/addRating", reviewSchema);  // Send the fields directly
-            // console.log("REVIEW", response);
-
-            if (response.status === 201) {
-                // toast.success("Rating added successfully!");
-                // ✅ Update ratings locally after submission
-                setProductRating((prev) => ({
-                    ...prev,
-                    ratings: [...prev.ratings, reviewSchema]
-                }));
-            }
-        } catch (error) {
-            toast.error(error.response?.data?.message || "Failed to add rating");
+        // If already rated, jump to Step 2 with existing feedback
+        if (existingUserRating) {
+            setFeedback(existingUserRating?.userReview || "");
+            setStep(1);
+        } else {
+            setStep(1);
         }
-        setLoading(false);
 
-        setModalRating(star); // Sync modal rating
-        setModalHover(0); // Reset hover state
-        setStep(1); // Reset to first step
         const modal = new window.bootstrap.Modal(modalRef.current);
         modal.show();
     };
 
+    useEffect(() => {
+        // console.log("All ratings:", productRating?.ratings);
+        // console.log("Current user ID:", user?._id);
+
+        if (productRating?.ratings && user?._id) {
+            const match = productRating.ratings.find((r) => r.userId._id === user._id);
+            // console.log("Matched rating:", match);
+            setExistingUserRating(match);
+        }
+    }, [productRating, user]);
+
     // Next Button Click Handler
-    const handleNext = async () => {
-        setLoading(true); // Show loader
+    const handleNext = () => {
+        if (existingUserRating) {
+            handleUpdate(); // Optional: directly call update if you want
+            return;
+        }
+        setStep(2);
+    };
+
+    const removeFile = (index) => {
+        setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    };
+
+    // Submit Button Click Handler
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (existingUserRating) {
+            toast.error("You have already submitted a review.");
+            return;
+        }
+
+        if (!name.trim()) {
+            toast.error("Name is required.");
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const formData = new FormData();
+            formData.append("productId", id);
+            formData.append("userId", user._id);
+            formData.append("userRating", modalRating);
+            formData.append("userReview", feedback);
+
+            // Uploading only the first file, if any
+            if (files.length > 0) {
+                formData.append("productImage", files[0]);
+            }
+
+            const response = await axios.post(
+                "http://localhost:5000/v1/rating/addRating",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+
+            if (response.status === 201) {
+                toast.success("Review submitted successfully!");
+                window.location.reload();
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to submit review");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
+    const handleUpdate = async () => {
+        setLoading(true);
 
         const reviewData = new FormData();
         reviewData.append("userId", user._id);
@@ -1420,49 +1481,27 @@ const Productdetails = () => {
         reviewData.append("userRating", modalRating);
         reviewData.append("userReview", feedback);
 
-        // Append each file to FormData
         files.forEach((file) => {
             reviewData.append("productImage", file);
         });
-
-        console.log("Review Data", reviewData);
 
         try {
             const response = await axios.put("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/rating/updateRating", reviewData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
-            // console.log(response);
-
             if (response.status === 200) {
-                // toast.success("Rating updated successfully!");
+                toast.success("Review updated successfully!");
                 const modal = new window.bootstrap.Modal(modalRef.current);
-                modal.hide(); // Hide modal after success
-                setFiles([]); // Clear uploaded files after submit
-            } else {
-                console.log("Error Response Status:", response.status);
+                modal.hide();
+                setFiles([]);
+                window.location.reload();
             }
         } catch (error) {
-            console.error("Error details:", error);
-            toast.error(error.response?.data?.message || "Failed to update rating");
+            toast.error(error.response?.data?.message || "Failed to update review");
         } finally {
             setLoading(false);
         }
-        setStep(2); // Move to next step
-    };
-    const removeFile = (index) => {
-        setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-    };
-
-    // Submit Button Click Handler
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!name.trim()) {
-            toast.error("Name is required.");
-            return;
-        }
-        toast.success("Review submitted successfully!");
-        window.location.reload(); // Commented to prevent navigation
     };
 
     // Rating Labels
@@ -1481,42 +1520,50 @@ const Productdetails = () => {
     const togglePriceBreakup = () => {
         setPriceBreakupVisible(!isPriceBreakupVisible);
     };
-
+    const toggleDetailsBreakup = () => {
+        setDetailsBreakupVisible(!isDetailsBreakupVisible)
+    }
+    const toggleDescriptBreakup = () => {
+        setDescriptBreakupVisible(!isDescriptsBreakupVisible)
+    }
+    const togglefaqsBreakup = () => {
+        setfaqsBreakupVisible(!isfaqsBreakupVisible)
+    }
 
     useEffect(() => {
         const fetchWishlist = async () => {
-          try {
-            let userId = user?._id || localStorage.getItem("guestUserId");
-      
-            const response = await axios.get(
-              `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`
-            );
-      
-            const wishlistData = response.data.wishlist || {};
-            const wishlistItems = (wishlistData.products || []).map(item => ({
-              productId: item?.productId?.product_id,
-              colorBy: item?.colorBy,
-              caratBy: item?.caratBy,
-              size: item?.size
-            }));
-      
-            // ✅ Save entire wishlist info (not just productIds)
-            localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
-      
-            // ✅ Check if current product is in wishlist
-            const isInWishlist = wishlistItems.some(
-              w => w.productId === product.id
-            );
-            setIsWishlist(isInWishlist);
-      
-          } catch (error) {
-            console.error("Wishlist fetch error:", error);
-          }
+            try {
+                let userId = user?._id || localStorage.getItem("guestUserId");
+
+                const response = await axios.get(
+                    `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`
+                );
+
+                const wishlistData = response.data.wishlist || {};
+                const wishlistItems = (wishlistData.products || []).map(item => ({
+                    productId: item?.productId?.product_id,
+                    colorBy: item?.colorBy,
+                    caratBy: item?.caratBy,
+                    size: item?.size
+                }));
+
+                // ✅ Save entire wishlist info (not just productIds)
+                localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
+
+                // ✅ Check if current product is in wishlist
+                const isInWishlist = wishlistItems.some(
+                    w => w.productId === product.id
+                );
+                setIsWishlist(isInWishlist);
+
+            } catch (error) {
+                // console.error("Wishlist fetch error:", error);
+            }
         };
-      
+
         fetchWishlist();
-      }, [product.id, user?._id]);
-      
+    }, [product.id, user?._id]);
+
 
     useEffect(() => {
         // console.log("Product Data Before Dispatch:", product);
@@ -1695,18 +1742,20 @@ const Productdetails = () => {
 
     const fetchProductDetails = async () => {
         try {
-            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_id/${id}`);
+            const userId = localStorage.getItem("userId"); // or however you're storing it
+            console.log(userId);
+
+            const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/upload/get_id/${id}?userId=${userId}`);
             const data = response.data;
             console.log("Data", data);
 
-            // Extract images and videos
             const images = data.media?.filter(item => item.type === "goldImage").map(item => item.url) || [];
             const videos = data.media?.filter(item => item.type === 'goldVideo').map(item => item.url) || [];
 
             setProduct({
                 media: [...images, ...videos],
-                images, // Store extracted images
-                videos, // Store extracted videos
+                images,
+                videos,
                 title: data.title,
                 id: data.product_id,
                 grossWt: data.grossWt,
@@ -1724,11 +1773,12 @@ const Productdetails = () => {
             });
 
         } catch (err) {
-            console.error("Error fetching product details:", err.response || err);
+            console.error("Error fetching product details:", err.response?.data || err);
         } finally {
-            setLoading(false); // Stop loader
+            setLoading(false);
         }
     };
+
 
     useEffect(() => {
         fetchProductDetails();
@@ -2056,8 +2106,20 @@ const Productdetails = () => {
                                     </div>
                                 )}
                                 <h4 className='font_h'>{formatCurrency(price)}</h4>
-                                <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
-                                <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
+                                <p className='m-0 p-0 title_taxes pt-2 pb-3'>
+                                    Price inclusive of taxes. See the full
+                                    <span
+                                        className="fw-bold"
+                                        style={{ cursor: "pointer", color: "var(--color)" }}
+                                        onClick={() => {
+                                            priceBreakupRef.current?.scrollIntoView({ behavior: "smooth" });
+                                            // setIsPriceBreakupVisible(true); // Optional: expand the section
+                                        }}
+                                    >
+                                        {" "}Price breakup
+                                    </span>
+                                </p>
+                                {/* <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p> */}
 
                                 <p className="KT_button" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                                     <span className="align-middle">Color</span>
@@ -2139,6 +2201,9 @@ const Productdetails = () => {
                                             Clear
                                         </button>
                                     )}
+                                    <button className="btn" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">Size Guide</button>
+
                                 </div>
                                 {/* <p className="d-flex align-items-center customize_sec">
                                 <div className="w-25 border-end px-2 py-1 bg-white" style={{ borderRadius: "10px 0px 0px 10px" }}>
@@ -2193,6 +2258,10 @@ const Productdetails = () => {
                                         </button>
                                     </div>
                                 </div>
+                                <p className='delivery_cancellation'>
+                                    <i className="ri-truck-line fs-5 pe-2"></i>
+                                    <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 15 DAYS</u>
+                                </p>
                                 {/* Video call */}
                                 {/* <div>
                                     <div className='row p-0 m-0 w-100 border rounded-3'>
@@ -2298,8 +2367,19 @@ const Productdetails = () => {
                                     </button>
                                 </div>
 
-                                <p className='m-0 p-0 title_taxes pt-2'>Price inclusive of taxes. See the full <span>price breakup</span></p>
-                                <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p>
+                                <p className='m-0 p-0 title_taxes pt-2 pb-3'>
+                                    Price inclusive of taxes. See the full
+                                    <span
+                                        className="fw-bold"
+                                        style={{ cursor: "pointer", color: "var(--color)" }}
+                                        onClick={() => {
+                                            priceBreakupRef.current?.scrollIntoView({ behavior: "smooth" });
+                                            // setIsPriceBreakupVisible(true); // Optional: expand the section
+                                        }}
+                                    >
+                                        {" "}Price breakup
+                                    </span>
+                                </p>
 
                                 <p className="KT_button d-flex justify-content-between align-items-center">
                                     <span>Color</span>
@@ -2413,10 +2493,10 @@ const Productdetails = () => {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <p className='delivery_cancellation pt-4'>
+                                <p className='delivery_cancellation'>
                                     <i className="ri-truck-line fs-5 pe-2"></i>
-                                    <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 3RD SEP 2024</u>
-                                </p> */}
+                                    <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 15 DAYS</u>
+                                </p>
                                 {/* <p className='pincode_productdetail pt-2 p-0 m-0'>Your Pincode</p>
                                 <div className="input-group mb-3 w-100 pincode_input">
                                     <input type="text" className="form-control" aria-describedby="basic-addon2" />
@@ -2548,18 +2628,35 @@ const Productdetails = () => {
                             <div className='col-xl-8'>
                                 {/* <h5>PRODUCT DETAILS</h5> */}
                                 <div className="section product-details">
-                                    <h3 style={{ textAlign: 'left' }}>Product Details</h3>
-                                    <div className="grid">
-                                        <div className="detail-box">
-                                            <h4>Weight</h4>
-                                            <p className='m-0 p-0 mb-2'>Gross (Product): {product.grossWt} gram</p>
-                                            <p>Net (Gold): {caratBy === "14KT" ? product.netWeight14KT : product.netWeight18KT} gram</p>
-                                        </div>
-                                        <div className="detail-box">
-                                            <h4>Purity</h4>
-                                            <p>{caratBy} {colorBy}</p>
-                                        </div>
+                                    <div className="bg_price_breakup d-flex justify-content-between align-items-center">
+                                        <h3 className="m-0">Product Details</h3> {/* Center the heading */}
+                                        {/* Button for toggling visibility with icon */}
+                                        <button
+                                            className="btn btn-link p-0 text-dark text-decoration-none"
+                                            onClick={toggleDetailsBreakup}
+                                            style={{ fontSize: '15px', cursor: 'pointer' }}
+                                        >
+                                            {/* Toggling the icon between + and - */}
+                                            {isDetailsBreakupVisible ? (
+                                                <i className="ri-subtract-line"></i> // Minus icon when details are visible
+                                            ) : (
+                                                <i className="ri-add-line"></i> // Plus icon when details are hidden
+                                            )}
+                                        </button>
                                     </div>
+                                    {isDetailsBreakupVisible && (
+                                        <div className="grid mt-3">
+                                            <div className="detail-box">
+                                                <h4>Weight</h4>
+                                                <p className='m-0 p-0 mb-2'>Gross (Product): {product.grossWt} gram</p>
+                                                <p>Net (Gold): {caratBy === "14KT" ? product.netWeight14KT : product.netWeight18KT} gram</p>
+                                            </div>
+                                            <div className="detail-box">
+                                                <h4>Purity</h4>
+                                                <p>{caratBy} {colorBy}</p>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                                 {/* <div className="diamonds-gemstones">
                                     <h3>Diamond & Gemstones</h3>
@@ -2597,7 +2694,7 @@ const Productdetails = () => {
                                         </table>
                                     </div>
                                 </div> */}
-                                <div className="section price-breakup pt-3">
+                                <div className="section price-breakup pt-3" ref={priceBreakupRef}>
                                     <div className="bg_price_breakup d-flex justify-content-between align-items-center">
                                         <h3 className="m-0">Price Breakup</h3> {/* Center the heading */}
                                         {/* Button for toggling visibility with icon */}
@@ -2649,6 +2746,52 @@ const Productdetails = () => {
                                                 </span>
                                             </p>
                                         </ul>
+                                    )}
+                                </div>
+                                <div className="section product-details pt-3">
+                                    <div className="bg_price_breakup d-flex justify-content-between align-items-center">
+                                        <h3 className="m-0">Descriptions</h3>
+                                        <button
+                                            className="btn btn-link p-0 text-dark text-decoration-none"
+                                            onClick={toggleDescriptBreakup}
+                                            style={{ fontSize: '15px', cursor: 'pointer' }}
+                                        >
+                                            {isDescriptsBreakupVisible ? (
+                                                <i className="ri-subtract-line"></i> 
+                                            ) : (
+                                                <i className="ri-add-line"></i>
+                                            )}
+                                        </button>
+                                    </div>
+                                    {isDescriptsBreakupVisible && (
+                                        <div className="description_breackup">
+                                            <p>Indulge in the world of sustainable luxury with this exquisite Esther Diamond Ring from Limelight Diamonds. This piece embodies timeless elegance, showcasing the captivating brilliance of lab-grown diamonds while reflecting a commitment to ethical practices.</p>
+                                            <p>Our Esther Diamond Ring features Lab Grown CVD Type IIA Diamonds, expertly cut into a Round shape. The diamonds boasts a EF clarity and VS color, radiating exceptional brilliance and weighing 0.10 Ct. The setting is crafted from 14KT Yellow Gold, adding a touch of classic sophistication. This Esther Diamond Ring is ideal for engagements, anniversaries, special occasions, or simply adding a touch of elegance to your everyday style.
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="section product-details pt-3">
+                                    <div className="bg_price_breakup d-flex justify-content-between align-items-center">
+                                        <h3 className="m-0" style={{textTransform:"capitalize"}}>FAQ's</h3>
+                                        <button
+                                            className="btn btn-link p-0 text-dark text-decoration-none"
+                                            onClick={togglefaqsBreakup}
+                                            style={{ fontSize: '15px', cursor: 'pointer' }}
+                                        >
+                                            {isfaqsBreakupVisible ? (
+                                                <i className="ri-subtract-line"></i> 
+                                            ) : (
+                                                <i className="ri-add-line"></i>
+                                            )}
+                                        </button>
+                                    </div>
+                                    {isfaqsBreakupVisible && (
+                                        <div className="description_breackup">
+                                            <p>Indulge in the world of sustainable luxury with this exquisite Esther Diamond Ring from Limelight Diamonds. This piece embodies timeless elegance, showcasing the captivating brilliance of lab-grown diamonds while reflecting a commitment to ethical practices.</p>
+                                            <p>Our Esther Diamond Ring features Lab Grown CVD Type IIA Diamonds, expertly cut into a Round shape. The diamonds boasts a EF clarity and VS color, radiating exceptional brilliance and weighing 0.10 Ct. The setting is crafted from 14KT Yellow Gold, adding a touch of classic sophistication. This Esther Diamond Ring is ideal for engagements, anniversaries, special occasions, or simply adding a touch of elegance to your everyday style.
+                                            </p>
+                                        </div>
                                     )}
                                 </div>
                             </div>
@@ -3188,7 +3331,16 @@ const Productdetails = () => {
                                         </div>
 
                                         {/* Next Button */}
-                                        <button className="btn btn-dark w-100 mt-3" onClick={handleNext} disabled={!feedback.trim()}>Next</button>
+                                        {existingUserRating ? (
+                                            <button className="btn btn-dark w-100 mt-3" onClick={handleUpdate} disabled={!feedback.trim()}>
+                                                Update
+                                            </button>
+                                        ) : (
+                                            <button className="btn btn-dark w-100 mt-3" onClick={handleNext} disabled={!feedback.trim()}>
+                                                Next
+                                            </button>
+                                        )}
+
                                     </>
                                 ) : (
                                     <>

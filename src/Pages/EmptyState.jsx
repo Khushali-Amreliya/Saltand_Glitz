@@ -31,18 +31,21 @@ const EmptyState = () => {
                         </button>
                     </div>
 
-                    <div className="footer">
-                        <div className="footer-item">
-                            <img src="assets/img/delivery.png" alt="BIS" className="img-fluid " />
-                            <p>BIS 100% Hallmarked Jewellery</p>
-                        </div>
-                        <div className="footer-item">
-                            <img src="assets/img/pdp-delivery-tah-sprite (3).png" alt="Tanishq" className="img-fluid " />
-                            <p>Trust of Tanishq Titan Privileges</p>
-                        </div>
-                        <div className="footer-item">
-                            <img src="assets/img/pdp-delivery-tah-sprite (2).png" alt="Caratlane" className="img-fluid " />
-                            <p>100% Certified by Caratlane</p>
+                    
+                   <div className="footer container ">
+                        <div className="row text-center">
+                            <div className="col-4 footer-item">
+                                <img src="/assets/img/certified_logo[1].png" alt="certified" className="img-fluid w-50 mb-2" />
+                                <p className="mb-0 small">Certified By Recognised Lab</p>
+                            </div>
+                            <div className="col-4 footer-item">
+                                <img src="/assets/img/VVS_GRADE_DIAMOND.png" alt="vvs_grade_diamond" className="img-fluid w-50 mb-2" />
+                                {/* <p className="mb-0 small">VVS Grade Diamond</p> */}
+                            </div>
+                            <div className="col-4 footer-item">
+                                <img src="/assets/img/pdp-delivery-tah-sprite (2).png" alt="delivery" className="img-fluid w-50 mb-2" />
+                                <p className="mb-0 small">100% Certified by Salt</p>
+                            </div>
                         </div>
                     </div>
                     <div className='d-lg-none d-block filter_midium_divice w-100 py-2'>

@@ -47,27 +47,23 @@ const Footer = () => {
         <div className='row ps-3'>
           <div className='col-lg-2 col-md-6 col-sm-12 footer_sec pb-5'>
             <h6 className='fw-bolder pb-3'>Client Care</h6>
-            <p><Link to="">Contact Us</Link></p>
+            <p><Link to="/contact">Contact Us</Link></p>
             <p><Link to="">Track Your Order</Link></p>
             <p><Link to="">Book an Appointment</Link></p>
             <p><Link to="">Frequently Asked Questions</Link></p>
             <p><Link to="">Shipping & Returns</Link></p>
             <p><Link to="">Product Care & Repair</Link></p>
             <p><Link to="">Gift Cards</Link></p>
-            <p><Link to="">Website Accessibility</Link></p>
           </div>
 
           <div className='col-lg-2 col-md-6 col-sm-12 footer_sec pb-5'>
             <h6 className='fw-bolder pb-3'>Our Company</h6>
             <p><Link to="">World of Salt</Link></p>
             <p><Link to="">Sustainability</Link></p>
-            <p><Link to="">California Supply Chains Act</Link></p>
-            <p><Link to="">California Privacy</Link></p>
             <p><Link to="">Salt Careers</Link></p>
             <p><Link to="/return">Return Policies</Link></p>
             <p><Link to="/exchange">Exchange & Buy Back Policies</Link></p>
             <p><Link to="/warranty">Warranty Policies</Link></p>
-            <p><Link to="">Opt-Out of Targeted Advertising</Link></p>
           </div>
 
           <div className='col-lg-3 col-md-6 col-sm-12 footer_sec pb-5'>
@@ -75,9 +71,6 @@ const Footer = () => {
             <p><Link to="">Wedding & Gift Registry</Link></p>
             <p><Link to="">Business Accounts</Link></p>
             <p><Link to="">Salt for the Press</Link></p>
-            <p><Link to="">The Salt & Co. Foundation</Link></p>
-            <p><Link to="">Salt Alertline</Link></p>
-            <p><Link to="">Site Index</Link></p>
           </div>
 
           <div className='col-lg-5 col-md-6 col-sm-12 footer_sec pb-5'>
@@ -206,14 +199,13 @@ const faqData = [
     question: "Client Care",
     answer: (
       <div>
-        <p><Link to="">Contact Us</Link></p>
+        <p><Link to="/contact">Contact Us</Link></p>
         <p><Link to="">Track Your Order</Link></p>
         <p><Link to="">Book an Appointment</Link></p>
         <p><Link to="">Frequently Asked Questions</Link></p>
         <p><Link to="">Shipping & Returns</Link></p>
         <p><Link to="">Product Care & Repair</Link></p>
         <p><Link to="">Gift Cards</Link></p>
-        <p><Link to="">Website Accessibility</Link></p>
       </div>
     )
   },
@@ -223,13 +215,10 @@ const faqData = [
       <div>
         <p><Link to="">World of Salt</Link></p>
         <p><Link to="">Sustainability</Link></p>
-        <p><Link to="">California Supply Chains Act</Link></p>
-        <p><Link to="">California Privacy</Link></p>
         <p><Link to="">Salt Careers</Link></p>
         <p><Link to="/return">Return Policy</Link></p>
         <p><Link to="/exchange">Transparency in Coverage</Link></p>
         <p><Link to="/warranty">Warranty Policies</Link></p>
-        <p><Link to="">Opt-Out of Targeted Advertising</Link></p>
       </div>
     ),
   },
@@ -240,9 +229,6 @@ const faqData = [
         <p><Link to="">Wedding & Gift Registry</Link></p>
         <p><Link to="">Business Accounts</Link></p>
         <p><Link to="">Salt for the Press</Link></p>
-        <p><Link to="">The Salt & Co. Foundation</Link></p>
-        <p><Link to="">Salt Alertline</Link></p>
-        <p><Link to="">Site Index</Link></p>
       </div>
     ),
   },

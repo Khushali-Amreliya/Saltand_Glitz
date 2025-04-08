@@ -121,7 +121,7 @@ const OrderSummary = () => {
                     <span>{formatCurrency(totallPrice.toFixed())}</span>
                 </h6>
                 <p className='text-center fw-bold' style={{ color: "#8863fb", fontSize: "14px" }}>Need Help?</p>
-                <p className='text-center login_SKU'>We’re available by phone +91-44-66075200 (Toll Free) every day, 9 AM to 1 AM IST (Mon - Sun)</p>
+                <p className='text-center login_SKU'>We’re available by phone +91 79843 69890 (Toll Free) every day, 9 AM to 1 AM IST (Mon - Sun)</p>
                 <div className='text-center pt-3'>
                     <i className="ri-phone-line fs-4 bg-dark text-light rounded-pill p-2 vertical-align-middle"></i>
                     <i className="ri-whatsapp-line fs-4 bg-dark text-light rounded-pill p-2 vertical-align-middle mx-3"></i>
