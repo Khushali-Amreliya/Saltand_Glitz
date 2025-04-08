@@ -11,7 +11,7 @@ const parseJSON = (key) => {
 };
 
 const cartItems = parseJSON("cartItems") || [];
-const wishlistItems = parseJSON("wishlistItem") || [];
+const wishlistItems = parseJSON("wishlist") || [];
 const totalQuantity = parseJSON("totalQuantity") || 0;
 const subtotal = parseJSON("subtotal") || 0;
 const discount = parseJSON("discount") || 0;
@@ -25,7 +25,7 @@ const setItem = (items, totalQuantity, subtotal, discount) => {
 };
 
 const setWishlist = (wishlist) => {
-    localStorage.setItem("wishlistItem", JSON.stringify(wishlist));
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
 };
 
 const setRecentlyViewed = (recentlyViewed) => {
@@ -221,36 +221,40 @@ const cartSlice = createSlice({
 
         addToWishlist(state, action) {
             const newItem = action.payload;
-
+        
             // Ensure wishlist is initialized
             if (!state.wishlist) {
                 state.wishlist = [];
             }
-
+        
             // Validate newItem properties before using
             if (!newItem || !newItem.id) {
                 console.error("Invalid item received for wishlist:", newItem);
                 return;
             }
-
-            const existingItem = state.wishlist.find(item => item.id === newItem.id);
-
+        
+            const existingItem = state.wishlist.find(item => 
+                item.id === newItem.id &&
+                item.caratBy === newItem.caratBy &&
+                item.colorBy === newItem.colorBy &&
+                item.size === newItem.size
+            );
+        
             if (!existingItem) {
                 state.wishlist.push({
                     id: newItem.id,
-                    title: newItem.title || "Unknown Product",
-                    image01: newItem.image01 || "",
-                    total14KT: newItem.total14KT || 0,
+                    // title: newItem.title || "Unknown Product",
+                    // image01: newItem.image01 || "",
+                    // total14KT: newItem.total14KT || 0,
                     caratBy: newItem.caratBy,
                     colorBy: newItem.colorBy,
                     size: newItem.size,
                 });
             }
-
+        
             setWishlist(state.wishlist);
         },
-
-
+        
         removeFromWishlist(state, action) {
             const itemId = action.payload;
             state.wishlist = state.wishlist.filter(item => item.id !== itemId);
@@ -266,9 +270,9 @@ const cartSlice = createSlice({
             if (!existingItem) {
                 state.wishlist.push({
                     id: newItem.id,
-                    title: newItem.title,
-                    image01: newItem.image01,
-                    price: newItem.price,
+                    // title: newItem.title,
+                    // image01: newItem.image01,
+                    // price: newItem.price,
                     caratBy: newItem.caratBy,
                     colorBy: newItem.colorBy,
                     size: newItem.size,

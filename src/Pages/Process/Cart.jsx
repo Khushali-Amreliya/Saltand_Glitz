@@ -327,28 +327,28 @@ const Cart = () => {
 
   const moveToWishlist = async (item) => {
     setLoading(true);
-
+  
     const userId = user?._id || localStorage.getItem("guestUserId");
     const productId = item?.productId?.product_id;
-
+  
     if (!productId) {
       toast.error("Invalid product data!");
       setLoading(false);
       return;
     }
-
+  
     const cartItem = {
       user: userId,
       productId: productId,
     };
-
+  
     try {
       // Step 1: Remove from Cart
       const removeResponse = await axios.delete(
         `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${userId}/${productId}`,
         { data: cartItem }
       );
-
+  
       if (removeResponse.status === 200) {
         // Step 2: Add to Wishlist
         const wishlistItem = {
@@ -358,26 +358,38 @@ const Cart = () => {
           colorBy: item?.colorBy,
           caratBy: item?.caratBy
         };
-
+  
         console.log("Sending wishlistItem:", wishlistItem);
-
+  
         const wishlistResponse = await axios.post(
           "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist",
           wishlistItem
         );
-
+  
         console.log("Wishlist Response Data:", wishlistResponse.data);
-
+  
         if (wishlistResponse.status === 200 || wishlistResponse.status === 201) {
           dispatch(cartAction.removeItem(productId));
-
-          // Fix API Response Handling
+  
           const wishlistData = wishlistResponse.data.wishlist;
           if (wishlistData && wishlistData._id) {
             const wishlistProduct = wishlistData.products.find(p => p.productId === productId);
-
+  
             if (wishlistProduct) {
-              dispatch(cartAction.addToWishlist(wishlistProduct));
+              const wishlistItemToStore = {
+                id: productId,
+                colorBy: item?.colorBy,
+                caratBy: item?.caratBy,
+                size: item?.size,
+              };
+  
+              dispatch(cartAction.addToWishlist(wishlistItemToStore));
+  
+              // OPTIONAL: Manually update localStorage (if Redux doesn't persist it)
+              const existingWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+              existingWishlist.push(wishlistItemToStore);
+              localStorage.setItem("wishlist", JSON.stringify(existingWishlist));
+  
               navigate("/wishlist");
               toast.success("Item moved to wishlist");
             } else {
@@ -394,7 +406,7 @@ const Cart = () => {
       }
     } catch (error) {
       console.error("Error moving item to wishlist:", error);
-
+  
       if (error.response) {
         console.error("Wishlist API Error Response:", error.response.data);
         toast.error("Wishlist API Error: " + (error.response.data.message || "Unexpected error"));
@@ -405,6 +417,7 @@ const Cart = () => {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);

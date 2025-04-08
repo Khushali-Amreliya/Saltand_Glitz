@@ -1485,24 +1485,38 @@ const Productdetails = () => {
 
     useEffect(() => {
         const fetchWishlist = async () => {
-            try {
-                let userId = user?._id || localStorage.getItem("guestUserId");
-
-                // if (!userId) return; // Agar dono null hain, toh call na karein
-
-                const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
-                const wishlistData = response.data.wishlist || {};
-                const wishlistProductIds = (wishlistData.products || []).map(item => item.productId.product_id);
-
-                localStorage.setItem('wishlist', JSON.stringify(wishlistProductIds));
-                setIsWishlist(wishlistProductIds.includes(product.id));
-            } catch (error) {
-                console.error("Wishlist fetch error:", error);
-            }
+          try {
+            let userId = user?._id || localStorage.getItem("guestUserId");
+      
+            const response = await axios.get(
+              `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`
+            );
+      
+            const wishlistData = response.data.wishlist || {};
+            const wishlistItems = (wishlistData.products || []).map(item => ({
+              productId: item?.productId?.product_id,
+              colorBy: item?.colorBy,
+              caratBy: item?.caratBy,
+              size: item?.size
+            }));
+      
+            // ✅ Save entire wishlist info (not just productIds)
+            localStorage.setItem("wishlist", JSON.stringify(wishlistItems));
+      
+            // ✅ Check if current product is in wishlist
+            const isInWishlist = wishlistItems.some(
+              w => w.productId === product.id
+            );
+            setIsWishlist(isInWishlist);
+      
+          } catch (error) {
+            console.error("Wishlist fetch error:", error);
+          }
         };
-
+      
         fetchWishlist();
-    }, [product.id, user?._id]);
+      }, [product.id, user?._id]);
+      
 
     useEffect(() => {
         // console.log("Product Data Before Dispatch:", product);
