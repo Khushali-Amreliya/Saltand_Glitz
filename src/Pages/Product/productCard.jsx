@@ -271,11 +271,11 @@ const renderStar = (rating) => {
                     left: 0,
                     width: `${adjustedPercentage}%`, // Adjusted fill percentage
                     overflow: "hidden",
-                    color: "gold", // Filled star color
+                    color: "gold",
+                }} // Filled star color
                     // textShadow: "0 0 3px rgba(0, 0, 0, 0.5)", // Improve visibility
-                }}
             >
-                ★
+                
             </span>
         </span>
     );

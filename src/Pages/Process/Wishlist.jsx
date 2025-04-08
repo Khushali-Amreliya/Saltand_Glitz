@@ -23,15 +23,24 @@ const Wishlist = () => {
   // Fetch wishlist items from the backend
   const fetchWishlist = useCallback(async () => {
     let userId = user?._id || localStorage.getItem("guestUserId");
-    console.log(userId);
+    console.log("User ID:", userId);
 
     try {
       const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/get_wishlist/${userId}`);
-      console.log("Wishlist", response);
-      console.log(response.data.wishlist.products);
-
+      console.log("Wishlist Response:", response.data);
 
       if (response.status === 200) {
+        const wishlistProducts = response.data.wishlist.products.map(item => ({
+          productId: item.productId?.product_id,
+          size: item.size,
+          caratBy: item.caratBy,
+          colorBy: item.colorBy
+        }));
+
+        // Store in Local Storage
+        localStorage.setItem("wishlist", JSON.stringify(wishlistProducts));
+
+        // Update State
         setWishlistItems(response.data.wishlist.products);
       }
     } catch (error) {
@@ -39,8 +48,10 @@ const Wishlist = () => {
     } finally {
       setLoading(false);
     }
-    Header()
+
+    Header();
   }, []);
+
 
 
   useEffect(() => {
