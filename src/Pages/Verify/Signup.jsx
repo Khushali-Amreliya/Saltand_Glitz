@@ -177,9 +177,9 @@ const Signup = () => {
                         <div className='signup_logo'>
                             <i className="ri-fingerprint-line fs-2"></i>
                             <h6>Signup with Salt & Glitz</h6>
-                            <div>
+                            {/* <div>
                                 <p>Unlock Best prices and become an insider for our exclusive launches & offers. Complete your profile and get ₹250 worth of xCLusive Points.</p>
-                            </div>
+                            </div> */}
                         </div>
                         <div className='pt-4 mx-auto d-block'>
                             <img onClick={handleSignIn} alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />

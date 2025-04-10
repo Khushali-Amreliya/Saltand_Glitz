@@ -6,45 +6,17 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Shipping = () => {
-    // const totalQuantity = useSelector(state => state.cart.totalQuantity)
     const [showBillingForm, setShowBillingForm] = useState(false);
+    const [selectedBillingOption, setSelectedBillingOption] = useState("ShippingAddress");
     const [cartId, setCartId] = useState();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('HomeDelivery');
     const [user, setUser] = useState({});
-
-    useEffect(() => {
-        // Fetch user profile from local storage
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-    }, []); // This will only run on component mount
-
-    const fetchCart = async () => {
-        try {
-            let userId = user?._id || localStorage.getItem("guestUserId");
-
-            const response = await axios.get(
-                `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`
-            );
-            // console.log(response.data.cart.cart_id);
-            setCartId(response.data.cart.cart_id);
-        } catch (err) {
-            console.error("Error fetching cart data:", err);
-        }
-    };
-
-    useEffect(() => {
-        fetchCart(); // 👈 useEffect ke andar sirf call karo
-    }, [user?._id]);
 
     const [formErrors, setFormErrors] = useState({
         postalCode: '',
     });
     const [formData, setFormData] = useState({
-
         street: '',
         postalCode: '',
         city: '',
@@ -59,16 +31,53 @@ const Shipping = () => {
         country: '',
     });
 
-    const handleRadioChange = (e) => {
-        setSelectedOption(e.target.value);
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+
+        // By default: select "Same as Shipping Address"
+        setSelectedBillingOption("ShippingAddress");
+    }, []);
+
+    useEffect(() => {
+        // If "Same as Shipping Address" is selected, auto copy shipping data
+        if (selectedBillingOption === "ShippingAddress") {
+            setBillingData({ ...formData });
+            setShowBillingForm(false);
+        } else {
+            setShowBillingForm(true);
+        }
+    }, [selectedBillingOption, formData]); // Re-run if shipping address changes
+
+
+    const fetchCart = async () => {
+        try {
+            let userId = user?._id || localStorage.getItem("guestUserId");
+
+            const response = await axios.get(
+                `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`
+            );
+            setCartId(response.data.cart.cart_id);
+        } catch (err) {
+            console.error("Error fetching cart data:", err);
+        }
     };
+
+    useEffect(() => {
+        fetchCart(); // 👈 useEffect ke andar sirf call karo
+    }, [user?._id]);
+
+
 
     const handleAddress = (e) => {
         const selectedOption = e.target.value;
+        setSelectedBillingOption(selectedOption);
 
         if (selectedOption === "ShippingAddress") {
-            setBillingData({ ...formData }); // Copy shipping to billing
-            setShowBillingForm(false); // Hide billing form
+            setBillingData({ ...formData });
+            setShowBillingForm(false);
         } else {
             setBillingData({
                 street: '',
@@ -77,10 +86,9 @@ const Shipping = () => {
                 postalCode: '',
                 country: ''
             });
-            setShowBillingForm(true); // Show billing form for editing
+            setShowBillingForm(true);
         }
     };
-
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -91,24 +99,17 @@ const Shipping = () => {
         setBillingData(prev => ({ ...prev, [name]: value }));
     };
 
-
     const handleChange = (e) => {
         const { name, value } = e.target;
 
         if (name === 'postalCode' && !/^\d{0,6}$/.test(value)) {
             return;
         }
-
-        // if (name === 'mobile' && !/^\d{0,10}$/.test(value)) {
-        //     return;
-        // }
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const validateForm = () => {
         const isPincodeValid = /^\d{6}$/.test(formData.postalCode);
-        // const isMobileValid = /^\d{10}$/.test(formData.mobile);
-
         return (
             Object.values(formData).every(field => field.trim() !== '') &&
             isPincodeValid
@@ -116,16 +117,22 @@ const Shipping = () => {
     };
 
     const handlePlaceOrder = async () => {
+        const isShippingValid = validateForm(); // for shipping
         const isPincodeValid = /^\d{6}$/.test(formData.postalCode);
 
-        if (!validateForm() || !isPincodeValid) {
+        const isBillingValid =
+            selectedBillingOption === "ShippingAddress" ||
+            Object.values(billingData).every(field => field.trim() !== '') &&
+            /^\d{6}$/.test(billingData.postalCode);
+
+        if (!isShippingValid || !isPincodeValid || !isBillingValid) {
             setFormErrors({
                 postalCode: isPincodeValid ? '' : 'Pincode must be 6 digits.',
             });
-            toast.error("Please correct the errors in the form.");
+
+            toast.error("Please complete your address details."); // 👉 This will now always show for bad form
             return;
         }
-
 
         setLoading(true);
         try {
@@ -155,22 +162,10 @@ const Shipping = () => {
         } catch (error) {
             console.error('Failed to add address:', error);
             setLoading(false);
-            toast.error("There was an error submitting your address. Please try again.");
+            toast.error("Please Fill up your address.");
         }
     };
 
-
-    const handleSubmitButton = () => {
-        if (!validateForm()) {
-            toast.error("Please Fill Out Your Shipping Address!")
-            return;
-        }
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            navigate('/gift');
-        }, 1000);
-    }
 
     // header scroll
     const [isScrolled, setIsScrolled] = useState(false);
@@ -212,7 +207,7 @@ const Shipping = () => {
                 </div> */}
 
                 <div className="cart_header_right">
-                    <Link to="/assistance" className="assistance-link">
+                    <Link to="https://wa.me/+917984369890" target="_blank" rel="noopener noreferrer" className="assistance-link text-decoration-none">
                         <span className='d-lg-block d-md-block d-sm-block d-none'>
                             Need Assistance?
                         </span>
@@ -389,11 +384,11 @@ const Shipping = () => {
                                         <input
                                             className="form-check-input float-end align-middle"
                                             type="radio"
-                                            name="street"
+                                            name="billing"
                                             id="Shipping"
                                             value="ShippingAddress"
                                             onChange={handleAddress}
-                                            
+                                            checked={selectedBillingOption === "ShippingAddress"}
                                         />
                                     </div>
                                     <div className="shipping_add mt-3 align-items-center justify-content-between d-flex">
@@ -406,10 +401,11 @@ const Shipping = () => {
                                         <input
                                             className="form-check-input float-end align-middle"
                                             type="radio"
-                                            name="street"
+                                            name="billing"
                                             id="DifferentBilling"
                                             value="DifferentBillingAddress"
                                             onChange={handleAddress}
+                                            checked={selectedBillingOption === "DifferentBillingAddress"}
                                         />
                                     </div>
 
@@ -482,7 +478,8 @@ const Shipping = () => {
             <section className="cart_footer">
                 <div className="cart_footer_left pt-3">
                     <p>
-                        <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) | contactus@saltandglitz.com
+                        <strong>Contact Us:</strong>&nbsp; +91 7984369890 (Helpline) |
+                        contact support@saltandglitz.com
                     </p>
                 </div>
                 <div className="cart_footer_right">

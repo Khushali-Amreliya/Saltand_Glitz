@@ -338,14 +338,14 @@ const Loginn = () => {
         <Helmet title="Login">
             <>
                 {loading && <Loader />}
-                <section className='container mt-5 loginn_width'>
+                <section className='container my-5 loginn_width'>
                     <div className='text-center row'>
                         <div className='signup_logo'>
                             <i className="ri-fingerprint-line fs-2"></i>
                             <h6>Login with Salt & Glitz</h6>
-                            <p className='p_width_loginn'>
+                            {/* <p className='p_width_loginn'>
                                 Unlock Best prices and become an insider for our exclusive launches & offers.
-                            </p>
+                            </p> */}
                             {/* <div className='pt-4 mx-auto d-block'>
                                 <img alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />
                             </div> */}
@@ -487,9 +487,9 @@ const Loginn = () => {
                             </form>
                         </div>
                         <p className='m-0 p-0 create_acc'>
-                            New to Tiffany & Co.? <Link to="/signup" className='text-decoration-none'><span>Create an Account</span></Link>
+                            New to Salt & Glitz? <Link to="/signup" className='text-decoration-none'><span>Create an Account</span></Link>
                         </p>
-                        <p className='create_acc'>Complete your profile and get Rs.250 worth of xCLusive Points.</p>
+                        {/* <p className='create_acc'>Complete your profile and get Rs.250 worth of xCLusive Points.</p> */}
                     </div>
                 </section>
             </>

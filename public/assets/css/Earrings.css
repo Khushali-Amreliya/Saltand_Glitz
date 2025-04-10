@@ -1,5 +1,5 @@
 .bg_product_page {
-    background: var(--background);
+    background: var(--light-color);
     /* background-color: #F6F3F9; */
     justify-content: center;
     /* padding: 28px 15px 28px 80px; */
@@ -167,13 +167,14 @@
     color: #fff;
     width: 40%;
     position: fixed;
-    z-index: 2;
-    left: 0px;
-    bottom: 0px;
+    z-index: 1000;
+    left: 0;
+    bottom: 0;
 }
 
 .filter_midium_divice p {
     font-size: 13px;
+    color: var(--color);
     font-weight: bold;
 }
 
@@ -202,15 +203,15 @@
     font-family: InterSemiBold, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
     font-size: 12px !important;
     font-weight: bold;
-    color: rgb(79, 50, 103) !important;
-    background: rgb(220, 210, 254) !important;
+    color: var(--color) !important;
+    background: var(--background) !important;
     border-radius: 12px !important;
 }
 
 .filter_md_btn1 {
     font-size: 12px !important;
     border-radius: 12px !important;
-    background: linear-gradient(to right, rgb(222, 87, 229), rgb(136, 99, 251)) !important;
+    background: var(--color) !important;
     border: 1px solid #fff;
 }
 
@@ -372,13 +373,14 @@
     border-color: #ccc !important;
 }
 
-.show_more_btn{
+.show_more_btn {
     font-size: 14px !important;
     letter-spacing: 0.5px !important;
     color: var(--color) !important;
     font-weight: 600 !important;
 }
-.filter_viewmore_btn{
+
+.filter_viewmore_btn {
     border: 1px solid var(--color) !important;
     border-radius: 8px !important;
     font-size: 13px !important;

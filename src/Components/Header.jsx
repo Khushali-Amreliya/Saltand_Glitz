@@ -3238,8 +3238,8 @@ const Header = () => {
 
         try {
             const response = await axios.post("https://saltandglitz-api-131827005467.asia-south2.run.app/v1/search/searchProduct", { query });
-            console.log("search",response);
-            
+            console.log("search", response);
+
             let searchResults = response.data;
             if (!Array.isArray(searchResults)) {
                 searchResults = response.data.data || [];
@@ -3266,6 +3266,11 @@ const Header = () => {
     //         setLoading(false);
     //     }
     // };
+    const [openDropdown, setOpenDropdown] = useState(null);
+
+    const toggleDropdown = (item) => {
+        setOpenDropdown(openDropdown === item ? null : item);
+    };
 
     return (
         <div className=" m-0 p-0 header_shadow">
@@ -3417,10 +3422,18 @@ const Header = () => {
                             <div className="offcanvas-body">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="" id="ringsmd">
-                                            <i className="ri-subtract-line"></i>Rings
-                                        </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="ringsmd">
+                                        <div
+                                            className="d-flex justify-content-between align-items-center"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => toggleDropdown("rings")}
+                                        >
+                                            {/* <span className="nav-link">Rings</span> */}
+                                            <Link className="nav-link active" to="/products/Ring" data-bs-dismiss="offcanvas" aria-label="Close" >
+                                                Rings
+                                            </Link>
+                                            <span className="me-2 dropdown_accordian_icon">{openDropdown === "rings" ? "-" : "+"}</span>
+                                        </div>
+                                        <ul className={`dropdown-menu dropdown-content dropdown_accordian ${openDropdown === "rings" ? "show" : ""}`}>
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Shop By Style
@@ -3540,20 +3553,27 @@ const Header = () => {
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
                                                 </div>
-                                                <div className='col-lg-3 mb-2'>
+                                                {/* <div className='col-lg-3 mb-2'>
                                                     <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_MB.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                                 <div className='col-lg-3'>
                                                     <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_PC.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/products/Earring" id="earrings">
-                                            <i className="ri-subtract-line"></i>Earrings
-                                        </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="earrings">
+                                        <div
+                                            className="d-flex justify-content-between align-items-center"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => toggleDropdown("earrings")}
+                                        >
+                                            <Link className="nav-link active" to="/products/Earring" data-bs-dismiss="offcanvas" aria-label="Close" >
+                                                Earrings
+                                            </Link>
+                                            <span className="me-2 dropdown_accordian_icon">{openDropdown === "earrings" ? "-" : "+"}</span>
+                                        </div>
+                                        <ul className={`dropdown-menu dropdown-content dropdown_accordian ${openDropdown === "earrings" ? "show" : ""}`}>
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Shop By Style
@@ -3598,7 +3618,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center" to=""
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings8.jpg'
@@ -3625,7 +3645,7 @@ const Header = () => {
                                                                 </li>
                                                                 <li>
                                                                     <Link className="d-flex align-items-center" to=""
-                                                                    data-bs-dismiss="offcanvas" aria-label="Close">
+                                                                        data-bs-dismiss="offcanvas" aria-label="Close">
                                                                         <img
                                                                             alt='Jewelry Style'
                                                                             src='/assets/img/rings9.jpg'
@@ -3651,22 +3671,27 @@ const Header = () => {
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
                                                 </div>
-                                                <div className='col-lg-3 mb-2'>
+                                                {/* <div className='col-lg-3 mb-2'>
                                                     <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_Switch.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                                 <div className='col-lg-3'>
                                                     <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_DH.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active"
-                                            to={`/products/${"Bracelet".replace(/ /g, "-")}`}
-                                            id="bracelet">
-                                            <i className="ri-subtract-line"></i>Bracelets & Bangles
-                                        </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="bracelet">
+                                        <div
+                                            className="d-flex justify-content-between align-items-center"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => toggleDropdown("bracelet")}
+                                        >
+                                            <Link className="nav-link active" to="/products/Bracelet" data-bs-dismiss="offcanvas" aria-label="Close" >
+                                                Bracelets & Bangles
+                                            </Link>
+                                            <span className="me-2 dropdown_accordian_icon">{openDropdown === "bracelet" ? "-" : "+"}</span>
+                                        </div>
+                                        <ul className={`dropdown-menu dropdown-content dropdown_accordian ${openDropdown === "bracelet" ? "show" : ""}`}>
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Shop By Style
@@ -3732,20 +3757,27 @@ const Header = () => {
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
                                                 </div>
-                                                <div className='col-lg-3 mb-2'>
+                                                {/* <div className='col-lg-3 mb-2'>
                                                     <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_SB.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                                 <div className='col-lg-3'>
                                                     <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_WC.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/products/Mangalsutra" id="solitaires">
-                                            <i className="ri-subtract-line"></i>Mangalsutras
-                                        </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="solitaires">
+                                        <div
+                                            className="d-flex justify-content-between align-items-center"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => toggleDropdown("mangalsutra")}
+                                        >
+                                            <Link className="nav-link active" to="/products/Mangalsutra" data-bs-dismiss="offcanvas" aria-label="Close" >
+                                                Mangalsutras
+                                            </Link>
+                                            <span className="me-2 dropdown_accordian_icon">{openDropdown === "mangalsutra" ? "-" : "+"}</span>
+                                        </div>
+                                        <ul className={`dropdown-menu dropdown-content dropdown_accordian ${openDropdown === "mangalsutra" ? "show" : ""}`}>
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Shop By Style
@@ -3823,20 +3855,27 @@ const Header = () => {
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
                                                 </div>
-                                                <div className='col-lg-3 mb-2'>
+                                                {/* <div className='col-lg-3 mb-2'>
                                                     <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_ME.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                                 <div className='col-lg-3'>
                                                     <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_TN.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/products/Pendant" id="moreJewellery">
-                                            <i className="ri-subtract-line"></i>Necklaces & Pendants
-                                        </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="moreJewellery">
+                                        <div
+                                            className="d-flex justify-content-between align-items-center"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => toggleDropdown("pendant")}
+                                        >
+                                            <Link className="nav-link active" to="/products/Pendant" data-bs-dismiss="offcanvas" aria-label="Close" >
+                                                Necklaces & Pendants
+                                            </Link>
+                                            <span className="me-2 dropdown_accordian_icon">{openDropdown === "pendant" ? "-" : "+"}</span>
+                                        </div>
+                                        <ul className={`dropdown-menu dropdown-content dropdown_accordian ${openDropdown === "pendant" ? "show" : ""}`}>
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Shop By Style
@@ -3918,20 +3957,21 @@ const Header = () => {
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
                                                 </div>
-                                                <div className='col-lg-3 mb-2'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_LN.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
-                                                </div>
-                                                <div className='col-lg-3'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_IN.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
-                                                </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="" id="gifts">
-                                            <i className="ri-subtract-line"></i>Gifts
-                                        </Link>
-                                        <ul className="dropdown-menu dropdown-content" aria-labelledby="gifts">
+                                        <div
+                                            className="d-flex justify-content-between align-items-center"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => toggleDropdown("gifts")}
+                                        >
+                                            <Link className="nav-link active" to="" data-bs-dismiss="offcanvas" aria-label="Close" >
+                                                Gifts
+                                            </Link>
+                                            <span className="me-2 dropdown_accordian_icon">{openDropdown === "gifts" ? "-" : "+"}</span>
+                                        </div>
+                                        <ul className={`dropdown-menu dropdown-content dropdown_accordian ${openDropdown === "gifts" ? "show" : ""}`}>
                                             <div className='row'>
                                                 <div className='col-lg-4 category_jwellery'>
                                                     <h6 className='border-dropdown'>Gifting
@@ -4021,24 +4061,39 @@ const Header = () => {
                                                     <li><Link>₹50k to ₹75k</Link></li>
                                                     <li><Link>Above ₹ 75k</Link></li>
                                                     <li><Link>FOR MEN</Link></li>
-                                                </div><div className='col-lg-3 mb-2'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/03_MAR/Banner/hamburger/03/egold_d.png' className='img-fluid' style={{ borderRadius: "10px" }}></img>
-                                                </div>
-                                                <div className='col-lg-3'>
-                                                    <img alt='' src='https://cdn.caratlane.com/media/static/images/V4/2025/CL/02-FEB/Banner/New_Website/MenuBar/Desktop_01/MenuBar_Desktop_Ww.jpg' className='img-fluid' style={{ borderRadius: "10px" }}></img>
                                                 </div>
                                             </div>
                                         </ul>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="" id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
+                                        {/* <Link className="nav-link active" to="" id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
                                             <i className="ri-subtract-line"></i>Trending
-                                        </Link>
+                                        </Link> */}
+                                        <div
+                                            className="d-flex justify-content-between align-items-center"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => toggleDropdown("trending")}
+                                        >
+                                            <Link className="nav-link active" to="" data-bs-dismiss="offcanvas" aria-label="Close" >
+                                                Trending
+                                            </Link>
+                                            {/* <span className="me-2">{openDropdown === "trending" ? "-" : "+"}</span> */}
+                                        </div>
                                     </li>
                                     <li className="nav-item dropdown">
-                                        <Link className="nav-link active" to="/aboutUs" id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
+                                        {/* <Link className="nav-link active" to="/aboutUs" id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
                                             <i className="ri-subtract-line"></i>About Us
-                                        </Link>
+                                        </Link> */}
+                                        <div
+                                            className="d-flex justify-content-between align-items-center"
+                                            style={{ cursor: "pointer" }}
+                                            onClick={() => toggleDropdown("aboutus")}
+                                        >
+                                            <Link className="nav-link active" to="/aboutUs" data-bs-dismiss="offcanvas" aria-label="Close" >
+                                                About Us
+                                            </Link>
+                                            {/* <span className="me-2">{openDropdown === "aboutus" ? "-" : "+"}</span> */}
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -4101,7 +4156,7 @@ const Header = () => {
                         </Link> */}
 
                     </div>
-                    <form action="" className='pt-3'>
+                    <form action="" className='py-3'>
                         <div className="bg-light rounded rounded-pill shadow-sm">
                             <div className="input-group" data-bs-toggle="offcanvas" data-bs-target="#mdsearchOffcanvas" aria-controls="mdsearchOffcanvas">
                                 <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
@@ -5197,9 +5252,9 @@ const Header = () => {
                             {searchTerm.trim() === "" ? (
                                 // Jab tak search nahi kiya, tab tak default products dikhaye
                                 defaultProducts.map((item) => (
-                                    <div className="col-lg-6 px-4" key={item._id}>
-                                        <div className="search-item">
-                                            <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
+                                    <div className="col-lg-6 px-4 " key={item.product_id}>
+                                        <div className="search-item ">
+                                            <Link to={`/Productdetails/${item.product_id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
                                                 <div className="left">
                                                     <img
                                                         src={item.goldImages[0]}
@@ -5281,7 +5336,7 @@ const Header = () => {
                                                     src={item.images?.[0]}
                                                     className="img-fluid position-relative"
                                                     onError={(e) => {
-                                                        e.target.onerror = null; 
+                                                        e.target.onerror = null;
                                                         e.target.style.display = "none";
                                                         e.target.parentElement.innerHTML = `
                                                         <div class='no-image-placeholder-cart d-flex justify-content-center align-items-center border border-1 rounded-3' style="height: 190px;">
@@ -5362,7 +5417,7 @@ const Header = () => {
                                     defaultProducts.map((item) => (
                                         <div className="col-lg-6 px-4" key={item._id}>
                                             <div className="search-item">
-                                                <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark">
+                                                <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
                                                     <div className="left">
                                                         <img
                                                             src={item.goldImages[0]}
@@ -5389,7 +5444,7 @@ const Header = () => {
                                         filteredProducts.map((item) => (
                                             <div className="col-lg-6 px-4" key={item._id}>
                                                 <div className="search-item">
-                                                    <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark">
+                                                    <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
                                                         <div className="left">
                                                             <img
                                                                 src={item.image01}
@@ -5439,7 +5494,7 @@ const Header = () => {
                                             className="card border-0 w-100 mx-auto d-block"
                                             key={item.id}
                                         >
-                                            <Link to={`/Productdetails/${item.id}`}>
+                                            <Link to={`/Productdetails/${item.id}`} data-bs-dismiss="offcanvas" aria-label="Close">
                                                 <img
                                                     alt={item.title}
                                                     src={item.images?.[0]}

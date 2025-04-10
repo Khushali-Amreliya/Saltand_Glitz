@@ -20,11 +20,11 @@ const Contact = () => {
                 <div className='row text-center py-5'>
                     <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
                         <i class="ri-mail-line fs-4"></i>
-                        <p className='p_main'>Email<i class="ri-arrow-drop-right-line fs-4 align-middle"></i></p>
+                        <p className='p_main'>support@saltandglitz.com<i class="ri-arrow-drop-right-line fs-4 align-middle"></i></p>
                     </div>
                     <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
                         <i class="ri-phone-line fs-4"></i>
-                        <p className='p_main'>Call us at +91 1234567890<i class="ri-arrow-drop-right-line fs-4 align-middle"></i></p>
+                        <p className='p_main'>Call us at +91 7984369890<i class="ri-arrow-drop-right-line fs-4 align-middle"></i></p>
                     </div>
                     <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
                         <i class="ri-vip-diamond-line fs-4"></i>

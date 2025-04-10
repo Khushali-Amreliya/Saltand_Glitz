@@ -137,6 +137,7 @@
 
 .border-dropdown {
     font-weight: bold;
+    color: var(--color);
     font-size: 12px;
     padding-left: 10px;
     text-transform: uppercase;
@@ -185,6 +186,19 @@
     }
 }
 
+.dropdown_accordian {
+    display: none !important;
+}
+
+.dropdown_accordian.show {
+    display: block !important;
+}
+
+.dropdown_accordian_icon {
+    font-size: 21px;
+    color: var(--color);
+    font-weight: 600;
+}
 
 .dropdown-content li {
     list-style: none;
@@ -192,7 +206,7 @@
 
 .dropdown-content li a {
     text-decoration: none;
-    color: #000;
+    color: var(--color);
     padding-left: 16px;
     display: block;
     font-size: 12px !important;
@@ -201,6 +215,13 @@
     text-transform: uppercase;
     cursor: pointer;
 }
+
+.dropdown-content li a:hover {
+    color: var(--color) !important;
+    transition: all 0.3s ease-in-out !important;
+    font-weight: 600 !important;
+}
+
 
 .category_jwellery li a img {
     width: 17%;
@@ -217,13 +238,6 @@
 .dropdown a {
     color: #000;
     transition: 0.3s;
-}
-
-.dropdown a:hover {
-    color: #000 !important;
-    /* padding-left: 20px !important; */
-    transition: all 0.4s ease-in-out !important;
-    font-weight: 400 !important;
 }
 
 
@@ -252,7 +266,7 @@
 .nav-link {
     position: relative;
     text-decoration: none;
-    color: #353842 !important;
+    color: var(--color) !important;
     font-weight: 400 !important;
     font-size: 15.5px;
     transition: color 0.8s ease !important;
@@ -540,7 +554,7 @@
 }
 
 .search_offcanvas_arrow {
-    width: 13% !important;
+    width: 15% !important;
     height: auto !important;
     object-fit: cover !important;
     border-radius: 5px !important;
@@ -549,7 +563,7 @@
 .offcanvas-title {
     font-size: 24px;
     font-weight: bold;
-    color: #5D3FD3;
+    color: var(--color);
 }
 
 .btn-close {
@@ -557,12 +571,12 @@
 }
 
 .offcanvas_search {
-    border-bottom: 1px solid rgb(235, 235, 255) !important;
+    border-bottom: 1px solid var(--background) !important;
     padding-top: 8px;
 }
 
 .offcanvas_search_border {
-    border-bottom: 1px solid rgb(235, 235, 255) !important;
+    border-bottom: 0.2px solid var(--background) !important;
     padding-top: 8px;
 }
 
@@ -579,16 +593,19 @@
 .logo-fixed {
     width: 165px !important;
 }
-.shadow-sm{
+
+.shadow-sm {
     border: 1px solid var(--color);
     padding: 5px 10px !important;
 }
+
 /* Media Query */
 @media(max-width:1316px) {
     .header_logo i {
         padding: 0px 5px !important;
         margin: 0px 0px !important;
     }
+
     .nav-link {
         font-size: 13.5px !important;
     }
@@ -597,6 +614,13 @@
 @media(max-width:1024px) {
     .border-dropdown {
         font-size: 10px !important;
+    }
+}
+
+@media(max-width:1005px) {
+
+    .nav-link {
+        font-size: 12.5px !important;
     }
 }
 
@@ -612,11 +636,22 @@
 
 @media(max-width:991px) {
     .category_jwellery li a img {
-        width: 8% !important;
+        width: 4% !important;
+    }
+}
+
+@media(max-width:768px) {
+    .nav-link {
+        font-size: 14px !important;
+        font-weight: 600 !important;
     }
 }
 
 @media(max-width:592px) {
+    .category_jwellery li a img {
+        width: 7% !important;
+    }
+
     .main_logo {
         width: 48% !important;
     }

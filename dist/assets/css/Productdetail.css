@@ -309,7 +309,7 @@
 }
 
 .section .bg_price_breakup {
-    background: var(--background);
+    background: var(--light-color);
     padding: 0 6px;
 }
 
@@ -624,11 +624,13 @@
 }
 
 .review_list_box {
-    /* box-shadow: 0 2px 8px rgba(0, 0, 0, .15); */
     box-shadow: 0 2px 8px var(--background);
     border-radius: 4px;
     padding: 20px;
+    height: 239px;
+    overflow-y: auto;
 }
+
 
 .review_list_box p span {
     border-radius: 50%;
@@ -772,6 +774,70 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.offers-box {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 500px;
+    background: #fff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.offers-title {
+    font-weight: 600;
+    color: var(--color);
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.offer-item {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.offer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.offer-title {
+    display: flex;
+    align-items: center;
+    color: var(--color);
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.offer-icon {
+    margin-right: 8px;
+    color: var(--color);
+}
+
+.plus-icon {
+    font-size: 20px;
+    color: var(--color);
+    font-weight: bold;
+}
+
+.offer-content {
+    padding: 10px 12px;
+    font-size: 14px;
+    background-color: var(--background);
+    /* border-top: 1px solid #eee; */
+}
+
+.offer-content span,
+.offer-content button {
+    font-size: 12px;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

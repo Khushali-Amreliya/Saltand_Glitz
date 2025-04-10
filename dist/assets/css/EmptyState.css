@@ -73,3 +73,9 @@
   letter-spacing: 1.5px;
   word-spacing: 2px;
 }
+
+@media(max-width:768px) {
+  .footer-item img {
+    width: 100% !important;
+  }
+}

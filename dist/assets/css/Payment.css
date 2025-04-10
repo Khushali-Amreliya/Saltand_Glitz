@@ -7,13 +7,13 @@
     align-items: center;
     padding: 10px;
     border-radius: 15px;
-    background:rgb(246, 243, 249);
+    background:var(--light-color);
     transition: border-color 0.3s ease;
 }
 .payment-option.selected {
-    background-color: #66bec8;
-    border-color: #297179;
-    border: 1px solid #297179;
+    background-color: var(--background);
+    border-color: var(--color);
+    border: 1px solid var(--color);
     color: #000;
 }
 .icon-wrapper {
@@ -38,7 +38,7 @@
 }
 .description {
     font-size: 12px;
-    color: #08424a;
+    color: var(--color);
     margin: 2px 0 0 0;
     letter-spacing: 0.5px;
 }
@@ -46,18 +46,18 @@
     margin-left: auto;
 }
 .radio-wrapper input[type="radio"] {
-    accent-color: #0b7a9c;
+    accent-color: var(--color);
     width: 18px;
     height: 18px;
 }
 .gift_add_wrapper{
-    color: #0b617b;
+    color: var(--color);
     font-weight: bold;
     font-size: 15px;
     padding-right: 15px;
 }
 .gift_card{
-    background-color: #ebebff !important;
+    background-color: var(--light-color) !important;
 }
 .pay_btn{
     background:var(--background) !important;

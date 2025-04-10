@@ -675,80 +675,127 @@ const Mainpage = () => {
         <section className="container-fluid mb-5 d-lg-block d-md-block d-none">
           {banners && banners.length > 0 ? (
             <Slider {...webBanners}>
-              {banners
-                .filter((_, index) => index % 2 === 0) // ✅ Only 0, 2, 4 index
-                .map((banner, index) => (
-                  <div key={index}>
-                    {banner.type === "goldVideo" ? (
-                      // <video autoPlay muted loop className="img-fluid banner_class" style={{ borderRadius: "10px", objectFit: "cover" }}>
-                      //   <source src={banner.bannerImage} type="video/mp4" />
-                      //   Your browser does not support the video tag.
-                      // </video>
-                      <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="img-fluid"
-                        style={{ borderRadius: "10px", objectFit: "cover" }}
-                      >
-                        <source src={banner.bannerImage} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    ) : (
-                      <img
-                        alt={`Banner ${index + 1}`}
-                        src={banner.bannerImage}
-                        className="img-fluid banner_class"
-                        style={{ borderRadius: "10px", objectFit: "cover" }}
-                      />
-                    )}
-                  </div>
-                ))}
+
+              {/* Banner 0 - Image */}
+              {banners[0] && (
+                <div>
+                  <Link to="products">
+                    <img
+                      alt="Banner 1"
+                      src={banners[0].bannerImage}
+                      className="img-fluid banner_class"
+                      style={{ borderRadius: "10px", objectFit: "cover" }}
+                    />
+                  </Link>
+                </div>
+              )}
+
+              {/* Banner 1 - Image */}
+              {banners[2] && (
+                <div>
+                  <img
+                    alt="Banner 2"
+                    src={banners[2].bannerImage}
+                    className="img-fluid banner_class"
+                    style={{ borderRadius: "10px", objectFit: "cover" }}
+                  />
+                </div>
+              )}
+
+              {/* Banner 2 - Video */}
+              {banners[4] && banners[4].type === "goldVideo" && (
+                <div>
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="img-fluid"
+                    style={{ borderRadius: "10px", objectFit: "cover" }}
+                  >
+                    <source src={banners[4].bannerImage} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              )}
+
+              {/* Banner 3 - Image */}
+              {banners[6] && (
+                <div>
+                  <img
+                    alt="Banner 4"
+                    src={banners[6].bannerImage}
+                    className="img-fluid banner_class"
+                    style={{ borderRadius: "10px", objectFit: "cover" }}
+                  />
+                </div>
+              )}
+
             </Slider>
           ) : (
             <Slider {...webBanners}>
-              {[...Array(1)].map((_, index) => (
-                <Shimmer key={index} type="banner" />
-              ))}
+              <Shimmer type="banner" />
             </Slider>
           )}
         </section>
+
 
         {/* Mobile Banners */}
         <section className="container-fluid d-lg-none d-md-none d-block mb-5">
           {banners?.length > 0 ? (
             <Slider {...mobileBanners}>
-              {banners
-                .filter((_, index) => index % 2 !== 0) // ✅ Only 1, 3, 5 index
-                .map((banner, index) => (
-                  <div key={index}>
-                    {banner.type === "goldVideo" ? (
-                      // <video autoPlay muted loop className="img-fluid" style={{ borderRadius: "10px", objectFit: "cover" }}>
-                      //   <source src={banner.mobileBannerImage} type="video/mp4" />
-                      //   Your browser does not support the video tag.
-                      // </video>
-                      <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="img-fluid"
-                        style={{ borderRadius: "10px", objectFit: "cover" }}
-                      >
-                        <source src={banner.mobileBannerImage} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    ) : (
-                      <img
-                        alt={`Banner ${index + 1}`}
-                        src={banner.mobileBannerImage}
-                        className="img-fluid"
-                        style={{ borderRadius: "10px", objectFit: "cover" }}
-                      />
-                    )}
-                  </div>
-                ))}
+              {/* Banner 0 - Image */}
+              {banners[1] && (
+                <div>
+                  <img
+                    alt="Banner 1"
+                    src={banners[1].mobileBannerImage}
+                    className="img-fluid banner_class"
+                    style={{ borderRadius: "10px", objectFit: "cover" }}
+                  />
+                </div>
+              )}
+
+              {/* Banner 1 - Image */}
+              {banners[3] && (
+                <div>
+                  <img
+                    alt="Banner 2"
+                    src={banners[3].mobileBannerImage}
+                    className="img-fluid banner_class"
+                    style={{ borderRadius: "10px", objectFit: "cover" }}
+                  />
+                </div>
+              )}
+
+              {/* Banner 2 - Video */}
+              {banners[5] && banners[5].type === "goldVideo" && (
+                <div>
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="img-fluid"
+                    style={{ borderRadius: "10px", objectFit: "cover" }}
+                  >
+                    <source src={banners[5].mobileBannerImage} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              )}
+
+              {/* Banner 3 - Image */}
+              {banners[7] && (
+                <div>
+                  <img
+                    alt="Banner 4"
+                    src={banners[7].mobileBannerImage}
+                    className="img-fluid banner_class"
+                    style={{ borderRadius: "10px", objectFit: "cover" }}
+                  />
+                </div>
+              )}
             </Slider>
           ) : (
             <Slider {...mobileBanners}>
@@ -1480,7 +1527,7 @@ const Mainpage = () => {
         </section>
 
         {/* Whatsapp Icon */}
-        <Link to="https://wa.me/+919662044820" target="_blank" rel="noopener noreferrer" className="whatsapp-logo text-decoration-none">
+        <Link to="https://wa.me/+917984369890" target="_blank" rel="noopener noreferrer" className="whatsapp-logo text-decoration-none">
           {/* <i class="ri-whatsapp-fill fs-1"></i> */}
           <i className="fa-brands fa-whatsapp"></i>
         </Link>

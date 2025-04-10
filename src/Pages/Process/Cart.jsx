@@ -327,28 +327,28 @@ const Cart = () => {
 
   const moveToWishlist = async (item) => {
     setLoading(true);
-  
+
     const userId = user?._id || localStorage.getItem("guestUserId");
     const productId = item?.productId?.product_id;
-  
+
     if (!productId) {
       toast.error("Invalid product data!");
       setLoading(false);
       return;
     }
-  
+
     const cartItem = {
       user: userId,
       productId: productId,
     };
-  
+
     try {
       // Step 1: Remove from Cart
       const removeResponse = await axios.delete(
         `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/remove/${userId}/${productId}`,
         { data: cartItem }
       );
-  
+
       if (removeResponse.status === 200) {
         // Step 2: Add to Wishlist
         const wishlistItem = {
@@ -358,23 +358,23 @@ const Cart = () => {
           colorBy: item?.colorBy,
           caratBy: item?.caratBy
         };
-  
+
         console.log("Sending wishlistItem:", wishlistItem);
-  
+
         const wishlistResponse = await axios.post(
           "https://saltandglitz-api-131827005467.asia-south2.run.app/v1/wishlist/create_wishlist",
           wishlistItem
         );
-  
+
         console.log("Wishlist Response Data:", wishlistResponse.data);
-  
+
         if (wishlistResponse.status === 200 || wishlistResponse.status === 201) {
           dispatch(cartAction.removeItem(productId));
-  
+
           const wishlistData = wishlistResponse.data.wishlist;
           if (wishlistData && wishlistData._id) {
             const wishlistProduct = wishlistData.products.find(p => p.productId === productId);
-  
+
             if (wishlistProduct) {
               const wishlistItemToStore = {
                 id: productId,
@@ -382,14 +382,14 @@ const Cart = () => {
                 caratBy: item?.caratBy,
                 size: item?.size,
               };
-  
+
               dispatch(cartAction.addToWishlist(wishlistItemToStore));
-  
+
               // OPTIONAL: Manually update localStorage (if Redux doesn't persist it)
               const existingWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
               existingWishlist.push(wishlistItemToStore);
               localStorage.setItem("wishlist", JSON.stringify(existingWishlist));
-  
+
               navigate("/wishlist");
               toast.success("Item moved to wishlist");
             } else {
@@ -406,7 +406,7 @@ const Cart = () => {
       }
     } catch (error) {
       console.error("Error moving item to wishlist:", error);
-  
+
       if (error.response) {
         console.error("Wishlist API Error Response:", error.response.data);
         toast.error("Wishlist API Error: " + (error.response.data.message || "Unexpected error"));
@@ -417,7 +417,7 @@ const Cart = () => {
       setLoading(false);
     }
   };
-  
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -494,8 +494,8 @@ const Cart = () => {
           </div>
 
           <div className="cart_header_right">
-            <Link to="" className="assistance-link">
-              <span className="d-lg-block d-md-block d-sm-block d-none">
+            <Link to="https://wa.me/+917984369890" target="_blank" rel="noopener noreferrer" className="assistance-link text-decoration-none">
+              <span className='d-lg-block d-md-block d-sm-block d-none'>
                 Need Assistance?
               </span>
               <i className="ri-whatsapp-line whatsapp-icon"></i>
@@ -725,26 +725,19 @@ const Cart = () => {
 
                               {[
                                 {
-                                  code: "SHAYAUPSELL10",
+                                  code: "NATURE10",
                                   discount: "10% OFF",
-                                  validity: "August 21 2024",
+                                  // validity: "August 21 2024",
                                   description:
-                                    "Get Extra 10% OFF on purchase of 3 or more items",
+                                    "Flat 10% off on diamond above 1 carat",
                                 },
                                 {
-                                  code: "PERFECT3",
-                                  discount: "3% OFF",
-                                  validity: "August 19 2024",
+                                  code: "CRAFT20",
+                                  discount: "20% OFF",
+                                  // validity: "August 19 2024",
                                   description:
-                                    "Flat 3% Off on Loose Solitaires Only",
-                                },
-                                {
-                                  code: "MOUNT5",
-                                  discount: "5% OFF",
-                                  validity: "August 19 2024",
-                                  description:
-                                    "Flat 5% Off on Solitaire Mount SKU",
-                                },
+                                    "Flat 20% off on making charges",
+                                }
                               ].map((offer, index) => (
                                 <div className="coupan_box mx-3" key={index}>
                                   <div className="offer-label border border-start-0 border-top-0 border-bottom-0 px-3 align-items-center d-flex">
@@ -911,8 +904,8 @@ const Cart = () => {
         <section className="cart_footer position_cart">
           <div className="cart_footer_left pt-3">
             <p>
-              <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) |
-              contact us@saltandglitz.com
+              <strong>Contact Us:</strong>&nbsp; +91 7984369890 (Helpline) |
+              contact support@saltandglitz.com
             </p>
           </div>
           <div className="cart_footer_right">

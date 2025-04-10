@@ -120,13 +120,29 @@ const OrderSummary = () => {
                     TOTAL COST
                     <span>{formatCurrency(totallPrice.toFixed())}</span>
                 </h6>
-                <p className='text-center fw-bold' style={{ color: "#8863fb", fontSize: "14px" }}>Need Help?</p>
-                <p className='text-center login_SKU'>We’re available by phone +91 79843 69890 (Toll Free) every day, 9 AM to 1 AM IST (Mon - Sun)</p>
-                <div className='text-center pt-3'>
-                    <i className="ri-phone-line fs-4 bg-dark text-light rounded-pill p-2 vertical-align-middle"></i>
-                    <i className="ri-whatsapp-line fs-4 bg-dark text-light rounded-pill p-2 vertical-align-middle mx-3"></i>
-                    <i className="ri-mail-line fs-4 bg-dark text-light rounded-pill p-2 vertical-align-middle"></i>
+                <p className='text-center fw-bold' style={{ color: "#00362A", fontSize: "14px" }}>Need Help?</p>
+                <p className='text-center login_SKU'>We’re available by phone +91 7984369890 (Toll Free) every day, 9 AM to 1 AM IST (Mon - Sun)</p>
+                <div className='text-center pt-3 d-flex justify-content-center gap-3'>
+                    <div
+                        className="bg-dark text-light rounded-circle d-flex align-items-center justify-content-center"
+                        style={{ width: "45px", height: "45px" }}
+                    >
+                        <i className="ri-phone-line fs-4"></i>
+                    </div>
+                    <div
+                        className="bg-dark text-light rounded-circle d-flex align-items-center justify-content-center"
+                        style={{ width: "45px", height: "45px" }}
+                    >
+                        <i className="ri-whatsapp-line fs-4"></i>
+                    </div>
+                    <div
+                        className="bg-dark text-light rounded-circle d-flex align-items-center justify-content-center"
+                        style={{ width: "45px", height: "45px" }}
+                    >
+                        <i className="ri-mail-line fs-4"></i>
+                    </div>
                 </div>
+
             </div>
         </>
     )

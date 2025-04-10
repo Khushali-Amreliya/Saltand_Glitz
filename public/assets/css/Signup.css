@@ -8,7 +8,7 @@
 }
 
 .signup_logo {
-    color: #4f3267;
+    color: var(--color);
     font-family: InterRegular, "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
 }

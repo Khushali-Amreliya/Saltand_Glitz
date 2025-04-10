@@ -1,6 +1,6 @@
 .footer_sec p {
     margin: 0;
-    padding-bottom: 5px;
+    padding-bottom: 12px;
 }
 
 .footer_sec p a,
@@ -15,8 +15,11 @@
 
 .footer_sec h6 {
     font-weight: 500;
-    letter-spacing: 0.6px;
-    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    word-spacing: 0.5px;
+    font-size: 13px;
+    color: var(--color);
 }
 
 .footer_main {
@@ -31,6 +34,8 @@
 
 .faq-question {
     background: #fff;
+    text-transform: uppercase;
+    color: var(--color);
     padding: 5px;
     cursor: pointer;
     position: relative;
@@ -39,7 +44,7 @@
     align-items: center;
     font-weight: 500;
     letter-spacing: 0.6px;
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .faq-question:hover {
@@ -48,9 +53,9 @@
 
 .faq-answer {
     display: none;
-    background: #f2f6f9;
+    background: var(--light-color);
     padding: 15px;
-    border-left: 2px solid var(--color);
+    border-left: 1.3px solid var(--color);
     font-size: 13px;
     letter-spacing: 1px;
     word-spacing: 0.5px;
@@ -63,7 +68,7 @@
 }
 
 .faq-answer p {
-    margin-bottom: 10px !important;
+    margin-bottom: 15px !important;
 }
 
 .faq-question.active+.faq-answer {
@@ -80,7 +85,7 @@
 }
 
 .app-download-container {
-    background:var(--shadow-color);
+    background: var(--shadow-color);
     padding: 20px;
     border-radius: 10px;
     max-width: 400px;
@@ -102,4 +107,8 @@
 
 .store-badge {
     width: 133px;
+}
+
+.main-content {
+    padding-bottom: 60px !important;
 }

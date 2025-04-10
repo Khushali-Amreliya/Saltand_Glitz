@@ -100,7 +100,7 @@ const Gift = () => {
                 </div> */}
 
                 <div className="cart_header_right">
-                    <Link to="/assistance" className="assistance-link">
+                    <Link to="https://wa.me/+917984369890" target="_blank" rel="noopener noreferrer" className="assistance-link text-decoration-none">
                         <span className='d-lg-block d-md-block d-sm-block d-none'>
                             Need Assistance?
                         </span>
@@ -119,7 +119,7 @@ const Gift = () => {
                                 <div className='card-body gift_card_body'>
                                     <div className='row'>
                                         <div className='col-xl-8 col-lg-6 col-md-8 col-sm-8 col-12'>
-                                            <p className='m-0 p-0'>Send CaratLane&nbsp;
+                                            <p className='m-0 p-0'>Send Salt & Glitz&nbsp;
                                                 <span className='fst-italic'>Postcards</span>
                                             </p>
                                             <p className='gift_mess'>Add a video message to your gift!</p>
@@ -196,7 +196,8 @@ const Gift = () => {
             <section className="cart_footer">
                 <div className="cart_footer_left pt-3">
                     <p>
-                        <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) | contactus@saltandglitz.com
+                        <strong>Contact Us:</strong>&nbsp; +91 7984369890 (Helpline) |
+                        contact support@saltandglitz.com
                     </p>
                 </div>
                 <div className="cart_footer_right">

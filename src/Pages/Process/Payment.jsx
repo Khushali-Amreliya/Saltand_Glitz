@@ -54,7 +54,7 @@ const Payment = () => {
                 </div> */}
 
                 <div className="cart_header_right">
-                    <Link to="/assistance" className="assistance-link">
+                    <Link to="https://wa.me/+917984369890" target="_blank" rel="noopener noreferrer" className="assistance-link text-decoration-none">
                         <span className='d-lg-block d-md-block d-sm-block d-none'>
                             Need Assistance?
                         </span>
@@ -158,7 +158,8 @@ const Payment = () => {
             <section className="cart_footer">
                 <div className="cart_footer_left pt-3">
                     <p>
-                        <strong>Contact Us:</strong>&nbsp; +91-44-66075200 (Helpline) | contactus@saltandglitz.com
+                        <strong>Contact Us:</strong>&nbsp; +91 7984369890 (Helpline) |
+                        contact support@saltandglitz.com
                     </p>
                 </div>
                 <div className="cart_footer_right">

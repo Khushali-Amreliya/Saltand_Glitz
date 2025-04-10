@@ -1166,6 +1166,7 @@ import { IoHeart } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoStar } from "react-icons/io5";
 import { GoArrowLeft } from "react-icons/go";
+import { FaTag } from 'react-icons/fa';
 // import { productCard } from "../Product/productCard"
 
 const renderStars = (rating) => {
@@ -1237,6 +1238,8 @@ const Productdetails = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    const [openIndex, setOpenIndex] = useState(null);
+    const [copiedIndex, setCopiedIndex] = useState(null);
     const [size, setSize] = useState(6); // For ring size
     const [caratBy, setCaratBy] = useState("14KT"); // For Purity (KT)
     const [colorBy, setColorBy] = useState(colors.length >= 3 ? colors[2].name : ""); // For selected color
@@ -1283,6 +1286,25 @@ const Productdetails = () => {
         ratings: []
     });
 
+    const offers = [
+        {
+            title: "Flat 10% off on diamond above 1 carat",
+            code: "NATURE10"
+        },
+        {
+            title: "Flat 20% off on making charges",
+            code: "CRAFT20"
+        },
+    ];
+
+    const toggleAccordion = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
+    const handleCopy = (code, index) => {
+        navigator.clipboard.writeText(code);
+        setCopiedIndex(index);
+        setTimeout(() => setCopiedIndex(null), 1500);
+    };
 
     useEffect(() => {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -1309,8 +1331,8 @@ const Productdetails = () => {
         slidesToScroll: 1,
         responsive: [
             { breakpoint: 992, settings: { slidesToShow: 3 } },
-            { breakpoint: 768, settings: { slidesToShow: 1.5 } },
-            { breakpoint: 576, settings: { slidesToShow: 1 } },
+            { breakpoint: 768, settings: { slidesToShow: 1.2 } },
+            { breakpoint: 576, settings: { slidesToShow: 1.2 } },
         ],
     };
 
@@ -2121,9 +2143,10 @@ const Productdetails = () => {
                                 </p>
                                 {/* <p className='title_offer'><i className="ri-discount-percent-line"></i>&nbsp;Special offer for you</p> */}
 
-                                <p className="KT_button" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                    <span className="align-middle">Color</span>
-                                    <span className="ps-3 align-middle" style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                                {/* Color Selection */}
+                                <div className="my-3 KT_button d-flex align-items-center gap-1">
+                                    <span style={{ minWidth: "70px" }}>Color</span>
+                                    <div className="d-flex align-items-center gap-2">
                                         {colors.map((color) => (
                                             <div
                                                 key={color.id}
@@ -2132,15 +2155,15 @@ const Productdetails = () => {
                                                     height: "18px",
                                                     backgroundColor: color.color,
                                                     borderRadius: "50%",
-                                                    border: colorBy === color.name ? "1px solid #ddd" : "1px solid #ddd",
+                                                    border: "1px solid #ddd",
                                                     cursor: "pointer",
                                                     display: "flex",
                                                     alignItems: "center",
                                                     justifyContent: "center",
-                                                    position: "relative"
+                                                    position: "relative",
                                                 }}
                                                 onClick={() => handleColorClick(color.name)}
-                                                title={color.name} // Tooltip dikhane ke liye
+                                                title={color.name}
                                             >
                                                 {colorBy === color.name && (
                                                     <i
@@ -2148,63 +2171,69 @@ const Productdetails = () => {
                                                         style={{
                                                             color: "#fff",
                                                             fontSize: "12px",
-                                                            position: "absolute"
+                                                            position: "absolute",
                                                         }}
                                                     ></i>
                                                 )}
                                             </div>
                                         ))}
-                                    </span>
-                                </p>
-
-
-                                {/* KT Selection Buttons */}
-                                <div className="my-3 KT_button">
-                                    <span className="align-middle pe-3">
-                                        Purity
-                                    </span>
-                                    <button
-                                        className={`btn ${caratBy === "14KT" ? "bg-dark text-light" : "btn-light text-dark"
-                                            } me-2`}
-                                        onClick={() => handleKTClick("14KT")}
-                                    >
-                                        14KT
-                                    </button>
-                                    <button
-                                        className={`btn ${caratBy === "18KT" ? "bg-dark text-light" : "btn-light text-dark"
-                                            } me-2`}
-                                        onClick={() => handleKTClick("18KT")}
-                                    >
-                                        18KT
-                                    </button>
+                                    </div>
                                 </div>
-                                <div className="my-3 KT_button d-flex align-items-center">
-                                    <span className="pe-3">Ring Size</span>
-                                    <select
-                                        className="form-select d-inline w-auto"
-                                        value={size} // Bind the size state
-                                        onChange={handleSizeChange}
-                                    >
-                                        <option value="choose">Choose</option>
-                                        {[...Array(21)].map((_, i) => (
-                                            <option key={i} value={i + 6}>
-                                                {i + 6}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    {showClear && ( // Show Clear button only if showClear is true
+
+                                {/* Purity Selection */}
+                                <div className="my-3 KT_button d-flex align-items-center gap-1">
+                                    <span style={{ minWidth: "70px" }}>Purity</span>
+                                    <div className="d-flex align-items-center gap-2">
                                         <button
-                                            className="btn btn-link ms-3 bg-white text-decoration-none text-dark"
-                                            type="button"
-                                            onClick={handleClear}
+                                            className={`btn ${caratBy === "14KT" ? "bg-dark text-light" : "btn-light text-dark"}`}
+                                            onClick={() => handleKTClick("14KT")}
                                         >
-                                            Clear
+                                            14KT
                                         </button>
-                                    )}
-                                    <button className="btn" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Size Guide</button>
-
+                                        <button
+                                            className={`btn ${caratBy === "18KT" ? "bg-dark text-light" : "btn-light text-dark"}`}
+                                            onClick={() => handleKTClick("18KT")}
+                                        >
+                                            18KT
+                                        </button>
+                                    </div>
                                 </div>
+
+                                {/* Ring Size Selection */}
+                                <div className="my-3 KT_button d-flex align-items-center gap-1">
+                                    <span style={{ minWidth: "70px" }}>Ring Size</span>
+                                    <div className="d-flex align-items-center gap-2">
+                                        <select
+                                            className="form-select d-inline w-auto"
+                                            value={size}
+                                            onChange={handleSizeChange}
+                                        >
+                                            <option value="choose">Choose</option>
+                                            {[...Array(21)].map((_, i) => (
+                                                <option key={i} value={i + 6}>
+                                                    {i + 6}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {showClear && (
+                                            <button
+                                                className="btn btn-link bg-white text-decoration-none text-dark"
+                                                type="button"
+                                                onClick={handleClear}
+                                            >
+                                                Clear
+                                            </button>
+                                        )}
+                                        <button
+                                            className="btn bg-transparent p-0"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                        >
+                                            <u>Size Guide</u>
+                                        </button>
+                                    </div>
+                                </div>
+
                                 {/* <p className="d-flex align-items-center customize_sec">
                                 <div className="w-25 border-end px-2 py-1 bg-white" style={{ borderRadius: "10px 0px 0px 10px" }}>
                                     <small className="text-muted">Size</small>
@@ -2262,6 +2291,38 @@ const Productdetails = () => {
                                     <i className="ri-truck-line fs-5 pe-2"></i>
                                     <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 15 DAYS</u>
                                 </p>
+                                <div className="offers-box border rounded p-3">
+                                    <h6 className="offers-title mb-3 fw-bold text-purple">Additional Offers for you</h6>
+                                    {offers.map((offer, index) => (
+                                        <div key={index} className="offer-item border rounded mb-2">
+                                            <div
+                                                className="offer-header d-flex justify-content-between align-items-center p-2"
+                                                onClick={() => toggleAccordion(index)}
+                                                style={{ cursor: 'pointer' }}
+                                            >
+                                                <div className="offer-title d-flex align-items-center text-purple">
+                                                    <FaTag className="me-2" />
+                                                    <span>{offer.title}</span>
+                                                </div>
+                                                <span className="fw-bold">{openIndex === index ? '-' : '+'}</span>
+                                            </div>
+
+                                            {openIndex === index && (
+                                                <div className="offer-content px-3 pb-2 d-flex justify-content-between align-items-center">
+                                                    <span className="">{offer.code}</span>
+                                                    {offer.code !== "No Code Required" && (
+                                                        <button
+                                                            className="btn btn-sm"
+                                                            onClick={() => handleCopy(offer.code, index)}
+                                                        >
+                                                            {copiedIndex === index ? "Copied!" : "Copy"}
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
                                 {/* Video call */}
                                 {/* <div>
                                     <div className='row p-0 m-0 w-100 border rounded-3'>
@@ -2434,18 +2495,49 @@ const Productdetails = () => {
                                         </button>
                                     </div>
                                 </div>
-                                <div className="my-3 KT_button d-flex justify-content-between align-items-center">
-                                    <span className="pe-3">
-                                        Ring Size
-                                    </span>
-                                    <select className="form-select d-inline w-auto">
-                                        {[...Array(21)].map((_, i) => (
-                                            <option key={i} value={i + 6}>
-                                                {i + 6}
-                                            </option>
-                                        ))}
-                                    </select>
+                                <div className="my-3 KT_button">
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        {/* Left-aligned text */}
+                                        <div>
+                                            <span className="pe-3">Ring Size</span><br></br>
+                                            <button
+                                                className="btn bg-transparent p-0"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal"
+                                            >
+                                                <u>Size Guide</u>
+                                            </button>
+                                        </div>
+
+                                        {/* Right-aligned controls */}
+                                        <div className="d-flex align-items-center">
+                                            <select
+                                                className="form-select d-inline w-auto"
+                                                value={size} // Bind the size state
+                                                onChange={handleSizeChange}
+                                            >
+                                                <option value="choose">Choose</option>
+                                                {[...Array(21)].map((_, i) => (
+                                                    <option key={i} value={i + 6}>
+                                                        {i + 6}
+                                                    </option>
+                                                ))}
+                                            </select>
+
+                                            {showClear && (
+                                                <button
+                                                    className="btn btn-link bg-white text-decoration-none text-dark"
+                                                    type="button"
+                                                    onClick={handleClear}
+                                                >
+                                                    Clear
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
+
+
                                 <hr className="custom-hr" />
                                 {/* <div className=" align-items-center customize_sec container-fluid">
                                 <div className="row">
@@ -2497,6 +2589,38 @@ const Productdetails = () => {
                                     <i className="ri-truck-line fs-5 pe-2"></i>
                                     <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 15 DAYS</u>
                                 </p>
+                                <div className="offers-box border rounded p-3">
+                                    <h6 className="offers-title mb-3 fw-bold text-purple">Additional Offers for you</h6>
+                                    {offers.map((offer, index) => (
+                                        <div key={index} className="offer-item border rounded mb-2">
+                                            <div
+                                                className="offer-header d-flex justify-content-between align-items-center p-2"
+                                                onClick={() => toggleAccordion(index)}
+                                                style={{ cursor: 'pointer' }}
+                                            >
+                                                <div className="offer-title d-flex align-items-center text-purple">
+                                                    <FaTag className="me-2" />
+                                                    <span>{offer.title}</span>
+                                                </div>
+                                                <span className="fw-bold">{openIndex === index ? '-' : '+'}</span>
+                                            </div>
+
+                                            {openIndex === index && (
+                                                <div className="offer-content px-3 pb-2 d-flex justify-content-between align-items-center">
+                                                    <span className="">{offer.code}</span>
+                                                    {offer.code !== "No Code Required" && (
+                                                        <button
+                                                            className="btn btn-sm"
+                                                            onClick={() => handleCopy(offer.code, index)}
+                                                        >
+                                                            {copiedIndex === index ? "Copied!" : "Copy"}
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
                                 {/* <p className='pincode_productdetail pt-2 p-0 m-0'>Your Pincode</p>
                                 <div className="input-group mb-3 w-100 pincode_input">
                                     <input type="text" className="form-control" aria-describedby="basic-addon2" />
@@ -2757,7 +2881,7 @@ const Productdetails = () => {
                                             style={{ fontSize: '15px', cursor: 'pointer' }}
                                         >
                                             {isDescriptsBreakupVisible ? (
-                                                <i className="ri-subtract-line"></i> 
+                                                <i className="ri-subtract-line"></i>
                                             ) : (
                                                 <i className="ri-add-line"></i>
                                             )}
@@ -2773,14 +2897,14 @@ const Productdetails = () => {
                                 </div>
                                 <div className="section product-details pt-3">
                                     <div className="bg_price_breakup d-flex justify-content-between align-items-center">
-                                        <h3 className="m-0" style={{textTransform:"capitalize"}}>FAQ's</h3>
+                                        <h3 className="m-0" style={{ textTransform: "capitalize" }}>FAQ's</h3>
                                         <button
                                             className="btn btn-link p-0 text-dark text-decoration-none"
                                             onClick={togglefaqsBreakup}
                                             style={{ fontSize: '15px', cursor: 'pointer' }}
                                         >
                                             {isfaqsBreakupVisible ? (
-                                                <i className="ri-subtract-line"></i> 
+                                                <i className="ri-subtract-line"></i>
                                             ) : (
                                                 <i className="ri-add-line"></i>
                                             )}
@@ -2932,12 +3056,11 @@ const Productdetails = () => {
                                                             <span>
                                                                 {rating?.userId?.firstName ? rating.userId.firstName.charAt(0) : "U"}
                                                             </span>&nbsp;
-                                                            {rating?.userId?.firstName || "No Review"}
+                                                            {rating?.userId?.firstName || "No Review"} {rating?.userId?.lastName || ""}
                                                         </p>
                                                     </div>
-
                                                     <div className="pb-2">
-                                                        <img src={rating.productImage} className="img-fluid w-25"></img>
+                                                        <img src={rating.productImage} className="img-fluid w-25" style={{boxShadow:"rgb(204 204 204 / 31%) 0px 0px 10px"}}></img>
                                                     </div>
                                                     <h5 className="mb-0">{rating.userReview || "No Review"}</h5>
                                                 </div>
@@ -3377,6 +3500,24 @@ const Productdetails = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* price Modal */}
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Ring Size Chart</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                <div>
+                                    <img alt="" src="https://cdn.shopify.com/s/files/1/0805/4777/4752/files/SIZE_CHART__final-01-01.jpg?v=1739880858" className="img-fluid"></img>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </>
         </Helmet>
     );

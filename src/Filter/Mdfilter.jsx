@@ -20,18 +20,18 @@ const Mdfilter = ({ onFilterApply }) => {
 
     const handleSelectFilterChange = (combinedValue) => {
         let updatedFilters = { ...filters };
-    
+
         if (combinedValue === "featured") {
             updatedFilters = { ...filters, featured: "featured", sortBy: "", priceOrder: "" };
         } else {
             const [sortBy, priceOrder] = combinedValue.split("_");
             updatedFilters = { ...filters, featured: "", sortBy, priceOrder };
         }
-    
+
         setFilters(updatedFilters);
         onFilterApply(updatedFilters);
     };
-    
+
     const handleFilterChange = (type, value) => {
         const updatedFilters = { ...filters, [type]: value };
         setFilters(updatedFilters);
@@ -43,7 +43,7 @@ const Mdfilter = ({ onFilterApply }) => {
         window.location.reload(); // Refresh the page
     };
 
-    const categories = ["Earring", "Ring", "Bracelet","Pendant","Mangalsutra"];
+    const categories = ["Earring", "Ring", "Bracelet", "Pendant", "Mangalsutra"];
     const priceRanges = [
         { id: "below20k", label: "Below ₹20,000" },
         { id: "20kTo30k", label: "₹20,000 - ₹30,000" },
@@ -67,7 +67,7 @@ const Mdfilter = ({ onFilterApply }) => {
                     </div> */}
                     <div className="col-md-6 col-sm-6 col-6">
                         <p
-                            className=""
+                            className="text-light"
                             data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasBottomSort"
                             aria-controls="offcanvasBottom"
@@ -94,7 +94,11 @@ const Mdfilter = ({ onFilterApply }) => {
                                     aria-label="Close"
                                 ></button>
                             </div>
-                            <div className="offcanvas-body small m-0 p-0">
+                            <div className="offcanvas-body small m-0 p-0" style={{
+                                maxHeight: "calc(100vh - 150px)",
+                                overflowY: "auto",
+                                paddingBottom: "80px"
+                            }}>
                                 <div className="mb-2 text-left">
                                     <p onClick={() => handleSelectFilterChange("featured")} className="filter-option">Featured</p>
                                     <p onClick={() => handleSelectFilterChange("newestFirst")} className="filter-option">Latest</p>
@@ -122,7 +126,7 @@ const Mdfilter = ({ onFilterApply }) => {
                     </div>
                     <div className="col-md-6 col-sm-6 col-6">
                         <p
-                            className=""
+                            className="text-light"
                             data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasBottom"
                             aria-controls="offcanvasBottom"
@@ -149,7 +153,11 @@ const Mdfilter = ({ onFilterApply }) => {
                                     aria-label="Close"
                                 ></button>
                             </div>
-                            <div className="offcanvas-body small m-0 p-0">
+                            <div className="offcanvas-body small m-0 p-0" style={{
+                                maxHeight: "calc(100vh - 150px)",
+                                overflowY: "auto",
+                                paddingBottom: "80px"
+                            }}>
                                 <div className="sticky-header px-5">
                                     {/* Price */}
                                     <div className="border border-bottom-3 border-top-0 border-start-0 border-end-0 pb-2">
