@@ -51,7 +51,6 @@ import Jhumkas from '../Category/Earring/Jhumkas';
 import Chain from '../Category/Bracelet/Chain';
 import Oval from '../Category/Bracelet/Oval';
 import CollectionPage from '../Category/Collection';
-import Practice from '../Pages/Practice';
 
 const Router = () => {
   return (
@@ -65,7 +64,6 @@ z
         <Route path='/aboutUs' element={<AboutUs />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/otp' element={<OtpComponent />} />
-        <Route path='/practice' element={<Practice />}></Route>
 
         {/* Category */}
         <Route path='/solitaire' element={<Solitaire />} />
