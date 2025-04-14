@@ -1285,7 +1285,13 @@ const Productdetails = () => {
         rating: 0,
         ratings: []
     });
+    const today = new Date();
+    const estimatedDate = new Date(today);
+    estimatedDate.setDate(today.getDate() + 15);
 
+    // Format date like "25 April 2025"
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = estimatedDate.toLocaleDateString('en-IN', options);
     const offers = [
         {
             title: "Flat 10% off on diamond above 1 carat",
@@ -2201,7 +2207,7 @@ const Productdetails = () => {
 
                                 {/* Ring Size Selection */}
                                 <div className="my-3 KT_button d-flex align-items-center gap-1">
-                                    <span style={{ minWidth: "70px" }}>Ring Size</span>
+                                    <span style={{ minWidth: "70px" }}>Size</span>
                                     <div className="d-flex align-items-center gap-2">
                                         <select
                                             className="form-select d-inline w-auto"
@@ -2269,7 +2275,7 @@ const Productdetails = () => {
                                     </div>
                                     <div className="col-5">
                                         <button
-                                            className='btn add_btn px-4 my-3 w-100'
+                                            className='btn buy_btn px-4 my-3 w-100'
                                             onClick={buyNow}
                                         >
                                             BUY NOW
@@ -2283,13 +2289,13 @@ const Productdetails = () => {
                                             {/* <i
                                                 className={`fa-heart fs-5 ${isWishlist ? 'fa-solid' : 'fa-regular'}`}
                                             ></i> */}
-                                            {isWishlist ? <IoHeart className="fs-4 text-dark" /> : <IoMdHeartEmpty className="fs-4" />}
+                                            {isWishlist ? <IoHeart className="fs-4 color" /> : <IoMdHeartEmpty className="fs-4" />}
                                         </button>
                                     </div>
                                 </div>
                                 <p className='delivery_cancellation'>
                                     <i className="ri-truck-line fs-5 pe-2"></i>
-                                    <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 15 DAYS</u>
+                                    <u>ESTIMATED DELIVERY BY {formattedDate.toUpperCase()}</u>
                                 </p>
                                 <div className="offers-box border rounded p-3">
                                     <h6 className="offers-title mb-3 fw-bold text-purple">Additional Offers for you</h6>
@@ -2424,7 +2430,7 @@ const Productdetails = () => {
                                         className='btn wish_btn border-0'
                                         onClick={handleWishlistClick}
                                     >
-                                        {isWishlist ? <IoHeart className="fs-4 text-dark" /> : <IoMdHeartEmpty className="fs-4" />}
+                                        {isWishlist ? <IoHeart className="fs-4 color" /> : <IoMdHeartEmpty className="fs-4" />}
                                     </button>
                                 </div>
 
@@ -2482,13 +2488,13 @@ const Productdetails = () => {
                                     <span className="align-middle">Purity</span>
                                     <div>
                                         <button
-                                            className={`btn ${caratBy === "14KT" ? "bg-dark text-light" : "btn-light text-dark"} me-2`}
+                                            className={`btn ${caratBy === "14KT" ? "background text-light" : "btn-light color"} me-2`}
                                             onClick={() => handleKTClick("14KT")}
                                         >
                                             14KT
                                         </button>
                                         <button
-                                            className={`btn ${caratBy === "18KT" ? "bg-dark text-light" : "btn-light text-dark"}`}
+                                            className={`btn ${caratBy === "18KT" ? "background text-light" : "btn-light color"}`}
                                             onClick={() => handleKTClick("18KT")}
                                         >
                                             18KT
@@ -2499,7 +2505,7 @@ const Productdetails = () => {
                                     <div className="d-flex justify-content-between align-items-center">
                                         {/* Left-aligned text */}
                                         <div>
-                                            <span className="pe-3">Ring Size</span><br></br>
+                                            <span className="pe-3">Size</span><br></br>
                                             <button
                                                 className="btn bg-transparent p-0"
                                                 data-bs-toggle="modal"
@@ -2577,7 +2583,7 @@ const Productdetails = () => {
                                         </div>
                                         <div className="col">
                                             <button
-                                                className="btn add_btn add_btn_md px-4 my-3 w-100"
+                                                className="btn buy_btn_md add_btn_md px-4 my-3 w-100"
                                                 onClick={buyNow}
                                             >
                                                 BUY NOW
@@ -2587,7 +2593,7 @@ const Productdetails = () => {
                                 </div>
                                 <p className='delivery_cancellation'>
                                     <i className="ri-truck-line fs-5 pe-2"></i>
-                                    <u> DELIVERY & CANCELLATION ESTIMATED DELIVERY BY 15 DAYS</u>
+                                    <u>ESTIMATED DELIVERY BY {formattedDate.toUpperCase()}</u>
                                 </p>
                                 <div className="offers-box border rounded p-3">
                                     <h6 className="offers-title mb-3 fw-bold text-purple">Additional Offers for you</h6>
@@ -3060,7 +3066,7 @@ const Productdetails = () => {
                                                         </p>
                                                     </div>
                                                     <div className="pb-2">
-                                                        <img src={rating.productImage} className="img-fluid w-25" style={{boxShadow:"rgb(204 204 204 / 31%) 0px 0px 10px"}}></img>
+                                                        <img src={rating.productImage} className="img-fluid w-25" style={{ boxShadow: "rgb(204 204 204 / 31%) 0px 0px 10px" }}></img>
                                                     </div>
                                                     <h5 className="mb-0">{rating.userReview || "No Review"}</h5>
                                                 </div>
@@ -3093,7 +3099,7 @@ const Productdetails = () => {
                                 )}
 
                                 <Slider ref={similar} {...similarSlider}>
-                                    {similarProducts.map((item) => (
+                                    {similarProducts.slice(0, 10).map((item) => (
                                         <div className="col-lg-3 col-md-4 col-sm-6 mb-4 card border-0 px-1" key={item._id}>
                                             <Link to={`/Productdetails/${item._id}`}>
                                                 <img

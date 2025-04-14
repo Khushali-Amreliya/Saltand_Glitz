@@ -72,13 +72,16 @@ const LoginSuccess = () => {
                     <Link to="/cart" className="back-button">
                         <i className="ri-arrow-left-line"></i>
                     </Link>
-                    <div className="cart_logo">
-                        <i className="ri-shopping-cart-fill cart_logo_icon d-lg-block d-md-block d-sm-block d-none"></i>
-                        {/* <img alt='' src='assets/img/tiffco-logo-2.svg' className='cart_logo_icon'></img> */}
-                    </div>
+                    <Link to="/" className="text-decoration-none text-dark">
+                        <img
+                            alt=''
+                            src='/assets/img/logo_website.png'
+                            className='img-fluid mx-auto d-block cart-logo-fixed'
+                        />
+                    </Link>
                 </div>
                 <div className="cart_header_right">
-                    <Link to="/assistance" className="assistance-link">
+                    <Link to="https://wa.me/+917984369890" target="_blank" rel="noopener noreferrer" className="assistance-link text-decoration-none">
                         <span className='d-lg-block d-md-block d-sm-block d-none'>
                             Need Assistance?
                         </span>
@@ -94,7 +97,7 @@ const LoginSuccess = () => {
                                 Logged in as <strong>{user ? user.email : 'Guest'}</strong>
                             </p>
                             <Link to="/shipping" className="text-decoration-none"><button className="btn mx-auto d-block place_order_btn">Continue Checkout</button></Link>
-                            <p style={{ fontSize: "12px", cursor:"pointer" }} className="pt-3">
+                            <p style={{ fontSize: "12px", cursor: "pointer" }} className="pt-3">
                                 Use a different account. <span className="text-danger" onClick={handleLogout}>Log Out</span>
                             </p>
                             <p className="text-muted" style={{ fontSize: "12px" }}>

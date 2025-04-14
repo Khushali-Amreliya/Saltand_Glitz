@@ -1,6 +1,6 @@
 .exlimation_mark {
     font-size: 10px !important;
-    background: #000!important;
+    background: #000 !important;
     padding: 1px 7px !important;
     border-radius: 50%;
     color: #fff;
@@ -64,6 +64,14 @@
     transform: translate(-50%, 0%);
 }
 
+.zoom-img {
+    transition: transform 0.3s ease;
+}
+
+.card-container:hover .zoom-img {
+    transform: scale(1.05);
+}
+
 /* Wishlist Icons */
 .wishlist-icons {
     /* z-index: 2; */
@@ -74,12 +82,13 @@
 
 .review_card {
     /* z-index: 2; */
-    left: 15px;
+    left: 9px;
     color: #000 !important;
     border-radius: 15px;
     padding: 0px 10px !important;
     border: 1.3px solid var(--color);
     vertical-align: middle;
+    background-color: var(--text);
 }
 
 .review_card p {
@@ -87,7 +96,8 @@
 }
 
 .review_card_md {
-    bottom: 46px !important;
+    bottom: 41px !important;
+    background-color: var(--text);
 }
 
 .absolute_next_btn,
@@ -191,6 +201,12 @@
 
 .heart_icon {
     color: #DE1A31 !important;
+}
+
+@media (min-width: 992px) {
+    .card-container:hover .zoom-img {
+        transform: scale(1.05) !important;
+    }
 }
 
 @media(max-width:768px) {

@@ -246,7 +246,11 @@ const Login = () => {
             <img alt='' src='assets/img/tiffco-logo-2.svg' className='cart_logo_icon'></img>
           </div> */}
           <Link to="/" className="text-decoration-none text-dark">
-            SALT & GLITZ
+            <img
+              alt=''
+              src='/assets/img/logo_website.png'
+              className='img-fluid mx-auto d-block cart-logo-fixed'
+            />
           </Link>
         </div>
 
@@ -274,12 +278,12 @@ const Login = () => {
                 <div className='signup_logo'>
                   <i className="ri-fingerprint-line fs-2"></i>
                   <h6>Login with Salt & Glitz</h6>
-                  <p className='p_width_loginn'>
+                  {/* <p className='p_width_loginn'>
                     Unlock Best prices and become an insider for our exclusive launches & offers.
-                  </p>
+                  </p> */}
                   {/* <div className='pt-4 mx-auto d-block'>
-                                              <img alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />
-                                          </div> */}
+                    <img alt='' src='assets/img/google.png' className='img-fluid google_facebook_logo' />
+                  </div> */}
                 </div>
                 <div className='mx-auto d-block pb-4 pt-4'>
                   <form onSubmit={step === 1 ? handleContinue : handleLogin}>
@@ -298,7 +302,7 @@ const Login = () => {
                           />
                           <label className="form__label">Email</label>
                         </div>
-                        <button className='mt-4 btn w-100 place_order_btn text-light' type='submit'>
+                        <button className='mt-4 btn w-100 place_order_btn' type='submit'>
                           CONTINUE
                         </button>
                       </>
@@ -317,7 +321,7 @@ const Login = () => {
                           />
                           <label className="form__label">Password</label>
                         </div>
-                        <button className='btn w-100 place_order_btn text-light' type='submit' onClick={handleLogin}>
+                        <button className='btn w-100 place_order_btn' type='submit' onClick={handleLogin}>
                           LOGIN
                         </button>
 
@@ -352,7 +356,7 @@ const Login = () => {
                             />
                           ))}
                         </div>
-                        <button className='mt-3 btn w-100 place_order_btn text-light' type='button' onClick={handleVerifyOtp} disabled={otp.length !== 4}>
+                        <button className='mt-3 btn w-100 place_order_btn' type='button' onClick={handleVerifyOtp} disabled={otp.length !== 4}>
                           LOGIN
                         </button>
 
@@ -378,7 +382,7 @@ const Login = () => {
                           />
                           <label className="form__label">Email</label>
                         </div>
-                        <button className='btn w-100 place_order_btn text-light mt-3' type='button' onClick={handleSendForgotPasswordOtp}>
+                        <button className='btn w-100 place_order_btn mt-3' type='button' onClick={handleSendForgotPasswordOtp}>
                           SEND OTP
                         </button>
                       </>
@@ -410,7 +414,7 @@ const Login = () => {
                             required
                           />
                         </div>
-                        <button className='btn w-100 place_order_btn text-light mt-3' type='button' onClick={handleResetPassword}>
+                        <button className='btn w-100 place_order_btn mt-3' type='button' onClick={handleResetPassword}>
                           CONFIRM
                         </button>
                       </>
@@ -418,9 +422,9 @@ const Login = () => {
                   </form>
                 </div>
                 <p className='m-0 p-0 create_acc'>
-                  New to Tiffany & Co.? <Link to="/signup" className='text-decoration-none'><span>Create an Account</span></Link>
+                  New to Salt & Glitz? <Link to="/signup" className='text-decoration-none'><span>Create an Account</span></Link>
                 </p>
-                <p className='create_acc'>Complete your profile and get Rs.250 worth of xCLusive Points.</p>
+                {/* <p className='create_acc'>Complete your profile and get Rs.250 worth of xCLusive Points.</p> */}
               </div>
             </section>
           </div>

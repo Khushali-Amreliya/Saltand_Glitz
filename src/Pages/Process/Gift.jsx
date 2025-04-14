@@ -88,7 +88,11 @@ const Gift = () => {
                         <img alt='' src='assets/img/tiffco-logo-2.svg' className='cart_logo_icon'></img>
                     </div> */}
                     <Link to="/" className="text-decoration-none text-dark">
-                        SALT & GLITZ
+                        <img
+                            alt=''
+                            src='/assets/img/logo_website.png'
+                            className='img-fluid mx-auto d-block cart-logo-fixed'
+                        />
                     </Link>
                 </div>
 

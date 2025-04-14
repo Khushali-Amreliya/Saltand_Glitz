@@ -747,12 +747,14 @@ const Mainpage = () => {
               {/* Banner 0 - Image */}
               {banners[1] && (
                 <div>
-                  <img
-                    alt="Banner 1"
-                    src={banners[1].mobileBannerImage}
-                    className="img-fluid banner_class"
-                    style={{ borderRadius: "10px", objectFit: "cover" }}
-                  />
+                  <Link to="products">
+                    <img
+                      alt="Banner 1"
+                      src={banners[1].mobileBannerImage}
+                      className="img-fluid banner_class"
+                      style={{ borderRadius: "10px", objectFit: "cover" }}
+                    />
+                  </Link>
                 </div>
               )}
 
@@ -1284,7 +1286,7 @@ const Mainpage = () => {
               <img
                 alt="Web Banner"
                 src={bottomBanners[6]?.bannerImage}
-                className="img-fluid d-none d-md-block"
+                className="img-fluid d-none d-md-block banner_class"
                 style={{ borderRadius: "10px", objectFit: "cover" }}
                 onError={(e) => {
                   e.target.onerror = null;
@@ -1302,7 +1304,7 @@ const Mainpage = () => {
               <img
                 alt="Mobile Banner"
                 src={bottomBanners[7]?.bannerImage}
-                className="img-fluid d-md-none"
+                className="img-fluid d-md-none banner_class"
                 style={{ borderRadius: "10px", objectFit: "cover" }}
                 onError={(e) => {
                   e.target.onerror = null;
@@ -1491,7 +1493,7 @@ const Mainpage = () => {
               <img
                 alt="Web Banner"
                 src={bottomBanners[8]?.bannerImage}
-                className="img-fluid d-none d-md-block"
+                className="img-fluid d-none d-md-block banner_class"
                 style={{ borderRadius: "10px", objectFit: "cover" }}
                 onError={(e) => {
                   e.target.onerror = null;
@@ -1509,7 +1511,7 @@ const Mainpage = () => {
               <img
                 alt="Mobile Banner"
                 src={bottomBanners[9]?.bannerImage}
-                className="img-fluid d-md-none"
+                className="img-fluid d-md-none banner_class"
                 style={{ borderRadius: "10px", objectFit: "cover" }}
                 onError={(e) => {
                   e.target.onerror = null;

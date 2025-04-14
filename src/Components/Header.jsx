@@ -2992,6 +2992,7 @@ import { GrContactInfo } from "react-icons/gr";
 import { MdAccountCircle } from "react-icons/md";
 import { IoIosSearch } from "react-icons/io";
 import Loader from '../Pages/Loader';
+import Shimmer from '../ShimmerEffect/shimmer';
 
 // const userFetch = JSON.parse(localStorage.getItem('user'));
 const userFetch = JSON.parse(localStorage.getItem('user'))
@@ -3151,7 +3152,7 @@ const Header = () => {
                 console.error('Error parsing user data:', error);
                 toast.error('Error loading user data. Please log in again.');
                 localStorage.removeItem('user'); // Clear invalid data
-                navigate('/'); // Redirect to signup or login page
+                navigate('/'); // Redirect to signup or login page  
             }
         }
     }, [navigate]); // Include navigate as a dependency
@@ -3403,9 +3404,9 @@ const Header = () => {
 
             {/* Small device */}
             <section className='container-fluid pt-2 d-md-block d-sm-block d-lg-none'>
-                <div className='row'>
-                    <div className='col-sm-2 col-2 p-0 d-flex justify-content-center align-items-center'>
-                        <CiMenuFries className="fs-3 me-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" />
+                <div className='row align-items-center p-0 m-0'>
+                    <div className='col-2 p-0 d-flex justify-content-start align-items-center gap-2'>
+                        <CiMenuFries className="fs-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop" />
                         <Link
                             className="text-decoration-none text-dark"
                             to={isLoggedIn ? "/Userprofile" : "/loginn"}
@@ -3421,7 +3422,7 @@ const Header = () => {
                             </div>
                             <div className="offcanvas-body">
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item dropdown dropdown_sm">
                                         <div
                                             className="d-flex justify-content-between align-items-center"
                                             style={{ cursor: "pointer" }}
@@ -3562,7 +3563,7 @@ const Header = () => {
                                             </div>
                                         </ul>
                                     </li>
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item dropdown dropdown_sm">
                                         <div
                                             className="d-flex justify-content-between align-items-center"
                                             style={{ cursor: "pointer" }}
@@ -3680,7 +3681,7 @@ const Header = () => {
                                             </div>
                                         </ul>
                                     </li>
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item dropdown dropdown_sm">
                                         <div
                                             className="d-flex justify-content-between align-items-center"
                                             style={{ cursor: "pointer" }}
@@ -3766,7 +3767,7 @@ const Header = () => {
                                             </div>
                                         </ul>
                                     </li>
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item dropdown dropdown_sm">
                                         <div
                                             className="d-flex justify-content-between align-items-center"
                                             style={{ cursor: "pointer" }}
@@ -3864,7 +3865,7 @@ const Header = () => {
                                             </div>
                                         </ul>
                                     </li>
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item dropdown dropdown_sm">
                                         <div
                                             className="d-flex justify-content-between align-items-center"
                                             style={{ cursor: "pointer" }}
@@ -3960,7 +3961,7 @@ const Header = () => {
                                             </div>
                                         </ul>
                                     </li>
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item dropdown dropdown_sm">
                                         <div
                                             className="d-flex justify-content-between align-items-center"
                                             style={{ cursor: "pointer" }}
@@ -4065,7 +4066,7 @@ const Header = () => {
                                             </div>
                                         </ul>
                                     </li>
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item dropdown dropdown_sm">
                                         {/* <Link className="nav-link active" to="" id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
                                             <i className="ri-subtract-line"></i>Trending
                                         </Link> */}
@@ -4080,7 +4081,7 @@ const Header = () => {
                                             {/* <span className="me-2">{openDropdown === "trending" ? "-" : "+"}</span> */}
                                         </div>
                                     </li>
-                                    <li className="nav-item dropdown">
+                                    <li className="nav-item dropdown dropdown_sm">
                                         {/* <Link className="nav-link active" to="/aboutUs" id="navbarDropdown" data-bs-dismiss="offcanvas" aria-label="Close">
                                             <i className="ri-subtract-line"></i>About Us
                                         </Link> */}
@@ -4103,58 +4104,36 @@ const Header = () => {
                             </div> */}
                         </div>
                     </div>
-                    <div className='col-sm-8 col-8 d-flex justify-content-center align-items-center'>
+                    <div className='col-8 d-flex justify-content-center align-items-center'>
                         <div>
-                            {/* <Link to="/">
-                                <img
-                                    alt=''
-                                    src='/assets/img/tiffco-logo-2.svg'
-                                    className='mx-auto d-block main_logo'
-                                />
-                            </Link> */}
                             <Link to="/" className="text-decoration-none fs-5 text-dark">
                                 <img
                                     alt=''
                                     src='/assets/img/logo_website.png'
                                     className='img-fluid mx-auto d-block logo-fixed'
                                 />
-                                {/* SALT & GLITZ */}
                             </Link>
                         </div>
                     </div>
-                    <div className='col-sm-2 col-2 p-0 d-flex justify-content-center align-items-center'>
-
-                        {/* <Link className='text-decoration-none text-dark pe-3' to="/wishlist">
-                            <i className="ri-heart-line pe-0 position-relative">
-                                {wishlistLength.length > 0 && (
-                                    <span className="badge badge-icon">{wishlistLength.length}</span>
-                                )}
-                            </i>
-                        </Link> */}
-                        <Link className="text-decoration-none text-dark position-relative me-3 me-sm-0" to="/wishlist">
-                            <CiHeart className="fs-5 position-relative" />
+                    {/* Right Side - Wishlist and Cart */}
+                    <div className="col-2 p-0 d-flex justify-content-end align-items-center gap-2">
+                        <Link className="text-decoration-none text-dark position-relative" to="/wishlist">
+                            <CiHeart className="fs-3" />
                             {wishlistLength.length > 0 && (
                                 <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
                                     {wishlistLength.length}
                                 </span>
                             )}
                         </Link>
-                        <Link className="text-decoration-none text-dark position-relative me-2 me-sm-0" to="/cart">
-                            <CiShoppingCart className="fs-5 pe-0 position-relative" />
+
+                        <Link className="text-decoration-none text-dark position-relative" to="/cart">
+                            <CiShoppingCart className="fs-3" />
                             {tQuantity.totalQuantity > 0 && (
                                 <span className="badge badge-icon badge_icon_w position-absolute start-100 translate-middle">
                                     {tQuantity.totalQuantity}
                                 </span>
                             )}
                         </Link>
-                        {/* <Link className='text-decoration-none text-dark pe-3' to="/cart">
-                            <i className="ri-shopping-cart-line pe-0 position-relative">
-                                {tQuantity.totalQuantity > 0 && (
-                                    <span className="badge badge-icon">{tQuantity.totalQuantity}</span>
-                                )}
-                            </i>
-                        </Link> */}
-
                     </div>
                     <form action="" className='py-3'>
                         <div className="bg-light rounded rounded-pill shadow-sm">
@@ -5246,7 +5225,7 @@ const Header = () => {
                 <div className="offcanvas-body">
                     <h5 className='trending_title'>Search Results</h5>
                     {loading ? (
-                        <Loader />
+                        <Shimmer />
                     ) : (
                         <div className="row offcanvas_search">
                             {searchTerm.trim() === "" ? (
@@ -5409,15 +5388,15 @@ const Header = () => {
                     <h5 className='trending_title'>Search Results</h5>
                     <div className='row offcanvas_search'>
                         {loading ? (
-                            <Loader />
+                            <Shimmer />
                         ) : (
                             <div className="row offcanvas_search">
                                 {searchTerm.trim() === "" ? (
                                     // Jab tak search nahi kiya, tab tak default products dikhaye
                                     defaultProducts.map((item) => (
-                                        <div className="col-lg-6 px-4" key={item._id}>
+                                        <div className="col-lg-6 px-4" key={item.product_id}>
                                             <div className="search-item">
-                                                <Link to={`/Productdetails/${item._id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
+                                                <Link to={`/Productdetails/${item.product_id}`} className="text-decoration-none text-dark" data-bs-dismiss="offcanvas" aria-label="Close">
                                                     <div className="left">
                                                         <img
                                                             src={item.goldImages[0]}

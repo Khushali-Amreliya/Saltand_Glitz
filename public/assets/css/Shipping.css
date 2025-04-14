@@ -1,4 +1,4 @@
-.delivery_shipping{
+.delivery_shipping {
     width: 100%;
     height: 100%;
     border-radius: 12px;
@@ -14,17 +14,20 @@
     align-items: center;
     font-weight: bold;
 }
-.pick_up_shipping{
+
+.pick_up_shipping {
     font-size: 10px;
     color: #4f3267 !important;
     font-weight: 100 !important;
     padding-top: 10px;
     letter-spacing: 0.5px;
 }
-.padding_width{
+
+.padding_width {
     padding: 0px 20px 0px 26px;
 }
-.btn_delivery{
+
+.btn_delivery {
     font-size: 12px !important;
     color: rgb(79, 50, 103);
     border: 1px solid rgb(222, 214, 251);
@@ -40,56 +43,67 @@
     overflow: hidden;
     max-width: 200px;
 }
+
 .delivery_shipping {
     transition: background-color 0.3s ease;
 }
+
 .delivery_shipping.selected {
     border: 1px solid rgb(152, 216, 222);
     background: #e2ebed;
 }
-.delivery_title{
+
+.delivery_title {
     font-weight: bold;
 }
-.delivery_modal input{
-    background:#f1f6f7;
+
+.delivery_modal input {
+    background: #f1f6f7;
     border: 1px solid #f1f6f7;
     padding: 12px 0px 12px 10px;
     border-radius: 10px;
 }
-.delivery_modal input:hover{
+
+.delivery_modal input:hover {
     border: 1px solid #bfdfe6;
     background: rgb(243, 235, 252) !;
 }
-.delivery_modal_select{
-    background:#f1f6f7 !important;
+
+.delivery_modal_select {
+    background: #f1f6f7 !important;
     border: 1px solid #f1f6f7 !important;
     padding: 12px 0px 12px 10px !important;
     border-radius: 10px !important;
     font-size: 13.5px !important;
     color: #212529 !important;
 }
-.delivery_modal div p{
-    background:#f6f3f9 !important;
+
+.delivery_modal div p {
+    background: #f6f3f9 !important;
     border: 1px solid #f6f3f9;
     padding: 8px 0px 8px 10px;
     border-radius: 10px;
     font-size: 10px;
 }
+
 .delivery_modal div p:hover {
     border: 1px solid rgb(136, 99, 251);
     background: rgb(243, 235, 252) !;
 }
-.delivery_modal p{
+
+.delivery_modal p {
     font-size: 10px;
 }
-.btn_Save{
-    background:var(--background) !important;
+
+.btn_Save {
+    background: var(--background) !important;
     /* color: #fff !important; */
     border-radius: 10px !important;
 }
-.shipping_add{
-    background: rgb(246, 243, 249);
-    box-shadow: rgba(178, 178, 202, 0.5) 2px 2px 6px;
+
+.shipping_add {
+    background: var(--light-color);
+    box-shadow: var(--shadow-color);
     border-radius: 12px;
     width: 100%;
     text-align: left;
@@ -101,25 +115,30 @@
     color: rgb(79, 50, 103);
     margin-bottom: 24px;
 }
+
 .sticky-header {
     position: sticky;
     top: 0;
-    max-height: calc(100vh - 20px); 
+    max-height: calc(100vh - 20px);
     overflow-y: auto;
     padding-right: 15px;
 }
+
 .sticky-header::-webkit-scrollbar {
     display: none;
 }
+
 .sticky-header {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-.shipping_width{
+
+.shipping_width {
     width: 75% !important;
 }
-@media(max-width:1024px){
-    .shipping_width{
+
+@media(max-width:1024px) {
+    .shipping_width {
         width: 100% !important;
     }
 }

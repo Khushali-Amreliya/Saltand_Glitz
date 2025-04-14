@@ -72,7 +72,7 @@
 }
 
 .cart_img {
-    border: 1px solid rgb(222, 214, 251);
+    border: 1px solid var(--background);
     border-radius: 10px;
     /* height: 200px !important; */
 }
@@ -98,7 +98,7 @@
 
 .cart_Coupon {
     background: var(--background);
-    box-shadow: rgba(178, 178, 202, 0.5) 2px 2px 6px;
+    box-shadow: var(--shadow-color);
     border-radius: 12px;
     width: 100%;
     text-align: left;
@@ -108,7 +108,7 @@
     cursor: pointer;
     font-family: InterBold, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.2rem;
-    color: rgb(79, 50, 103);
+    color: var(--color);
     margin-bottom: 24px;
 }
 
@@ -140,7 +140,7 @@
 }
 
 .coupon_input {
-    background-color: rgb(246, 243, 249);
+    background-color: var(--light-color);
     padding: 10px 10px;
     border-radius: 10px;
 }
@@ -153,11 +153,11 @@
 .coupon_input span {
     background-color: transparent;
     font-size: 13px;
-    color: #de57e5;
+    color: var(--color);
 }
 
 .coupon_modal {
-    background: rgb(246, 243, 249);
+    background: var(--light-color);
     border-radius: 24px 24px 0px 0px;
     padding: 0px 5px;
     overflow: hidden;
@@ -165,7 +165,7 @@
 
 .coupon_modal h6 {
     font-size: 13px;
-    color: rgb(78, 85, 94);
+    color: var(--color);
 }
 
 .coupan_box {
@@ -223,7 +223,7 @@
 .coupon_box1 p {
     font-size: 9.5px;
     padding: 0px 10px;
-    color: #4e555e;
+    color: var(--color);
 }
 
 .coupon_box1_p {
@@ -231,10 +231,11 @@
 }
 
 .offer-label {
-    background-color: #afaeb0;
+    background-color: var(--color);
     border-radius: 20px 0px 0px 20px;
     writing-mode: vertical-lr;
     transform: rotate(180deg);
+    color: var(--text);
 }
 
 .ri-focus-3-line {
@@ -349,13 +350,13 @@
     line-height: 22px;
     margin-bottom: 2px;
     font-size: 12px;
-    color: rgb(79, 50, 103) !important;
+    /* color: rgb(79, 50, 103) !important; */
     font-weight: 600;
 }
 
 .cart_amount {
-    background: rgb(246, 243, 249);
-    box-shadow: rgba(178, 178, 202, 0.5) 2px 2px 6px;
+    background: rgb(249, 249, 250);
+    box-shadow: var(--shadow-color);
     border-radius: 12px;
     width: 100%;
     text-align: left;
@@ -365,12 +366,12 @@
     cursor: pointer;
     font-family: InterBold, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.2rem;
-    color: rgb(79, 50, 103);
+    color: var(--color);
     margin-bottom: 24px;
 }
 
 .text_price {
-    color: #4f3267;
+    color: var(--color);
     font-weight: bold;
     font-size: 12px;
 }
@@ -413,7 +414,7 @@
     border-top: 2px solid #fff;
     padding-top: 8px;
     margin-top: 10px;
-    color: #4f3267;
+    color: var(--color);
 }
 
 .total_Amount h6 {
@@ -447,7 +448,7 @@
     right: 0;
     z-index: 9999;
     box-shadow: var(--shadow-color);
-    background-color: var(--light-color);
+    background-color: #fff;
     animation: slideDown 0.8s ease-in-out;
 }
 
@@ -537,7 +538,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: var(--light-color);
+    background-color: var(--text);
     /* position: fixed; */
     width: 100%;
     bottom: 0;
@@ -549,7 +550,7 @@
 
 .cart_footer_left {
     font-size: 14px;
-    color: #4a4a4a;
+    color: var(--color);
 }
 
 .cart_footer_left p {

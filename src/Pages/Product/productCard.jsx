@@ -166,7 +166,7 @@ const ProductCard = ({ Productsitem }) => {
                             <img
                                 alt="product-image"
                                 src={displayImages[0]}
-                                className="img-fluid border border-1 "
+                                className="img-fluid border border-1 zoom-img"
                                 onError={(e) => {
                                     e.target.onerror = null; // Prevent infinite loop
                                     e.target.style.display = "none";
@@ -183,7 +183,7 @@ const ProductCard = ({ Productsitem }) => {
                                         key={index}
                                         alt={`product-image-${index}`}
                                         src={img}
-                                        className="img-fluid"
+                                        className="img-fluid zoom-img"
                                         onError={(e) => {
                                             e.target.onerror = null; // Prevent infinite loop
                                             e.target.style.display = "none";
@@ -239,7 +239,7 @@ const ProductCard = ({ Productsitem }) => {
                         />}
                     </div>
 
-                    <div className="review_card position-absolute bottom-0 left-0 my-3 d-flex align-items-center">
+                    <div className="review_card position-absolute bottom-0 left-0 my-2 d-flex align-items-center">
                         <p className="m-0 pe-1">{rating}</p>
                         {renderStar(rating)}
                     </div>
@@ -260,7 +260,7 @@ const ProductCard = ({ Productsitem }) => {
                         </button>
                         <button onClick={(e) => { e.preventDefault(); slider?.current?.slickNext(); }} className="absolute_next_btn d-lg-none d-block">
                             <i className="ri-arrow-right-wide-line"></i>
-                        </button>
+                        </button>   
                     </div>
 
                     {/* Wishlist Heart Icon for mobile */}
@@ -274,7 +274,7 @@ const ProductCard = ({ Productsitem }) => {
                     <div className="wishlist-icons position-absolute top-0 end-0 p-2" style={{ cursor: 'pointer' }} onClick={handleWishlistToggle}>
                         {isWishlist ? <IoHeart className="fs-5 heart_icon" /> : <IoMdHeartEmpty className="fs-5 heart_icon" />}
                     </div>
-                    <div className="review_card review_card_md position-absolute left-0 my-3 d-flex align-items-center">
+                    <div className="review_card review_card_md position-absolute left-0 my-2 d-flex align-items-center">
                         <p className="m-0 pe-1">{rating}</p>
                         {renderStar(rating)}
                     </div>

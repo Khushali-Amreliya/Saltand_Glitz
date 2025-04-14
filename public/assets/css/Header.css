@@ -121,6 +121,11 @@
     background-color: #fff;
 }
 
+.dropdown_sm {
+    margin-bottom: 23px;
+    border-bottom: 1px solid var(--background);
+}
+
 .dropdown {
     position: static !important;
 }
@@ -590,9 +595,9 @@
     margin-right: 0.5rem !important;
 }
 
-.logo-fixed {
+/* .logo-fixed {
     width: 165px !important;
-}
+} */
 
 .shadow-sm {
     border: 1px solid var(--color);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -10,6 +10,9 @@ const Footer = () => {
       setActiveIndex(index);
     }
   };
+  const location = useLocation();
+  const isCollectionOrProductPage =
+    location.pathname.includes('/products') || location.pathname.includes('/Productdetails');
 
   return (
     <>
@@ -128,7 +131,7 @@ const Footer = () => {
         <h6 className='m-0 p-0 text-center pb-2'>© S&G 2025</h6>
       </section>
       <section className='container footer_main py-3 d-sm-block d-lg-none d-md-none'>
-        <div className='main-content'>
+        <div className={`${isCollectionOrProductPage ? 'main-content ' : ''}`}>
           <div className="app-download-container">
             <h2 className="app-title">Download the Salt&Glitz App</h2>
             <p className="app-description">

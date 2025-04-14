@@ -33,8 +33,36 @@
 
 .add_btn {
     /* background: var(--background) !important; */
-    background-color: #fff;
+    background: var(--text) !important;
     color: var(--color) !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    border: 1px solid #000 !important;
+    padding: 11px 36px !important;
+}
+
+.add_btn:hover {
+    background: var(--color) !important;
+    color: var(--text) !important;
+}
+
+.buy_btn {
+    background: var(--color) !important;
+    color: var(--text) !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    border: 1px solid #000 !important;
+    padding: 11px 36px !important;
+}
+
+.buy_btn:hover {
+    background: var(--text) !important;
+    color: var(--color) !important;
+}
+
+.buy_btn_md {
+    background: var(--color) !important;
+    color: var(--text) !important;
     font-size: 13px !important;
     font-weight: bold !important;
     border: 1px solid #000 !important;
@@ -47,7 +75,7 @@
     font-size: 13px !important;
     font-weight: bold !important;
     border: 1px solid #000 !important;
-    padding: 9.5px 15px !important;
+    padding: 8.5px 15px !important;
     vertical-align: middle !important;
 }
 
@@ -85,6 +113,7 @@
     letter-spacing: 1px;
     word-spacing: 1px;
     font-size: 12px;
+    color: var(--color);
 }
 
 .pincode_productdetail {
@@ -174,6 +203,7 @@
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 0.5px;
+    color: var(--color);
 }
 
 .policy_sec {
@@ -465,7 +495,7 @@
 .KT_button button {
     font-size: 11px;
     letter-spacing: 1px;
-    background-color: #f2f2f2;
+    /* background-color: #f2f2f2; */
 }
 
 .KT_button span {
@@ -780,7 +810,7 @@
     border-radius: 10px;
     padding: 15px;
     max-width: 500px;
-    background: #fff;
+    background: var(--light-color);
     font-family: 'Segoe UI', sans-serif;
 }
 
@@ -812,7 +842,7 @@
     align-items: center;
     color: var(--color);
     font-weight: 500;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .offer-icon {

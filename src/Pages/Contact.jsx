@@ -1,4 +1,7 @@
 import React from 'react'
+import { SlLocationPin } from "react-icons/sl";
+import { IoCallOutline } from "react-icons/io5";
+import { AiOutlineMail } from "react-icons/ai";
 
 const Contact = () => {
     return (
@@ -19,16 +22,19 @@ const Contact = () => {
                 <h2 className='text-center font_main'>Contact Us</h2>
                 <div className='row text-center py-5'>
                     <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
-                        <i class="ri-mail-line fs-4"></i>
+                        <AiOutlineMail className='fs-4 mb-2' />
                         <p className='p_main'>support@saltandglitz.com<i class="ri-arrow-drop-right-line fs-4 align-middle"></i></p>
                     </div>
                     <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
-                        <i class="ri-phone-line fs-4"></i>
+                        <IoCallOutline className='fs-4 mb-2' />
                         <p className='p_main'>Call us at +91 7984369890<i class="ri-arrow-drop-right-line fs-4 align-middle"></i></p>
                     </div>
                     <div className='col-lg-4 col-md-4 col-sm-12 col-12'>
-                        <i class="ri-vip-diamond-line fs-4"></i>
-                        <p className='p_main'>Book an Appoinment with a Diamond Expert<i class="ri-arrow-drop-right-line fs-4 align-middle"></i></p>
+                        <SlLocationPin className='fs-4 mb-2' />
+                        <p className='p_main'>Shop No. 216, 2nd Floor
+                            Central Business Hub, Parle Point
+                            Opposite Himson Bungalow
+                            Surat, Gujarat – 395007<i class="ri-arrow-drop-right-line fs-4 align-middle"></i></p>
                     </div>
                 </div>
             </section>

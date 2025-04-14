@@ -42,7 +42,7 @@ const OrderSummary = () => {
     const fetchCart = async () => {
         try {
             setLoading(true); // Start loader
-            let userId = user?._id || localStorage.getItem("guestUserId");
+            let userId = user?._id;
 
             const response = await axios.get(`https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`);
             console.log(response.data); // Debug response structure
@@ -81,7 +81,7 @@ const OrderSummary = () => {
         <>
             {loading && <Loader />}
             <div className='login_product px-3'>
-                <h5 className='pb-3 fw-bold'>Order Summary</h5>
+                <h5 className='pb-3 fw-bold color'>Order Summary</h5>
                 {
                     product.map((item) => (
                         <div className='row align-items-center d-flex py-1' key={item.productId.product_id}>
@@ -92,11 +92,12 @@ const OrderSummary = () => {
                             </div>
                             <div className='col-lg-9 col-md-8 col-sm-8 col-8 pt-3 d-flex justify-content-between'>
                                 <div>
-                                    <h6 className='m-0 pb-1 login_title'>{item.productId.title}</h6>
-                                    <p className='login_SKU m-0 p-0'>SKU: {item.productId.id}</p>
-                                    <p className='login_quantity m-0 py-2'>Quantity: {item.quantity}</p>
+                                    <p className='login_SKU m-0 pb-1'>SKU: {item.productId.id}</p>
+                                    <h6 className='m-0 login_title pb-1'>{item.productId.title}</h6>
+                                    <p className='login_price m-0'>{formatCurrency(item.itemPrice)}</p>
+
+                                    <p className='login_quantity m-0'>Quantity: {item.quantity}</p>
                                     {/* <p className='login_delivery m-0 p-0'>Expected Delivery by - 30th Aug</p> */}
-                                    <p className='login_price'>{formatCurrency(item.itemPrice)}</p>
                                 </div>
                             </div>
                         </div>
@@ -124,19 +125,19 @@ const OrderSummary = () => {
                 <p className='text-center login_SKU'>We’re available by phone +91 7984369890 (Toll Free) every day, 9 AM to 1 AM IST (Mon - Sun)</p>
                 <div className='text-center pt-3 d-flex justify-content-center gap-3'>
                     <div
-                        className="bg-dark text-light rounded-circle d-flex align-items-center justify-content-center"
+                        className="background text-light rounded-circle d-flex align-items-center justify-content-center"
                         style={{ width: "45px", height: "45px" }}
                     >
                         <i className="ri-phone-line fs-4"></i>
                     </div>
                     <div
-                        className="bg-dark text-light rounded-circle d-flex align-items-center justify-content-center"
+                        className="background text-light rounded-circle d-flex align-items-center justify-content-center"
                         style={{ width: "45px", height: "45px" }}
                     >
                         <i className="ri-whatsapp-line fs-4"></i>
                     </div>
                     <div
-                        className="bg-dark text-light rounded-circle d-flex align-items-center justify-content-center"
+                        className="background text-light rounded-circle d-flex align-items-center justify-content-center"
                         style={{ width: "45px", height: "45px" }}
                     >
                         <i className="ri-mail-line fs-4"></i>

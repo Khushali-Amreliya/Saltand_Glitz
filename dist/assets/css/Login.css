@@ -9,34 +9,36 @@
 }
 
 .login_title {
-    font-size: 14px;
-    color: #33363E;
+    font-size: 13px;
+    color: var(--color);
 }
 
 .login_SKU {
-    font-size: 14px !important;
+    font-size: 11px !important;
     color: #33363E;
 }
 
 .login_quantity {
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color);
 }
 
 .login_delivery {
-    font-size: 13px;
+    font-size: 13.5px;
     color: #8863fb;
     font-weight: bold;
 }
 
 .login_price {
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color);
 }
 
 .login_product {
-    border-bottom: 1px solid rgb(222, 214, 251);
-    padding-bottom: 30px;
+    border-bottom: 1px solid var(--background);
+    padding-bottom: 100px;
     margin: 0px 0px;
 }
 
@@ -55,15 +57,15 @@
 }
 
 .login_shipping {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .login_discount {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .login_subtotal {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .login_cost span {
@@ -73,6 +75,7 @@
 .login_cost {
     margin: 20px 0px;
     font-size: 14px;
+    color: var(--color);
 }
 
 .delete__btn {
@@ -82,15 +85,15 @@
 }
 
 .summary_border {
-    border-top: 1px solid rgb(222, 214, 251);
+    border-top: 1px solid var(--background);
     padding: 25px 0px;
 }
 
 .login_total {
     margin: 20px 0px;
-    border-bottom: 1px solid rgb(222, 214, 251);
+    border-bottom: 1px solid var(--background);
     padding: 25px 0px;
-    color: #33363E;
+    color: var(--color);
 }
 
 .create_acc {

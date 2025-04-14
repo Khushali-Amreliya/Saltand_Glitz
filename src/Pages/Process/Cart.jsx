@@ -28,6 +28,7 @@ const Cart = () => {
   const [totallPrice, setTotallPrice] = useState(0);
   const [product, setProduct] = useState([]); // Initialize as an array
   const [tQuantity, setTQuantity] = useState([])
+  const [coupon, setCoupon] = useState([])
   const user = JSON.parse(localStorage.getItem('user'));
   const discount = useSelector(state => state.cart.discount);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
@@ -95,26 +96,27 @@ const Cart = () => {
         setLoading(false);
         return;
       }
-
-      // console.log("Fetching Cart for User ID:", userId); // ✅ Debugging line
+      // console.log("Fetching Cart for User ID:", userId); // Debugging line
 
       const response = await axios.get(
         `https://saltandglitz-api-131827005467.asia-south2.run.app/v1/cart/getCart/${userId}`
       );
 
+
       if (response.status === 200) {
-        console.log("Cart Response:", response.data); // ✅ Debugging
+        // console.log("Cart Response:", response.data); // Debugging
         const data = response.data;
         setTotallPrice(data.totalPrice || 0);
-        setProduct(data.cart?.quantity || []); // ✅ Ensure cart is an array
+        setProduct(data.cart?.quantity || []); // Ensure cart is an array
+        setCoupon(data.coupons || [])
         setTQuantity(data.totalQuantity || 0);
       } else {
         console.error("Cart Fetch Failed:", response);
-        setProduct([]); // ✅ Default empty cart
+        setProduct([]); // Default empty cart
       }
     } catch (err) {
       console.error("Error fetching cart data:", err);
-      setProduct([]); // ✅ Default empty cart on error
+      setProduct([]); // Default empty cart on error
     } finally {
       setTimeout(() => {
         setLoading(false);
@@ -123,7 +125,7 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    fetchCart(); // 👈 useEffect ke andar sirf call karo
+    fetchCart(); // useEffect ke andar sirf call karo
   }, [user?._id]);
 
   const removeToCart = async (item) => {
@@ -324,7 +326,6 @@ const Cart = () => {
   //   }
   // };
 
-
   const moveToWishlist = async (item) => {
     setLoading(true);
 
@@ -417,7 +418,6 @@ const Cart = () => {
       setLoading(false);
     }
   };
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -720,39 +720,24 @@ const Cart = () => {
                             </div>
                             <div className="coupon_modal">
                               <h6 className="text-center py-2 fw-bold">
-                                Other Offers at CartLane
+                                Other Offers at Salt & Glitz
                               </h6>
 
-                              {[
-                                {
-                                  code: "NATURE10",
-                                  discount: "10% OFF",
-                                  // validity: "August 21 2024",
-                                  description:
-                                    "Flat 10% off on diamond above 1 carat",
-                                },
-                                {
-                                  code: "CRAFT20",
-                                  discount: "20% OFF",
-                                  // validity: "August 19 2024",
-                                  description:
-                                    "Flat 20% off on making charges",
-                                }
-                              ].map((offer, index) => (
+                              {coupon.map((coupon, index) => (
                                 <div className="coupan_box mx-3" key={index}>
                                   <div className="offer-label border border-start-0 border-top-0 border-bottom-0 px-3 align-items-center d-flex">
-                                    <h5 className="pt-3 fw-bold text-light">
-                                      {offer.discount}
+                                    <h5 className="pt-3 fw-bold">
+                                      {coupon.couponOffer}
                                     </h5>
                                   </div>
                                   <div className="coupon_box1 align-items-center d-flex position-relative">
                                     <div className="w-100 d-flex justify-content-between align-items-center">
                                       <div>
                                         <h6 className="m-0">
-                                          {offer.code}
+                                          {coupon.couponCode}
                                           <span
                                             onClick={() =>
-                                              handleCopyCode(offer.code)
+                                              handleCopyCode(coupon.couponCode)
                                             }
                                             className="text-danger ms-2"
                                             style={{ cursor: "pointer" }}
@@ -760,13 +745,13 @@ const Cart = () => {
                                             Copy Code
                                           </span>
                                         </h6>
-                                        <p>{offer.validity}</p>
+                                        <p>{coupon.validity}</p>
                                         <p className="coupon_box1_p">
-                                          {offer.description}
+                                          {coupon.couponContent}
                                         </p>
                                       </div>
                                     </div>
-                                    {copiedCode === offer.code && (
+                                    {copiedCode === coupon.couponCode && (
                                       <div
                                         className="popover text-success text-center rounded position-absolute"
                                         style={{
