@@ -1785,6 +1785,7 @@ const Productdetails = () => {
                 images,
                 videos,
                 title: data.title,
+                ID: data.id,
                 id: data.product_id,
                 grossWt: data.grossWt,
                 netWeight14KT: data.netWeight14KT,
@@ -2759,7 +2760,8 @@ const Productdetails = () => {
                                 {/* <h5>PRODUCT DETAILS</h5> */}
                                 <div className="section product-details">
                                     <div className="bg_price_breakup d-flex justify-content-between align-items-center">
-                                        <h3 className="m-0">Product Details</h3> {/* Center the heading */}
+                                        <h3 className="m-0">Product Details</h3>
+                                        {/* Center the heading */}
                                         {/* Button for toggling visibility with icon */}
                                         <button
                                             className="btn btn-link p-0 text-dark text-decoration-none"
@@ -2774,6 +2776,7 @@ const Productdetails = () => {
                                             )}
                                         </button>
                                     </div>
+                                    <p className="text-start ps-3">SKU  :- {product.ID}</p>
                                     {isDetailsBreakupVisible && (
                                         <div className="grid mt-3">
                                             <div className="detail-box">
